@@ -343,3 +343,8 @@ def findChampInRawData(raw_data: pd.DataFrame, champ_name: str='', champ_id: int
 def eventExtractor(raw_data_series: pd.Series, event_type: str):
     return list(filter(lambda evt: (evt['type']==event_type),\
             sum([fr['events'] for fr in [ti for ti in raw_data_series['timeline']['info']['frames']]], [])))
+
+
+# timeline 데이터에서 이 게임 동안 발생한 모든 이벤트의 타입을 리스트로 리턴하는 함수
+def getEventList(timeline: dict):
+    return list(set([b['type'] for b in sum([a['events'] for a in timeline['info']['frames']], [])]))
