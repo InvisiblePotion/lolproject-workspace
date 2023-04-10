@@ -1,0 +1,1 @@
+select 1+1 ex1 from dual;
