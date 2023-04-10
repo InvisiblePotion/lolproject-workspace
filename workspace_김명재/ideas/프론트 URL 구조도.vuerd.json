@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -984,
-    "scrollLeft": -283,
+    "scrollTop": -904,
+    "scrollLeft": -258,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -163,7 +163,7 @@
           },
           {
             "name": "/champlist",
-            "comment": "챔피언 분석",
+            "comment": "챔피언 리스트",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -178,7 +178,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 63.3310546875,
-              "widthComment": 71.5703125,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
@@ -252,13 +252,36 @@
               "widthDefault": 60
             },
             "id": "d8bae9e3-18fa-4ae1-9b92-e21eece4da16"
+          },
+          {
+            "name": "if login: /summoners/stat/?summonerName",
+            "comment": "내 스탯 보기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 260.19091796875,
+              "widthComment": 76.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "9191723d-bfe1-4b16-95a2-cc69e708fa3f"
           }
         ],
         "ui": {
           "active": false,
-          "left": 821.4161,
-          "top": 1120.9713,
-          "zIndex": 492,
+          "left": 783.6387,
+          "top": 1124.3046,
+          "zIndex": 142,
           "widthName": 71.5703125,
           "widthComment": 60
         },
@@ -266,12 +289,12 @@
         "id": "c4e87a19-2c53-4f41-a9fe-842948546ef0"
       },
       {
-        "name": "챔피언 분석",
+        "name": "챔피언 리스트",
         "comment": "/champlist",
         "columns": [
           {
             "name": "/champlist",
-            "comment": "",
+            "comment": "챔피언 리스트",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -286,14 +309,14 @@
               "fk": true,
               "pfk": false,
               "widthName": 63.3310546875,
-              "widthComment": 60,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
             "id": "58fde61e-cbff-43f2-bcad-3481f9eb5521"
           },
           {
-            "name": "/champlist?recommand",
+            "name": "/champlist/recommand?summonerName",
             "comment": "추천 챔피언",
             "dataType": "동기",
             "default": "",
@@ -308,7 +331,7 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 139.22998046875,
+              "widthName": 242.72216796875,
               "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
@@ -317,7 +340,7 @@
           },
           {
             "name": "/champ?champName",
-            "comment": "",
+            "comment": "챔피언 상세",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -332,7 +355,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 127.57568359375,
-              "widthComment": 60,
+              "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
@@ -341,11 +364,12 @@
         ],
         "ui": {
           "active": false,
-          "left": 850.0954,
-          "top": 1508.5517,
-          "zIndex": 532,
-          "widthName": 71.5703125,
-          "widthComment": 63.3310546875
+          "left": 844.5399,
+          "top": 1525.2182,
+          "zIndex": 154,
+          "widthName": 84.5703125,
+          "widthComment": 63.3310546875,
+          "color": "#2196F3"
         },
         "visible": true,
         "id": "92ba11ce-d8aa-49eb-8be1-d06aac6d2b4a"
@@ -356,7 +380,7 @@
         "columns": [
           {
             "name": "/champ?champName",
-            "comment": "",
+            "comment": "챔피언 상세",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -371,7 +395,7 @@
               "fk": true,
               "pfk": false,
               "widthName": 127.57568359375,
-              "widthComment": 60,
+              "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
@@ -403,11 +427,12 @@
         ],
         "ui": {
           "active": false,
-          "left": 863.9991,
-          "top": 1772.0826,
-          "zIndex": 534,
+          "left": 855.1103,
+          "top": 1796.5268,
+          "zIndex": 156,
           "widthName": 71.5703125,
-          "widthComment": 120
+          "widthComment": 120,
+          "color": "#2196F3"
         },
         "visible": true,
         "id": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f"
@@ -418,7 +443,7 @@
         "columns": [
           {
             "name": "/duolist",
-            "comment": "",
+            "comment": "듀오 찾기",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -441,7 +466,7 @@
           },
           {
             "name": "/duo?postNum",
-            "comment": "",
+            "comment": "듀오 게시글",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -456,7 +481,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 90.8671875,
-              "widthComment": 60,
+              "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
@@ -465,9 +490,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1438.353,
-          "top": 1233.5312,
-          "zIndex": 524,
+          "left": 1512.7972,
+          "top": 1236.8646,
+          "zIndex": 107,
           "widthName": 71.5703125,
           "widthComment": 60
         },
@@ -480,7 +505,7 @@
         "columns": [
           {
             "name": "/login",
-            "comment": "",
+            "comment": "로그인 페이지",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -495,7 +520,7 @@
               "fk": true,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 60,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
@@ -504,11 +529,12 @@
         ],
         "ui": {
           "active": false,
-          "left": 364.2632,
-          "top": 1319.952,
-          "zIndex": 517,
+          "left": 330.9302,
+          "top": 1337.7296,
+          "zIndex": 159,
           "widthName": 60,
-          "widthComment": 60
+          "widthComment": 60,
+          "color": "#4CAF50"
         },
         "visible": true,
         "id": "d460ff1c-75e4-4951-97b2-53ce85e922e2"
@@ -519,7 +545,7 @@
         "columns": [
           {
             "name": "/rank",
-            "comment": "",
+            "comment": "랭킹",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -543,9 +569,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1416.75,
-          "top": 1097.9951,
-          "zIndex": 537,
+          "left": 1458.9715,
+          "top": 1113.5497,
+          "zIndex": 103,
           "widthName": 60,
           "widthComment": 60
         },
@@ -558,7 +584,7 @@
         "columns": [
           {
             "name": "/summoners?summonerName",
-            "comment": "",
+            "comment": "전적 검색",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -578,13 +604,36 @@
               "widthDefault": 60
             },
             "id": "9807658d-2454-4635-86ed-fceb8c550193"
+          },
+          {
+            "name": "/summoners/stat?summonerName",
+            "comment": "유저 스탯 보기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 205.85498046875,
+              "widthComment": 89.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "2898f1b7-c8fc-4ef6-a639-7b458f310a10"
           }
         ],
         "ui": {
           "active": false,
-          "left": 243.1716,
-          "top": 1145.7603,
-          "zIndex": 539,
+          "left": 162.0612,
+          "top": 1150.2041,
+          "zIndex": 77,
           "widthName": 60,
           "widthComment": 120
         },
@@ -621,9 +670,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1298.5719,
-          "top": 1696.7143,
-          "zIndex": 527,
+          "left": 1323.0161,
+          "top": 1730.0476,
+          "zIndex": 152,
           "widthName": 71.5703125,
           "widthComment": 99.21435546875
         },
@@ -636,7 +685,7 @@
         "columns": [
           {
             "name": "/duo?postNum",
-            "comment": "",
+            "comment": "듀오 게시글",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -651,7 +700,7 @@
               "fk": true,
               "pfk": false,
               "widthName": 90.8671875,
-              "widthComment": 60,
+              "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
@@ -659,7 +708,7 @@
           },
           {
             "name": "/duo?postNum",
-            "comment": "",
+            "comment": "듀오 게시글",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -674,7 +723,7 @@
               "fk": true,
               "pfk": false,
               "widthName": 90.8671875,
-              "widthComment": 60,
+              "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
@@ -683,9 +732,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1359.1426,
-          "top": 1470.2859,
-          "zIndex": 526,
+          "left": 1388.0312,
+          "top": 1476.9525,
+          "zIndex": 111,
           "widthName": 71.5703125,
           "widthComment": 90.8671875
         },
@@ -694,10 +743,10 @@
       },
       {
         "name": "챔피언 추천",
-        "comment": "/champlist?recommand",
+        "comment": "/champlist/recommand?summonerName",
         "columns": [
           {
-            "name": "/champlist?recommand",
+            "name": "/champlist/recommand?summonerName",
             "comment": "추천 챔피언",
             "dataType": "동기",
             "default": "",
@@ -712,7 +761,7 @@
               "pk": false,
               "fk": true,
               "pfk": false,
-              "widthName": 139.22998046875,
+              "widthName": 242.72216796875,
               "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
@@ -722,14 +771,77 @@
         ],
         "ui": {
           "active": false,
-          "left": 381.4443,
-          "top": 1594.8893,
-          "zIndex": 530,
+          "left": 253.6666,
+          "top": 1622.6668,
+          "zIndex": 155,
           "widthName": 71.5703125,
-          "widthComment": 120
+          "widthComment": 120,
+          "color": "#2196F3"
         },
         "visible": true,
         "id": "25565e28-7140-4d82-8eda-0e0df81d8e29"
+      },
+      {
+        "name": "개인 스탯",
+        "comment": "/summoners/stat/?summonerName",
+        "columns": [
+          {
+            "name": "/summoners/stat?summonerName",
+            "comment": "유저 스탯 보기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 205.85498046875,
+              "widthComment": 89.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "a789a718-301b-44df-9c5c-1fbe13edef64"
+          },
+          {
+            "name": "if login: /summoners/stat/?summonerName",
+            "comment": "내 스탯 보기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 260.19091796875,
+              "widthComment": 76.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "0a4c3dd0-cf87-4414-80af-d145c61d66ab"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 478.9993,
+          "top": 943.3338,
+          "zIndex": 75,
+          "widthName": 60,
+          "widthComment": 120
+        },
+        "visible": true,
+        "id": "4636a0e1-f4d5-40f0-a19c-ce46b2fa8030"
       }
     ],
     "indexes": []
@@ -748,8 +860,8 @@
           "columnIds": [
             "55b6a7f3-6aa8-4d0d-a34e-3fe568215e52"
           ],
-          "x": 1016.995546484375,
-          "y": 1639.0517,
+          "x": 1069.686140234375,
+          "y": 1655.7182,
           "direction": "bottom"
         },
         "end": {
@@ -757,8 +869,8 @@
           "columnIds": [
             "309cc105-0d2a-4aa9-84b8-e9c1fc681d40"
           ],
-          "x": 1019.286941796875,
-          "y": 1772.0826,
+          "x": 1016.183298046875,
+          "y": 1796.5268,
           "direction": "top"
         },
         "constraintName": "fk_챔피언 분석_to_챔피언 상세",
@@ -778,8 +890,8 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 821.4161,
-          "y": 1311.0963,
+          "x": 783.6387,
+          "y": 1329.8046,
           "direction": "left"
         },
         "end": {
@@ -791,8 +903,8 @@
             "25275077-8af5-4439-8497-2fae6fd3127d",
             "aee05f69-1885-4985-9fa4-023eb7955abf"
           ],
-          "x": 607.2632,
-          "y": 1364.702,
+          "x": 598.5005125,
+          "y": 1382.4796,
           "direction": "right"
         },
         "constraintName": "fk_메인 페이지_to_로그인",
@@ -811,8 +923,8 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 821.4161,
-          "y": 1184.3463,
+          "x": 783.6387,
+          "y": 1192.8046,
           "direction": "left"
         },
         "end": {
@@ -823,8 +935,8 @@
             "286cbe4a-6200-4803-b5f7-6e2ca45e3346",
             "72d2ef79-4a40-4855-8b4e-9021d80a79a3"
           ],
-          "x": 605.88693203125,
-          "y": 1190.5103,
+          "x": 580.05680546875,
+          "y": 1205.2041,
           "direction": "right"
         },
         "constraintName": "fk_메인 페이지_to_검색",
@@ -842,8 +954,8 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1015.058922265625,
-          "y": 1374.4713,
+          "x": 1017.519315234375,
+          "y": 1398.3046,
           "direction": "bottom"
         },
         "end": {
@@ -853,8 +965,8 @@
             "46e309b0-5a6f-42f4-8b10-ca3360be8ea0",
             "27324528-dd4c-4911-b9ff-a8ee027c601d"
           ],
-          "x": 1016.995546484375,
-          "y": 1508.5517,
+          "x": 1069.686140234375,
+          "y": 1525.2182,
           "direction": "top"
         },
         "constraintName": "fk_메인 페이지_to_챔피언 분석",
@@ -870,8 +982,8 @@
           "columnIds": [
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1208.70174453125,
-          "y": 1247.7213,
+          "x": 1251.39993046875,
+          "y": 1261.3045999999997,
           "direction": "right"
         },
         "end": {
@@ -879,8 +991,8 @@
           "columnIds": [
             "e934da84-032a-45f9-bd19-9e2e0627141d"
           ],
-          "x": 1438.353,
-          "y": 1288.5312,
+          "x": 1512.7972,
+          "y": 1291.8646,
           "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_듀오 찾기 게시판",
@@ -897,8 +1009,8 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1208.70174453125,
-          "y": 1163.2213,
+          "x": 1251.39993046875,
+          "y": 1169.9712666666665,
           "direction": "right"
         },
         "end": {
@@ -907,8 +1019,8 @@
             "7c3944b7-4358-4825-946c-199a2510f230",
             "8fde6b44-91f3-4296-af3a-2f18de6cf24e"
           ],
-          "x": 1416.75,
-          "y": 1142.7451,
+          "x": 1458.9715,
+          "y": 1158.2997,
           "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_랭킹",
@@ -924,8 +1036,8 @@
           "columnIds": [
             "4f8c9efb-efbd-42ac-b5ec-61d44bd40195"
           ],
-          "x": 1174.57478359375,
-          "y": 1827.0826,
+          "x": 1177.25629609375,
+          "y": 1851.5268,
           "direction": "right"
         },
         "end": {
@@ -933,8 +1045,8 @@
           "columnIds": [
             "0ce9b334-f0a0-4b80-8c7b-d422e9054d77"
           ],
-          "x": 1298.5719,
-          "y": 1741.4643,
+          "x": 1323.0161,
+          "y": 1774.7976,
           "direction": "left"
         },
         "constraintName": "fk_챔피언 상세_to_챔피언 픽률",
@@ -950,8 +1062,8 @@
           "columnIds": [
             "d8bae9e3-18fa-4ae1-9b92-e21eece4da16"
           ],
-          "x": 1208.70174453125,
-          "y": 1332.2213,
+          "x": 1251.39993046875,
+          "y": 1352.637933333333,
           "direction": "right"
         },
         "end": {
@@ -959,8 +1071,8 @@
           "columnIds": [
             "49ee23e0-9fbb-4ca0-96b7-b94049fd957f"
           ],
-          "x": 1359.1426,
-          "y": 1525.2859,
+          "x": 1388.0312,
+          "y": 1531.9525,
           "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_듀오 게시글",
@@ -977,8 +1089,8 @@
             "ae3a648d-b5c7-4ffb-a09e-48443dc4bfb8",
             "55b6a7f3-6aa8-4d0d-a34e-3fe568215e52"
           ],
-          "x": 850.0954,
-          "y": 1573.8017,
+          "x": 844.5399,
+          "y": 1590.4682,
           "direction": "left"
         },
         "end": {
@@ -987,8 +1099,8 @@
             "0c348174-4d8b-4ca1-b4f8-57215b27b1c3",
             "706ffe76-c2be-44cb-bfcf-b634538b1805"
           ],
-          "x": 715.24459296875,
-          "y": 1639.6393,
+          "x": 690.95908046875,
+          "y": 1667.4168,
           "direction": "right"
         },
         "constraintName": "fk_챔피언 분석_to_",
@@ -1004,8 +1116,8 @@
           "columnIds": [
             "9cd161a2-4345-438d-88c0-f7249e64e4e7"
           ],
-          "x": 1575.28659375,
-          "y": 1343.5312,
+          "x": 1655.51595,
+          "y": 1346.8646,
           "direction": "bottom"
         },
         "end": {
@@ -1013,13 +1125,65 @@
           "columnIds": [
             "655b782f-7814-4662-ac32-1be436ddc591"
           ],
-          "x": 1496.07619375,
-          "y": 1470.2859,
+          "x": 1530.74995,
+          "y": 1476.9525,
           "direction": "top"
         },
         "constraintName": "fk_듀오 게시판_to_듀오 게시글",
         "visible": true,
         "id": "79df7f2f-20f0-4000-97b2-64c3261b4f76"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "0d4cd7b9-347c-47b9-9379-0a8ad1786de9",
+          "columnIds": [
+            "2898f1b7-c8fc-4ef6-a639-7b458f310a10"
+          ],
+          "x": 371.059002734375,
+          "y": 1150.2041,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "4636a0e1-f4d5-40f0-a19c-ce46b2fa8030",
+          "columnIds": [
+            "a789a718-301b-44df-9c5c-1fbe13edef64"
+          ],
+          "x": 478.9993,
+          "y": 998.3338,
+          "direction": "left"
+        },
+        "constraintName": "fk_검색_to_개인 스탯",
+        "visible": true,
+        "id": "6c8294e6-957d-4151-ac14-329ceff8ce82"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
+          "columnIds": [
+            "9191723d-bfe1-4b16-95a2-cc69e708fa3f"
+          ],
+          "x": 1017.519315234375,
+          "y": 1124.3046,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "4636a0e1-f4d5-40f0-a19c-ce46b2fa8030",
+          "columnIds": [
+            "0a4c3dd0-cf87-4414-80af-d145c61d66ab"
+          ],
+          "x": 951.33084296875,
+          "y": 998.3338,
+          "direction": "right"
+        },
+        "constraintName": "fk_메인 페이지_to_개인 스탯",
+        "visible": true,
+        "id": "32a1c3ec-10df-462b-8d56-79785e6bfe63"
       }
     ]
   }
