@@ -15,7 +15,7 @@ cursor = None
 seoul_api_key = None
 
 
-def db_open(debug_print: bool=True):
+def db_open(debug_print: bool=False):
     global db
     global cursor
     db = ora.connect(user='lol_data', password='1234', dsn=dsn)
@@ -23,21 +23,21 @@ def db_open(debug_print: bool=True):
     if debug_print: print('oracle open!')
 
 
-def oracle_execute(q, debug_print: bool=True):
+def oracle_execute(query: str, debug_print: bool=False):
     global db
     global cursor
     try:
-        if 'SELECT ' in q.upper():
-            df = pd.read_sql(sql=q, con=db)
+        if 'SELECT ' in query.upper():
+            df = pd.read_sql(sql=query, con=db)
             return df
-        cursor.execute(q)
+        cursor.execute(query)
         if debug_print: print('oracle 쿼리 성공!')
         return
     except Exception as e:
         print(e)
 
 
-def oracle_close(debug_print: bool=True):
+def oracle_close(debug_print: bool=False):
     global db
     db.commit()
     cursor.close()
@@ -45,33 +45,33 @@ def oracle_close(debug_print: bool=True):
     if debug_print: print('oracle close!')
 
 
-def oracle_totalExecute(q, debug_print: bool=True):
+def oracle_totalExecute(query: str, debug_print: bool=True):
     db_open(debug_print)
-    result = oracle_execute(q, debug_print)
+    result = oracle_execute(query, debug_print)
     oracle_close(debug_print)
     return result
 
 
-def connect_mysql(db):
+def connect_mysql(db: str):
     conn = mysql.connect(host='localhost', user='root', password='1234', db=db, charset='utf8')
     return conn
 
 
-def mysql_execute(query, conn):
+def mysql_execute(query: str, conn):
     cursor_mysql = conn.cursor()
     cursor_mysql.execute(query)
     result = cursor_mysql.fetchall()
     return result
 
 
-def mysql_execute_dict(query, conn):
+def mysql_execute_dict(query: str, conn):
     cursor_mysql = conn.cursor(cursor=mysql.cursors.DictCursor)
     cursor_mysql.execute(query)
     result = cursor_mysql.fetchall()
     return result
 
 
-def df_creator(url, seoul_api_key):
+def df_creator(url: str, seoul_api_key: str):
     url = url.replace('(인증키)', seoul_api_key).replace('xml', 'json').replace('/5/', '/1000/')
     res = requests.get(url).json()
     key = list(res.keys())[0]
@@ -110,6 +110,7 @@ def getMatchDataByName(summoner_name: str, api_key: str, get_count: int=10, matc
     return {'match_data': match_data, 'match_timeline': match_timeline}
 
 
+# 가공된 DTO 형태의 데이터프레임을 데이터베이스 테이블에 삽입해주는 함수
 def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
     # 테이블 명 대문자 아니면 에러남
     table_name = table_name.upper()
@@ -169,6 +170,9 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
     print('>>> 처리 완료!')
 
 
+##### << 재활용 가능한 함수로 수정 필요! >> #####
+# getRawdata()로 만든 데이터프레임을 원하는 데이터베이스 테이블에 삽입하기 위해
+#:DTO 형태로 가공하여 데이터프레임으로 리턴하는 함수
 def convertRawDataToDTO(df: pd.DataFrame):
     cols_match_df = [
         'gameId', 'gameDuration',
@@ -213,6 +217,7 @@ def convertRawDataToDTO(df: pd.DataFrame):
     return new_df
 
 
+# LOL API의 API 접속 제한을 기다리기 위한 반복 슬립 함수
 def apiSleep(slp_time: int=120):
 # riot api limit 대기...(100req per 120s)
     print('sleep until request limit recovery...')
@@ -220,7 +225,9 @@ def apiSleep(slp_time: int=120):
         time.sleep(1)
 
 
+# LOL API에서 원하는 티어에서 랜덤으로 60게임에 대한 게임 정보와 타임라인 정보를 묶어 데이터프레임으로 리턴하는 함수
 def getRawdata(tier: str, riot_api_key: str):
+
     tier = tier.upper()
     # division 리스트와 page를 랜덤으로 뽑아올 함수를 사용하기 lst 리스트도 만들어두기
     division_list = ['I','II','III','IV']
@@ -273,3 +280,71 @@ def getRawdata(tier: str, riot_api_key: str):
     print('complete!')
     return df
 
+
+# getRawdata() 함수로 만들어진 데이터프레임 안에서 특정 챔피언의 등장 횟수와 등장 레코드를 리턴하는 함수
+def findChampInRawData(raw_data: pd.DataFrame, champ_name: str='', champ_id: int=0):
+
+    # 두 파라미터 모두 입력되지 않거나 모두 입력된 경우에 대한 에러 처리
+    if ((champ_name=='') and (champ_id==0)) or ((champ_name!='') and (champ_id!=0)):
+        print('에러>> [파라미터 입력 에러]: 챔피언 이름(str)이나 챔피언 ID(int) 두 파라미터 중 하나를 입력해야 합니다.')
+        return
+    if raw_data.__class__ != pd.DataFrame().__class__:
+        print('에러>> [파라미터 입력 에러]: raw_data(pandas.DataFrame())의 타입이 DataFrame()이 아닙니다. 입력한 값을 확인해주세요.')
+        return
+    # champ_name에 str이 아닌 값이 들어온 경우에 대한 에러 처리
+    if champ_name.__class__ != str().__class__:
+        print('에러>> [파라미터 입력 에러]: 챔피언 이름(str)의 타입이 str이 아닙니다. 입력한 값을 확인해주세요.')
+        return
+    # champ_id에 int가 아닌 값이 들어온 경우에 대한 에러 처리
+    if champ_id.__class__ != int().__class__:
+        print('에러>> [파라미터 입력 에러]: 챔피언 ID(int)의 타입이 int가 아닙니다. 입력한 값을 확인해주세요.')
+        return
+
+    
+    # champ_name으로 champ_id를 가져오는 과정에 대한 에러 핸들러
+    def champidSelectErrorHandler(cid_df):
+        
+        cid_df_len = len(cid_df)
+         # 챔피언 이름이 데이터베이스에 존재하지 않는 경우에 대한 에러 처리
+        if cid_df_len == 0:
+            print(f'에러>> [파라미터 입력 에러]: 챔피언 이름="{champ_name}"에 해당하는 레코드가 데이터베이스 상에 존재하지 않습니다.')
+            return True
+        # 챔피언 이름에 대한 레코드가 중복 존재하는 경우에 대한 에러 처리
+        elif cid_df_len > 1:
+            print(f'에러>> [데이터베이스 에러]: 챔피언 이름="{champ_name}"에 해당하는 레코드가 중복으로 존재합니다!\n\t\
+                  데이터베이스의 수정이 필요합니다.')
+            return True
+        # my_utils의 함수나 데이터베이스 접속에 대한 문제로 예측되는 경우에 대한 에러 처리
+        elif cid_df_len != 1:
+            print(f'에러>> [원인 불명]: my_utils.py의 oracle_totalExecute()를 통한 검색에 문제가 있습니다.\n\t\
+                  데이터베이스 접속에 문제가 있거나 my_utils.py 파일의 함수에 대한 수정이 필요합니다.\n\t\
+                  에러 원인: cid_df_len={cid_df_len}')
+            return True
+        return False
+    
+    # champ_name이 입력된 경우 데이터베이스를 참조해 champ_id를 가져옴
+    if champ_name != '':
+        cid_df = oracle_totalExecute(f'SELECT championid FROM CHAMPION_NAME_KR WHERE champion_name_kr = \'{champ_name}\'', debug_print=False)
+        # 에러 핸들러에서 에러가 감지된 경우 여기서 강제 리턴
+        if champidSelectErrorHandler(cid_df):
+            return
+        champ_id = cid_df.iloc[0].values[0]
+
+    # 예측하기 힘든 데이터프레임에 대한 예외 처리
+    try:
+        return list(filter(lambda x: x[1]==champ_id,\
+            [(i, v['championId']) for i,v in enumerate(sum([a['matches']['info']['participants'] for a in raw_data.iloc], []))]))
+    except:
+        print('에러>> [파라미터 입력 에러]: raw_data의 값이 my_utils.getRawdata() 함수로 만들어진 데이터프레임이 아닌 것 같습니다.\n\t\
+              raw_data를 my_utils.getRawdata() 함수로 만들어서 입력해 주시기 바랍니다.')
+
+
+##### << 예외 처리 구문 작성 필요! >> #####
+def eventExtractor(raw_data_series: pd.Series, event_type: str):
+    return list(filter(lambda evt: (evt['type']==event_type),\
+            sum([fr['events'] for fr in [ti for ti in raw_data_series['timeline']['info']['frames']]], [])))
+
+
+# timeline 데이터에서 이 게임 동안 발생한 모든 이벤트의 타입을 리스트로 리턴하는 함수
+def getEventList(timeline: dict):
+    return list(set([b['type'] for b in sum([a['events'] for a in timeline['info']['frames']], [])]))
