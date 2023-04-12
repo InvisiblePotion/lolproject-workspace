@@ -6,6 +6,9 @@ from urllib import parse
 from tqdm import tqdm
 import time
 import random
+from PIL import Image
+from io import BytesIO
+import numpy as np
 
 dsn = ora.makedsn('localhost', 1521, 'xe')
 
@@ -348,3 +351,29 @@ def eventExtractor(raw_data_series: pd.Series, event_type: str):
 # timeline 데이터에서 이 게임 동안 발생한 모든 이벤트의 타입을 리스트로 리턴하는 함수
 def getEventList(timeline: dict):
     return list(set([b['type'] for b in sum([a['events'] for a in timeline['info']['frames']], [])]))
+
+
+def cos_sim(a_v: np.ndarray, b_v: np.ndarray):
+    return np.dot(a_v, b_v) / (np.linalg.norm(a_v) * np.linalg.norm(b_v))
+
+
+def get_grey_img(file_name: str):
+    return Image.open(BytesIO(
+        open(f'./champion_image/{file_name}', 'rb').read()
+    )).convert('L')
+
+
+def img2vec(img: Image.Image):
+    return (arr := np.asarray(img, dtype=int)).reshape(arr.shape[0] * arr.shape[1])
+
+
+def get_all_cos_sim(champion_file_lst: list):
+    vec_compare_dict = {}
+    for idx, first_champ in enumerate(tqdm(champion_file_lst)):
+        # a:b와 b:a가 동시에 존재하는걸 방지하기 위해 슬라이싱
+        for second_champ in champion_file_lst[idx:]:
+            # a:a를 방지하기 위해 앞뒤 이름이 다를 경우만 실행
+            if first_champ != second_champ:
+                vec_compare_dict[f'{first_champ[:-4]}:{second_champ[:-4]}'] = \
+                    round(cos_sim(img2vec(get_grey_img(first_champ)), img2vec(get_grey_img(second_champ))), 3)
+    return vec_compare_dict
