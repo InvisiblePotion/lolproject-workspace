@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -1013,
-    "scrollLeft": -756,
+    "scrollTop": -839,
+    "scrollLeft": -1021,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -185,7 +185,7 @@
             "id": "9f71f736-dde8-428e-aebd-df41113221ed"
           },
           {
-            "name": "/rank",
+            "name": "/ranking",
             "comment": "랭킹",
             "dataType": "동기",
             "default": "",
@@ -304,7 +304,7 @@
           "active": false,
           "left": 956.1387,
           "top": 1034.3046,
-          "zIndex": 238,
+          "zIndex": 38,
           "widthName": 71.5703125,
           "widthComment": 60,
           "color": "#00BCD4"
@@ -367,7 +367,7 @@
           "active": false,
           "left": 1379.041,
           "top": 1444.5512,
-          "zIndex": 198,
+          "zIndex": 9,
           "widthName": 84.5703125,
           "widthComment": 63.3310546875,
           "color": "#F44336"
@@ -407,7 +407,7 @@
           "active": false,
           "left": 1414.9679,
           "top": 1680.5272,
-          "zIndex": 205,
+          "zIndex": 10,
           "widthName": 71.5703125,
           "widthComment": 120,
           "color": "#F44336"
@@ -470,7 +470,7 @@
           "active": false,
           "left": 1596.0116,
           "top": 1226.9362,
-          "zIndex": 230,
+          "zIndex": 11,
           "widthName": 71.5703125,
           "widthComment": 60,
           "color": "#4CAF50"
@@ -556,7 +556,7 @@
           "active": false,
           "left": 468.4302,
           "top": 1205.2296,
-          "zIndex": 139,
+          "zIndex": 4,
           "widthName": 60,
           "widthComment": 60,
           "color": "#607D8B"
@@ -566,10 +566,10 @@
       },
       {
         "name": "랭킹",
-        "comment": "/rank",
+        "comment": "/ranking",
         "columns": [
           {
-            "name": "/rank",
+            "name": "/ranking",
             "comment": "랭킹",
             "dataType": "동기",
             "default": "",
@@ -596,7 +596,7 @@
           "active": false,
           "left": 1605.4002,
           "top": 1064.621,
-          "zIndex": 196,
+          "zIndex": 36,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -659,7 +659,7 @@
           "active": false,
           "left": 337.0612,
           "top": 1060.2041,
-          "zIndex": 8,
+          "zIndex": 30,
           "widthName": 71.5703125,
           "widthComment": 120,
           "color": "#3F51B5"
@@ -722,7 +722,7 @@
           "active": false,
           "left": 641.7771,
           "top": 852.3813,
-          "zIndex": 44,
+          "zIndex": 32,
           "widthName": 60,
           "widthComment": 120,
           "color": "#673AB7"
@@ -785,7 +785,7 @@
           "active": false,
           "left": 104.917,
           "top": 1438.3333,
-          "zIndex": 132,
+          "zIndex": 3,
           "widthName": 71.5703125,
           "widthComment": 60,
           "color": "#607D8B"
@@ -848,7 +848,7 @@
           "active": false,
           "left": 556.8056,
           "top": 1444.7235,
-          "zIndex": 140,
+          "zIndex": 5,
           "widthName": 84.5703125,
           "widthComment": 60,
           "color": "#607D8B"
@@ -858,7 +858,7 @@
       },
       {
         "name": "찾은 아이디",
-        "comment": "",
+        "comment": "/idfound",
         "columns": [
           {
             "name": "/idfound",
@@ -888,7 +888,7 @@
           "active": false,
           "left": 66.167,
           "top": 1673.1112,
-          "zIndex": 143,
+          "zIndex": 24,
           "widthName": 71.5703125,
           "widthComment": 60,
           "color": "#607D8B"
@@ -898,7 +898,7 @@
       },
       {
         "name": "찾은 비밀번호",
-        "comment": "",
+        "comment": "/pwfound",
         "columns": [
           {
             "name": "/pwfound",
@@ -928,7 +928,7 @@
           "active": false,
           "left": 515.6113,
           "top": 1681.6667,
-          "zIndex": 141,
+          "zIndex": 28,
           "widthName": 84.5703125,
           "widthComment": 60,
           "color": "#607D8B"
@@ -966,7 +966,7 @@
           {
             "name": "/changelol",
             "comment": "롤 계정 변경",
-            "dataType": "비동기",
+            "dataType": "비동기;wip",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -981,7 +981,7 @@
               "pfk": false,
               "widthName": 64.06103515625,
               "widthComment": 76.140625,
-              "widthDataType": 60,
+              "widthDataType": 64.4228515625,
               "widthDefault": 60
             },
             "id": "767cef29-ce84-453a-b982-71573c6a7236"
@@ -989,7 +989,7 @@
           {
             "name": "/changepw",
             "comment": "비밀번호 변경",
-            "dataType": "동기",
+            "dataType": "동기;wip",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1014,7 +1014,7 @@
           "active": false,
           "left": 946.5952,
           "top": 1485.4762,
-          "zIndex": 240,
+          "zIndex": 22,
           "widthName": 67,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -1029,7 +1029,7 @@
           {
             "name": "/changepw",
             "comment": "비밀번호 변경",
-            "dataType": "동기",
+            "dataType": "동기;wip",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1054,7 +1054,7 @@
           "active": false,
           "left": 918.3331,
           "top": 1738.1111,
-          "zIndex": 236,
+          "zIndex": 12,
           "widthName": 84.5703125,
           "widthComment": 67.25390625,
           "color": "#9E9E9E"
@@ -1422,7 +1422,7 @@
           "columnIds": [
             "3593148c-e70e-4f62-b19a-968825e855ac"
           ],
-          "x": 1084.007309375,
+          "x": 1086.21873515625,
           "y": 1485.4762,
           "direction": "top"
         },
@@ -1439,7 +1439,7 @@
           "columnIds": [
             "7f61569e-e325-4873-9b52-59d9ebb239a0"
           ],
-          "x": 1084.007309375,
+          "x": 1086.21873515625,
           "y": 1615.9762,
           "direction": "bottom"
         },
