@@ -1,0 +1,122 @@
+{
+  "canvas": {
+    "version": "2.2.11",
+    "width": 5000,
+    "height": 5000,
+    "scrollTop": -1615.3333333333335,
+    "scrollLeft": -1698,
+    "zoomLevel": 1,
+    "show": {
+      "tableComment": true,
+      "columnComment": true,
+      "columnDataType": true,
+      "columnDefault": true,
+      "columnAutoIncrement": true,
+      "columnPrimaryKey": true,
+      "columnUnique": true,
+      "columnNotNull": true,
+      "relationship": true
+    },
+    "database": "Oracle",
+    "databaseName": "",
+    "canvasType": "ERD",
+    "language": "GraphQL",
+    "tableCase": "pascalCase",
+    "columnCase": "camelCase",
+    "highlightTheme": "VS2015",
+    "bracketType": "none",
+    "setting": {
+      "relationshipDataTypeSync": true,
+      "relationshipOptimization": false,
+      "columnOrder": [
+        "columnName",
+        "columnComment",
+        "columnDataType",
+        "columnDefault",
+        "columnNotNull",
+        "columnUnique",
+        "columnAutoIncrement"
+      ]
+    },
+    "pluginSerializationMap": {}
+  },
+  "table": {
+    "tables": [
+      {
+        "name": "논리 테이블",
+        "comment": "물리 테이블",
+        "columns": [
+          {
+            "name": "논리 컬럼",
+            "comment": "물리 컬럼",
+            "dataType": "데이터 타입",
+            "default": "디폴트 값",
+            "option": {
+              "autoIncrement": true,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 71.5703125,
+              "widthDefault": 60
+            },
+            "id": "069d8f06-3b1c-47bb-b336-109319fce587"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1729,
+          "top": 1849.3333,
+          "zIndex": 30,
+          "widthName": 71.5703125,
+          "widthComment": 71.5703125,
+          "color": "#9E9E9E"
+        },
+        "visible": true,
+        "id": "1b8d9eb9-8534-4c19-81f5-edbc43c92ea3"
+      },
+      {
+        "name": "",
+        "comment": "",
+        "columns": [],
+        "ui": {
+          "active": true,
+          "left": 1766,
+          "top": 2102.3333,
+          "zIndex": 35,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "326167f9-ae8d-43e7-8790-e44da41bffcf"
+      }
+    ],
+    "indexes": []
+  },
+  "memo": {
+    "memos": [
+      {
+        "value": "논리 테이블, 물리 테이블 작성 예시",
+        "ui": {
+          "active": false,
+          "left": 1728,
+          "top": 1787.3333333333335,
+          "zIndex": 25,
+          "width": 219,
+          "height": 100
+        },
+        "id": "b14131a5-06a4-4f67-84d9-883e75be46dc"
+      }
+    ]
+  },
+  "relationship": {
+    "relationships": []
+  }
+}
