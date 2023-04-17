@@ -28,6 +28,11 @@ public class Example_Controller {
 		return "example";
 	}
 	
+	@GetMapping("/ws")
+	public String websocket() {
+		return "websocket";
+	}
+	
 	@GetMapping(value="/test-ajax", produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Example_dto testAjax(@RequestParam Map<String, Integer> nums) {
 		return ex_ser.testDB(nums);
