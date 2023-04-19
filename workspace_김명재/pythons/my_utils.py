@@ -242,7 +242,8 @@ def getRawdata(tier: str, riot_api_key: str):
     for division in tqdm(division_list):
         url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division}?page={page}&api_key={riot_api_key}'
         res = requests.get(url).json()
-        lst += random.sample(res,5)
+        if len(res) >= 5: lst += random.sample(res, 5)
+        else: lst += [a for a in res]
 
     # summonerName을 통해서 puuid 가져오기
     summonerName_lst = list(map(lambda x:x['summonerName'] ,lst))
@@ -282,6 +283,58 @@ def getRawdata(tier: str, riot_api_key: str):
     df = pd.DataFrame(df_create, columns = ['match_id','matches','timeline'])
     print('complete!')
     return df
+
+
+def getSampleData(tier: str, division: str, get_amount: int, riot_api_key: str):
+    tier = tier.upper()
+
+    page = random.randrange(1, 100)
+    lst = []
+
+    # riot api를 통해서 summonerName을 가져오기
+    print('get SummonerName.....')
+    for v in range(get_amount):
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division}?page={page}&api_key={riot_api_key}'
+        res = requests.get(url).json()
+        lst += random.sample(res, 1)['summonerName']
+
+    print('total player: ', len(lst))
+
+    # summonerName을 통해서 puuid 가져오기
+    summonerName_lst = list(map(lambda x: x['summonerName'], lst))
+
+    print('get puuid......')
+    puuid_lst = []
+    skip_count = 0
+    for n in tqdm(summonerName_lst):
+        try:
+            puuid_lst.append(getPuuidBySummonerName(n, riot_api_key))
+        except:
+            skip_count += 1
+            continue
+    print('passed player: ', skip_count)
+
+    # match_ids 가져오기
+    print('get match_id...')
+    match_id_lst = []
+    for p in tqdm(puuid_lst):
+        match_id_lst.extend(getMatchIdsByPuuid(p, riot_api_key, 3))
+
+    # match,timeline rawdata - (match_id, matches, timelines) df만들기
+    print('get matches & timeline.....')
+    df_create = []
+    for idx, match_id in enumerate(tqdm(match_id_lst)):
+        matches, timeline = getMatchDataAndTimelineByMatchId(match_id, riot_api_key)
+        # API Key 제한수 초과시 2분 휴식
+        try:
+            is_max = matches['metadata']
+            df_create.append([match_id ,matches,timeline])
+        except:
+            print('Rate Limit Exceeded: ', idx)
+            apiSleep(120)
+
+    print('complete!')
+    return pd.DataFrame(df_create, columns=['match_id','matches','timeline'])
 
 
 # getRawdata() 함수로 만들어진 데이터프레임 안에서 특정 챔피언의 등장 횟수와 등장 레코드를 리턴하는 함수
