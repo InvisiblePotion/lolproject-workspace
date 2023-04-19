@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -545.5,
-    "scrollLeft": -657,
+    "scrollTop": -555.5,
+    "scrollLeft": -563,
     "zoomLevel": 0.3,
     "show": {
       "tableComment": true,
@@ -519,7 +519,7 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 1537.8954,
           "top": 1268.365,
           "zIndex": 325,
@@ -2447,7 +2447,7 @@
       },
       {
         "identification": false,
-        "relationshipType": "ZeroOne",
+        "relationshipType": "OneOnly",
         "startRelationshipType": "Dash",
         "start": {
           "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
