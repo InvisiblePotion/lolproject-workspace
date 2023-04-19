@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -1763.3333333333335,
-    "scrollLeft": -1737,
+    "scrollTop": -1896.3333333333335,
+    "scrollLeft": -1780,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -74,7 +74,7 @@
           "active": false,
           "left": 1729,
           "top": 1849.3333,
-          "zIndex": 1,
+          "zIndex": 78,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -83,9 +83,72 @@
         "id": "1b8d9eb9-8534-4c19-81f5-edbc43c92ea3"
       },
       {
-        "name": "챔피언 상세/루트",
-        "comment": "",
+        "name": "champion_root",
+        "comment": "챔피언/루트",
         "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1729.9997,
+          "top": 1979.8887,
+          "zIndex": 224,
+          "widthName": 90.181640625,
+          "widthComment": 72.14794921875,
+          "color": "#F44336"
+        },
+        "visible": true,
+        "id": "326167f9-ae8d-43e7-8790-e44da41bffcf"
+      },
+      {
+        "name": "champion_info",
+        "comment": "챔피언/초기 정보",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "bd7eb3c9-992b-40ec-8a57-5041fe6d1ee2"
+          },
           {
             "name": "",
             "comment": "",
@@ -107,47 +170,55 @@
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "1c0389fa-8bae-49d4-a580-3451e5e34719"
+            "id": "9ee524f2-299d-436f-aa6a-585732a6b6f5"
           }
         ],
         "ui": {
-          "active": false,
-          "left": 1728.8886,
-          "top": 1970.9999,
-          "zIndex": 51,
-          "widthName": 102.71826171875,
-          "widthComment": 60,
-          "color": "#F44336"
-        },
-        "visible": true,
-        "id": "326167f9-ae8d-43e7-8790-e44da41bffcf"
-      },
-      {
-        "name": "챔피언 상세/초기 정보",
-        "comment": "",
-        "columns": [],
-        "ui": {
-          "active": false,
-          "left": 1729.8887,
-          "top": 2065.5554,
-          "zIndex": 42,
-          "widthName": 133.28857421875,
-          "widthComment": 60,
+          "active": true,
+          "left": 2136.5553,
+          "top": 2092.2215,
+          "zIndex": 237,
+          "widthName": 88.328125,
+          "widthComment": 102.71826171875,
           "color": "#F44336"
         },
         "visible": true,
         "id": "f55d5619-bf59-4bc7-910f-9f1105a7a1f4"
       },
       {
-        "name": "챔피언 상세/룬",
-        "comment": "",
-        "columns": [],
+        "name": "champion_rune",
+        "comment": "챔피언/룬",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "13cd975f-58e2-4fa8-91fd-b3557e63e0d4"
+          }
+        ],
         "ui": {
           "active": false,
-          "left": 1728.8891,
-          "top": 2162.2221,
-          "zIndex": 44,
-          "widthName": 89.71826171875,
+          "left": 2135.5561,
+          "top": 2264.4433,
+          "zIndex": 228,
+          "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
         },
@@ -155,48 +226,120 @@
         "id": "a9e2e859-fcff-4b50-a4fc-ea3e9fd36fb0"
       },
       {
-        "name": "챔피언 상세/스킬",
-        "comment": "",
-        "columns": [],
+        "name": "champion_skill",
+        "comment": "챔피언/스킬",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "1a407aa9-b03b-4cb0-a66d-a14a4b98ceb4"
+          }
+        ],
         "ui": {
           "active": false,
-          "left": 1728.8892,
-          "top": 2260.0002,
-          "zIndex": 45,
-          "widthName": 102.71826171875,
-          "widthComment": 60,
+          "left": 2134.4451,
+          "top": 2421.1103,
+          "zIndex": 229,
+          "widthName": 87.515625,
+          "widthComment": 72.14794921875,
           "color": "#F44336"
         },
         "visible": true,
         "id": "fcfd89b2-b8e0-4f43-97ad-7b9d3aae7882"
       },
       {
-        "name": "챔피언 상세/아이템",
-        "comment": "",
-        "columns": [],
+        "name": "champion_item",
+        "comment": "챔피언/아이템",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "02052126-0fbe-4f3d-aafc-2016a9d7490b"
+          }
+        ],
         "ui": {
           "active": false,
-          "left": 1730.0002,
-          "top": 2359.0007,
-          "zIndex": 46,
-          "widthName": 115.71826171875,
-          "widthComment": 60,
+          "left": 2138.6116,
+          "top": 2598.7217,
+          "zIndex": 230,
+          "widthName": 91.6796875,
+          "widthComment": 85.14794921875,
           "color": "#F44336"
         },
         "visible": true,
         "id": "abd37862-b952-47b9-98f1-da8ea9c41d81"
       },
       {
-        "name": "챔피언 상세/스펠",
-        "comment": "",
-        "columns": [],
+        "name": "champion_spell",
+        "comment": "챔피언/스펠",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "ec78ab0d-d878-434d-890a-394cc3a0d3ff"
+          }
+        ],
         "ui": {
           "active": false,
-          "left": 1728.8889,
-          "top": 2459.0007,
-          "zIndex": 47,
-          "widthName": 102.71826171875,
-          "widthComment": 60,
+          "left": 2137.5006,
+          "top": 2746.9161,
+          "zIndex": 231,
+          "widthName": 92.5048828125,
+          "widthComment": 72.14794921875,
           "color": "#F44336"
         },
         "visible": true,
@@ -209,6 +352,137 @@
     "memos": []
   },
   "relationship": {
-    "relationships": []
+    "relationships": [
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 1988.8387,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "f55d5619-bf59-4bc7-910f-9f1105a7a1f4",
+          "columnIds": [
+            "bd7eb3c9-992b-40ec-8a57-5041fe6d1ee2"
+          ],
+          "x": 2136.5553,
+          "y": 2147.2215,
+          "direction": "left"
+        },
+        "constraintName": "fk_champion_root_to_champion_info",
+        "visible": true,
+        "id": "6cb5333b-ae29-4862-b991-d89474534d85"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 2006.7387,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "a9e2e859-fcff-4b50-a4fc-ea3e9fd36fb0",
+          "columnIds": [
+            "13cd975f-58e2-4fa8-91fd-b3557e63e0d4"
+          ],
+          "x": 2135.5561,
+          "y": 2309.1933,
+          "direction": "left"
+        },
+        "constraintName": "fk_champion_root_to_champion_rune",
+        "visible": true,
+        "id": "3cde0429-1627-4946-8dc2-04f99cffc82c"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 2024.6387000000002,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "fcfd89b2-b8e0-4f43-97ad-7b9d3aae7882",
+          "columnIds": [
+            "1a407aa9-b03b-4cb0-a66d-a14a4b98ceb4"
+          ],
+          "x": 2348.2966625,
+          "y": 2421.1103,
+          "direction": "top"
+        },
+        "constraintName": "fk_champion_root_to_champion_skill",
+        "visible": true,
+        "id": "172b4e2d-f3ff-4bdd-bd11-b3f7e7f78c35"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 2042.5387000000003,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "abd37862-b952-47b9-98f1-da8ea9c41d81",
+          "columnIds": [
+            "02052126-0fbe-4f3d-aafc-2016a9d7490b"
+          ],
+          "x": 2352.4631625,
+          "y": 2598.7217,
+          "direction": "top"
+        },
+        "constraintName": "fk_champion_root_to_champion_item",
+        "visible": true,
+        "id": "6184849e-cfe9-4823-b40e-b674ad67f2bd"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 2060.4387,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "6155dc19-a33f-4d60-8f54-18ba853d08ed",
+          "columnIds": [
+            "ec78ab0d-d878-434d-890a-394cc3a0d3ff"
+          ],
+          "x": 2351.3521625,
+          "y": 2746.9161,
+          "direction": "top"
+        },
+        "constraintName": "fk_champion_root_to_champion_spell",
+        "visible": true,
+        "id": "35fade88-cda9-4f49-8a74-32cbfb17c7e0"
+      }
+    ]
   }
 }
