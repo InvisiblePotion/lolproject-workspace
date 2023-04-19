@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -549.5,
-    "scrollLeft": -649,
+    "scrollTop": -545.5,
+    "scrollLeft": -657,
     "zoomLevel": 0.3,
     "show": {
       "tableComment": true,
@@ -348,9 +348,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 891.760309326037,
-          "top": 594.5311081069074,
-          "zIndex": 197,
+          "left": 935.0933,
+          "top": 1021.1975,
+          "zIndex": 273,
           "widthName": 71.5703125,
           "widthComment": 60,
           "color": "#00BCD4"
@@ -411,9 +411,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 631.6250522573105,
-          "top": 341.76146874000887,
-          "zIndex": 203,
+          "left": 1544.9582,
+          "top": 1025.0949,
+          "zIndex": 289,
           "widthName": 84.5703125,
           "widthComment": 63.3310546875,
           "color": "#F44336"
@@ -519,10 +519,10 @@
           }
         ],
         "ui": {
-          "active": false,
-          "left": 997.8940065067611,
-          "top": 165.0314721780693,
-          "zIndex": 202,
+          "active": true,
+          "left": 1537.8954,
+          "top": 1268.365,
+          "zIndex": 325,
           "widthName": 71.5703125,
           "widthComment": 120,
           "color": "#F44336"
@@ -606,9 +606,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1374.251522908839,
-          "top": 370.3790925132111,
-          "zIndex": 201,
+          "left": 1614.2512,
+          "top": 1813.7124,
+          "zIndex": 323,
           "widthName": 71.5703125,
           "widthComment": 60,
           "color": "#4CAF50"
@@ -738,9 +738,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 410.2449728647692,
-          "top": 1072.262475003879,
-          "zIndex": 205,
+          "left": 506.9118,
+          "top": 1202.2625,
+          "zIndex": 277,
           "widthName": 60,
           "widthComment": 60,
           "color": "#795548"
@@ -801,9 +801,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1457.5003144447176,
-          "top": 790.4498843497523,
-          "zIndex": 184,
+          "left": 697.5004,
+          "top": 667.1163,
+          "zIndex": 311,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -887,9 +887,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1180.3113264037145,
-          "top": 1122.1486237700146,
-          "zIndex": 185,
+          "left": 1003.6444,
+          "top": 462.1485,
+          "zIndex": 309,
           "widthName": 71.5703125,
           "widthComment": 120,
           "color": "#3F51B5"
@@ -950,9 +950,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1527.66845703125,
-          "top": 1163.5079827803515,
-          "zIndex": 169,
+          "left": 1501.0016,
+          "top": 673.5078,
+          "zIndex": 310,
           "widthName": 60,
           "widthComment": 120,
           "color": "#673AB7"
@@ -1013,9 +1013,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 966.4573504089678,
-          "top": 1487.204656999828,
-          "zIndex": 209,
+          "left": 196.4578,
+          "top": 1030.5376,
+          "zIndex": 313,
           "widthName": 71.5703125,
           "widthComment": 60,
           "color": "#795548"
@@ -1099,9 +1099,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 291.7524181206571,
-          "top": 1748.349672418721,
-          "zIndex": 208,
+          "left": 18.4191,
+          "top": 1221.6825,
+          "zIndex": 317,
           "widthName": 84.5703125,
           "widthComment": 60,
           "color": "#795548"
@@ -1162,9 +1162,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 767.141801643294,
-          "top": 1806.377296265032,
-          "zIndex": 210,
+          "left": 10.4757,
+          "top": 823.0443,
+          "zIndex": 314,
           "widthName": 102.140625,
           "widthComment": 60,
           "color": "#795548"
@@ -1225,9 +1225,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 173.8706044728291,
-          "top": 1383.0567237825132,
-          "zIndex": 206,
+          "left": 493.8706,
+          "top": 1483.0572,
+          "zIndex": 318,
           "widthName": 115.140625,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -1311,9 +1311,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 801.9087736796379,
-          "top": 1134.7486331989921,
-          "zIndex": 204,
+          "left": 858.575,
+          "top": 1738.0822,
+          "zIndex": 320,
           "widthName": 67,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -1420,9 +1420,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 548.4720990960211,
-          "top": 1439.6507900029721,
-          "zIndex": 207,
+          "left": 0,
+          "top": 1496.3174,
+          "zIndex": 316,
           "widthName": 84.5703125,
           "widthComment": 67.25390625,
           "color": "#9E9E9E"
@@ -1460,9 +1460,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 674.2764761987332,
-          "top": 0,
-          "zIndex": 200,
+          "left": 1419.284,
+          "top": 1573.3332,
+          "zIndex": 324,
           "widthName": 84.5703125,
           "widthComment": 120,
           "color": "#F44336"
@@ -1684,9 +1684,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 112.1091024821659,
-          "top": 322.45432257514034,
-          "zIndex": 199,
+          "left": 75.4426,
+          "top": 75.7877,
+          "zIndex": 223,
           "widthName": 71.5703125,
           "widthComment": 89.7880859375,
           "color": "#E91E63"
@@ -1770,9 +1770,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 121.20692836857711,
-          "top": 840.2901203118988,
-          "zIndex": 222,
+          "left": 331.2068,
+          "top": 646.9575,
+          "zIndex": 312,
           "widthName": 60,
           "widthComment": 60,
           "color": "#009688"
@@ -1833,9 +1833,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 525.7804572410735,
-          "top": 720.0533021180771,
-          "zIndex": 216,
+          "left": 685.7803,
+          "top": 853.3869,
+          "zIndex": 304,
           "widthName": 60,
           "widthComment": 60,
           "color": "#009688"
@@ -1860,18 +1860,18 @@
           "columnIds": [
             "55b6a7f3-6aa8-4d0d-a34e-3fe568215e52"
           ],
-          "x": 966.7710483510605,
-          "y": 369.26146874000887,
-          "direction": "right"
+          "x": 1712.531198046875,
+          "y": 1135.0949,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f",
           "columnIds": [
             "309cc105-0d2a-4aa9-84b8-e9c1fc681d40"
           ],
-          "x": 997.8940065067611,
-          "y": 240.5314721780693,
-          "direction": "left"
+          "x": 1714.920058203125,
+          "y": 1268.365,
+          "direction": "top"
         },
         "constraintName": "fk_챔피언 분석_to_챔피언 상세",
         "visible": true,
@@ -1889,9 +1889,9 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1008.7006169432245,
-          "y": 930.0311081069074,
-          "direction": "bottom"
+          "x": 1227.4440690429687,
+          "y": 1021.1975,
+          "direction": "top"
         },
         "end": {
           "tableId": "0d4cd7b9-347c-47b9-9379-0a8ad1786de9",
@@ -1901,9 +1901,9 @@
             "286cbe4a-6200-4803-b5f7-6e2ca45e3346",
             "72d2ef79-4a40-4855-8b4e-9021d80a79a3"
           ],
-          "x": 1180.3113264037145,
-          "y": 1187.3986237700146,
-          "direction": "left"
+          "x": 1212.6422027343751,
+          "y": 592.6485,
+          "direction": "bottom"
         },
         "constraintName": "fk_메인 페이지_to_검색",
         "visible": true,
@@ -1920,9 +1920,9 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 969.720514404162,
-          "y": 594.5311081069074,
-          "direction": "top"
+          "x": 1402.85453046875,
+          "y": 1105.0725,
+          "direction": "right"
         },
         "end": {
           "tableId": "92ba11ce-d8aa-49eb-8be1-d06aac6d2b4a",
@@ -1931,9 +1931,9 @@
             "46e309b0-5a6f-42f4-8b10-ca3360be8ea0",
             "27324528-dd4c-4911-b9ff-a8ee027c601d"
           ],
-          "x": 966.7710483510605,
-          "y": 424.26146874000887,
-          "direction": "right"
+          "x": 1544.9582,
+          "y": 1080.0949,
+          "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_챔피언 분석",
         "visible": true,
@@ -1948,17 +1948,17 @@
           "columnIds": [
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1281.561334716662,
-          "y": 594.5311081069074,
-          "direction": "top"
+          "x": 1285.9142228515625,
+          "y": 1356.6975,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "a8076037-3ed7-42f1-869a-97a816e3982a",
           "columnIds": [
             "e934da84-032a-45f9-bd19-9e2e0627141d"
           ],
-          "x": 1374.251522908839,
-          "y": 403.0040925132111,
+          "x": 1614.2512,
+          "y": 1878.9624,
           "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_듀오 찾기 게시판",
@@ -1975,9 +1975,9 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1359.521539794787,
-          "y": 678.4061081069074,
-          "direction": "right"
+          "x": 1110.5037614257812,
+          "y": 1021.1975,
+          "direction": "top"
         },
         "end": {
           "tableId": "dfd4465c-f0b2-413e-a676-658510d1c8d9",
@@ -1985,9 +1985,9 @@
             "7c3944b7-4358-4825-946c-199a2510f230",
             "8fde6b44-91f3-4296-af3a-2f18de6cf24e"
           ],
-          "x": 1457.5003144447176,
-          "y": 817.9498843497523,
-          "direction": "left"
+          "x": 1067.3060640625,
+          "y": 722.1163,
+          "direction": "right"
         },
         "constraintName": "fk_메인 페이지_to_랭킹",
         "visible": true,
@@ -2002,8 +2002,8 @@
           "columnIds": [
             "2898f1b7-c8fc-4ef6-a639-7b458f310a10"
           ],
-          "x": 1598.3069318724645,
-          "y": 1187.3986237700146,
+          "x": 1421.6400054687501,
+          "y": 527.3985,
           "direction": "right"
         },
         "end": {
@@ -2011,8 +2011,8 @@
           "columnIds": [
             "a789a718-301b-44df-9c5c-1fbe13edef64"
           ],
-          "x": 1527.66845703125,
-          "y": 1191.0079827803515,
+          "x": 1501.0016,
+          "y": 701.0078,
           "direction": "left"
         },
         "constraintName": "fk_검색_to_개인 스탯",
@@ -2028,17 +2028,17 @@
           "columnIds": [
             "9191723d-bfe1-4b16-95a2-cc69e708fa3f"
           ],
-          "x": 1359.521539794787,
-          "y": 846.1561081069074,
-          "direction": "right"
+          "x": 1344.3843766601562,
+          "y": 1021.1975,
+          "direction": "top"
         },
         "end": {
           "tableId": "4636a0e1-f4d5-40f0-a19c-ce46b2fa8030",
           "columnIds": [
             "0a4c3dd0-cf87-4414-80af-d145c61d66ab"
           ],
-          "x": 1527.66845703125,
-          "y": 1246.0079827803515,
+          "x": 1501.0016,
+          "y": 756.0078,
           "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_개인 스탯",
@@ -2055,9 +2055,9 @@
             "d4cf5ba0-1bea-4302-b487-eeea7c8967eb",
             "036f3d91-d47a-4992-ba1f-4ba835a2899c"
           ],
-          "x": 677.8152853647691,
-          "y": 1200.887475003879,
-          "direction": "right"
+          "x": 573.8043781250001,
+          "y": 1202.2625,
+          "direction": "top"
         },
         "end": {
           "tableId": "4973b901-0d37-4fa5-abb0-2e4828d5bb9a",
@@ -2065,9 +2065,9 @@
             "2a5f55de-5353-4d1d-8564-af34889a824d",
             "2d803983-dd82-4656-a144-4b3d0388d690"
           ],
-          "x": 966.4573504089678,
-          "y": 1542.204656999828,
-          "direction": "left"
+          "x": 481.598425,
+          "y": 1085.5376,
+          "direction": "right"
         },
         "constraintName": "fk_로그인_to_아이디 찾기",
         "visible": true,
@@ -2082,18 +2082,18 @@
           "columnIds": [
             "036f3d91-d47a-4992-ba1f-4ba835a2899c"
           ],
-          "x": 610.9227072397691,
-          "y": 1243.762475003879,
-          "direction": "bottom"
+          "x": 506.9118,
+          "y": 1288.0125,
+          "direction": "left"
         },
         "end": {
           "tableId": "3dfc2cef-ae34-4a03-887a-351053907966",
           "columnIds": [
             "221ce29f-c69f-44cc-820a-8d0a28aada88"
           ],
-          "x": 497.8705821831571,
-          "y": 1748.349672418721,
-          "direction": "top"
+          "x": 293.24331875,
+          "y": 1286.9325,
+          "direction": "right"
         },
         "constraintName": "fk_로그인_to_비밀번호 찾기",
         "visible": true,
@@ -2108,17 +2108,17 @@
           "columnIds": [
             "c78cf7dd-1518-4376-91f9-0938f01008b6"
           ],
-          "x": 1109.0276629089678,
-          "y": 1597.204656999828,
-          "direction": "bottom"
+          "x": 339.0281125,
+          "y": 1030.5376,
+          "direction": "top"
         },
         "end": {
           "tableId": "b8537131-82cf-4d5b-b7eb-2c897c696f1b",
           "columnIds": [
             "69e55cb2-ba70-4fef-832e-3084c3fd6e35"
           ],
-          "x": 1052.282426643294,
-          "y": 1861.377296265032,
+          "x": 295.616325,
+          "y": 878.0443,
           "direction": "right"
         },
         "constraintName": "fk_아이디 찾기_to_찾은 아이디",
@@ -2134,8 +2134,8 @@
           "columnIds": [
             "fdbaaa5f-d37b-4951-9dc7-cac25db3a834"
           ],
-          "x": 1242.5812321775995,
-          "y": 930.0311081069074,
+          "x": 1052.0336076171875,
+          "y": 1356.6975,
           "direction": "bottom"
         },
         "end": {
@@ -2143,9 +2143,9 @@
           "columnIds": [
             "3593148c-e70e-4f62-b19a-968825e855ac"
           ],
-          "x": 1076.7329924296378,
-          "y": 1199.9986331989921,
-          "direction": "right"
+          "x": 995.987109375,
+          "y": 1738.0822,
+          "direction": "top"
         },
         "constraintName": "fk_메인 페이지_to_마이페이지",
         "visible": true,
@@ -2160,18 +2160,18 @@
           "columnIds": [
             "298db712-5b41-455c-85f1-3c115116b2fc"
           ],
-          "x": 1174.9186647098861,
-          "y": 165.0314721780693,
-          "direction": "top"
+          "x": 1626.4077291015626,
+          "y": 1419.365,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "40adfcd2-2df4-4afd-a7f4-a817d86b5919",
           "columnIds": [
             "c9288ce2-f8eb-4a0a-8dac-7560d047214b"
           ],
-          "x": 1028.3257926049832,
-          "y": 44.75,
-          "direction": "right"
+          "x": 1596.308658203125,
+          "y": 1573.3332,
+          "direction": "top"
         },
         "constraintName": "fk_챔피언 상세_to_챔피언 카운터",
         "visible": true,
@@ -2186,18 +2186,18 @@
           "columnIds": [
             "c0be3b47-c459-4087-801f-684d4c488873"
           ],
-          "x": 548.4720990960211,
-          "y": 1477.4007900029721,
-          "direction": "left"
+          "x": 332.02294921875,
+          "y": 1534.0674,
+          "direction": "right"
         },
         "end": {
           "tableId": "28ed3687-1f24-4091-bdee-19473d88235b",
           "columnIds": [
             "9647a0bd-0ee3-4947-8777-d58a53743eb6"
           ],
-          "x": 472.0112294728291,
-          "y": 1410.5567237825132,
-          "direction": "right"
+          "x": 493.8706,
+          "y": 1538.0572,
+          "direction": "left"
         },
         "constraintName": "fk_비밀번호 변경_to_찾은 비밀번호",
         "visible": true,
@@ -2212,8 +2212,8 @@
           "columnIds": [
             "7f61569e-e325-4873-9b52-59d9ebb239a0"
           ],
-          "x": 801.9087736796379,
-          "y": 1199.9986331989921,
+          "x": 858.575,
+          "y": 1803.3322,
           "direction": "left"
         },
         "end": {
@@ -2221,9 +2221,9 @@
           "columnIds": [
             "3b1ad02d-bb55-4ee0-95d8-77a18c091ada"
           ],
-          "x": 714.4835737053961,
-          "y": 1439.6507900029721,
-          "direction": "top"
+          "x": 332.02294921875,
+          "y": 1609.5674,
+          "direction": "right"
         },
         "constraintName": "fk_마이페이지_to_비밀번호 변경",
         "visible": true,
@@ -2238,18 +2238,18 @@
           "columnIds": [
             "e24675de-76c0-4469-93de-5b2bf790ed26"
           ],
-          "x": 360.4584728081571,
-          "y": 1748.349672418721,
-          "direction": "top"
+          "x": 155.83120937500001,
+          "y": 1352.1825,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "439d961d-c756-404a-8fbd-a01335d10f8c",
           "columnIds": [
             "48e8a240-3e76-4df8-ab7e-cf186e7e0945"
           ],
-          "x": 548.4720990960211,
-          "y": 1552.9007900029721,
-          "direction": "left"
+          "x": 166.011474609375,
+          "y": 1496.3174,
+          "direction": "top"
         },
         "constraintName": "fk_비밀번호 찾기_to_비밀번호 변경",
         "visible": true,
@@ -2264,17 +2264,17 @@
           "columnIds": [
             "df3c27b4-65cb-4d7c-bacb-ddf00317169a"
           ],
-          "x": 472.0112294728291,
-          "y": 1465.5567237825132,
-          "direction": "right"
+          "x": 642.9409125,
+          "y": 1483.0572,
+          "direction": "top"
         },
         "end": {
           "tableId": "d460ff1c-75e4-4951-97b2-53ce85e922e2",
           "columnIds": [
             "42af2ff4-ef03-4aa6-a177-515dc06b9874"
           ],
-          "x": 477.1375509897692,
-          "y": 1243.762475003879,
+          "x": 640.6969562500001,
+          "y": 1373.7625,
           "direction": "bottom"
         },
         "constraintName": "fk_비밀번호 변경 성공_to_로그인",
@@ -2290,17 +2290,17 @@
           "columnIds": [
             "d6a778a5-1b5f-4cb4-aa65-67acfe5376e4"
           ],
-          "x": 388.7772408685771,
-          "y": 938.1651203118988,
-          "direction": "right"
+          "x": 464.99195625,
+          "y": 777.4575,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "d460ff1c-75e4-4951-97b2-53ce85e922e2",
           "columnIds": [
             "0d6ea396-e1e3-40d1-8819-05bd3c65c7a6"
           ],
-          "x": 544.0301291147691,
-          "y": 1072.262475003879,
+          "x": 707.5895343750001,
+          "y": 1202.2625,
           "direction": "top"
         },
         "constraintName": "fk_회원가입_to_로그인",
@@ -2320,8 +2320,8 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 891.760309326037,
-          "y": 846.1561081069074,
+          "x": 935.0933,
+          "y": 1188.9475,
           "direction": "left"
         },
         "end": {
@@ -2333,8 +2333,8 @@
             "25275077-8af5-4439-8497-2fae6fd3127d",
             "aee05f69-1885-4985-9fa4-023eb7955abf"
           ],
-          "x": 677.8152853647691,
-          "y": 1115.137475003879,
+          "x": 774.4821125000001,
+          "y": 1288.0125,
           "direction": "right"
         },
         "constraintName": "fk_메인 페이지_to_로그인",
@@ -2350,18 +2350,18 @@
           "columnIds": [
             "1385b27e-43b0-4d15-9522-250c58395f0f"
           ],
-          "x": 1374.251522908839,
-          "y": 468.2540925132111,
-          "direction": "left"
+          "x": 1800.1213171875,
+          "y": 1813.7124,
+          "direction": "top"
         },
         "end": {
           "tableId": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f",
           "columnIds": [
             "2156288f-1964-40b1-8196-686ad5ceabcf"
           ],
-          "x": 1351.9433229130111,
-          "y": 240.5314721780693,
-          "direction": "right"
+          "x": 1803.4323873046876,
+          "y": 1419.365,
+          "direction": "bottom"
         },
         "constraintName": "fk_듀오 게시판_to_챔피언 상세",
         "visible": true,
@@ -2376,18 +2376,18 @@
           "columnIds": [
             "162e2392-73fd-414d-a893-aa15246887ef"
           ],
-          "x": 1125.640924560412,
-          "y": 594.5311081069074,
-          "direction": "top"
+          "x": 1402.85453046875,
+          "y": 1272.8225,
+          "direction": "right"
         },
         "end": {
           "tableId": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f",
           "columnIds": [
             "245fd13d-6d2d-468d-b437-fbfcb122561a"
           ],
-          "x": 1174.9186647098861,
-          "y": 316.0314721780693,
-          "direction": "bottom"
+          "x": 1537.8954,
+          "y": 1343.865,
+          "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_챔피언 상세",
         "visible": true,
@@ -2402,18 +2402,18 @@
           "columnIds": [
             "5a927f46-3f52-4de6-b823-592dea8b9134"
           ],
-          "x": 767.141801643294,
-          "y": 1861.377296265032,
-          "direction": "left"
+          "x": 153.0460125,
+          "y": 933.0443,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "3dfc2cef-ae34-4a03-887a-351053907966",
           "columnIds": [
             "7d76b669-f22d-42ca-8eac-c813ed6e54f7"
           ],
-          "x": 566.5766368706571,
-          "y": 1813.599672418721,
-          "direction": "right"
+          "x": 155.83120937500001,
+          "y": 1221.6825,
+          "direction": "top"
         },
         "constraintName": "fk_아이디 찾기 성공_to_비밀번호 찾기",
         "visible": true,
@@ -2428,18 +2428,18 @@
           "columnIds": [
             "884681c9-812c-4db5-bc0f-11ef4b338266"
           ],
-          "x": 1457.5003144447176,
-          "y": 872.9498843497523,
-          "direction": "left"
+          "x": 882.40323203125,
+          "y": 667.1163,
+          "direction": "top"
         },
         "end": {
           "tableId": "0d4cd7b9-347c-47b9-9379-0a8ad1786de9",
           "columnIds": [
             "72150e83-1c19-4067-b874-7f5b9e8652e5"
           ],
-          "x": 1389.3091291380895,
-          "y": 1122.1486237700146,
-          "direction": "top"
+          "x": 1003.6444,
+          "y": 527.3985,
+          "direction": "left"
         },
         "constraintName": "fk_랭킹_to_소환사 전적",
         "visible": true,
@@ -2454,17 +2454,17 @@
           "columnIds": [
             "27dc82ab-2a43-45ea-b26e-b55049ff6297"
           ],
-          "x": 891.760309326037,
-          "y": 678.4061081069074,
-          "direction": "left"
+          "x": 993.5634538085937,
+          "y": 1021.1975,
+          "direction": "top"
         },
         "end": {
           "tableId": "2a4db1cf-42fb-4c82-b20d-342469cd2fd2",
           "columnIds": [
             "00552457-3db5-4ced-8b3d-3d0cc40365bc"
           ],
-          "x": 793.3507697410735,
-          "y": 775.0533021180771,
+          "x": 953.3506125,
+          "y": 908.3869,
           "direction": "right"
         },
         "constraintName": "fk_메인 페이지_to_이용약관",
@@ -2480,8 +2480,8 @@
           "columnIds": [
             "f4b034c4-88d3-4098-942d-932c2bf404fa"
           ],
-          "x": 525.7804572410735,
-          "y": 775.0533021180771,
+          "x": 685.7803,
+          "y": 908.3869,
           "direction": "left"
         },
         "end": {
@@ -2489,8 +2489,8 @@
           "columnIds": [
             "d9822d82-e0e0-4c97-89d8-b0befb364724"
           ],
-          "x": 388.7772408685771,
-          "y": 872.9151203118988,
+          "x": 598.7771124999999,
+          "y": 712.2075,
           "direction": "right"
         },
         "constraintName": "fk_이용약관_to_회원가입",
