@@ -152,9 +152,9 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
                     if data_frame.columns[col_idx].upper() in pk_col:
                         dual_on_cv += data_frame.columns[col_idx].upper() + '=' + str(data_frame.iloc[rec_idx][col_idx]) + ' and '
                 else:
-                    values += '\''+str(data_frame.iloc[rec_idx][col_idx])+'\', '
+                    values += '"'+str(data_frame.iloc[rec_idx][col_idx])+'", '
                     if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv += data_frame.columns[col_idx].upper() + '=\'' + str(data_frame.iloc[rec_idx][col_idx]) + '\' and '
+                        dual_on_cv += data_frame.columns[col_idx].upper() + '="' + str(data_frame.iloc[rec_idx][col_idx]) + '" and '
             except:
                 print(f'''>> Warning: {rec_idx}번째 레코드의 {col_idx}번째 컬럼 값 삽입 실패. 해당 컬럼 스킵.
                     (추정: 값과 컬럼 타입 불일치. 함수 수정 필요.)''')
@@ -167,8 +167,9 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
             oracle_execute(f'INSERT INTO {table_name} values({values[:-2]})', debug_print=False)
         else: 
             # dual_on_cv의 마지막 ' and '를 슬라이싱으로 제거
-            oracle_execute(f'MERGE INTO {table_name} USING DUAL ON({dual_on_cv[:-5]})\
-                           WHEN NOT MATCHED THEN INSERT VALUES({values[:-2]})', debug_print=False)
+            execute = f'MERGE INTO {table_name} USING DUAL ON({dual_on_cv[:-5]}) WHEN NOT MATCHED THEN INSERT VALUES({values[:-2]})'
+            print(execute)
+            oracle_execute(execute, debug_print=False)
     oracle_close(debug_print=False)
     print('>>> 처리 완료!')
 
