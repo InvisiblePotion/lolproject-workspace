@@ -137,39 +137,40 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
     print('>>> 테이블에 데이터 삽입 중...')
     db_open(debug_print=False)
     for rec_idx in tqdm(range(len(data_frame))):
-        values = ''
-        dual_on_cv = ''
+        values = []
+        dual_on_cv = []
+
+        num = 0
+        var = 0
 
         # values 변수에 sql의 values()에 쓰일 모든 값을 담는다
         for col_idx in range(len(data_frame.iloc[rec_idx])):
             try:
-                if tab_col['DATA_TYPE'][col_idx] == 'NUMBER': # 타입이 NUMBER거나
-                    values += str(data_frame.iloc[rec_idx][col_idx])+', '
+                # 타입이 NUMBER거나 FLOAT라면 '를 붙이지 않는다.
+                if (tab_col['DATA_TYPE'][col_idx] == 'NUMBER') or (tab_col['DATA_TYPE'][col_idx] == 'FLOAT'):
+                    values.append(str(data_frame.iloc[rec_idx][col_idx]))
                     if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv += data_frame.columns[col_idx].upper() + '=' + str(data_frame.iloc[rec_idx][col_idx]) + ' and '
-                elif tab_col['DATA_TYPE'][col_idx] == 'FLOAT': # FLOAT라면 ''를 붙이지 않는다. (추후 조건 추가 필요 가능성 높음)
-                    values += str(data_frame.iloc[rec_idx][col_idx])+', '
-                    if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv += data_frame.columns[col_idx].upper() + '=' + str(data_frame.iloc[rec_idx][col_idx]) + ' and '
+                        dual_on_cv.append(data_frame.columns[col_idx].upper() + '=' + str(data_frame.iloc[rec_idx][col_idx]))
+                # 숫자가 아니라면 값 내부의 ' 기호를 오라클용 이스케이프 문인 '' 기호로 변경한 뒤 좌우를 '로 감싸준다.
                 else:
-                    values += '"'+str(data_frame.iloc[rec_idx][col_idx])+'", '
+                    values.append('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\'')
                     if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv += data_frame.columns[col_idx].upper() + '="' + str(data_frame.iloc[rec_idx][col_idx]) + '" and '
+                        dual_on_cv.append(data_frame.columns[col_idx].upper() + '=' + ('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\''))
             except:
                 print(f'''>> Warning: {rec_idx}번째 레코드의 {col_idx}번째 컬럼 값 삽입 실패. 해당 컬럼 스킵.
                     (추정: 값과 컬럼 타입 불일치. 함수 수정 필요.)''')
-                values += "'INERR',"
+                values.append('INERR')
                 continue
 
         # 기본키가 없다면 INSERT, 있다면 MERGE를 수행
         if pk_col == []:
             # values의 마지막 ', '를 슬라이싱으로 제거
-            oracle_execute(f'INSERT INTO {table_name} values({values[:-2]})', debug_print=False)
+            execute = f"INSERT INTO {table_name} values({', '.join(values)})"
         else: 
             # dual_on_cv의 마지막 ' and '를 슬라이싱으로 제거
-            execute = f'MERGE INTO {table_name} USING DUAL ON({dual_on_cv[:-5]}) WHEN NOT MATCHED THEN INSERT VALUES({values[:-2]})'
-            print(execute)
-            oracle_execute(execute, debug_print=False)
+            execute = f"MERGE INTO {table_name} USING DUAL ON({' and '.join(dual_on_cv)}) WHEN NOT MATCHED THEN INSERT VALUES({', '.join(values)})"
+        # print(execute)
+        oracle_execute(execute)
     oracle_close(debug_print=False)
     print('>>> 처리 완료!')
 
