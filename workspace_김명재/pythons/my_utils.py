@@ -285,24 +285,27 @@ def getRawdata(tier: str, riot_api_key: str):
     return df
 
 
-def getSampleData(tier: str, division: str, get_amount: int, riot_api_key: str):
+def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
+    if division not in [1,2,3,4]:
+        err_msg = '에러>> [파라미터 입력 에러]: \'division\' 값은 1~4 이어야 합니다.'
+        print(err_msg)
+        return 'getSampleData() ' + err_msg
     tier = tier.upper()
+    division_list = ['I','II','III','IV']
 
     page = random.randrange(1, 100)
-    lst = []
+    summonerName_lst = []
 
     # riot api를 통해서 summonerName을 가져오기
     print('get SummonerName.....')
-    for v in range(get_amount):
-        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division}?page={page}&api_key={riot_api_key}'
+    for v in tqdm(range(get_amount)):
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division+1]}?page={page}&api_key={riot_api_key}'
         res = requests.get(url).json()
-        lst += random.sample(res, 1)['summonerName']
+        summonerName_lst.append(random.sample(res, 1)[0]['summonerName'])
 
-    print('total player: ', len(lst))
+    print('total player: ', len(summonerName_lst))
 
-    # summonerName을 통해서 puuid 가져오기
-    summonerName_lst = list(map(lambda x: x['summonerName'], lst))
-
+    # puuid 가져오기
     print('get puuid......')
     puuid_lst = []
     skip_count = 0
@@ -318,20 +321,25 @@ def getSampleData(tier: str, division: str, get_amount: int, riot_api_key: str):
     print('get match_id...')
     match_id_lst = []
     for p in tqdm(puuid_lst):
-        match_id_lst.extend(getMatchIdsByPuuid(p, riot_api_key, 3))
+        match_id_lst.extend(getMatchIdsByPuuid(p, riot_api_key, 1))
 
     # match,timeline rawdata - (match_id, matches, timelines) df만들기
     print('get matches & timeline.....')
     df_create = []
-    for idx, match_id in enumerate(tqdm(match_id_lst)):
-        matches, timeline = getMatchDataAndTimelineByMatchId(match_id, riot_api_key)
-        # API Key 제한수 초과시 2분 휴식
-        try:
-            is_max = matches['metadata']
-            df_create.append([match_id ,matches,timeline])
-        except:
-            print('Rate Limit Exceeded: ', idx)
-            apiSleep(120)
+    idx = 0
+    with tqdm(total=len(match_id_lst)) as progress:
+        while idx < len(match_id_lst):
+            matches, timeline = getMatchDataAndTimelineByMatchId(match_id_lst[idx], riot_api_key)
+            # API Key 제한수 초과시 2분 휴식
+            try:
+                is_max = matches['metadata']
+                df_create.append([match_id_lst[idx] , matches, timeline])
+            except:
+                print('Rate Limit Exceeded: ', idx)
+                apiSleep(120)
+                continue
+            idx += 1
+            progress.update(1)
 
     print('complete!')
     return pd.DataFrame(df_create, columns=['match_id','matches','timeline'])
