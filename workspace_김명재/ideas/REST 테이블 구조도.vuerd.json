@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -1847.3333333333335,
-    "scrollLeft": -1081,
+    "scrollTop": -1852.3333333333335,
+    "scrollLeft": -1161,
     "zoomLevel": 0.8,
     "show": {
       "tableComment": true,
@@ -18,7 +18,7 @@
       "relationship": true
     },
     "database": "Oracle",
-    "databaseName": "REST Table",
+    "databaseName": "",
     "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
@@ -373,8 +373,8 @@
             "id": "f668d2f4-5d62-4d5b-bbba-a00d9f17c996"
           },
           {
-            "name": "duo_owner",
-            "comment": "듀오 글 작성자",
+            "name": "duo_ownerid",
+            "comment": "듀오 글 작성자 id",
             "dataType": "VARCHAR(20)",
             "default": "",
             "option": {
@@ -388,12 +388,35 @@
               "pk": false,
               "fk": true,
               "pfk": false,
-              "widthName": 67.09521484375,
-              "widthComment": 89.140625,
+              "widthName": 78.12109375,
+              "widthComment": 104.73681640625,
               "widthDataType": 82.1328125,
               "widthDefault": 60
             },
             "id": "9da0b85f-7395-4cf6-b4e9-eaf374608b90"
+          },
+          {
+            "name": "duo_lolname",
+            "comment": "듀오 글 작성자 lolname",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 77.5244140625,
+              "widthComment": 120,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "2f826d2c-1dcb-4932-ad5e-7a853b79ee5c"
           },
           {
             "name": "duo_accepter",
@@ -443,10 +466,10 @@
           }
         ],
         "ui": {
-          "active": true,
-          "left": 927.75,
-          "top": 2232.8333,
-          "zIndex": 151,
+          "active": false,
+          "left": 946.5,
+          "top": 2207.8333,
+          "zIndex": 184,
           "widthName": 60,
           "widthComment": 60
         },
@@ -506,9 +529,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1095.25,
-          "top": 2564.0833,
-          "zIndex": 123,
+          "left": 1272.75,
+          "top": 2546.5833,
+          "zIndex": 177,
           "widthName": 90.2197265625,
           "widthComment": 60
         },
@@ -573,7 +596,7 @@
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
-              "unique": false,
+              "unique": true,
               "notNull": true
             },
             "ui": {
@@ -616,7 +639,7 @@
           "active": false,
           "left": 1073.75,
           "top": 1902.0833,
-          "zIndex": 141,
+          "zIndex": 163,
           "widthName": 60,
           "widthComment": 60
         },
@@ -770,8 +793,8 @@
           "columnIds": [
             "f668d2f4-5d62-4d5b-bbba-a00d9f17c996"
           ],
-          "x": 1167.08984375,
-          "y": 2383.8333,
+          "x": 1203.322998046875,
+          "y": 2379.3333,
           "direction": "bottom"
         },
         "end": {
@@ -779,9 +802,9 @@
           "columnIds": [
             "eb33e037-71a6-4b63-b82b-02e9e9317e30"
           ],
-          "x": 1202.8946533203125,
-          "y": 2564.0833,
-          "direction": "top"
+          "x": 1272.75,
+          "y": 2601.5833,
+          "direction": "left"
         },
         "constraintName": "fk_duo_to_agree",
         "visible": true,
@@ -796,7 +819,7 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 1309.63037109375,
+          "x": 1368.6004638671875,
           "y": 2053.0833000000002,
           "direction": "bottom"
         },
@@ -805,8 +828,8 @@
           "columnIds": [
             "9da0b85f-7395-4cf6-b4e9-eaf374608b90"
           ],
-          "x": 1047.419921875,
-          "y": 2232.8333,
+          "x": 1032.107666015625,
+          "y": 2207.8333,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
@@ -822,7 +845,7 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 1466.8839518229167,
+          "x": 1486.5406494140625,
           "y": 2053.0833000000002,
           "direction": "bottom"
         },
@@ -831,8 +854,8 @@
           "columnIds": [
             "49352f8c-40f2-493e-bcdd-a31222fca518"
           ],
-          "x": 1418.1839599609375,
-          "y": 2564.0833,
+          "x": 1488.039306640625,
+          "y": 2546.5833,
           "direction": "top"
         },
         "constraintName": "fk_user_to_agree",
@@ -848,7 +871,7 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 1152.3767903645833,
+          "x": 1250.6602783203125,
           "y": 2053.0833000000002,
           "direction": "bottom"
         },
@@ -857,13 +880,39 @@
           "columnIds": [
             "d27bdd11-1a0e-4b19-a113-06ca1c03010e"
           ],
-          "x": 1286.759765625,
-          "y": 2232.8333,
+          "x": 1203.322998046875,
+          "y": 2207.8333,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
         "visible": true,
         "id": "abae1625-f784-4e32-9a1a-79765dce4f74"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "0781c2fc-679f-43fe-87af-501e13a40634",
+          "columnIds": [
+            "6021b18c-5775-46b0-8f8c-b90b4360c27b"
+          ],
+          "x": 1132.7200927734375,
+          "y": 2053.0833000000002,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "998f4922-e974-4dd1-982c-e42a0f69048a",
+          "columnIds": [
+            "2f826d2c-1dcb-4932-ad5e-7a853b79ee5c"
+          ],
+          "x": 1374.538330078125,
+          "y": 2207.8333,
+          "direction": "top"
+        },
+        "constraintName": "fk_user_to_duo",
+        "visible": true,
+        "id": "c99e41ff-9de0-4adc-a61e-653c1d4abe84"
       }
     ]
   }
