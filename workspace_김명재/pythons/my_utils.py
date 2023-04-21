@@ -9,6 +9,9 @@ import random
 from PIL import Image
 from io import BytesIO
 import numpy as np
+import warnings
+
+warnings.filterwarnings('ignore')
 
 dsn = ora.makedsn('localhost', 1521, 'xe')
 
@@ -132,6 +135,11 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
     print('>>> 테이블의 Primary Key 정보 검색 중...')
     pk_col = [val for val in\
               oracle_totalExecute(f"SELECT COLUMN_NAME FROM USER_CONS_COLUMNS WHERE TABLE_NAME = '{table_name}'", debug_print=False)['COLUMN_NAME']]
+    # MERGE의 UPDATE를 위해 SET 컬럼 생성
+    all_col = [col.upper() for col in data_frame.columns]
+    set_col = [col for col in enumerate(all_col)]
+    for pcol in pk_col:
+        set_col.remove((all_col.index(pcol), pcol))
     
     # 데이터 삽입 시작
     print('>>> 테이블에 데이터 삽입 중...')
@@ -140,22 +148,19 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
         values = []
         dual_on_cv = []
 
-        num = 0
-        var = 0
-
         # values 변수에 sql의 values()에 쓰일 모든 값을 담는다
         for col_idx in range(len(data_frame.iloc[rec_idx])):
             try:
                 # 타입이 NUMBER거나 FLOAT라면 '를 붙이지 않는다.
                 if (tab_col['DATA_TYPE'][col_idx] == 'NUMBER') or (tab_col['DATA_TYPE'][col_idx] == 'FLOAT'):
                     values.append(str(data_frame.iloc[rec_idx][col_idx]))
-                    if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv.append(data_frame.columns[col_idx].upper() + '=' + str(data_frame.iloc[rec_idx][col_idx]))
+                    if all_col[col_idx] in pk_col:
+                        dual_on_cv.append(all_col[col_idx] + '=' + str(data_frame.iloc[rec_idx][col_idx]))
                 # 숫자가 아니라면 값 내부의 ' 기호를 오라클용 이스케이프 문인 '' 기호로 변경한 뒤 좌우를 '로 감싸준다.
                 else:
                     values.append('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\'')
-                    if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv.append(data_frame.columns[col_idx].upper() + '=' + ('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\''))
+                    if all_col[col_idx] in pk_col:
+                        dual_on_cv.append(all_col[col_idx] + '=' + ('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\''))
             except:
                 print(f'''>> Warning: {rec_idx}번째 레코드의 {col_idx}번째 컬럼 값 삽입 실패. 해당 컬럼 스킵.
                     (추정: 값과 컬럼 타입 불일치. 함수 수정 필요.)''')
@@ -164,11 +169,19 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
 
         # 기본키가 없다면 INSERT, 있다면 MERGE를 수행
         if pk_col == []:
-            # values의 마지막 ', '를 슬라이싱으로 제거
             execute = f"INSERT INTO {table_name} values({', '.join(values)})"
         else: 
-            # dual_on_cv의 마지막 ' and '를 슬라이싱으로 제거
-            execute = f"MERGE INTO {table_name} USING DUAL ON({' and '.join(dual_on_cv)}) WHEN NOT MATCHED THEN INSERT VALUES({', '.join(values)})"
+            execute = f"""
+                MERGE
+                INTO {table_name}
+                USING DUAL ON ({' and '.join(dual_on_cv)})
+                WHEN NOT MATCHED THEN INSERT VALUES({', '.join(values)})
+                WHEN MATCHED THEN UPDATE SET 
+            """
+            set_val = []
+            for sc in set_col:
+                set_val.append(f"{sc[1]}={values[sc[0]]}")
+            execute += ', '.join(set_val)
         # print(execute)
         oracle_execute(execute)
     oracle_close(debug_print=False)

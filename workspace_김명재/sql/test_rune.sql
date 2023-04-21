@@ -4,7 +4,7 @@ create table test_rune (
     runeTypeId number(4),
     runeName nvarchar2(20),
     runeKey varchar(30),
-    runeIcon varchar(100),
+    runeIcon varchar(200),
     runeShortDesc nvarchar2(300),
     runeLongDesc nvarchar2(1000)
 );
