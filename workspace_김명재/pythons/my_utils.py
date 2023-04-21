@@ -6,6 +6,12 @@ from urllib import parse
 from tqdm import tqdm
 import time
 import random
+from PIL import Image
+from io import BytesIO
+import numpy as np
+import warnings
+
+warnings.filterwarnings('ignore')
 
 dsn = ora.makedsn('localhost', 1521, 'xe')
 
@@ -129,43 +135,55 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str):
     print('>>> 테이블의 Primary Key 정보 검색 중...')
     pk_col = [val for val in\
               oracle_totalExecute(f"SELECT COLUMN_NAME FROM USER_CONS_COLUMNS WHERE TABLE_NAME = '{table_name}'", debug_print=False)['COLUMN_NAME']]
+    # MERGE의 UPDATE를 위해 SET 컬럼 생성
+    all_col = [col.upper() for col in data_frame.columns]
+    set_col = [col for col in enumerate(all_col)]
+    for pcol in pk_col:
+        set_col.remove((all_col.index(pcol), pcol))
     
     # 데이터 삽입 시작
     print('>>> 테이블에 데이터 삽입 중...')
     db_open(debug_print=False)
     for rec_idx in tqdm(range(len(data_frame))):
-        values = ''
-        dual_on_cv = ''
+        values = []
+        dual_on_cv = []
 
         # values 변수에 sql의 values()에 쓰일 모든 값을 담는다
         for col_idx in range(len(data_frame.iloc[rec_idx])):
             try:
-                if tab_col['DATA_TYPE'][col_idx] == 'NUMBER': # 타입이 NUMBER거나
-                    values += str(data_frame.iloc[rec_idx][col_idx])+', '
-                    if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv += data_frame.columns[col_idx].upper() + '=' + str(data_frame.iloc[rec_idx][col_idx]) + ' and '
-                elif tab_col['DATA_TYPE'][col_idx] == 'FLOAT': # FLOAT라면 ''를 붙이지 않는다. (추후 조건 추가 필요 가능성 높음)
-                    values += str(data_frame.iloc[rec_idx][col_idx])+', '
-                    if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv += data_frame.columns[col_idx].upper() + '=' + str(data_frame.iloc[rec_idx][col_idx]) + ' and '
+                # 타입이 NUMBER거나 FLOAT라면 '를 붙이지 않는다.
+                if (tab_col['DATA_TYPE'][col_idx] == 'NUMBER') or (tab_col['DATA_TYPE'][col_idx] == 'FLOAT'):
+                    values.append(str(data_frame.iloc[rec_idx][col_idx]))
+                    if all_col[col_idx] in pk_col:
+                        dual_on_cv.append(all_col[col_idx] + '=' + str(data_frame.iloc[rec_idx][col_idx]))
+                # 숫자가 아니라면 값 내부의 ' 기호를 오라클용 이스케이프 문인 '' 기호로 변경한 뒤 좌우를 '로 감싸준다.
                 else:
-                    values += '\''+str(data_frame.iloc[rec_idx][col_idx])+'\', '
-                    if data_frame.columns[col_idx].upper() in pk_col:
-                        dual_on_cv += data_frame.columns[col_idx].upper() + '=\'' + str(data_frame.iloc[rec_idx][col_idx]) + '\' and '
+                    values.append('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\'')
+                    if all_col[col_idx] in pk_col:
+                        dual_on_cv.append(all_col[col_idx] + '=' + ('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\''))
             except:
                 print(f'''>> Warning: {rec_idx}번째 레코드의 {col_idx}번째 컬럼 값 삽입 실패. 해당 컬럼 스킵.
                     (추정: 값과 컬럼 타입 불일치. 함수 수정 필요.)''')
-                values += "'INERR',"
+                values.append('INERR')
                 continue
 
         # 기본키가 없다면 INSERT, 있다면 MERGE를 수행
         if pk_col == []:
-            # values의 마지막 ', '를 슬라이싱으로 제거
-            oracle_execute(f'INSERT INTO {table_name} values({values[:-2]})', debug_print=False)
+            execute = f"INSERT INTO {table_name} values({', '.join(values)})"
         else: 
-            # dual_on_cv의 마지막 ' and '를 슬라이싱으로 제거
-            oracle_execute(f'MERGE INTO {table_name} USING DUAL ON({dual_on_cv[:-5]})\
-                           WHEN NOT MATCHED THEN INSERT VALUES({values[:-2]})', debug_print=False)
+            execute = f"""
+                MERGE
+                INTO {table_name}
+                USING DUAL ON ({' and '.join(dual_on_cv)})
+                WHEN NOT MATCHED THEN INSERT VALUES({', '.join(values)})
+                WHEN MATCHED THEN UPDATE SET 
+            """
+            set_val = []
+            for sc in set_col:
+                set_val.append(f"{sc[1]}={values[sc[0]]}")
+            execute += ', '.join(set_val)
+        # print(execute)
+        oracle_execute(execute)
     oracle_close(debug_print=False)
     print('>>> 처리 완료!')
 
@@ -239,7 +257,8 @@ def getRawdata(tier: str, riot_api_key: str):
     for division in tqdm(division_list):
         url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division}?page={page}&api_key={riot_api_key}'
         res = requests.get(url).json()
-        lst += random.sample(res,5)
+        if len(res) >= 5: lst += random.sample(res, 5)
+        else: lst += [a for a in res]
 
     # summonerName을 통해서 puuid 가져오기
     summonerName_lst = list(map(lambda x:x['summonerName'] ,lst))
@@ -279,6 +298,66 @@ def getRawdata(tier: str, riot_api_key: str):
     df = pd.DataFrame(df_create, columns = ['match_id','matches','timeline'])
     print('complete!')
     return df
+
+
+def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
+    if division not in [1,2,3,4]:
+        err_msg = '에러>> [파라미터 입력 에러]: \'division\' 값은 1~4 이어야 합니다.'
+        print(err_msg)
+        return 'getSampleData() ' + err_msg
+    tier = tier.upper()
+    division_list = ['I','II','III','IV']
+
+    page = random.randrange(1, 100)
+    summonerName_lst = []
+
+    # riot api를 통해서 summonerName을 가져오기
+    print('get SummonerName.....')
+    for v in tqdm(range(get_amount)):
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division+1]}?page={page}&api_key={riot_api_key}'
+        res = requests.get(url).json()
+        summonerName_lst.append(random.sample(res, 1)[0]['summonerName'])
+
+    print('total player: ', len(summonerName_lst))
+
+    # puuid 가져오기
+    print('get puuid......')
+    puuid_lst = []
+    skip_count = 0
+    for n in tqdm(summonerName_lst):
+        try:
+            puuid_lst.append(getPuuidBySummonerName(n, riot_api_key))
+        except:
+            skip_count += 1
+            continue
+    print('passed player: ', skip_count)
+
+    # match_ids 가져오기
+    print('get match_id...')
+    match_id_lst = []
+    for p in tqdm(puuid_lst):
+        match_id_lst.extend(getMatchIdsByPuuid(p, riot_api_key, 1))
+
+    # match,timeline rawdata - (match_id, matches, timelines) df만들기
+    print('get matches & timeline.....')
+    df_create = []
+    idx = 0
+    with tqdm(total=len(match_id_lst)) as progress:
+        while idx < len(match_id_lst):
+            matches, timeline = getMatchDataAndTimelineByMatchId(match_id_lst[idx], riot_api_key)
+            # API Key 제한수 초과시 2분 휴식
+            try:
+                is_max = matches['metadata']
+                df_create.append([match_id_lst[idx] , matches, timeline])
+            except:
+                print('Rate Limit Exceeded: ', idx)
+                apiSleep(120)
+                continue
+            idx += 1
+            progress.update(1)
+
+    print('complete!')
+    return pd.DataFrame(df_create, columns=['match_id','matches','timeline'])
 
 
 # getRawdata() 함수로 만들어진 데이터프레임 안에서 특정 챔피언의 등장 횟수와 등장 레코드를 리턴하는 함수
@@ -348,3 +427,29 @@ def eventExtractor(raw_data_series: pd.Series, event_type: str):
 # timeline 데이터에서 이 게임 동안 발생한 모든 이벤트의 타입을 리스트로 리턴하는 함수
 def getEventList(timeline: dict):
     return list(set([b['type'] for b in sum([a['events'] for a in timeline['info']['frames']], [])]))
+
+
+def cos_sim(a_v: np.ndarray, b_v: np.ndarray):
+    return np.dot(a_v, b_v) / (np.linalg.norm(a_v) * np.linalg.norm(b_v))
+
+
+def get_grey_img(file_name: str):
+    return Image.open(BytesIO(
+        open(f'./champion_image/{file_name}', 'rb').read()
+    )).convert('L')
+
+
+def img2vec(img: Image.Image):
+    return (arr := np.asarray(img, dtype=int)).reshape(arr.shape[0] * arr.shape[1])
+
+
+def get_all_cos_sim(champion_file_lst: list):
+    vec_compare_dict = {}
+    for idx, first_champ in enumerate(tqdm(champion_file_lst)):
+        # a:b와 b:a가 동시에 존재하는걸 방지하기 위해 슬라이싱
+        for second_champ in champion_file_lst[idx:]:
+            # a:a를 방지하기 위해 앞뒤 이름이 다를 경우만 실행
+            if first_champ != second_champ:
+                vec_compare_dict[f'{first_champ[:-4]}:{second_champ[:-4]}'] = \
+                    round(cos_sim(img2vec(get_grey_img(first_champ)), img2vec(get_grey_img(second_champ))), 3)
+    return vec_compare_dict

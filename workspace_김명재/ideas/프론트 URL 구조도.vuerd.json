@@ -3,9 +3,9 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -904,
-    "scrollLeft": -258,
-    "zoomLevel": 0.9,
+    "scrollTop": -597.5,
+    "scrollLeft": -395,
+    "zoomLevel": 0.3,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -17,7 +17,7 @@
       "columnNotNull": false,
       "relationship": true
     },
-    "database": "MySQL",
+    "database": "Oracle",
     "databaseName": "프론트 URL 구조도",
     "canvasType": "ERD",
     "language": "GraphQL",
@@ -27,7 +27,7 @@
     "bracketType": "none",
     "setting": {
       "relationshipDataTypeSync": true,
-      "relationshipOptimization": false,
+      "relationshipOptimization": true,
       "columnOrder": [
         "columnName",
         "columnComment",
@@ -47,7 +47,7 @@
         "comment": "/",
         "columns": [
           {
-            "name": "/banRate",
+            "name": "/champlist/lane?[banRate=True]&[get",
             "comment": "밴율 상위 5인",
             "dataType": "비동기",
             "default": "",
@@ -62,7 +62,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 222.48583984375,
               "widthComment": 83.30078125,
               "widthDataType": 60,
               "widthDefault": 60
@@ -122,13 +122,13 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": true,
+              "primaryKey": false,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
-              "pk": true,
+              "pk": false,
               "fk": false,
               "pfk": false,
               "widthName": 60,
@@ -145,13 +145,13 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": true,
+              "primaryKey": false,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
-              "pk": true,
+              "pk": false,
               "fk": false,
               "pfk": false,
               "widthName": 179.71533203125,
@@ -168,13 +168,13 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": true,
+              "primaryKey": false,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
-              "pk": true,
+              "pk": false,
               "fk": false,
               "pfk": false,
               "widthName": 63.3310546875,
@@ -185,19 +185,19 @@
             "id": "9f71f736-dde8-428e-aebd-df41113221ed"
           },
           {
-            "name": "/rank",
+            "name": "/ranking",
             "comment": "랭킹",
             "dataType": "동기",
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": true,
+              "primaryKey": false,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
-              "pk": true,
+              "pk": false,
               "fk": false,
               "pfk": false,
               "widthName": 60,
@@ -214,13 +214,13 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": true,
+              "primaryKey": false,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
-              "pk": true,
+              "pk": false,
               "fk": false,
               "pfk": false,
               "widthName": 60,
@@ -237,13 +237,13 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": true,
+              "primaryKey": false,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
-              "pk": true,
+              "pk": false,
               "fk": false,
               "pfk": false,
               "widthName": 90.8671875,
@@ -260,6 +260,52 @@
             "default": "",
             "option": {
               "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 260.19091796875,
+              "widthComment": 76.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "9191723d-bfe1-4b16-95a2-cc69e708fa3f"
+          },
+          {
+            "name": "/mypage",
+            "comment": "마이페이지",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 67,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "fdbaaa5f-d37b-4951-9dc7-cac25db3a834"
+          },
+          {
+            "name": "/contract",
+            "comment": "이용약관",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
               "primaryKey": true,
               "unique": false,
               "notNull": true
@@ -269,21 +315,45 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 260.19091796875,
-              "widthComment": 76.140625,
+              "widthName": 60,
+              "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "9191723d-bfe1-4b16-95a2-cc69e708fa3f"
+            "id": "27dc82ab-2a43-45ea-b26e-b55049ff6297"
+          },
+          {
+            "name": "/champ/{champName}",
+            "comment": "챔피언 상세",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 134.666015625,
+              "widthComment": 71.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "162e2392-73fd-414d-a893-aa15246887ef"
           }
         ],
         "ui": {
           "active": false,
-          "left": 783.6387,
-          "top": 1124.3046,
-          "zIndex": 142,
+          "left": 935.0933,
+          "top": 1021.1975,
+          "zIndex": 2,
           "widthName": 71.5703125,
-          "widthComment": 60
+          "widthComment": 60,
+          "color": "#00BCD4"
         },
         "visible": true,
         "id": "c4e87a19-2c53-4f41-a9fe-842948546ef0"
@@ -316,29 +386,6 @@
             "id": "58fde61e-cbff-43f2-bcad-3481f9eb5521"
           },
           {
-            "name": "/champlist/recommand?summonerName",
-            "comment": "추천 챔피언",
-            "dataType": "동기",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": true,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 242.72216796875,
-              "widthComment": 71.5703125,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "ae3a648d-b5c7-4ffb-a09e-48443dc4bfb8"
-          },
-          {
             "name": "/champ?champName",
             "comment": "챔피언 상세",
             "dataType": "동기",
@@ -364,12 +411,12 @@
         ],
         "ui": {
           "active": false,
-          "left": 844.5399,
-          "top": 1525.2182,
-          "zIndex": 154,
+          "left": 1544.9582,
+          "top": 1025.0949,
+          "zIndex": 4,
           "widthName": 84.5703125,
           "widthComment": 63.3310546875,
-          "color": "#2196F3"
+          "color": "#F44336"
         },
         "visible": true,
         "id": "92ba11ce-d8aa-49eb-8be1-d06aac6d2b4a"
@@ -402,9 +449,55 @@
             "id": "309cc105-0d2a-4aa9-84b8-e9c1fc681d40"
           },
           {
-            "name": "/champ/ajax?pickrate",
-            "comment": "",
-            "dataType": "비동기",
+            "name": "/champ/{champName}",
+            "comment": "챔피언 상세",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 134.666015625,
+              "widthComment": 71.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "245fd13d-6d2d-468d-b437-fbfcb122561a"
+          },
+          {
+            "name": "/champ/{champName}",
+            "comment": "챔피언 상세",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 134.666015625,
+              "widthComment": 71.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "2156288f-1964-40b1-8196-686ad5ceabcf"
+          },
+          {
+            "name": "/matchup/{champName}",
+            "comment": "챔피언 카운터",
+            "dataType": "동기",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -417,22 +510,22 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 127.125,
-              "widthComment": 60,
+              "widthName": 146.47900390625,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "4f8c9efb-efbd-42ac-b5ec-61d44bd40195"
+            "id": "298db712-5b41-455c-85f1-3c115116b2fc"
           }
         ],
         "ui": {
           "active": false,
-          "left": 855.1103,
-          "top": 1796.5268,
-          "zIndex": 156,
+          "left": 1537.8954,
+          "top": 1268.365,
+          "zIndex": 18,
           "widthName": 71.5703125,
           "widthComment": 120,
-          "color": "#2196F3"
+          "color": "#F44336"
         },
         "visible": true,
         "id": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f"
@@ -466,7 +559,30 @@
           },
           {
             "name": "/duo?postNum",
-            "comment": "듀오 게시글",
+            "comment": "듀오 게시글(modal)",
+            "dataType": "비동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 90.8671875,
+              "widthComment": 116.50537109375,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "9cd161a2-4345-438d-88c0-f7249e64e4e7"
+          },
+          {
+            "name": "/champ/{champname}",
+            "comment": "챔피언 상세",
             "dataType": "동기",
             "default": "",
             "option": {
@@ -480,21 +596,22 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 90.8671875,
+              "widthName": 132.23486328125,
               "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "9cd161a2-4345-438d-88c0-f7249e64e4e7"
+            "id": "1385b27e-43b0-4d15-9522-250c58395f0f"
           }
         ],
         "ui": {
           "active": false,
-          "left": 1512.7972,
-          "top": 1236.8646,
-          "zIndex": 107,
+          "left": 1614.2512,
+          "top": 1813.7124,
+          "zIndex": 16,
           "widthName": 71.5703125,
-          "widthComment": 60
+          "widthComment": 60,
+          "color": "#4CAF50"
         },
         "visible": true,
         "id": "a8076037-3ed7-42f1-869a-97a816e3982a"
@@ -525,26 +642,118 @@
               "widthDefault": 60
             },
             "id": "5710f062-8842-4ecf-a772-ffe5967e61a0"
+          },
+          {
+            "name": "/login",
+            "comment": "로그인 페이지",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "0d6ea396-e1e3-40d1-8819-05bd3c65c7a6"
+          },
+          {
+            "name": "/login",
+            "comment": "로그인 페이지",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "42af2ff4-ef03-4aa6-a177-515dc06b9874"
+          },
+          {
+            "name": "/idfind",
+            "comment": "아이디 찾기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "d4cf5ba0-1bea-4302-b487-eeea7c8967eb"
+          },
+          {
+            "name": "/findpw",
+            "comment": "비밀번호 찾기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "036f3d91-d47a-4992-ba1f-4ba835a2899c"
           }
         ],
         "ui": {
           "active": false,
-          "left": 330.9302,
-          "top": 1337.7296,
-          "zIndex": 159,
+          "left": 506.9118,
+          "top": 1202.2625,
+          "zIndex": 3,
           "widthName": 60,
           "widthComment": 60,
-          "color": "#4CAF50"
+          "color": "#795548"
         },
         "visible": true,
         "id": "d460ff1c-75e4-4951-97b2-53ce85e922e2"
       },
       {
         "name": "랭킹",
-        "comment": "/rank",
+        "comment": "/ranking",
         "columns": [
           {
-            "name": "/rank",
+            "name": "/ranking",
             "comment": "랭킹",
             "dataType": "동기",
             "default": "",
@@ -565,22 +774,46 @@
               "widthDefault": 60
             },
             "id": "7c3944b7-4358-4825-946c-199a2510f230"
+          },
+          {
+            "name": "/summoners/{summonerName}",
+            "comment": "전적 검색",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 186.8056640625,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "884681c9-812c-4db5-bc0f-11ef4b338266"
           }
         ],
         "ui": {
           "active": false,
-          "left": 1458.9715,
-          "top": 1113.5497,
-          "zIndex": 103,
+          "left": 697.5004,
+          "top": 667.1163,
+          "zIndex": 8,
           "widthName": 60,
-          "widthComment": 60
+          "widthComment": 60,
+          "color": "#FFEB3B"
         },
         "visible": true,
         "id": "dfd4465c-f0b2-413e-a676-658510d1c8d9"
       },
       {
-        "name": "검색",
-        "comment": "/summoners?summonerName",
+        "name": "소환사 전적",
+        "comment": "/summoners/{summonerName}",
         "columns": [
           {
             "name": "/summoners?summonerName",
@@ -627,163 +860,46 @@
               "widthDefault": 60
             },
             "id": "2898f1b7-c8fc-4ef6-a639-7b458f310a10"
+          },
+          {
+            "name": "/summoners/{summonerName}",
+            "comment": "전적 검색",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 186.8056640625,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "72150e83-1c19-4067-b874-7f5b9e8652e5"
           }
         ],
         "ui": {
           "active": false,
-          "left": 162.0612,
-          "top": 1150.2041,
-          "zIndex": 77,
-          "widthName": 60,
-          "widthComment": 120
+          "left": 1003.6444,
+          "top": 462.1485,
+          "zIndex": 6,
+          "widthName": 71.5703125,
+          "widthComment": 120,
+          "color": "#3F51B5"
         },
         "visible": true,
         "id": "0d4cd7b9-347c-47b9-9379-0a8ad1786de9"
       },
       {
-        "name": "챔피언 픽률",
-        "comment": "/champ?pickrate",
-        "columns": [
-          {
-            "name": "/champ/ajax?pickrate",
-            "comment": "",
-            "dataType": "비동기",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 127.125,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "0ce9b334-f0a0-4b80-8c7b-d422e9054d77"
-          }
-        ],
-        "ui": {
-          "active": false,
-          "left": 1323.0161,
-          "top": 1730.0476,
-          "zIndex": 152,
-          "widthName": 71.5703125,
-          "widthComment": 99.21435546875
-        },
-        "visible": true,
-        "id": "ffa35abe-4f45-489e-9a20-7fb67232fb44"
-      },
-      {
-        "name": "듀오 게시글",
-        "comment": "/duo?postNum",
-        "columns": [
-          {
-            "name": "/duo?postNum",
-            "comment": "듀오 게시글",
-            "dataType": "동기",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 90.8671875,
-              "widthComment": 71.5703125,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "49ee23e0-9fbb-4ca0-96b7-b94049fd957f"
-          },
-          {
-            "name": "/duo?postNum",
-            "comment": "듀오 게시글",
-            "dataType": "동기",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 90.8671875,
-              "widthComment": 71.5703125,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "655b782f-7814-4662-ac32-1be436ddc591"
-          }
-        ],
-        "ui": {
-          "active": false,
-          "left": 1388.0312,
-          "top": 1476.9525,
-          "zIndex": 111,
-          "widthName": 71.5703125,
-          "widthComment": 90.8671875
-        },
-        "visible": true,
-        "id": "7d706498-87b7-4850-8095-bf7a2cc8eedd"
-      },
-      {
-        "name": "챔피언 추천",
-        "comment": "/champlist/recommand?summonerName",
-        "columns": [
-          {
-            "name": "/champlist/recommand?summonerName",
-            "comment": "추천 챔피언",
-            "dataType": "동기",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 242.72216796875,
-              "widthComment": 71.5703125,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "0c348174-4d8b-4ca1-b4f8-57215b27b1c3"
-          }
-        ],
-        "ui": {
-          "active": false,
-          "left": 253.6666,
-          "top": 1622.6668,
-          "zIndex": 155,
-          "widthName": 71.5703125,
-          "widthComment": 120,
-          "color": "#2196F3"
-        },
-        "visible": true,
-        "id": "25565e28-7140-4d82-8eda-0e0df81d8e29"
-      },
-      {
         "name": "개인 스탯",
-        "comment": "/summoners/stat/?summonerName",
+        "comment": "/summoner/{summonerName}/stat",
         "columns": [
           {
             "name": "/summoners/stat?summonerName",
@@ -834,14 +950,898 @@
         ],
         "ui": {
           "active": false,
-          "left": 478.9993,
-          "top": 943.3338,
-          "zIndex": 75,
+          "left": 1501.0016,
+          "top": 673.5078,
+          "zIndex": 7,
           "widthName": 60,
-          "widthComment": 120
+          "widthComment": 120,
+          "color": "#673AB7"
         },
         "visible": true,
         "id": "4636a0e1-f4d5-40f0-a19c-ce46b2fa8030"
+      },
+      {
+        "name": "아이디 찾기",
+        "comment": "/idfind",
+        "columns": [
+          {
+            "name": "/idfind",
+            "comment": "아이디 찾기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "2a5f55de-5353-4d1d-8564-af34889a824d"
+          },
+          {
+            "name": "/idfound",
+            "comment": "아이디 찾기 성공",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 102.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "c78cf7dd-1518-4376-91f9-0938f01008b6"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 196.4578,
+          "top": 1030.5376,
+          "zIndex": 10,
+          "widthName": 71.5703125,
+          "widthComment": 60,
+          "color": "#795548"
+        },
+        "visible": true,
+        "id": "4973b901-0d37-4fa5-abb0-2e4828d5bb9a"
+      },
+      {
+        "name": "비밀번호 찾기",
+        "comment": "/lostpw",
+        "columns": [
+          {
+            "name": "/findpw",
+            "comment": "비밀번호 찾기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "221ce29f-c69f-44cc-820a-8d0a28aada88"
+          },
+          {
+            "name": "/changepw",
+            "comment": "비밀번호 변경",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 67.25390625,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "e24675de-76c0-4469-93de-5b2bf790ed26"
+          },
+          {
+            "name": "/loswpw",
+            "comment": "비밀번호 찾기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "7d76b669-f22d-42ca-8eac-c813ed6e54f7"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 18.4191,
+          "top": 1221.6825,
+          "zIndex": 13,
+          "widthName": 84.5703125,
+          "widthComment": 60,
+          "color": "#795548"
+        },
+        "visible": true,
+        "id": "3dfc2cef-ae34-4a03-887a-351053907966"
+      },
+      {
+        "name": "아이디 찾기 성공",
+        "comment": "/idfound",
+        "columns": [
+          {
+            "name": "/idfound",
+            "comment": "아이디 찾기 성공",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 102.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "69e55cb2-ba70-4fef-832e-3084c3fd6e35"
+          },
+          {
+            "name": "/loswpw",
+            "comment": "비밀번호 찾기",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "5a927f46-3f52-4de6-b823-592dea8b9134"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 10.4757,
+          "top": 823.0443,
+          "zIndex": 11,
+          "widthName": 102.140625,
+          "widthComment": 60,
+          "color": "#795548"
+        },
+        "visible": true,
+        "id": "b8537131-82cf-4d5b-b7eb-2c897c696f1b"
+      },
+      {
+        "name": "비밀번호 변경 성공",
+        "comment": "/pwreset",
+        "columns": [
+          {
+            "name": "/pwreset",
+            "comment": "비밀번호 변경 성공",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 115.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "9647a0bd-0ee3-4947-8777-d58a53743eb6"
+          },
+          {
+            "name": "/login",
+            "comment": "로그인 페이지",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "df3c27b4-65cb-4d7c-bacb-ddf00317169a"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 493.8706,
+          "top": 1483.0572,
+          "zIndex": 14,
+          "widthName": 115.140625,
+          "widthComment": 60,
+          "color": "#9E9E9E"
+        },
+        "visible": true,
+        "id": "28ed3687-1f24-4091-bdee-19473d88235b"
+      },
+      {
+        "name": "마이페이지",
+        "comment": "/mypage",
+        "columns": [
+          {
+            "name": "/mypage",
+            "comment": "마이페이지",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 67,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "3593148c-e70e-4f62-b19a-968825e855ac"
+          },
+          {
+            "name": "/changelol",
+            "comment": "롤 계정 변경",
+            "dataType": "비동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.06103515625,
+              "widthComment": 76.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "767cef29-ce84-453a-b982-71573c6a7236"
+          },
+          {
+            "name": "/changepw",
+            "comment": "비밀번호 변경",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 67.25390625,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "7f61569e-e325-4873-9b52-59d9ebb239a0"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 858.575,
+          "top": 1738.0822,
+          "zIndex": 15,
+          "widthName": 67,
+          "widthComment": 60,
+          "color": "#9E9E9E"
+        },
+        "visible": true,
+        "id": "5a3d2723-b579-43ad-853c-d64559b08547"
+      },
+      {
+        "name": "비밀번호 변경",
+        "comment": "/changepw",
+        "columns": [
+          {
+            "name": "/changepw",
+            "comment": "비밀번호 변경",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 67.25390625,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "48e8a240-3e76-4df8-ab7e-cf186e7e0945"
+          },
+          {
+            "name": "/changepw",
+            "comment": "비밀번호 변경",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 67.25390625,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "3b1ad02d-bb55-4ee0-95d8-77a18c091ada"
+          },
+          {
+            "name": "/rest/changepw",
+            "comment": "비밀번호 변경 시도",
+            "dataType": "비동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 93.88232421875,
+              "widthComment": 115.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "05b79d71-2f28-4d8e-b164-4a19f4d45695"
+          },
+          {
+            "name": "/pwreset",
+            "comment": "비밀번호 변경 성공",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 115.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "c0be3b47-c459-4087-801f-684d4c488873"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 0,
+          "top": 1496.3174,
+          "zIndex": 12,
+          "widthName": 84.5703125,
+          "widthComment": 67.25390625,
+          "color": "#9E9E9E"
+        },
+        "visible": true,
+        "id": "439d961d-c756-404a-8fbd-a01335d10f8c"
+      },
+      {
+        "name": "챔피언 카운터",
+        "comment": "/matchup/{champName}",
+        "columns": [
+          {
+            "name": "/matchup/{champName}",
+            "comment": "챔피언 카운터",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 146.47900390625,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "c9288ce2-f8eb-4a0a-8dac-7560d047214b"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1419.284,
+          "top": 1573.3332,
+          "zIndex": 17,
+          "widthName": 84.5703125,
+          "widthComment": 120,
+          "color": "#F44336"
+        },
+        "visible": true,
+        "id": "40adfcd2-2df4-4afd-a7f4-a817d86b5919"
+      },
+      {
+        "name": "사이트 헤더",
+        "comment": "<공용 포워딩>",
+        "columns": [
+          {
+            "name": "/",
+            "comment": "메인",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "ab310748-2e0c-4e0e-af64-39bed318fedd"
+          },
+          {
+            "name": "/login",
+            "comment": "로그인",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "1abd267e-b262-472a-93ea-3d7e178b5a29"
+          },
+          {
+            "name": "/mypage",
+            "comment": "마이페이지",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 67,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "49202387-92e8-4b3a-b438-9ae7ae1b1929"
+          },
+          {
+            "name": "/champ/{champName}",
+            "comment": "챔피언 상세 검색",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 134.666015625,
+              "widthComment": 102.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "84fec216-2247-452e-adb3-61ada609e99e"
+          },
+          {
+            "name": "/summoner/{summonerName}",
+            "comment": "소환사 전적, 검색",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 181.080078125,
+              "widthComment": 104.984375,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "62319eef-a38e-4e0b-92c0-e98c1955a8eb"
+          },
+          {
+            "name": "/summoner/{summonerName}/stat",
+            "comment": "소환사 개인 스탯",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 207.58154296875,
+              "widthComment": 102.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "63b1e3f2-06a6-44d4-a730-9684b8a8309b"
+          },
+          {
+            "name": "/champlist",
+            "comment": "챔피언 리스트",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 63.3310546875,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "398071a9-a304-4eba-8ee4-556faea299d9"
+          },
+          {
+            "name": "/ranking",
+            "comment": "랭킹",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "231792d2-fb3d-4958-9e5b-9a25c9faf001"
+          },
+          {
+            "name": "/duolist",
+            "comment": "듀오 찾기 게시판",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 102.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "9095fd24-7de5-4536-a4bd-a74912a01a8e"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 75.4426,
+          "top": 75.7877,
+          "zIndex": 1,
+          "widthName": 71.5703125,
+          "widthComment": 89.7880859375,
+          "color": "#E91E63"
+        },
+        "visible": true,
+        "id": "aaedf29a-d34c-44cd-b907-f1d494b2db47"
+      },
+      {
+        "name": "회원가입",
+        "comment": "/join",
+        "columns": [
+          {
+            "name": "/login",
+            "comment": "로그인 페이지",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "d9822d82-e0e0-4c97-89d8-b0befb364724"
+          },
+          {
+            "name": "/join",
+            "comment": "회원가입",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "b6b04dfe-37d9-4ce4-815f-ef69074b69a5"
+          },
+          {
+            "name": "/login",
+            "comment": "로그인 페이지",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "d6a778a5-1b5f-4cb4-aa65-67acfe5376e4"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 331.2068,
+          "top": 646.9575,
+          "zIndex": 9,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#009688"
+        },
+        "visible": true,
+        "id": "35bf5e63-685a-4fc6-bf00-26b620336edb"
+      },
+      {
+        "name": "이용약관",
+        "comment": "/contract",
+        "columns": [
+          {
+            "name": "/login",
+            "comment": "로그인 페이지",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "f4b034c4-88d3-4098-942d-932c2bf404fa"
+          },
+          {
+            "name": "/contract",
+            "comment": "이용약관",
+            "dataType": "동기",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "00552457-3db5-4ced-8b3d-3d0cc40365bc"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 685.7803,
+          "top": 853.3869,
+          "zIndex": 5,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#009688"
+        },
+        "visible": true,
+        "id": "2a4db1cf-42fb-4c82-b20d-342469cd2fd2"
       }
     ],
     "indexes": []
@@ -860,8 +1860,8 @@
           "columnIds": [
             "55b6a7f3-6aa8-4d0d-a34e-3fe568215e52"
           ],
-          "x": 1069.686140234375,
-          "y": 1655.7182,
+          "x": 1712.531198046875,
+          "y": 1135.0949,
           "direction": "bottom"
         },
         "end": {
@@ -869,8 +1869,8 @@
           "columnIds": [
             "309cc105-0d2a-4aa9-84b8-e9c1fc681d40"
           ],
-          "x": 1016.183298046875,
-          "y": 1796.5268,
+          "x": 1714.920058203125,
+          "y": 1268.365,
           "direction": "top"
         },
         "constraintName": "fk_챔피언 분석_to_챔피언 상세",
@@ -879,41 +1879,7 @@
       },
       {
         "identification": false,
-        "relationshipType": "ZeroOne",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
-          "columnIds": [
-            "d15319d6-d867-4de8-9929-2179bc28da79",
-            "f4fc353b-13ab-4ce1-ab51-f94de75b65be",
-            "9f71f736-dde8-428e-aebd-df41113221ed",
-            "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
-            "4faffc15-ad5f-4bfc-8951-e217c884278f"
-          ],
-          "x": 783.6387,
-          "y": 1329.8046,
-          "direction": "left"
-        },
-        "end": {
-          "tableId": "d460ff1c-75e4-4951-97b2-53ce85e922e2",
-          "columnIds": [
-            "5710f062-8842-4ecf-a772-ffe5967e61a0",
-            "790e4bdd-95ae-4e0f-92ea-d7aba1a0b98d",
-            "17f70051-fa16-4ae6-96fc-006bf8f78cd7",
-            "25275077-8af5-4439-8497-2fae6fd3127d",
-            "aee05f69-1885-4985-9fa4-023eb7955abf"
-          ],
-          "x": 598.5005125,
-          "y": 1382.4796,
-          "direction": "right"
-        },
-        "constraintName": "fk_메인 페이지_to_로그인",
-        "visible": true,
-        "id": "a7cd5fa8-31c7-499f-a894-40070f3c318a"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroOne",
+        "relationshipType": "OneN",
         "startRelationshipType": "Dash",
         "start": {
           "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
@@ -923,9 +1889,9 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 783.6387,
-          "y": 1192.8046,
-          "direction": "left"
+          "x": 1227.4440690429687,
+          "y": 1021.1975,
+          "direction": "top"
         },
         "end": {
           "tableId": "0d4cd7b9-347c-47b9-9379-0a8ad1786de9",
@@ -935,9 +1901,9 @@
             "286cbe4a-6200-4803-b5f7-6e2ca45e3346",
             "72d2ef79-4a40-4855-8b4e-9021d80a79a3"
           ],
-          "x": 580.05680546875,
-          "y": 1205.2041,
-          "direction": "right"
+          "x": 1212.6422027343751,
+          "y": 592.6485,
+          "direction": "bottom"
         },
         "constraintName": "fk_메인 페이지_to_검색",
         "visible": true,
@@ -954,9 +1920,9 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1017.519315234375,
-          "y": 1398.3046,
-          "direction": "bottom"
+          "x": 1402.85453046875,
+          "y": 1105.0725,
+          "direction": "right"
         },
         "end": {
           "tableId": "92ba11ce-d8aa-49eb-8be1-d06aac6d2b4a",
@@ -965,9 +1931,9 @@
             "46e309b0-5a6f-42f4-8b10-ca3360be8ea0",
             "27324528-dd4c-4911-b9ff-a8ee027c601d"
           ],
-          "x": 1069.686140234375,
-          "y": 1525.2182,
-          "direction": "top"
+          "x": 1544.9582,
+          "y": 1080.0949,
+          "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_챔피언 분석",
         "visible": true,
@@ -982,17 +1948,17 @@
           "columnIds": [
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1251.39993046875,
-          "y": 1261.3045999999997,
-          "direction": "right"
+          "x": 1285.9142228515625,
+          "y": 1356.6975,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "a8076037-3ed7-42f1-869a-97a816e3982a",
           "columnIds": [
             "e934da84-032a-45f9-bd19-9e2e0627141d"
           ],
-          "x": 1512.7972,
-          "y": 1291.8646,
+          "x": 1614.2512,
+          "y": 1878.9624,
           "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_듀오 찾기 게시판",
@@ -1009,9 +1975,9 @@
             "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
             "4faffc15-ad5f-4bfc-8951-e217c884278f"
           ],
-          "x": 1251.39993046875,
-          "y": 1169.9712666666665,
-          "direction": "right"
+          "x": 1110.5037614257812,
+          "y": 1021.1975,
+          "direction": "top"
         },
         "end": {
           "tableId": "dfd4465c-f0b2-413e-a676-658510d1c8d9",
@@ -1019,9 +1985,9 @@
             "7c3944b7-4358-4825-946c-199a2510f230",
             "8fde6b44-91f3-4296-af3a-2f18de6cf24e"
           ],
-          "x": 1458.9715,
-          "y": 1158.2997,
-          "direction": "left"
+          "x": 1067.3060640625,
+          "y": 722.1163,
+          "direction": "right"
         },
         "constraintName": "fk_메인 페이지_to_랭킹",
         "visible": true,
@@ -1032,127 +1998,21 @@
         "relationshipType": "ZeroOne",
         "startRelationshipType": "Dash",
         "start": {
-          "tableId": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f",
-          "columnIds": [
-            "4f8c9efb-efbd-42ac-b5ec-61d44bd40195"
-          ],
-          "x": 1177.25629609375,
-          "y": 1851.5268,
-          "direction": "right"
-        },
-        "end": {
-          "tableId": "ffa35abe-4f45-489e-9a20-7fb67232fb44",
-          "columnIds": [
-            "0ce9b334-f0a0-4b80-8c7b-d422e9054d77"
-          ],
-          "x": 1323.0161,
-          "y": 1774.7976,
-          "direction": "left"
-        },
-        "constraintName": "fk_챔피언 상세_to_챔피언 픽률",
-        "visible": true,
-        "id": "4e58be85-8a21-4dab-966b-571279815d69"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroOne",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
-          "columnIds": [
-            "d8bae9e3-18fa-4ae1-9b92-e21eece4da16"
-          ],
-          "x": 1251.39993046875,
-          "y": 1352.637933333333,
-          "direction": "right"
-        },
-        "end": {
-          "tableId": "7d706498-87b7-4850-8095-bf7a2cc8eedd",
-          "columnIds": [
-            "49ee23e0-9fbb-4ca0-96b7-b94049fd957f"
-          ],
-          "x": 1388.0312,
-          "y": 1531.9525,
-          "direction": "left"
-        },
-        "constraintName": "fk_메인 페이지_to_듀오 게시글",
-        "visible": true,
-        "id": "d2fed3f0-ef25-440b-ae04-4a22d05c8ffc"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroOne",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "92ba11ce-d8aa-49eb-8be1-d06aac6d2b4a",
-          "columnIds": [
-            "ae3a648d-b5c7-4ffb-a09e-48443dc4bfb8",
-            "55b6a7f3-6aa8-4d0d-a34e-3fe568215e52"
-          ],
-          "x": 844.5399,
-          "y": 1590.4682,
-          "direction": "left"
-        },
-        "end": {
-          "tableId": "25565e28-7140-4d82-8eda-0e0df81d8e29",
-          "columnIds": [
-            "0c348174-4d8b-4ca1-b4f8-57215b27b1c3",
-            "706ffe76-c2be-44cb-bfcf-b634538b1805"
-          ],
-          "x": 690.95908046875,
-          "y": 1667.4168,
-          "direction": "right"
-        },
-        "constraintName": "fk_챔피언 분석_to_",
-        "visible": true,
-        "id": "a37dc735-0868-4bc1-8bb2-dd833139df0f"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroOne",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "a8076037-3ed7-42f1-869a-97a816e3982a",
-          "columnIds": [
-            "9cd161a2-4345-438d-88c0-f7249e64e4e7"
-          ],
-          "x": 1655.51595,
-          "y": 1346.8646,
-          "direction": "bottom"
-        },
-        "end": {
-          "tableId": "7d706498-87b7-4850-8095-bf7a2cc8eedd",
-          "columnIds": [
-            "655b782f-7814-4662-ac32-1be436ddc591"
-          ],
-          "x": 1530.74995,
-          "y": 1476.9525,
-          "direction": "top"
-        },
-        "constraintName": "fk_듀오 게시판_to_듀오 게시글",
-        "visible": true,
-        "id": "79df7f2f-20f0-4000-97b2-64c3261b4f76"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroOne",
-        "startRelationshipType": "Dash",
-        "start": {
           "tableId": "0d4cd7b9-347c-47b9-9379-0a8ad1786de9",
           "columnIds": [
             "2898f1b7-c8fc-4ef6-a639-7b458f310a10"
           ],
-          "x": 371.059002734375,
-          "y": 1150.2041,
-          "direction": "top"
+          "x": 1421.6400054687501,
+          "y": 527.3985,
+          "direction": "right"
         },
         "end": {
           "tableId": "4636a0e1-f4d5-40f0-a19c-ce46b2fa8030",
           "columnIds": [
             "a789a718-301b-44df-9c5c-1fbe13edef64"
           ],
-          "x": 478.9993,
-          "y": 998.3338,
+          "x": 1501.0016,
+          "y": 701.0078,
           "direction": "left"
         },
         "constraintName": "fk_검색_to_개인 스탯",
@@ -1161,15 +2021,15 @@
       },
       {
         "identification": false,
-        "relationshipType": "ZeroOne",
+        "relationshipType": "OneN",
         "startRelationshipType": "Dash",
         "start": {
           "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
           "columnIds": [
             "9191723d-bfe1-4b16-95a2-cc69e708fa3f"
           ],
-          "x": 1017.519315234375,
-          "y": 1124.3046,
+          "x": 1344.3843766601562,
+          "y": 1021.1975,
           "direction": "top"
         },
         "end": {
@@ -1177,13 +2037,465 @@
           "columnIds": [
             "0a4c3dd0-cf87-4414-80af-d145c61d66ab"
           ],
-          "x": 951.33084296875,
-          "y": 998.3338,
-          "direction": "right"
+          "x": 1501.0016,
+          "y": 756.0078,
+          "direction": "left"
         },
         "constraintName": "fk_메인 페이지_to_개인 스탯",
         "visible": true,
         "id": "32a1c3ec-10df-462b-8d56-79785e6bfe63"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "d460ff1c-75e4-4951-97b2-53ce85e922e2",
+          "columnIds": [
+            "d4cf5ba0-1bea-4302-b487-eeea7c8967eb",
+            "036f3d91-d47a-4992-ba1f-4ba835a2899c"
+          ],
+          "x": 573.8043781250001,
+          "y": 1202.2625,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "4973b901-0d37-4fa5-abb0-2e4828d5bb9a",
+          "columnIds": [
+            "2a5f55de-5353-4d1d-8564-af34889a824d",
+            "2d803983-dd82-4656-a144-4b3d0388d690"
+          ],
+          "x": 481.598425,
+          "y": 1085.5376,
+          "direction": "right"
+        },
+        "constraintName": "fk_로그인_to_아이디 찾기",
+        "visible": true,
+        "id": "6ed86390-2981-444e-ba60-e5f956b3671d"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "d460ff1c-75e4-4951-97b2-53ce85e922e2",
+          "columnIds": [
+            "036f3d91-d47a-4992-ba1f-4ba835a2899c"
+          ],
+          "x": 506.9118,
+          "y": 1288.0125,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "3dfc2cef-ae34-4a03-887a-351053907966",
+          "columnIds": [
+            "221ce29f-c69f-44cc-820a-8d0a28aada88"
+          ],
+          "x": 293.24331875,
+          "y": 1286.9325,
+          "direction": "right"
+        },
+        "constraintName": "fk_로그인_to_비밀번호 찾기",
+        "visible": true,
+        "id": "5eb5ef1d-1618-4617-92a9-ba76d848ae73"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "4973b901-0d37-4fa5-abb0-2e4828d5bb9a",
+          "columnIds": [
+            "c78cf7dd-1518-4376-91f9-0938f01008b6"
+          ],
+          "x": 339.0281125,
+          "y": 1030.5376,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "b8537131-82cf-4d5b-b7eb-2c897c696f1b",
+          "columnIds": [
+            "69e55cb2-ba70-4fef-832e-3084c3fd6e35"
+          ],
+          "x": 295.616325,
+          "y": 878.0443,
+          "direction": "right"
+        },
+        "constraintName": "fk_아이디 찾기_to_찾은 아이디",
+        "visible": true,
+        "id": "f9996785-7c2a-4f8d-976a-676e3ec4ca1d"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
+          "columnIds": [
+            "fdbaaa5f-d37b-4951-9dc7-cac25db3a834"
+          ],
+          "x": 1052.0336076171875,
+          "y": 1356.6975,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "5a3d2723-b579-43ad-853c-d64559b08547",
+          "columnIds": [
+            "3593148c-e70e-4f62-b19a-968825e855ac"
+          ],
+          "x": 995.987109375,
+          "y": 1738.0822,
+          "direction": "top"
+        },
+        "constraintName": "fk_메인 페이지_to_마이페이지",
+        "visible": true,
+        "id": "b9f7a8bc-ce51-4a8e-99d7-2c2028eaa925"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f",
+          "columnIds": [
+            "298db712-5b41-455c-85f1-3c115116b2fc"
+          ],
+          "x": 1626.4077291015626,
+          "y": 1419.365,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "40adfcd2-2df4-4afd-a7f4-a817d86b5919",
+          "columnIds": [
+            "c9288ce2-f8eb-4a0a-8dac-7560d047214b"
+          ],
+          "x": 1596.308658203125,
+          "y": 1573.3332,
+          "direction": "top"
+        },
+        "constraintName": "fk_챔피언 상세_to_챔피언 카운터",
+        "visible": true,
+        "id": "83263c4f-4494-4897-a19f-cd5410194cc6"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "439d961d-c756-404a-8fbd-a01335d10f8c",
+          "columnIds": [
+            "c0be3b47-c459-4087-801f-684d4c488873"
+          ],
+          "x": 332.02294921875,
+          "y": 1534.0674,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "28ed3687-1f24-4091-bdee-19473d88235b",
+          "columnIds": [
+            "9647a0bd-0ee3-4947-8777-d58a53743eb6"
+          ],
+          "x": 493.8706,
+          "y": 1538.0572,
+          "direction": "left"
+        },
+        "constraintName": "fk_비밀번호 변경_to_찾은 비밀번호",
+        "visible": true,
+        "id": "71167c57-a93b-4232-82d6-3a5325b31634"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "5a3d2723-b579-43ad-853c-d64559b08547",
+          "columnIds": [
+            "7f61569e-e325-4873-9b52-59d9ebb239a0"
+          ],
+          "x": 858.575,
+          "y": 1803.3322,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "439d961d-c756-404a-8fbd-a01335d10f8c",
+          "columnIds": [
+            "3b1ad02d-bb55-4ee0-95d8-77a18c091ada"
+          ],
+          "x": 332.02294921875,
+          "y": 1609.5674,
+          "direction": "right"
+        },
+        "constraintName": "fk_마이페이지_to_비밀번호 변경",
+        "visible": true,
+        "id": "74e5d0cc-e84b-4fdb-ac0a-7b76a7dec726"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "3dfc2cef-ae34-4a03-887a-351053907966",
+          "columnIds": [
+            "e24675de-76c0-4469-93de-5b2bf790ed26"
+          ],
+          "x": 155.83120937500001,
+          "y": 1352.1825,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "439d961d-c756-404a-8fbd-a01335d10f8c",
+          "columnIds": [
+            "48e8a240-3e76-4df8-ab7e-cf186e7e0945"
+          ],
+          "x": 166.011474609375,
+          "y": 1496.3174,
+          "direction": "top"
+        },
+        "constraintName": "fk_비밀번호 찾기_to_비밀번호 변경",
+        "visible": true,
+        "id": "8f666527-1129-4e45-bfe8-67291dd634d1"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "28ed3687-1f24-4091-bdee-19473d88235b",
+          "columnIds": [
+            "df3c27b4-65cb-4d7c-bacb-ddf00317169a"
+          ],
+          "x": 642.9409125,
+          "y": 1483.0572,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "d460ff1c-75e4-4951-97b2-53ce85e922e2",
+          "columnIds": [
+            "42af2ff4-ef03-4aa6-a177-515dc06b9874"
+          ],
+          "x": 640.6969562500001,
+          "y": 1373.7625,
+          "direction": "bottom"
+        },
+        "constraintName": "fk_비밀번호 변경 성공_to_로그인",
+        "visible": true,
+        "id": "6220fa26-87ed-48b3-ae45-f674be2be946"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "35bf5e63-685a-4fc6-bf00-26b620336edb",
+          "columnIds": [
+            "d6a778a5-1b5f-4cb4-aa65-67acfe5376e4"
+          ],
+          "x": 464.99195625,
+          "y": 777.4575,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "d460ff1c-75e4-4951-97b2-53ce85e922e2",
+          "columnIds": [
+            "0d6ea396-e1e3-40d1-8819-05bd3c65c7a6"
+          ],
+          "x": 707.5895343750001,
+          "y": 1202.2625,
+          "direction": "top"
+        },
+        "constraintName": "fk_회원가입_to_로그인",
+        "visible": true,
+        "id": "51d9cf37-5c7f-49d5-a3b9-0a102e59bff4"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
+          "columnIds": [
+            "d15319d6-d867-4de8-9929-2179bc28da79",
+            "f4fc353b-13ab-4ce1-ab51-f94de75b65be",
+            "9f71f736-dde8-428e-aebd-df41113221ed",
+            "22a1fdb2-f6c3-4a64-86ee-dd66cc2556d6",
+            "4faffc15-ad5f-4bfc-8951-e217c884278f"
+          ],
+          "x": 935.0933,
+          "y": 1188.9475,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "d460ff1c-75e4-4951-97b2-53ce85e922e2",
+          "columnIds": [
+            "5710f062-8842-4ecf-a772-ffe5967e61a0",
+            "790e4bdd-95ae-4e0f-92ea-d7aba1a0b98d",
+            "17f70051-fa16-4ae6-96fc-006bf8f78cd7",
+            "25275077-8af5-4439-8497-2fae6fd3127d",
+            "aee05f69-1885-4985-9fa4-023eb7955abf"
+          ],
+          "x": 774.4821125000001,
+          "y": 1288.0125,
+          "direction": "right"
+        },
+        "constraintName": "fk_메인 페이지_to_로그인",
+        "visible": true,
+        "id": "a7cd5fa8-31c7-499f-a894-40070f3c318a"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "a8076037-3ed7-42f1-869a-97a816e3982a",
+          "columnIds": [
+            "1385b27e-43b0-4d15-9522-250c58395f0f"
+          ],
+          "x": 1800.1213171875,
+          "y": 1813.7124,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f",
+          "columnIds": [
+            "2156288f-1964-40b1-8196-686ad5ceabcf"
+          ],
+          "x": 1803.4323873046876,
+          "y": 1419.365,
+          "direction": "bottom"
+        },
+        "constraintName": "fk_듀오 게시판_to_챔피언 상세",
+        "visible": true,
+        "id": "8a0d5bac-6006-4ab7-8cc0-1f3255e57445"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
+          "columnIds": [
+            "162e2392-73fd-414d-a893-aa15246887ef"
+          ],
+          "x": 1402.85453046875,
+          "y": 1272.8225,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "cc99b2cd-2ef6-4f7d-98d6-d6f0a867fc2f",
+          "columnIds": [
+            "245fd13d-6d2d-468d-b437-fbfcb122561a"
+          ],
+          "x": 1537.8954,
+          "y": 1343.865,
+          "direction": "left"
+        },
+        "constraintName": "fk_메인 페이지_to_챔피언 상세",
+        "visible": true,
+        "id": "921e8140-5af4-4ab0-99a7-1ccf7d0df343"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "b8537131-82cf-4d5b-b7eb-2c897c696f1b",
+          "columnIds": [
+            "5a927f46-3f52-4de6-b823-592dea8b9134"
+          ],
+          "x": 153.0460125,
+          "y": 933.0443,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "3dfc2cef-ae34-4a03-887a-351053907966",
+          "columnIds": [
+            "7d76b669-f22d-42ca-8eac-c813ed6e54f7"
+          ],
+          "x": 155.83120937500001,
+          "y": 1221.6825,
+          "direction": "top"
+        },
+        "constraintName": "fk_아이디 찾기 성공_to_비밀번호 찾기",
+        "visible": true,
+        "id": "218660e3-c2c4-4860-93af-a19c771a031e"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "dfd4465c-f0b2-413e-a676-658510d1c8d9",
+          "columnIds": [
+            "884681c9-812c-4db5-bc0f-11ef4b338266"
+          ],
+          "x": 882.40323203125,
+          "y": 667.1163,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "0d4cd7b9-347c-47b9-9379-0a8ad1786de9",
+          "columnIds": [
+            "72150e83-1c19-4067-b874-7f5b9e8652e5"
+          ],
+          "x": 1003.6444,
+          "y": 527.3985,
+          "direction": "left"
+        },
+        "constraintName": "fk_랭킹_to_소환사 전적",
+        "visible": true,
+        "id": "c7436e30-f623-459a-9971-009b402389fc"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "c4e87a19-2c53-4f41-a9fe-842948546ef0",
+          "columnIds": [
+            "27dc82ab-2a43-45ea-b26e-b55049ff6297"
+          ],
+          "x": 993.5634538085937,
+          "y": 1021.1975,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "2a4db1cf-42fb-4c82-b20d-342469cd2fd2",
+          "columnIds": [
+            "00552457-3db5-4ced-8b3d-3d0cc40365bc"
+          ],
+          "x": 953.3506125,
+          "y": 908.3869,
+          "direction": "right"
+        },
+        "constraintName": "fk_메인 페이지_to_이용약관",
+        "visible": true,
+        "id": "613670d1-faac-4b8f-8241-1c96f136cc03"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "2a4db1cf-42fb-4c82-b20d-342469cd2fd2",
+          "columnIds": [
+            "f4b034c4-88d3-4098-942d-932c2bf404fa"
+          ],
+          "x": 685.7803,
+          "y": 908.3869,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "35bf5e63-685a-4fc6-bf00-26b620336edb",
+          "columnIds": [
+            "d9822d82-e0e0-4c97-89d8-b0befb364724"
+          ],
+          "x": 598.7771124999999,
+          "y": 712.2075,
+          "direction": "right"
+        },
+        "constraintName": "fk_이용약관_to_회원가입",
+        "visible": true,
+        "id": "5c550f71-bf81-44c0-8605-b35651abbd58"
       }
     ]
   }

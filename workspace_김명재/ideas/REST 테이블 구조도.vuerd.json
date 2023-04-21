@@ -1,0 +1,919 @@
+{
+  "canvas": {
+    "version": "2.2.11",
+    "width": 5000,
+    "height": 5000,
+    "scrollTop": -1852.3333333333335,
+    "scrollLeft": -1161,
+    "zoomLevel": 0.8,
+    "show": {
+      "tableComment": true,
+      "columnComment": true,
+      "columnDataType": true,
+      "columnDefault": true,
+      "columnAutoIncrement": true,
+      "columnPrimaryKey": true,
+      "columnUnique": true,
+      "columnNotNull": true,
+      "relationship": true
+    },
+    "database": "Oracle",
+    "databaseName": "",
+    "canvasType": "ERD",
+    "language": "GraphQL",
+    "tableCase": "pascalCase",
+    "columnCase": "camelCase",
+    "highlightTheme": "VS2015",
+    "bracketType": "none",
+    "setting": {
+      "relationshipDataTypeSync": true,
+      "relationshipOptimization": false,
+      "columnOrder": [
+        "columnName",
+        "columnComment",
+        "columnDataType",
+        "columnDefault",
+        "columnNotNull",
+        "columnUnique",
+        "columnAutoIncrement"
+      ]
+    },
+    "pluginSerializationMap": {}
+  },
+  "table": {
+    "tables": [
+      {
+        "name": "작성 예시",
+        "comment": "",
+        "columns": [
+          {
+            "name": "논리 컬럼",
+            "comment": "물리 컬럼",
+            "dataType": "데이터 타입",
+            "default": "디폴트 값",
+            "option": {
+              "autoIncrement": true,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 71.5703125,
+              "widthDefault": 60
+            },
+            "id": "069d8f06-3b1c-47bb-b336-109319fce587"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1729,
+          "top": 1849.3333,
+          "zIndex": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#9E9E9E"
+        },
+        "visible": true,
+        "id": "1b8d9eb9-8534-4c19-81f5-edbc43c92ea3"
+      },
+      {
+        "name": "champion_root",
+        "comment": "챔피언/루트",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1729.9997,
+          "top": 1979.8887,
+          "zIndex": 2,
+          "widthName": 90.181640625,
+          "widthComment": 72.14794921875,
+          "color": "#F44336"
+        },
+        "visible": true,
+        "id": "326167f9-ae8d-43e7-8790-e44da41bffcf"
+      },
+      {
+        "name": "champion_info",
+        "comment": "챔피언/초기 정보",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "bd7eb3c9-992b-40ec-8a57-5041fe6d1ee2"
+          },
+          {
+            "name": "",
+            "comment": "",
+            "dataType": "blob",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "9ee524f2-299d-436f-aa6a-585732a6b6f5"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 2136.5553,
+          "top": 2092.2215,
+          "zIndex": 7,
+          "widthName": 88.328125,
+          "widthComment": 102.71826171875,
+          "color": "#F44336"
+        },
+        "visible": true,
+        "id": "f55d5619-bf59-4bc7-910f-9f1105a7a1f4"
+      },
+      {
+        "name": "champion_rune",
+        "comment": "챔피언/룬",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "13cd975f-58e2-4fa8-91fd-b3557e63e0d4"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 2135.5561,
+          "top": 2264.4433,
+          "zIndex": 3,
+          "widthName": 92.29541015625,
+          "widthComment": 60,
+          "color": "#F44336"
+        },
+        "visible": true,
+        "id": "a9e2e859-fcff-4b50-a4fc-ea3e9fd36fb0"
+      },
+      {
+        "name": "champion_skill",
+        "comment": "챔피언/스킬",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "1a407aa9-b03b-4cb0-a66d-a14a4b98ceb4"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 2134.4451,
+          "top": 2421.1103,
+          "zIndex": 4,
+          "widthName": 87.515625,
+          "widthComment": 72.14794921875,
+          "color": "#F44336"
+        },
+        "visible": true,
+        "id": "fcfd89b2-b8e0-4f43-97ad-7b9d3aae7882"
+      },
+      {
+        "name": "champion_item",
+        "comment": "챔피언/아이템",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "02052126-0fbe-4f3d-aafc-2016a9d7490b"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 2138.6116,
+          "top": 2598.7217,
+          "zIndex": 5,
+          "widthName": 91.6796875,
+          "widthComment": 85.14794921875,
+          "color": "#F44336"
+        },
+        "visible": true,
+        "id": "abd37862-b952-47b9-98f1-da8ea9c41d81"
+      },
+      {
+        "name": "champion_spell",
+        "comment": "챔피언/스펠",
+        "columns": [
+          {
+            "name": "",
+            "comment": "챔피언 이름",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "ec78ab0d-d878-434d-890a-394cc3a0d3ff"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 2137.5006,
+          "top": 2746.9161,
+          "zIndex": 6,
+          "widthName": 92.5048828125,
+          "widthComment": 72.14794921875,
+          "color": "#F44336"
+        },
+        "visible": true,
+        "id": "6155dc19-a33f-4d60-8f54-18ba853d08ed"
+      },
+      {
+        "name": "DUO",
+        "comment": "듀오",
+        "columns": [
+          {
+            "name": "duo_id",
+            "comment": "듀오 id",
+            "dataType": "NUMBER(32)",
+            "default": "",
+            "option": {
+              "autoIncrement": true,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 77.47998046875,
+              "widthDefault": 60
+            },
+            "id": "f668d2f4-5d62-4d5b-bbba-a00d9f17c996"
+          },
+          {
+            "name": "duo_ownerid",
+            "comment": "듀오 글 작성자 id",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 78.12109375,
+              "widthComment": 104.73681640625,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "9da0b85f-7395-4cf6-b4e9-eaf374608b90"
+          },
+          {
+            "name": "duo_lolname",
+            "comment": "듀오 글 작성자 lolname",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 77.5244140625,
+              "widthComment": 120,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "2f826d2c-1dcb-4932-ad5e-7a853b79ee5c"
+          },
+          {
+            "name": "duo_accepter",
+            "comment": "듀오 요청 수락자",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 80.40625,
+              "widthComment": 102.140625,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "d27bdd11-1a0e-4b19-a113-06ca1c03010e"
+          },
+          {
+            "name": "duo_content",
+            "comment": "듀오 글 내용",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 75.4423828125,
+              "widthComment": 76.140625,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "81ae19c9-5fd5-408d-8239-049db8fef537"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 946.5,
+          "top": 2207.8333,
+          "zIndex": 184,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "998f4922-e974-4dd1-982c-e42a0f69048a"
+      },
+      {
+        "name": "DUO/REQUEST",
+        "comment": "듀오/요청",
+        "columns": [
+          {
+            "name": "duo_id",
+            "comment": "듀오 id",
+            "dataType": "NUMBER(32)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": true,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 77.47998046875,
+              "widthDefault": 60
+            },
+            "id": "eb33e037-71a6-4b63-b82b-02e9e9317e30"
+          },
+          {
+            "name": "duo_request",
+            "comment": "듀오 요청",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": true,
+              "widthName": 74.44580078125,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "49352f8c-40f2-493e-bcdd-a31222fca518"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1272.75,
+          "top": 2546.5833,
+          "zIndex": 177,
+          "widthName": 90.2197265625,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "e92c01e5-cf04-4511-b71f-a9fffa3961b2"
+      },
+      {
+        "name": "USER",
+        "comment": "유저",
+        "columns": [
+          {
+            "name": "user_id",
+            "comment": "유저 id",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "e8decb38-79ff-451d-b588-4fbdbde1d983"
+          },
+          {
+            "name": "user_pw",
+            "comment": "유저 pw",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "55b308a9-358c-45cb-8449-ce803f4ad2f8"
+          },
+          {
+            "name": "user_lolname",
+            "comment": "유저 lolname",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 79.09228515625,
+              "widthComment": 79.4287109375,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "6021b18c-5775-46b0-8f8c-b90b4360c27b"
+          },
+          {
+            "name": "user_code",
+            "comment": "유저 code",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60.95068359375,
+              "widthComment": 61.287109375,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "c56a65eb-4c52-4db8-91ea-1e19dc23c99c"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1073.75,
+          "top": 1902.0833,
+          "zIndex": 163,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "0781c2fc-679f-43fe-87af-501e13a40634"
+      }
+    ],
+    "indexes": []
+  },
+  "memo": {
+    "memos": []
+  },
+  "relationship": {
+    "relationships": [
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 1988.8387,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "f55d5619-bf59-4bc7-910f-9f1105a7a1f4",
+          "columnIds": [
+            "bd7eb3c9-992b-40ec-8a57-5041fe6d1ee2"
+          ],
+          "x": 2136.5553,
+          "y": 2147.2215,
+          "direction": "left"
+        },
+        "constraintName": "fk_champion_root_to_champion_info",
+        "visible": true,
+        "id": "6cb5333b-ae29-4862-b991-d89474534d85"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 2006.7387,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "a9e2e859-fcff-4b50-a4fc-ea3e9fd36fb0",
+          "columnIds": [
+            "13cd975f-58e2-4fa8-91fd-b3557e63e0d4"
+          ],
+          "x": 2135.5561,
+          "y": 2309.1933,
+          "direction": "left"
+        },
+        "constraintName": "fk_champion_root_to_champion_rune",
+        "visible": true,
+        "id": "3cde0429-1627-4946-8dc2-04f99cffc82c"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 2024.6387000000002,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "fcfd89b2-b8e0-4f43-97ad-7b9d3aae7882",
+          "columnIds": [
+            "1a407aa9-b03b-4cb0-a66d-a14a4b98ceb4"
+          ],
+          "x": 2348.2966625,
+          "y": 2421.1103,
+          "direction": "top"
+        },
+        "constraintName": "fk_champion_root_to_champion_skill",
+        "visible": true,
+        "id": "172b4e2d-f3ff-4bdd-bd11-b3f7e7f78c35"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 2042.5387000000003,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "abd37862-b952-47b9-98f1-da8ea9c41d81",
+          "columnIds": [
+            "02052126-0fbe-4f3d-aafc-2016a9d7490b"
+          ],
+          "x": 2352.4631625,
+          "y": 2598.7217,
+          "direction": "top"
+        },
+        "constraintName": "fk_champion_root_to_champion_item",
+        "visible": true,
+        "id": "6184849e-cfe9-4823-b40e-b674ad67f2bd"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "326167f9-ae8d-43e7-8790-e44da41bffcf",
+          "columnIds": [
+            "1c0389fa-8bae-49d4-a580-3451e5e34719"
+          ],
+          "x": 2157.7028250000003,
+          "y": 2060.4387,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "6155dc19-a33f-4d60-8f54-18ba853d08ed",
+          "columnIds": [
+            "ec78ab0d-d878-434d-890a-394cc3a0d3ff"
+          ],
+          "x": 2351.3521625,
+          "y": 2746.9161,
+          "direction": "top"
+        },
+        "constraintName": "fk_champion_root_to_champion_spell",
+        "visible": true,
+        "id": "35fade88-cda9-4f49-8a74-32cbfb17c7e0"
+      },
+      {
+        "identification": true,
+        "relationshipType": "ZeroN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "998f4922-e974-4dd1-982c-e42a0f69048a",
+          "columnIds": [
+            "f668d2f4-5d62-4d5b-bbba-a00d9f17c996"
+          ],
+          "x": 1203.322998046875,
+          "y": 2379.3333,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "e92c01e5-cf04-4511-b71f-a9fffa3961b2",
+          "columnIds": [
+            "eb33e037-71a6-4b63-b82b-02e9e9317e30"
+          ],
+          "x": 1272.75,
+          "y": 2601.5833,
+          "direction": "left"
+        },
+        "constraintName": "fk_duo_to_agree",
+        "visible": true,
+        "id": "67e4f000-ff0d-41c0-94e5-e455d6f58be8"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "0781c2fc-679f-43fe-87af-501e13a40634",
+          "columnIds": [
+            "e8decb38-79ff-451d-b588-4fbdbde1d983"
+          ],
+          "x": 1368.6004638671875,
+          "y": 2053.0833000000002,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "998f4922-e974-4dd1-982c-e42a0f69048a",
+          "columnIds": [
+            "9da0b85f-7395-4cf6-b4e9-eaf374608b90"
+          ],
+          "x": 1032.107666015625,
+          "y": 2207.8333,
+          "direction": "top"
+        },
+        "constraintName": "fk_user_to_duo",
+        "visible": true,
+        "id": "0abe25ad-afd6-47c2-a3cc-0f279cc1ee04"
+      },
+      {
+        "identification": true,
+        "relationshipType": "ZeroN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "0781c2fc-679f-43fe-87af-501e13a40634",
+          "columnIds": [
+            "e8decb38-79ff-451d-b588-4fbdbde1d983"
+          ],
+          "x": 1486.5406494140625,
+          "y": 2053.0833000000002,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "e92c01e5-cf04-4511-b71f-a9fffa3961b2",
+          "columnIds": [
+            "49352f8c-40f2-493e-bcdd-a31222fca518"
+          ],
+          "x": 1488.039306640625,
+          "y": 2546.5833,
+          "direction": "top"
+        },
+        "constraintName": "fk_user_to_agree",
+        "visible": true,
+        "id": "5f380cf6-d60b-4dec-8d42-3b1c43da68ab"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Ring",
+        "start": {
+          "tableId": "0781c2fc-679f-43fe-87af-501e13a40634",
+          "columnIds": [
+            "e8decb38-79ff-451d-b588-4fbdbde1d983"
+          ],
+          "x": 1250.6602783203125,
+          "y": 2053.0833000000002,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "998f4922-e974-4dd1-982c-e42a0f69048a",
+          "columnIds": [
+            "d27bdd11-1a0e-4b19-a113-06ca1c03010e"
+          ],
+          "x": 1203.322998046875,
+          "y": 2207.8333,
+          "direction": "top"
+        },
+        "constraintName": "fk_user_to_duo",
+        "visible": true,
+        "id": "abae1625-f784-4e32-9a1a-79765dce4f74"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "0781c2fc-679f-43fe-87af-501e13a40634",
+          "columnIds": [
+            "6021b18c-5775-46b0-8f8c-b90b4360c27b"
+          ],
+          "x": 1132.7200927734375,
+          "y": 2053.0833000000002,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "998f4922-e974-4dd1-982c-e42a0f69048a",
+          "columnIds": [
+            "2f826d2c-1dcb-4932-ad5e-7a853b79ee5c"
+          ],
+          "x": 1374.538330078125,
+          "y": 2207.8333,
+          "direction": "top"
+        },
+        "constraintName": "fk_user_to_duo",
+        "visible": true,
+        "id": "c99e41ff-9de0-4adc-a61e-653c1d4abe84"
+      }
+    ]
+  }
+}

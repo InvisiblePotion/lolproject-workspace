@@ -9,6 +9,10 @@ target
 pom.properties
 .classpath
 MANIFEST.MF
+Servers2/
+
+### VSCode ###
+settings.json
 
 ### Eclipse ###
 .metadata
