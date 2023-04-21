@@ -1,0 +1,59 @@
+#wrapdiv{
+  background-color: #81ACFF;
+}
+
+#maindiv{
+  display: block;
+  width: 1080px;
+  margin: 0 auto;
+  /* border: 1px solid black; */
+}
+
+#m_logo{
+  display: flex;
+  justify-content: center;
+  margin: 56px 0 46px;
+  /* border: 1px solid black; */
+}
+
+#searchdiv{
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  height: 124px;
+  /* border: 1px solid black; */
+  margin: 0 auto;
+}
+
+#lanediv{
+  width: 1080px;
+  height: 266px;
+  display: flex;
+  margin-top: 24px;
+  justify-content: space-between;
+  flex-direction: row;
+
+}
+
+.m_lane{
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  /* border: 1px solid black; */
+  background-color: white;
+}
+
+#duodiv{
+  display: flex;
+  margin-top: 24px;
+  justify-content: space-between;
+}
+
+.duolist{
+  width: 320px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid black; */
+  background-color: white;
+}
