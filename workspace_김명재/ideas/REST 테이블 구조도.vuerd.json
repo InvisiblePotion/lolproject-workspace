@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -1842.3999999999896,
-    "scrollLeft": -2728.0093750000005,
+    "scrollTop": -774.3999999999901,
+    "scrollLeft": -2721.5999999999926,
     "zoomLevel": 0.8,
     "show": {
       "tableComment": true,
@@ -3695,6 +3695,469 @@
         },
         "visible": true,
         "id": "30be9c99-dae4-4563-a3b5-16eb7d866a3d"
+      },
+      {
+        "name": "summoner_game_info",
+        "comment": "전적/초기 정보",
+        "columns": [
+          {
+            "name": "summoner_name",
+            "comment": "소환사 이름",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 103.08642578125,
+              "widthComment": 71.5703125,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "f29d23f9-58a2-4a14-9afa-ac476a98683e"
+          },
+          {
+            "name": "summoner_level",
+            "comment": "소환사 레벨",
+            "dataType": "NUMBER(4)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 96.97998046875,
+              "widthComment": 71.5703125,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "0c959016-d2d4-45ac-a500-efcb568289a9"
+          },
+          {
+            "name": "summoner_profile",
+            "comment": "소환사 아이콘",
+            "dataType": "NUMBER(4)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 107.6376953125,
+              "widthComment": 84.5703125,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "fe4bb0d2-2f60-4bfb-a933-2bb16730a643"
+          },
+          {
+            "name": "summoner_rank",
+            "comment": "소환사 랭크",
+            "dataType": "VARCHAR(20)",
+            "default": "Unranked",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 95.86279296875,
+              "widthComment": 71.5703125,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "2315e6a6-da28-49ee-a407-2f6c48c382f5"
+          }
+        ],
+        "ui": {
+          "active": true,
+          "left": 3403.4,
+          "top": 992,
+          "zIndex": 1531,
+          "widthName": 131.54931640625,
+          "widthComment": 89.71826171875
+        },
+        "visible": true,
+        "id": "83b2c925-7e6a-4d12-9cf0-7da0c65905c2"
+      },
+      {
+        "name": "summoner_stat_info",
+        "comment": "개인 통계/초기 정보",
+        "columns": [
+          {
+            "name": "",
+            "comment": "",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "2fdb98df-2010-4aca-a94b-649d1de45024"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 2919.9999999999905,
+          "top": 956.7999999999929,
+          "zIndex": 1423,
+          "widthName": 119.92041015625,
+          "widthComment": 120
+        },
+        "visible": true,
+        "id": "51d2df8f-4b6b-43f9-ae79-a149f662ede2"
+      },
+      {
+        "name": "Summoner",
+        "comment": "소환사 정보",
+        "columns": [
+          {
+            "name": "summoner_id",
+            "comment": "소환사 id",
+            "dataType": "VARCHAR(70)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 81.44091796875,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "ac90e1ae-df2d-4a86-8b6a-057167a5b357"
+          },
+          {
+            "name": "summoner_puuid",
+            "comment": "소환사 puuid",
+            "dataType": "VARCHAR(100)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 104.27978515625,
+              "widthComment": 79.43505859375,
+              "widthDataType": 89.29296875,
+              "widthDefault": 60
+            },
+            "id": "5df4d6c4-1440-460e-a3fd-ced1b2138fec"
+          },
+          {
+            "name": "summoner_name",
+            "comment": "소환사 이름",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 103.08642578125,
+              "widthComment": 71.5703125,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "c56a62c0-ed93-4fe3-b9c3-102ce5fab5c8"
+          },
+          {
+            "name": "summoner_level",
+            "comment": "소환사 레벨",
+            "dataType": "NUMBER(4)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 96.97998046875,
+              "widthComment": 71.5703125,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "4dfee0cd-4f8c-4e06-aff5-5a221b1b1970"
+          },
+          {
+            "name": "summoner_profile",
+            "comment": "소환사 아이콘",
+            "dataType": "NUMBER(4)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 107.6376953125,
+              "widthComment": 84.5703125,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "b8aba645-a99a-4156-b392-2c583624af48"
+          },
+          {
+            "name": "summoner_tier",
+            "comment": "랭크 티어",
+            "dataType": "VARCHAR(20)",
+            "default": "Unranked",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 89.6484375,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "a0c4b560-5076-41e8-8880-1bfebce58dd2"
+          },
+          {
+            "name": "summoner_rank",
+            "comment": "랭크 단계",
+            "dataType": "NUMBER(1)",
+            "default": "0",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 95.86279296875,
+              "widthComment": 60,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "9cc5d26c-b00a-46e1-8a07-9c23bfa8b5b2"
+          },
+          {
+            "name": "summoner_wins",
+            "comment": "승수",
+            "dataType": "NUMBER(4)",
+            "default": "0",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 96.33251953125,
+              "widthComment": 60,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "a93db034-fe68-4881-9aab-a2c525845fcd"
+          },
+          {
+            "name": "summoner_losses",
+            "comment": "패수",
+            "dataType": "NUMBER(4)",
+            "default": "0",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 105.2509765625,
+              "widthComment": 60,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "a936899a-8642-490f-9e8a-18fbda05cae5"
+          },
+          {
+            "name": "summoner_veteran",
+            "comment": "베테랑 여부",
+            "dataType": "NUMBER(1)",
+            "default": "0",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 113.82666015625,
+              "widthComment": 71.5703125,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "2652a07d-15e7-4f4b-b426-da2c038da944"
+          },
+          {
+            "name": "summoner_inactive",
+            "comment": "비활성 여부",
+            "dataType": "NUMBER(1)",
+            "default": "0",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 114.9248046875,
+              "widthComment": 71.5703125,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "9b23a3df-517b-4660-970f-d0de8e923ce1"
+          },
+          {
+            "name": "summoner_freshblood",
+            "comment": "신규 참전 여부",
+            "dataType": "NUMBER(1)",
+            "default": "0",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 133.4599609375,
+              "widthComment": 89.140625,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "7e23bc12-e34f-4931-b7e7-dfb02080a23f"
+          },
+          {
+            "name": "summoner_hotstreak",
+            "comment": "연승 상태",
+            "dataType": "NUMBER(1)",
+            "default": "0",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 125.02392578125,
+              "widthComment": 60,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "92e379f4-a8d2-48e8-9195-7bacddacdc0f"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 3332.4,
+          "top": 529.6,
+          "zIndex": 1527,
+          "widthName": 66.30810546875,
+          "widthComment": 71.5703125,
+          "color": "#9E9E9E"
+        },
+        "visible": true,
+        "id": "0439bf5a-3210-4934-b822-e51384110f45"
       }
     ],
     "indexes": []
@@ -3811,6 +4274,18 @@
           "height": 100
         },
         "id": "0eb11186-3144-4a58-be35-049068b03407"
+      },
+      {
+        "value": "id는 46~47자, puuid는 78자로 확인되었으나 혹시 모르니 넓게 잡음.\n\n랭크 단계는 I~IV 단계가 없는 티어의 경우 0으로 표기",
+        "ui": {
+          "active": false,
+          "left": 3333.799999999989,
+          "top": 428.39999999999225,
+          "zIndex": 1491,
+          "width": 422.20000000000033,
+          "height": 100
+        },
+        "id": "78b964f4-fb42-4afc-a00f-9793e391f2d6"
       }
     ]
   },
@@ -4959,6 +5434,32 @@
         "constraintName": "fk_spell_to_champion_spell",
         "visible": true,
         "id": "e5fa85bc-f7f1-4431-914b-4a76b68c745a"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "0439bf5a-3210-4934-b822-e51384110f45",
+          "columnIds": [
+            "c56a62c0-ed93-4fe3-b9c3-102ce5fab5c8"
+          ],
+          "x": 3600.320166015625,
+          "y": 865.1,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "83b2c925-7e6a-4d12-9cf0-7da0c65905c2",
+          "columnIds": [
+            "f29d23f9-58a2-4a14-9afa-ac476a98683e"
+          ],
+          "x": 3656.123876953125,
+          "y": 992,
+          "direction": "top"
+        },
+        "constraintName": "fk_summoner_to_summoner_game_info",
+        "visible": true,
+        "id": "0d7ccbdd-28fa-4cde-b34b-62c5af77ba37"
       }
     ]
   }
