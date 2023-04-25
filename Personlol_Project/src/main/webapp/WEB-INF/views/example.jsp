@@ -22,6 +22,7 @@
         <input id="n2" type="text" placeholder="숫자 2"><br>
         <button id="ajax_test">AJAX-DB 테스트</button>
         <div id="result">위에 적은 두 숫자를 더한 결과가 여기에 표시 되면 정상입니다!</div>
+        
 	</body>
     <script>
         $('#ajax_test').click(()=>{
