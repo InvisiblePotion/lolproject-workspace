@@ -1,0 +1,270 @@
+"item_id","name_er","name_kr","buy_price","sell_price","tag"
+"1001",Boots,장화,300,210,Boots
+"1004",Faerie Charm,요정의 부적,250,175,ManaRegen
+"1006",Rejuvenation Bead,원기 회복의 구슬,300,120,HealthRegen
+"1011",Giant's Belt,거인의 허리띠,500,630,Health
+"1018",Cloak of Agility,민첩성의 망토,600,420,CriticalStrike
+"1026",Blasting Wand,방출의 마법봉,850,595,SpellDamage
+"1027",Sapphire Crystal,사파이어 수정,350,245,Mana
+"1028",Ruby Crystal,루비 수정,400,280,Health
+"1029",Cloth Armor,천 갑옷,300,210,Armor
+"1031",Chain Vest,쇠사슬 조끼,500,560,Armor
+"1033",Null-Magic Mantle,마법무효화의 망토,450,315,SpellBlock
+"1035",Emberknife,잉걸불 칼,350,140,LifeSteal
+"1036",Long Sword,롱소드,350,245,Damage
+"1037",Pickaxe,곡괭이,875,613,Damage
+"1038",B. F. Sword,B.F. 대검,1300,910,Damage
+"1039",Hailblade,빗발칼날,350,140,LifeSteal
+"1040",Obsidian Edge,흑요석 검,350,140,LifeSteal
+"1042",Dagger,단검,300,210,AttackSpeed
+"1043",Recurve Bow,곡궁,400,700,AttackSpeed
+"1052",Amplifying Tome,증폭의 고서,435,305,SpellDamage
+"1053",Vampiric Scepter,흡혈의 낫,550,630,Damage
+"1054",Doran's Shield,도란의 방패,450,180,Health
+"1055",Doran's Blade,도란의 검,450,180,Health
+"1056",Doran's Ring,도란의 반지,400,160,Health
+"1057",Negatron Cloak,음전자 망토,450,630,SpellBlock
+"1058",Needlessly Large Rod,쓸데없이 큰 지팡이,1250,875,SpellDamage
+"1082",Dark Seal,암흑의 인장,350,140,Health
+"1083",Cull,수확의 낫,450,180,Damage
+"1101",Scorchclaw Pup,새끼 화염발톱,450,180,Jungle
+"1102",Gustwalker Hatchling,새끼 바람돌이,450,180,Jungle
+"1103",Mosstomper Seedling,새끼 이끼쿵쿵이,450,180,Jungle
+"1104",Eye of the Herald,전령의 눈,0,0,Trinket
+"1500",Penetrating Bullets,관통 탄환,0,0,HealthRegen
+"1501",Fortification,요새화,0,0,OnHit
+"1502",Reinforced Armor,이중 갑옷,0,0,Armor
+"1503",Warden's Eye,파수꾼의 눈,0,0,HealthRegen
+"1504",Vanguard,수호자,0,0,Armor
+"1505",Lightning Rod,번개 막대,0,0,Armor
+"1506",Reinforced Armor,이중 갑옷,0,0,Armor
+"1507",Overcharged,과충전,0,0,Armor
+"1508",Anti-tower Socks,방탄 양말,0,0,Armor
+"1509",Gusto,체질,0,0,Armor
+"1510",Phreakish Gusto,특이 체질,0,0,Armor
+"1511",Super Mech Armor,슈퍼 메크 방어구,0,0,Armor
+"1512",Super Mech Power Field,슈퍼 메크 전력장,0,0,Armor
+"1515",Turret Plating,포탑 방패,0,0,Armor
+"1516",Structure Bounty,구조물 현상금,0,0,HealthRegen
+"1517",Structure Bounty,구조물 현상금,0,0,HealthRegen
+"1518",Structure Bounty,구조물 현상금,0,0,HealthRegen
+"1519",Structure Bounty,구조물 현상금,0,0,HealthRegen
+"1520",OvererchargedHA,과충전HA,0,0,Armor
+"1521",Fortification,요새화,0,0,OnHit
+"1522",Tower Power-Up,포탑 강화,0,0,Armor
+"2003",Health Potion,체력 물약,50,20,HealthRegen
+"2010",Total Biscuit of Everlasting Will,굳건한 의지의 완전한 비스킷,50,5,"0"
+"2015",Kircheis Shard,키르히아이스의 파편,400,490,AttackSpeed
+"2031",Refillable Potion,충전형 물약,150,60,HealthRegen
+"2033",Corrupting Potion,부패 물약,350,200,Active
+"2051",Guardian's Horn,수호자의 뿔피리,950,665,Health
+"2052",Poro-Snax,포로 간식,0,0,"0"
+"2055",Control Ward,제어 와드,75,30,Consumable
+"2065",Shurelya's Battlesong,슈렐리아의 군가,750,1750,Health
+"2138",Elixir of Iron,강철의 영약,500,200,Health
+"2139",Elixir of Sorcery,마법의 영약,500,200,Consumable
+"2140",Elixir of Wrath,분노의 영약,500,200,Consumable
+"2403",Minion Dematerializer,미니언 해체분석기,0,0,"0"
+"2419",Commencing Stopwatch,초시계 키트,0,0,Active
+"2420",Stopwatch,초시계,750,300,Active
+"2421",Broken Stopwatch,망가진 초시계,750,300,"0"
+"2422",Slightly Magical Footwear,약간 신비한 신발,300,90,Boots
+"2423",Perfectly Timed Stopwatch,완벽한 초시계,750,300,Active
+"2424",Broken Stopwatch,망가진 초시계,750,300,"0"
+"3001",Evenshroud,저녁갑주,500,1750,Health
+"3003",Archangel's Staff,대천사의 지팡이,550,2100,Health
+"3004",Manamune,마나무네,1050,2030,Damage
+"3006",Berserker's Greaves,광전사의 군화,500,770,AttackSpeed
+"3009",Boots of Swiftness,신속의 장화,600,630,Boots
+"3011",Chemtech Putrifier,화학공학 부패기,700,1610,SpellDamage
+"3020",Sorcerer's Shoes,마법사의 신발,800,770,Boots
+"3024",Glacial Buckler,얼음 방패,250,630,Armor
+"3026",Guardian Angel,수호 천사,150,1200,Armor
+"3031",Infinity Edge,무한의 대검,625,2380,CriticalStrike
+"3033",Mortal Reminder,필멸자의 운명,150,2100,Damage
+"3035",Last Whisper,최후의 속삭임,750,1015,ArmorPenetration
+"3036",Lord Dominik's Regards,도미닉 경의 인사,950,2100,Damage
+"3040",Seraph's Embrace,대천사의 포옹,3000,2100,Health
+"3041",Mejai's Soulstealer,메자이의 영혼약탈자,1250,1120,Health
+"3042",Muramana,무라마나,3000,2100,Damage
+"3044",Phage,탐식의 망치,350,770,Health
+"3046",Phantom Dancer,유령 무희,850,1820,Damage
+"3047",Plated Steelcaps,판금 장화,500,770,Armor
+"3050",Zeke's Convergence,지크의 융합,700,1680,Health
+"3051",Hearthbound Axe,온기가 필요한 자의 도끼,350,700,Damage
+"3053",Sterak's Gage,스테락의 도전,725,2170,Health
+"3057",Sheen,광휘의 검,700,490,OnHit
+"3065",Spirit Visage,정령의 형상,850,2030,Health
+"3066",Winged Moonplate,비상의 월갑,400,560,Health
+"3067",Kindlegem,점화석,400,560,Health
+"3068",Sunfire Aegis,태양불꽃 방패,900,1890,Health
+"3070",Tear of the Goddess,여신의 눈물,400,280,Mana
+"3071",Black Cleaver,칠흑의 양날 도끼,850,2170,Health
+"3072",Bloodthirster,피바라기,400,2240,Damage
+"3074",Ravenous Hydra,굶주린 히드라,200,2380,Damage
+"3075",Thornmail,가시 갑옷,1000,1890,Health
+"3076",Bramble Vest,덤불 조끼,200,560,Armor
+"3077",Tiamat,티아맷,325,840,Damage
+"3078",Trinity Force,삼위일체,833,2333,Health
+"3082",Warden's Mail,파수꾼의 갑옷,400,700,Armor
+"3083",Warmog's Armor,워모그의 갑옷,500,2100,Health
+"3084",Heartsteel,강철심장,700,2240,Health
+"3085",Runaan's Hurricane,루난의 허리케인,950,1820,CriticalStrike
+"3086",Zeal,열정의 검,150,735,AttackSpeed
+"3089",Rabadon's Deathcap,라바돈의 죽음모자,1100,2520,SpellDamage
+"3091",Wit's End,마법사의 최후,775,2170,SpellBlock
+"3094",Rapid Firecannon,고속 연사포,750,1750,CriticalStrike
+"3095",Stormrazor,폭풍갈퀴,100,1890,Damage
+"3100",Lich Bane,리치베인,550,2100,SpellDamage
+"3102",Banshee's Veil,밴시의 장막,700,1820,SpellBlock
+"3105",Aegis of the Legion,군단의 방패,450,840,SpellBlock
+"3107",Redemption,구원,700,1610,Health
+"3108",Fiendish Codex,악마의 마법서,465,630,SpellDamage
+"3109",Knight's Vow,기사의 맹세,400,1610,Health
+"3110",Frozen Heart,얼어붙은 심장,800,1890,Armor
+"3111",Mercury's Treads,헤르메스의 발걸음,350,770,Boots
+"3112",Guardian's Orb,수호자의 보주,950,665,Health
+"3113",Aether Wisp,에테르 환영,415,595,NonbootsMovement
+"3114",Forbidden Idol,금지된 우상,550,560,ManaRegen
+"3115",Nashor's Tooth,내셔의 이빨,450,2240,AttackSpeed
+"3116",Rylai's Crystal Scepter,라일라이의 수정홀,415,1820,Health
+"3117",Mobility Boots,기동력의 장화,700,700,Boots
+"3119",Winter's Approach,혹한의 손길,1000,1820,Health
+"3121",Fimbulwinter,종말의 겨울,2700,1890,Health
+"3123",Executioner's Calling,처형인의 대검,450,560,Damage
+"3124",Guinsoo's Rageblade,구인수의 격노검,900,1820,CriticalStrike
+"3133",Caulfield's Warhammer,콜필드의 전투 망치,400,770,Damage
+"3134",Serrated Dirk,톱날 단검,400,770,Damage
+"3135",Void Staff,공허의 지팡이,700,1960,MagicPenetration
+"3139",Mercurial Scimitar,헤르메스의 시미터,225,2100,SpellBlock
+"3140",Quicksilver Sash,수은 장식띠,850,910,Active
+"3142",Youmuu's Ghostblade,요우무의 유령검,800,2100,Damage
+"3143",Randuin's Omen,란두인의 예언,1100,2100,Health
+"3145",Hextech Alternator,마법공학 교류 발전기,215,735,Health
+"3152",Hextech Rocketbelt,마법공학 로켓 벨트,865,2240,Health
+"3153",Blade of The Ruined King,몰락한 왕의 검,525,2310,Damage
+"3155",Hexdrinker,주문포식자,500,910,Damage
+"3156",Maw of Malmortius,맬모셔스의 아귀,375,2030,SpellBlock
+"3157",Zhonya's Hourglass,존야의 모래시계,350,2100,Armor
+"3158",Ionian Boots of Lucidity,명석함의 아이오니아 장화,650,665,Boots
+"3161",Spear Of Shojin,쇼진의 창,200,2380,Health
+"3165",Morellonomicon,모렐로노미콘,715,2100,Health
+"3177",Guardian's Blade,수호자의 검,950,665,Health
+"3179",Umbral Glaive,그림자 검,500,1610,Damage
+"3181",Hullbreaker,선체파괴자,825,1960,Health
+"3184",Guardian's Hammer,수호자의 망치,950,665,Health
+"3190",Locket of the Iron Solari,강철의 솔라리 펜던트,500,1750,Health
+"3191",Seeker's Armguard,추적자의 팔목 보호대,265,700,Armor
+"3193",Gargoyle Stoneplate,가고일 돌갑옷,1250,2240,SpellBlock
+"3211",Spectre's Cowl,망령의 두건,400,875,Health
+"3222",Mikael's Blessing,미카엘의 축복,600,1610,SpellBlock
+"3330",Scarecrow Effigy,허수아비,0,0,Active
+"3340",Stealth Ward,투명 와드,0,0,Active
+"3363",Farsight Alteration,망원형 개조,0,0,Active
+"3364",Oracle Lens,예언자의 렌즈,0,0,Active
+"3400",Your Cut,수당,0,0,Consumable
+"3504",Ardent Censer,불타는 향로,630,1610,AttackSpeed
+"3508",Essence Reaver,정수 약탈자,500,2030,Damage
+"3513",Eye of the Herald,전령의 눈,0,0,Trinket
+"3599",Kalista's Black Spear,칼리스타의 칠흑의 창,0,0,Consumable
+"3600",Kalista's Black Spear,칼리스타의 칠흑의 창,0,0,Consumable
+"3742",Dead Man's Plate,망자의 갑옷,900,2030,Health
+"3748",Titanic Hydra,거대한 히드라,800,2310,Health
+"3801",Crystalline Bracer,수정 팔 보호구,100,560,Health
+"3802",Lost Chapter,사라진 양피지,80,910,SpellDamage
+"3803",Catalyst of Aeons,억겁의 카탈리스트,550,910,Health
+"3814",Edge of Night,밤의 끝자락,1050,2030,Health
+"3850",Spellthief's Edge,주문도둑의 검,400,160,Health
+"3851",Frostfang,얼음 송곳니,400,160,GoldPer
+"3853",Shard of True Ice,얼음 정수의 파편,400,160,GoldPer
+"3854",Steel Shoulderguards,강철 어깨 보호대,400,160,Health
+"3855",Runesteel Spaulders,룬 강철 어깨 갑옷,400,160,Health
+"3857",Pauldrons of Whiterock,화이트록의 갑옷,400,160,Health
+"3858",Relic Shield,고대유물 방패,400,160,Health
+"3859",Targon's Buckler,타곤 산의 방패,400,160,Health
+"3860",Bulwark of the Mountain,타곤 산의 방벽,400,160,Health
+"3862",Spectral Sickle,영혼의 낫,400,160,Health
+"3863",Harrowing Crescent,해로윙 초승달낫,400,160,Health
+"3864",Black Mist Scythe,검은 안개 낫,400,160,Health
+"3901",Fire at Will,가차없는 포격,0,0,"0"
+"3902",Death's Daughter,죽음의 여신,0,0,"0"
+"3903",Raise Morale,사기진작,0,0,"0"
+"3916",Oblivion Orb,망각의 구,365,560,SpellDamage
+"4005",Imperial Mandate,제국의 명령,750,1750,Health
+"4401",Force of Nature,대자연의 힘,800,2030,Health
+"4403",The Golden Spatula,황금 뒤집개,687,5031,Health
+"4628",Horizon Focus,지평선의 초점,1050,2100,Health
+"4629",Cosmic Drive,우주의 추진력,815,2100,SpellDamage
+"4630",Blighting Jewel,역병의 보석,815,875,MagicPenetration
+"4632",Verdant Barrier,신록의 장벽,115,700,SpellBlock
+"4633",Riftmaker,균열 생성기,1050,2240,Health
+"4635",Leeching Leer,흡수의 시선,465,910,Health
+"4636",Night Harvester,밤의 수확자,815,2240,Health
+"4637",Demonic Embrace,악마의 포옹,815,2100,Health
+"4638",Watchful Wardstone,감시하는 와드석,1100,770,Health
+"4641",Stirring Wardstone,고무의 와드석,1200,480,Health
+"4642",Bandleglass Mirror,밴들유리 거울,265,665,SpellDamage
+"4643",Vigilant Wardstone,경계의 와드석,0,770,Health
+"4644",Crown of the Shattered Queen,부서진 여왕의 왕관,265,1960,Health
+"4645",Shadowflame,그림자불꽃,700,2100,Health
+"6029",Ironspike Whip,강철가시 채찍,225,770,Damage
+"6035",Silvermere Dawn,은빛 여명,425,2100,Health
+"6333",Death's Dance,죽음의 무도,525,2310,Armor
+"6609",Chempunk Chainsword,화공 펑크 사슬검,500,1960,Health
+"6616",Staff of Flowing Water,흐르는 물의 지팡이,630,1610,SpellDamage
+"6617",Moonstone Renewer,월석 재생기,750,1750,Health
+"6630",Goredrinker,선혈포식자,300,2310,Health
+"6631",Stridebreaker,발걸음 분쇄기,400,2310,Health
+"6632",Divine Sunderer,신성한 파괴자,700,2310,Health
+"6653",Liandry's Anguish,리안드리의 고뇌,1000,2240,SpellDamage
+"6655",Luden's Tempest,루덴의 폭풍,1050,2240,SpellDamage
+"6656",Everfrost,만년서리,265,1960,Health
+"6657",Rod of Ages,영겁의 지팡이,215,1960,Health
+"6660",Bami's Cinder,바미의 불씨,200,700,Health
+"6662",Iceborn Gauntlet,얼어붙은 건틀릿,700,2100,Health
+"6664",Turbo Chemtank,터보 화공 탱크,700,1960,Health
+"6665","Jak'Sho, The Protean",해신 작쇼,800,2240,Health
+"6667",Radiant Virtue,광휘의 미덕,800,2240,Health
+"6670",Noonquiver,절정의 화살,300,910,Damage
+"6671",Galeforce,돌풍,625,2380,Damage
+"6672",Kraken Slayer,크라켄 학살자,625,2380,Damage
+"6673",Immortal Shieldbow,불멸의 철갑궁,600,2380,Health
+"6675",Navori Quickblades,나보리 신속검,825,2380,Damage
+"6676",The Collector,징수의 총,425,2100,Damage
+"6677",Rageknife,분노의 칼,200,560,AttackSpeed
+"6691",Duskblade of Draktharr,드락사르의 황혼검,900,2170,Damage
+"6692",Eclipse,월식,900,2170,Damage
+"6693",Prowler's Claw,자객의 발톱,900,2170,Damage
+"6694",Serylda's Grudge,세릴다의 원한,650,2240,Damage
+"6695",Serpent's Fang,독사의 송곳니,625,1820,Damage
+"6696",Axiom Arc,원칙의 원형낫,800,2100,Damage
+"7000",Sandshrike's Claw,암살자의 발톱,0,2170,Damage
+"7001",Syzygy,천체 정렬,0,2170,Damage
+"7002",Draktharr's Shadowcarver,드락사르의 암흑검,0,2170,Damage
+"7005",Frozen Fist,얼어붙은 주먹,0,2100,Health
+"7006",Typhoon,태풍,0,2380,Damage
+"7007",Wyrmfallen Sacrifice,쓰러진 용의 제물,0,2380,Damage
+"7008",Bloodward,핏빛 철갑궁,0,2380,Health
+"7009",Icathia's Curse,이케시아의 저주,0,2240,Health
+"7010",Vespertide,어스름의 기원,0,2240,Health
+"7011",Upgraded Aeropack,업그레이드 비행팩,0,2240,Health
+"7012",Liandry's Lament,리안드리의 슬픔,0,2240,SpellDamage
+"7013",Eye of Luden,루덴의 눈,0,2240,SpellDamage
+"7014",Eternal Winter,영원한 겨울,0,1960,Health
+"7015",Ceaseless Hunger,무한한 허기,0,2310,Health
+"7016",Dreamshatter,몽상파쇄자,0,2310,Health
+"7017",Deicide,신성시해자,0,2310,Health
+"7018",Infinity Force,무한한 삼위일체,0,2333,Health
+"7019",Reliquary of the Golden Dawn,황금 새벽의 유물함,0,1750,Health
+"7020",Shurelya's Requiem,슈렐리아의 진혼곡,0,1750,Health
+"7021",Starcaster,성운 투척기,0,1750,Health
+"7022",Seat of Command,지휘관의 입지,0,1750,Health
+"7023",Equinox,별의 균형,0,1750,Health
+"7024",Caesura,중단,0,1960,Health
+"7025",Leviathan,레비아탄,0,2240,Health
+"7026",The Unspoken Parasite,무언의 기생갑,0,2240,Health
+"7027",Primordial Dawn,태고의 새벽,0,2240,Health
+"7028",Infinite Convergence,무한 융합,0,1960,Health
+"7050",Gangplank Placeholder,갱플랭크 Placeholder,0,0,"0"
+"8001",Anathema's Chains,증오의 사슬,800,1750,Health
+"8020",Abyssal Mask,심연의 가면,450,2100,Health
