@@ -1,0 +1,65 @@
+#maindiv{
+  display: block;
+  width: 1080px;
+  margin: 0 auto;
+}
+
+#champ_info{
+
+}
+
+#inner_champ{
+  width: 1080px;
+  height: 124px;
+  margin-bottom: 8px;
+  
+  border: 1px solid black;
+}
+
+#menulist{
+  width: 1080px;
+  border: 1px solid black;
+}
+
+#mainbox{
+  display: flex;
+  flex-direction: row;
+  width: 1080px;
+  margin-top: 10px;
+}
+
+#left-box{
+  width: 740px;
+  border: 1px solid black;
+}
+
+#right-box{
+  width: 332px;
+  border: 1px solid black;
+  margin-left: 8px;
+}
+
+#roon-main{
+  display: flex;
+  flex-direction: row;
+  width: 748px;
+  height: 258px;
+  padding: 12px;
+}
+
+#roon-left{
+  display: flex;
+  flex-direction: row;
+  width: 410px;
+  height: 204px;
+
+}
+
+.roon-left-in{
+  
+}
+
+#roon-right{
+  width: 282px;
+  height: 234px;
+}
