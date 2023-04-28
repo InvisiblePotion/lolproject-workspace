@@ -20,8 +20,10 @@
         <br>
         <input id="n1" type="text" placeholder="숫자 1"><br>
         <input id="n2" type="text" placeholder="숫자 2"><br>
+        <input id = "n3" type = "text" placeholder = "숫자3">
         <button id="ajax_test">AJAX-DB 테스트</button>
         <div id="result">위에 적은 두 숫자를 더한 결과가 여기에 표시 되면 정상입니다!</div>
+        
         
 	</body>
     <script>
@@ -29,10 +31,11 @@
             $.ajax({
                 method: 'get',
                 url: '/personlol/example/test-ajax',
-                data: {'num1': $('#n1').val(), 'num2': $('#n2').val()},
+                data: {'num1': $('#n1').val(), 'num2': $('#n2').val(), 'num3': $("#n3").val()},
                 dataType: 'json'
             }).done((res)=>{
-                console.log(res);
+                console.log(1,res);
+                console.log(2,res.ex1)
                 $('#result').html(res.ex1)
             }).fail((err)=>{
                 console.log(err);

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.personlol.dao.test2Dao">
+
+	<select id="testSum" resultType="com.base.personlol.dto.test2Dto">
+		select #{num1} + #{num2} + #{num3} sum from dual
+	</select>
+	
+	<insert id="join" parameterType="test2dto">
+		INSERT INTO TEST2 values(#{id},#{name})
+	</insert>
+	
+	<select id="cheack" resultType="Integer">
+		select test2.id from test2 where id = #{id}
+	</select>
+	
+</mapper>
