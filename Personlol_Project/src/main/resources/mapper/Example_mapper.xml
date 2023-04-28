@@ -9,13 +9,13 @@
 		select #{num1} + #{num2} + #{num3} ex1 from dual
 	</select>
 	
-<<<<<<< HEAD
+
 	<insert id="testDB3" parameterType="member">
 		INSERT INTO TEST_MEMBER 
 		VALUES(#{userid},#{userpw},#{pwchk},#{account})
 	</insert>
-=======
+
 	
 	
->>>>>>> 5cd3af42928f092df7fd086abe947e0b2ac9038a
+
 </mapper>
