@@ -1,9 +1,8 @@
 package com.base.personlol.controller;
 
-<<<<<<< HEAD
+
 import java.lang.reflect.Member;
-=======
->>>>>>> 5cd3af42928f092df7fd086abe947e0b2ac9038a
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,11 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.base.personlol.dto.Example_dto;
-<<<<<<< HEAD
+
 import com.base.personlol.dto.Test_member_dto;
-=======
+
 import com.base.personlol.dto.test2Dto;
->>>>>>> 5cd3af42928f092df7fd086abe947e0b2ac9038a
+
 import com.base.personlol.service.Example_service;
 import com.base.personlol.service.test2MM;
 
