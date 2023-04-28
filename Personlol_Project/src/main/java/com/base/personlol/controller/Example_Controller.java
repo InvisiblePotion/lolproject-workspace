@@ -43,6 +43,7 @@ public class Example_Controller {
 	test2MM test2MM;
 	
 	
+	
 	@GetMapping("/")
 	public String example() {
 		return "example";
@@ -126,12 +127,13 @@ public class Example_Controller {
 			result.put("code",code);
 			
 			return result;
-		}
-		
-		
-		
-		
+		}	
 	}
-
+	@PostMapping("/join")
+	public @ResponseBody Integer join(@RequestParam Map<String, Integer> join) {
+		int join1 = test2MM.join(join);
+		System.out.println("join1: " + join1);
+		return join1;		
+	}
 	
 }//
