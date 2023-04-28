@@ -36,7 +36,7 @@
                 $('#result').html(res.ex1)
             }).fail((err)=>{
                 console.log(err);
-                $('#result').html('무언가 잘못되었습니다... (F12로 개발자 도구 로그를 확인해주세요.)')
+                $('#result').html('무언가 잘못되었습니다 히잉... (F12로 개발자 도구 로그를 확인해주세요.)')
             })
         })
     </script>

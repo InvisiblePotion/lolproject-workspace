@@ -9,4 +9,8 @@
 		select #{num1} + #{num2} ex1 from dual
 	</select>
 	
+	<insert id="testDB3" parameterType="member">
+		INSERT INTO TEST_MEMBER 
+		VALUES(#{userid},#{userpw},#{pwchk},#{account})
+	</insert>
 </mapper>
