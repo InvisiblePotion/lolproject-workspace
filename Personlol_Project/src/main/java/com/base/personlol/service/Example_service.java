@@ -15,6 +15,7 @@ public class Example_service {
 	Example_dao ex_dao;
 	
 	public Example_dto testDB(Map<String, Integer> nums) {
+		System.out.println("MM에 넘어오는 ajox:"+nums);
 		return ex_dao.testDB(nums);
 	}
 	
