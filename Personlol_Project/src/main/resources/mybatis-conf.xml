@@ -11,6 +11,10 @@
     </typeAliases>
     -->
     <typeAliases>
+<<<<<<< HEAD
     	<package name="com.base.personlol.dto" />
+=======
+    	<package name="com.base.personlol.dto"/>
+>>>>>>> 58412c354639774268d14b73636287d20b9b2107
     </typeAliases>
 </configuration>
