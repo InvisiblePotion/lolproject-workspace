@@ -1,4 +1,3 @@
-
 CREATE TABLE ChampData
 (
   champ_id    NUMBER(3)     NOT NULL,
@@ -9,9 +8,6 @@ CREATE TABLE ChampData
   champ_full  VARCHAR(100)  NOT NULL,
   CONSTRAINT PK_ChampData PRIMARY KEY (champ_id)
 );
-
-ALTER TABLE ChampData
-  ADD CONSTRAINT UQ_champ_id UNIQUE (champ_id);
 
 ALTER TABLE ChampData
   ADD CONSTRAINT UQ_champ_key UNIQUE (champ_key);
@@ -46,9 +42,6 @@ CREATE TABLE ChampSkill
 );
 
 ALTER TABLE ChampSkill
-  ADD CONSTRAINT UQ_skill_id UNIQUE (skill_id);
-
-ALTER TABLE ChampSkill
   ADD CONSTRAINT UQ_skill_name UNIQUE (skill_name);
 
 ALTER TABLE ChampSkill
@@ -67,9 +60,6 @@ CREATE TABLE ChampSkin
   skin_chromas NUMBER(1)     DEFAULT 0 NOT NULL,
   CONSTRAINT PK_ChampSkin PRIMARY KEY (champ_id, skin_id)
 );
-
-ALTER TABLE ChampSkin
-  ADD CONSTRAINT UQ_skin_id UNIQUE (skin_id);
 
 ALTER TABLE ChampSkin
   ADD CONSTRAINT UQ_skin_name UNIQUE (skin_name);
@@ -94,9 +84,6 @@ CREATE TABLE Item
 );
 
 ALTER TABLE Item
-  ADD CONSTRAINT UQ_item_id UNIQUE (item_id);
-
-ALTER TABLE Item
   ADD CONSTRAINT UQ_item_name UNIQUE (item_name);
 
 
@@ -116,14 +103,11 @@ CREATE TABLE Rune
   runetype_id    NUMBER(4)       NOT NULL,
   rune_name      NVARCHAR2(20)   NOT NULL,
   rune_key       VARCHAR(30)     NOT NULL,
-  rune_icon      VARCHAR(100)     NOT NULL,
+  rune_icon      VARCHAR(100)    NOT NULL,
   rune_shortdesc NVARCHAR2(300)  NOT NULL,
   rune_longdesc  NVARCHAR2(1000) NOT NULL,
   CONSTRAINT PK_Rune PRIMARY KEY (rune_id)
 );
-
-ALTER TABLE Rune
-  ADD CONSTRAINT UQ_rune_id UNIQUE (rune_id);
 
 ALTER TABLE Rune
   ADD CONSTRAINT UQ_rune_name UNIQUE (rune_name);
@@ -144,9 +128,6 @@ CREATE TABLE RuneShard
 );
 
 ALTER TABLE RuneShard
-  ADD CONSTRAINT UQ_runeshard_id UNIQUE (runeshard_id);
-
-ALTER TABLE RuneShard
   ADD CONSTRAINT UQ_runeshard_stat UNIQUE (runeshard_stat);
 
 
@@ -159,9 +140,6 @@ CREATE TABLE RuneType
   runetype_icon VARCHAR(100) NOT NULL,
   CONSTRAINT PK_RuneType PRIMARY KEY (runetype_id)
 );
-
-ALTER TABLE RuneType
-  ADD CONSTRAINT UQ_runetype_id UNIQUE (runetype_id);
 
 ALTER TABLE RuneType
   ADD CONSTRAINT UQ_runetype_name UNIQUE (runetype_name);
@@ -185,9 +163,6 @@ CREATE TABLE Spell
 );
 
 ALTER TABLE Spell
-  ADD CONSTRAINT UQ_spell_id UNIQUE (spell_id);
-
-ALTER TABLE Spell
   ADD CONSTRAINT UQ_spell_key UNIQUE (spell_key);
 
 ALTER TABLE Spell
@@ -205,7 +180,7 @@ CREATE TABLE Summoner
   summoner_name       NVARCHAR2(20) NOT NULL,
   summoner_level      NUMBER(4)     NOT NULL,
   summoner_profile    NUMBER(4)     NOT NULL,
-  summoner_tier       VARCHAR(20)   DEFAULT Unranked NOT NULL,
+  summoner_tier       VARCHAR(20)   DEFAULT 'Unranked' NOT NULL,
   summoner_rank       NUMBER(1)     DEFAULT 0 NOT NULL,
   summoner_wins       NUMBER(4)     DEFAULT 0 NOT NULL,
   summoner_losses     NUMBER(4)     DEFAULT 0 NOT NULL,
@@ -215,9 +190,6 @@ CREATE TABLE Summoner
   summoner_hotstreak  NUMBER(1)     DEFAULT 0 NOT NULL,
   CONSTRAINT PK_Summoner PRIMARY KEY (summoner_id)
 );
-
-ALTER TABLE Summoner
-  ADD CONSTRAINT UQ_summoner_id UNIQUE (summoner_id);
 
 ALTER TABLE Summoner
   ADD CONSTRAINT UQ_summoner_puuid UNIQUE (summoner_puuid);
@@ -250,4 +222,3 @@ ALTER TABLE ItemUpgrade
   ADD CONSTRAINT FK_Item_TO_ItemUpgrade1
     FOREIGN KEY (next_item)
     REFERENCES Item (item_id);
-
