@@ -3,9 +3,9 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -222,
-    "scrollLeft": -1936,
-    "zoomLevel": 1,
+    "scrollTop": -2341,
+    "scrollLeft": -2847,
+    "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -229,7 +229,7 @@
           "active": false,
           "left": 3743.5551,
           "top": 2029.8879,
-          "zIndex": 21,
+          "zIndex": 90,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -2451,7 +2451,7 @@
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
-              "unique": true,
+              "unique": false,
               "notNull": true
             },
             "ui": {
@@ -2540,7 +2540,7 @@
           "active": false,
           "left": 3089.332,
           "top": 2898.3334,
-          "zIndex": 32,
+          "zIndex": 92,
           "widthName": 68.1298828125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -4132,6 +4132,29 @@
         "comment": "1차 가공 데이터",
         "columns": [
           {
+            "name": "version",
+            "comment": "게임 버전",
+            "dataType": "VARCHAR(30)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "11e4385f-af82-4076-af6c-42db6fdf659c"
+          },
+          {
             "name": "game_id",
             "comment": "게임 id",
             "dataType": "NUMBER(12)",
@@ -4155,8 +4178,8 @@
             "id": "66edac00-16b9-48ce-92f0-c2cceed52792"
           },
           {
-            "name": "participant_id",
-            "comment": "참여자 id",
+            "name": "participant_number",
+            "comment": "참여자 번호",
             "dataType": "NUMBER(2)",
             "default": "",
             "option": {
@@ -4170,12 +4193,35 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 81.35205078125,
-              "widthComment": 60,
+              "widthName": 116.15625,
+              "widthComment": 71.5703125,
               "widthDataType": 70.31982421875,
               "widthDefault": 60
             },
             "id": "09ba139b-6fac-4aa0-b8a1-98d0044ac0d7"
+          },
+          {
+            "name": "participant_puuid",
+            "comment": "참여자 puuid",
+            "dataType": "VARCHAR(100)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 104.19091796875,
+              "widthComment": 79.43505859375,
+              "widthDataType": 89.29296875,
+              "widthDefault": 60
+            },
+            "id": "38663c15-61e9-4f76-bc5a-48c5d25a4d41"
           },
           {
             "name": "matches",
@@ -4228,7 +4274,7 @@
           "active": false,
           "left": 2164.7783,
           "top": 470.7782,
-          "zIndex": 49,
+          "zIndex": 83,
           "widthName": 60,
           "widthComment": 96.30078125
         },
