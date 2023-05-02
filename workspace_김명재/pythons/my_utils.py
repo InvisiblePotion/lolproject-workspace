@@ -128,7 +128,6 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
     
     # 데이터 삽입 시작
     if debug_print: print('>>> 테이블에 데이터 삽입 중...')
-    db_open(debug_print=False)
     for rec_idx in tqdm(range(len(data_frame))):
         values = []
         dual_on_cv = []
@@ -168,6 +167,7 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
                 set_val.append(f"{sc[1]}={values[sc[0]]}")
             execute += ', '.join(set_val)
         # print(execute)
+        db_open(debug_print=False)
         oracle_execute(execute)
     oracle_close(debug_print=False)
     if debug_print: print('>>> 처리 완료!')
@@ -568,6 +568,9 @@ def autoInsert(riot_api_key: str, start_page: int=1):
                     summoner_detail['profileIconId']
                 ]
 
+                # Summoner 테이블 갱신
+                insertDataFrameIntoTable(pd.DataFrame(summoner_normal_data + summoner_rank_data_list[summoner_id_idx]), 'SUMMONER', debug_print=False)
+
                 # 현재 puuId로부터 가장 최근의 20게임의 matchId를 획득
                 if match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key={riot_api_key}"): continue
                 for match_id in match_id_list:
@@ -583,14 +586,18 @@ def autoInsert(riot_api_key: str, start_page: int=1):
                     # RawData 테이블 형태로 가공하여 RawData 테이블에 삽입
                     filterd_rawdata = RawdataFirstFilter(pd.DataFrame([raw], columns=['matches','timeline']))
                     insertDataFrameIntoTable(pd.DataFrame(filterd_rawdata), 'RAWDATA', debug_print=False)
-                    raw[0]['metadata']
-                
-                # Summoner 테이블 갱신
-                insertDataFrameIntoTable(pd.DataFrame(summoner_normal_data + summoner_rank_data_list[summoner_id_idx]), 'SUMMONER', debug_print=False)
+
+                    # 현재 게임에 참가중인 모든 플레이어의 puuid 추출후 중복을 방지하기 위해 현재 유저만 제거
+                    match_puuid_list = raw[0]['metadata']['participants']
+                    match_puuid_list.remove(summoner_normal_data[1])
+                    ### 230502:
+                    ### 여기서부터 'match_puuid_list'로 소환사 정보를 검색 후 검색된 summonerId로 랭크 정보를 검색.
+                    ### 검색된 각 데이터로부터 Summoner 테이블의 형태에 맞는 데이터를 추출하여 insertDataFrameIntoTable() 사용해 삽입
+                    ### 이후 실행해보고 이 함수의 기능들 함수화 하여 분리하기
 
             rank_tier_list[this_rank_idx]['page'] += 1
 
-            
+
 
 
 # getRawdata() 함수로 만들어진 데이터프레임 안에서 특정 챔피언의 등장 횟수와 등장 레코드를 리턴하는 함수
