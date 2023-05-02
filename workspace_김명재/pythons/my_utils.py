@@ -11,6 +11,22 @@ from io import BytesIO
 import numpy as np
 import warnings
 
+
+class BadApiResult(Exception):
+    def __init__(self, request_result: requests.Response):
+        super().__init__(f"사용한 API로부터 비정상적인 리턴을 받았습니다.\
+                         \n상태 코드: {request_result.status_code}\
+                         \n사용된 URL: {request_result.url}")
+    __name__ = 'BadApiResult'
+
+
+class InvaildApiKey(Exception):
+    def __init__(self, request_result: requests.Response):
+        super().__init__(f"사용된 API Key가 유효하지 않습니다.\
+                         \n사용된 API Key: {request_result.url[request_result.url.find('api_key') + 8:]}")
+    __name__ = 'InvaildApiKey'
+
+
 warnings.filterwarnings('ignore')
 
 dsn = ora.makedsn('localhost', 1521, 'xe')
@@ -500,19 +516,21 @@ def autoInsert(riot_api_key: str, start_page: int=1):
     DB에 1차 정제 데이터를 지속 삽입하는 함수
     """
 
-    sleep_count = 0
-
-    def checkLimit(get_string: str):
-        value = requests.get(get_string).json()
+    def checkApiResult(get_req_string: str):
         try:
-            if value['status']['status_code'] == 429:
-                nonlocal sleep_count
-                sleep_count += 1
-                print(f'now sleeping... total sleep count: {sleep_count}')
-                apiSleep(120, False)
-                return checkLimit(get_string)
-            else: return value
-        except: return value
+            while True:
+                result = requests.get(get_req_string)
+                if result.status_code == 200:
+                    return result.json()
+                elif result.status_code == 429:
+                    time.sleep(10)
+                    continue
+                elif result.status_code == 403:
+                    raise InvaildApiKey(result)
+                else:
+                    raise BadApiResult(result)
+        except Exception as e:
+            print(f"{e.__name__}:\n{e}")
 
     page = start_page
 
@@ -526,24 +544,64 @@ def autoInsert(riot_api_key: str, start_page: int=1):
         ('DIAMOND', 'II'),
         ('DIAMOND', 'I')
     ]
-    
-    print('<<< Job Start >>>')
-    for rank, tier in tier_list:
 
-        print('get SummonerId......')
-        summoner_ids = checkLimit(f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{rank}/{tier}?page={page}&api_key={riot_api_key}')
-        if len(summoner_ids) < 10:
-            print('!!! EXPIRED TIER OCCURRED !!!')
-            print(f'!!! ({rank}, {tier}) IS REMOVED !!!')
-            tier_list.remove((rank, tier))
-        else:
-            summoner_ids = [a['summonerId'] for a in random.sample(summoner_ids, 10)]
-    
-        print('get puuid......')
-        puuids = []
-        for s_name in summoner_ids:
-            puuids.append(checkLimit(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{s_name}?api_key={riot_api_key}")['puuid'])
+    print(f"<<< autoInsert() 시작 >>>\
+          \nStart Time: {time.localtime}")
+
+    cycle_count = 0
+    inserted_player = 0
+    inserted_game = 0
+
+    # tier_list의 모든 티어가 소멸되기 전까지 무한 반복
+    while len(tier_list) != 0:
+
+        # 현재 tier_list의 모든 랭크 티어를 순환
+        for rank, tier in tqdm(tier_list):
+            print(f"<<< 새 랭크 티어 입력 시작 >>>\
+                  \n반복 횟수: {cycle_count}\
+                  \n현재 페이지: {page}\
+                  \n입력된 총 플레이어 수: {inserted_player}\
+                  \n입력된 총 게임 수: {inserted_game}\
+                  \n남은 랭크 티어 수: {len(tier_list)}")
+
+            # 현재 랭크 티어의 page번째 페이지에서 무작위로 10명을 골라 summonerId를 획득
+            print(f"\tget SummonerId: {rank} {tier}")
+            summoner_id_list = checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{rank}/{tier}?page={page}&api_key={riot_api_key}")
+            
+            # 가져온 페이지의 유저 수가 10명 미만이라면 현재 랭크 티어의 모든 페이지를 탐색 한것으로 간주하고 tier_list에서 현재 랭크 티어를 제거
+            if len(summoner_id_list) < 10:
+                print('!!! 페이지를 전부 소진한 랭크 티어 발생 !!!')
+                tier_list.remove((rank, tier))
+                print(f"!!! {rank} {tier} 이 tier_list에서 제거되었습니다. !!!")
+                continue
+            else:
+                summoner_id_list = [a['summonerId'] for a in random.sample(summoner_id_list, 10)]
+
+            # 획득한 summoner_id_list로 입력 작업 시작
+            for s_name in tqdm(summoner_id_list, desc='    get puuId'):
+                while True:
+                    puuid_result = checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{s_name}?api_key={riot_api_key}")['puuid']
+                    if 0 != oracle_totalExecute(f"SELECT COUNT(summoner_puuid) FROM SUMMONER WHERE summoner_puuid = {puuid_result}"): continue
+                    puuid = puuid_result
+                    break
+
+                # 현재 puuId로부터 가장 최근의 20게임의 matchId를 획득
+                while True:
+                    match_id_list = checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count=20&type=ranked&api_key={riot_api_key}")
+                    for match_id in match_id_list:
+                        if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = {match_id}"):
+                            match_id_list.remove(match_id)
+                    # match_id_list = match_id_result
+                    break
+            # for puuid in tqdm(puuid_list, desc='    get matchId'):
+
+            # tot = []
+            # for match_id in tqdm(match_id_list, desc='    get match data'):
+            #     match_data = requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={riot_api_key}").json()
+            #     match_timeline = requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key={riot_api_key}").json()
+            #     tot.append([match_id, match_data, match_timeline])
         
+        page += 1
 
 
 
