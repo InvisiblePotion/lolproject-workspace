@@ -11,6 +11,22 @@ from io import BytesIO
 import numpy as np
 import warnings
 
+
+class BadApiResult(Exception):
+    def __init__(self, request_result: requests.Response):
+        super().__init__(f"사용한 API로부터 비정상적인 리턴을 받았습니다.\
+                         \n상태 코드: {request_result.status_code}\
+                         \n사용된 URL: {request_result.url}")
+    __name__ = 'BadApiResult'
+
+
+class InvaildApiKey(Exception):
+    def __init__(self, request_result: requests.Response):
+        super().__init__(f"사용된 API Key가 유효하지 않습니다.\
+                         \n사용된 API Key: {request_result.url[request_result.url.find('api_key') + 8:]}")
+    __name__ = 'InvaildApiKey'
+
+
 warnings.filterwarnings('ignore')
 
 dsn = ora.makedsn('localhost', 1521, 'xe')
@@ -235,11 +251,14 @@ def convertRawDataToDTO(df: pd.DataFrame):
     return new_df
 
 
-# LOL API의 API 접속 제한을 기다리기 위한 반복 슬립 함수
-def apiSleep(slp_time: int=120):
-# riot api limit 대기...(100req per 120s)
-    print('sleep until request limit recovery...')
-    for slp in tqdm(range(slp_time)):
+# LOL API의 접속 제한을 기다리기 위한 반복 슬립 함수 (100req per 120s)
+def apiSleep(slp_time: int=120, print_msg: bool=True):
+    if print_msg:
+        print('sleep until request limit recovery...')
+        iter = tqdm(range(slp_time))
+    else:
+        iter = range(slp_time)
+    for slp in iter:
         time.sleep(1)
 
 
@@ -358,6 +377,233 @@ def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
 
     print('complete!')
     return pd.DataFrame(df_create, columns=['match_id','matches','timeline'])
+
+
+def RawdataFirstFilter(rawdata: pd.DataFrame):
+    """
+    RawData를 1차 정제 형태로 변환해주는 함수
+    """
+    result = []
+    for game in rawdata.iloc:
+        for i in range(10):
+            matches = game['matches']['info']
+            part = matches['participants'][i]
+            challenge = part['challenges']
+            # timeline에서 어떤 데이터를 뽑을지 아직 미정
+            # timeline = rawdata['timeline']['info']
+            # frames = timeline['frames']
+
+            each_part = {
+                'gameVersion': matches['gameVersion'],
+                'gameId': matches['gameId'],
+                'participantId': part['participantId'],
+                'participantPuuid': part['puuid'],
+                'matches': {
+                    'game': {
+                        'gameCreation': matches['gameCreation'],
+                        'gameStartTimestamp': matches['gameStartTimestamp'],
+                        'gameEndTimestamp': matches['gameEndTimestamp'],
+                        'gameDuration': matches['gameDuration'],
+                        'gameVersion': matches['gameVersion'],
+                        'queueId': matches['queueId'],
+                        'bans': matches['teams'][0]['bans'] + matches['teams'][1]['bans']
+                    },
+                    'summoner': {
+                        'summonerName': part['summonerName'],
+                        'summonerLevel': part['summonerLevel'],
+                        'summonerId': part['summonerId'],
+                        'puuid': part['puuid']
+                    },
+                    'champion': {
+                        'championId': part['championId'],
+                        'championName': part['championName'],
+                        'champLevel': part['champLevel'],
+                        'lane': part['lane'],
+                        'individualPosition': part['individualPosition'],
+                        'teamPosition': part['teamPosition'],
+                        'teamId': part['teamId'],
+                        'win': part['win']
+                    },
+                    'spell': {
+                        'summoner1Id': part['summoner1Id'],
+                        'summoner2Id': part['summoner2Id']
+                    },
+                    'rune': {
+                        'runePrimaryStyle': part['perks']['styles'][0]['style'],
+                        'runeCorePerk': part['perks']['styles'][0]['selections'][0]['perk'],
+                        'runePrimaryPerk1': part['perks']['styles'][0]['selections'][1]['perk'],
+                        'runePrimaryPerk2': part['perks']['styles'][0]['selections'][2]['perk'],
+                        'runePrimaryPerk3': part['perks']['styles'][0]['selections'][3]['perk'],
+                        'runeSubStyle': part['perks']['styles'][1]['style'],
+                        'runeSubPerk1': part['perks']['styles'][1]['selections'][0]['perk'],
+                        'runeSubPerk2': part['perks']['styles'][1]['selections'][1]['perk'],
+                        'runeShardOffense': part['perks']['statPerks']['offense'],
+                        'runeShardFlex': part['perks']['statPerks']['flex'],
+                        'runeShardDefense': part['perks']['statPerks']['defense']
+                    },
+                    'item': {
+                        'item0': part['item0'],
+                        'item1': part['item1'],
+                        'item2': part['item2'],
+                        'item3': part['item3'],
+                        'item4': part['item4'],
+                        'item5': part['item5'],
+                        'item6': part['item6']
+                    },
+                    'kda': {
+                        'kills': part['kills'],
+                        'deaths': part['deaths'],
+                        'assists': part['assists'],
+                        'kda': challenge['kda'],
+                        'killParticipation': challenge['killParticipation']
+                    },
+                    'gold': {
+                        'bountyLevel': part['bountyLevel'],
+                        'bountyGold': challenge['bountyGold'],
+                        'goldEarned': part['goldEarned'],
+                        'goldPerMinute': challenge['goldPerMinute']
+                    },
+                    'cs': {
+                        'totalMinionsKilled': part['totalMinionsKilled'],
+                        'laneMinionsFirst10Minutes': challenge['laneMinionsFirst10Minutes']
+                    },
+                    'turret': {
+                        'turretTakedowns': challenge['turretTakedowns'],
+                        'turretPlatesTaken': challenge['turretPlatesTaken']
+                    },
+                    'damage': {
+                        'teamDamagePercentage': challenge['teamDamagePercentage'],
+                        'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
+                        'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
+                        'magicDamageDealtToChampions': part['magicDamageDealtToChampions'],
+                        'trueDamageDealtToChampions': part['trueDamageDealtToChampions'],
+                        'damageDealtToBuildings': part['damageDealtToBuildings'],
+                        'damageDealtToObjectives': part['damageDealtToObjectives'],
+                        'totalDamageTaken': part['totalDamageTaken'],
+                        'physicalDamageTaken':part['physicalDamageTaken'],
+                        'magicDamageTaken': part['magicDamageTaken'],
+                        'trueDamageTaken': part['trueDamageTaken'],
+                        'totalHeal': part['totalHeal'],
+                        'totalHealsOnTeammates': part['totalHealsOnTeammates']
+                    },
+                    'vision': {
+                        'visionScore': part['visionScore'],
+                        'wardsPlaced': part['wardsPlaced'],
+                        'controlWardsPlaced': challenge['controlWardsPlaced'],
+                        'wardsKilled': part['wardsKilled']
+                    },
+                    'etc': {
+                        'spell1Casts': part['spell1Casts'],
+                        'spell2Casts': part['spell2Casts'],
+                        'spell3Casts': part['spell3Casts'],
+                        'spell4Casts': part['spell4Casts'],
+                        'firstBloodKill': part['firstBloodKill'],
+                        'largestKillingSpree': part['largestKillingSpree'],
+                        'largestMultiKill': part['largestMultiKill'],
+                        'earlyLaningPhaseGoldExpAdvantage': challenge['earlyLaningPhaseGoldExpAdvantage']
+                    }
+                },
+                'timeline': {
+                    '제조 필요!': '어떤 정보를 넣을지 의논 필요'
+                }
+            }
+            result.append(each_part)
+    return result
+
+
+def autoInsert(riot_api_key: str, start_page: int=1):
+    """
+    DB에 1차 정제 데이터를 지속 삽입하는 함수
+    """
+
+    def checkApiResult(get_req_string: str):
+        try:
+            while True:
+                result = requests.get(get_req_string)
+                if result.status_code == 200:
+                    return result.json()
+                elif result.status_code == 429:
+                    time.sleep(10)
+                    continue
+                elif result.status_code == 403:
+                    raise InvaildApiKey(result)
+                else:
+                    raise BadApiResult(result)
+        except Exception as e:
+            print(f"{e.__name__}:\n{e}")
+
+    page = start_page
+
+    tier_list = [
+        ('PLATINUM', 'IV'),
+        ('PLATINUM', 'III'),
+        ('PLATINUM', 'II'),
+        ('PLATINUM', 'I'),
+        ('DIAMOND', 'IV'),
+        ('DIAMOND', 'III'),
+        ('DIAMOND', 'II'),
+        ('DIAMOND', 'I')
+    ]
+
+    print(f"<<< autoInsert() 시작 >>>\
+          \nStart Time: {time.localtime}")
+
+    cycle_count = 0
+    inserted_player = 0
+    inserted_game = 0
+
+    # tier_list의 모든 티어가 소멸되기 전까지 무한 반복
+    while len(tier_list) != 0:
+
+        # 현재 tier_list의 모든 랭크 티어를 순환
+        for rank, tier in tqdm(tier_list):
+            print(f"<<< 새 랭크 티어 입력 시작 >>>\
+                  \n반복 횟수: {cycle_count}\
+                  \n현재 페이지: {page}\
+                  \n입력된 총 플레이어 수: {inserted_player}\
+                  \n입력된 총 게임 수: {inserted_game}\
+                  \n남은 랭크 티어 수: {len(tier_list)}")
+
+            # 현재 랭크 티어의 page번째 페이지에서 무작위로 10명을 골라 summonerId를 획득
+            print(f"\tget SummonerId: {rank} {tier}")
+            summoner_id_list = checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{rank}/{tier}?page={page}&api_key={riot_api_key}")
+            
+            # 가져온 페이지의 유저 수가 10명 미만이라면 현재 랭크 티어의 모든 페이지를 탐색 한것으로 간주하고 tier_list에서 현재 랭크 티어를 제거
+            if len(summoner_id_list) < 10:
+                print('!!! 페이지를 전부 소진한 랭크 티어 발생 !!!')
+                tier_list.remove((rank, tier))
+                print(f"!!! {rank} {tier} 이 tier_list에서 제거되었습니다. !!!")
+                continue
+            else:
+                summoner_id_list = [a['summonerId'] for a in random.sample(summoner_id_list, 10)]
+
+            # 획득한 summoner_id_list로 입력 작업 시작
+            for s_name in tqdm(summoner_id_list, desc='    get puuId'):
+                while True:
+                    puuid_result = checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{s_name}?api_key={riot_api_key}")['puuid']
+                    if 0 != oracle_totalExecute(f"SELECT COUNT(summoner_puuid) FROM SUMMONER WHERE summoner_puuid = {puuid_result}"): continue
+                    puuid = puuid_result
+                    break
+
+                # 현재 puuId로부터 가장 최근의 20게임의 matchId를 획득
+                while True:
+                    match_id_list = checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count=20&type=ranked&api_key={riot_api_key}")
+                    for match_id in match_id_list:
+                        if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = {match_id}"):
+                            match_id_list.remove(match_id)
+                    # match_id_list = match_id_result
+                    break
+            # for puuid in tqdm(puuid_list, desc='    get matchId'):
+
+            # tot = []
+            # for match_id in tqdm(match_id_list, desc='    get match data'):
+            #     match_data = requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={riot_api_key}").json()
+            #     match_timeline = requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key={riot_api_key}").json()
+            #     tot.append([match_id, match_data, match_timeline])
+        
+        page += 1
+
+
 
 
 # getRawdata() 함수로 만들어진 데이터프레임 안에서 특정 챔피언의 등장 횟수와 등장 레코드를 리턴하는 함수
