@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -516,
-    "scrollLeft": -2435,
+    "scrollTop": -488,
+    "scrollLeft": -2502,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -3839,6 +3839,29 @@
             "id": "11e4385f-af82-4076-af6c-42db6fdf659c"
           },
           {
+            "name": "game_create_time",
+            "comment": "게임 생성 시간",
+            "dataType": "NUMBER(16)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 107.73291015625,
+              "widthComment": 89.140625,
+              "widthDataType": 77.47998046875,
+              "widthDefault": 60
+            },
+            "id": "a99c96ac-6923-4fe2-986e-7b9bba364ada"
+          },
+          {
             "name": "game_id",
             "comment": "게임 id",
             "dataType": "NUMBER(12)",
@@ -3956,9 +3979,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 2165.8894,
-          "top": 513.0002,
-          "zIndex": 118,
+          "left": 2564.7783,
+          "top": 516.3335,
+          "zIndex": 158,
           "widthName": 60,
           "widthComment": 96.30078125
         },
@@ -4250,7 +4273,7 @@
           "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 127,
+          "zIndex": 157,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
