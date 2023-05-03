@@ -158,7 +158,9 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
                         dual_on_cv.append(all_col[col_idx] + '=' + str(data_frame.iloc[rec_idx][col_idx]))
                 # 숫자가 아니라면 값 내부의 ' 기호를 오라클용 이스케이프 문인 '' 기호로 변경한 뒤 좌우를 '로 감싸준다.
                 else:
-                    values.append('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\'')
+                    if str(data_frame.iloc[rec_idx][col_idx]) == 'DEFAULT':
+                        values.append(str(data_frame.iloc[rec_idx][col_idx]))
+                    else: values.append('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\'')
                     if all_col[col_idx] in pk_col:
                         dual_on_cv.append(all_col[col_idx] + '=' + ('\'' + str(data_frame.iloc[rec_idx][col_idx]).replace('\'', '\'\'') + '\''))
             except:
@@ -238,8 +240,7 @@ def convertRawDataToDTO(df: pd.DataFrame):
 # LOL API의 접속 제한을 기다리기 위한 반복 슬립 함수 (100req per 120s)
 def apiSleep(slp_time: int=120, print_msg: bool=True):
     if print_msg:
-        print('sleep until request limit recovery...')
-        iter = tqdm(range(slp_time))
+        iter = tqdm(range(slp_time), desc='api key 쿨타임 대기중...')
     else:
         iter = range(slp_time)
     for slp in iter:
@@ -498,7 +499,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame):
 
 def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
     """
-    DB에 1차 정제 데이터를 지속 삽입하는 함수
+    하나의 API Key로 DB에 1차 정제 데이터를 지속 삽입하는 함수
     """
 
     # 사이클 순환 정보를 위한 변수
@@ -513,8 +514,8 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
 
     def checkApiResult(url: str):
         """
-        request.get()의 결과가 에러인 경우 False를 반환하여
-        if가 걸린 부분의 continue 트리거를 작동시키는 autoInsert() 전용 내부 함수
+        `request.get()`의 결과에 따라서 API Key를 교체하거나 에러 메시지를 출력하고
+        에러인 경우 `False`를 리턴하여 `if`가 걸린 부분의 `continue` 트리거를 작동시키는 `autoInsert()` 전용 내부 함수
         """
         nonlocal api_nonlimit_request_count
         nonlocal api_sleep_count
@@ -524,18 +525,18 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
         try:
             while True:
                 api_nonlimit_request_count += 1
-                result = requests.get(url)
+                result = requests.get(url+riot_api_key)
 
                 # 리턴이 정상인 경우 json 형태로 리턴
                 if result.status_code == 200:
                     if is_sleep: api_sleep_count += 1
                     return result.json()
                 
-                # 리미트 초과인 경우 10초 대기 후 API 재호출
+                # 리미트 초과인 경우 10초 휴식 후 재시도
                 elif result.status_code == 429:
                     api_nonlimit_request_count -= 1
                     is_sleep = True
-                    time.sleep(10)
+                    apiSleep(10, False)
                     continue
 
                 # 만료 되었거나 불량인 API key 사용시 API key 관련 에러문 출력
@@ -587,7 +588,7 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
     rank_data_keys = ['tier', 'wins', 'losses', 'veteran', 'inactive', 'freshBlood', 'hotStreak']
 
     print(f"<<< autoInsert() 시작 >>>\
-          \nStart Time: {time.localtime}")
+          \nStart Time: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
 
     # 수동 중단시까지 무한 반복
     while True:
@@ -604,11 +605,12 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                     \n입력된 총 게임 수: {inserted_game}\
                     \nRIOT API 총 사용 횟수: {api_nonlimit_request_count}\
                     \nRIOT API 휴식 횟수: {api_sleep_count}\
-                    \nRIOT API 에러 횟수: {api_error_count}")
+                    \nRIOT API 에러 횟수: {api_error_count}\
+                    \n==============================")
 
             # 현재 랭크 티어의 'page'번째 페이지의 모든 유저 정보를 획득
-            print(f"\t{tier} {rank}의 {page}번 페이지 가져오는 중......")
-            if (summoner_page := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{rank}?page={page}&api_key={riot_api_key}")) is False: continue
+            print(f"{tier} {rank}의 {page}번 페이지 가져오는 중......")
+            if (summoner_page := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{rank}?page={page}&api_key=")) is False: continue
 
             # 가져온 페이지의 유저 수가 10명 미만이라면 현재 랭크 티어의 모든 페이지를 탐색 한것으로 간주하고 현재 랭크 티어의 page를 1로 초기화
             if len(summoner_page) < 10:
@@ -634,7 +636,10 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
             for summoner_id_idx, summoner_id in enumerate(summoner_id_list):
 
                 # 소환사 상세 정보 획득
-                if (summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/{summoner_id}?api_key={riot_api_key}")) is False: continue
+                # (summonerId로 조회하는 데이터는 가끔 []를 반환하는 경우가 있는데, 해당 유저가 블랙리스트 처리 된 것으로 추정된다.)
+                # (따라서 이러한 유저는 이 구간에서는 continue로 스킵하며 게임 데이터 내부에서 발견된 경우에만 존재하는 데이터만으로 삽입한다.)
+                if (summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/{summoner_id}?api_key=")) is False: continue
+                if summoner_detail == []: continue
                 
                 # Summoner 테이블에 필요한 일반 데이터 추출
                 summoner_normal_data = [summoner_detail[i] for i in normal_data_keys]
@@ -644,7 +649,7 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                 inserted_player += 1
 
                 # 현재 puuId로부터 가장 최근의 20게임의 matchId를 획득
-                if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key={riot_api_key}")) is False: continue
+                if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key=")) is False: continue
                 print(f"\t'{summoner_normal_data[2]}': 유저의 게임 정보 추출 및 삽입......")
                 for match_id in match_id_list:
 
@@ -655,8 +660,8 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                     
                     # 현재 matchId의 matches와 timeline을 획득
                     match_raw = {
-                        'matches': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={riot_api_key}"),
-                        'timeline': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key={riot_api_key}")}
+                        'matches': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key="),
+                        'timeline': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key=")}
                     if True in [v is False for v in match_raw.values()]: continue
 
                     # RawData 테이블 형태로 가공하여 게임 데이터 리스트에 추가
@@ -674,12 +679,24 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                     for part_puuid in match_puuid_list:
 
                         # puuid로 소환사 정보 획득
-                        if (part_summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{part_puuid}?api_key={riot_api_key}")) is False: continue
+                        if (part_summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{part_puuid}?api_key=")) is False: continue
                         part_summoner_normal_data = [part_summoner_detail[i] for i in normal_data_keys]
                         
                         # summonerId로 랭크 관련 정보 획득
-                        if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data[0]}?api_key={riot_api_key}")[0]) is False: continue
-                        part_summoner_rank_data = [part_rank_detail[i] for i in rank_data_keys]
+                        if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data[0]}?api_key=")) is False: continue
+                       
+                        # 이 유저가 솔랭에서 언랭 혹은 배치이면서 다른 랭크 데이터가 전혀 없다면 디폴트로 삽입
+                        if part_rank_detail == []:
+                            part_summoner_rank_data = ['DEFAULT' for i in rank_data_keys]
+
+                        # 이 유저가 솔랭에서 언랭 혹은 배치이면서 다른 랭크 데이터가 있다면 필요한 랭크 데이터가 없기 때문에 디폴트로 삽입
+                        elif not True in (is_solo_rank_list := [a['queueType'] == 'RANKED_SOLO_5x5' for a in part_rank_detail]):
+                            part_summoner_rank_data = ['DEFAULT' for i in rank_data_keys]
+
+                        # summonerId의 정상 여부 확인 후 솔랭 데이터만 찾기
+                        else:
+                            part_solo_rank_detail = part_rank_detail[is_solo_rank_list.index(True)]
+                            part_summoner_rank_data = [part_solo_rank_detail[i] for i in rank_data_keys]
 
                         # 랭크 관련 정보의 bool 값을 0,1로 변환
                         for idx in range(3, 7):
@@ -690,7 +707,6 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                         match_part_summoner_data_list.append(part_summoner_normal_data + part_summoner_rank_data)
                     
                     # 현재 게임의 게임 데이터와 유저 데이터 전부 확인 후 삽입
-                    ### 한 사이클 경과 후 list out of range로 터진전적이 있음. 디버그 필요...
                     if not debug: insertDataFrameIntoTable(pd.DataFrame(filterd_match_raw), 'RAWDATA', debug_print=False)
                     inserted_game += 1
                     if not debug: insertDataFrameIntoTable(pd.DataFrame(match_part_summoner_data_list, columns=summoner_table_cols), 'SUMMONER', debug_print=False)
