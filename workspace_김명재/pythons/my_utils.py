@@ -598,6 +598,7 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
             tier, rank, page = this_rank['tier'], this_rank['rank'], this_rank['page']
             
             print(f"<<< 새 랭크 티어 입력 시작 >>>\
+                    \n현재 시간: {time.strftime('%Y-%m-%d %H:%M:%S')}\
                     \n반복 횟수: {cycle_count}\
                     \n현재 랭크 티어: {tier} {rank}\
                     \n현재 페이지: {page}\
