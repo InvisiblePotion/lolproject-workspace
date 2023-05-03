@@ -485,8 +485,9 @@ def RawdataFirstFilter(rawdata: pd.DataFrame):
                         'spell4Casts': part['spell4Casts'],
                         'firstBloodKill': part['firstBloodKill'],
                         'largestKillingSpree': part['largestKillingSpree'],
-                        'largestMultiKill': part['largestMultiKill'],
-                        'earlyLaningPhaseGoldExpAdvantage': challenge['earlyLaningPhaseGoldExpAdvantage']
+                        'largestMultiKill': part['largestMultiKill']
+                        ## 230503: 이유는 몰라도 이 데이터가 없는 데이터가 있었다... 일단 제거
+                        # 'earlyLaningPhaseGoldExpAdvantage': challenge['earlyLaningPhaseGoldExpAdvantage']
                     }
                 },
                 'timeline': {
