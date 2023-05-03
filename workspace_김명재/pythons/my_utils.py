@@ -26,7 +26,7 @@ class InvaildApiKey(Exception):
 
 warnings.filterwarnings('ignore')
 
-dsn = ora.makedsn('localhost', 1521, 'xe')
+dsn = ora.makedsn('192.168.0.140', 1521, 'xe')
 
 
 db = None
@@ -37,18 +37,20 @@ seoul_api_key = None
 def db_open(debug_print: bool=False):
     global db
     global cursor
-    db = ora.connect(user='lol_data', password='1234', dsn=dsn)
+    db = ora.connect(user='PERSONLOL', password='1234', dsn=dsn)
     cursor = db.cursor()
     if debug_print: print('oracle open!')
 
 
-def oracle_execute(query: str, debug_print: bool=False):
+def oracle_execute(query: str, use_pandas: bool=True, debug_print: bool=False):
     global db
     global cursor
     try:
         if 'SELECT ' in query.upper():
-            df = pd.read_sql(sql=query, con=db)
-            return df
+            if use_pandas:
+                df = pd.read_sql(sql=query, con=db)
+                return df
+            return cursor.execute(query).fetchall()
         cursor.execute(query)
         if debug_print: print('oracle 쿼리 성공!')
         return
@@ -64,9 +66,9 @@ def oracle_close(debug_print: bool=False):
     if debug_print: print('oracle close!')
 
 
-def oracle_totalExecute(query: str, debug_print: bool=True):
+def oracle_totalExecute(query: str, use_pandas: bool=True, debug_print: bool=True):
     db_open(debug_print)
-    result = oracle_execute(query, debug_print)
+    result = oracle_execute(query, use_pandas, debug_print)
     oracle_close(debug_print)
     return result
 
@@ -118,8 +120,17 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
     
     # MERGE를 이용한 중복 검사를 위한 기본키(조합키) 검색
     if debug_print: print('>>> 테이블의 Primary Key 정보 검색 중...')
-    pk_col = [val for val in\
-              oracle_totalExecute(f"SELECT COLUMN_NAME FROM USER_CONS_COLUMNS WHERE TABLE_NAME = '{table_name}'", debug_print=False)['COLUMN_NAME']]
+
+    # 테이블의 PK 정보를 조회하는 쿼리
+    pk_col_execute = f"""
+        SELECT COLUMN_NAME
+        FROM USER_CONS_COLUMNS
+        WHERE CONSTRAINT_NAME = (SELECT CONSTRAINT_NAME
+                                 FROM ALL_CONSTRAINTS
+                                 WHERE TABLE_NAME = '{table_name}'
+                                 AND CONSTRAINT_TYPE = 'P')"""
+    pk_col = [val for val in \
+              oracle_totalExecute(pk_col_execute, debug_print=False)['COLUMN_NAME']]
     # MERGE의 UPDATE를 위해 SET 컬럼 생성
     all_col = [col.upper() for col in data_frame.columns]
     set_col = [col for col in enumerate(all_col)]
@@ -486,44 +497,93 @@ def autoInsert(riot_api_key: str, start_page: int=1):
     DB에 1차 정제 데이터를 지속 삽입하는 함수
     """
 
+    # 사이클 순환 정보를 위한 변수
+    cycle_count = 0 # 사이클 회전 수
+    inserted_player = 0 # 삽입된 Summoner 수
+    inserted_game = 0 # 삽입된 RawData 수
+
+    # API 연결 상태 디버깅용 변수
+    api_nonlimit_request_count = 0 # RIOT API의 정상 리턴이나 리미트 초과가 아닌 비정상 리턴의 횟수
+    api_sleep_count = 0 # 리미트 초과로 발생 횟수
+    api_error_count = 0 # API의 비정상 리턴 횟수
+
     def checkApiResult(url: str):
         """
-        request.get()의 결과가 에러인 경우 True를 반환하여
-        if가 걸린 부분에 continue 트리거를 작동시키는 autoInsert() 전용 내부 함수
+        request.get()의 결과가 에러인 경우 False를 반환하여
+        if가 걸린 부분의 continue 트리거를 작동시키는 autoInsert() 전용 내부 함수
         """
+        nonlocal api_nonlimit_request_count
+        nonlocal api_sleep_count
+        nonlocal api_error_count
+        is_sleep = False
+        
         try:
             while True:
+                api_nonlimit_request_count += 1
                 result = requests.get(url)
+
+                # 리턴이 정상인 경우 json 형태로 리턴
                 if result.status_code == 200:
+                    if is_sleep: api_sleep_count += 1
                     return result.json()
+                
+                # 리미트 초과인 경우 10초 대기 후 API 재호출
                 elif result.status_code == 429:
+                    api_nonlimit_request_count -= 1
+                    is_sleep = True
                     time.sleep(10)
                     continue
+
+                # 만료 되었거나 불량인 API key 사용시 API key 관련 에러문 출력
                 elif result.status_code == 403:
                     raise InvaildApiKey(result)
+                
+                # 리턴의 상태 코드가 200, 429, 403이 아닌 경우 예외로 간주하고 API 관련 에러문 출력 출력
                 else:
                     raise BadApiResult(result)
-        except Exception as e:
-            print(f"{type(e).__name__}:\n{e}")
-            return True
 
+        # 위에서 발생된 모든 예외를 캐치하여 API 관련 에러 카운트를 1 올리고 False를 리턴(continue 트리거 작동)
+        except Exception as e:
+            api_error_count += 1
+            if is_sleep: api_sleep_count += 1
+            print(f"{type(e).__name__}:\n{e}")
+            return False
+
+    # 검색 할 랭크 리스트
     rank_tier_list = [
-        {'tier': 'PLATINUM', 'rank': 'IV', 'page': start_page},
-        {'tier': 'PLATINUM', 'rank': 'III', 'page': start_page},
-        {'tier': 'PLATINUM', 'rank': 'II', 'page': start_page},
-        {'tier': 'PLATINUM', 'rank': 'I', 'page': start_page},
-        {'tier': 'DIAMOND', 'rank': 'IV', 'page': start_page},
-        {'tier': 'DIAMOND', 'rank': 'III', 'page': start_page},
-        {'tier': 'DIAMOND', 'rank': 'II', 'page': start_page},
-        {'tier': 'DIAMOND', 'rank': 'I', 'page': start_page}
+        {'tier': 'PLATINUM', 'rank': 'IV', 'page': start_page, 'pageCycle': 0},
+        {'tier': 'PLATINUM', 'rank': 'III', 'page': start_page, 'pageCycle': 0},
+        {'tier': 'PLATINUM', 'rank': 'II', 'page': start_page, 'pageCycle': 0},
+        {'tier': 'PLATINUM', 'rank': 'I', 'page': start_page, 'pageCycle': 0},
+        {'tier': 'DIAMOND', 'rank': 'IV', 'page': start_page, 'pageCycle': 0},
+        {'tier': 'DIAMOND', 'rank': 'III', 'page': start_page, 'pageCycle': 0},
+        {'tier': 'DIAMOND', 'rank': 'II', 'page': start_page, 'pageCycle': 0},
+        {'tier': 'DIAMOND', 'rank': 'I', 'page': start_page, 'pageCycle': 0}
     ]
+
+    # Summoner 테이블의 컬럼 리스트
+    summoner_table_cols = [
+        'summoner_id',
+        'summoner_puuid',
+        'summoner_name',
+        'summoner_level',
+        'summoner_profile',
+        'summoner_tier',
+        'summoner_wins',
+        'summoner_losses',
+        'summoner_veteran',
+        'summoner_inactive',
+        'summoner_freshblood',
+        'summoner_hotstreak']
+    
+    # Summoner 테이블의 일반 정보 키 리스트
+    normal_data_keys = ['id', 'puuid', 'name', 'summonerLevel', 'profileIconId']
+
+    # Summoner 테이블의 랭크 관련 정보 키 리스트
+    rank_data_keys = ['tier', 'wins', 'losses', 'veteran', 'inactive', 'freshBlood', 'hotStreak']
 
     print(f"<<< autoInsert() 시작 >>>\
           \nStart Time: {time.localtime}")
-
-    cycle_count = 0
-    inserted_player = 0
-    inserted_game = 0
 
     # 수동 중단시까지 무한 반복
     while True:
@@ -534,70 +594,102 @@ def autoInsert(riot_api_key: str, start_page: int=1):
             
             print(f"<<< 새 랭크 티어 입력 시작 >>>\
                     \n반복 횟수: {cycle_count}\
-                    \n현재 랭크 티어: {rank}{tier}\
+                    \n현재 랭크 티어: {tier} {rank}\
                     \n현재 페이지: {page}\
                     \n입력된 총 플레이어 수: {inserted_player}\
-                    \n입력된 총 게임 수: {inserted_game}")
+                    \n입력된 총 게임 수: {inserted_game}\
+                    \nRIOT API 총 사용 횟수: {api_nonlimit_request_count}\
+                    \nRIOT API 휴식 횟수: {api_sleep_count}\
+                    \nRIOT API 에러 횟수: {api_error_count}")
 
             # 현재 랭크 티어의 'page'번째 페이지의 모든 유저 정보를 획득
-            print(f"\tget SummonerId: {tier} {rank}")
-            if summoner_page := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{rank}?page={page}&api_key={riot_api_key}"): continue
+            print(f"\t{tier} {rank}의 {page}번 페이지 가져오는 중......")
+            if (summoner_page := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{rank}?page={page}&api_key={riot_api_key}")) is False: continue
 
             # 가져온 페이지의 유저 수가 10명 미만이라면 현재 랭크 티어의 모든 페이지를 탐색 한것으로 간주하고 현재 랭크 티어의 page를 1로 초기화
             if len(summoner_page) < 10:
                 print('!!! 페이지를 전부 소진한 랭크 티어 발생 !!!')
                 rank_tier_list[this_rank_idx]['page'] = 1
+                rank_tier_list[this_rank_idx]['pageCycle'] += 1
                 print(f"!!! {tier} {rank}의 page를 1로 초기화합니다. !!!")
                 continue
 
             # 가져온 페이지에서 무작위 10명을 골라 summonerId의 리스트와 Summoner 테이블에 필요한 랭크 관련 데이터 리스트를 생성
             sample_summoner = random.sample(summoner_page, 10)
             summoner_id_list = [a['summonerId'] for a in sample_summoner]
-            summoner_rank_data_list = [[a['tier'], a['rank'], a['wins'], a['losses'], a['veteran'], a['inactive'], a['freshBlood'], a['hotStreak']] for a in sample_summoner]
+            summoner_rank_data_list = [[v[i] for i in rank_data_keys] for v in sample_summoner]
+
+            # 랭크 관련 데이터의 bool 값을 0,1로 변환
+            for v in summoner_rank_data_list:
+                for i in range(3, 7):
+                    if v[i]: v[i] = 1
+                    else: v[i] = 0
 
             # 획득한 summoner_id_list로 추출 및 삽입 작업 시작
-            for summoner_id_idx, summoner_id in enumerate(tqdm(summoner_id_list, desc='\tget puuId')):
-                # 소환사 상세 정보 획득
-                if summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/{summoner_id}?api_key={riot_api_key}"): continue
-                # Summoner 테이블에 필요한 일반 데이터 추출
-                summoner_normal_data = [
-                    summoner_detail['id'],
-                    summoner_detail['puuid'],
-                    summoner_detail['name'],
-                    summoner_detail['summonerLevel'],
-                    summoner_detail['profileIconId']
-                ]
+            print(f"페이지의 유저 데이터 추출 및 삽입......")
+            for summoner_id_idx, summoner_id in enumerate(summoner_id_list):
 
-                # Summoner 테이블 갱신
-                insertDataFrameIntoTable(pd.DataFrame(summoner_normal_data + summoner_rank_data_list[summoner_id_idx]), 'SUMMONER', debug_print=False)
+                # 소환사 상세 정보 획득
+                if (summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/{summoner_id}?api_key={riot_api_key}")) is False: continue
+                
+                # Summoner 테이블에 필요한 일반 데이터 추출
+                summoner_normal_data = [summoner_detail[i] for i in normal_data_keys]
+                
+                # 소환사 정보로 Summoner 테이블 갱신
+                insertDataFrameIntoTable(pd.DataFrame([summoner_normal_data + summoner_rank_data_list[summoner_id_idx]], columns=summoner_table_cols), 'SUMMONER', debug_print=False)
+                inserted_player += 1
 
                 # 현재 puuId로부터 가장 최근의 20게임의 matchId를 획득
-                if match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key={riot_api_key}"): continue
+                if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key={riot_api_key}")) is False: continue
+                print(f"\t'{summoner_normal_data[2]}': 유저의 게임 정보 추출 및 삽입......")
                 for match_id in match_id_list:
+                    
                     # RawData 테이블에 현재 match_id가 이미 존재한다면 리스트에서 제거 후 continue
-                    if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = {match_id}"):
+                    if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = '{match_id}'", use_pandas=False, debug_print=False)[0]:
                         match_id_list.remove(match_id)
                         continue
+                    
                     # 현재 matchId의 matches와 timeline을 획득
-                    raw = [
-                        checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={riot_api_key}"),
-                        checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key={riot_api_key}")]
-                    if True in raw: continue
-                    # RawData 테이블 형태로 가공하여 RawData 테이블에 삽입
-                    filterd_rawdata = RawdataFirstFilter(pd.DataFrame([raw], columns=['matches','timeline']))
-                    insertDataFrameIntoTable(pd.DataFrame(filterd_rawdata), 'RAWDATA', debug_print=False)
+                    match_raw = {
+                        'matches': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={riot_api_key}"),
+                        'timeline': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key={riot_api_key}")}
+                    ### 문제 발생: 이 부분에서 반드시 continue 트리거가 작동됨.
+                    if True in [v is False for v in match_raw.values()]: continue
+
+                    # RawData 테이블 형태로 가공하여 게임 데이터 리스트에 추가
+                    filterd_match_raw = RawdataFirstFilter(pd.DataFrame([match_raw]))
 
                     # 현재 게임에 참가중인 모든 플레이어의 puuid 추출후 중복을 방지하기 위해 현재 유저만 제거
-                    match_puuid_list = raw[0]['metadata']['participants']
+                    match_puuid_list = match_raw[0]['metadata']['participants']
                     match_puuid_list.remove(summoner_normal_data[1])
-                    ### 230502:
-                    ### 여기서부터 'match_puuid_list'로 소환사 정보를 검색 후 검색된 summonerId로 랭크 정보를 검색.
-                    ### 검색된 각 데이터로부터 Summoner 테이블의 형태에 맞는 데이터를 추출하여 insertDataFrameIntoTable() 사용해 삽입
-                    ### 이후 실행해보고 이 함수의 기능들 함수화 하여 분리하기
 
+                    # 현재 게임의 소환사 데이터 저장용 리스트
+                    match_part_summoner_data_list = []
+
+                    # 현재 게임에서 9명의 puuid로 Summoner 테이블에 필요한 정보를 추출 및 삽입
+                    print(f"\t\t'{match_id}': 게임 참여자의 유저 정보 추출 및 삽입......")
+                    for part_puuid in match_puuid_list:
+
+                        # puuid로 소환사 정보 획득
+                        if (part_summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{part_puuid}?api_key={riot_api_key}")) is False: continue
+                        part_summoner_normal_data = [part_summoner_detail[i] for i in normal_data_keys]
+                        
+                        # summonerId로 랭크 관련 정보 획득
+                        if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data['id']}?api_key={riot_api_key}")[0]) is False: continue
+                        part_summoner_rank_data = [part_rank_detail[i] for i in rank_data_keys]
+
+                        # 9명의 정보를 현재 게임의 소환사 정보 리스트에 추가
+                        match_part_summoner_data_list.append(part_summoner_normal_data + part_summoner_rank_data)
+                    
+                    # 현재 게임의 게임 데이터와 유저 데이터 전부 확인 후 삽입
+                    insertDataFrameIntoTable(pd.DataFrame(filterd_match_raw), 'RAWDATA', debug_print=False)
+                    inserted_game += 1
+                    insertDataFrameIntoTable(pd.DataFrame(match_part_summoner_data_list, columns=summoner_table_cols), 'SUMMONER', debug_print=False)
+                    inserted_player += len(match_part_summoner_data_list)
+
+            # 매 사이클 종료시 변수 후처리
             rank_tier_list[this_rank_idx]['page'] += 1
-
-
+            cycle_count += 1
 
 
 # getRawdata() 함수로 만들어진 데이터프레임 안에서 특정 챔피언의 등장 횟수와 등장 레코드를 리턴하는 함수
