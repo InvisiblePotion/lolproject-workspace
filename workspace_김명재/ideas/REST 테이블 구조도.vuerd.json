@@ -4267,36 +4267,13 @@
               "widthDefault": 60
             },
             "id": "92e379f4-a8d2-48e8-9195-7bacddacdc0f"
-          },
-          {
-            "name": "summoner_blacklist",
-            "comment": "블랙리스트 상태",
-            "dataType": "NUMBER(1)",
-            "default": "0",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 117.4130859375,
-              "widthComment": 97.5703125,
-              "widthDataType": 70.31982421875,
-              "widthDefault": 60
-            },
-            "id": "73cd9a92-987b-4b70-9507-2c584e68947d"
           }
         ],
         "ui": {
           "active": true,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 53,
+          "zIndex": 54,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
