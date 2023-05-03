@@ -10,6 +10,9 @@ pom.properties
 .classpath
 MANIFEST.MF
 
+### workspace_김명재 ###
+apiKeyList.json
+
 ### Spring ###
 /Personlol_Project/src/main/webapp/resources/
 
