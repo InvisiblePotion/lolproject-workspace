@@ -136,10 +136,15 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
     set_col = [col for col in enumerate(all_col)]
     for pcol in pk_col:
         set_col.remove((all_col.index(pcol), pcol))
-    
+
+    db_open(debug_print=False)
     # 데이터 삽입 시작
-    if debug_print: print('>>> 테이블에 데이터 삽입 중...')
-    for rec_idx in tqdm(range(len(data_frame))):
+    if debug_print:
+        print('>>> 테이블에 데이터 삽입 중...')
+        table_iter = tqdm(range(len(data_frame)))
+    else:
+        table_iter = range(len(data_frame))
+    for rec_idx in table_iter:
         values = []
         dual_on_cv = []
 
@@ -178,7 +183,6 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
                 set_val.append(f"{sc[1]}={values[sc[0]]}")
             execute += ', '.join(set_val)
         # print(execute)
-        db_open(debug_print=False)
         oracle_execute(execute)
     oracle_close(debug_print=False)
     if debug_print: print('>>> 처리 완료!')
@@ -492,13 +496,13 @@ def RawdataFirstFilter(rawdata: pd.DataFrame):
     return result
 
 
-def autoInsert(riot_api_key: str, start_page: int=1):
+def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
     """
     DB에 1차 정제 데이터를 지속 삽입하는 함수
     """
 
     # 사이클 순환 정보를 위한 변수
-    cycle_count = 0 # 사이클 회전 수
+    cycle_count = 1 # 사이클 회전 수
     inserted_player = 0 # 삽입된 Summoner 수
     inserted_game = 0 # 삽입된 RawData 수
 
@@ -636,16 +640,16 @@ def autoInsert(riot_api_key: str, start_page: int=1):
                 summoner_normal_data = [summoner_detail[i] for i in normal_data_keys]
                 
                 # 소환사 정보로 Summoner 테이블 갱신
-                insertDataFrameIntoTable(pd.DataFrame([summoner_normal_data + summoner_rank_data_list[summoner_id_idx]], columns=summoner_table_cols), 'SUMMONER', debug_print=False)
+                if not debug: insertDataFrameIntoTable(pd.DataFrame([summoner_normal_data + summoner_rank_data_list[summoner_id_idx]], columns=summoner_table_cols), 'SUMMONER', debug_print=False)
                 inserted_player += 1
 
                 # 현재 puuId로부터 가장 최근의 20게임의 matchId를 획득
                 if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key={riot_api_key}")) is False: continue
                 print(f"\t'{summoner_normal_data[2]}': 유저의 게임 정보 추출 및 삽입......")
                 for match_id in match_id_list:
-                    
+
                     # RawData 테이블에 현재 match_id가 이미 존재한다면 리스트에서 제거 후 continue
-                    if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = '{match_id}'", use_pandas=False, debug_print=False)[0]:
+                    if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = '{match_id}'", use_pandas=False, debug_print=False)[0][0]:
                         match_id_list.remove(match_id)
                         continue
                     
@@ -653,14 +657,13 @@ def autoInsert(riot_api_key: str, start_page: int=1):
                     match_raw = {
                         'matches': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={riot_api_key}"),
                         'timeline': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key={riot_api_key}")}
-                    ### 문제 발생: 이 부분에서 반드시 continue 트리거가 작동됨.
                     if True in [v is False for v in match_raw.values()]: continue
 
                     # RawData 테이블 형태로 가공하여 게임 데이터 리스트에 추가
                     filterd_match_raw = RawdataFirstFilter(pd.DataFrame([match_raw]))
 
                     # 현재 게임에 참가중인 모든 플레이어의 puuid 추출후 중복을 방지하기 위해 현재 유저만 제거
-                    match_puuid_list = match_raw[0]['metadata']['participants']
+                    match_puuid_list = match_raw['matches']['metadata']['participants']
                     match_puuid_list.remove(summoner_normal_data[1])
 
                     # 현재 게임의 소환사 데이터 저장용 리스트
@@ -675,16 +678,22 @@ def autoInsert(riot_api_key: str, start_page: int=1):
                         part_summoner_normal_data = [part_summoner_detail[i] for i in normal_data_keys]
                         
                         # summonerId로 랭크 관련 정보 획득
-                        if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data['id']}?api_key={riot_api_key}")[0]) is False: continue
+                        if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data[0]}?api_key={riot_api_key}")[0]) is False: continue
                         part_summoner_rank_data = [part_rank_detail[i] for i in rank_data_keys]
+
+                        # 랭크 관련 정보의 bool 값을 0,1로 변환
+                        for idx in range(3, 7):
+                            if part_summoner_rank_data[idx]: part_summoner_rank_data[idx] = 1
+                            else: part_summoner_rank_data[idx] = 0
 
                         # 9명의 정보를 현재 게임의 소환사 정보 리스트에 추가
                         match_part_summoner_data_list.append(part_summoner_normal_data + part_summoner_rank_data)
                     
                     # 현재 게임의 게임 데이터와 유저 데이터 전부 확인 후 삽입
-                    insertDataFrameIntoTable(pd.DataFrame(filterd_match_raw), 'RAWDATA', debug_print=False)
+                    ### 한 사이클 경과 후 list out of range로 터진전적이 있음. 디버그 필요...
+                    if not debug: insertDataFrameIntoTable(pd.DataFrame(filterd_match_raw), 'RAWDATA', debug_print=False)
                     inserted_game += 1
-                    insertDataFrameIntoTable(pd.DataFrame(match_part_summoner_data_list, columns=summoner_table_cols), 'SUMMONER', debug_print=False)
+                    if not debug: insertDataFrameIntoTable(pd.DataFrame(match_part_summoner_data_list, columns=summoner_table_cols), 'SUMMONER', debug_print=False)
                     inserted_player += len(match_part_summoner_data_list)
 
             # 매 사이클 종료시 변수 후처리
