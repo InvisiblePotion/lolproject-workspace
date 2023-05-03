@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -491,
-    "scrollLeft": -2548,
+    "scrollTop": -507,
+    "scrollLeft": -2998,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -3978,10 +3978,10 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 2564.7783,
-          "top": 516.3335,
-          "zIndex": 48,
+          "top": 517.4446,
+          "zIndex": 52,
           "widthName": 60,
           "widthComment": 96.30078125
         },
@@ -4267,13 +4267,36 @@
               "widthDefault": 60
             },
             "id": "92e379f4-a8d2-48e8-9195-7bacddacdc0f"
+          },
+          {
+            "name": "summoner_blacklist",
+            "comment": "블랙리스트 상태",
+            "dataType": "NUMBER(1)",
+            "default": "0",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 117.4130859375,
+              "widthComment": 97.5703125,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "73cd9a92-987b-4b70-9507-2c584e68947d"
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 39,
+          "zIndex": 53,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
