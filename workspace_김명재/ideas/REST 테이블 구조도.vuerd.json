@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -488,
-    "scrollLeft": -2502,
+    "scrollTop": -491,
+    "scrollLeft": -2548,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -74,7 +74,7 @@
           "active": false,
           "left": 3100.9998,
           "top": 1966.3335,
-          "zIndex": 18,
+          "zIndex": 16,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -229,7 +229,7 @@
           "active": false,
           "left": 3743.5551,
           "top": 2029.8879,
-          "zIndex": 35,
+          "zIndex": 30,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -614,7 +614,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 22,
+          "zIndex": 20,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -769,7 +769,7 @@
           "active": false,
           "left": 3741.5021,
           "top": 2735.5005,
-          "zIndex": 21,
+          "zIndex": 19,
           "widthName": 87.515625,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1016,7 +1016,7 @@
           "active": false,
           "left": 3741.8115,
           "top": 2947.2548,
-          "zIndex": 19,
+          "zIndex": 17,
           "widthName": 126.76318359375,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -1372,7 +1372,7 @@
           "active": false,
           "left": 4090.5,
           "top": 1082.411,
-          "zIndex": 25,
+          "zIndex": 21,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1434,7 +1434,7 @@
           "active": false,
           "left": 4416.75,
           "top": 1413.3833,
-          "zIndex": 26,
+          "zIndex": 22,
           "widthName": 90.2197265625,
           "widthComment": 60
         },
@@ -1565,7 +1565,7 @@
           "active": false,
           "left": 4218.75,
           "top": 767.7722,
-          "zIndex": 41,
+          "zIndex": 32,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1742,7 +1742,7 @@
           "active": false,
           "left": 4394.5322,
           "top": 2363.2663,
-          "zIndex": 27,
+          "zIndex": 23,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -1851,7 +1851,7 @@
           "active": false,
           "left": 4390.1322,
           "top": 2137.4663,
-          "zIndex": 32,
+          "zIndex": 28,
           "widthName": 60,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -1983,7 +1983,7 @@
           "active": false,
           "left": 4394.8,
           "top": 2613.1333,
-          "zIndex": 31,
+          "zIndex": 27,
           "widthName": 65.49560546875,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2138,7 +2138,7 @@
           "active": false,
           "left": 3093.2224,
           "top": 2262.733,
-          "zIndex": 28,
+          "zIndex": 24,
           "widthName": 71.10693359375,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2362,7 +2362,7 @@
           "active": false,
           "left": 3092.2239,
           "top": 2569.6431,
-          "zIndex": 29,
+          "zIndex": 25,
           "widthName": 67.0126953125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2540,7 +2540,7 @@
           "active": false,
           "left": 3089.332,
           "top": 2898.3334,
-          "zIndex": 36,
+          "zIndex": 31,
           "widthName": 68.1298828125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2718,7 +2718,7 @@
           "active": false,
           "left": 4387.6,
           "top": 3143.9333,
-          "zIndex": 30,
+          "zIndex": 26,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -3562,7 +3562,7 @@
           "active": false,
           "left": 3743.7333,
           "top": 4036.6674,
-          "zIndex": 20,
+          "zIndex": 18,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -3803,7 +3803,7 @@
           "active": false,
           "left": 4370.6665,
           "top": 3809.3337,
-          "zIndex": 33,
+          "zIndex": 29,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -3864,12 +3864,12 @@
           {
             "name": "game_id",
             "comment": "게임 id",
-            "dataType": "NUMBER(12)",
+            "dataType": "VARCHAR(16)",
             "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": true,
-              "unique": true,
+              "unique": false,
               "notNull": true
             },
             "ui": {
@@ -3879,7 +3879,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 77.47998046875,
+              "widthDataType": 82.1328125,
               "widthDefault": 60
             },
             "id": "66edac00-16b9-48ce-92f0-c2cceed52792"
@@ -3978,10 +3978,10 @@
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 2564.7783,
           "top": 516.3335,
-          "zIndex": 158,
+          "zIndex": 48,
           "widthName": 60,
           "widthComment": 96.30078125
         },
@@ -4273,7 +4273,7 @@
           "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 157,
+          "zIndex": 39,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -4355,7 +4355,7 @@
           "active": false,
           "left": 2616.8055555555566,
           "top": 1857.3111111111243,
-          "zIndex": 17,
+          "zIndex": 15,
           "width": 370.2000000000013,
           "height": 146.3999999999999,
           "color": "#2B1919"
@@ -4404,7 +4404,7 @@
           "active": false,
           "left": 3336.022222222211,
           "top": 428.39999999999225,
-          "zIndex": 126,
+          "zIndex": 33,
           "width": 422.20000000000033,
           "height": 100
         },
