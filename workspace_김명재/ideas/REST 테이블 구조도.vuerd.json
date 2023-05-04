@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -507,
-    "scrollLeft": -2998,
+    "scrollTop": -683,
+    "scrollLeft": -3734,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -1565,7 +1565,7 @@
           "active": false,
           "left": 4218.75,
           "top": 767.7722,
-          "zIndex": 32,
+          "zIndex": 33,
           "widthName": 60,
           "widthComment": 60
         },
@@ -3931,6 +3931,29 @@
             "id": "38663c15-61e9-4f76-bc5a-48c5d25a4d41"
           },
           {
+            "name": "api_key",
+            "comment": "API Key",
+            "dataType": "VARCHAR(50)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "59e02ae7-9b0c-4ff9-b5d3-96f13b7cc11f"
+          },
+          {
             "name": "matches",
             "comment": "게임 종합 데이터",
             "dataType": "VARCHAR(3000)",
@@ -3979,9 +4002,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 2564.7783,
-          "top": 517.4446,
-          "zIndex": 52,
+          "left": 2670.3337,
+          "top": 836.3336,
+          "zIndex": 36,
           "widthName": 60,
           "widthComment": 96.30078125
         },
@@ -4037,6 +4060,29 @@
               "widthDefault": 60
             },
             "id": "5df4d6c4-1440-460e-a3fd-ced1b2138fec"
+          },
+          {
+            "name": "api_key",
+            "comment": "API Key",
+            "dataType": "VARCHAR(50)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "fe033db5-0ce6-48f6-8d03-9c5ddb7976ed"
           },
           {
             "name": "summoner_name",
@@ -4270,16 +4316,78 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 54,
+          "zIndex": 34,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
         },
         "visible": true,
         "id": "0439bf5a-3210-4934-b822-e51384110f45"
+      },
+      {
+        "name": "ApiKey",
+        "comment": "API Key 목록",
+        "columns": [
+          {
+            "name": "api_key",
+            "comment": "API Key",
+            "dataType": "VARCHAR(50)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "1648e08a-9cca-4116-8b91-a8f0c7da782d"
+          },
+          {
+            "name": "key_holder",
+            "comment": "소유자 이름",
+            "dataType": "NVARCHAR2(4)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 65.0830078125,
+              "widthComment": 71.5703125,
+              "widthDataType": 92.07958984375,
+              "widthDefault": 60
+            },
+            "id": "ecc2ab36-5e25-441e-8ec3-201401de66ec"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 3381.3331,
+          "top": 1013.8881,
+          "zIndex": 35,
+          "widthName": 60,
+          "widthComment": 77.47998046875
+        },
+        "visible": true,
+        "id": "86767753-be6a-41c8-88f2-1c6b13a43bbd"
       }
     ],
     "indexes": []
@@ -4404,7 +4512,7 @@
           "active": false,
           "left": 3336.022222222211,
           "top": 428.39999999999225,
-          "zIndex": 33,
+          "zIndex": 32,
           "width": 422.20000000000033,
           "height": 100
         },
@@ -5583,6 +5691,58 @@
         "constraintName": "fk_duo_to_user",
         "visible": true,
         "id": "0d4418cc-c0bf-40bf-aa17-1fd2e728152f"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "86767753-be6a-41c8-88f2-1c6b13a43bbd",
+          "columnIds": [
+            "1648e08a-9cca-4116-8b91-a8f0c7da782d"
+          ],
+          "x": 3602.699555078125,
+          "y": 1013.8881,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "0439bf5a-3210-4934-b822-e51384110f45",
+          "columnIds": [
+            "fe033db5-0ce6-48f6-8d03-9c5ddb7976ed"
+          ],
+          "x": 3600.320166015625,
+          "y": 865.1,
+          "direction": "bottom"
+        },
+        "constraintName": "fk_apikey_to_summoner",
+        "visible": true,
+        "id": "3cae0547-eb4f-41f5-8290-cf9a6ddbe5b0"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "86767753-be6a-41c8-88f2-1c6b13a43bbd",
+          "columnIds": [
+            "1648e08a-9cca-4116-8b91-a8f0c7da782d"
+          ],
+          "x": 3381.3331,
+          "y": 1068.8881000000001,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "0fa1db98-d049-4f8e-97f9-ca4ede62bdb0",
+          "columnIds": [
+            "59e02ae7-9b0c-4ff9-b5d3-96f13b7cc11f"
+          ],
+          "x": 3199.0837,
+          "y": 952.8336,
+          "direction": "right"
+        },
+        "constraintName": "fk_apikey_to_rawdata",
+        "visible": true,
+        "id": "9ec9655d-1120-4bd5-9efb-fb48df515ff5"
       }
     ]
   }
