@@ -503,7 +503,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
     return result
 
 
-def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: bool=False):
+def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: bool=False, use_tqdm: bool=False, thread_no: int=1):
     """
     하나의 API Key로 DB에 1차 정제 데이터를 지속 삽입하는 함수
     """
@@ -531,8 +531,8 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
         nonlocal api_error_count
         is_sleep = False
         
-        try:
-            while True:
+        while True:
+            try:
                 api_nonlimit_request_count += 1
                 result = requests.get(url+riot_api_key)
 
@@ -555,13 +555,16 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                 # 리턴의 상태 코드가 200, 429, 403이 아닌 경우 예외로 간주하고 API 관련 에러문 출력 출력
                 else:
                     raise BadApiResult(result)
+                    
+            except requests.exceptions.ConnectionError as e:
+                time.sleep(5)
 
-        # 위에서 발생된 모든 예외를 캐치하여 API 관련 에러 카운트를 1 올리고 False를 리턴(continue 트리거 작동)
-        except Exception as e:
-            api_error_count += 1
-            if is_sleep: api_sleep_count += 1
-            print(f"{type(e).__name__}:\n{e}")
-            return False
+            # 위에서 발생된 모든 예외를 캐치하여 API 관련 에러 카운트를 1 올리고 False를 리턴(continue 트리거 작동)
+            except Exception as e:
+                api_error_count += 1
+                if is_sleep: api_sleep_count += 1
+                print(f"{type(e).__name__}:\n{e}")
+                return False
 
     # 검색 할 랭크 리스트
     rank_tier_list = [
@@ -599,25 +602,34 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
 
     print(f"<<< autoInsert() 시작 >>>\
           \nStart Time: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-
+    
     # 수동 중단시까지 무한 반복
     while True:
 
         # 현재 rank_tier_list의 모든 랭크 티어를 순환
         for this_rank_idx, this_rank in enumerate(rank_tier_list):
+
+            # 안전 종료 대기 시간 30초
+            print(f"=========== 종료 안전 시점 ===========")
+            for safe_time in tqdm(range(30)): time.sleep(1)
+            print("=========== 다음 사이클 실행 ===========")
+
             tier, rank, page = this_rank['tier'], this_rank['rank'], this_rank['page']
+
+            # if use_tqdm: progress = tqdm(total=10, desc=f"Thread {thread_no}")
             
-            print(f"<<< 새 랭크 티어 입력 시작 >>>\
-                    \n현재 시간: {time.strftime('%Y-%m-%d %H:%M:%S')}\
-                    \n반복 횟수: {cycle_count}\
-                    \n현재 랭크 티어: {tier} {rank}\
-                    \n현재 페이지: {page}\
-                    \n입력된 총 플레이어 수: {inserted_player}\
-                    \n입력된 총 게임 수: {inserted_game}\
-                    \nRIOT API 총 사용 횟수: {api_nonlimit_request_count}\
-                    \nRIOT API 휴식 횟수: {api_sleep_count}\
-                    \nRIOT API 에러 횟수: {api_error_count}\
-                    \n==============================")
+            if use_tqdm: pass
+            else: print(f"<<< 새 랭크 티어 입력 시작 >>>\
+                        \n현재 시간: {time.strftime('%Y-%m-%d %H:%M:%S')}\
+                        \n반복 횟수: {cycle_count}\
+                        \n현재 랭크 티어: {tier} {rank}\
+                        \n현재 페이지: {page}\
+                        \n입력된 총 플레이어 수: {inserted_player}\
+                        \n입력된 총 게임 수: {inserted_game}\
+                        \nRIOT API 총 사용 횟수: {api_nonlimit_request_count}\
+                        \nRIOT API 휴식 횟수: {api_sleep_count}\
+                        \nRIOT API 에러 횟수: {api_error_count}\
+                        \n==============================")
 
             # 현재 랭크 티어의 'page'번째 페이지의 모든 유저 정보를 획득
             print(f"{tier} {rank}의 {page}번 페이지 가져오는 중......")
@@ -691,7 +703,8 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
 
                     # 가공된 데이터가 비정상일 경우 continue
                     if filterd_match_raw.__class__ is not list:
-                        logging.error({"errorType": "missingGameData", "apiKey": riot_api_key, "dataType": "Exception", "data": str(f"{filterd_match_raw.__class__.__name__}({filterd_match_raw})")})
+                        logging.error({"errorType": "missingGameData", "apiKey": riot_api_key, "dataType": "dict",
+                                       "data": {"error": str(f"{filterd_match_raw.__class__.__name__}({filterd_match_raw})"), "matchId": match_id}})
                         continue
 
                     # 현재 게임에 참가중인 모든 플레이어의 puuid 추출후 중복을 방지하기 위해 현재 유저만 제거
