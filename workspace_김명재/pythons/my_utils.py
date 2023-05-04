@@ -521,16 +521,6 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
     api_sleep_count = 0 # 리미트 초과로 발생 횟수
     api_error_count = 0 # API의 비정상 리턴 횟수
 
-
-    def safeTimeSleeper():
-        """
-        매 정각마다 호출되어 안전한 종료를 위해 최대 2분간 휴식하는 함수
-        """
-        cur_time = int(time.time())
-        for safe_time in tqdm(range(120 - cur_time), total=120, initial=cur_time, desc=f"{thread_no}번 스레드 안전 종료 대기"):
-            time.sleep(1)
-
-
     def checkApiResult(url: str):
         """
         `request.get()`의 결과에 따라서 API Key를 교체하거나 에러 메시지를 출력하고
@@ -543,7 +533,6 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
         
         while True:
             try:
-                if (int(time.time()) % 3600) <= 120: safeTimeSleeper()
                 api_nonlimit_request_count += 1
                 result = requests.get(url+riot_api_key)
 
@@ -576,7 +565,6 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                 if is_sleep: api_sleep_count += 1
                 print(f"{type(e).__name__}:\n{e}")
                 return False
-
 
     # 검색 할 랭크 리스트
     rank_tier_list = [
@@ -621,12 +609,16 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
         # 현재 rank_tier_list의 모든 랭크 티어를 순환
         for this_rank_idx, this_rank in enumerate(rank_tier_list):
 
+            # 안전 종료 대기 시간 30초
+            print(f"=========== 종료 안전 시점 ===========")
+            for safe_time in tqdm(range(30)): time.sleep(1)
+            print("=========== 다음 사이클 실행 ===========")
+
             tier, rank, page = this_rank['tier'], this_rank['rank'], this_rank['page']
+
+            # if use_tqdm: progress = tqdm(total=10, desc=f"Thread {thread_no}")
             
-            ### 여기부터 수정
-            if use_tqdm: progress = tqdm(total=100)
-            ###
-            
+            if use_tqdm: pass
             else: print(f"<<< 새 랭크 티어 입력 시작 >>>\
                         \n현재 시간: {time.strftime('%Y-%m-%d %H:%M:%S')}\
                         \n반복 횟수: {cycle_count}\
@@ -640,19 +632,18 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                         \n==============================")
 
             # 현재 랭크 티어의 'page'번째 페이지의 모든 유저 정보를 획득
-            if not use_tqdm: print(f"{tier} {rank}의 {page}번 페이지 가져오는 중......")
+            print(f"{tier} {rank}의 {page}번 페이지 가져오는 중......")
             if (summoner_page := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{rank}?page={page}&api_key=")) is False:
                 logging.error({"errorType": 'rankPage', "apiKey": riot_api_key, "dataType": "str", "data": f"{tier} {rank}: {page}page"})
                 continue
 
             # 가져온 페이지의 유저 수가 10명 미만이라면 현재 랭크 티어의 모든 페이지를 탐색 한것으로 간주하고 현재 랭크 티어의 page를 1로 초기화
-            if not use_tqdm:
-                if len(summoner_page) < 10:
-                    print('!!! 페이지를 전부 소진한 랭크 티어 발생 !!!')
-                    rank_tier_list[this_rank_idx]['page'] = 1
-                    rank_tier_list[this_rank_idx]['pageCycle'] += 1
-                    print(f"!!! {tier} {rank}의 page를 1로 초기화합니다. !!!")
-                    continue
+            if len(summoner_page) < 10:
+                print('!!! 페이지를 전부 소진한 랭크 티어 발생 !!!')
+                rank_tier_list[this_rank_idx]['page'] = 1
+                rank_tier_list[this_rank_idx]['pageCycle'] += 1
+                print(f"!!! {tier} {rank}의 page를 1로 초기화합니다. !!!")
+                continue
 
             # 가져온 페이지에서 무작위 10명을 골라 summonerId의 리스트와 Summoner 테이블에 필요한 랭크 관련 데이터 리스트를 생성
             sample_summoner = random.sample(summoner_page, 10)
@@ -666,7 +657,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                     else: v[i] = 0
 
             # 획득한 summoner_id_list로 추출 및 삽입 작업 시작
-            if not use_tqdm: print(f"페이지의 유저 데이터 추출 및 삽입......")
+            print(f"페이지의 유저 데이터 추출 및 삽입......")
             for summoner_id_idx, summoner_id in enumerate(summoner_id_list):
 
                 # 소환사 상세 정보 획득
@@ -691,7 +682,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                 if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key=")) is False:
                     logging.error({"errorType": "apiMatchId", "apiKey": riot_api_key, "dataType": "puuId", "data": summoner_normal_data[1]})
                     continue
-                if not use_tqdm: print(f"\t'{summoner_normal_data[3]}': 유저의 게임 정보 추출 및 삽입......")
+                print(f"\t'{summoner_normal_data[3]}': 유저의 게임 정보 추출 및 삽입......")
                 for match_id in match_id_list:
 
                     # RawData 테이블에 현재 match_id가 이미 존재한다면 리스트에서 제거 후 continue
