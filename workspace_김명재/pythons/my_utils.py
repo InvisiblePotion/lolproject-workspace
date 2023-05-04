@@ -365,7 +365,7 @@ def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
     return pd.DataFrame(df_create, columns=['match_id','matches','timeline'])
 
 
-def RawdataFirstFilter(rawdata: pd.DataFrame):
+def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
     """
     RawData를 1차 정제 형태로 변환해주는 함수
     """
@@ -386,6 +386,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame):
                     'game_id': game['matches']['metadata']['matchId'],
                     'participant_number': part['participantId'],
                     'participant_puuid': part['puuid'],
+                    'api_key': api_key,
                     'matches': {
                         'game': {
                             'gameCreation': matches['gameCreation'],
@@ -578,6 +579,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
     summoner_table_cols = [
         'summoner_id',
         'summoner_puuid',
+        'api_key',
         'summoner_name',
         'summoner_level',
         'summoner_profile',
@@ -658,6 +660,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                 
                 # Summoner 테이블에 필요한 일반 데이터 추출
                 summoner_normal_data = [summoner_detail[i] for i in normal_data_keys]
+                summoner_normal_data.insert(2, riot_api_key)
                 
                 # 소환사 정보로 Summoner 테이블 갱신
                 if not debug: insertDataFrameIntoTable(pd.DataFrame([summoner_normal_data + summoner_rank_data_list[summoner_id_idx]], columns=summoner_table_cols), 'SUMMONER', debug_print=False)
@@ -667,7 +670,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                 if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key=")) is False:
                     logging.error({"errorType": "apiMatchId", "apiKey": riot_api_key, "dataType": "puuId", "data": summoner_normal_data[1]})
                     continue
-                print(f"\t'{summoner_normal_data[2]}': 유저의 게임 정보 추출 및 삽입......")
+                print(f"\t'{summoner_normal_data[3]}': 유저의 게임 정보 추출 및 삽입......")
                 for match_id in match_id_list:
 
                     # RawData 테이블에 현재 match_id가 이미 존재한다면 리스트에서 제거 후 continue
@@ -684,7 +687,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                         continue
 
                     # RawData 테이블 형태로 가공하여 저장
-                    filterd_match_raw = RawdataFirstFilter(pd.DataFrame([match_raw]))
+                    filterd_match_raw = RawdataFirstFilter(pd.DataFrame([match_raw]), riot_api_key)
 
                     # 가공된 데이터가 비정상일 경우 continue
                     if filterd_match_raw.__class__ is not list:
@@ -707,6 +710,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                             logging.error({"errorType": "apiSummonerData", "apiKey": riot_api_key, "dataType": "puuId", "data": part_puuid})
                             continue
                         part_summoner_normal_data = [part_summoner_detail[i] for i in normal_data_keys]
+                        part_summoner_normal_data.insert(2, riot_api_key)
                         
                         # summonerId로 랭크 관련 정보 획득
                         if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data[0]}?api_key=")) is False:
