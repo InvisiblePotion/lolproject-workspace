@@ -688,7 +688,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
 
                     # 가공된 데이터가 비정상일 경우 continue
                     if filterd_match_raw.__class__ is not list:
-                        logging.error({"errorType": "missingGameData", "apiKey": riot_api_key, "dataType": "Exception", "data": filterd_match_raw})
+                        logging.error({"errorType": "missingGameData", "apiKey": riot_api_key, "dataType": "Exception", "data": str(f"{filterd_match_raw.__class__.__name__}({filterd_match_raw})")})
                         continue
 
                     # 현재 게임에 참가중인 모든 플레이어의 puuid 추출후 중복을 방지하기 위해 현재 유저만 제거
