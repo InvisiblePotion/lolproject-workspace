@@ -9,7 +9,12 @@ target
 pom.properties
 .classpath
 MANIFEST.MF
-Servers2/
+
+### workspace_김명재 ###
+apiKeyList.json
+
+### Spring ###
+/Personlol_Project/src/main/webapp/resources/
 
 ### VSCode ###
 settings.json
