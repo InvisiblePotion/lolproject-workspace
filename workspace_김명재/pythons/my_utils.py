@@ -9,6 +9,7 @@ from PIL import Image
 from io import BytesIO
 import numpy as np
 import warnings
+import logging
 
 
 class BadApiResult(Exception):
@@ -369,139 +370,145 @@ def RawdataFirstFilter(rawdata: pd.DataFrame):
     RawData를 1차 정제 형태로 변환해주는 함수
     """
     result = []
-    for game in rawdata.iloc:
-        for i in range(10):
-            matches = game['matches']['info']
-            part = matches['participants'][i]
-            challenge = part['challenges']
-            # timeline에서 어떤 데이터를 뽑을지 아직 미정
-            # timeline = rawdata['timeline']['info']
-            # frames = timeline['frames']
+    try:
+        for game in rawdata.iloc:
+            for i in range(10):
+                matches = game['matches']['info']
+                part = matches['participants'][i]
+                challenge = part['challenges']
+                # timeline에서 어떤 데이터를 뽑을지 아직 미정
+                # timeline = rawdata['timeline']['info']
+                # frames = timeline['frames']
 
-            each_part = {
-                'version': matches['gameVersion'],
-                'game_create_time': matches['gameCreation'],
-                'game_id': game['matches']['metadata']['matchId'],
-                'participant_number': part['participantId'],
-                'participant_puuid': part['puuid'],
-                'matches': {
-                    'game': {
-                        'gameCreation': matches['gameCreation'],
-                        'gameStartTimestamp': matches['gameStartTimestamp'],
-                        'gameEndTimestamp': matches['gameEndTimestamp'],
-                        'gameDuration': matches['gameDuration'],
-                        'gameVersion': matches['gameVersion'],
-                        'queueId': matches['queueId'],
-                        'bans': matches['teams'][0]['bans'] + matches['teams'][1]['bans']
+                each_part = {
+                    'version': matches['gameVersion'],
+                    'game_create_time': matches['gameCreation'],
+                    'game_id': game['matches']['metadata']['matchId'],
+                    'participant_number': part['participantId'],
+                    'participant_puuid': part['puuid'],
+                    'matches': {
+                        'game': {
+                            'gameCreation': matches['gameCreation'],
+                            'gameStartTimestamp': matches['gameStartTimestamp'],
+                            'gameEndTimestamp': matches['gameEndTimestamp'],
+                            'gameDuration': matches['gameDuration'],
+                            'gameVersion': matches['gameVersion'],
+                            'queueId': matches['queueId'],
+                            'bans': matches['teams'][0]['bans'] + matches['teams'][1]['bans']
+                        },
+                        'summoner': {
+                            'summonerName': part['summonerName'],
+                            'summonerLevel': part['summonerLevel'],
+                            'summonerId': part['summonerId'],
+                            'puuid': part['puuid']
+                        },
+                        'champion': {
+                            'championId': part['championId'],
+                            'championName': part['championName'],
+                            'champLevel': part['champLevel'],
+                            'lane': part['lane'],
+                            'individualPosition': part['individualPosition'],
+                            'teamPosition': part['teamPosition'],
+                            'teamId': part['teamId'],
+                            'win': part['win']
+                        },
+                        'spell': {
+                            'summoner1Id': part['summoner1Id'],
+                            'summoner2Id': part['summoner2Id']
+                        },
+                        'rune': {
+                            'runePrimaryStyle': part['perks']['styles'][0]['style'],
+                            'runeCorePerk': part['perks']['styles'][0]['selections'][0]['perk'],
+                            'runePrimaryPerk1': part['perks']['styles'][0]['selections'][1]['perk'],
+                            'runePrimaryPerk2': part['perks']['styles'][0]['selections'][2]['perk'],
+                            'runePrimaryPerk3': part['perks']['styles'][0]['selections'][3]['perk'],
+                            'runeSubStyle': part['perks']['styles'][1]['style'],
+                            'runeSubPerk1': part['perks']['styles'][1]['selections'][0]['perk'],
+                            'runeSubPerk2': part['perks']['styles'][1]['selections'][1]['perk'],
+                            'runeShardOffense': part['perks']['statPerks']['offense'],
+                            'runeShardFlex': part['perks']['statPerks']['flex'],
+                            'runeShardDefense': part['perks']['statPerks']['defense']
+                        },
+                        'item': {
+                            'item0': part['item0'],
+                            'item1': part['item1'],
+                            'item2': part['item2'],
+                            'item3': part['item3'],
+                            'item4': part['item4'],
+                            'item5': part['item5'],
+                            'item6': part['item6']
+                        },
+                        'kda': {
+                            'kills': part['kills'],
+                            'deaths': part['deaths'],
+                            'assists': part['assists'],
+                            'kda': challenge['kda'],
+                            'killParticipation': challenge['killParticipation']
+                        },
+                        'gold': {
+                            'bountyLevel': part['bountyLevel'],
+                            'bountyGold': challenge['bountyGold'],
+                            'goldEarned': part['goldEarned'],
+                            'goldPerMinute': challenge['goldPerMinute']
+                        },
+                        'cs': {
+                            'totalMinionsKilled': part['totalMinionsKilled'],
+                            'laneMinionsFirst10Minutes': challenge['laneMinionsFirst10Minutes']
+                        },
+                        'turret': {
+                            'turretTakedowns': challenge['turretTakedowns'],
+                            'turretPlatesTaken': challenge['turretPlatesTaken']
+                        },
+                        'damage': {
+                            'teamDamagePercentage': challenge['teamDamagePercentage'],
+                            'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
+                            'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
+                            'magicDamageDealtToChampions': part['magicDamageDealtToChampions'],
+                            'trueDamageDealtToChampions': part['trueDamageDealtToChampions'],
+                            'damageDealtToBuildings': part['damageDealtToBuildings'],
+                            'damageDealtToObjectives': part['damageDealtToObjectives'],
+                            'totalDamageTaken': part['totalDamageTaken'],
+                            'physicalDamageTaken':part['physicalDamageTaken'],
+                            'magicDamageTaken': part['magicDamageTaken'],
+                            'trueDamageTaken': part['trueDamageTaken'],
+                            'totalHeal': part['totalHeal'],
+                            'totalHealsOnTeammates': part['totalHealsOnTeammates']
+                        },
+                        'vision': {
+                            'visionScore': part['visionScore'],
+                            'wardsPlaced': part['wardsPlaced'],
+                            'controlWardsPlaced': challenge['controlWardsPlaced'],
+                            'wardsKilled': part['wardsKilled']
+                        },
+                        'etc': {
+                            'spell1Casts': part['spell1Casts'],
+                            'spell2Casts': part['spell2Casts'],
+                            'spell3Casts': part['spell3Casts'],
+                            'spell4Casts': part['spell4Casts'],
+                            'firstBloodKill': part['firstBloodKill'],
+                            'largestKillingSpree': part['largestKillingSpree'],
+                            'largestMultiKill': part['largestMultiKill']
+                            ## 230503: 이유는 몰라도 이 데이터가 없는 데이터가 있었다... 일단 제거
+                            # 'earlyLaningPhaseGoldExpAdvantage': challenge['earlyLaningPhaseGoldExpAdvantage']
+                        }
                     },
-                    'summoner': {
-                        'summonerName': part['summonerName'],
-                        'summonerLevel': part['summonerLevel'],
-                        'summonerId': part['summonerId'],
-                        'puuid': part['puuid']
-                    },
-                    'champion': {
-                        'championId': part['championId'],
-                        'championName': part['championName'],
-                        'champLevel': part['champLevel'],
-                        'lane': part['lane'],
-                        'individualPosition': part['individualPosition'],
-                        'teamPosition': part['teamPosition'],
-                        'teamId': part['teamId'],
-                        'win': part['win']
-                    },
-                    'spell': {
-                        'summoner1Id': part['summoner1Id'],
-                        'summoner2Id': part['summoner2Id']
-                    },
-                    'rune': {
-                        'runePrimaryStyle': part['perks']['styles'][0]['style'],
-                        'runeCorePerk': part['perks']['styles'][0]['selections'][0]['perk'],
-                        'runePrimaryPerk1': part['perks']['styles'][0]['selections'][1]['perk'],
-                        'runePrimaryPerk2': part['perks']['styles'][0]['selections'][2]['perk'],
-                        'runePrimaryPerk3': part['perks']['styles'][0]['selections'][3]['perk'],
-                        'runeSubStyle': part['perks']['styles'][1]['style'],
-                        'runeSubPerk1': part['perks']['styles'][1]['selections'][0]['perk'],
-                        'runeSubPerk2': part['perks']['styles'][1]['selections'][1]['perk'],
-                        'runeShardOffense': part['perks']['statPerks']['offense'],
-                        'runeShardFlex': part['perks']['statPerks']['flex'],
-                        'runeShardDefense': part['perks']['statPerks']['defense']
-                    },
-                    'item': {
-                        'item0': part['item0'],
-                        'item1': part['item1'],
-                        'item2': part['item2'],
-                        'item3': part['item3'],
-                        'item4': part['item4'],
-                        'item5': part['item5'],
-                        'item6': part['item6']
-                    },
-                    'kda': {
-                        'kills': part['kills'],
-                        'deaths': part['deaths'],
-                        'assists': part['assists'],
-                        'kda': challenge['kda'],
-                        'killParticipation': challenge['killParticipation']
-                    },
-                    'gold': {
-                        'bountyLevel': part['bountyLevel'],
-                        'bountyGold': challenge['bountyGold'],
-                        'goldEarned': part['goldEarned'],
-                        'goldPerMinute': challenge['goldPerMinute']
-                    },
-                    'cs': {
-                        'totalMinionsKilled': part['totalMinionsKilled'],
-                        'laneMinionsFirst10Minutes': challenge['laneMinionsFirst10Minutes']
-                    },
-                    'turret': {
-                        'turretTakedowns': challenge['turretTakedowns'],
-                        'turretPlatesTaken': challenge['turretPlatesTaken']
-                    },
-                    'damage': {
-                        'teamDamagePercentage': challenge['teamDamagePercentage'],
-                        'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
-                        'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
-                        'magicDamageDealtToChampions': part['magicDamageDealtToChampions'],
-                        'trueDamageDealtToChampions': part['trueDamageDealtToChampions'],
-                        'damageDealtToBuildings': part['damageDealtToBuildings'],
-                        'damageDealtToObjectives': part['damageDealtToObjectives'],
-                        'totalDamageTaken': part['totalDamageTaken'],
-                        'physicalDamageTaken':part['physicalDamageTaken'],
-                        'magicDamageTaken': part['magicDamageTaken'],
-                        'trueDamageTaken': part['trueDamageTaken'],
-                        'totalHeal': part['totalHeal'],
-                        'totalHealsOnTeammates': part['totalHealsOnTeammates']
-                    },
-                    'vision': {
-                        'visionScore': part['visionScore'],
-                        'wardsPlaced': part['wardsPlaced'],
-                        'controlWardsPlaced': challenge['controlWardsPlaced'],
-                        'wardsKilled': part['wardsKilled']
-                    },
-                    'etc': {
-                        'spell1Casts': part['spell1Casts'],
-                        'spell2Casts': part['spell2Casts'],
-                        'spell3Casts': part['spell3Casts'],
-                        'spell4Casts': part['spell4Casts'],
-                        'firstBloodKill': part['firstBloodKill'],
-                        'largestKillingSpree': part['largestKillingSpree'],
-                        'largestMultiKill': part['largestMultiKill']
-                        ## 230503: 이유는 몰라도 이 데이터가 없는 데이터가 있었다... 일단 제거
-                        # 'earlyLaningPhaseGoldExpAdvantage': challenge['earlyLaningPhaseGoldExpAdvantage']
+                    'timeline': {
+                        '제조 필요!': '어떤 정보를 넣을지 의논 필요'
                     }
-                },
-                'timeline': {
-                    '제조 필요!': '어떤 정보를 넣을지 의논 필요'
                 }
-            }
-            result.append(each_part)
+                result.append(each_part)
+    except Exception as e:
+        return e
     return result
 
 
-def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
+def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: bool=False):
     """
     하나의 API Key로 DB에 1차 정제 데이터를 지속 삽입하는 함수
     """
+
+    # 로깅
+    logging.basicConfig(filename=logging_path, encoding='utf-8', level=logging.ERROR)
 
     # 사이클 순환 정보를 위한 변수
     cycle_count = 1 # 사이클 회전 수
@@ -612,7 +619,9 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
 
             # 현재 랭크 티어의 'page'번째 페이지의 모든 유저 정보를 획득
             print(f"{tier} {rank}의 {page}번 페이지 가져오는 중......")
-            if (summoner_page := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{rank}?page={page}&api_key=")) is False: continue
+            if (summoner_page := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{rank}?page={page}&api_key=")) is False:
+                logging.error({"errorType": 'rankPage', "apiKey": riot_api_key, "dataType": "str", "data": f"{tier} {rank}: {page}page"})
+                continue
 
             # 가져온 페이지의 유저 수가 10명 미만이라면 현재 랭크 티어의 모든 페이지를 탐색 한것으로 간주하고 현재 랭크 티어의 page를 1로 초기화
             if len(summoner_page) < 10:
@@ -640,8 +649,12 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                 # 소환사 상세 정보 획득
                 # (summonerId로 조회하는 데이터는 가끔 []를 반환하는 경우가 있는데, 해당 유저가 블랙리스트 처리 된 것으로 추정된다.)
                 # (따라서 이러한 유저는 이 구간에서는 continue로 스킵하며 게임 데이터 내부에서 발견된 경우에만 존재하는 데이터만으로 삽입한다.)
-                if (summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/{summoner_id}?api_key=")) is False: continue
-                if summoner_detail == []: continue
+                if (summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/{summoner_id}?api_key=")) is False:
+                    logging.error({"errorType": "apiSummonerData", "apiKey": riot_api_key, "dataType": "summonerId", "data": summoner_id})
+                    continue
+                if summoner_detail == []:
+                    logging.error({"errorType": "summonerBlackListed", "apiKey": riot_api_key, "dataType": "summonerId", "data": summoner_id})
+                    continue
                 
                 # Summoner 테이블에 필요한 일반 데이터 추출
                 summoner_normal_data = [summoner_detail[i] for i in normal_data_keys]
@@ -651,7 +664,9 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                 inserted_player += 1
 
                 # 현재 puuId로부터 가장 최근의 20게임의 matchId를 획득
-                if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key=")) is False: continue
+                if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key=")) is False:
+                    logging.error({"errorType": "apiMatchId", "apiKey": riot_api_key, "dataType": "puuId", "data": summoner_normal_data[1]})
+                    continue
                 print(f"\t'{summoner_normal_data[2]}': 유저의 게임 정보 추출 및 삽입......")
                 for match_id in match_id_list:
 
@@ -664,10 +679,17 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                     match_raw = {
                         'matches': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key="),
                         'timeline': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key=")}
-                    if True in [v is False for v in match_raw.values()]: continue
+                    if True in [v is False for v in match_raw.values()]:
+                        logging.error({"errorType": "apiMatchData", "apiKey": riot_api_key, "dataType": "matchId", "data": match_id})
+                        continue
 
-                    # RawData 테이블 형태로 가공하여 게임 데이터 리스트에 추가
+                    # RawData 테이블 형태로 가공하여 저장
                     filterd_match_raw = RawdataFirstFilter(pd.DataFrame([match_raw]))
+
+                    # 가공된 데이터가 비정상일 경우 continue
+                    if filterd_match_raw.__class__ is not list:
+                        logging.error({"errorType": "missingGameData", "apiKey": riot_api_key, "dataType": "Exception", "data": filterd_match_raw})
+                        continue
 
                     # 현재 게임에 참가중인 모든 플레이어의 puuid 추출후 중복을 방지하기 위해 현재 유저만 제거
                     match_puuid_list = match_raw['matches']['metadata']['participants']
@@ -681,11 +703,15 @@ def autoInsert(riot_api_key: str, start_page: int=1, debug: bool=False):
                     for part_puuid in match_puuid_list:
 
                         # puuid로 소환사 정보 획득
-                        if (part_summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{part_puuid}?api_key=")) is False: continue
+                        if (part_summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{part_puuid}?api_key=")) is False:
+                            logging.error({"errorType": "apiSummonerData", "apiKey": riot_api_key, "dataType": "puuId", "data": part_puuid})
+                            continue
                         part_summoner_normal_data = [part_summoner_detail[i] for i in normal_data_keys]
                         
                         # summonerId로 랭크 관련 정보 획득
-                        if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data[0]}?api_key=")) is False: continue
+                        if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data[0]}?api_key=")) is False:
+                            logging.error({"errorType": "apiSummonerRankData", "apiKey": riot_api_key, "dataType": "summonerId", "data": part_summoner_normal_data[0]})
+                            continue
                        
                         # 이 유저가 솔랭에서 언랭 혹은 배치이면서 다른 랭크 데이터가 전혀 없다면 디폴트로 삽입
                         if part_rank_detail == []:
