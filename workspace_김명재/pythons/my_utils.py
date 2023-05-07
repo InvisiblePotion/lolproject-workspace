@@ -624,20 +624,21 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
             tier, rank, page = this_rank['tier'], this_rank['rank'], this_rank['page']
             
             ### 여기부터 수정
-            if use_tqdm: progress = tqdm(total=100)
+            # if use_tqdm: progress = tqdm(total=100)
             ###
             
-            else: print(f"<<< 새 랭크 티어 입력 시작 >>>\
-                        \n현재 시간: {time.strftime('%Y-%m-%d %H:%M:%S')}\
-                        \n반복 횟수: {cycle_count}\
-                        \n현재 랭크 티어: {tier} {rank}\
-                        \n현재 페이지: {page}\
-                        \n입력된 총 플레이어 수: {inserted_player}\
-                        \n입력된 총 게임 수: {inserted_game}\
-                        \nRIOT API 총 사용 횟수: {api_nonlimit_request_count}\
-                        \nRIOT API 휴식 횟수: {api_sleep_count}\
-                        \nRIOT API 에러 횟수: {api_error_count}\
-                        \n==============================")
+            # else: 
+            print(f"<<< 새 랭크 티어 입력 시작 >>>\
+                \n현재 시간: {time.strftime('%Y-%m-%d %H:%M:%S')}\
+                \n반복 횟수: {cycle_count}\
+                \n현재 랭크 티어: {tier} {rank}\
+                \n현재 페이지: {page}\
+                \n입력된 총 플레이어 수: {inserted_player}\
+                \n입력된 총 게임 수: {inserted_game}\
+                \nRIOT API 총 사용 횟수: {api_nonlimit_request_count}\
+                \nRIOT API 휴식 횟수: {api_sleep_count}\
+                \nRIOT API 에러 횟수: {api_error_count}\
+                \n==============================")
 
             # 현재 랭크 티어의 'page'번째 페이지의 모든 유저 정보를 획득
             if not use_tqdm: print(f"{tier} {rank}의 {page}번 페이지 가져오는 중......")
