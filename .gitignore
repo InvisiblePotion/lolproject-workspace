@@ -98,6 +98,9 @@ local.properties
 # Log file
 *.log
 
+# python cache
+*.pyc
+
 # BlueJ files
 *.ctxt
 
