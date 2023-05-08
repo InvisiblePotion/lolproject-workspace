@@ -369,6 +369,21 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
     """
     RawData를 1차 정제 형태로 변환해주는 함수
     """
+
+    legend_items = [
+        3003,3004,3011,3026,3031,3033,3036,3040,3041,3042,
+        3046,3050,3053,3065,3068,3071,3072,3074,3075,3083,
+        3085,3089,3091,3094,3095,3100,3102,3107,3109,3110,
+        3115,3116,3119,3121,3124,3135,3139,3142,3143,3153,
+        3156,3157,3161,3165,3179,3181,3193,3222,3504,3508,
+        3742,3748,3814,4401,4628,4629,4637,4645,6035,6333,
+        6609,6616,6664,6675,6676,6694,6695,6696,8001,8020]
+    
+    mythic_items = [
+        2065,3001,3078,3084,3152,3190,4005,4633,4636,4644,
+        6617,6630,6631,6632,6653,6655,6656,6657,6662,6665,
+        6667,6671,6672,6673,6691,6692,6693]
+
     result = []
     try:
         for game in rawdata.iloc:
@@ -412,7 +427,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                             'individualPosition': part['individualPosition'],
                             'teamPosition': part['teamPosition'],
                             'teamId': part['teamId'],
-                            'win': part['win']
+                            'win': str(part['win']) # bool
                         },
                         'spell': {
                             'summoner1Id': part['summoner1Id'],
@@ -441,7 +456,9 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                             'item3': part['item3'],
                             'item4': part['item4'],
                             'item5': part['item5'],
-                            'item6': part['item6']
+                            'item6': part['item6'],
+                            'itemTree': list(filter(lambda x: x in legend_items + mythic_items,
+                                [a['itemId'] for a in eventExtractor(game, 'ITEM_PURCHASED', part_num+1)]))[:3]
                         },
                         'kda': {
                             'kills': part['kills'],
@@ -490,7 +507,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                             'spell2Casts': part['spell2Casts'],
                             'spell3Casts': part['spell3Casts'],
                             'spell4Casts': part['spell4Casts'],
-                            'firstBloodKill': part['firstBloodKill'],
+                            'firstBloodKill': str(part['firstBloodKill']), # bool
                             'largestKillingSpree': part['largestKillingSpree'],
                             'largestMultiKill': part['largestMultiKill']
                         }
@@ -833,8 +850,12 @@ def findChampInRawData(raw_data: pd.DataFrame, champ_name: str='', champ_id: int
 
 
 ##### << 예외 처리 구문 작성 필요! >> #####
-def eventExtractor(raw_data_series: pd.Series, event_type: str, part_number: int):
-    return list(filter(lambda evt: ((evt['type']==event_type) and evt['participantId']==part_number),\
+def eventExtractor(raw_data_series: pd.Series, event_type: str, part_number: int=0):
+    if part_number == 0:
+        return list(filter(lambda evt: ((evt['type']==event_type)),\
+            sum([fr['events'] for fr in [ti for ti in raw_data_series['timeline']['info']['frames']]], [])))
+    else:
+        return list(filter(lambda evt: ((evt['type']==event_type) and evt['participantId']==part_number),\
             sum([fr['events'] for fr in [ti for ti in raw_data_series['timeline']['info']['frames']]], [])))
 
 
