@@ -372,13 +372,14 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
     result = []
     try:
         for game in rawdata.iloc:
-            for i in range(10):
+            for part_num in range(10):
                 matches = game['matches']['info']
-                part = matches['participants'][i]
+                part = matches['participants'][part_num]
                 challenge = part['challenges']
+
                 # timeline에서 어떤 데이터를 뽑을지 아직 미정
-                # timeline = rawdata['timeline']['info']
-                # frames = timeline['frames']
+                timeline = rawdata['timeline']['info']
+                frames = timeline['frames']
 
                 each_part = {
                     'version': matches['gameVersion'],
@@ -416,6 +417,9 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'spell': {
                             'summoner1Id': part['summoner1Id'],
                             'summoner2Id': part['summoner2Id']
+                        },
+                        'skill': {
+                            'skillTree': eventExtractor(game, 'SKILL_LEVEL_UP', part_num)
                         },
                         'rune': {
                             'runePrimaryStyle': part['perks']['styles'][0]['style'],
@@ -489,8 +493,6 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                             'firstBloodKill': part['firstBloodKill'],
                             'largestKillingSpree': part['largestKillingSpree'],
                             'largestMultiKill': part['largestMultiKill']
-                            ## 230503: 이유는 몰라도 이 데이터가 없는 데이터가 있었다... 일단 제거
-                            # 'earlyLaningPhaseGoldExpAdvantage': challenge['earlyLaningPhaseGoldExpAdvantage']
                         }
                     },
                     'timeline': {
@@ -831,8 +833,8 @@ def findChampInRawData(raw_data: pd.DataFrame, champ_name: str='', champ_id: int
 
 
 ##### << 예외 처리 구문 작성 필요! >> #####
-def eventExtractor(raw_data_series: pd.Series, event_type: str):
-    return list(filter(lambda evt: (evt['type']==event_type),\
+def eventExtractor(raw_data_series: pd.Series, event_type: str, part_number: int):
+    return list(filter(lambda evt: ((evt['type']==event_type) and evt['participantId']==part_number),\
             sum([fr['events'] for fr in [ti for ti in raw_data_series['timeline']['info']['frames']]], [])))
 
 
