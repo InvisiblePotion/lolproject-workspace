@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -2341,
-    "scrollLeft": -2847,
+    "scrollTop": -1987,
+    "scrollLeft": -2619,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -74,7 +74,7 @@
           "active": false,
           "left": 3100.9998,
           "top": 1966.3335,
-          "zIndex": 18,
+          "zIndex": 16,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -229,7 +229,7 @@
           "active": false,
           "left": 3743.5551,
           "top": 2029.8879,
-          "zIndex": 90,
+          "zIndex": 30,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -614,7 +614,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 23,
+          "zIndex": 20,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -769,7 +769,7 @@
           "active": false,
           "left": 3741.5021,
           "top": 2735.5005,
-          "zIndex": 22,
+          "zIndex": 19,
           "widthName": 87.515625,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1016,7 +1016,7 @@
           "active": false,
           "left": 3741.8115,
           "top": 2947.2548,
-          "zIndex": 19,
+          "zIndex": 17,
           "widthName": 126.76318359375,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -1372,7 +1372,7 @@
           "active": false,
           "left": 4090.5,
           "top": 1082.411,
-          "zIndex": 26,
+          "zIndex": 21,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1434,7 +1434,7 @@
           "active": false,
           "left": 4416.75,
           "top": 1413.3833,
-          "zIndex": 27,
+          "zIndex": 22,
           "widthName": 90.2197265625,
           "widthComment": 60
         },
@@ -1442,7 +1442,7 @@
         "id": "e92c01e5-cf04-4511-b71f-a9fffa3961b2"
       },
       {
-        "name": "USER",
+        "name": "",
         "comment": "유저",
         "columns": [
           {
@@ -1565,7 +1565,7 @@
           "active": false,
           "left": 4218.75,
           "top": 767.7722,
-          "zIndex": 25,
+          "zIndex": 33,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1742,7 +1742,7 @@
           "active": false,
           "left": 4394.5322,
           "top": 2363.2663,
-          "zIndex": 29,
+          "zIndex": 23,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -1851,7 +1851,7 @@
           "active": false,
           "left": 4390.1322,
           "top": 2137.4663,
-          "zIndex": 35,
+          "zIndex": 28,
           "widthName": 60,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -1983,7 +1983,7 @@
           "active": false,
           "left": 4394.8,
           "top": 2613.1333,
-          "zIndex": 34,
+          "zIndex": 27,
           "widthName": 65.49560546875,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2138,7 +2138,7 @@
           "active": false,
           "left": 3093.2224,
           "top": 2262.733,
-          "zIndex": 30,
+          "zIndex": 24,
           "widthName": 71.10693359375,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2362,7 +2362,7 @@
           "active": false,
           "left": 3092.2239,
           "top": 2569.6431,
-          "zIndex": 31,
+          "zIndex": 25,
           "widthName": 67.0126953125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2540,7 +2540,7 @@
           "active": false,
           "left": 3089.332,
           "top": 2898.3334,
-          "zIndex": 92,
+          "zIndex": 31,
           "widthName": 68.1298828125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2718,7 +2718,7 @@
           "active": false,
           "left": 4387.6,
           "top": 3143.9333,
-          "zIndex": 33,
+          "zIndex": 26,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -3562,7 +3562,7 @@
           "active": false,
           "left": 3743.7333,
           "top": 4036.6674,
-          "zIndex": 20,
+          "zIndex": 18,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -3803,13 +3803,213 @@
           "active": false,
           "left": 4370.6665,
           "top": 3809.3337,
-          "zIndex": 36,
+          "zIndex": 29,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
         },
         "visible": true,
         "id": "30be9c99-dae4-4563-a3b5-16eb7d866a3d"
+      },
+      {
+        "name": "RawData",
+        "comment": "1차 가공 데이터",
+        "columns": [
+          {
+            "name": "version",
+            "comment": "게임 버전",
+            "dataType": "VARCHAR(30)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "11e4385f-af82-4076-af6c-42db6fdf659c"
+          },
+          {
+            "name": "game_create_time",
+            "comment": "게임 생성 시간",
+            "dataType": "NUMBER(16)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 107.73291015625,
+              "widthComment": 89.140625,
+              "widthDataType": 77.47998046875,
+              "widthDefault": 60
+            },
+            "id": "a99c96ac-6923-4fe2-986e-7b9bba364ada"
+          },
+          {
+            "name": "game_id",
+            "comment": "게임 id",
+            "dataType": "VARCHAR(16)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "66edac00-16b9-48ce-92f0-c2cceed52792"
+          },
+          {
+            "name": "participant_number",
+            "comment": "참여자 번호",
+            "dataType": "NUMBER(2)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 116.15625,
+              "widthComment": 71.5703125,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "09ba139b-6fac-4aa0-b8a1-98d0044ac0d7"
+          },
+          {
+            "name": "participant_puuid",
+            "comment": "참여자 puuid",
+            "dataType": "VARCHAR(100)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 104.19091796875,
+              "widthComment": 79.43505859375,
+              "widthDataType": 89.29296875,
+              "widthDefault": 60
+            },
+            "id": "38663c15-61e9-4f76-bc5a-48c5d25a4d41"
+          },
+          {
+            "name": "api_key",
+            "comment": "API Key",
+            "dataType": "VARCHAR(50)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "59e02ae7-9b0c-4ff9-b5d3-96f13b7cc11f"
+          },
+          {
+            "name": "matches",
+            "comment": "게임 종합 데이터",
+            "dataType": "VARCHAR(3000)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 102.140625,
+              "widthDataType": 96.453125,
+              "widthDefault": 60
+            },
+            "id": "908ddba3-7444-4269-84a9-e6535394efad"
+          },
+          {
+            "name": "timeline",
+            "comment": "시간대별 데이터",
+            "dataType": "VARCHAR(200)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 97.5703125,
+              "widthDataType": 89.29296875,
+              "widthDefault": 60
+            },
+            "id": "f615a715-9c74-4792-9346-2e5016f5bd79"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 2670.3337,
+          "top": 836.3336,
+          "zIndex": 36,
+          "widthName": 60,
+          "widthComment": 96.30078125
+        },
+        "visible": true,
+        "id": "0fa1db98-d049-4f8e-97f9-ca4ede62bdb0"
       },
       {
         "name": "Summoner",
@@ -3860,6 +4060,29 @@
               "widthDefault": 60
             },
             "id": "5df4d6c4-1440-460e-a3fd-ced1b2138fec"
+          },
+          {
+            "name": "api_key",
+            "comment": "API Key",
+            "dataType": "VARCHAR(50)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "fe033db5-0ce6-48f6-8d03-9c5ddb7976ed"
           },
           {
             "name": "summoner_name",
@@ -3952,29 +4175,6 @@
               "widthDefault": 60
             },
             "id": "a0c4b560-5076-41e8-8880-1bfebce58dd2"
-          },
-          {
-            "name": "summoner_rank",
-            "comment": "랭크 단계",
-            "dataType": "NUMBER(1)",
-            "default": "0",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 95.86279296875,
-              "widthComment": 60,
-              "widthDataType": 70.31982421875,
-              "widthDefault": 60
-            },
-            "id": "9cc5d26c-b00a-46e1-8a07-9c23bfa8b5b2"
           },
           {
             "name": "summoner_wins",
@@ -4119,7 +4319,7 @@
           "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 16,
+          "zIndex": 34,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -4128,18 +4328,18 @@
         "id": "0439bf5a-3210-4934-b822-e51384110f45"
       },
       {
-        "name": "RawData",
-        "comment": "1차 가공 데이터",
+        "name": "ApiKey",
+        "comment": "API Key 목록",
         "columns": [
           {
-            "name": "version",
-            "comment": "게임 버전",
-            "dataType": "VARCHAR(30)",
+            "name": "api_key",
+            "comment": "API Key",
+            "dataType": "VARCHAR(50)",
             "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": true,
-              "unique": false,
+              "unique": true,
               "notNull": true
             },
             "ui": {
@@ -4152,149 +4352,42 @@
               "widthDataType": 82.1328125,
               "widthDefault": 60
             },
-            "id": "11e4385f-af82-4076-af6c-42db6fdf659c"
+            "id": "1648e08a-9cca-4116-8b91-a8f0c7da782d"
           },
           {
-            "name": "game_id",
-            "comment": "게임 id",
-            "dataType": "NUMBER(12)",
+            "name": "key_holder",
+            "comment": "소유자 이름",
+            "dataType": "NVARCHAR2(4)",
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": true,
+              "primaryKey": false,
               "unique": false,
-              "notNull": true
+              "notNull": false
             },
             "ui": {
               "active": false,
-              "pk": true,
+              "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 77.47998046875,
-              "widthDefault": 60
-            },
-            "id": "66edac00-16b9-48ce-92f0-c2cceed52792"
-          },
-          {
-            "name": "participant_number",
-            "comment": "참여자 번호",
-            "dataType": "NUMBER(2)",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": true,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 116.15625,
+              "widthName": 65.0830078125,
               "widthComment": 71.5703125,
-              "widthDataType": 70.31982421875,
+              "widthDataType": 92.07958984375,
               "widthDefault": 60
             },
-            "id": "09ba139b-6fac-4aa0-b8a1-98d0044ac0d7"
-          },
-          {
-            "name": "participant_puuid",
-            "comment": "참여자 puuid",
-            "dataType": "VARCHAR(100)",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 104.19091796875,
-              "widthComment": 79.43505859375,
-              "widthDataType": 89.29296875,
-              "widthDefault": 60
-            },
-            "id": "38663c15-61e9-4f76-bc5a-48c5d25a4d41"
-          },
-          {
-            "name": "matches",
-            "comment": "게임 종합 데이터",
-            "dataType": "VARCHAR(3000)",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 102.140625,
-              "widthDataType": 96.453125,
-              "widthDefault": 60
-            },
-            "id": "908ddba3-7444-4269-84a9-e6535394efad"
-          },
-          {
-            "name": "timeline",
-            "comment": "시간대별 데이터",
-            "dataType": "VARCHAR(200)",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 97.5703125,
-              "widthDataType": 89.29296875,
-              "widthDefault": 60
-            },
-            "id": "f615a715-9c74-4792-9346-2e5016f5bd79"
+            "id": "ecc2ab36-5e25-441e-8ec3-201401de66ec"
           }
         ],
         "ui": {
           "active": false,
-          "left": 2164.7783,
-          "top": 470.7782,
-          "zIndex": 83,
+          "left": 3381.3331,
+          "top": 1013.8881,
+          "zIndex": 35,
           "widthName": 60,
-          "widthComment": 96.30078125
+          "widthComment": 77.47998046875
         },
         "visible": true,
-        "id": "0fa1db98-d049-4f8e-97f9-ca4ede62bdb0"
-      },
-      {
-        "name": "",
-        "comment": "",
-        "columns": [],
-        "ui": {
-          "active": false,
-          "left": 2850.5554,
-          "top": 718.5557,
-          "zIndex": 24,
-          "widthName": 60,
-          "widthComment": 60
-        },
-        "visible": true,
-        "id": "1ff40320-eda3-4fe0-8a04-ebcca825aafd"
+        "id": "86767753-be6a-41c8-88f2-1c6b13a43bbd"
       }
     ],
     "indexes": []
@@ -4370,7 +4463,7 @@
           "active": false,
           "left": 2616.8055555555566,
           "top": 1857.3111111111243,
-          "zIndex": 17,
+          "zIndex": 15,
           "width": 370.2000000000013,
           "height": 146.3999999999999,
           "color": "#2B1919"
@@ -4417,9 +4510,9 @@
         "value": "id는 46~47자, puuid는 78자로 확인되었으나 혹시 모르니 넓게 잡음.\n\n랭크 단계는 I~IV 단계가 없는 티어의 경우 0으로 표기",
         "ui": {
           "active": false,
-          "left": 3333.799999999989,
+          "left": 3336.022222222211,
           "top": 428.39999999999225,
-          "zIndex": 15,
+          "zIndex": 32,
           "width": 422.20000000000033,
           "height": 100
         },
@@ -5598,6 +5691,58 @@
         "constraintName": "fk_duo_to_user",
         "visible": true,
         "id": "0d4418cc-c0bf-40bf-aa17-1fd2e728152f"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "86767753-be6a-41c8-88f2-1c6b13a43bbd",
+          "columnIds": [
+            "1648e08a-9cca-4116-8b91-a8f0c7da782d"
+          ],
+          "x": 3602.699555078125,
+          "y": 1013.8881,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "0439bf5a-3210-4934-b822-e51384110f45",
+          "columnIds": [
+            "fe033db5-0ce6-48f6-8d03-9c5ddb7976ed"
+          ],
+          "x": 3600.320166015625,
+          "y": 865.1,
+          "direction": "bottom"
+        },
+        "constraintName": "fk_apikey_to_summoner",
+        "visible": true,
+        "id": "3cae0547-eb4f-41f5-8290-cf9a6ddbe5b0"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "86767753-be6a-41c8-88f2-1c6b13a43bbd",
+          "columnIds": [
+            "1648e08a-9cca-4116-8b91-a8f0c7da782d"
+          ],
+          "x": 3381.3331,
+          "y": 1068.8881000000001,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "0fa1db98-d049-4f8e-97f9-ca4ede62bdb0",
+          "columnIds": [
+            "59e02ae7-9b0c-4ff9-b5d3-96f13b7cc11f"
+          ],
+          "x": 3199.0837,
+          "y": 952.8336,
+          "direction": "right"
+        },
+        "constraintName": "fk_apikey_to_rawdata",
+        "visible": true,
+        "id": "9ec9655d-1120-4bd5-9efb-fb48df515ff5"
       }
     ]
   }
