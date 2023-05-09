@@ -423,7 +423,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                 challenge = part['challenges']
 
                 # timeline에서 어떤 데이터를 뽑을지 아직 미정
-                timeline = game['timeline']['info']
+                # timeline = game['timeline']['info']
                 # frames = timeline['frames']
 
                 each_part = {
