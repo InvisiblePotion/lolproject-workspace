@@ -32,8 +32,8 @@ class WrongParticipantNumber(Exception):
 
 warnings.filterwarnings('ignore')
 
-# dsn = ora.makedsn('192.168.0.140', 1521, 'xe')
-dsn = ora.makedsn('localhost', 1521, 'xe')
+dsn = ora.makedsn('192.168.0.140', 1521, 'xe')
+# dsn = ora.makedsn('localhost', 1521, 'xe')
 
 
 db = None
@@ -44,7 +44,8 @@ seoul_api_key = None
 def db_open(debug_print: bool=False):
     global db
     global cursor
-    db = ora.connect(user='LOL_DATA', password='1234', dsn=dsn)
+    db = ora.connect(user='PERSONLOL', password='1234', dsn=dsn)
+    # db = ora.connect(user='LOL_DATA', password='1234', dsn=dsn)
     cursor = db.cursor()
     if debug_print: print('oracle open!')
 
