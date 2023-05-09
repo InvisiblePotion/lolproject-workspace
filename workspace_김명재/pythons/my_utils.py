@@ -32,7 +32,8 @@ class WrongParticipantNumber(Exception):
 
 warnings.filterwarnings('ignore')
 
-dsn = ora.makedsn('192.168.0.140', 1521, 'xe')
+# dsn = ora.makedsn('192.168.0.140', 1521, 'xe')
+dsn = ora.makedsn('localhost', 1521, 'xe')
 
 
 db = None
@@ -43,7 +44,7 @@ seoul_api_key = None
 def db_open(debug_print: bool=False):
     global db
     global cursor
-    db = ora.connect(user='PERSONLOL', password='1234', dsn=dsn)
+    db = ora.connect(user='LOL_DATA', password='1234', dsn=dsn)
     cursor = db.cursor()
     if debug_print: print('oracle open!')
 
@@ -397,6 +398,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
     RawData를 1차 정제 형태로 변환해주는 함수
     """
 
+    # 전설, 신화 아이템 리스트: 13.9 (버전별 갱신 필요)
     legend_items = [
         3003,3004,3011,3026,3031,3033,3036,3040,3041,3042,
         3046,3050,3053,3065,3068,3071,3072,3074,3075,3083,
@@ -405,144 +407,141 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
         3156,3157,3161,3165,3179,3181,3193,3222,3504,3508,
         3742,3748,3814,4401,4628,4629,4637,4645,6035,6333,
         6609,6616,6664,6675,6676,6694,6695,6696,8001,8020]
-    
+
     mythic_items = [
         2065,3001,3078,3084,3152,3190,4005,4633,4636,4644,
         6617,6630,6631,6632,6653,6655,6656,6657,6662,6665,
         6667,6671,6672,6673,6691,6692,6693]
 
     result = []
-    # try:
-    for game in rawdata.iloc:
-        for part_num in range(10):
-            matches = game['matches']['info']
-            part = matches['participants'][part_num]
-            challenge = part['challenges']
+    try:
+        for game in rawdata.iloc:
+            for part_num in range(10):
+                matches = game['matches']['info']
+                part = matches['participants'][part_num]
+                challenge = part['challenges']
 
-            # timeline에서 어떤 데이터를 뽑을지 아직 미정
-            timeline = game['timeline']['info']
-            # frames = timeline['frames']
+                # timeline에서 어떤 데이터를 뽑을지 아직 미정
+                timeline = game['timeline']['info']
+                # frames = timeline['frames']
 
-            each_part = {
-                'version': matches['gameVersion'],
-                'game_create_time': matches['gameCreation'],
-                'game_id': game['matches']['metadata']['matchId'],
-                'participant_number': part['participantId'],
-                'participant_puuid': part['puuid'],
-                'api_key': api_key,
-                'game': {
-                    'gameCreation': matches['gameCreation'],
-                    'gameStartTimestamp': matches['gameStartTimestamp'],
-                    'gameEndTimestamp': matches['gameEndTimestamp'],
-                    'gameDuration': matches['gameDuration'],
-                    'gameVersion': matches['gameVersion'],
-                    'queueId': matches['queueId'],
-                    'bans': matches['teams'][0]['bans'] + matches['teams'][1]['bans']
-                },
-                'summoner': {
-                    'summonerName': part['summonerName'],
-                    'summonerLevel': part['summonerLevel'],
-                    'summonerId': part['summonerId'],
-                    'puuid': part['puuid']
-                },
-                'champion': {
-                    'championId': part['championId'],
-                    'championName': part['championName'],
-                    'champLevel': part['champLevel'],
-                    'lane': part['lane'],
-                    'individualPosition': part['individualPosition'],
-                    'teamPosition': part['teamPosition'],
-                    'teamId': part['teamId'],
-                    'win': str(part['win']) # bool
-                },
-                'spell': {
-                    'summoner1Id': part['summoner1Id'],
-                    'summoner2Id': part['summoner2Id']
-                },
-                'skillTree': [sk['skillSlot'] for sk in eventExtractor(game, 'SKILL_LEVEL_UP', part_num)],
-                'rune': {
-                    'runePrimaryStyle': part['perks']['styles'][0]['style'],
-                    'runeCorePerk': part['perks']['styles'][0]['selections'][0]['perk'],
-                    'runePrimaryPerk1': part['perks']['styles'][0]['selections'][1]['perk'],
-                    'runePrimaryPerk2': part['perks']['styles'][0]['selections'][2]['perk'],
-                    'runePrimaryPerk3': part['perks']['styles'][0]['selections'][3]['perk'],
-                    'runeSubStyle': part['perks']['styles'][1]['style'],
-                    'runeSubPerk1': part['perks']['styles'][1]['selections'][0]['perk'],
-                    'runeSubPerk2': part['perks']['styles'][1]['selections'][1]['perk'],
-                    'runeShardOffense': part['perks']['statPerks']['offense'],
-                    'runeShardFlex': part['perks']['statPerks']['flex'],
-                    'runeShardDefense': part['perks']['statPerks']['defense']
-                },
-                'item': {
-                    'item0': part['item0'],
-                    'item1': part['item1'],
-                    'item2': part['item2'],
-                    'item3': part['item3'],
-                    'item4': part['item4'],
-                    'item5': part['item5'],
-                    'item6': part['item6']
-                },
-                'startItem': getStartItem(game, part_num+1),
-                'itemTree': list(filter(lambda x: x in legend_items + mythic_items,
-                    [a['itemId'] for a in eventExtractor(game, 'ITEM_PURCHASED', part_num+1)]))[:3],
-                'kda': {
-                    'kills': part['kills'],
-                    'deaths': part['deaths'],
-                    'assists': part['assists'],
-                    'kda': challenge['kda'],
-                    'killParticipation': challenge['killParticipation']
-                },
-                'gold': {
-                    'bountyLevel': part['bountyLevel'],
-                    'bountyGold': challenge['bountyGold'],
-                    'goldEarned': part['goldEarned'],
-                    'goldPerMinute': challenge['goldPerMinute']
-                },
-                'cs': {
-                    'totalMinionsKilled': part['totalMinionsKilled'],
-                    'laneMinionsFirst10Minutes': challenge['laneMinionsFirst10Minutes']
-                },
-                'turret': {
-                    'turretTakedowns': challenge['turretTakedowns'],
-                    'turretPlatesTaken': challenge['turretPlatesTaken']
-                },
-                'damage': {
-                    'teamDamagePercentage': challenge['teamDamagePercentage'],
-                    'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
-                    'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
-                    'magicDamageDealtToChampions': part['magicDamageDealtToChampions'],
-                    'trueDamageDealtToChampions': part['trueDamageDealtToChampions'],
-                    'damageDealtToBuildings': part['damageDealtToBuildings'],
-                    'damageDealtToObjectives': part['damageDealtToObjectives'],
-                    'totalDamageTaken': part['totalDamageTaken'],
-                    'physicalDamageTaken':part['physicalDamageTaken'],
-                    'magicDamageTaken': part['magicDamageTaken'],
-                    'trueDamageTaken': part['trueDamageTaken'],
-                    'totalHeal': part['totalHeal'],
-                    'totalHealsOnTeammates': part['totalHealsOnTeammates']
-                },
-                'vision': {
-                    'visionScore': part['visionScore'],
-                    'wardsPlaced': part['wardsPlaced'],
-                    'controlWardsPlaced': challenge['controlWardsPlaced'],
-                    'wardsKilled': part['wardsKilled']
-                },
-                'etc': {
-                    'spell1Casts': part['spell1Casts'],
-                    'spell2Casts': part['spell2Casts'],
-                    'spell3Casts': part['spell3Casts'],
-                    'spell4Casts': part['spell4Casts'],
-                    'firstBloodKill': str(part['firstBloodKill']), # bool
-                    'largestKillingSpree': part['largestKillingSpree'],
-                    'largestMultiKill': part['largestMultiKill']
-                },
-                'timeline': {
-                    '제조 필요!': '어떤 정보를 넣을지 의논 필요'
+                each_part = {
+                    'version': matches['gameVersion'],
+                    'game_create_time': matches['gameCreation'],
+                    'game_id': game['matches']['metadata']['matchId'],
+                    'participant_number': part['participantId'],
+                    'participant_puuid': part['puuid'],
+                    'api_key': api_key,
+                    'game': {
+                        'gameCreation': matches['gameCreation'],
+                        'gameStartTimestamp': matches['gameStartTimestamp'],
+                        'gameEndTimestamp': matches['gameEndTimestamp'],
+                        'gameDuration': matches['gameDuration'],
+                        'gameVersion': matches['gameVersion'],
+                        'queueId': matches['queueId'],
+                        'bans': matches['teams'][0]['bans'] + matches['teams'][1]['bans']
+                    },
+                    'summoner': {
+                        'summonerName': part['summonerName'],
+                        'summonerLevel': part['summonerLevel'],
+                        'summonerId': part['summonerId'],
+                        'puuid': part['puuid']
+                    },
+                    'champion': {
+                        'championId': part['championId'],
+                        'championName': part['championName'],
+                        'champLevel': part['champLevel'],
+                        'lane': part['lane'],
+                        'individualPosition': part['individualPosition'],
+                        'teamPosition': part['teamPosition'],
+                        'teamId': part['teamId'],
+                        'win': str(part['win']) # bool
+                    },
+                    'spell': {
+                        'summoner1Id': part['summoner1Id'],
+                        'summoner2Id': part['summoner2Id']
+                    },
+                    'skill': {
+                        'spell1Casts': part['spell1Casts'],
+                        'spell2Casts': part['spell2Casts'],
+                        'spell3Casts': part['spell3Casts'],
+                        'spell4Casts': part['spell4Casts']
+                    },
+                    'skillTree': [sk['skillSlot'] for sk in eventExtractor(game, 'SKILL_LEVEL_UP', part_num+1)],
+                    'rune': {
+                        'runePrimaryStyle': part['perks']['styles'][0]['style'],
+                        'runeCorePerk': part['perks']['styles'][0]['selections'][0]['perk'],
+                        'runePrimaryPerk1': part['perks']['styles'][0]['selections'][1]['perk'],
+                        'runePrimaryPerk2': part['perks']['styles'][0]['selections'][2]['perk'],
+                        'runePrimaryPerk3': part['perks']['styles'][0]['selections'][3]['perk'],
+                        'runeSubStyle': part['perks']['styles'][1]['style'],
+                        'runeSubPerk1': part['perks']['styles'][1]['selections'][0]['perk'],
+                        'runeSubPerk2': part['perks']['styles'][1]['selections'][1]['perk'],
+                        'runeShardOffense': part['perks']['statPerks']['offense'],
+                        'runeShardFlex': part['perks']['statPerks']['flex'],
+                        'runeShardDefense': part['perks']['statPerks']['defense']
+                    },
+                    'item': {
+                        'item0': part['item0'],
+                        'item1': part['item1'],
+                        'item2': part['item2'],
+                        'item3': part['item3'],
+                        'item4': part['item4'],
+                        'item5': part['item5'],
+                        'item6': part['item6']
+                    },
+                    'startItem': getStartItem(game, part_num+1),
+                    'itemTree': list(filter(lambda x: x in legend_items + mythic_items,
+                        [a['itemId'] for a in eventExtractor(game, 'ITEM_PURCHASED', part_num+1)]))[:3],
+                    'kda': {
+                        'kills': part['kills'],
+                        'deaths': part['deaths'],
+                        'assists': part['assists'],
+                        'kda': challenge['kda'],
+                        'killParticipation': challenge['killParticipation'],
+                        'firstBloodKill': str(part['firstBloodKill']), # bool
+                        'largestKillingSpree': part['largestKillingSpree'],
+                        'largestMultiKill': part['largestMultiKill']
+                    },
+                    'gold': {
+                        'bountyLevel': part['bountyLevel'],
+                        'bountyGold': challenge['bountyGold'],
+                        'goldEarned': part['goldEarned'],
+                        'goldPerMinute': challenge['goldPerMinute']
+                    },
+                    'cs': {
+                        'totalMinionsKilled': part['totalMinionsKilled'],
+                        'laneMinionsFirst10Minutes': challenge['laneMinionsFirst10Minutes']
+                    },
+                    'turret': {
+                        'turretTakedowns': challenge['turretTakedowns'],
+                        'turretPlatesTaken': challenge['turretPlatesTaken']
+                    },
+                    'damage': {
+                        'teamDamagePercentage': challenge['teamDamagePercentage'],
+                        'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
+                        'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
+                        'magicDamageDealtToChampions': part['magicDamageDealtToChampions'],
+                        'trueDamageDealtToChampions': part['trueDamageDealtToChampions'],
+                        'damageDealtToBuildings': part['damageDealtToBuildings'],
+                        'damageDealtToObjectives': part['damageDealtToObjectives'],
+                        'totalDamageTaken': part['totalDamageTaken'],
+                        'physicalDamageTaken':part['physicalDamageTaken'],
+                        'magicDamageTaken': part['magicDamageTaken'],
+                        'trueDamageTaken': part['trueDamageTaken'],
+                        'totalHeal': part['totalHeal'],
+                        'totalHealsOnTeammates': part['totalHealsOnTeammates']
+                    },
+                    'vision': {
+                        'visionScore': part['visionScore'],
+                        'wardsPlaced': part['wardsPlaced'],
+                        'controlWardsPlaced': challenge['controlWardsPlaced'],
+                        'wardsKilled': part['wardsKilled']
+                    }
                 }
-            }
-            result.append(each_part)
-    # except Exception as e:
-    #     return e
+                result.append(each_part)
+    except Exception as e:
+        return e
     return result
 
 
@@ -569,7 +568,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
         """
         매 정각마다 호출되어 안전한 종료를 위해 최대 2분간 휴식하는 함수
         """
-        cur_time = int(time.time())
+        cur_time = int(time.time()) % 3600
         for safe_time in tqdm(range(120 - cur_time), total=120, initial=cur_time, desc=f"{thread_no}번 스레드 안전 종료 대기"):
             time.sleep(1)
 
