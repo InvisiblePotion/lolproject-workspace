@@ -326,9 +326,11 @@ def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
     # riot api를 통해서 summonerName을 가져오기
     print('get SummonerName.....')
     for v in tqdm(range(get_amount)):
-        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division+1]}?page={page}&api_key={riot_api_key}'
-        res = requests.get(url).json()
-        summonerName_lst.append(random.sample(res, 1)[0]['summonerName'])
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division-1]}?page={page}&api_key={riot_api_key}'
+        res = requests.get(url)
+        if res.status_code == 429:
+            apiSleep(120, True)
+        summonerName_lst.append(random.sample(res.json(), 1)[0]['summonerName'])
 
     print('total player: ', len(summonerName_lst))
 
@@ -429,6 +431,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                 each_part = {
                     'version': matches['gameVersion'],
                     'game_create_time': matches['gameCreation'],
+                    'game_duration': matches['gameDuration'],
                     'game_id': game['matches']['metadata']['matchId'],
                     'participant_number': part['participantId'],
                     'participant_puuid': part['puuid'],
