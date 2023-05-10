@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": 0,
-    "scrollLeft": 0,
+    "scrollTop": -2685,
+    "scrollLeft": -2846,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -74,7 +74,7 @@
           "active": false,
           "left": 3100.9998,
           "top": 1966.3335,
-          "zIndex": 10,
+          "zIndex": 9,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -113,7 +113,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -275,7 +275,7 @@
           "active": false,
           "left": 3750.2217,
           "top": 1993.2213,
-          "zIndex": 22,
+          "zIndex": 39,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -314,7 +314,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -706,7 +706,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 31,
+          "zIndex": 41,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -745,7 +745,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -907,7 +907,7 @@
           "active": false,
           "left": 3747.8909,
           "top": 2780.7787,
-          "zIndex": 24,
+          "zIndex": 45,
           "widthName": 87.515625,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -946,7 +946,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1200,7 +1200,7 @@
           "active": false,
           "left": 3747.0892,
           "top": 3035.8662,
-          "zIndex": 25,
+          "zIndex": 47,
           "widthName": 126.76318359375,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -1239,7 +1239,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1424,7 +1424,7 @@
           "active": false,
           "left": 3747.8671,
           "top": 4000.6165,
-          "zIndex": 28,
+          "zIndex": 53,
           "widthName": 92.5048828125,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1601,8 +1601,8 @@
         "ui": {
           "active": false,
           "left": 4090.5,
-          "top": 1082.411,
-          "zIndex": 35,
+          "top": 1082.4109,
+          "zIndex": 37,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1664,7 +1664,7 @@
           "active": false,
           "left": 4416.75,
           "top": 1413.3833,
-          "zIndex": 36,
+          "zIndex": 33,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1795,7 +1795,7 @@
           "active": false,
           "left": 4218.75,
           "top": 767.7722,
-          "zIndex": 34,
+          "zIndex": 31,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1972,7 +1972,7 @@
           "active": false,
           "left": 4394.5322,
           "top": 2363.2663,
-          "zIndex": 11,
+          "zIndex": 10,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -2081,7 +2081,7 @@
           "active": false,
           "left": 4390.1322,
           "top": 2137.4663,
-          "zIndex": 15,
+          "zIndex": 14,
           "widthName": 60,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2213,7 +2213,7 @@
           "active": false,
           "left": 4394.8,
           "top": 2613.1333,
-          "zIndex": 14,
+          "zIndex": 13,
           "widthName": 65.49560546875,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2368,7 +2368,7 @@
           "active": false,
           "left": 3093.2224,
           "top": 2262.733,
-          "zIndex": 12,
+          "zIndex": 11,
           "widthName": 71.10693359375,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2592,7 +2592,7 @@
           "active": false,
           "left": 3092.2239,
           "top": 2569.6431,
-          "zIndex": 13,
+          "zIndex": 12,
           "widthName": 67.0126953125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2770,7 +2770,7 @@
           "active": false,
           "left": 3089.332,
           "top": 2898.3334,
-          "zIndex": 17,
+          "zIndex": 16,
           "widthName": 68.1298828125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2948,7 +2948,7 @@
           "active": false,
           "left": 4387.6,
           "top": 3143.9333,
-          "zIndex": 21,
+          "zIndex": 20,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -3050,7 +3050,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -3212,7 +3212,7 @@
           "active": false,
           "left": 3746.7665,
           "top": 3368.8338,
-          "zIndex": 26,
+          "zIndex": 49,
           "widthName": 130.71142578125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3251,7 +3251,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -3551,7 +3551,7 @@
           "active": false,
           "left": 3748.3887,
           "top": 3624.7227,
-          "zIndex": 27,
+          "zIndex": 51,
           "widthName": 123.5703125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3699,7 +3699,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -3953,7 +3953,7 @@
           "active": false,
           "left": 3746.7888,
           "top": 4278.6115,
-          "zIndex": 29,
+          "zIndex": 55,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -4084,7 +4084,7 @@
             "name": "update_time",
             "comment": "갱신 시간",
             "dataType": "DATE",
-            "default": "SYSDATE",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -4108,7 +4108,7 @@
           "active": false,
           "left": 2616.1115,
           "top": 2005.2228,
-          "zIndex": 30,
+          "zIndex": 57,
           "widthName": 89.140625,
           "widthComment": 60,
           "color": "#607D8B"
@@ -4240,7 +4240,7 @@
           "active": false,
           "left": 4370.6665,
           "top": 3809.3337,
-          "zIndex": 16,
+          "zIndex": 15,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -4343,6 +4343,52 @@
               "widthDefault": 60
             },
             "id": "09ba139b-6fac-4aa0-b8a1-98d0044ac0d7"
+          },
+          {
+            "name": "champion_id",
+            "comment": "챔피언 id",
+            "dataType": "NUMBER(3)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 76.7373046875,
+              "widthComment": 60,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "060ff714-74eb-4e6b-b049-29eb5f569554"
+          },
+          {
+            "name": "lane",
+            "comment": "라인",
+            "dataType": "VARCHAR(7)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 74.97265625,
+              "widthDefault": 60
+            },
+            "id": "b7d96c3f-3555-4be2-819b-1fa9f56f9d75"
           },
           {
             "name": "participant_puuid",
@@ -4763,7 +4809,7 @@
           "active": false,
           "left": 2664.7782,
           "top": 851.8892,
-          "zIndex": 33,
+          "zIndex": 34,
           "widthName": 60,
           "widthComment": 96.30078125
         },
@@ -5078,7 +5124,7 @@
           "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 32,
+          "zIndex": 30,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -5141,7 +5187,7 @@
           "active": false,
           "left": 3381.3331,
           "top": 1013.8881,
-          "zIndex": 19,
+          "zIndex": 18,
           "widthName": 60,
           "widthComment": 77.47998046875
         },
@@ -5172,7 +5218,7 @@
           "active": false,
           "left": 3747.955555555572,
           "top": 2704.2444444444523,
-          "zIndex": 23,
+          "zIndex": 22,
           "width": 403.8000000000003,
           "height": 100
         },
@@ -5222,7 +5268,7 @@
           "active": false,
           "left": 2616.8055555555566,
           "top": 1857.3111111111243,
-          "zIndex": 9,
+          "zIndex": 35,
           "width": 370.2000000000013,
           "height": 146.3999999999999,
           "color": "#2B1919"
@@ -5259,7 +5305,7 @@
           "active": false,
           "left": 3750.155555555586,
           "top": 1929.6888888889214,
-          "zIndex": 20,
+          "zIndex": 19,
           "width": 145.40000000000012,
           "height": 100
         },
@@ -5271,7 +5317,7 @@
           "active": false,
           "left": 3336.022222222211,
           "top": 428.39999999999225,
-          "zIndex": 18,
+          "zIndex": 17,
           "width": 422.20000000000033,
           "height": 100
         },
@@ -5300,7 +5346,7 @@
             "9da0b85f-7395-4cf6-b4e9-eaf374608b90"
           ],
           "x": 4416.003845214844,
-          "y": 1082.411,
+          "y": 1082.4109,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
@@ -5352,7 +5398,7 @@
             "d27bdd11-1a0e-4b19-a113-06ca1c03010e"
           ],
           "x": 4155.600769042969,
-          "y": 1082.411,
+          "y": 1082.4109,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
@@ -5378,7 +5424,7 @@
             "2f826d2c-1dcb-4932-ad5e-7a853b79ee5c"
           ],
           "x": 4285.802307128906,
-          "y": 1082.411,
+          "y": 1082.4109,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
@@ -6435,7 +6481,7 @@
             "f668d2f4-5d62-4d5b-bbba-a00d9f17c996"
           ],
           "x": 4546.205383300781,
-          "y": 1082.411,
+          "y": 1082.4109,
           "direction": "top"
         },
         "end": {
@@ -6496,7 +6542,7 @@
             "59e02ae7-9b0c-4ff9-b5d3-96f13b7cc11f"
           ],
           "x": 3173.36804375,
-          "y": 1111.8892,
+          "y": 1132.3892,
           "direction": "right"
         },
         "constraintName": "fk_apikey_to_rawdata",
