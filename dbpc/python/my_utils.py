@@ -369,6 +369,7 @@ def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
     return pd.DataFrame(df_create, columns=['match_id','matches','timeline'])
 
 
+# 원하는 시간까지의 플레이어가 소지중인 아이템을 추적하여 리스트로 반환하는 함수
 def getHoldingItems(raw_data_series: pd.Series, part_number: int, end_time: int=-1):
 
 	# end_time이 -1이거나 게임 종료 시간을 초과한 값이라면 end_time에 게임 종료 시간을 저장
@@ -397,7 +398,7 @@ def getHoldingItems(raw_data_series: pd.Series, part_number: int, end_time: int=
 			else: evt_list.append(evt)
 
 		except IndexError as e: # UNDO가 가장 먼저 나오거나 구매 및 판매 횟수보다 많은 케이스에 대한 예외 처리 및 로깅
-			logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.unexpectedItemUndo",
+			logging.warning({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.unexpectedItemUndo",
 				"dataType": "dict", "data": {"participantId": part_number, "matchId": raw_data_series['matches']['metadata']['matchId']}})
 			continue
 		except Exception as e:  # 예측하지 못한 예외 발생 시 로깅 후 에러를 발생
@@ -405,16 +406,19 @@ def getHoldingItems(raw_data_series: pd.Series, part_number: int, end_time: int=
 		  		"dataType": "matchId", "data": raw_data_series['matches']['metadata']['matchId']})
 			raise e
 
-	# 정제된 이벤트 리스트로 시작 아이템을 추적하여 리턴
+	# 정제된 이벤트 리스트로 현재 아이템을 추적하여 리턴
 	start_items = []
 	for evt in evt_list:
 		try:
 			if evt['type'] == 'ITEM_PURCHASED': start_items.append(evt['itemId'])
 			else: start_items.remove(evt['itemId'])
 
+        ### 230510: 현재 장신구에 대한 파괴가 이 에러로 빠지는 이슈가 있음.
+        ##: 전령의 눈과 같은 장신구 칸을 차지하는 아이템이 원인인 것으로 추정 중. (정글러 챔피언이 다수임)
 		except ValueError as e: # 구매하지 않은 아이템이 판매되는 경우에 대한 예외 처리 및 로깅
-			logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.unexpectedItemSold",
-		  		"dataType": "dict", "data": {"participantId": part_number, "itemId": evt['itemId'], "matchId": raw_data_series['matches']['metadata']['matchId']}})
+			logging.info({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.unexpectedItemSoldOrDestroy",
+		  		"dataType": "dict", "data": {"itemId": evt['itemId'], "championName": raw_data_series['matches']['info']['participants'][part_number-1]['championName'],
+                                             "participantId": part_number, "matchId": raw_data_series['matches']['metadata']['matchId']}})
 			continue
 		except Exception as e: # 예측하지 못한 예외 발생 시 로깅 후 에러를 발생
 			logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.exception",
@@ -584,7 +588,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
     """
 
     # 로깅
-    logging.basicConfig(filename=logging_path, encoding='utf-8', level=logging.ERROR)
+    logging.basicConfig(filename=logging_path, encoding='utf-8', level=logging.INFO)
 
     # 사이클 순환 정보를 위한 변수
     cycle_count = 1 # 사이클 회전 수

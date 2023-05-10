@@ -7,4 +7,4 @@ print('현재 키 목록:', api_key_list)
 api_key = api_key_list[0]
 print('사용된 키:', api_key)
 
-mu.autoInsert(api_key, './dbpc/logs/autoInsertContinues_DBPC.log', start_page=1, debug=False)
+mu.autoInsert(riot_api_key=api_key, logging_path='D:\\lol_project\\lolproject-workspace\\dbpc\\logs\\autoInsertContinues_DBPC.log', start_page=1, debug=False)
