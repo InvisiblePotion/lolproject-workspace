@@ -1,0 +1,16 @@
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6397215890'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6388270495'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6459361968'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6458264407'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': 'ValueError(list.remove(x): x not in list)', 'matchId': 'KR_6486524488'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6407035750'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': 'ValueError(list.remove(x): x not in list)', 'matchId': 'KR_6468472476'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6455110037'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6378079378'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6473932817'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6468779575'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6442592006'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6480482619'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': 'ValueError(list.remove(x): x not in list)', 'matchId': 'KR_6483461927'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': "KeyError('killParticipation')", 'matchId': 'KR_6466370420'}}
+ERROR:root:{'errorType': 'missingGameData', 'apiKey': 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39', 'dataType': 'dict', 'data': {'error': 'ValueError(list.remove(x): x not in list)', 'matchId': 'KR_6476355864'}}
