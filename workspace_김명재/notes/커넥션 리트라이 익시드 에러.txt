@@ -1,0 +1,7 @@
+ConnectionError:
+HTTPSConnectionPool(host='kr.api.riotgames.com', port=443): 
+Max retries exceeded with url: 
+/lol/summoner/v4/summoners/by-puuid/Rz5JheNFrL9dGnp2uxULnY0yZgPEhZputDNpqIdJs2hgrZr9EiwCVpAoL6VcXWX4fFFmPOBpAdz8DA?api_key=RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39 
+(Caused by NewConnectionError(
+    '<urllib3.connection.HTTPSConnection object at 0x0000013D260D8B80>: 
+        Failed to establish a new connection: [Errno 11002] getaddrinfo failed'))
