@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>test-join</title>
+<title>join</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/join.css">
+<link rel="stylesheet" href="./resources/css/join.css">
 
 </head>
 <body>
 	<div id="root" class="container">
     <div class="join-layout">
-      <h1><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="logo" class="logo-image"></h1>
+      <h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1>
       <form action="">
         <div class="form-group">
           <h2>기본 정보 입력</h2>
@@ -51,22 +51,22 @@
   
  
 </body>
-<script src="${pageContext.request.contextPath}/resources/js/join.js"></script>
+<script src="./resources/js/join.js"></script>
 <script>
 	$('#btnAgree').click(function() {
-		id=$('#userid').val()
-		pw=$('#userpw').val()
-		pwchk=$('#userpw_chk').val()
-		account = $('#lol-account').val()
+		user_id=$('#userid').val()
+		user_pw=$('#userpw').val()
+		user_lolname = $('#lol-account').val()
+		
 		$.ajax({
 			method: 'post',
-			url:'/personlol/example/ajax-join',
-			data:{'userid':id,'userpw':pw,'pwchk':pwchk,'account':account}
+			url:'/personlol/user/login',
+			data:{'user_id':user_id,'user_pw':user_pw,'user_lolname':user_lolname}
 			/* dataType:'json' */
 		}).done(res => {
 			console.log(res)
 			alert("join 성공")
-			location.href = '/personlol/example/test-success' 
+			location.href = '/personlol/success' 
 		}).fail(err => {
 			console.log(res)
 		})

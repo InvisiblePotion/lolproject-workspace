@@ -5,8 +5,8 @@
 
 <mapper namespace="com.base.personlol.dao.Example_dao">
 
-	<select id="testDB" resultType="com.base.personlol.dto.Example_dto">
+	<!-- <select id="testDB" resultType="com.base.personlol.dto.Example_dto">
 		select #{num1} + #{num2} ex1 from dual
-	</select>
+	</select> -->
 	
 </mapper>
