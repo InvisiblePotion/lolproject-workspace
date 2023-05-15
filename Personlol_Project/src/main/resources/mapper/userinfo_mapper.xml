@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.personlol.dao.user_dao">
+
+	<!-- id중복체크 -->
+	<select id="cheackID" resultType="Int">
+		select count(*) from USERINFO where user_id = #{user_id}
+	</select>
+		
+	<!-- usercode중복체크 -->	
+	<select id="checkCode" resultType ="Int">
+		select count(*) from USERINFO where user_code = #{user_code}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insertinfo" parameterType="userinfo">
+		INSERT INTO USERINFO 
+		VALUES(#{user_id},#{user_pw},#{user_lolname},#{user_code})
+	</insert>
+	
+	<!-- 아이디 찾기 -->
+	<select id="idfind" resultType="String">
+		select USERINFO.user_id from USERINFO where user_lolname = #{user_lolname} and user_code = #{user_code}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="pwfind" resultType="String">
+		select count(*) from USERINFO where user_id = #{user_id} and user_code = #{user_code}
+	</select>
+	
+	<!-- 비번 바꾸기 전 코드체크 -->
+	<select id="checknewpw" resultType="Int">
+		select count(*) from USERINFO where user_code = #{user_code}
+	</select>
+		
+	<!-- 비번바꾸기 -->	
+	<update id="changepw" parameterType="java.util.Map">
+		UPDATE USERINFO SET user_pw = #{user_pw} WHERE user_code = #{user_code}
+	</update>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="String">
+		select USERINFO.user_id from USERINFO where user_id = #{user_id} and user_pw = #{user_pw}
+	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deletemember" parameterType="java.util.Map">
+  		DELETE FROM USERINFO WHERE user_id = #{user_id}
+	</delete>
+
+	<!-- 업데이트 유저코드 -->
+	<update id="newcode" parameterType="java.util.Map">
+		UPDATE USERINFO set user_code =#{user_code} where user_id = #{user_id}
+	</update>
+	
+
+</mapper>
