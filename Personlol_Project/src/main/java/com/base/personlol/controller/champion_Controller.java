@@ -1,6 +1,7 @@
 package com.base.personlol.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -10,4 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/champion")
 public class champion_Controller {
 
-}
+	@GetMapping("/champlist")
+	public String champlist() {
+		return "champList";
+	}
+}//

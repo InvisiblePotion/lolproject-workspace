@@ -22,17 +22,17 @@
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/example/test-main" class="imgfile"><img
-						src="../resources/img/logotesting.png"></a>
+					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png"></a>
 					<div class="search-bar">
 						<input type="text">
 						<button type="button">go!</button>
 					</div>
 					<div class="menu">
-						<a href="/personlol/example/test-champlist" class="m-col">챔피언분석</a>
-						<a href="/personlol/example/test-rank" class="m-col">랭킹</a> <a
-							href=" " class="m-col">듀오찾기</a> <a href=" " class="m-col">사용자분석</a>
-						<a href="/personlol/example/test-logine" class="m-col login">로그인</a>
+						<a href="/personlol/champion/champlist" class="m-col">챔피언분석</a>
+						<a href="/personlol/summoner/rank" class="m-col">랭킹</a> 
+						<a href=" " class="m-col">듀오찾기</a>
+						<a href=" " class="m-col">사용자분석</a>
+						<a href="/personlol/logine" class="m-col login">로그인</a>
 					</div>
 				</div>
 			</nav>
@@ -107,7 +107,7 @@
 	$.ajax({
 		method:'get',
 		data:{champ:'champion_name'},
-		url:'/personlol/example/champName',
+		url:'/personlol/',
 	}).done(res => {
 		console.log(res)
 		

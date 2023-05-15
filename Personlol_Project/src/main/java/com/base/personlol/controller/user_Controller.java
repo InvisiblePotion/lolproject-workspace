@@ -81,6 +81,8 @@ public class user_Controller {
 		return "changepw";
 	}
 	
+	
+	
 	//아이디 찾기 기능
 	@GetMapping("/goidfind")
 	public ModelAndView idfind(@RequestParam("user_lolname") String user_lolname, @RequestParam("user_code") String user_code) {
