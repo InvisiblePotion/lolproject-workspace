@@ -18,7 +18,7 @@
 <body>
   <div id="root">
     <div class="changepw-layout">
-      <h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1>
+      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
       <form>
         <div class="form-group">
           <h2>새로운 비밀번호 입력하세요</h2>

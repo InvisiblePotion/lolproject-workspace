@@ -24,7 +24,7 @@
   <div id="root" class="container mt-5">
     <div class="logine-layout">
 
-      <h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1>
+      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
 
       <div class="form-group">
         <label for="userid">아이디</label>
@@ -45,7 +45,7 @@
 
       <div class="msg2-div">
         <span>PersonLoL이 처음이세요?</span> &nbsp; &nbsp;
-        <a href="/personlol/example/test-agree"><span>회원가입하기</span></a>
+        <a href="/personlol/agree"><span>회원가입하기</span></a>
       </div>
 
     </div>

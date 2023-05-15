@@ -9,13 +9,13 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/pwfind.css">
+<link rel="stylesheet" href="./resources/css/pwfind.css">
 </head>
 <body>
 
 <div id="root" class="container mt-5">
     <div class="idfind-layout">
-      <h1><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="logo" class="logo-image"></h1>
+      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
       <form>
         <div class="form-group">
           <h2>비밀번호를 잊어버리셨나요?</h2>

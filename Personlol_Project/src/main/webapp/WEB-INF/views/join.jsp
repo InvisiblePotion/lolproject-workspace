@@ -14,7 +14,7 @@
 <body>
 	<div id="root" class="container">
     <div class="join-layout">
-      <h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1>
+      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
       <form action="">
         <div class="form-group">
           <h2>기본 정보 입력</h2>
@@ -60,7 +60,7 @@
 		
 		$.ajax({
 			method: 'post',
-			url:'/personlol/user/login',
+			url:'/personlol/user/join',
 			data:{'user_id':user_id,'user_pw':user_pw,'user_lolname':user_lolname}
 			/* dataType:'json' */
 		}).done(res => {

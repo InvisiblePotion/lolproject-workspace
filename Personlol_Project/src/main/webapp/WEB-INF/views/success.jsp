@@ -16,7 +16,7 @@
 
   <div id="root" class="container">
     <div class="success-layout">
-      <h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1>
+      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
       <form>
         <div class="form-group">
           <div class="cong-div">
@@ -91,6 +91,7 @@
       }).done(res=>{
         console.log(res);
         alert("회원 탈퇴가 완료되었습니다.");
+        
 //        location.href = "/personlol/example/logout";
       }).fail(err=>{
         console.log(err);

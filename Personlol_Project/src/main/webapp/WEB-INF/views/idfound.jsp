@@ -15,7 +15,7 @@
 
 <div id="root" class="container mt-5">
     <div class="idfind-layout">
-      <h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1>
+      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
       <form>
         <div class="form-group">
         	<h2>아이디찾기 성공!</h2>
