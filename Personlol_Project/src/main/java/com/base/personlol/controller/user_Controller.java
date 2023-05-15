@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class user_Controller {
+	//user컨트롤러
 	
 	@Autowired
 	user_service u_ser;
