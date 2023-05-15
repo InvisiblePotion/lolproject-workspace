@@ -41,9 +41,9 @@
 				<div class="btn-toolbar justify-content-between" role="toolbar"
 					aria-label="Toolbar with button groups">
 					<div class="btn-group" role="group" aria-label="First group">
-						<button type="button" class="btn btn-outline-secondary">챌린져</button>
-						<button type="button" class="btn btn-outline-secondary">그랜드마스터</button>
-						<button type="button" class="btn btn-outline-secondary">마스터</button>
+						<button type="button" id = "get_ch" class="btn btn-outline-secondary">챌린져</button>
+						<button type="button" id = "get_gm"class="btn btn-outline-secondary">그랜드마스터</button>
+						<button type="button" id = "get_m"class="btn btn-outline-secondary">마스터</button>
 						
 					</div>
 					<div class="input-group">
@@ -84,34 +84,121 @@
 	</div class="list-container">
 
 	<script>
-  
   	$.ajax({
   		method: 'get',
-  		data:{
-  			tier:'CHALLENGER'
-  		},
-  		url:'/personlol/example/chlist',
+  		url:'/personlol/rank/challenger',
   	}).done(res => {
   		console.log(res)
-  		let rList = ''
-			$.each(res, function (i, reply) {
-				rList += '<table class="table table-hover" id="info_table">' +
+  		let cList = ''
+			$.each(res, function (i, ch) {
+				cList += '<table class="table table-hover" id="info_table">' +
 					'<tr height="25" >' +
-					'<td width="100px" >' + reply.summonername + '</td>' +
-					'<td width="100px" >' + reply.tier +'</td>'+
-					'<td width="100px" >' + reply.leaguepoints +'</td>'+
-					'<td width="100px" >' + reply.wins +'</td>'+
-					'<td width="100px" >' + reply.losses +'</td></tr>'+
+					'<td width="100px" >' + ch.summonerName + '</td>' +
+					'<td width="100px" >' + ch.tier +'</td>'+
+					'<td width="100px" >' + ch.leaguePoints + '</td>'+
+					'<td width="100px" >' + ch.wins +'</td>'+
+					'<td width="100px" >' + ch.losses +'</td>'+
+					'<td width="100px" >' + ch.veteran +'</td>'+
+					'<td width="100px" >' + ch.inactive +'</td>'+
+					'<td width="100px" >' + ch.freshBlood +'</td>'+		
+					'<td width="100px" >' + ch.hotStreak +'</td></tr>'+
 					'</table>'
 			})
-			$('#info').html(rList);
+			$('#info').html(cList);
   		
   	}).fail(err => {
   		console.log(res)
   	})
   </script>
+  <script>
+  $('#get_ch').click(function(){
+		$.ajax({
+	  		method: 'get',
+	  		url:'/personlol/rank/challenger',
+	  	}).done(res => {
+	  		console.log(res)
+	  		let cList = ''
+				$.each(res, function (i, ch) {
+					cList += '<table class="table table-hover" id="info_table">' +
+						'<tr height="25" >' +
+						'<td width="100px" >' + ch.summonerName + '</td>' +
+						'<td width="100px" >' + ch.tier +'</td>'+
+						'<td width="100px" >' + ch.leaguePoints + '</td>'+
+						'<td width="100px" >' + ch.wins +'</td>'+
+						'<td width="100px" >' + ch.losses +'</td>'+
+						'<td width="100px" >' + ch.veteran +'</td>'+
+						'<td width="100px" >' + ch.inactive +'</td>'+
+						'<td width="100px" >' + ch.freshBlood +'</td>'+		
+						'<td width="100px" >' + ch.hotStreak +'</td></tr>'+
+						'</table>'
+				})
+				$('#info').html(cList);
+	  		
+	  	}).fail(err => {
+	  		console.log(res)
+	  	})
+	})
+  </script>
+  <script>
+  $('#get_gm').click(function(){
+		$.ajax({
+	  		method: 'get',
+	  		url:'/personlol/rank/grandmaster',
+	  	}).done(res => {
+	  		console.log(res)
+	  		let gList = ''
+				$.each(res, function (i, gm) {
+					gList += '<table class="table table-hover" id="info_table">' +
+						'<tr height="25" >' +
+						'<td width="100px" >' + gm.summonerName + '</td>' +
+						'<td width="100px" >' + gm.tier +'</td>'+
+						'<td width="100px" >' + gm.leaguePoints + '</td>'+
+						'<td width="100px" >' + gm.wins +'</td>'+
+						'<td width="100px" >' + gm.losses +'</td>'+
+						'<td width="100px" >' + gm.veteran +'</td>'+
+						'<td width="100px" >' + gm.inactive +'</td>'+
+						'<td width="100px" >' + gm.freshBlood +'</td>'+		
+						'<td width="100px" >' + gm.hotStreak +'</td></tr>'+
+						'</table>'
+				})
+				$('#info').html(gList);
+	  		
+	  	}).fail(err => {
+	  		console.log(res)
+	  	})
+	})
+  </script>
   
+  <script>
+  $('#get_m').click(function(){
+		$.ajax({
+	  		method: 'get',
+	  		url:'/personlol/rank/master',
+	  	}).done(res => {
+	  		console.log(res)
+	  		let mList = ''
+				$.each(res, function (i, m) {
+					mList += '<table class="table table-hover" id="info_table">' +
+						'<tr height="25" >' +
+						'<td width="100px" >' + m.summonerName + '</td>' +
+						'<td width="100px" >' + m.tier +'</td>'+
+						'<td width="100px" >' + m.leaguePoints + '</td>'+
+						'<td width="100px" >' + m.wins +'</td>'+
+						'<td width="100px" >' + m.losses +'</td>'+
+						'<td width="100px" >' + m.veteran +'</td>'+
+						'<td width="100px" >' + m.inactive +'</td>'+
+						'<td width="100px" >' + m.freshBlood +'</td>'+		
+						'<td width="100px" >' + m.hotStreak +'</td></tr>'+
+						'</table>'
+				})
+				$('#info').html(mList);
+	  		
+	  	}).fail(err => {
+	  		console.log(res)
+	  	})
+	})
   
+  </script>
 
 </body>
 </html>

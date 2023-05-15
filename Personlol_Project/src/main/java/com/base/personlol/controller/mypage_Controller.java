@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class mypage_Controller {
 	
 	//기본
-	@GetMapping("/")
+	@GetMapping("")
 	public String mypage() {
 		return "mypage";
 	}

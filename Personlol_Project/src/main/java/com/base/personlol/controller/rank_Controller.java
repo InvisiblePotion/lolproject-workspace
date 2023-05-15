@@ -8,13 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/duo")
-public class duo_Controller {
+@RequestMapping("/rank")
+public class rank_Controller {
 	
-	//듀오페이지
+	//기본
 	@GetMapping("")
-	public String duo() {
-		return "duo";
+	public String rank() {
+		return "rank";
 	}
-
 }
