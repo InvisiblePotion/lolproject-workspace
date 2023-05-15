@@ -37,8 +37,8 @@
       </div>
 
       <div class="msg1-div">
-        <a href="/personlol/example/test-idfind"><span class="idmsg">아이디를 잊으셨나요?</span></a>
-        <a href="/personlol/example/test-pwfind"><span class="pwmsg">비밀번호를 잊으셨나요?</span></a>
+        <a href="/personlol/idfind"><span class="idmsg">아이디를 잊으셨나요?</span></a>
+        <a href="/personlol/pwfind"><span class="pwmsg">비밀번호를 잊으셨나요?</span></a>
       </div>
 
       <button id="logine_button" class="btn btn-primary btn-lg btn-block">로그인</button>

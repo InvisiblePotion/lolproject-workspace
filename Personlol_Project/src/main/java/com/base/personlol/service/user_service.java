@@ -133,7 +133,7 @@ public class user_service {
         return randomString;
     }
 	
-	//뉴코드 생성기(수정하세요!)
+	//뉴코드 생성기
 	public Integer newcode(Map<String, String> id) {
 		String user_code = generateRandomUserCode();
 		System.out.println("새로운 user_code는?: "+ user_code);

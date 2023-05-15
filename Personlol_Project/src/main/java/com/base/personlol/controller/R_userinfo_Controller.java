@@ -133,7 +133,7 @@ public class R_userinfo_Controller {
 		return deletemember;
 	}
 	
-	//뉴코드 생성 (수정하세요 DAO랑 매퍼는 니가 만들어 주세요!)
+	//뉴코드 생성
 	@PutMapping("/newcode")
 	public @ResponseBody Integer newcode(@RequestBody Map<String,String> id) {
 		System.out.println("받아온 id는?:"+ id);
