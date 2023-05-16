@@ -94,19 +94,21 @@
 		//디폴트
 		let cur_rank = 'ch'
 
-		//버튼 클릭시 실행되는 함수
+		//버튼 클릭시 실행되는 함수(챌,그마,마 정보 ,page정보)가지고 감
 		function getranking(info){
 			cur_rank = info.value
 			highpage('lol_'+cur_rank)
 			getajax('lol_'+info.value, 1)
 		}
 
-		//페이지 번호 눌렀을때
+		//페이지 번호 눌렀을때 info = page
 		function pageclick(info){
 			//페이지 눌렀을때 정보가져오기
 			getajax('lol_'+cur_rank, info)
 		}
 		
+		
+		//페이지 전체 가져오기(몇 페이지 나와야하는지 받아오는 함수)
 		function highpage(rank){
 			$.ajax({
 				method:'get',
@@ -125,7 +127,7 @@
 			})
 		}
 
-			//비동기실행
+		//비동기실행(랭킹정보 가져오는 함수)
 		function getajax(rank, page){
 			$.ajax({
 				method: 'get',
