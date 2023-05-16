@@ -41,9 +41,9 @@
 				<div class="btn-toolbar justify-content-between" role="toolbar"
 					aria-label="Toolbar with button groups">
 					<div class="btn-group" role="group" aria-label="First group">
-						<button type="button" class="btn btn-outline-secondary">챌린져</button>
-						<button type="button" class="btn btn-outline-secondary">그랜드마스터</button>
-						<button type="button" class="btn btn-outline-secondary">마스터</button>
+						<button type="button" onclick="getranking(this)" id = "get_ch" class="btn btn-outline-secondary" value="ch">챌린져</button>
+						<button type="button" onclick="getranking(this)" id = "get_gm" class="btn btn-outline-secondary" value="gm">그랜드마스터</button>
+						<button type="button" onclick="getranking(this)" id = "get_m" class="btn btn-outline-secondary" value="master">마스터</button>
 						
 					</div>
 					<div class="input-group">
@@ -82,36 +82,82 @@
 		</div>
 
 	</div class="list-container">
+	<div id = "pagenum">
+
+	</div id = "pagenum">
 
 	<script>
-  
-  	$.ajax({
-  		method: 'get',
-  		data:{
-  			tier:'CHALLENGER'
-  		},
-  		url:'/personlol/example/chlist',
-  	}).done(res => {
-  		console.log(res)
-  		let rList = ''
-			$.each(res, function (i, reply) {
-				rList += '<table class="table table-hover" id="info_table">' +
-					'<tr height="25" >' +
-					'<td width="100px" >' + reply.summonername + '</td>' +
-					'<td width="100px" >' + reply.tier +'</td>'+
-					'<td width="100px" >' + reply.leaguepoints +'</td>'+
-					'<td width="100px" >' + reply.wins +'</td>'+
-					'<td width="100px" >' + reply.losses +'</td></tr>'+
-					'</table>'
+		//페이지 불러옴과 동시에 실행되는 함수
+		getajax('lol_ch',1)
+		highpage('lol_ch')
+
+		//디폴트
+		let cur_rank = 'ch'
+
+		//버튼 클릭시 실행되는 함수
+		function getranking(info){
+			cur_rank = info.value
+			highpage('lol_'+cur_rank)
+			getajax('lol_'+info.value, 1)
+		}
+
+		//페이지 번호 눌렀을때
+		function pageclick(info){
+			//페이지 눌렀을때 정보가져오기
+			getajax('lol_'+cur_rank, info)
+		}
+		
+		function highpage(rank){
+			$.ajax({
+				method:'get',
+				url:'/personlol/rank/highpage',
+				data:{'rank':rank}
+			}).done(res=>{
+				console.log(res)
+				let pList = ''
+				for (let i=0; i<res; i++){
+					pList+='<a href ="#" onclick = "pageclick('+(i+1)+')">'+(i+1)+'</a>'
+				}
+				$('#pagenum').html(pList);
+
+			}).fail(err=>{
+				console.log(err)
 			})
-			$('#info').html(rList);
-  		
-  	}).fail(err => {
-  		console.log(res)
-  	})
+		}
+
+			//비동기실행
+		function getajax(rank, page){
+			$.ajax({
+				method: 'get',
+				url:'/personlol/rank/ranking',
+				data:{'rank':rank, 'page':page},
+			}).done(res => {
+				console.log(res)
+				
+				let cList = ''
+				$.each(res, function (i, r) {
+					cList += '<table class="table table-hover" id="info_table">' +
+						'<tr height="25" >' +
+						'<td width="200px" >' + r.ranking + '</td>' +
+						'<td width="200px" >' + r.summonerName + '</td>' +
+						'<td width="200px" >' + r.tier +'</td>'+
+						'<td width="200px" >' + r.leaguePoints + '</td>'+
+						'<td width="200px" >' + r.wins +'</td>'+
+						'<td width="200px" >' + r.losses +'</td>'+
+						'<td width="200px" >' + r.veteran +'</td>'+
+						'<td width="200px" >' + r.inactive +'</td>'+
+						'<td width="200px" >' + r.freshBlood +'</td>'+		
+						'<td width="200px" >' + r.hotStreak +'</td></tr>'+
+						'</table>'
+				})
+				$('#info').html(cList);
+				
+			}).fail(err => {
+				console.log(res)
+			})
+		}
+			
   </script>
-  
-  
 
 </body>
 </html>
