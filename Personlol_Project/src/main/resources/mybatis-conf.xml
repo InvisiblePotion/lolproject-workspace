@@ -10,21 +10,13 @@
         <typeAlias type="com.loldata.www.dto.DTO 이름" alias="알리아스 이름" />
     </typeAliases>
     -->
-<<<<<<< HEAD
+
     <typeAliases>
-<<<<<<< HEAD
+
     	<package name="com.base.personlol.dto" />
-=======
-    	<package name="com.base.personlol.dto"/>
->>>>>>> 58412c354639774268d14b73636287d20b9b2107
-    </typeAliases>
-=======
-    
-    <typeAliases>
 
-    	<package name="com.base.personlol.dto"/>
 
     </typeAliases>
-    
->>>>>>> 94a45850b7b99a8088ee46f07598c14a086c8cc5
+
+
 </configuration>

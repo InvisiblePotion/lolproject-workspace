@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.personlol.HomeController;
-import com.base.personlol.dao.Example_dao;
 import com.base.personlol.dto.test2Dto;
 
 import lombok.extern.slf4j.Slf4j;

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.personlol.dao.duo_dao">
+	<select id="getList" resultType="duo">
+		<![CDATA[select * from duo]]>
+	</select>
+	
+	<resultMap type="duo" id="mapForRead">
+		<id column="D_ID" property="duo_id" />
+		<result column="D_TITLE" property="duo_title" />
+		<result column="D_CONTENT" property="duo_content" 
+		 	javaType="java.lang.String" jdbcType="NCLOB" />
+		<result column="D_DATE" property="duo_date" />	
+	</resultMap>	
+	
+	<insert id="duoWrite">
+		INSERT INTO duo VALUES(duo_SEQ.NEXTVAL,#{duo_title},#{duo_content},DEFAULT)
+	</insert>
+	
+	<insert id="duoUpdate">
+		UPDATE duo SET duo_title=#{duo_title}, duo_content=#{duo_content} WHERE duo_id = #{duo_id} 
+	</insert>
+	
+	<delete id="duoDelete">
+		DELETE FROM duo where duo_id = #{duo_id} 
+	</delete>
+	
+	<!-- <insert id="duoWriteTest" parameterType="duo">
+		INSERT INTO duoduo VALUES(#{duo_content},#(duo_title))
+	</insert>
+	
+	DB체크
+	<select id="cheackDB" resultType="Int">
+		select * from duoduo 
+	</select> -->
+	
+	
+	<!-- <insert id = "insert">
+		insert into duoduo (duo_id,duo_content,duo_ownerid,duo_lolname)
+		values (seq_duo.nextval, #{duo_content}, #{duo_ownerid}, #{duo_lolname})
+	</insert> -->
+	
+	<!-- <insert id = "insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+			select seq_duo.nextval from dual;
+		</selectKey>
+		
+		insert into duoduo (duo_id,duo_content,duo_ownerid,duo_lolname)
+		values (#{duo_id}, #{duo_content}, #{duo_ownerid}, #{duo_lolname})
+	</insert> -->
+	
+	<!-- <select id="read" resultType="duo">
+		select * from duoduo where duo_id = #{duo_id}
+	</select>
+	
+	<delete id="delete">
+		delete from duoduo where duo_id = #{duo_id}
+	</delete>
+	
+	<update id="update">
+		update duoduo,
+		content = #{duo_content},
+		updateDate = sysdate,
+		where duo_id = #{duo_id}
+	</update> -->
+</mapper>
