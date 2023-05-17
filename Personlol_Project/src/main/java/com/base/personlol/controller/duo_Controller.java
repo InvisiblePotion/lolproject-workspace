@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PostMapping;
+=======
+>>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/duo")
 public class duo_Controller {
 
+<<<<<<< HEAD
 	@Autowired
 	duo_service dse;	
 
@@ -108,4 +112,12 @@ public class duo_Controller {
 	 * return result; }
 	 */
 //}
+=======
+	@GetMapping("")
+	public String duo() {
+		return "duo";
+	}
+	
+	
+>>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
 }

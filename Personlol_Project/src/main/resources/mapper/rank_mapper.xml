@@ -5,6 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.base.personlol.dao.rank_dao"> 
+<<<<<<< HEAD
 
 	<select id="challengerinfo" resultType = "rank_dto">
 		SELECT * FROM LOL_CH ORDER BY LEAGUEPOINTS DESC
@@ -19,4 +20,21 @@
 	</select>
 
 
+=======
+	
+	<!-- 랭킹 정보 받아오는 서브쿼리에 서브쿼리 -->
+	<select id="rankinginfo" resultType="rank_dto">
+		SELECT T.*
+		FROM
+		(SELECT ROWNUM AS ranking, R.*
+		FROM (SELECT * FROM ${rank} S ORDER BY LEAGUEPOINTS DESC) R) T
+		WHERE ranking BETWEEN ${start_page} AND #{end_page}
+	</select>
+	
+	<!-- 최종 페이지 계산 -->
+	<select id="highpage" resultType="Integer">
+		SELECT CEIL(count(*)/100) FROM ${rank}
+	</select>
+
+>>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
 </mapper>

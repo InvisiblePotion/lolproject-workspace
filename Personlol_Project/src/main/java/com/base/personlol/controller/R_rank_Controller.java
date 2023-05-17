@@ -22,6 +22,7 @@ public class R_rank_Controller {
 	@Autowired //서비스 클래스 연결
 	rank_service r_ser;
 	
+<<<<<<< HEAD
 	@GetMapping("/challenger")
 	public List<rank_dto> Ranking_challenger() {
 		System.out.println("챌린저 받아오나요~?");
@@ -51,4 +52,28 @@ public class R_rank_Controller {
 		return masterinfo;
 		
 	}
+=======
+	//rank.jsp에 getajax 랭킹 정보 가져오기
+	@GetMapping("/ranking")
+	public List<rank_dto> Ranking_challenger(@RequestParam Map<String, ?> rankdata) {
+		System.out.println("챌린저 받아오나요~?");
+		System.out.println("너찍혀?~: "+ rankdata);
+		List<rank_dto> rankinfo = r_ser.rankinginfo(rankdata);
+		System.out.println("챌인포 받아왔옹?: "+rankinfo);	
+		
+		return rankinfo;
+		
+	}
+	
+	// 페이지 수 구해오는 함수
+	@GetMapping("/highpage")
+	public Integer highpage(@RequestParam String rank) {
+		System.out.println("페이지 띄우기 rest타?"+rank);
+		Integer highpage = r_ser.highpage(rank);
+		System.out.println("최대페이지 받아왔어?: "+highpage);
+		return highpage;
+	}
+	
+
+>>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
 }
