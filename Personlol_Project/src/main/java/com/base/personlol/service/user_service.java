@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 
 public class user_service {
+	
 	@Autowired
 	user_dao u_dao;
 	

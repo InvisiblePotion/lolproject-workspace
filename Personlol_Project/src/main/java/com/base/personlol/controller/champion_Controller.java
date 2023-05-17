@@ -15,4 +15,6 @@ public class champion_Controller {
 	public String champlist() {
 		return "champList";
 	}
+	
+	
 }//

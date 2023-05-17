@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.base.personlol.dao.champion_dao">
+  	<select id="key_list" resultType="com.base.personlol.dto.champion_dto">
+  		SELECT ${champ_icon} FROM CHAMPDATA 
+  	
+  	</select>
+  
+  	<select id="lane_img" resultType="com.base.personlol.dto.champion_dto">
+  		SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON , ci.LANE  FROM 
+  		CHAMPDATA c LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID WHERE  lane = #{lane}
+  	</select>
+  	
+  	<select id="lane_list" resultType="com.base.personlol.dto.champion_dto">
+  	SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON , ci.LANE as lane ,ci.WIN_RATE ,ci.PICK_RATE ,ci.BAN_RATE  FROM 
+  	CHAMPDATA c LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID WHERE lane = #{lane}
+  	</select>
+  	
+  </mapper>
