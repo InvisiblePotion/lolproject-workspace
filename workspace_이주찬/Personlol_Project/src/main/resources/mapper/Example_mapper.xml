@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.personlol.dao.Example_dao">
+
+	<select id="testDB" resultType="com.base.personlol.dto.Example_dto">
+		select #{num1} + #{num2} + #{num3} ex1 from dual
+	</select>
+
+	<insert id="testDB3" parameterType="member">
+		INSERT INTO TEST_MEMBER 
+		VALUES(#{userid},#{userpw},#{pwchk},#{account})
+	</insert>
+
+</mapper>
