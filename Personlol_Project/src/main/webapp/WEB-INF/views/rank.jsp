@@ -24,7 +24,7 @@
 						<button type="button">go!</button>
 					</div>
 					<div class="menu">
-						<a href="/personlol/champion/champlist" class="m-col">챔피언분석</a>
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
 						<a href="/personlol/summoner/rank" class="m-col">랭킹</a> 
 						<a href=" " class="m-col">듀오찾기</a> <a href=" " class="m-col">사용자분석</a>
 						<a href="/personlol/logine" class="m-col login">로그인</a>

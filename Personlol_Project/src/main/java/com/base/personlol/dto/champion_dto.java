@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class champion_dto {
-	private int champ_id;
+	private Integer champ_id;
 	private String champ_key;
 	private String champ_name;
 	private String champ_title;
@@ -18,6 +18,9 @@ public class champion_dto {
 	private String win_rate;
 	private String pick_rate;
 	private String ban_rate;
+	
+	//정렬
+	private String sort;
 	
 	
 	

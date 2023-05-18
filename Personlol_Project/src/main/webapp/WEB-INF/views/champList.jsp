@@ -29,7 +29,7 @@
 						<button type="button">go!</button>
 					</div>
 					<div class="menu">
-						<a href="/personlol/champion/champlist" class="m-col">챔피언분석</a>
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
 						<a href="/personlol/summoner/rank" class="m-col">랭킹</a> 
 						<a href=" " class="m-col">듀오찾기</a>
 						<a href=" " class="m-col">사용자분석</a>
@@ -44,18 +44,20 @@
 	<div class="container text-center">
 		<div class="row">
 			<div class = 'col'>
-				1
+				<div class="search-container">
+					<input type="text" class="search-summoner">
+				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col" id="col1">
 				<div id="btn-group1" class="btn-group" role="group"
 					aria-label="Basic outlined example">
-					<input type="button" class="btn btn-outline-primary" value="TOP">
-					<input type="button" class="btn btn-outline-primary" value="JUNGLE">
-					<input type="button" class="btn btn-outline-primary" value="MIDDLE">
-					<input type="button" class="btn btn-outline-primary" value="BOTTOM">
-					<input type="button" class="btn btn-outline-primary" value="UTILITY">
+					<input type="button" class="btn btn-outline-primary 1" value="TOP">
+					<input type="button" class="btn btn-outline-primary 1" value="JUNGLE">
+					<input type="button" class="btn btn-outline-primary 1" value="MIDDLE">
+					<input type="button" class="btn btn-outline-primary 1" value="BOTTOM">
+					<input type="button" class="btn btn-outline-primary 1" value="UTILITY">
 				</div>
 			</div>
 		</div class="row">
@@ -64,7 +66,7 @@
 
 			<div class="col">
 				<div class="search-container">
-					<input type="text" class="search-champ">
+					<input type="text" class="search-champ" placeholder="챔피언 검색" id="search-champ">
 				</div>
 				<div class="btn-group" role="group"
 					aria-label="Basic outlined example">
@@ -124,18 +126,19 @@
 		
 	</div class="container text-center">
 
-	<script>
+<script>
+$(document).ready(function() {
 	/*아이콘 부분*/
 	$.ajax({
 		method:'get',
-		data:{champ_icon:'champ_icon'},
 		url:'/personlol/champimg',
 	}).done(res => {
-
 		/*아이콘 띄우기  */
 		let icon_img = ''
 		$.each(res, function (i, img) {
-			icon_img += '<img class="icon_img" width="70" height="70" src="../resources/'+img.champ_icon +'" alt="이미지">'
+			icon_img +=
+				'<a href="/personlol/champion/detail?champ_id='+img.champ_id+'">'+
+				'<img class="icon_img" width="70" height="70" src="../resources/'+img.champ_icon +'" alt="이미지">'
 		})
 		$('.ul-group').html(icon_img);
 	}).fail(err => {
@@ -150,7 +153,7 @@
 			data:{champ_icon:'champ_icon'},
 			url:'/personlol/champimg',
 		}).done(res => {
-
+			console.log(res)
 			/*아이콘 띄우기  */
 			let icon_img = ''
 			$.each(res, function (i, img) {
@@ -251,37 +254,163 @@
 	})//
 	
 	
-</script>
 
-<script>
-/*챔프 리스트 부분*/
+
+<!--리스트 관련 함수 생성-->
+
+// 테이블 찍어주는 함수
+function updateTableData(data) {
+	  let lane_list_sort = '';
+
+	  $.each(data, function(i, list) {
+	    lane_list_sort +=
+	      '<tr><td class="number">' +
+	      (i + 1) +
+	      '</td>' +
+	      '<td align="left" width="120px"> <img width="30" height="30" src="../resources/' +
+	      list.champ_icon +
+	      '" alt="이미지">' +
+	      '<span style="font-size: 12px; font-weight: bold;">' +
+	      list.champ_name +
+	      '</span> </td>' +
+	      '<td align="left">' +
+	      0 +
+	      '</td>' +
+	      '<td align="left">' +
+	      list.win_rate +
+	      '</td>' +
+	      '<td align="left">' +
+	      list.pick_rate +
+	      '</td>' +
+	      '<td align="left">' +
+	      list.ban_rate +
+	      '</td>' +
+	      '<td align="left">' +
+	      0 +
+	      '</td> </tr>';
+	  });
+
+	  $('#list_table1').html(lane_list_sort);
+	}//찍어주는 함수 끝
+	
+	//win 클릭시 함수
+	function handleTableWinRateClick() {
+		  if (isSorting) return; // 정렬 중일 때는 추가 클릭 이벤트를 무시
+
+		  isSorting = true; // 정렬 중 플래그 설정
+
+		  // console.log("두번째 웨얼:" + where);
+		  // 정렬 순서 변경
+		  if (sortOrder === 'ASC') {
+		    sortOrder = 'DESC';
+		  } else {
+		    sortOrder = 'ASC';
+		  }
+
+		  $.ajax({
+		    method: 'get',
+		    url: '/personlol/list/sorted/winRate/' + where,
+		    data: { lane: where, sort: sortOrder }
+		  }).done(res => {
+		    console.log(res);
+		    updateTableData(res);
+		    isSorting = false; // 정렬 종료 후 플래그 초기화
+		  }).fail(err => {
+		    console.log(err);
+		  });
+		}
+		
+		//pick 클릭시 함수
+		function handleTablePickRateClick() {
+		  if (isSorting) return; // 정렬 중일 때는 추가 클릭 이벤트를 무시
+
+		  isSorting = true; // 정렬 중 플래그 설정
+
+		  // console.log("두번째 웨얼:" + where);
+		  // 정렬 순서 변경
+		  if (sortOrder === 'ASC') {
+		    sortOrder = 'DESC';
+		  } else {
+		    sortOrder = 'ASC';
+		  }
+
+		  $.ajax({
+		    method: 'get',
+		    url: '/personlol/list/sorted/pickRate/' + where,
+		    data: { lane: where, sort: sortOrder }
+		  }).done(res => {
+		    console.log(res);
+		    updateTableData(res);
+		    
+		    isSorting = false; // 정렬 종료 후 플래그 초기화
+		    
+		  }).fail(err => {
+		    console.log(err);
+		  });
+		}
+		
+		//ban 클릭시 함수
+		function handleTableBanRateClick() {
+		  if (isSorting) return; // 정렬 중일 때는 추가 클릭 이벤트를 무시
+
+		  isSorting = true; // 정렬 중 플래그 설정
+
+		  // console.log("두번째 웨얼:" + where);
+		  
+		  // 정렬 순서 변경
+		  if (sortOrder === 'ASC') {
+		    sortOrder = 'DESC';
+		  } else {
+		    sortOrder = 'ASC';
+		  }
+
+		  $.ajax({
+		    method: 'get',
+		    url: '/personlol/list/sorted/banRate/' + where,
+		    data: { lane: where, sort: sortOrder }
+		  }).done(res => {
+		    console.log(res);
+		    updateTableData(res);
+		    
+		    isSorting = false; // 정렬 종료 후 플래그 초기화
+		    
+		  }).fail(err => {
+		    console.log(err);
+		  });
+		}
+		
+	
+
+
+
+
+/*챔프 리스트 초기부분 */
 $.ajax({
 	method:'get',
 	url:'/personlol/list',
 	data:{lane:'TOP'},
 	
 }).done(res => {
-	let flist=''
-	$.each(res,function (i,list){
-		flist +=
-		'<tr><td>'+(i+1)+'</td>'+
-		'<td align="left" width="120px"> <img width="30" height="30" src="../resources/'+list.champ_icon+'" alt ="이미지">'+
-		'<span style="font-size: 12px; font-weight: bold;">'+list.champ_name+'</span> </td>'+
-		'<td align="center">'+0+'</td>'+
-		'<td align="center">'+list.win_rate+'</td>'+
-		'<td align="center">'+list.pick_rate+'</td>'+
-		'<td align="center">'+list.ban_rate+'</td>'+
-		'<td align="center">'+ 0 +'</td> </tr>'
-	})
-	$('#list_table1').html(flist)
+	updateTableData(res);
+	
+	
 	
 }).fail(err =>{
 	
 })//
 
-$('input').click(function () {
+//라인별 버튼 눌렀을때 비동기 처리 부분
+var where;
+//초기 정렬 순서 설정
+let sortOrder = 'ASC';
+
+let isSorting = false; // 정렬 중 여부를 나타내는 변수
+
+$('.1').click(function () {
+	if (isSorting) return; // 정렬 중일 때는 추가 클릭 이벤트를 무시
+	
 	where = $(this).val();
-	//console.log(where);
+	//console.log("첫번째 웨얼:"+where);
 	
 	$.ajax({
 		method:'get',
@@ -289,20 +418,15 @@ $('input').click(function () {
 		data:{lane:where}
 		
 	}).done(res => {
-		let lane_list=''
+		updateTableData(res)
+		// 승률 클릭시
+    	$('#table_win_rate').click(handleTableWinRateClick);
+
+    	// 픽률 클릭시
+    	$('#table_pick_rate').click(handleTablePickRateClick);
 		
-		$.each(res,function (i,list){
-			lane_list +=
-				'<tr><td>'+(i+1)+'</td>'+
-				'<td align="left" width="120px"> <img width="30" height="30" src="../resources/'+list.champ_icon+'" alt ="이미지">'+
-				'<span style="font-size: 12px; font-weight: bold;">'+list.champ_name+'</span> </td>'+
-				'<td align="left">'+0+'</td>'+
-				'<td align="left">'+list.win_rate+'</td>'+
-				'<td align="left">'+list.pick_rate+'</td>'+
-				'<td align="left">'+list.ban_rate+'</td>'+
-				'<td align="left">'+ 0 +'</td> </tr>'
-		})
-		$('#list_table1').html(lane_list)
+		//밴률 클릭시
+    	$('#table_ban_rate').click(handleTableBanRateClick);
 		
 		
 	}).fail(err => {
@@ -310,11 +434,38 @@ $('input').click(function () {
 	})
 	
 	
+	
+})//
+
+$('#search-champ').on('input', function() {
+	var searchTerm = $(this).val(); // 검색 입력란의 값을 가져옵니다.
+	console.log('검색어:', searchTerm);
+	
+	$.ajax({
+		method:'get',
+		url:'/personlol/champion/search',
+		data:{ searchVal: searchTerm },
+		
+	}).done(res => {
+		let icon_img = ''
+		$.each(res, function (i, img) {
+			icon_img += '<img class="icon_img" width="70" height="70" src="../resources/'+img.champ_icon +'" alt="이미지">'
+		})
+		$('.ul-group').html(icon_img);
+
+	}).fail(err => {
+		console.log(err)
+	})
+	
+	
+	
 })//
 
 
-
+});//도큐뭔트 뤠디
 </script>
+
+
 
 
 </body>

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.personlol.dao.champion_dao;
+import com.base.personlol.dto.ChampRune_dto;
+import com.base.personlol.dto.Champskill_dto;
 import com.base.personlol.dto.champion_dto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +19,9 @@ public class champion_service {
 	@Autowired
 	champion_dao champ_dao;
 
-	public List<champion_dto> key_list(String champ_icon) {
+	public List<champion_dto> key_list() {
 		List<champion_dto> keyList = null;
-		keyList = champ_dao.key_list(champ_icon);
+		keyList = champ_dao.key_list();
 		
 		return keyList;
 	}
@@ -101,6 +103,59 @@ public class champion_service {
 		return util_list;
 	}
 	
+	//win rate 리스트 정렬 부분
+	public List<champion_dto> list_sort_win(String lane, String sort) {
+		List<champion_dto> list_sort_win = null;
+		list_sort_win = champ_dao.lane_sort_win(lane,sort);
+		return list_sort_win;
+	}
+
+	//pick rate 리스트 정렬
+	public List<champion_dto> list_sort_pick(String lane, String sort) {
+		List<champion_dto> list_sort_pick = null;
+		list_sort_pick = champ_dao.lane_sort_pick(lane,sort);
+		return list_sort_pick;
+	}
+	
+	//ban rate 리스트 정렬
+	public List<champion_dto> list_sort_ban(String lane, String sort) {
+		List<champion_dto> list_sort_ban = null;
+		list_sort_ban = champ_dao.lane_sort_ban(lane,sort);
+		return list_sort_ban;
+	}
+	
+	//챔피언 검색
+	public List<champion_dto> search_champ(String searchVal) {
+		List<champion_dto> search_champ =null;
+		search_champ = champ_dao.search_champ(searchVal);
+		
+		return search_champ;
+	}
+
+	public List<champion_dto> champ_info(Integer champ_id) {
+		List<champion_dto> champ_info = null;
+		champ_info = champ_dao.champ_info(champ_id);
+		return champ_info;
+	}
+
+	public List<Champskill_dto> champ_skill(Integer champ_id) {
+		List<Champskill_dto> champ_skill = null;
+		champ_skill = champ_dao.champ_skill(champ_id);
+		return champ_skill;
+	}
+
+	public List<Champskill_dto> skill_tree(Integer champ_id) {
+		List<Champskill_dto> skill_tree = null;
+		skill_tree = champ_dao.skill_tree(champ_id);
+		return skill_tree;
+	}
+
+	public List<ChampRune_dto> champ_rune(Integer champ_id) {
+		List<ChampRune_dto> champ_rune = null;
+		champ_rune = champ_dao.champ_rune(champ_id);
+		return champ_rune;
+	}
+
 	
 
 }//

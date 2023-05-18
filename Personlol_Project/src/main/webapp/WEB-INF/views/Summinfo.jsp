@@ -22,7 +22,7 @@
                         <button type="button">go!</button>
                     </div>
                     <div class="menu">
-                        <a href="/personlol/example/test-champlist" class="m-col">챔피언분석</a>
+                        <a href="/personlol/champion/" class="m-col">챔피언분석</a>
                         <a href=" " class="m-col">랭킹</a>
                         <a href=" " class="m-col">듀오찾기</a>
                         <a href=" " class="m-col">사용자분석</a>
