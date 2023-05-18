@@ -228,10 +228,9 @@
             console.log(summoner_name)
             const encoded_name = encodeURIComponent(summoner_name);
             const url = '/personlol/summoner/?summoner_name=' + encoded_name;
-            location.href = url;
+            location.href = url
         }
     </script>
-
 
     <script>
         // 시작시 롤 네임 뿌려주기 위한 코드
@@ -243,7 +242,7 @@
         }).done(res => {
             console.log(res);
             $('#cur_lolname').text(res.user_id);
-            $('#SUMMONER_PROFILE').html('<img src="./resources/dd/img/mypagetest/' + res.summoner_profile +
+            $('#SUMMONER_PROFILE').html('<img src="./resources/dd/img/profileicon/'+res.summoner_profile+
                 '.png">');
             const summoner_name = res.summoner_name;
             console.log(summoner_name);
