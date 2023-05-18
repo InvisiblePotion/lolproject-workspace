@@ -127,9 +127,10 @@ public class R_userinfo_Controller {
 	
 	//회원탈퇴
 	@DeleteMapping("/deletemember")
-	public @ResponseBody Integer deletemember(@RequestBody Map<String,String> userid) {
+	public @ResponseBody Integer deletemember(@RequestBody Map<String,String> userid, HttpSession session) {
 		System.out.println("삭제할려고하는id는?: "+ userid);
 		Integer deletemember = u_ser.deletemember(userid);
+		session.invalidate();
 		return deletemember;
 	}
 	

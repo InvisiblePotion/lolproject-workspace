@@ -22,12 +22,28 @@
                         <button type="button">go!</button>
                     </div>
                     <div class="menu">
-                        <a href="/personlol/example/test-champlist" class="m-col">챔피언분석</a>
-                        <a href=" " class="m-col">랭킹</a>
-                        <a href=" " class="m-col">듀오찾기</a>
+                        <a href="/personlol/champion/champlist" class="m-col">챔피언분석</a>
+                        <a href="/personlol/summoner/rank" class="m-col">랭킹</a>
+                        <a href="/personlol/duo" class="m-col">듀오찾기</a>
                         <a href=" " class="m-col">사용자분석</a>
-                        <a href="/personlol/example/test-logine" class="m-col login">로그인</a>
-                    </div>
+                        
+                        <c:choose>
+                          <c:when test="${sessionScope.id ne null}">
+                            <a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+                          </c:when>
+                          <c:otherwise>
+                            <a href="/personlol/logine" class="m-col login">로그인</a>
+                          </c:otherwise>
+                        </c:choose>
+          
+                        <div id="loginout">
+                          <c:if test="${sessionScope.id ne null}">
+                            <div><span class = "m-col">${sessionScope.id}님 환영합니다!</span></div>
+                            <div><span><a href="#" id="logout" class="m-col logout">로그아웃</a></span></div>
+                          </c:if>
+                        </div id="loginout">
+          
+                      </div>
                 </div>
             </nav>
         </div >
@@ -2085,7 +2101,32 @@
    
 </body>
     <script>
-    	
-
+        function getQueryString(key) {
+            //url 가져오는거
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(key);
+        }
+        const summoner_name = getQueryString('summoner_name')
+        
+        //summoner_name 값 가져오기
+        console.log(summoner_name)
+        $.ajax({
+            method:'get',
+            url:'/personlol/summoner/info',
+            data:{'summoner_name':summoner_name},
+            contentType: 'application/json; charset=utf-8'
+        }).done(res=>{
+            console.log(res);
+        }).fail(err=>{
+            console.log(err);
+        })
+    </script>
+    <script>
+        //로그아웃
+        $('#logout').click(function () {
+        location.href = '/personlol/logout';
+        console.log("로그아웃");
+        alert("로그아웃");
+        })
     </script>
 </html>

@@ -12,8 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 public class summoner_Controller {
 
 	
-	@GetMapping("/rank")
+	@GetMapping("/")
 	public String rank() {
-		return "rank";
+		return "summonerinfo";
 	} 
-}//
+}

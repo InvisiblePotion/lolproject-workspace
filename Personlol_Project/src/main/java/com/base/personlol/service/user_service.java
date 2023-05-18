@@ -78,8 +78,6 @@ public class user_service {
 			Integer changepw = u_dao.changepw(changepwdata);
 			System.out.println("업데이트 여부: "+ changepw);
 			return changepw;
-		}else {
-			
 		}
 		return null;		
 	}

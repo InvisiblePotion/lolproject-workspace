@@ -41,6 +41,7 @@ public class R_rank_Controller {
 		Integer highpage = r_ser.highpage(rank);
 		System.out.println("최대페이지 받아왔어?: "+highpage);
 		return highpage;
+		
 	}
 	
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +34,21 @@
 						<a href="/personlol/summoner/rank" class="m-col">랭킹</a> 
 						<a href=" " class="m-col">듀오찾기</a>
 						<a href=" " class="m-col">사용자분석</a>
-						<a href="/personlol/logine" class="m-col login">로그인</a>
+						<c:choose>
+							<c:when test="${sessionScope.id ne null}">
+								<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/personlol/logine" class="m-col login">로그인</a>
+							</c:otherwise>
+						</c:choose>
+
+						<div id="loginout">
+							<c:if test="${sessionScope.id ne null}">
+								<div><span class = "m-col">${sessionScope.id}님 환영합니다!</span></div>
+								<div><span><a href="#" id="logout" class="m-col logout">로그아웃</a></span></div>
+							</c:if>
+						</div id="loginout">
 					</div>
 				</div>
 			</nav>
@@ -120,6 +136,14 @@
 		$('.ul-group').html(icon_img);
 	}).fail(err => {
 		console.log(err)
+	})
+</script>
+
+<script>
+	$('#logout').click(function () {
+		location.href = '/personlol/logout';
+		console.log("로그아웃");
+		alert("로그아웃");
 	})
 </script>
 </body>

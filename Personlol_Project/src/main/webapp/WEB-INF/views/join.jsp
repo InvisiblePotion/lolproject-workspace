@@ -66,7 +66,7 @@
 		}).done(res => {
 			console.log(res)
 			alert("join 성공")
-			location.href = '/personlol/success' 
+			location.href = '/personlol/logine' 
 		}).fail(err => {
 			console.log(res)
 		})

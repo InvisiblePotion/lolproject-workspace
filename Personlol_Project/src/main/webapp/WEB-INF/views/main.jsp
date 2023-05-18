@@ -1,15 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>main</title>
 
-<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<head>
+  <meta charset="UTF-8">
+  <title>main</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-	<div id="wrapdiv">
+  <div id="wrapdiv">
 
     <div id="generic">
       <div class="area">
@@ -25,12 +31,31 @@
               <a href="/personlol/summoner/rank" class="m-col">랭킹</a>
               <a href="/personlol/duo" class="m-col">듀오찾기</a>
               <a href=" " class="m-col">사용자분석</a>
-              <a href="/personlol/logine" class="m-col login">로그인</a>
+              
+              <c:choose>
+                <c:when test="${sessionScope.id ne null}">
+                  <a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+                </c:when>
+                <c:otherwise>
+                  <a href="/personlol/logine" class="m-col login">로그인</a>
+                </c:otherwise>
+              </c:choose>
+
+              <div id="loginout">
+                <c:if test="${sessionScope.id ne null}">
+                  <div><span class = "m-col">${sessionScope.id}님 환영합니다!</span></div>
+                  <div><span><a href="#" id="logout" class="m-col logout">로그아웃</a></span></div>
+                </c:if>
+              </div id="loginout">
+
             </div>
           </div>
+
+
+
         </nav>
       </div>
-    </div  id="generic">
+    </div id="generic">
 
     <div id="maindiv">
 
@@ -96,4 +121,13 @@
   </div id="wrapdiv">
 
 </body>
+
+<script>
+  $('#logout').click(function () {
+    location.href = '/personlol/logout';
+    console.log("로그아웃");
+    alert("로그아웃");
+  })
+</script>
+
 </html>
