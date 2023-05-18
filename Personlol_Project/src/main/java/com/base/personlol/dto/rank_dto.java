@@ -21,10 +21,6 @@ public class rank_dto {
 	boolean inactive;
 	boolean freshBlood;
 	boolean hotStreak;
-<<<<<<< HEAD
-=======
-	
 	int ranking;
->>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
 
 }

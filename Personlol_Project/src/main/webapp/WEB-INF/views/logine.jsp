@@ -72,7 +72,7 @@
         if (res == 1) {
           let s_id = '<%=session.getAttribute("id")%>';
           console.log(s_id);
-          location.href = '/personlol/success';
+          location.href = '/personlol/main';
         } else if (res == 0) {
           alert("로그인 실패")
         }

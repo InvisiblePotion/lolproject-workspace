@@ -1,5 +1,6 @@
 package com.base.personlol.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.base.personlol.dao.duo_dao;
-import com.base.personlol.dto.duo_dto;
+import com.base.personlol.dto.Duo_dto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,26 +19,32 @@ public class duo_service {
 	@Autowired
 	duo_dao ddao;
 	
-	public List<duo_dto> getList() {
+	public List<Duo_dto> getList() {
 		System.out.println("getList..........");
-		List<duo_dto> dList=null;
+		List<Duo_dto> dList=null;
 		dList=ddao.getList();
 		return dList;
 	}
 	
-	public boolean duoWrite(duo_dto duo) {
+	public boolean duoWrite(Duo_dto duo) {
+		System.out.println("Service: "+ ddao.duoWrite(duo));
 		return ddao.duoWrite(duo);
 	}
 	
-	public boolean duoDelete(String duo_id) {
-		return ddao.duoDelete(duo_id);
+	public void duoDelete(Integer duo_id) {
+		boolean b = true;
+		int cnt=ddao.getDuoExist(duo_id);
+		if (cnt!=0) {
+			b = ddao.duoDelete(duo_id);
+		}System.out.println("b="+b);
+		/* return ddao.duoDelete(duo_id); */
 	}
 
-	public boolean duoUpdate(duo_dto duo) {
+	public boolean duoUpdate(Duo_dto duo) {
 		System.out.println("Service_update: "+duo);
 		return ddao.duoUpdate(duo);
 	}
-	
+
 	
 	
 //	public boolean duoWrite(duo_dto duo) {

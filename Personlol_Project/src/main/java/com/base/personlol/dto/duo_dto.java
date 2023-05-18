@@ -1,5 +1,6 @@
 package com.base.personlol.dto;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
@@ -8,11 +9,13 @@ import lombok.Data;
 
 @Data
 @Alias("duo")
-public class duo_dto {
+public class Duo_dto {
 	
 	private Long duo_id;
-	private String duo_title;
+	private String duo_ownerid;
+	private String duo_accepter;
 	private String duo_content;
-	private Date duo_date;
-	
+	private Long duo_active;
+	private Timestamp duo_date;
+	private String duo_title;	
 }

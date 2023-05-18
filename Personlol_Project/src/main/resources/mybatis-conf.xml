@@ -8,6 +8,7 @@
     <!--
     <typeAliases>
         <typeAlias type="com.loldata.www.dto.DTO 이름" alias="알리아스 이름" />
+    
     </typeAliases>
     -->
 

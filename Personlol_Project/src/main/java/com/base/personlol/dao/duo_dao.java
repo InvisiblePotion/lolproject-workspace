@@ -1,18 +1,25 @@
 package com.base.personlol.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.base.personlol.dto.duo_dto;
+import org.apache.ibatis.annotations.Select;
+
+import com.base.personlol.dto.Duo_dto;
+
 
 public interface duo_dao {
 
-	public List<duo_dto> getList();
+	public ArrayList<Duo_dto> getList();
 	
-	public boolean duoWrite(duo_dto duo);	
+	public boolean duoWrite(Duo_dto duo);	
 	
-	public boolean duoDelete(String duo_id);
+	public boolean duoDelete(Integer duo_id);
 
-	public boolean duoUpdate(duo_dto duo);
+	public boolean duoUpdate(Duo_dto duo);
+	
+	@Select("SELECT COUNT(*) FROM DUO WHERE DUO_ID=#{duo_id}")
+	public int getDuoExist(Integer duo_id);
 	
 	/*
 	 * public int duoUpdate(int duo_id);

@@ -1,10 +1,9 @@
 package com.base.personlol.service;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
+
 import java.util.Map;
->>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ public class rank_service {
 	@Autowired
 	rank_dao r_dao;
 
-<<<<<<< HEAD
 	public List<rank_dto> challengerinfo() {
 		List<rank_dto> challengerinfo = r_dao.challengerinfo();
 		System.out.println("ser에 challengerinfo 받아와? ");
@@ -38,7 +36,7 @@ public class rank_service {
 		System.out.println("ser에 masterinfoinfo 받아와? ");
 		return masterinfo;
 	}
-=======
+
 	//랭킹정보 받아오는 ser
 	public List<rank_dto> rankinginfo(Map<String, ?> rankdata) {
 		//디폴트 페이지 값!
@@ -69,7 +67,5 @@ public class rank_service {
 		return highpage;
 	}
 	
-
->>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
 
 }

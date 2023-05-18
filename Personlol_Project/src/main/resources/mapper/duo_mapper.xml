@@ -16,8 +16,8 @@
 		<result column="D_DATE" property="duo_date" />	
 	</resultMap>	
 	
-	<insert id="duoWrite">
-		INSERT INTO duo VALUES(duo_SEQ.NEXTVAL,#{duo_title},#{duo_content},DEFAULT)
+	<insert id="duoWrite"><!-- DUO_SEQ.NEXTVAL -->
+		INSERT INTO DUO VALUES(SEQ_DUO.NEXTVAL,#{duo_ownerid},DEFAULT,#{duo_content},DEFAULT,DEFAULT,#{duo_title})
 	</insert>
 	
 	<insert id="duoUpdate">
@@ -25,7 +25,7 @@
 	</insert>
 	
 	<delete id="duoDelete">
-		DELETE FROM duo where duo_id = #{duo_id} 
+		DELETE FROM DUO where duo_id = #{duo_id} 
 	</delete>
 	
 	<!-- <insert id="duoWriteTest" parameterType="duo">

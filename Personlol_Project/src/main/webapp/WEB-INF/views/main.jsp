@@ -23,11 +23,8 @@
             <div class="menu">
               <a href="/personlol/champion/champlist" class="m-col">챔피언분석</a>
               <a href="/personlol/summoner/rank" class="m-col">랭킹</a>
-<<<<<<< HEAD
               <a href="/personlol/duo/" class="m-col">듀오찾기</a>
-=======
               <a href="/personlol/duo" class="m-col">듀오찾기</a>
->>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
               <a href=" " class="m-col">사용자분석</a>
               <a href="/personlol/logine" class="m-col login">로그인</a>
             </div>

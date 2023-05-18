@@ -41,15 +41,14 @@
 				<div class="btn-toolbar justify-content-between" role="toolbar"
 					aria-label="Toolbar with button groups">
 					<div class="btn-group" role="group" aria-label="First group">
-<<<<<<< HEAD
+
 						<button type="button" id = "get_ch" class="btn btn-outline-secondary">챌린져</button>
 						<button type="button" id = "get_gm"class="btn btn-outline-secondary">그랜드마스터</button>
 						<button type="button" id = "get_m"class="btn btn-outline-secondary">마스터</button>
-=======
 						<button type="button" onclick="getranking(this)" id = "get_ch" class="btn btn-outline-secondary" value="ch">챌린져</button>
 						<button type="button" onclick="getranking(this)" id = "get_gm" class="btn btn-outline-secondary" value="gm">그랜드마스터</button>
 						<button type="button" onclick="getranking(this)" id = "get_m" class="btn btn-outline-secondary" value="master">마스터</button>
->>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
+
 						
 					</div>
 					<div class="input-group">
@@ -93,7 +92,6 @@
 	</div id = "pagenum">
 
 	<script>
-<<<<<<< HEAD
   	$.ajax({
   		method: 'get',
   		url:'/personlol/rank/challenger',
@@ -209,7 +207,8 @@
 	})
   
   </script>
-=======
+
+	<script>
 		//페이지 불러옴과 동시에 실행되는 함수
 		getajax('lol_ch',1)
 		highpage('lol_ch')
@@ -283,7 +282,7 @@
 		}
 			
   </script>
->>>>>>> 7e07cbab88576cadfdf2605b98c732ce4a4ba0dd
+
 
 </body>
 </html>
