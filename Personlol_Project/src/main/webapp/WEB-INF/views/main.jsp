@@ -6,12 +6,17 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
   <meta charset="UTF-8">
   <title>main</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+
 </head>
 
 <body>
@@ -27,7 +32,7 @@
               <button class = "gosummonerinfo" type="button">go!</button>
             </div>
             <div class="menu">
-              <a href="/personlol/champion/champlist" class="m-col">챔피언분석</a>
+              <a href="/personlol/champion/" class="m-col">챔피언분석</a>
               <a href="/personlol/summoner/rank" class="m-col">랭킹</a>
               <a href="/personlol/duo" class="m-col">듀오찾기</a>
               <a href=" " class="m-col">사용자분석</a>
