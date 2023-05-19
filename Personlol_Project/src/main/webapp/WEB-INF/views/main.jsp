@@ -6,17 +6,17 @@
 <!DOCTYPE html>
 <html>
 
-<<<<<<< HEAD
+
 <head>
   <meta charset="UTF-8">
   <title>main</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-=======
+
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
->>>>>>> d791a76e27450727fa7e19db29be1fa729c94f3a
+
 </head>
 
 <body>
