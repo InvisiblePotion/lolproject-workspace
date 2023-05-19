@@ -1,0 +1,145 @@
+/* 헤더부분 */
+*{
+  box-sizing: border-box;
+  border: 0 solid;
+}
+div{
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+h1, p{
+  margin: 0;
+}
+li{
+  list-style: none;
+}
+
+body{
+  width: 100%;
+  height: 100%;
+  max-width: unset;
+  margin: 0px auto;
+  line-height: 1.193;
+  background-color: #f5f5f5;
+
+}
+#generic{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.area{
+  min-width: 1208px;
+}
+.bener-container{
+  width: 100%;
+  height: 68px;
+  background-color: darkcyan;
+}
+.bener{
+  display: flex;
+  height: 100%;
+  margin: 0 15% 0 5%;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.imgfile{
+  margin-right: 34px;
+}
+.search-bar{
+  width: 360px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4px 13px 4px 4px;
+  border-radius: 4px;
+}
+.menu{
+  display: flex;
+  /* margin-left: auto; */
+  align-items: center;
+  height: 50px;
+}
+.m-col{
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  margin-left: 20px;
+  color: azure;
+  width: 120px;
+  
+}
+
+#loginout {
+  display: flex;
+  flex-direction: row;
+}
+
+
+/* 헤더끝 */
+
+#wrapdiv{
+  background-color: #81ACFF;
+}
+
+#maindiv{
+  display: block;
+  width: 1080px;
+  margin: 0 auto;
+  /* border: 1px solid black; */
+}
+
+#m_logo{
+  display: flex;
+  justify-content: center;
+  margin: 56px 0 46px;
+  /* border: 1px solid black; */
+}
+
+#searchdiv{
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  height: 124px;
+  /* border: 1px solid black; */
+  margin: 0 auto;
+}
+
+#lanediv{
+  width: 1080px;
+  height: 266px;
+  display: flex;
+  margin-top: 24px;
+  justify-content: space-between;
+  flex-direction: row;
+
+}
+
+.m_lane{
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  /* border: 1px solid black; */
+  background-color: white;
+}
+
+#duodiv{
+  display: flex;
+  margin-top: 24px;
+  justify-content: space-between;
+}
+
+.duolist{
+  width: 320px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid black; */
+  background-color: white;
+}

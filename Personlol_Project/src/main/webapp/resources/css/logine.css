@@ -1,0 +1,49 @@
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+#root {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 로고 */
+.logo-image{
+  width: 250px;
+  height: 60px;
+}
+
+body {
+  background-color: #f5f5f5; /* 배경색 추가 */
+}
+
+.logine-layout {
+  margin-top: 80px;
+  margin-bottom: 0px;
+  max-width: 1000px;
+  height: 650px;
+  /* margin: 0 auto; */
+  padding: 20px;
+  background-color: #fff; /* 배경색 추가 */
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+/* msg */
+span{
+  font-size: 14px;
+}
+.msg1-div{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.msg2-div{
+  margin-top: 20px;
+}
+
+
