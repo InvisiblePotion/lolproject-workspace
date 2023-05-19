@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -16,7 +19,7 @@
         <div class="area">
             <nav class="bener-container">
                 <div class="bener">
-                    <a href=" " class="imgfile"><img src="../resources/img/logotesting.png" ></a>
+                    <a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png" ></a>
                     <div class="search-bar">
                         <input type="text">
                         <button type="button">go!</button>
@@ -2117,6 +2120,11 @@
             contentType: 'application/json; charset=utf-8'
         }).done(res=>{
             console.log(res);
+            $('.summoner_tier').html(res.summoner_tier)
+            $('.summoner_name').html(summoner_name)
+            $('.summoner_level').html(res.summoner_level)
+            $('.summoner_icon').html('<img src="../resources/dd/img/profileicon/'+res.summoner_profile+
+                '.png">');
         }).fail(err=>{
             console.log(err);
         })

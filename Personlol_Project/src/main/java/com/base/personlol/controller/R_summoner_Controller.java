@@ -23,11 +23,11 @@ public class R_summoner_Controller {
 	summoner_service sum_ser;
 	
 	@GetMapping("/info")
-	public String getfirstinfo(@RequestParam Map<String,String> summoner_name) {
+	public summoner_dto getfirstinfo(@RequestParam Map<String,String> summoner_name) {
 		System.out.println("깐트롤라 firstinfo?"+summoner_name);
 		summoner_dto firstinfo = sum_ser.getfirstinfo(summoner_name); 
 		System.out.println("돌아온깐트롤라 firstinfo?: "+firstinfo);
-		return "firstinfo";
+		return firstinfo;
 	}
 
 

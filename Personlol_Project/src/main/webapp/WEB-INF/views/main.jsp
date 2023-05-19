@@ -23,15 +23,15 @@
           <div class="bener">
             <a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png"></a>
             <div class="search-bar">
-              <input type="text">
-              <button type="button">go!</button>
+              <input class= "summoner_name" type="text">
+              <button class = "gosummonerinfo" type="button">go!</button>
             </div>
             <div class="menu">
               <a href="/personlol/champion/champlist" class="m-col">챔피언분석</a>
               <a href="/personlol/summoner/rank" class="m-col">랭킹</a>
               <a href="/personlol/duo" class="m-col">듀오찾기</a>
               <a href=" " class="m-col">사용자분석</a>
-              
+
               <c:choose>
                 <c:when test="${sessionScope.id ne null}">
                   <a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
@@ -43,7 +43,7 @@
 
               <div id="loginout">
                 <c:if test="${sessionScope.id ne null}">
-                  <div><span class = "m-col">${sessionScope.id}님 환영합니다!</span></div>
+                  <div><span class="m-col">${sessionScope.id}님 환영합니다!</span></div>
                   <div><span><a href="#" id="logout" class="m-col logout">로그아웃</a></span></div>
                 </c:if>
               </div id="loginout">
@@ -69,8 +69,8 @@
         <div>
           <fieldset>
             <legend>전적 검색</legend>
-            <input>
-            <button>전적검색</button>
+            <input class="summoner_name">
+            <button class="gosummonerinfo">전적검색</button>
           </fieldset>
         </div>
       </div id="searchdiv">
@@ -120,14 +120,24 @@
 
   </div id="wrapdiv">
 
+  <script>
+    $('.gosummonerinfo').click(function () {
+      const summoner_name = $('.summoner_name').val()
+      const encoded_name = encodeURIComponent(summoner_name);
+      const url = '/personlol/summoner/?summoner_name=' + encoded_name;
+      location.href = url
+    })
+  </script>
+  <script>
+    //로그아웃
+    $('#logout').click(function () {
+      location.href = '/personlol/logout';
+      console.log("로그아웃");
+      alert("로그아웃");
+    })
+  </script>
 </body>
 
-<script>
-  $('#logout').click(function () {
-    location.href = '/personlol/logout';
-    console.log("로그아웃");
-    alert("로그아웃");
-  })
-</script>
+
 
 </html>

@@ -5,4 +5,10 @@
 
 <mapper namespace="com.base.personlol.dao.summoner_dao">
 
+    <select id="getsummonerinfo" resultType="summonerinfodto">
+        SELECT s.SUMMONER_LEVEL, s.SUMMONER_TIER, s.SUMMONER_PROFILE
+        FROM SUMMONER s
+        WHERE s.SUMMONER_NAME = #{summoner_name}
+    </select>
+    
 </mapper>
