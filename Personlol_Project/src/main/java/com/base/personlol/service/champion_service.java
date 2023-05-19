@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.personlol.dao.champion_dao;
+import com.base.personlol.dto.ChampRuneCore_dto;
+import com.base.personlol.dto.ChampRuneShard_dto;
+import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
+import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -155,6 +159,27 @@ public class champion_service {
 		champ_rune = champ_dao.champ_rune(champ_id);
 		return champ_rune;
 	}
+
+	public List<ChampRuneType_dto> type_img(Integer typecore) {
+		List<ChampRuneType_dto> type_img = null;
+		type_img = champ_dao.type_img(typecore);
+		return type_img;
+	}
+
+	public List<ChampRuneCore_dto> core_img(Integer core_main) {
+		List<ChampRuneCore_dto> core_img = null;
+		core_img = champ_dao.core_img(core_main);
+		return core_img;
+	}
+
+	public List<ChampRuneShard_dto> shard_img(Integer shard) {
+		List<ChampRuneShard_dto> shard_img = null;
+		shard_img = champ_dao.shard_img(shard);
+		return shard_img;
+	}
+
+
+
 
 	
 
