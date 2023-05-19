@@ -11,8 +11,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/champion")
 public class champion_Controller {
 
-	@GetMapping("/champlist")
+	@GetMapping("/")
 	public String champlist() {
 		return "champList";
 	}
+	
+	@GetMapping("/detail")
+	public String detail() {
+		return "detail";
+	}
+	
+	
+	
 }//
