@@ -15,7 +15,7 @@ apiKeyList.json
 .__pycache__/
 
 ### Spring ###
-/Personlol_Project/src/main/webapp/resources/
+###/Personlol_Project/src/main/webapp/resources/###
 
 ### VSCode ###
 settings.json
