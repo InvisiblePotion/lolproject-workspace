@@ -23,7 +23,7 @@
         </div>
         
         <button id="idfind_button" class="btn btn-primary btn-lg btn-block">로그인 하러가기</button>
-        <a href="/personlol/idfind"><span class="pwmsg">비밀번호를 잊으셨나요?</span></a>
+        <a href="/personlol/pwfind"><span class="pwmsg">비밀번호를 잊으셨나요?</span></a>
         <div class="msg2-div">
           <span>PersonLoL이 처음이세요?</span> &nbsp; &nbsp;
           <a href="/personlol/agree"><span>회원가입하기</span></a>

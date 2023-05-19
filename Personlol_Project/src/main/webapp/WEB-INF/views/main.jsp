@@ -14,8 +14,8 @@
   <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
 
 </head>
 
@@ -28,8 +28,9 @@
           <div class="bener">
             <a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png"></a>
             <div class="search-bar">
-              <input class= "summoner_name" type="text">
-              <button class = "gosummonerinfo" type="button">go!</button>
+
+              <input class="summoner_name" type="text">
+              <button class="gosummonerinfo" type="button">go!</button>
             </div>
             <div class="menu">
               <a href="/personlol/champion/" class="m-col">챔피언분석</a>
@@ -126,12 +127,13 @@
   </div id="wrapdiv">
 
   <script>
-    $('.gosummonerinfo').click(function () {
-      const summoner_name = $('.summoner_name').val()
+  $('.gosummonerinfo').click(function() {
+      const summoner_name = $('.summoner_name').val();
+      console.log(summoner_name);
       const encoded_name = encodeURIComponent(summoner_name);
       const url = '/personlol/summoner/?summoner_name=' + encoded_name;
-      location.href = url
-    })
+      location.href = url;
+    });
   </script>
   <script>
     //로그아웃
@@ -141,6 +143,7 @@
       alert("로그아웃");
     })
   </script>
+  
 </body>
 
 

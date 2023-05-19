@@ -65,8 +65,17 @@
 			/* dataType:'json' */
 		}).done(res => {
 			console.log(res)
-			alert("join 성공")
-			location.href = '/personlol/logine' 
+			if(res.code == "1"){
+				alert("join 성공")
+				location.href = '/personlol/logine'
+			}else if(res.code == "-1"){
+				$('#id_err').html('중복된 아이디입니다.').css('color', 'red');
+			}else if(res.code == "0"){
+				$('#lol_err').html('중복된 닉네임 정보입니다.').css('color','red')
+			}else{
+				alert('서버에러')
+			}
+			 
 		}).fail(err => {
 			console.log(res)
 		})

@@ -57,10 +57,10 @@
 			<nav class="bener">
 				<div class="bener2">
 					<a href="/personlol/main" class="imgfile"><img
-						src="./resources/img/logotesting.png"></a>
+						src="../resources/img/logotesting.png"></a>
 					<div class="search-bar">
-						<input type="text">
-						<button type="button">go!</button>
+						<input class="summoner_name" type="text">
+              			<button class="gosummonerinfo" type="button">go!</button>
 					</div>
 					<div class="menu">
 						<a href=" " class="m-col">playerport</a> <a href=" " class="m-col">듀오찾기</a>
@@ -246,6 +246,24 @@
 	    }
 	});
 	
+	</script>
+	
+	<script>
+		$('.gosummonerinfo').click(function () {
+			const summoner_name = $('.summoner_name').val();
+			console.log(summoner_name);
+			const encoded_name = encodeURIComponent(summoner_name);
+			const url = '/personlol/summoner/?summoner_name=' + encoded_name;
+			location.href = url;
+		});
+	</script>
+	<script>
+		//로그아웃
+		$('#logout').click(function () {
+			location.href = '/personlol/logout';
+			console.log("로그아웃");
+			alert("로그아웃");
+		})
 	</script>
 </body>
 </html>

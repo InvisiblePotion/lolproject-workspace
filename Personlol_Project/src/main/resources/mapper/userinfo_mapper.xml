@@ -15,6 +15,11 @@
 		select count(*) from USERINFO where user_code = #{user_code}
 	</select>
 	
+	<!-- lolname중복체크 -->
+	<select id="checkuser_lolname" resultType ="Int">
+		select count(*) from USERINFO where user_lolname = #{user_lolname}
+	</select>
+
 	<!-- 회원가입 -->
 	<insert id="insertinfo" parameterType="userinfo">
 		INSERT INTO USERINFO 
