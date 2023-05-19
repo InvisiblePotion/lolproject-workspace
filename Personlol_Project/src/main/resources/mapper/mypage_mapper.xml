@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.personlol.dao.mypage_dao">
+
+	<!-- 인증코드 확인 -->
+	<select id="getcurcode" resultType ="String">
+		SELECT userinfo.USER_CODE FROM USERINFO WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- 마이페이지 시작 시 롤 네임 -->
+	<select id="getnameicon" resultType = "mypage">
+		SELECT u.USER_ID, s.SUMMONER_PROFILE ,s.SUMMONER_NAME
+		FROM USERINFO u
+		JOIN SUMMONER s ON u.USER_LOLNAME = s.SUMMONER_NAME
+		WHERE u.USER_ID = #{user_id}
+	</select>
+	
+	<update id="changelolname" parameterType="java.util.Map">
+		UPDATE USERINFO set USER_LOLNAME = #{changelolname} where user_id = #{user_id}
+	</update>
+	
+</mapper>

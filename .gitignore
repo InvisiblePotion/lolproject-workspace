@@ -12,6 +12,7 @@ MANIFEST.MF
 
 ### workspace_김명재 ###
 apiKeyList.json
+.__pycache__/
 
 ### Spring ###
 /Personlol_Project/src/main/webapp/resources/
