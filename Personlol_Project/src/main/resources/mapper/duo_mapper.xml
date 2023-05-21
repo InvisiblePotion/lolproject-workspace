@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.personlol.dao.duo_dao">
+
+	<select id="getList" resultType="duo">
+		<![CDATA[   
+		 select *  from duo WHERE DUO_ACTIVE = 1 ORDER BY duo_id DESC]]>
+	</select>
+	
+	<resultMap type="duo" id="mapForRead">
+		<id column="D_ID" property="duo_id" />
+		<result column="D_TITLE" property="duo_title" />
+		<result column="D_CONTENT" property="duo_content" 
+		 	javaType="java.lang.String" jdbcType="NCLOB" />
+		<result column="D_DATE" property="duo_date" />	
+	</resultMap>	
+	
+	<insert id="duoWrite">
+		INSERT INTO DUO VALUES(SEQ_DUO.NEXTVAL,#{duo_ownerid},DEFAULT,#{duo_content},DEFAULT,DEFAULT,#{duo_title})
+	</insert>
+	
+	<!-- kang tae min -->
+	<select id="getId" resultType="String">
+		SELECT DUO_OWNERID  FROM Duo WHERE DUO_ID = #{duo_id}
+	</select>
+	
+	<update id="Disable">
+		UPDATE Duo SET duo_active = 0 WHERE DUO_ID = #{duo_id}
+	</update>
+	
+	<select id="getUser_lolname" resultType= "userinfo">
+		SELECT USER_LOLNAME  FROM UserInfo WHERE USER_ID = #{duo_ownerid}
+	</select>
+	
+	<update id="accept">
+		UPDATE Duo SET duo_active = 0 , DUO_ACCEPTER = #{user_id} WHERE DUO_ID = #{duo_id}
+	</update>
+	
+	<update id="convert">
+		UPDATE Duo SET duo_active = 0 WHERE DUO_OWNERID = #{user_id}
+	</update>
+	
+		<!-- 최종 페이지 계산 -->
+	<select id="highpage" resultType="Integer">
+		SELECT CEIL(count(*)/18) FROM duo
+	</select>
+	
+</mapper>

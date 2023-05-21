@@ -53,7 +53,7 @@ public class R_userinfo_Controller {
 		
 		// usercode 생성기
 		StringBuilder sb = new StringBuilder();
-		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		for (int i = 0; i < 8; i++) {
 		    int index = random.nextInt(characters.length());
 		    char randomChar = characters.charAt(index);
@@ -74,15 +74,32 @@ public class R_userinfo_Controller {
 			result.put("code",code);
 			
 			return result;
-		}else {
-			String msg = "실패";
+		}else if(insertRst == 0){
+			//lolname중복
+			String msg = "롤 네임 중복";
 			String code = "0";
 			
 			result.put("Msg", msg);
 			result.put("code",code);
 			
 			return result;
-		}	
+		}else if(insertRst == -1) {
+			//id 중복
+			String msg = "아이디 중복";
+			String code = "-1";
+			
+			result.put("Msg", msg);
+			result.put("code",code);
+			
+			return result;
+		}else {
+			String msg = "알수없는 이유";
+			String code = "1000";
+			
+			result.put("Msg", msg);
+			result.put("code",code);
+			return result;
+		}
 	}	//회원가입 끝	
 	
 	//로그인

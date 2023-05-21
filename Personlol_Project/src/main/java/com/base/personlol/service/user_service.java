@@ -23,15 +23,26 @@ public class user_service {
 	@Autowired
 	user_dao u_dao;
 	
-
+	//회원가입 넣기
 	public int insertinfo(userinfo_dto userinfo) {
 		int a = checkID(userinfo.getUser_id());
 		int b = checkCode(userinfo.getUser_code());
+		int c = checklolname(userinfo.getUser_lolname());
 		
-		System.out.println("프리베이트 찍히나요~?:"+a+" "+b);
-		if (a == 1 || b ==1) {
-			System.out.println("MM실패 탔어요~");
-			System.out.println("if문안의 코드에용"+userinfo.getUser_code());
+		System.out.println("프리베이트 찍히나요~? a: "+a+"b: "+b);
+		//a==1 ID중복
+		if (a == 1) {
+			System.out.println("ID중복: "+a);
+			return -1;
+			
+		}else if(b == 1){
+			System.out.println("유저코드 중복");
+			String newcode = generateRandomUserCode();
+			userinfo.setUser_code(newcode);
+			return u_dao.insertinfo(userinfo);
+			
+		}else if(c == 1){
+			System.out.println("롤네임 중복");
 			return 0;
 		}else {
 			System.out.println("MM성공 탔어요~");
@@ -40,6 +51,11 @@ public class user_service {
 		}
 	}
 	
+	private int checklolname(String user_lolname) {
+		//조인에서 쓰는 롤 네임 중복검사기
+		return u_dao.checkuser_lolname(user_lolname);
+	}
+
 	private int checkID (String userid) {
 		return u_dao.cheackID(userid); //조인에서 쓰는 id중복체크~
 	}
