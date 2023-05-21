@@ -15,7 +15,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         if (request.getSession().getAttribute("id") == null) {
         	System.out.println("인터셉터 발동!");
             System.out.println("로그인 안되어있음");
-            response.sendRedirect("./logine");
+            response.sendRedirect("/personlol/logine");
             return false;
         }
         

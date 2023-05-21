@@ -49,11 +49,37 @@
 	
 	<interceptors>
 	    <interceptor>
+	    	<!-- 예외 설정 -->   
 	        <mapping path="/**" />
-	        <!-- 예외 설정 -->        
+	        <!-- 아이디 찾기 -->
+	        <exclude-mapping path="/idfind" />     
+			<!-- 메인 -->
+	        <exclude-mapping path="/main" />
+			<!-- 메인2 -->
+	        <exclude-mapping path="//" />
+			<!-- 비밀번호 찾기 -->
+	        <exclude-mapping path="/pwfind" />
+	        <!-- 회원가입 -->
+	        <exclude-mapping path="/join" />
+	        <!-- 동의 -->	
+	        <exclude-mapping path="/agree" />
+	        <!-- 듀오 -->
+	        <exclude-mapping path="/duo" />
+	        <!-- 챔피언 리스트 -->
+	        <exclude-mapping path="/champion/" />
+	        <!-- 챔피언 상세 -->
+	        <exclude-mapping path="/champion/detail" />
+	        <!-- 로그인 -->
 	        <exclude-mapping path="/logine" />
+	        <!-- 랭킹 -->
+	        <exclude-mapping path="/rank" />
+	        <!-- 소환사 전적 -->
+	        <exclude-mapping path="/summonerinfo" />
+	        <!-- 사용자 분석 -->
+	        
+	        <!-- 리소스아래 모든 것 -->
 	        <exclude-mapping path="/resources/**"/>
-	        <!-- 기타 예외 경로 추가 가능 -->
+	        
 	        
 	        <beans:bean class="com.base.personlol.intercepter.SessionInterceptor"/>
 	    </interceptor>
