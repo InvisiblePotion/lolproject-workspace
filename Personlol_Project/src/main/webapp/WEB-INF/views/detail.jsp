@@ -63,7 +63,7 @@
     <div class="row">추천 룬 세팅</div>
       <div class = "row">
         <div class="col" id="main_rune">메인</div>
-        <div class="col" id="sub_run">영감</div>
+        <div class="col" id="sub_rune">영감</div>
         <div class="col" id="shard">능력치파편</div>
       </div>
 
@@ -83,10 +83,11 @@
 
     <div class="row">추천빌드</div>
     <div class="row">
-      <div class="col">아이템 사진</div>
+      <div class="col" id="test123">아이템 사진</div>
       <div class="col">아이템 통계</div>
     </div>
-    
+  
+   
  <script>
  
  $(document).ready(function() {
@@ -124,8 +125,7 @@
 		data:{champ_id:champ_id},
 		url:'/personlol/champion/skill'
 	}).done(res => {
-		console.log(res)
-		
+	
 		let skill_img=''
 		$.each(res, function (i,skill) {
 			skill_img +=
@@ -137,6 +137,8 @@
 		
 	})//
 	
+		
+	
 	//룬 정보
 	$.ajax({
 		method:'get',
@@ -144,12 +146,216 @@
 		url:'/personlol/champion/rune'
 	}).done(res => {
 		console.log(res)
-		
-		game_count=''
+		const promises = [];
 		$.each(res, function (i,rune) {
-			game_count +='<span>'+rune.game_count+'</span>'
-		})
-		$('#main_rune').html(game_count)
+			let typecore = rune.runetype_core;
+			let core_main = rune.core_mainrune;
+			let core_rune1 = rune.core_rune1;
+			let core_rune2 = rune.core_rune2;
+			let core_rune3 = rune.core_rune3;
+			
+			let typesub = rune.runetype_sub;
+			let sub_rune1 = rune.sub_rune1;
+			let sub_rune2 = rune.sub_rune2;
+			
+			let shard_offense = rune.shard_offense;
+			let shard_flex = rune.shard_flex;
+			let shard_defence = rune.shard_defence;
+			
+			
+			
+			//룬 타입 이미지
+			$.ajax({
+				method:'get',
+				data:{typecore:typecore},
+				url:'/personlol/champion/rune/type-img'
+			}).done(res => {
+				type_img=''
+				$.each(res, function (i,type) {
+					type_img += '<img class="skill_img" width="40" height="40" src="../resources/'+type.runetype_icon+
+					'" alt="이미지">'
+				})
+				$('#main_rune').append(type_img);
+				
+			}).fail(err => {
+				
+			}) 
+			
+			//룬 코어 이미지
+			$.ajax({
+				method:'get',
+				data:{core_main:core_main},
+				url:'/personlol/champion/rune/core-main'
+			}).done(res => {
+				core_main_img=''
+					$.each(res, function (i,type) {
+						core_main_img += '<img class="skill_img" width="40" height="40" src="../resources/dd/img/rune/perk/'+type.rune_key+
+						'.png" alt="이미지">'
+					})
+					$('#main_rune').append(core_main_img);
+				
+			}).fail(err => {
+				
+			})
+			//룬 코어 이미지1
+			$.ajax({
+				method:'get',
+				data:{core_rune1:core_rune1},
+				url:'/personlol/champion/rune/core-rune1'
+			}).done(res => {
+				core_main_img=''
+					$.each(res, function (i,type) {
+						core_main_img += '<img class="skill_img" width="40" height="40" src="../resources/dd/img/rune/perk/'+type.rune_key+
+						'.png" alt="이미지">'
+					})
+					$('#main_rune').append(core_main_img); 
+				
+			}).fail(err => {
+				
+			})//
+			
+			//룬 코어 이미지2
+			$.ajax({
+				method:'get',
+				data:{core_rune2:core_rune2},
+				url:'/personlol/champion/rune/core-rune2'
+			}).done(res => {
+				core_main_img=''
+					$.each(res, function (i,type) {
+						core_main_img += '<img class="skill_img" width="40" height="40" src="../resources/dd/img/rune/perk/'+type.rune_key+
+						'.png" alt="이미지">'
+					})
+					$('#main_rune').append(core_main_img); 
+				
+			}).fail(err => {
+				
+			})//
+			
+			//룬 코어 이미지3
+			$.ajax({
+				method:'get',
+				data:{core_rune3:core_rune3},
+				url:'/personlol/champion/rune/core-rune3'
+			}).done(res => {
+				core_main_img=''
+				$.each(res, function (i,type) {
+					core_main_img += '<img class="skill_img" width="40" height="40" src="../resources/dd/img/rune/perk/'+type.rune_key+
+					'.png" alt="이미지">'
+				})
+				$('#main_rune').append(core_main_img); 
+				
+			}).fail(err => {
+				
+			})//
+			
+			//룬 타입 서브
+			$.ajax({
+				method:'get',
+				data:{core_main:typesub},
+				url:'/personlol/champion/rune/type-sub'
+			}).done(res => {
+				type_sub=''
+				$.each(res, function (i,type) {
+					type_sub += '<img class="skill_img" width="40" height="40" src="../resources/'+type.runetype_icon+
+					'" alt="이미지">'
+				})
+				$('#main_rune').append(type_sub); 
+			}).fail(err => {
+				
+			})//
+			
+			//룬 서브 룬1
+			$.ajax({
+				method:'get',
+				data:{sub_rune1:sub_rune1},
+				url:'/personlol/champion/rune/sub-rune1'
+			}).done(res => {
+
+				sub_img=''
+				$.each(res, function (i,type) {
+					sub_img += '<img class="skill_img" width="40" height="40" src="../resources/dd/img/rune/perk/'+type.rune_key+
+					'.png" alt="이미지">'
+				})
+				$('#main_rune').append(sub_img); 
+
+			}).fail(err => {
+				
+			})//
+			
+			
+			//룬 서브 룬2
+			$.ajax({
+				method:'get',
+				data:{sub_rune2:sub_rune2},
+				url:'/personlol/champion/rune/sub-rune2'
+			}).done(res => {
+				
+				sub_img=''
+				$.each(res, function (i,type) {
+					sub_img += '<img class="skill_img" width="40" height="40" src="../resources/dd/img/rune/perk/'+type.rune_key+
+					'.png" alt="이미지">'
+				})
+				$('#main_rune').append(sub_img); 
+				
+			}).fail(err => {
+				
+			})//
+			
+			
+			//룬 파편1
+			$.ajax({
+				method:'get',
+				data:{shard1:shard_offense},
+				url:'/personlol/champion/rune/shard1'
+			}).done(res => {
+				shard_img=''
+				$.each(res, function (i,type) {
+					shard_img += '<img class="skill_img" width="40" height="40" src="../resources/'+type.runeshard_icon+
+					'" alt="이미지">'
+				})
+				$('#main_rune').append(shard_img);
+				
+			}).fail(err => {
+				
+			})//
+			
+			//룬 파편2
+			$.ajax({
+				method:'get',
+				data:{shard2:shard_flex},
+				url:'/personlol/champion/rune/shard2'
+			}).done(res => {
+				shard_img=''
+					$.each(res, function (i,type) {
+						shard_img += '<img class="skill_img" width="40" height="40" src="../resources/'+type.runeshard_icon+
+						'" alt="이미지">'
+					})
+					$('#main_rune').append(shard_img);
+				
+			}).fail(err => {
+				
+			})//
+			
+			//룬 파편3
+			$.ajax({
+				method:'get',
+				data:{shard3:shard_flex},
+				url:'/personlol/champion/rune/shard3'
+			}).done(res => {
+				shard_img=''
+				$.each(res, function (i,type) {
+					shard_img += '<img class="skill_img" width="40" height="40" src="../resources/'+type.runeshard_icon+
+					'" alt="이미지">'
+				})
+				$('#main_rune').append(shard_img);
+		
+			}).fail(err => {
+				
+			})
+		})//
+			
+			
+			
 	}).fail(err => {
 		
 	})//
@@ -176,7 +382,9 @@
 	
 
  });
+	 
  </script>
+ 
  </body>
  </html>
  

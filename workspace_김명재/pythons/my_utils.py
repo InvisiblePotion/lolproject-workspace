@@ -938,3 +938,22 @@ def get_all_cos_sim(champion_file_lst: list):
                 vec_compare_dict[f'{first_champ[:-4]}:{second_champ[:-4]}'] = \
                     round(cos_sim(img2vec(get_grey_img(first_champ)), img2vec(get_grey_img(second_champ))), 3)
     return vec_compare_dict
+
+# RawData 테이블에서 삽입된 플레이어 수가 10명이 아닌 게임 데이터의 game_id를 리스트로 반환하는 함수
+def invalidMatchFinder():
+    rawdata = oracle_totalExecute('SELECT * FROM RAWDATA', debug_print=False)
+    rawdata['COUNT'] = rawdata.apply(lambda x: 1, axis=1)
+    sum_of_rec = rawdata[['GAME_ID','COUNT']].groupby('GAME_ID').sum()
+    return [a for a in sum_of_rec[sum_of_rec['COUNT']<10].index]
+
+
+# RawData 테이블에서 플레이어 수가 비정상적인 게임 데이터를 삭제하여 무결성을 지키는 함수
+def rawdataIntegrityKeeper(print_msg: bool=True):
+    if (invalid_match_ids:=invalidMatchFinder()) != []:
+        if print_msg:
+            print('RawData 테이블의 결성 확인. 삭제를 진행합니다.')
+            print(f"대상 game_id: {invalid_match_ids}")
+            invalid_match_ids = tqdm(invalid_match_ids, desc='부적절한 매치 데이터 삭제 중...')
+        for match_id in invalid_match_ids:
+            oracle_totalExecute(f"DELETE FROM RAWDATA WHERE GAME_ID = '{match_id}'", debug_print=False)
+    elif print_msg: print('RawData 테이블 무결성 상태 확인!')

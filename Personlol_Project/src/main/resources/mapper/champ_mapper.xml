@@ -66,4 +66,17 @@
   		SELECT * FROM CHAMPION_RUNE cr WHERE CHAMP_ID = #{champ_id}
   	</select>
   	
+  	<select id="type_img" resultType="com.base.personlol.dto.ChampRuneType_dto">
+  		SELECT * FROM RUNETYPE WHERE RUNETYPE_ID = #{typecore}
+  	</select>
+  	
+  	<select id="core_img" resultType="com.base.personlol.dto.ChampRuneCore_dto">
+  		SELECT * FROM RUNE WHERE RUNE_ID = #{core_main}
+  	</select>
+  	
+  	<select id="shard_img" resultType="com.base.personlol.dto.ChampRuneShard_dto">
+  		SELECT * FROM RUNESHARD WHERE RUNESHARD_ID = #{shard}
+  	</select>
+  	
+  	
   </mapper>

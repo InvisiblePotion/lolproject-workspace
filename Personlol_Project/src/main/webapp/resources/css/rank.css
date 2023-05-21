@@ -87,8 +87,3 @@ body{
   height: 30px;
   margin-left: 800px;
 }
-
-#loginout {
-  display: flex;
-  flex-direction: row;
-}
