@@ -35,7 +35,6 @@ warnings.filterwarnings('ignore')
 dsn = ora.makedsn('192.168.0.140', 1521, 'xe')
 # dsn = ora.makedsn('localhost', 1521, 'xe')
 
-
 db = None
 cursor = None
 seoul_api_key = None
@@ -112,7 +111,7 @@ def getMatchDataByName(summoner_name: str, api_key: str, get_count: int=10, matc
 
 
 # 가공된 DTO 형태의 데이터프레임을 데이터베이스 테이블에 삽입해주는 함수
-def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_print: bool=True):
+def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_print: bool=True, print_sql: bool=False):
     # 테이블 명 대문자 아니면 에러남
     table_name = table_name.upper()
     
@@ -164,6 +163,8 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
                     values.append(str(data_frame.iloc[rec_idx][col_idx]))
                     if all_col[col_idx] in pk_col:
                         dual_on_cv.append(all_col[col_idx] + '=' + str(data_frame.iloc[rec_idx][col_idx]))
+                elif tab_col['DATA_TYPE'][col_idx] == 'DATE':
+                    values.append('TO_DATE(\''+str(data_frame.iloc[rec_idx][col_idx])+'\', \'YYYY-MM-DD HH24:MI:SS\')')
                 # 숫자가 아니라면 값 내부의 ' 기호를 오라클용 이스케이프 문인 '' 기호로 변경한 뒤 좌우를 '로 감싸준다.
                 else:
                     if str(data_frame.iloc[rec_idx][col_idx]) == 'DEFAULT':
@@ -192,7 +193,7 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
             for sc in set_col:
                 set_val.append(f"{sc[1]}={values[sc[0]]}")
             execute += ', '.join(set_val)
-        # print(execute)
+        if print_sql: print(execute)
         oracle_execute(execute)
     oracle_close(debug_print=False)
     if debug_print: print('>>> 처리 완료!')
@@ -326,11 +327,9 @@ def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
     # riot api를 통해서 summonerName을 가져오기
     print('get SummonerName.....')
     for v in tqdm(range(get_amount)):
-        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division-1]}?page={page}&api_key={riot_api_key}'
-        res = requests.get(url)
-        if res.status_code == 429:
-            apiSleep(120, True)
-        summonerName_lst.append(random.sample(res.json(), 1)[0]['summonerName'])
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division+1]}?page={page}&api_key={riot_api_key}'
+        res = requests.get(url).json()
+        summonerName_lst.append(random.sample(res, 1)[0]['summonerName'])
 
     print('total player: ', len(summonerName_lst))
 
@@ -374,26 +373,63 @@ def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
     return pd.DataFrame(df_create, columns=['match_id','matches','timeline'])
 
 
-def getStartItem(rawdata_series: pd.Series, participant_number: int):
+# 원하는 시간까지의 플레이어가 소지중인 아이템을 추적하여 리스트로 반환하는 함수
+def getHoldingItems(raw_data_series: pd.Series, part_number: int, end_time: int=-1):
 
-    if participant_number not in range(1, 11): raise WrongParticipantNumber
+	# end_time이 -1이거나 게임 종료 시간을 초과한 값이라면 end_time에 게임 종료 시간을 저장
+	game_end_time = eventExtractor(raw_data_series, 'GAME_END')[0]['timestamp']
+	if (end_time == -1) or (end_time > game_end_time): end_time = game_end_time
 
-    item_pur = eventExtractor(rawdata_series, 'ITEM_PURCHASED', participant_number)
-    purchased = [a['itemId'] for a in filter(lambda x: x['timestamp']<=120000, item_pur)]
+	# 아이템 구매, 판매, 되돌리기 이벤트를 종합
+	item_events = \
+		[{'timestamp':purchased['timestamp'], 'type':purchased['type'], 'itemId':purchased['itemId']}\
+		for purchased in list(filter(lambda x: x['timestamp'] <= end_time, eventExtractor(raw_data_series, 'ITEM_PURCHASED', part_number)))] + \
+		[{'timestamp':sold['timestamp'], 'type':sold['type'], 'itemId':sold['itemId']}\
+		for sold in list(filter(lambda x: x['timestamp'] <= end_time, eventExtractor(raw_data_series, 'ITEM_SOLD', part_number)))] + \
+		[{'timestamp':undo['timestamp'], 'type':undo['type'], 'beforeId':undo['beforeId'], 'afterId':undo['afterId']}\
+		for undo in list(filter(lambda x: x['timestamp'] <= end_time, eventExtractor(raw_data_series, 'ITEM_UNDO', part_number)))] + \
+		[{'timestamp':destroyed['timestamp'], 'type':destroyed['type'], 'itemId':destroyed['itemId']}\
+		for destroyed in list(filter(lambda x: x['timestamp'] <= end_time, eventExtractor(raw_data_series, 'ITEM_DESTROYED', part_number)))]
 
-    item_sold = eventExtractor(rawdata_series, 'ITEM_SOLD', participant_number)
-    sold = [a['itemId'] for a in filter(lambda x: x['timestamp']<=120000, item_sold)]
+	# timestamp로 이벤트를 시간 순 정렬
+	item_events.sort(key=lambda x: x['timestamp'])
 
-    item_undo = eventExtractor(rawdata_series, 'ITEM_UNDO', participant_number)
-    undo = [(a['beforeId'], a['afterId']) for a in filter(lambda x: x['timestamp']<=120000, item_undo)]
+	# 되돌리기 이벤트와 되돌려진 이벤트 제거
+	evt_list = []
+	for evt in item_events:
+		try:
+			if evt['type'] == 'ITEM_UNDO': evt_list.pop() # UNDO 이벤트 발생시 최근 이벤트 제거
+			else: evt_list.append(evt)
 
-    for before, after in undo:
-        if before == 0: purchased.remove(after)
-        else: purchased.remove(before)
-    for s in sold:
-        purchased.remove(s)
+		except IndexError as e: # UNDO가 가장 먼저 나오거나 구매 및 판매 횟수보다 많은 케이스에 대한 예외 처리 및 로깅
+			logging.warning({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.unexpectedItemUndo",
+				"dataType": "dict", "data": {"participantId": part_number, "matchId": raw_data_series['matches']['metadata']['matchId']}})
+			continue
+		except Exception as e:  # 예측하지 못한 예외 발생 시 로깅 후 에러를 발생
+			logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.unexpectedItemUndo",
+		  		"dataType": "matchId", "data": raw_data_series['matches']['metadata']['matchId']})
+			raise e
 
-    return purchased
+	# 정제된 이벤트 리스트로 현재 아이템을 추적하여 리턴
+	start_items = []
+	for evt in evt_list:
+		try:
+			if evt['type'] == 'ITEM_PURCHASED': start_items.append(evt['itemId'])
+			else: start_items.remove(evt['itemId'])
+
+        ### 230510: 현재 장신구에 대한 파괴가 이 에러로 빠지는 이슈가 있음.
+        ##: 전령의 눈과 같은 장신구 칸을 차지하는 아이템이 원인인 것으로 추정 중. (정글러 챔피언이 다수임)
+		except ValueError as e: # 구매하지 않은 아이템이 판매되는 경우에 대한 예외 처리 및 로깅
+			logging.info({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.unexpectedItemSoldOrDestroy",
+		  		"dataType": "dict", "data": {"itemId": evt['itemId'], "championName": raw_data_series['matches']['info']['participants'][part_number-1]['championName'],
+                                             "participantId": part_number, "matchId": raw_data_series['matches']['metadata']['matchId']}})
+			continue
+		except Exception as e: # 예측하지 못한 예외 발생 시 로깅 후 에러를 발생
+			logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "getHoldingItems.exception",
+		  		"dataType": "matchId", "data": raw_data_series['matches']['metadata']['matchId']})
+			raise e
+			
+	return start_items
 
 
 def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
@@ -424,9 +460,25 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                 part = matches['participants'][part_num]
                 challenge = part['challenges']
 
-                # timeline에서 어떤 데이터를 뽑을지 아직 미정
-                # timeline = game['timeline']['info']
-                # frames = timeline['frames']
+                # 예외 처리부
+
+                # 팀에서 킬이 나지 않은 경우 killParticipation키가 없는 경우가 발생해 해당 경우엔 대신 0으로 넣는다.
+                try: kill_participation = challenge['killParticipation']
+                except KeyError:kill_participation = 0
+
+                # 팀이 가한 피해량이 없는 경우 teamDamagePercentage 키가 없는 경우가 발생해 해당 경우엔 대신 0으로 넣는다.
+                try: team_damage_percentage = challenge['teamDamagePercentage']
+                except KeyError: team_damage_percentage = 0
+
+                # 게임이 유저의 라인을 추측하지 못할 정도로 비정상적으로 빠르게 끝났다면 (ex. 다시하기)
+                #:라인 관련 데이터가 없거나 비정상적인 정보가 들어간 경우 대신 'NONE'을 넣는다.
+                lane_list = ['TOP','JUNGLE','MIDDLE','BOTTOM']
+                position_list = ['TOP','JUNGLE','MIDDLE','BOTTOM','UTILITY']
+
+                if (lane := part['lane']) not in lane_list: lane = 'NONE'
+                if (individual_position := part['individualPosition']) not in position_list: individual_position = 'NONE'
+                if (team_position := part['teamPosition']) not in position_list: team_position = 'NONE'
+
 
                 each_part = {
                     'version': matches['gameVersion'],
@@ -434,6 +486,8 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                     'game_duration': matches['gameDuration'],
                     'game_id': game['matches']['metadata']['matchId'],
                     'participant_number': part['participantId'],
+                    'champion_id': part['championId'],
+                    'lane': part['teamPosition'],
                     'participant_puuid': part['puuid'],
                     'api_key': api_key,
                     'game': {
@@ -455,9 +509,9 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'championId': part['championId'],
                         'championName': part['championName'],
                         'champLevel': part['champLevel'],
-                        'lane': part['lane'],
-                        'individualPosition': part['individualPosition'],
-                        'teamPosition': part['teamPosition'],
+                        'lane': lane, # 예외처리
+                        'individualPosition': individual_position, # 예외처리
+                        'teamPosition': team_position, # 예외처리
                         'teamId': part['teamId'],
                         'win': str(part['win']) # bool
                     },
@@ -494,7 +548,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'item5': part['item5'],
                         'item6': part['item6']
                     },
-                    'startItem': getStartItem(game, part_num+1),
+                    'startItem': getHoldingItems(game, part_num+1, 60000),
                     'itemTree': list(filter(lambda x: x in legend_items + mythic_items,
                         [a['itemId'] for a in eventExtractor(game, 'ITEM_PURCHASED', part_num+1)]))[:3],
                     'kda': {
@@ -502,7 +556,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'deaths': part['deaths'],
                         'assists': part['assists'],
                         'kda': challenge['kda'],
-                        'killParticipation': challenge['killParticipation'],
+                        'killParticipation': kill_participation, # 예외처리
                         'firstBloodKill': str(part['firstBloodKill']), # bool
                         'largestKillingSpree': part['largestKillingSpree'],
                         'largestMultiKill': part['largestMultiKill']
@@ -522,7 +576,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'turretPlatesTaken': challenge['turretPlatesTaken']
                     },
                     'damage': {
-                        'teamDamagePercentage': challenge['teamDamagePercentage'],
+                        'teamDamagePercentage': team_damage_percentage, # 예외처리
                         'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
                         'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
                         'magicDamageDealtToChampions': part['magicDamageDealtToChampions'],
@@ -555,7 +609,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
     """
 
     # 로깅
-    logging.basicConfig(filename=logging_path, encoding='utf-8', level=logging.ERROR)
+    logging.basicConfig(filename=logging_path, encoding='utf-8', level=logging.INFO)
 
     # 사이클 순환 정보를 위한 변수
     cycle_count = 1 # 사이클 회전 수
@@ -567,8 +621,6 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
     api_sleep_count = 0 # 리미트 초과로 발생 횟수
     api_error_count = 0 # API의 비정상 리턴 횟수
 
-<<<<<<< HEAD
-=======
 
     def safeTimeSleeper():
         """
@@ -579,7 +631,6 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
             time.sleep(1)
 
 
->>>>>>> 8d015f375c4441293dd1081212feecb860a62169
     def checkApiResult(url: str):
         """
         `request.get()`의 결과에 따라서 API Key를 교체하거나 에러 메시지를 출력하고
@@ -625,6 +676,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                 print(f"{type(e).__name__}:\n{e}")
                 return False
 
+
     # 검색 할 랭크 리스트
     rank_tier_list = [
         {'tier': 'PLATINUM', 'rank': 'IV', 'page': start_page, 'pageCycle': 0},
@@ -668,32 +720,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
         # 현재 rank_tier_list의 모든 랭크 티어를 순환
         for this_rank_idx, this_rank in enumerate(rank_tier_list):
 
-            # 안전 종료 대기 시간 30초
-            print(f"=========== 종료 안전 시점 ===========")
-            for safe_time in tqdm(range(30)): time.sleep(1)
-            print("=========== 다음 사이클 실행 ===========")
-
             tier, rank, page = this_rank['tier'], this_rank['rank'], this_rank['page']
-
-            # if use_tqdm: progress = tqdm(total=10, desc=f"Thread {thread_no}")
-            
-<<<<<<< HEAD
-            if use_tqdm: pass
-            else: print(f"<<< 새 랭크 티어 입력 시작 >>>\
-                        \n현재 시간: {time.strftime('%Y-%m-%d %H:%M:%S')}\
-                        \n반복 횟수: {cycle_count}\
-                        \n현재 랭크 티어: {tier} {rank}\
-                        \n현재 페이지: {page}\
-                        \n입력된 총 플레이어 수: {inserted_player}\
-                        \n입력된 총 게임 수: {inserted_game}\
-                        \nRIOT API 총 사용 횟수: {api_nonlimit_request_count}\
-                        \nRIOT API 휴식 횟수: {api_sleep_count}\
-                        \nRIOT API 에러 횟수: {api_error_count}\
-                        \n==============================")
-=======
-            ### 여기부터 수정
-            # if use_tqdm: progress = tqdm(total=100)
-            ###
             
             # else: 
             print(f"<<< 새 랭크 티어 입력 시작 >>>\
@@ -707,21 +734,21 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                 \nRIOT API 휴식 횟수: {api_sleep_count}\
                 \nRIOT API 에러 횟수: {api_error_count}\
                 \n==============================")
->>>>>>> 8d015f375c4441293dd1081212feecb860a62169
 
             # 현재 랭크 티어의 'page'번째 페이지의 모든 유저 정보를 획득
-            print(f"{tier} {rank}의 {page}번 페이지 가져오는 중......")
+            if not use_tqdm: print(f"{tier} {rank}의 {page}번 페이지 가져오는 중......")
             if (summoner_page := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{rank}?page={page}&api_key=")) is False:
-                logging.error({"errorType": 'rankPage', "apiKey": riot_api_key, "dataType": "str", "data": f"{tier} {rank}: {page}page"})
+                logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": 'rankPage', "apiKey": riot_api_key, "dataType": "str", "data": f"{tier} {rank}: {page}page"})
                 continue
 
             # 가져온 페이지의 유저 수가 10명 미만이라면 현재 랭크 티어의 모든 페이지를 탐색 한것으로 간주하고 현재 랭크 티어의 page를 1로 초기화
-            if len(summoner_page) < 10:
-                print('!!! 페이지를 전부 소진한 랭크 티어 발생 !!!')
-                rank_tier_list[this_rank_idx]['page'] = 1
-                rank_tier_list[this_rank_idx]['pageCycle'] += 1
-                print(f"!!! {tier} {rank}의 page를 1로 초기화합니다. !!!")
-                continue
+            if not use_tqdm:
+                if len(summoner_page) < 10:
+                    print('!!! 페이지를 전부 소진한 랭크 티어 발생 !!!')
+                    rank_tier_list[this_rank_idx]['page'] = 1
+                    rank_tier_list[this_rank_idx]['pageCycle'] += 1
+                    print(f"!!! {tier} {rank}의 page를 1로 초기화합니다. !!!")
+                    continue
 
             # 가져온 페이지에서 무작위 10명을 골라 summonerId의 리스트와 Summoner 테이블에 필요한 랭크 관련 데이터 리스트를 생성
             sample_summoner = random.sample(summoner_page, 10)
@@ -735,17 +762,20 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                     else: v[i] = 0
 
             # 획득한 summoner_id_list로 추출 및 삽입 작업 시작
-            print(f"페이지의 유저 데이터 추출 및 삽입......")
+            if not use_tqdm: print(f"페이지의 유저 데이터 추출 및 삽입......")
             for summoner_id_idx, summoner_id in enumerate(summoner_id_list):
+
+                # 안전 정지
+                # if (int(time.time()) % 3600) <= 120: safeTimeSleeper()
 
                 # 소환사 상세 정보 획득
                 # (summonerId로 조회하는 데이터는 가끔 []를 반환하는 경우가 있는데, 해당 유저가 블랙리스트 처리 된 것으로 추정된다.)
                 # (따라서 이러한 유저는 이 구간에서는 continue로 스킵하며 게임 데이터 내부에서 발견된 경우에만 존재하는 데이터만으로 삽입한다.)
                 if (summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/{summoner_id}?api_key=")) is False:
-                    logging.error({"errorType": "apiSummonerData", "apiKey": riot_api_key, "dataType": "summonerId", "data": summoner_id})
+                    logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "apiSummonerData", "apiKey": riot_api_key, "dataType": "summonerId", "data": summoner_id})
                     continue
                 if summoner_detail == []:
-                    logging.error({"errorType": "summonerBlackListed", "apiKey": riot_api_key, "dataType": "summonerId", "data": summoner_id})
+                    logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "summonerBlackListed", "apiKey": riot_api_key, "dataType": "summonerId", "data": summoner_id})
                     continue
                 
                 # Summoner 테이블에 필요한 일반 데이터 추출
@@ -758,10 +788,13 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
 
                 # 현재 puuId로부터 가장 최근의 20게임의 matchId를 획득
                 if (match_id_list := checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{summoner_normal_data[1]}/ids?start=0&count=20&type=ranked&api_key=")) is False:
-                    logging.error({"errorType": "apiMatchId", "apiKey": riot_api_key, "dataType": "puuId", "data": summoner_normal_data[1]})
+                    logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "apiMatchId", "apiKey": riot_api_key, "dataType": "puuId", "data": summoner_normal_data[1]})
                     continue
-                print(f"\t'{summoner_normal_data[3]}': 유저의 게임 정보 추출 및 삽입......")
+                if not use_tqdm: print(f"\t'{summoner_normal_data[3]}': 유저의 게임 정보 추출 및 삽입......")
                 for match_id in match_id_list:
+
+                    # 안전 정지
+                    # if (int(time.time()) % 3600) <= 120: safeTimeSleeper()
 
                     # RawData 테이블에 현재 match_id가 이미 존재한다면 리스트에서 제거 후 continue
                     if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = '{match_id}'", use_pandas=False, debug_print=False)[0][0]:
@@ -773,7 +806,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                         'matches': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key="),
                         'timeline': checkApiResult(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key=")}
                     if True in [v is False for v in match_raw.values()]:
-                        logging.error({"errorType": "apiMatchData", "apiKey": riot_api_key, "dataType": "matchId", "data": match_id})
+                        logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "apiMatchData", "apiKey": riot_api_key, "dataType": "matchId", "data": match_id})
                         continue
 
                     # RawData 테이블 형태로 가공하여 저장
@@ -781,8 +814,8 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
 
                     # 가공된 데이터가 비정상일 경우 continue
                     if filterd_match_raw.__class__ is not list:
-                        logging.error({"errorType": "missingGameData", "apiKey": riot_api_key, "dataType": "dict",
-                                       "data": {"error": str(f"{filterd_match_raw.__class__.__name__}({filterd_match_raw})"), "matchId": match_id}})
+                        logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "missingGameData", "apiKey": riot_api_key, "dataType": "dict",
+                                       "data": {"error": str(f"{filterd_match_raw.__class__.__name__}: {filterd_match_raw}"), "matchId": match_id}})
                         continue
 
                     # 현재 게임에 참가중인 모든 플레이어의 puuid 추출후 중복을 방지하기 위해 현재 유저만 제거
@@ -798,14 +831,14 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
 
                         # puuid로 소환사 정보 획득
                         if (part_summoner_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{part_puuid}?api_key=")) is False:
-                            logging.error({"errorType": "apiSummonerData", "apiKey": riot_api_key, "dataType": "puuId", "data": part_puuid})
+                            logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "apiSummonerData", "apiKey": riot_api_key, "dataType": "puuId", "data": part_puuid})
                             continue
                         part_summoner_normal_data = [part_summoner_detail[i] for i in normal_data_keys]
                         part_summoner_normal_data.insert(2, riot_api_key)
                         
                         # summonerId로 랭크 관련 정보 획득
                         if (part_rank_detail := checkApiResult(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{part_summoner_normal_data[0]}?api_key=")) is False:
-                            logging.error({"errorType": "apiSummonerRankData", "apiKey": riot_api_key, "dataType": "summonerId", "data": part_summoner_normal_data[0]})
+                            logging.error({"time": time.strftime('%Y-%m-%d %H:%M:%S'), "errorType": "apiSummonerRankData", "apiKey": riot_api_key, "dataType": "summonerId", "data": part_summoner_normal_data[0]})
                             continue
                        
                         # 이 유저가 솔랭에서 언랭 혹은 배치이면서 다른 랭크 데이터가 전혀 없다면 디폴트로 삽입
@@ -938,6 +971,7 @@ def get_all_cos_sim(champion_file_lst: list):
                 vec_compare_dict[f'{first_champ[:-4]}:{second_champ[:-4]}'] = \
                     round(cos_sim(img2vec(get_grey_img(first_champ)), img2vec(get_grey_img(second_champ))), 3)
     return vec_compare_dict
+
 
 # RawData 테이블에서 삽입된 플레이어 수가 10명이 아닌 게임 데이터의 game_id를 리스트로 반환하는 함수
 def invalidMatchFinder():
