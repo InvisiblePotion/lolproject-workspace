@@ -22,14 +22,14 @@
 				<div class="bener">
 					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png"></a>
 					<div class="search-bar">
-						<input type="text">
-						<button type="button">go!</button>
+						<input class="summoner_name" type="text">
+						<button class="gosummonerinfo" type="button">go!</button>
 					</div>
 					<div class="menu">
 
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
 						<a href="/personlol/summoner/rank" class="m-col">랭킹</a>
-						<a href="/personlol/duo" class="m-col">듀오찾기</a>
+						<a href="/personlol/duo/" class="m-col">듀오찾기</a>
 						<a href=" " class="m-col">사용자분석</a>
 
 						<c:choose>
@@ -53,6 +53,8 @@
 			</nav>
 		</div>
 	</div>
+	<!-- 여기까지가 헤더!!!!!!! -->
+
 
 	<!-- 헤더 다음부분 -->
 	<div class="container text-center">
@@ -187,11 +189,21 @@
 	</script>
 
 	<script>
+		$('.gosummonerinfo').click(function () {
+			const summoner_name = $('.summoner_name').val();
+			console.log(summoner_name);
+			const encoded_name = encodeURIComponent(summoner_name);
+			const url = '/personlol/summoner/?summoner_name=' + encoded_name;
+			location.href = url;
+		});
+	</script>
+	<script>
+		//로그아웃
 		$('#logout').click(function () {
 			location.href = '/personlol/logout';
 			console.log("로그아웃");
 			alert("로그아웃");
-		});
+		})
 	</script>
 </body>
 

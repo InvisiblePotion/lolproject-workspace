@@ -153,22 +153,32 @@ public class champion_service {
 		skill_tree = champ_dao.skill_tree(champ_id);
 		return skill_tree;
 	}
-
+	
+	//룬트리
 	public List<ChampRune_dto> champ_rune(Integer champ_id) {
 		List<ChampRune_dto> champ_rune = null;
 		champ_rune = champ_dao.champ_rune(champ_id);
 		return champ_rune;
 	}
-
-	public List<ChampRuneType_dto> type_img(Integer typecore) {
-		List<ChampRuneType_dto> type_img = null;
-		type_img = champ_dao.type_img(typecore);
-		return type_img;
+	
+	//룬 메인
+	public List<ChampRuneType_dto> main_rune(Integer main_rune) {
+		List<ChampRuneType_dto> main_rune_img = null;
+		main_rune_img = champ_dao.main_img(main_rune);
+		return main_rune_img;
 	}
+	
+	public List<ChampRuneType_dto> sub_rune(Integer sub_rune) {
+		List<ChampRuneType_dto> sub_rune_img = null;
+		sub_rune_img = champ_dao.sub_img(sub_rune);
+		return sub_rune_img;
+	}
+	
 
-	public List<ChampRuneCore_dto> core_img(Integer core_main) {
+	//룬 코어 이미지
+	public List<ChampRuneCore_dto> core_img(Integer core_rune) {
 		List<ChampRuneCore_dto> core_img = null;
-		core_img = champ_dao.core_img(core_main);
+		core_img = champ_dao.core_img(core_rune);
 		return core_img;
 	}
 
@@ -177,6 +187,17 @@ public class champion_service {
 		shard_img = champ_dao.shard_img(shard);
 		return shard_img;
 	}
+
+	public List<Test_raw> testraw() {
+		
+		List<Test_raw> testraw= null;
+		testraw = champ_dao.testraw();
+		return testraw;
+	}
+
+	
+
+	
 
 
 
