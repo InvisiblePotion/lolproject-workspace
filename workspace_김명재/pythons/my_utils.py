@@ -32,7 +32,7 @@ class WrongParticipantNumber(Exception):
 
 warnings.filterwarnings('ignore')
 
-dsn = ora.makedsn('192.168.0.140', 1521, 'xe')
+dsn = ora.makedsn('112.218.158.250', 4100, 'xe')
 # dsn = ora.makedsn('localhost', 1521, 'xe')
 
 db = None
