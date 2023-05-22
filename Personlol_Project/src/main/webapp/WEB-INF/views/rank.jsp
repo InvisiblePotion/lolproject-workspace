@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +11,7 @@
 	<title>ranking</title>
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../resources/css/rank.css">
+	<link rel="stylesheet" href="./resources/css/rank.css">
 
 </head>
 
@@ -20,16 +21,16 @@
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png"></a>
+					<a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png"></a>
 					<div class="search-bar">
-						<input type="text">
-						<button type="button">go!</button>
+						<input class="summoner_name" type="text">
+						<button class="gosummonerinfo" type="button">go!</button>
 					</div>
 					<div class="menu">
 
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
-						<a href="/personlol/summoner/rank" class="m-col">랭킹</a>
-						<a href="/personlol/duo" class="m-col">듀오찾기</a>
+						<a href="/personlol/rank" class="m-col">랭킹</a>
+						<a href="/personlol/duo/" class="m-col">듀오찾기</a>
 						<a href=" " class="m-col">사용자분석</a>
 
 						<c:choose>
@@ -114,6 +115,22 @@
 		//디폴트
 		let cur_rank = 'ch'
 
+		$('.gosummonerinfo').click(function () {
+			let summoner_name = $(this).siblings('.summoner_name').filter(function () {
+				return $(this).val() !== "";
+			}).first().val();
+
+			if (!summoner_name) {
+				console.log("검색어가 비어있습니다.");
+				return;
+			}
+
+			console.log(summoner_name);
+			const encoded_name = encodeURIComponent(summoner_name);
+			const url = '/personlol/summoner/?summoner_name=' + encoded_name;
+			location.href = url;
+		});
+		
 		//버튼 클릭시 실행되는 함수(챌,그마,마 정보 ,page정보)가지고 감
 		function getranking(info) {
 			cur_rank = info.value
@@ -163,27 +180,25 @@
 
 				let cList = '';
 				$.each(res, function (i, r) {
-					cList += '<table class="table table-hover" id="info_table">' +
-						'<tr height="25" onclick="window.location.href=\'/personlol/summoner/?summoner_name=' + r
-						.summonerName + '\'">' +
-						'<td width="200px">' + r.ranking + '</td>' +
-						'<td width="200px">' + r.summonerName + '</td>' +
-						'<td width="200px">' + r.tier + '</td>' +
-						'<td width="200px">' + r.leaguePoints + '</td>' +
-						'<td width="200px">' + r.wins + '</td>' +
-						'<td width="200px">' + r.losses + '</td>' +
-						'<td width="200px">' + r.veteran + '</td>' +
-						'<td width="200px">' + r.inactive + '</td>' +
-						'<td width="200px">' + r.freshBlood + '</td>' +
-						'<td width="200px">' + r.hotStreak + '</td></tr>' +
-						'</table>';
+				  cList += '<tr height="25" onclick="window.location.href=\'/personlol/summoner/?summoner_name=' + r.summonerName + '\'">' +
+				    '<td width="200px">' + r.ranking + '</td>' +
+				    '<td width="200px">' + r.summonerName + '</td>' +
+				    '<td width="200px">' + r.tier + '</td>' +
+				    '<td width="200px">' + r.leaguePoints + '</td>' +
+				    '<td width="200px">' + r.wins + '</td>' +
+				    '<td width="200px">' + r.losses + '</td>' +
+				    '<td width="200px">' + r.veteran + '</td>' +
+				    '<td width="200px">' + r.inactive + '</td>' +
+				    '<td width="200px">' + r.freshBlood + '</td>' +
+				    '<td width="200px">' + r.hotStreak + '</td>' +
+				    '</tr>'; // 여기서 </table>을 삭제하고 </tr>로 변경
 				});
-				$('#info').html(cList);
+				$('#info').html('<table class="table table-hover" id="info_table">' + cList + '</table>'); // 여기서 테이블 전체를 감싸는 태그 추가
+
 			}).fail(err => {
 				console.log(res);
 			});
 		}
-		
 	</script>
 
 	<script>

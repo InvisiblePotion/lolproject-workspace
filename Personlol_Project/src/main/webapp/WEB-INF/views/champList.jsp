@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -31,7 +31,7 @@
 				</div>
 				<div class="menu">
 					<a href="/personlol/champion/" class="m-col">챔피언분석</a>
-					<a href="/personlol/summoner/rank" class="m-col">랭킹</a>
+					<a href="/personlol/rank" class="m-col">랭킹</a>
 					<a href="/personlol/duo/" class="m-col">듀오찾기</a>
 					<a href=" " class="m-col">사용자분석</a>
 
@@ -290,7 +290,7 @@
 
 
 
-			<!--리스트 관련 함수 생성-->
+			<!--리스트 관련 함수 생성-- >
 
 			// 테이블 찍어주는 함수
 			function updateTableData(data) {
@@ -516,7 +516,15 @@
 </script>
 <script>
 	$('.gosummonerinfo').click(function () {
-		const summoner_name = $('.summoner_name').val();
+		let summoner_name = $(this).siblings('.summoner_name').filter(function () {
+			return $(this).val() !== "";
+		}).first().val();
+
+		if (!summoner_name) {
+			console.log("검색어가 비어있습니다.");
+			return;
+		}
+
 		console.log(summoner_name);
 		const encoded_name = encodeURIComponent(summoner_name);
 		const url = '/personlol/summoner/?summoner_name=' + encoded_name;

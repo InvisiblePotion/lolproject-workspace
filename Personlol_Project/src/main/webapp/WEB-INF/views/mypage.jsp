@@ -31,11 +31,11 @@
                     <a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png"></a>
                     <div class="search-bar">
                         <input class="summoner_name" type="text">
-              			<button class="gosummonerinfo" type="button">go!</button>
+                        <button class="gosummonerinfo" type="button">go!</button>
                     </div>
                     <div class="menu">
                         <a href="/personlol/champion/" class="m-col">챔피언분석</a>
-                        <a href="/personlol/summoner/rank" class="m-col">랭킹</a>
+                        <a href="/personlol/rank" class="m-col">랭킹</a>
                         <a href="/personlol/duo/" class="m-col">듀오찾기</a>
                         <a href=" " class="m-col">사용자분석</a>
 
@@ -242,7 +242,7 @@
         }).done(res => {
             console.log(res);
             $('#cur_lolname').text(res.user_id);
-            $('#SUMMONER_PROFILE').html('<img src="./resources/dd/img/profileicon/'+res.summoner_profile+
+            $('#SUMMONER_PROFILE').html('<img src="./resources/dd/img/profileicon/' + res.summoner_profile +
                 '.png">');
             const summoner_name = res.summoner_name;
             console.log(summoner_name);
@@ -358,24 +358,32 @@
             location.href = "/personlol/changepw";
         })
     </script>
-    
+
     <script>
-		$('.gosummonerinfo').click(function () {
-			const summoner_name = $('.summoner_name').val();
-			console.log(summoner_name);
-			const encoded_name = encodeURIComponent(summoner_name);
-			const url = '/personlol/summoner/?summoner_name=' + encoded_name;
-			location.href = url;
-		});
-	</script>
-	<script>
-		//로그아웃
-		$('#logout').click(function () {
-			location.href = '/personlol/logout';
-			console.log("로그아웃");
-			alert("로그아웃");
-		})
-	</script>
+        $('.gosummonerinfo').click(function () {
+            let summoner_name = $(this).siblings('.summoner_name').filter(function () {
+                return $(this).val() !== "";
+            }).first().val();
+
+            if (!summoner_name) {
+                console.log("검색어가 비어있습니다.");
+                return;
+            }
+
+            console.log(summoner_name);
+            const encoded_name = encodeURIComponent(summoner_name);
+            const url = '/personlol/summoner/?summoner_name=' + encoded_name;
+            location.href = url;
+        });
+    </script>
+    <script>
+        //로그아웃
+        $('#logout').click(function () {
+            location.href = '/personlol/logout';
+            console.log("로그아웃");
+            alert("로그아웃");
+        })
+    </script>
 
 
 </body>
