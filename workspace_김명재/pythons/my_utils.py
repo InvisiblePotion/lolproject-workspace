@@ -462,6 +462,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                 part = matches['participants'][part_num]
                 challenge = part['challenges']
 
+
                 # 예외 처리부
 
                 # 팀에서 킬이 나지 않은 경우 killParticipation키가 없는 경우가 발생해 해당 경우엔 대신 0으로 넣는다.
@@ -495,7 +496,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                     'lane': part['teamPosition'],
                     'participant_puuid': part['puuid'],
                     'api_key': api_key,
-                    'game': {
+                    'game': str({
                         'gameCreation': matches['gameCreation'],
                         'gameStartTimestamp': matches['gameStartTimestamp'],
                         'gameEndTimestamp': matches['gameEndTimestamp'],
@@ -503,14 +504,14 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'gameVersion': matches['gameVersion'],
                         'queueId': matches['queueId'],
                         'bans': matches['teams'][0]['bans'] + matches['teams'][1]['bans']
-                    },
-                    'summoner': {
+                    }).replace("'",'"'),
+                    'summoner': str({
                         'summonerName': part['summonerName'],
                         'summonerLevel': part['summonerLevel'],
                         'summonerId': part['summonerId'],
                         'puuid': part['puuid']
-                    },
-                    'champion': {
+                    }).replace("'",'"'),
+                    'champion': str({
                         'championId': part['championId'],
                         'championName': part['championName'],
                         'champLevel': part['champLevel'],
@@ -519,19 +520,19 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'teamPosition': team_position, # 예외처리
                         'teamId': part['teamId'],
                         'win': win # bool
-                    },
-                    'spell': {
+                    }).replace("'",'"'),
+                    'spell': str({
                         'summoner1Id': part['summoner1Id'],
                         'summoner2Id': part['summoner2Id']
-                    },
-                    'skill': {
+                    }).replace("'",'"'),
+                    'skill': str({
                         'spell1Casts': part['spell1Casts'],
                         'spell2Casts': part['spell2Casts'],
                         'spell3Casts': part['spell3Casts'],
                         'spell4Casts': part['spell4Casts']
-                    },
+                    }).replace("'",'"'),
                     'skillTree': [sk['skillSlot'] for sk in eventExtractor(game, 'SKILL_LEVEL_UP', part_num+1)],
-                    'rune': {
+                    'rune': str({
                         'runePrimaryStyle': part['perks']['styles'][0]['style'],
                         'runeCorePerk': part['perks']['styles'][0]['selections'][0]['perk'],
                         'runePrimaryPerk1': part['perks']['styles'][0]['selections'][1]['perk'],
@@ -543,8 +544,8 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'runeShardOffense': part['perks']['statPerks']['offense'],
                         'runeShardFlex': part['perks']['statPerks']['flex'],
                         'runeShardDefense': part['perks']['statPerks']['defense']
-                    },
-                    'item': {
+                    }).replace("'",'"'),
+                    'item': str({
                         'item0': part['item0'],
                         'item1': part['item1'],
                         'item2': part['item2'],
@@ -552,11 +553,11 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'item4': part['item4'],
                         'item5': part['item5'],
                         'item6': part['item6']
-                    },
+                    }).replace("'",'"'),
                     'startItem': getHoldingItems(game, part_num+1, 60000),
                     'itemTree': list(filter(lambda x: x in legend_items + mythic_items,
                         [a['itemId'] for a in eventExtractor(game, 'ITEM_PURCHASED', part_num+1)]))[:3],
-                    'kda': {
+                    'kda': str({
                         'kills': part['kills'],
                         'deaths': part['deaths'],
                         'assists': part['assists'],
@@ -565,22 +566,22 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'firstBloodKill': first_blood_kill, # bool
                         'largestKillingSpree': part['largestKillingSpree'],
                         'largestMultiKill': part['largestMultiKill']
-                    },
-                    'gold': {
+                    }).replace("'",'"'),
+                    'gold': str({
                         'bountyLevel': part['bountyLevel'],
                         'bountyGold': challenge['bountyGold'],
                         'goldEarned': part['goldEarned'],
                         'goldPerMinute': challenge['goldPerMinute']
-                    },
-                    'cs': {
+                    }).replace("'",'"'),
+                    'cs': str({
                         'totalMinionsKilled': part['totalMinionsKilled'],
                         'laneMinionsFirst10Minutes': challenge['laneMinionsFirst10Minutes']
-                    },
-                    'turret': {
+                    }).replace("'",'"'),
+                    'turret': str({
                         'turretTakedowns': challenge['turretTakedowns'],
                         'turretPlatesTaken': challenge['turretPlatesTaken']
-                    },
-                    'damage': {
+                    }).replace("'",'"'),
+                    'damage': str({
                         'teamDamagePercentage': team_damage_percentage, # 예외처리
                         'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
                         'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
@@ -594,13 +595,13 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'trueDamageTaken': part['trueDamageTaken'],
                         'totalHeal': part['totalHeal'],
                         'totalHealsOnTeammates': part['totalHealsOnTeammates']
-                    },
-                    'vision': {
+                    }).replace("'",'"'),
+                    'vision': str({
                         'visionScore': part['visionScore'],
                         'wardsPlaced': part['wardsPlaced'],
                         'controlWardsPlaced': challenge['controlWardsPlaced'],
                         'wardsKilled': part['wardsKilled']
-                    }
+                    }).replace("'",'"')
                 }
                 result.append(each_part)
     except Exception as e:
