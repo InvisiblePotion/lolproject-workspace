@@ -49,11 +49,14 @@ public interface champion_dao {
 	//챔프 룬
 	List<ChampRune_dto> champ_rune(Integer champ_id);
 	
-	//챔프 타입 룬 이미지
-	List<ChampRuneType_dto> type_img(Integer typecore);
+	//룬 메인 이미지
+	List<ChampRuneType_dto> main_img(Integer main_rune);
+	
+	//룬 서브 이미지
+	List<ChampRuneType_dto> sub_img(Integer sub_rune);
 	
 	//챔프 코어 이미지
-	List<ChampRuneCore_dto> core_img(Integer core_main);
+	List<ChampRuneCore_dto> core_img(Integer core_rune);
 	
 	//챔프 파편 이미지
 	List<ChampRuneShard_dto> shard_img(Integer shard);
@@ -61,6 +64,14 @@ public interface champion_dao {
 	List<Item_dto> item_build(Integer champ_id);
 	
 	List<Item_dto> item_img(Integer item);
+
+	
+	
+	
+	//챔프 테스트
+	List<Test_raw> testraw();
+
+	
 
 	
 	

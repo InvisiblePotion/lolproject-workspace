@@ -44,7 +44,9 @@
   	</select>
   	
   	<select id="search_champ" resultType="com.base.personlol.dto.champion_dto">
-  		SELECT CHAMP_NAME, CHAMP_ICON FROM CHAMPDATA WHERE CHAMP_NAME LIKE '%' || #{searchVal} || '%'
+  		SELECT c.CHAMP_ID,c.CHAMP_NAME, c.CHAMP_ICON,ci.LANE FROM CHAMPDATA c
+  		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+  		WHERE c.CHAMP_NAME LIKE '%' || #{searchVal} || '%'
   	</select>
   	
   	<select id="champ_info" resultType="com.base.personlol.dto.champion_dto">
@@ -66,18 +68,23 @@
   		SELECT * FROM CHAMPION_RUNE cr WHERE CHAMP_ID = #{champ_id}
   	</select>
   	
-  	<select id="type_img" resultType="com.base.personlol.dto.ChampRuneType_dto">
-  		SELECT * FROM RUNETYPE WHERE RUNETYPE_ID = #{typecore}
+  	<select id="main_img" resultType="com.base.personlol.dto.ChampRuneType_dto">
+  		SELECT * FROM RUNETYPE WHERE RUNETYPE_ID = #{main_rune}
+  	</select>
+  	
+  	<select id="sub_img" resultType="com.base.personlol.dto.ChampRuneType_dto">
+  		SELECT * FROM RUNETYPE WHERE RUNETYPE_ID = #{sub_rune}
   	</select>
   	
   	<select id="core_img" resultType="com.base.personlol.dto.ChampRuneCore_dto">
-  		SELECT * FROM RUNE WHERE RUNE_ID = #{core_main}
+  		SELECT * FROM RUNE WHERE RUNETYPE_ID = #{core_rune}
   	</select>
   	
   	<select id="shard_img" resultType="com.base.personlol.dto.ChampRuneShard_dto">
   		SELECT * FROM RUNESHARD WHERE RUNESHARD_ID = #{shard}
   	</select>
   	
+<<<<<<< HEAD
   	<select id="item_build" resultType="com.base.personlol.dto.Item_dto">
 		<![CDATA[SELECT * FROM (SELECT * FROM CHAMPION_ITEM_BUILD WHERE CHAMP_ID = #{champ_id} ORDER BY PICK_RATE DESC) WHERE ROWNUM<=2]]>
   	</select>
@@ -87,5 +94,10 @@
   	</select>
   	
   	
+=======
+  	<select id="testraw" resultType="com.base.personlol.dto.Test_raw">
+  		SELECT * FROM NEWDATA
+  	</select>
+>>>>>>> 501745761389e25b9c1dc299e8c1d00d1be93d3f
   	
   </mapper>

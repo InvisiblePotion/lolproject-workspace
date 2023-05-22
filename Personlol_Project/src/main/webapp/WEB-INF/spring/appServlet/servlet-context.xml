@@ -48,6 +48,8 @@
 	<!-- <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/> -->
 	
 	<interceptors>
+	
+	    
 	    <interceptor>
 	    	<!-- 예외 설정 -->   
 	        <mapping path="/**" />
@@ -83,6 +85,8 @@
 	        
 	        <beans:bean class="com.base.personlol.intercepter.SessionInterceptor"/>
 	    </interceptor>
+	    
+	    
 	</interceptors>
 
 

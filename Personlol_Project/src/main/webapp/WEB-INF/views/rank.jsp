@@ -54,6 +54,8 @@
 			</nav>
 		</div>
 	</div>
+	<!-- 여기까지가 헤더!!!!!!! -->
+
 
 	<!-- 헤더 다음부분 -->
 	<div class="container text-center">
@@ -202,11 +204,21 @@
 	</script>
 
 	<script>
+		$('.gosummonerinfo').click(function () {
+			const summoner_name = $('.summoner_name').val();
+			console.log(summoner_name);
+			const encoded_name = encodeURIComponent(summoner_name);
+			const url = '/personlol/summoner/?summoner_name=' + encoded_name;
+			location.href = url;
+		});
+	</script>
+	<script>
+		//로그아웃
 		$('#logout').click(function () {
 			location.href = '/personlol/logout';
 			console.log("로그아웃");
 			alert("로그아웃");
-		});
+		})
 	</script>
 </body>
 
