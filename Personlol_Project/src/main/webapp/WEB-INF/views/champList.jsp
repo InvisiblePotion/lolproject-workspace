@@ -89,19 +89,19 @@
 					<img src="" alt="all" />
 				</button>
 				<button type="button" class="btn btn-light" id="top_img">
-					<img src="" alt="Top" />
+					<img width="40"  height="40" src="../resources/dd/img/lane/Top.png" alt="Top" />
 				</button>
 				<button type="button" class="btn btn-light" id="jug_img">
-					<img src="" alt="Jug" />
+					<img width="40"  height="40" src="../resources/dd/img/lane/Jungle.png" alt="Jug" />
 				</button>
 				<button type="button" class="btn btn-light" id="mid_img">
-					<img src="" alt="Mid" />
+					<img width="40"  height="40" src="../resources/dd/img/lane/Mid.png" alt="Mid" />
 				</button>
 				<button type="button" class="btn btn-light" id="bot_img">
-					<img src="" alt="Bot" />
+					<img width="40"  height="40" src="../resources/dd/img/lane/Bot.png" alt="Bot" />
 				</button>
 				<button type="button" class="btn btn-light" id="util_img">
-					<img src="" alt="Sup" />
+					<img width="40"  height="40" src="../resources/dd/img/lane/Support.png" alt="Sup" />
 				</button>
 				<button type="button" class="btn btn-light" id="lote_img">
 					<img src="" alt="lote" />

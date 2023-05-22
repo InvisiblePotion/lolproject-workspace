@@ -9,6 +9,7 @@ import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
+import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 
@@ -56,6 +57,12 @@ public interface champion_dao {
 	
 	//챔프 파편 이미지
 	List<ChampRuneShard_dto> shard_img(Integer shard);
+
+	List<Item_dto> item_build(Integer champ_id);
+	
+	List<Item_dto> item_img(Integer item);
+
+	
 	
 
 	

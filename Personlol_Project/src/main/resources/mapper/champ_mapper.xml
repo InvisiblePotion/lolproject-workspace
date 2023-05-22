@@ -59,7 +59,7 @@
   	</select>
   	
   	<select id="skill_tree" resultType="com.base.personlol.dto.Champskill_dto">
-  		SELECT * FROM CHAMPION_SKILL cs WHERE CHAMP_ID = #{champ_id} 
+  		SELECT cs.*, c.* FROM CHAMPION_SKILL cs  INNER JOIN CHAMPSKILL c ON(c.CHAMP_ID = cs.CHAMP_ID) WHERE cs.CHAMP_ID = #{champ_id} 
   	</select>
   	
   	<select id="champ_rune" resultType="com.base.personlol.dto.ChampRune_dto">
@@ -77,6 +77,15 @@
   	<select id="shard_img" resultType="com.base.personlol.dto.ChampRuneShard_dto">
   		SELECT * FROM RUNESHARD WHERE RUNESHARD_ID = #{shard}
   	</select>
+  	
+  	<select id="item_build" resultType="com.base.personlol.dto.Item_dto">
+		<![CDATA[SELECT * FROM (SELECT * FROM CHAMPION_ITEM_BUILD WHERE CHAMP_ID = #{champ_id} ORDER BY PICK_RATE DESC) WHERE ROWNUM<=2]]>
+  	</select>
+  	
+  	<select id="item_img" resultType="com.base.personlol.dto.Item_dto">
+  		SELECT * FROM ITEM WHERE ITEM_ID = #{item}
+  	</select>
+  	
   	
   	
   </mapper>

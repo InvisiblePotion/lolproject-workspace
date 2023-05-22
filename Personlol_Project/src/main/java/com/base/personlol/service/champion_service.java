@@ -11,6 +11,7 @@ import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
+import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 
@@ -149,8 +150,9 @@ public class champion_service {
 	}
 
 	public List<Champskill_dto> skill_tree(Integer champ_id) {
-		List<Champskill_dto> skill_tree = null;
+		List<Champskill_dto> skill_tree = null;		
 		skill_tree = champ_dao.skill_tree(champ_id);
+		System.out.println("Service_skill_tree_Return="+skill_tree);
 		return skill_tree;
 	}
 
@@ -177,7 +179,23 @@ public class champion_service {
 		shard_img = champ_dao.shard_img(shard);
 		return shard_img;
 	}
+	
+	public List<Item_dto> item_build(Integer champ_id) {
+		System.out.println("Service_item_build_champ_id="+champ_id);
+		List<Item_dto> item_build = null;
+		item_build = champ_dao.item_build(champ_id);
+		System.out.println("Service_item_build_Return="+item_build);
+		return item_build;		
+	}
 
+
+	public List<Item_dto> item_img(Integer item) {
+		List<Item_dto> item_img = null;
+		item_img = champ_dao.item_img(item);
+		return item_img;
+	}
+
+	
 
 
 

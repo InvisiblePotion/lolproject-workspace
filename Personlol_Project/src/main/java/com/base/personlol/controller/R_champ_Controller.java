@@ -1,12 +1,9 @@
 package com.base.personlol.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +12,7 @@ import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
-import com.base.personlol.dto.Test_raw;
+import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.champion_dto;
 import com.base.personlol.service.champion_service;
 
@@ -202,7 +199,6 @@ public class R_champ_Controller {
 	@GetMapping("/champion/info")
 	public List<champion_dto> champ_info(Integer champ_id){
 		List<champion_dto> champ_info = champ_ser.champ_info(champ_id);
-		
 		return champ_info;
 	}
 	//챔프 스킬 부분
@@ -305,7 +301,36 @@ public class R_champ_Controller {
 		List<ChampRuneShard_dto> shard3_img = champ_ser.shard_img(shard3);
 		return shard3_img;
 	}
+	
+	//챔프 아이템 부분
+		@GetMapping("/champion/item_build")
+		public List<Item_dto> item_build(Integer champ_id){
+			System.out.println("Controller_item_build_champ_id="+champ_id);
+			List<Item_dto> item_build = champ_ser.item_build(champ_id);
+			return item_build;
+		}
+	
+	//챔프 아이템 이미지
+		@GetMapping("/champion/item1")
+		public List<Item_dto> item1_img(Integer item){
+			System.out.println("Controller_item1_img = "+ item);
+			List<Item_dto> item_img = champ_ser.item_img(item);
+			return item_img;
+		}
 		
+		@GetMapping("/champion/item2")
+		public List<Item_dto> item2_img(Integer item){
+			System.out.println("Controller_item2_img = "+ item);
+			List<Item_dto> item_img = champ_ser.item_img(item);
+			return item_img;
+		}
+		
+		@GetMapping("/champion/item3")
+		public List<Item_dto> item3_img(Integer item){
+			System.out.println("Controller_item3_img = "+ item);
+			List<Item_dto> item_img = champ_ser.item_img(item);
+			return item_img;
+		}
 	
 	
 	
