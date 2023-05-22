@@ -10,7 +10,7 @@
 	<title>ranking</title>
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../resources/css/rank.css">
+	<link rel="stylesheet" href="./resources/css/rank.css">
 
 </head>
 
@@ -20,7 +20,7 @@
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png"></a>
+					<a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png"></a>
 					<div class="search-bar">
 						<input class="summoner_name" type="text">
 						<button class="gosummonerinfo" type="button">go!</button>
@@ -28,7 +28,7 @@
 					<div class="menu">
 
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
-						<a href="/personlol/summoner/rank" class="m-col">랭킹</a>
+						<a href="/personlol/rank" class="m-col">랭킹</a>
 						<a href="/personlol/duo/" class="m-col">듀오찾기</a>
 						<a href=" " class="m-col">사용자분석</a>
 

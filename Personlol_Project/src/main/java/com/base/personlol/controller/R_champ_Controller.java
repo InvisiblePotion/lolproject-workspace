@@ -232,6 +232,7 @@ public class R_champ_Controller {
 		List<ChampRuneType_dto> main_rune_img = champ_ser.main_rune(main_rune);
 		return main_rune_img;
 	}
+	
 	//챔프 룬메인
 	@GetMapping("/champion/rune/sub-rune")
 	public List<ChampRuneType_dto> sub_rune_img(Integer sub_rune){
