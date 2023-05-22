@@ -222,68 +222,32 @@ public class R_champ_Controller {
 	//챔프 룬 트리 부분
 	@GetMapping("/champion/rune")
 	public List<ChampRune_dto> champ_rune(Integer champ_id){
-		
-		System.out.println("champ_id: "+champ_id);
 		List<ChampRune_dto> champ_rune = champ_ser.champ_rune(champ_id);
-			
-		System.out.println("champ_skill: "+champ_rune);
 		return champ_rune;
 	}
 	
-	//챔프 타입룬 이미지 불러오기
-	@GetMapping("/champion/rune/type-img")
-	public List<ChampRuneType_dto> type_img(Integer typecore){
-		List<ChampRuneType_dto> type_img = champ_ser.type_img(typecore);
-		return type_img;
+	//챔프 룬메인
+	@GetMapping("/champion/rune/main-rune")
+	public List<ChampRuneType_dto> main_rune_img(Integer main_rune){
+		List<ChampRuneType_dto> main_rune_img = champ_ser.main_rune(main_rune);
+		return main_rune_img;
 	}
 	
-	//챔프 코어룬 이미지 불러오기
-	@GetMapping("/champion/rune/core-main")
-	public List<ChampRuneCore_dto> core_img(Integer core_main){
-		System.out.println("core_main: "+core_main);
-		List<ChampRuneCore_dto> core_img = champ_ser.core_img(core_main);
-		System.out.println("type_img: "+core_img);
-		return core_img;
+	//챔프 룬메인
+	@GetMapping("/champion/rune/sub-rune")
+	public List<ChampRuneType_dto> sub_rune_img(Integer sub_rune){
+		System.out.println("sub_rune:" + sub_rune);
+		List<ChampRuneType_dto> sub_rune_img = champ_ser.sub_rune(sub_rune);
+		System.out.println("sub_rune_img"+ sub_rune_img);
+		return sub_rune_img;
 	}
+	
 	
 	//챔프 코어1
-	@GetMapping("/champion/rune/core-rune1")
-	public List<ChampRuneCore_dto> core_rune1_img(Integer core_rune1){
-		List<ChampRuneCore_dto> core_rune1_img = champ_ser.core_img(core_rune1);
+	@GetMapping("/champion/rune/type-core")
+	public List<ChampRuneCore_dto> core_rune1_img(Integer core_rune){
+		List<ChampRuneCore_dto> core_rune1_img = champ_ser.core_img(core_rune);
 		return core_rune1_img;
-	}
-	//챔프 코어2
-	@GetMapping("/champion/rune/core-rune2")
-	public List<ChampRuneCore_dto> core_rune2_img(Integer core_rune2){
-		List<ChampRuneCore_dto> core_rune2_img = champ_ser.core_img(core_rune2);
-		return core_rune2_img;
-	}
-	//챔프 코어3
-	@GetMapping("/champion/rune/core-rune3")
-	public List<ChampRuneCore_dto> core_rune3_img(Integer core_rune3){
-		List<ChampRuneCore_dto> core_rune3_img = champ_ser.core_img(core_rune3);
-		return core_rune3_img;
-	}
-	
-	//챔프 타입 서브
-	@GetMapping("/champion/rune/type-sub")
-	public List<ChampRuneType_dto> type_sub(Integer core_main){
-		List<ChampRuneType_dto> type_sub = champ_ser.type_img(core_main);
-		return type_sub;
-	}
-	
-	//챔프 타입 서브
-	@GetMapping("/champion/rune/sub-rune1")
-	public List<ChampRuneCore_dto> sub_rune1_img(Integer sub_rune1){
-		List<ChampRuneCore_dto> sub_rune1_img = champ_ser.core_img(sub_rune1);
-		return sub_rune1_img;
-	}
-		
-	//챔프 타입 서브
-	@GetMapping("/champion/rune/sub-rune2")
-	public List<ChampRuneCore_dto> sub_rune2_img(Integer sub_rune2){
-		List<ChampRuneCore_dto> sub_rune2_img = champ_ser.core_img(sub_rune2);
-		return sub_rune2_img;
 	}
 	
 	//챔프 파편1
@@ -306,7 +270,13 @@ public class R_champ_Controller {
 		return shard3_img;
 	}
 		
-	
+	//테스트
+	@GetMapping("/champion/test")
+	public List<Test_raw> test_raw(){
+		List<Test_raw> test_raw = champ_ser.testraw();
+		
+		return test_raw;
+	}
 	
 	
 }//

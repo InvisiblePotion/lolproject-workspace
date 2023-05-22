@@ -149,6 +149,7 @@
 			method: 'get',
 			url: '/personlol/champimg',
 		}).done(res => {
+			console.log(res)
 			/*아이콘 띄우기  */
 			let icon_img = ''
 			$.each(res, function (i, img) {
@@ -175,8 +176,9 @@
 				/*아이콘 띄우기  */
 				let icon_img = ''
 				$.each(res, function (i, img) {
-					icon_img += '<img class="icon_img" width="70" height="70" src="../resources/' + img
-						.champ_icon + '" alt="이미지">'
+					icon_img += 
+						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
+						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon + '" alt="이미지">'
 				})
 				$('.ul-group').html(icon_img);
 			}).fail(err => {
@@ -192,10 +194,12 @@
 				},
 				url: '/personlol/champimg-top',
 			}).done(res => {
-
+				console.log(res)
 				let top_img = ''
 				$.each(res, function (i, img) {
-					top_img += '<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
+					top_img += 
+						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
+						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
 						'" alt="이미지">'
 				})
 				$('.ul-group').html(top_img);
@@ -216,7 +220,9 @@
 
 				let jug_img = ''
 				$.each(res, function (i, img) {
-					jug_img += '<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
+					jug_img +=
+						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
+						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
 						'" alt="이미지">'
 				})
 				$('.ul-group').html(jug_img);
@@ -237,7 +243,9 @@
 
 				let mid_img = ''
 				$.each(res, function (i, img) {
-					mid_img += '<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
+					mid_img += 
+						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
+						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
 						'" alt="이미지">'
 				})
 				$('.ul-group').html(mid_img);
@@ -257,7 +265,9 @@
 			}).done(res => {
 				let bot_img = ''
 				$.each(res, function (i, img) {
-					bot_img += '<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
+					bot_img += 
+						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
+						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
 						'" alt="이미지">'
 				})
 				$('.ul-group').html(bot_img);
@@ -277,7 +287,9 @@
 				}).done(res => {
 					let util_img = ''
 					$.each(res, function (i, img) {
-						util_img += '<img class="icon_img" width="70" height="70" src="../resources/' + img
+						util_img += 
+							'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
+							'<img class="icon_img" width="70" height="70" src="../resources/' + img
 							.champ_icon + '" alt="이미지">'
 					})
 					$('.ul-group').html(util_img);
@@ -301,9 +313,10 @@
 						'<tr><td class="number">' +
 						(i + 1) +
 						'</td>' +
-						'<td align="left" width="120px"> <img width="30" height="30" src="../resources/' +
-						list.champ_icon +
-						'" alt="이미지">' +
+						'<td align="left" width="120px">' +
+						'<a href="/personlol/champion/detail?champ_id=' + list.champ_id +'&lane='+list.lane+'">'+
+						'<img width="30" height="30" src="../resources/'+
+						list.champ_icon +'" alt="이미지">' +
 						'<span style="font-size: 12px; font-weight: bold;">' +
 						list.champ_name +
 						'</span> </td>' +
@@ -498,7 +511,9 @@
 			}).done(res => {
 				let icon_img = ''
 				$.each(res, function (i, img) {
-					icon_img += '<img class="icon_img" width="70" height="70" src="../resources/' + img
+					icon_img += 
+						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
+						'<img class="icon_img" width="70" height="70" src="../resources/' + img
 						.champ_icon + '" alt="이미지">'
 				})
 				$('.ul-group').html(icon_img);

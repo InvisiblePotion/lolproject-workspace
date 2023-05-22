@@ -10,11 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/summoner")
 public class summoner_Controller {
-	@GetMapping("/rank")
-	public String rank() {
-		return "rank";
-	}
-
+	
 	
 	@GetMapping("/")
 	public String summonerinfo() {
