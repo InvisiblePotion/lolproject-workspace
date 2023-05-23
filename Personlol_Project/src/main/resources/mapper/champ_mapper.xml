@@ -84,8 +84,6 @@
   		SELECT * FROM RUNESHARD WHERE RUNESHARD_ID = #{shard}
   	</select>
   	
-  	<select id="testraw" resultType="com.base.personlol.dto.Test_raw">
-  		SELECT * FROM NEWDATA
-  	</select>
+
   	
   </mapper>
