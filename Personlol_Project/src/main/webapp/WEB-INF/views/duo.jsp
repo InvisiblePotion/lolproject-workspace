@@ -9,6 +9,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 
 <link rel="stylesheet" type="text/css" href="../resources/css/duo.css">
 
@@ -92,17 +95,29 @@
 							<span size="12" class="gametext">모든 큐</span>
 						</div>
 						<div class="box1 game tier">
-							<span size="12" class="gametext">모든 티어</span>
+							<!-- <span size="12" class="gametext">모든 티어</span> -->
+							<select class="form-select" aria-label="Default select example" style="width: 100px">
+							  <option selected>티어</option>
+							  <option value="CHELLENGER">챌린저</option>
+							  <option value="GRANDMASTER">그랜드마스터</option>
+							  <option value="MASTER">마스터</option>
+							  <option value="PLATINUM">플레티넘</option>
+							  <option value="GOLD">골드</option>
+							  <option value="SILVER">실버</option>
+							  <option value="BRONZE">브론즈</option>
+							  <option value="IRON">아이언</option>
+							  <option value="Unranked">언랭</option>
+							</select>
 						</div>
 					</div>
 
 					<div class="lane-bar-bottom">
-						<button type="button" class="box2 all" width="52" height="40">전체</button>
-						<button type="button" class="box2 rebox" width="52" height="40">탑</button>
-						<button type="button" class="box2 rebox" width="52" height="40">정글</button>
-						<button type="button" class="box2 rebox" width="52" height="40">미드</button>
-						<button type="button" class="box2 rebox" width="52" height="40">바텀</button>
-						<button type="button" class="box2 rebox" width="52" height="40">서폿</button>
+						<button type="button" class="box2 rebox" width="52" height="40" value = "all">전체</button>
+						<button type="button" class="box2 rebox" width="52" height="40" id="top" value="top">탑</button>
+						<button type="button" class="box2 rebox" width="52" height="40" id="jungle" value="jungle">정글</button>
+						<button type="button" class="box2 rebox" width="52" height="40" id="mid" value="mid">미드</button>
+						<button type="button" class="box2 rebox" width="52" height="40" id="bottom" value="bottom">바텀</button>
+						<button type="button" class="box2 rebox" width="52" height="40" id="support" value="support">서폿</button>
 					</div>
 
 				</div>
@@ -139,7 +154,7 @@
 						</article>
 						<h1 size="15" color="text" class="title-text">${duo.duo_title}</h1>
                    		<p size="13" class="p-tag">${duo.duo_content}</p>
-						
+						<div id="result1">안녕하세요</div>
 						<div class="main-bottom">
 							<!-- 유저 초상화 -->
 							<a href="fdaf" class="user-container"> <!-- <img src="" alt=""> -->
@@ -180,26 +195,21 @@
 				<!-- 듀오찾기 블럭 1개 사이즈  끝-->
 				</c:forEach>
 			</div class="main-container">
-
-								
 			
 
 			
 			</div>
 			
 			<span size="14" class="main-more span-text">
-				<button id="load-more-button">더 보기</button>
+				<button type ="button" id="load-more-button">더 보기</button>
 			</span>
-		
+			<p id="result"></p>
 		</div>
 		<footer class="footer-container"> </footer>
 	</div>
+	
 	<script type="text/javascript">
-	// 모달창 열기 버튼 클릭 시
-	$("#myBtn").click(function() {
-		$("#myModal").css("display", "block"); // 모달창을 보이게 함
-	});
-
+	
 	// 모달창 닫기 버튼 클릭 시
 	$(".close").click(function() {
 		$("#myModal").css("display", "none"); // 모달창을 숨김
@@ -207,44 +217,154 @@
 	
 	//업데이트 버튼 클릭 시
 	$(".update").click(function() {
-		 location.reload();
+		
+		
 	});
 	
 	
 	
-	$(document).ready(function() {
-	    var page = 2; // 추가 게시물을 불러올 때 사용할 페이지 번호 초기화
-
-	    // 더 보기 버튼 클릭 이벤트 처리
-	    $("#load-more-button").click(function(e) {
-	        e.preventDefault(); //페이지 더보기 클릭 시 리로딩 방지.
-	        loadMorePosts();
+	$('#myBtn').click(function() {
+	    // 로그인 상태 확인 요청 보내기
+	    $.ajax({
+	        url: '/personlol/duo/isLoggedIn',
+	        type: 'GET',
+	        success: function(response) {
+	            if (response) {
+	                // 로그인 중인 경우에만 동작
+	                // AJAX 요청 등 필요한 작업 수행
+	                $("#myModal").css("display", "block"); // 모달창을 보이게 함
+	                //window.location.href = '/personlol/duo/';
+	            } else {
+	                alert('로그인 후 글을 작성할 수 있습니다.');
+	            }
+	        },
+	        error: function() {
+	            alert('서버 요청 중 오류가 발생했습니다.');
+	        }
 	    });
+	});
+	
+	
+	let page = 1; // 현재 페이지 번호
 
-	    // 추가 게시물을 가져와서 추가하는 함수
-	    function loadMorePosts() {
-	        $.ajax({
-	            url: "/?page=" + page,
-	            method: "GET",
-	            success: function(data) {
-	                if (data.length > 0) {
-	                    // 새로운 게시물을 additional-posts div에 추가합니다
-	                    $("#main-container").append(data);
+	
+	//게시글 시작
+	$(document).ready(function() {
+	    // 전체 버튼에 해당하는 값을 전달하여 초기 내용을 가져옵니다.
+	    loadContent('all', page, "null");
+	});
+	
+	//박스 클릭시
+	$('.box2.rebox').click(function() {
+	    const selectedId = $(this).val();
+	    // 클릭된 버튼의 내용을 가져옵니다.
+	    loadContent(selectedId, page,"null");
+	});
+	
+	
+	
 
-	                    // 다음 불러오기를 위해 페이지 번호 증가
-	                    page++;
-	                } else {
-	                    // 더 이상 불러올 게시물이 없으면 더 보기 버튼 또는 링크를 숨깁니다
-	                    $("#load-more-button").hide();
+	
+	
+	function loadContent(selectedId, page, tier) {
+	    $('.main-container').empty();
 
+	    $.ajax({
+	        method: 'get',
+	        url: '/personlol/duo/lane',
+	        data: { "lane": selectedId, "page": page, "tier":tier},
+	        dataType: 'json'
+	   
+	    }).done((res) => {
+	        console.log(selectedId);
+	        let div = $('<div></div>');
+
+	        $.each(res, function (i, line) {
+	            let mainContents = $('<div class="main-contents"></div>');
+	            let date = $('<article class="time-text"><span size="11" class="blue-text">' + new Date(line.DUO_DATE).toLocaleString('en-US', { timeStyle: 'short' }) + '</span></article>');
+	            let title = $('<h1 size="15" color="text" class="title-text">' + line.DUO_TITLE + '</h1>');
+	            let content = $('<p size="13" class="p-tag">' + line.DUO_CONTENT + '</p>');
+	            let resultDiv = $('<div class="result-div"></div>');
+	            let userContainer = $('<a href="fdaf" class="user-container"><div class="lane-img"></div><span size="12" class="user-id">' + line.USER_LOLNAME + '</span></a>');
+	            let mainBotton = $('<div class="main-botton"></div>');
+
+	            isLoggedIn().then((loggedIn) => {
+	                if (loggedIn) {
+	                    // 로그인 상태인 경우에만 동작
+	                    isLoggedIn().then((loginCheck) => {
+	                        if (line.DUO_OWNERID == String(loginCheck)) {
+	                            console.log('성공');
+	                            let deleteLink = $('<button class="copy-box"><span class="user-id"><a href="/personlol/duo/delete?duo_id=' + line.DUO_ID + '" id="wh">삭제하기</a></span></button>');
+	                            mainBotton.append(deleteLink);
+	                        } else {
+	                            console.log('실패');
+	                            let acceptLink = $('<button class="copy-box"><span class="user-id"><a href="/personlol/duo/accept/' + line.DUO_ID + '" id="wh">수락하기</a></span></button>');
+	                            mainBotton.append(acceptLink);
+	                        }
+	                    });
 	                }
+
+	                resultDiv.append(userContainer);
+	                mainContents.append(date);
+	                mainContents.append(title);
+	                mainContents.append(content);
+	                mainContents.append(resultDiv);
+	                mainContents.append(mainBotton);
+
+	                $('.main-container').append(mainContents);
+	            });
+	        });
+
+	        $('#result1').html(div);
+
+	    }).fail((jqXHR, textStatus, errorThrown) =>  {
+	        console.log(jqXHR);
+	        console.log(textStatus);
+	        console.log(errorThrown);
+	        $('#result').html('무언가 잘못되었습니다 히잉... (F12로 개발자 도구 로그를 확인해주세요.)');
+	    });
+	}
+	
+	// 더보기(페이징) 버튼 클릭 이벤트 처리
+	$('#load-more-button').on('click', function() {
+	    page++; // 페이지 번호 증가
+	    
+	    console.log(page)
+	    
+	    loadContent("all", page, "null"); // 새로운 페이지 번호로 게시글 로드
+	});
+	
+
+	function isLoggedIn() {
+	    // 서버로부터 세션 정보를 전달받아 로그인 상태를 확인하는 함수
+	    // 로그인 상태인 경우 Promise를 resolve하고, 로그아웃 상태인 경우 Promise를 reject합니다.
+	    return new Promise((resolve, reject) => {
+	        $.ajax({
+	            method: 'get',
+	            url: '/personlol/duo/check-login-status', // 서버에서 세션 상태를 확인하는 API 엔드포인트
+	            async: true, // 비동기적으로 요청 처리
+	            success: function (response) {
+	                var loggedIn = response.loggedIn;
+	                var loginCheck = response.loginCheck; // loginCheck 변수를 선언하여 값을 받아옴
+	                console.log(loginCheck);
+	                resolve(loginCheck);
 	            },
-	            error: function() {
-	                console.log("게시물을 불러오는 중에 오류가 발생했습니다.");
+	            error: function (error) {
+	                console.log(error);
+	                reject(error);
 	            }
 	        });
-	    }
+	    });
+	}
+	
+	// 셀렉트 옵션
+	$('.form-select').change(function() {
+	  	const selectTier = $(this).val();
+	  	// 선택된 값의 처리
+	  	console.log(selectTier)
+	  	loadContent("all",page,selectTier)
 	});
+	
 	
 	</script>
 </body>

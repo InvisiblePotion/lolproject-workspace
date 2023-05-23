@@ -1,0 +1,157 @@
+
+h1 {
+  text-align: center;
+}
+p{
+  text-align: center;
+}
+
+/* form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+} */
+
+.checkbox-wrapper {
+  margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.checkboxForm input[type="checkbox"]{
+  /* margin-left: 100px; */
+  appearance: none; /* 기본 스타일 제거 */
+  -webkit-appearance: none; /* 웹킷 브라우저에서도 적용 */
+  -moz-appearance: none; /* 모질라 브라우저에서도 적용 */
+  /* 원하는 스타일 적용 */
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  float: right;
+  cursor:pointer;
+  border: 1px solid #c5cbd0;
+}
+
+.checkboxForm input[type="checkbox"]:checked{
+  
+  background-color: #1ea1f7;
+  border: 1px solid #c5cbd0;
+}
+
+/* 체크박스에 대한 가상 요소 스타일 지정 */
+.checkboxForm input[type="checkbox"]::before {
+  content: "✔"; /* 가상 요소에 표시할 내용 지정 */
+  color: #c5cbd0;
+  display: block; /* 가상 요소를 블록 요소로 설정하여 크기와 위치 조정이 가능하도록 함 */
+  position: relative; /* 포지션을 설정하여 체크박스와 관련된 위치 지정 가능 */
+  top: 50%; /* 가상 요소를 세로 방향으로 중앙에 위치시키기 위해 50%로 설정 */
+  left: 50%; /* 가상 요소를 가로 방향으로 중앙에 위치시키기 위해 50%로 설정 */
+  transform: translate(-20%, -50%); /* 가상 요소를 중앙에 위치시키기 위해 50%만큼 이동 */
+  font-size: 12px; /* "V" 텍스트의 크기 설정 */
+}
+
+.checkboxForm input[type="checkbox"]:checked::before {
+  color: #fff; /* 원하는 색상으로 변경 */
+}
+
+
+
+
+/* 전체 페이지의 배경색 설정 */
+body {
+  background-color: #f5f5f5; /* 배경색 추가 */
+}
+
+/* 약관동의 폼의 스타일 */
+form {
+  max-width: 600px;
+  height: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff; /* 배경색 추가 */
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+/* 버튼 css */
+#btnAgree{
+  width: 200px;
+  height: 60px;
+  padding: 20px;
+  background-color: #1ea1f7;
+  text-align: center;
+  font-size: 20px;
+  line-height: 25px;
+  color: #fff;
+  border: 1px solid #dddfe4;
+  cursor: pointer;
+
+}
+#btnAgree:disabled{
+  background-color: #dddfe4
+}
+
+#btnNotAgree{
+  width: 200px;
+  height: 60px;
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+  font-size: 20px;
+  line-height: 25px;
+  color: black;
+  border: 1px solid #dddfe4;
+  cursor: pointer;
+}
+
+#agree_div{
+  margin-top: 50px;
+  text-align: center;
+}
+
+/* 로고 */
+.logo-image{
+  width: 250px;
+  height: 60px;
+}
+
+/* 체크박스 div 설정 */
+.chekdiv{
+  width: 500px;
+  margin-right: 50px;
+  /* margin-left: 50px; */
+  padding-top: 10px;
+  /* display: flex; */
+  
+}
+
+#allchekdiv{
+  border-bottom: 2px solid #dddfe4;
+  padding-bottom: 25px;
+}
+/* 약관동의 내용 */
+
+.terms_scroll{
+  text-align: left; 
+  /* margin-left: 50px; */
+  height: 150px;
+  width: 500px;
+  font-size: 15px;
+  overflow: auto;
+  background-color: #f5f5f5;
+  align-items: center;
+}
+
+.wrab_div{
+  margin-right: 50px;
+  margin-left: 50px;
+  padding-top: 10px;
+}
+
+.terms_scroll h3{
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-size: 14px;
+}
