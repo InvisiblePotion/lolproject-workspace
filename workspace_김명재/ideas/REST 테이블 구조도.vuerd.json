@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -2135.803125,
-    "scrollLeft": -2777.999999999999,
+    "scrollTop": -768.6031250000086,
+    "scrollLeft": -2436.0062499999963,
     "zoomLevel": 0.8,
     "show": {
       "tableComment": true,
@@ -19,7 +19,7 @@
     },
     "database": "Oracle",
     "databaseName": "",
-    "canvasType": "@vuerd/builtin-sql-ddl",
+    "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",
@@ -275,7 +275,7 @@
           "active": false,
           "left": 3745.2217,
           "top": 1993.2213,
-          "zIndex": 34,
+          "zIndex": 33,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -706,7 +706,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 18,
+          "zIndex": 17,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -907,7 +907,7 @@
           "active": false,
           "left": 3746.7802,
           "top": 2767.6675,
-          "zIndex": 26,
+          "zIndex": 25,
           "widthName": 87.515625,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1154,7 +1154,7 @@
           "active": false,
           "left": 3747.0892,
           "top": 3019.1997,
-          "zIndex": 19,
+          "zIndex": 18,
           "widthName": 126.76318359375,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -1378,7 +1378,7 @@
           "active": false,
           "left": 3744.8509,
           "top": 3880.7751,
-          "zIndex": 21,
+          "zIndex": 20,
           "widthName": 92.5048828125,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1533,7 +1533,7 @@
           "active": false,
           "left": 4090.5,
           "top": 1083.522,
-          "zIndex": 30,
+          "zIndex": 29,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1595,7 +1595,7 @@
           "active": false,
           "left": 4463.4166,
           "top": 1393.3832,
-          "zIndex": 14,
+          "zIndex": 13,
           "widthName": 74.44580078125,
           "widthComment": 60
         },
@@ -1703,7 +1703,7 @@
           "active": false,
           "left": 4218.75,
           "top": 767.7722,
-          "zIndex": 13,
+          "zIndex": 12,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1989,7 +1989,7 @@
           "active": false,
           "left": 4428.5769,
           "top": 2146.3554,
-          "zIndex": 33,
+          "zIndex": 32,
           "widthName": 60,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2098,7 +2098,7 @@
           "active": false,
           "left": 4433.2447,
           "top": 2623.1335,
-          "zIndex": 29,
+          "zIndex": 28,
           "widthName": 65.49560546875,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2253,7 +2253,7 @@
           "active": false,
           "left": 3093.2224,
           "top": 2262.733,
-          "zIndex": 12,
+          "zIndex": 11,
           "widthName": 71.10693359375,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2477,7 +2477,7 @@
           "active": false,
           "left": 3092.2239,
           "top": 2569.6431,
-          "zIndex": 16,
+          "zIndex": 15,
           "widthName": 67.0126953125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2655,7 +2655,7 @@
           "active": false,
           "left": 3089.332,
           "top": 2898.3334,
-          "zIndex": 17,
+          "zIndex": 16,
           "widthName": 68.1298828125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2833,7 +2833,7 @@
           "active": false,
           "left": 4392.489,
           "top": 3136.1536,
-          "zIndex": 32,
+          "zIndex": 31,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2896,7 +2896,7 @@
           "active": false,
           "left": 4435.1111,
           "top": 3448.8873,
-          "zIndex": 10,
+          "zIndex": 9,
           "widthName": 79.1875,
           "widthComment": 115.140625,
           "color": "#9E9E9E"
@@ -3097,7 +3097,7 @@
           "active": false,
           "left": 3747.0836,
           "top": 3312.3253,
-          "zIndex": 20,
+          "zIndex": 19,
           "widthName": 130.71142578125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3298,7 +3298,7 @@
           "active": false,
           "left": 3745.3725,
           "top": 3628.2143,
-          "zIndex": 28,
+          "zIndex": 27,
           "widthName": 123.5703125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3614,7 +3614,7 @@
           "active": false,
           "left": 3744.3283,
           "top": 4164.2132,
-          "zIndex": 35,
+          "zIndex": 34,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -3769,7 +3769,7 @@
           "active": false,
           "left": 2616.1115,
           "top": 2005.2228,
-          "zIndex": 22,
+          "zIndex": 21,
           "widthName": 89.140625,
           "widthComment": 60,
           "color": "#607D8B"
@@ -3901,7 +3901,7 @@
           "active": false,
           "left": 4367.3327,
           "top": 3925.556,
-          "zIndex": 31,
+          "zIndex": 30,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -4027,6 +4027,29 @@
               "widthDefault": 60
             },
             "id": "09ba139b-6fac-4aa0-b8a1-98d0044ac0d7"
+          },
+          {
+            "name": "participant_name",
+            "comment": "참여자 소환사 명",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 102.99755859375,
+              "widthComment": 102.140625,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "1735594d-dbee-479f-b279-c22a38ffe4b1"
           },
           {
             "name": "champion_id",
@@ -4490,10 +4513,10 @@
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 2664.7782,
           "top": 851.8892,
-          "zIndex": 11,
+          "zIndex": 45,
           "widthName": 60,
           "widthComment": 96.30078125
         },
@@ -4581,7 +4604,7 @@
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
-              "unique": true,
+              "unique": false,
               "notNull": true
             },
             "ui": {
@@ -4808,7 +4831,7 @@
           "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 8,
+          "zIndex": 35,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -4871,7 +4894,7 @@
           "active": false,
           "left": 3381.3331,
           "top": 1013.8881,
-          "zIndex": 15,
+          "zIndex": 14,
           "widthName": 60,
           "widthComment": 77.47998046875
         },
@@ -4902,7 +4925,7 @@
           "active": false,
           "left": 3746.844444444461,
           "top": 2693.133333333341,
-          "zIndex": 25,
+          "zIndex": 24,
           "width": 403.8000000000003,
           "height": 100
         },
@@ -4939,7 +4962,7 @@
           "active": false,
           "left": 3742.0000000000155,
           "top": 1673.2666666666992,
-          "zIndex": 23,
+          "zIndex": 22,
           "width": 475.7999999999993,
           "height": 179.1999999999998,
           "color": "#F44336"
@@ -4952,7 +4975,7 @@
           "active": false,
           "left": 2616.8055555555566,
           "top": 1857.3111111111243,
-          "zIndex": 9,
+          "zIndex": 8,
           "width": 370.2000000000013,
           "height": 146.3999999999999,
           "color": "#2B1919"
@@ -4977,7 +5000,7 @@
           "active": false,
           "left": 3746.155555555586,
           "top": 1912.6888888889214,
-          "zIndex": 24,
+          "zIndex": 23,
           "width": 400.6000000000005,
           "height": 100
         },
@@ -5001,7 +5024,7 @@
           "active": false,
           "left": 3746.6666666666665,
           "top": 3559.4444444444403,
-          "zIndex": 27,
+          "zIndex": 26,
           "width": 428,
           "height": 100
         },
@@ -5887,8 +5910,8 @@
           "columnIds": [
             "59e02ae7-9b0c-4ff9-b5d3-96f13b7cc11f"
           ],
-          "x": 3173.36804375,
-          "y": 1142.6392,
+          "x": 3196.31482109375,
+          "y": 1152.8892,
           "direction": "right"
         },
         "constraintName": "fk_apikey_to_rawdata",
