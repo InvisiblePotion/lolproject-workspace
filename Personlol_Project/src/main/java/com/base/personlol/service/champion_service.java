@@ -188,12 +188,6 @@ public class champion_service {
 		return shard_img;
 	}
 
-	public List<Test_raw> testraw() {
-		
-		List<Test_raw> testraw= null;
-		testraw = champ_dao.testraw();
-		return testraw;
-	}
 
 	
 

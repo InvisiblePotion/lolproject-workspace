@@ -270,13 +270,7 @@ public class R_champ_Controller {
 		return shard3_img;
 	}
 		
-	//테스트
-	@GetMapping("/champion/test")
-	public List<Test_raw> test_raw(){
-		List<Test_raw> test_raw = champ_ser.testraw();
-		
-		return test_raw;
-	}
+
 	
 	
 }//
