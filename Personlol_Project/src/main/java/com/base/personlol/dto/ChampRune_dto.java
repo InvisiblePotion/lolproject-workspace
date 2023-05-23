@@ -13,7 +13,7 @@ public class ChampRune_dto {
 	private Integer core_rune1;
 	private Integer core_rune2;
 	private Integer core_rune3;
-	private Integer runtype_sub;
+	private Integer runetype_sub;
 	private Integer sub_rune1;
 	private Integer sub_rune2;
 	private Integer shard_offense;
@@ -22,4 +22,8 @@ public class ChampRune_dto {
 	private Integer pick_rate;
 	private Integer game_count;
 	private Integer win_rate;
+	
+	//rune join 아이콘들 가져오기
+	
+	
 }

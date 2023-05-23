@@ -16,6 +16,9 @@ public interface user_dao {
 	
 	//코드 중복검사
 	int checkCode(String usercode);
+	
+	//롤네임 중복검사
+	int checkuser_lolname(String user_lolname);
 
 	//아이디 찾기
 	String idfind(@Param("user_lolname")String user_lolname, @Param("user_code")String user_code);
@@ -37,5 +40,7 @@ public interface user_dao {
 	
 	//유저코드 업데이트
 	Integer newcode(Map<String, String> id);
+
+
 
 }

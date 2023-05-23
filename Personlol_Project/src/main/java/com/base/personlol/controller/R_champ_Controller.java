@@ -1,6 +1,7 @@
 package com.base.personlol.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.personlol.dto.ChampRuneCore_dto;
+import com.base.personlol.dto.ChampRuneShard_dto;
+import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
+import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 import com.base.personlol.service.champion_service;
 
@@ -25,68 +30,49 @@ public class R_champ_Controller {
 		
 		List<champion_dto> keyList = champ_ser.key_list();
 		
-		System.out.print("디비에서 받아온값: "+keyList);
-		
 		return keyList;
 		
 	}
 	
 	@GetMapping("/champimg-top")
 	public List<champion_dto> top_img(String lane){
-		System.out.println("이미지 라인:" + lane);
-		
+	
 		List<champion_dto> topimg = champ_ser.top_img(lane);
 		
-		System.out.print("디비에서 받아온값 탑: "+topimg);
-		
+	
 		
 		return topimg;
 	}
 	
 	@GetMapping("/champimg-jug")
 	public List<champion_dto> jug_img(String lane){
-		System.out.println("이미지 라인:" + lane);
-		
+	
 		List<champion_dto> jugimg = champ_ser.jug_img(lane);
 		
-		System.out.print("디비에서 받아온값 정글: "+jugimg);
-		
-		
+	
 		return jugimg;
 	}
 	
 	@GetMapping("/champimg-mid")
 	public List<champion_dto> mid_img(String lane){
-		System.out.println("이미지 라인:" + lane);
-		
+
 		List<champion_dto> midimg = champ_ser.mid_img(lane);
-		
-		System.out.print("디비에서 받아온값 미드: "+midimg);
-		
-		
+	
 		return midimg;
 	}
 	
 	@GetMapping("/champimg-bot")
 	public List<champion_dto> bot_img(String lane){
-		System.out.println("이미지 라인:" + lane);
-		
+
 		List<champion_dto> botimg = champ_ser.bot_img(lane);
-		
-		System.out.print("디비에서 받아온값 봇: "+botimg);
-		
-		
+	
 		return botimg;
 	}
 	
 	@GetMapping("/champimg-util")
 	public List<champion_dto> util_img(String lane){
-		System.out.println("이미지 라인:" + lane);
 		
 		List<champion_dto> utilimg = champ_ser.util_img(lane);
-		
-		System.out.print("디비에서 받아온값 서폿: "+utilimg);
-		
 		return utilimg;
 	}
 	
@@ -208,7 +194,6 @@ public class R_champ_Controller {
 	//챔피언 검색 부분
 	@GetMapping("/champion/search")
 	public List<champion_dto> search_champ(@RequestParam("searchVal") String searchVal){
-		System.out.println("searchval:"+searchVal);
 		List<champion_dto> search_champ = champ_ser.search_champ(searchVal);
 		return search_champ;
 	}
@@ -235,16 +220,57 @@ public class R_champ_Controller {
 	}
 	
 	//챔프 룬 트리 부분
-		@GetMapping("/champion/rune")
-		public List<ChampRune_dto> champ_rune(Integer champ_id){
-			System.out.println("champ_id: "+champ_id);
-			List<ChampRune_dto> champ_rune = champ_ser.champ_rune(champ_id);
-			
-			System.out.println("champ_skill: "+champ_rune);
-			return champ_rune;
-		}
+	@GetMapping("/champion/rune")
+	public List<ChampRune_dto> champ_rune(Integer champ_id){
+		List<ChampRune_dto> champ_rune = champ_ser.champ_rune(champ_id);
+		return champ_rune;
+	}
+	
+	//챔프 룬메인
+	@GetMapping("/champion/rune/main-rune")
+	public List<ChampRuneType_dto> main_rune_img(Integer main_rune){
+		List<ChampRuneType_dto> main_rune_img = champ_ser.main_rune(main_rune);
+		return main_rune_img;
+	}
+	
+	//챔프 룬메인
+	@GetMapping("/champion/rune/sub-rune")
+	public List<ChampRuneType_dto> sub_rune_img(Integer sub_rune){
+		System.out.println("sub_rune:" + sub_rune);
+		List<ChampRuneType_dto> sub_rune_img = champ_ser.sub_rune(sub_rune);
+		System.out.println("sub_rune_img"+ sub_rune_img);
+		return sub_rune_img;
+	}
 	
 	
+	//챔프 코어1
+	@GetMapping("/champion/rune/type-core")
+	public List<ChampRuneCore_dto> core_rune1_img(Integer core_rune){
+		List<ChampRuneCore_dto> core_rune1_img = champ_ser.core_img(core_rune);
+		return core_rune1_img;
+	}
+	
+	//챔프 파편1
+	@GetMapping("/champion/rune/shard1")
+	public List<ChampRuneShard_dto> shard1_img(Integer shard1){
+		List<ChampRuneShard_dto> shard1_img = champ_ser.shard_img(shard1);
+		return shard1_img;
+	}
+	//챔프 파편2
+	@GetMapping("/champion/rune/shard2")
+	public List<ChampRuneShard_dto> shard2_img(Integer shard2){
+		List<ChampRuneShard_dto> shard2_img = champ_ser.shard_img(shard2);
+		return shard2_img;
+	}
+	
+	//챔프 파편3
+	@GetMapping("/champion/rune/shard3")
+	public List<ChampRuneShard_dto> shard3_img(Integer shard3){
+		List<ChampRuneShard_dto> shard3_img = champ_ser.shard_img(shard3);
+		return shard3_img;
+	}
+		
+
 	
 	
 }//

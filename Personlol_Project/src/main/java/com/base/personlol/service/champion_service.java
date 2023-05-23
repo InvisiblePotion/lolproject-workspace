@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.personlol.dao.champion_dao;
+import com.base.personlol.dto.ChampRuneCore_dto;
+import com.base.personlol.dto.ChampRuneShard_dto;
+import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
+import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -149,12 +153,48 @@ public class champion_service {
 		skill_tree = champ_dao.skill_tree(champ_id);
 		return skill_tree;
 	}
-
+	
+	//룬트리
 	public List<ChampRune_dto> champ_rune(Integer champ_id) {
 		List<ChampRune_dto> champ_rune = null;
 		champ_rune = champ_dao.champ_rune(champ_id);
 		return champ_rune;
 	}
+	
+	//룬 메인
+	public List<ChampRuneType_dto> main_rune(Integer main_rune) {
+		List<ChampRuneType_dto> main_rune_img = null;
+		main_rune_img = champ_dao.main_img(main_rune);
+		return main_rune_img;
+	}
+	
+	public List<ChampRuneType_dto> sub_rune(Integer sub_rune) {
+		List<ChampRuneType_dto> sub_rune_img = null;
+		sub_rune_img = champ_dao.sub_img(sub_rune);
+		return sub_rune_img;
+	}
+	
+
+	//룬 코어 이미지
+	public List<ChampRuneCore_dto> core_img(Integer core_rune) {
+		List<ChampRuneCore_dto> core_img = null;
+		core_img = champ_dao.core_img(core_rune);
+		return core_img;
+	}
+
+	public List<ChampRuneShard_dto> shard_img(Integer shard) {
+		List<ChampRuneShard_dto> shard_img = null;
+		shard_img = champ_dao.shard_img(shard);
+		return shard_img;
+	}
+
+
+	
+
+	
+
+
+
 
 	
 

@@ -25,6 +25,8 @@ body{
     max-width: unset;
     margin: 0px auto;
     line-height: 1.193;
+    background-color: rgb(54, 54, 54);
+
 
 }
 #zero{
@@ -269,6 +271,8 @@ body{
     display: flex;
     align-items: center;
     margin-bottom: 13px;
+    color: aliceblue;
+
     font-weight: 700;
     font-size: 15px;
 }
@@ -304,6 +308,8 @@ body{
     background-color: crimson;
 }
 .user-id{
+    color: rgb(249, 249, 249);
+
     font-weight: 500px;
     font-size: 12px;
 }
@@ -337,6 +343,8 @@ ol{
     min-width: 96px;
     padding: 0px 13px;
     margin-left: 7px;
+    background-color: rgb(57, 58, 60);
+
 
     display: flex;
     justify-content: center;

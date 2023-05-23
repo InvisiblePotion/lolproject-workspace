@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.base.personlol.dto.ChampRuneCore_dto;
+import com.base.personlol.dto.ChampRuneShard_dto;
+import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
+import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 
 public interface champion_dao {
@@ -43,6 +47,28 @@ public interface champion_dao {
 	
 	//챔프 룬
 	List<ChampRune_dto> champ_rune(Integer champ_id);
+	
+	//룬 메인 이미지
+	List<ChampRuneType_dto> main_img(Integer main_rune);
+	
+	//룬 서브 이미지
+	List<ChampRuneType_dto> sub_img(Integer sub_rune);
+	
+	//챔프 코어 이미지
+	List<ChampRuneCore_dto> core_img(Integer core_rune);
+	
+	//챔프 파편 이미지
+	List<ChampRuneShard_dto> shard_img(Integer shard);
+	
+	
+	//챔프 테스트
+	List<Test_raw> testraw();
+
+	
+
+	
+	
+
 	
 	
 
