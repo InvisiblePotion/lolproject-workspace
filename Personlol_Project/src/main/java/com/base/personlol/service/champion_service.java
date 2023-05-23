@@ -11,6 +11,7 @@ import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
+import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 
@@ -136,9 +137,9 @@ public class champion_service {
 		return search_champ;
 	}
 
-	public List<champion_dto> champ_info(Integer champ_id) {
+	public List<champion_dto> champ_info(Integer champ_id,String champ_lane) {
 		List<champion_dto> champ_info = null;
-		champ_info = champ_dao.champ_info(champ_id);
+		champ_info = champ_dao.champ_info(champ_id,champ_lane);
 		return champ_info;
 	}
 
@@ -155,9 +156,9 @@ public class champion_service {
 	}
 	
 	//룬트리
-	public List<ChampRune_dto> champ_rune(Integer champ_id) {
+	public List<ChampRune_dto> champ_rune(Integer champ_id,String champ_lane) {
 		List<ChampRune_dto> champ_rune = null;
-		champ_rune = champ_dao.champ_rune(champ_id);
+		champ_rune = champ_dao.champ_rune(champ_id,champ_lane);
 		return champ_rune;
 	}
 	
@@ -182,13 +183,27 @@ public class champion_service {
 		return core_img;
 	}
 
-	public List<ChampRuneShard_dto> shard_img(Integer shard) {
+	public List<ChampRuneShard_dto> shard_img() {
 		List<ChampRuneShard_dto> shard_img = null;
-		shard_img = champ_dao.shard_img(shard);
+		shard_img = champ_dao.shard_img();
 		return shard_img;
 	}
 
+	
+	public List<Item_dto> item_build(Integer champ_id) {
+		System.out.println("Service_item_build_champ_id="+champ_id);
+		List<Item_dto> item_build = null;
+		item_build = champ_dao.item_build(champ_id);
+		System.out.println("Service_item_build_Return="+item_build);
+		return item_build;		
+	}
 
+
+	public List<Item_dto> item_img(Integer item) {
+		List<Item_dto> item_img = null;
+		item_img = champ_dao.item_img(item);
+		return item_img;
+	}
 	
 
 	

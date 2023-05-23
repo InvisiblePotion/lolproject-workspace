@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>detail</title>
 
 <style>
+
 
 .rune_img{
 	text-align: center;
@@ -51,7 +52,7 @@
       <div class="col" id="champ_img">챔피언 사진</div>
       <div class="col">
         <div class = "row" id="champ_name">c-r-1</div>
-        <div class = "row">
+        <div class = "row skillimg">
           <div class = "col" id="skill_img">스킬사진</div>
           <div class = "col" id="skill_info">스킬내용</div>
         </div>
@@ -87,42 +88,46 @@
         
         </div>
         <div class="col" id="shard">
-       		<div class="row">
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5008.png"> </div>
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5005.png"></div>
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5007.png"></div>
-       		</div>
-       		<div class="row">
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5008.png"> </div>
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5002.png"></div>
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5003.png"></div>
-       		</div>
-       		<div class="row">
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5001.png"> </div>
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5002.png"></div>
-       			<div class="col"> <img alt="#" src="../resources/dd/img/rune/shard/5003.png"></div>
-       		</div>
+       		<div class="row" id="shard1"></div>
+       		<div class="row" id="shard2"></div>
+       		<div class="row" id="shard3"></div>
+       		<div class="row" id="all_rate"></div>
         </div>
       </div>
 
-    <div class="row">추천스킬빌드</div>
+   <div class="row">추천스킬빌드</div>
     <div class="row">
       <div class="col">
         <div class="row">스킬사진</div>
-        <div class="row" id="skill_tree">스킬순서</div>
+        <div class="row" id="skill_tree1"></div>
+        <div class="row" >&nbsp</div>
+        <div class="row" id="skill_tree2"></div>
+        <div class="row" >&nbsp</div>
+        <div class="row" id="skill_tree3"></div>
       </div>
       <div class="col" > 
       	<div class="row" id="sk_count">1</div>
       	<div class="row" id="sk_win">2</div>
-      </div>
-     
-      
+      </div>   
     </div>
 
     <div class="row">추천빌드</div>
     <div class="row">
-      <div class="col" id="test123">아이템 사진</div>
-      <div class="col">아이템 통계</div>
+        <div class="col">아이템 1</div>
+        <div class="col">아이템 2</div>
+        <div class="col">아이템 3</div>
+        <div class="col">픽률</div>
+        <div class="col">게임수</div>
+        <div class="col">승률</div>
+    </div>
+    
+    <div class="row">
+      <div class="col" id="item1"></div>
+      <div class="col" id="item2"></div>
+      <div class="col" id="item3"></div>
+      <div class="col" id="i_Pick"></div>
+      <div class="col" id="i_Totgame"></div>
+      <div class="col" id="i_Winrate"></div>
     </div>
   
    
@@ -137,12 +142,15 @@
 	     return urlParams.get(key);
 	 }
 	 const champ_id = getQueryString('champ_id')
-	 //console.log(champ_id)	 
+	 const champ_lane = getQueryString('lane')
+	 
+	 console.log(champ_lane)	 
+	 console.log(champ_id)	 
 	 
 	//초기정보
 	$.ajax({
 		method:'get',
-		data:{champ_id:champ_id},
+		data:{champ_id:champ_id, champ_lane:champ_lane},
 		url:'/personlol/champion/info',
 	}).done(res => {
 		$.each(res, function (i, info) {
@@ -163,14 +171,16 @@
 		data:{champ_id:champ_id},
 		url:'/personlol/champion/skill'
 	}).done(res => {
-	
+		console.log(res)
 		let skill_img=''
 		$.each(res, function (i,skill) {
 			skill_img +=
 				'<img class="skill_img" width="40" height="40" src="../resources/'+skill.skill_icon+
-				'" alt="이미지">'
+				'" alt="이미지" >'+'<div class="tooltip">'+skill.skill_tooltip+'</div>'
 		})
 		$('#skill_img').html(skill_img)
+		
+		
 	}).fail(err => {
 		
 	})//
@@ -190,7 +200,7 @@
 	//룬 정보
 	$.ajax({
 		method:'get',
-		data:{champ_id:champ_id},
+		data:{champ_id:champ_id,champ_lane:champ_lane},
 		url:'/personlol/champion/rune'
 	}).done(res => {
 		console.log(res)
@@ -199,11 +209,35 @@
 		$.each(res, function (i,rune) {
 			
 			var runetype = rune.runetype_core
-			console.log(runetype)
+			var core_main = rune.core_mainrune
+			var core_rune1 = rune.core_rune1
+			var core_rune2 = rune.core_rune2
+			var core_rune3 = rune.core_rune3
 			
 			var runesub = rune.runetype_sub
+			var sub_rune1 = rune.sub_rune1
+			var sub_rune2 = rune.sub_rune2
+			
+			var shard_defence = rune.shard_defence
+			var shard_flex = rune.shard_flex
+			var shard_offense = rune.shard_offense
+			
+			console.log(runetype)
+			console.log(core_main)
+			console.log(core_rune1)
+			console.log(core_rune2)
+			console.log(core_rune3)
+			
 			console.log(runesub)
-				
+			console.log(sub_rune1)
+			console.log(sub_rune2)
+			
+			console.log(shard_defence)
+			console.log(shard_flex)
+			console.log(shard_offense)
+			
+			
+
 			$.ajax({
 				method:'get',
 				url:'/personlol/champion/rune/main-rune',
@@ -220,7 +254,7 @@
 				
 			}).fail(err=>{
 				
-			})
+			})//r1
 			
 			$.ajax({
 				method:'get',
@@ -229,38 +263,104 @@
 			}).done(res =>{
 				console.log(res)
 				
-				rune_img_part1=''
-				for (var i = 0; i < 3; i++) {
-    			var rune = res[i];
-    			rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
+				if (res.length == 12){
+					
+					rune_img_part1=''
+					for (var i = 0; i < 3; i++) {
+		    		var rune = res[i];
+		    		rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    			
+					}
+					$('#core_rune1').html(rune_img_part1)
+						
+						
+					rune_img_part2=''
+					for (var i = 3; i < 6; i++) {
+			    	var rune = res[i];
+			    	rune_img_part2  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+					}
+					$('#core_rune2').html(rune_img_part2)
+						
+					rune_img_part3=''
+					for (var i = 6; i < 9; i++) {
+			    	var rune = res[i];
+			    	rune_img_part3  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+					}
+					$('#core_rune3').html(rune_img_part3)
+						
+					rune_img_part4=''
+					for (var i = 9; i < 12; i++) {
+			    	var rune = res[i];
+			    	rune_img_part4  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+					}
+					$('#core_rune4').html(rune_img_part4)
+						
+					var runetypeCoremain = $('img[data-rune-key="' + core_main + '"]');
+					var runetypeCorerune1 = $('img[data-rune-key="' + core_rune1 + '"]');
+					var runetypeCorerune2 = $('img[data-rune-key="' + core_rune2 + '"]');
+					var runetypeCorerune3 = $('img[data-rune-key="' + core_rune3 + '"]');
+						
+					runetypeCoremain[0].style.filter ="none"
+					runetypeCorerune1[0].style.filter ="none"
+					runetypeCorerune2[0].style.filter ="none"
+					runetypeCorerune3[0].style.filter ="none"
+				}else{
+					rune_img_part1=''
+					for (var i = 0; i < 4; i++) {
+		    		var rune = res[i];
+		    		rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    		
+					}
+					$('#core_rune1').html(rune_img_part1)
+						
+						
+					rune_img_part2=''
+					for (var i = 4; i < 7; i++) {
+			    	var rune = res[i];
+			    	rune_img_part2  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+					}
+					$('#core_rune2').html(rune_img_part2)
+						
+					rune_img_part3=''
+					for (var i = 7; i < 10; i++) {
+			    	var rune = res[i];
+			    	rune_img_part3  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+					}
+					$('#core_rune3').html(rune_img_part3)
+						
+					rune_img_part4=''
+					for (var i = 10; i < res.length; i++) {
+			    	var rune = res[i];
+			    	rune_img_part4  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+					}
+					$('#core_rune4').html(rune_img_part4)
+						
+					var runetypeCoremain = $('img[data-rune-key="' + core_main + '"]');
+					var runetypeCorerune1 = $('img[data-rune-key="' + core_rune1 + '"]');
+					var runetypeCorerune2 = $('img[data-rune-key="' + core_rune2 + '"]');
+					var runetypeCorerune3 = $('img[data-rune-key="' + core_rune3 + '"]');
+						
+					runetypeCoremain[0].style.filter ="none"
+					runetypeCorerune1[0].style.filter ="none"
+					runetypeCorerune2[0].style.filter ="none"
+					runetypeCorerune3[0].style.filter ="none"
 				}
-				$('#core_rune1').html(rune_img_part1)
 				
+					
+				}).fail(err =>{
 				
-				rune_img_part2=''
-				for (var i = 3; i < 6; i++) {
-	    		var rune = res[i];
-	    		rune_img_part2 += '<div class="col rune_img"><img class="rune_img" width="40"  height="40" src="../resources/' + rune.rune_icon + '"></div>';
-				}
-				$('#core_rune2').html(rune_img_part2)
-				
-				rune_img_part3=''
-				for (var i = 6; i < 9; i++) {
-	    		var rune = res[i];
-	    		rune_img_part3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
-				}
-				$('#core_rune3').html(rune_img_part3)
-				
-				rune_img_part4=''
-				for (var i = 9; i < 12; i++) {
-	    		var rune = res[i];
-	    		rune_img_part4 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
-				}
-				$('#core_rune4').html(rune_img_part4)
+				})//r2
 				
 				
 				//서브 룬
-				
 				$.ajax({
 				method:'get',
 				url:'/personlol/champion/rune/sub-rune',
@@ -271,7 +371,8 @@
 					sub_img=''
 					for (var i = 0; i < res.length; i++) {
 			    	var rune = res[i];
-			    	sub_img += '<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + '"></div>';
+			    	sub_img += '<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + 
+		    		'" data-rune-key="'+rune.runetype_id+'" ></div>';
 					}
 					$('#type_sub').html(sub_img)
 					
@@ -280,46 +381,142 @@
 				
 				})
 				
+				//서브 룬 이미지 목록
 				$.ajax({
 					method:'get',
 					url:'/personlol/champion/rune/type-core',
 					data:{core_rune:runesub}
 				}).done(res=>{
-					
+						
+					if (res.length == 12){
+						
 						rune_img_sub1=''
-						for (var i = 0; i < 3; i++) {
-			    		var rune = res[i];
-			    		rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
+						for (var i = 3; i < 6; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
 						}
 						$('#sub_rune1').html(rune_img_sub1)
-						
+							
 						rune_img_sub2=''
-						for (var i = 3; i < 6; i++) {
-			    		var rune = res[i];
-			    		rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
+						for (var i = 6; i < 9; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
 						}
 						$('#sub_rune2').html(rune_img_sub2)
-						
+							
 						rune_img_sub3=''
-						for (var i = 6; i < 9; i++) {
-			    		var rune = res[i];
-			    		rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + ' "></div>';
+						for (var i = 9; i < 12; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
 						}
 						$('#sub_rune3').html(rune_img_sub3)
+								
+						var runetypeSubune1 = $('img[data-rune-key="' + sub_rune1 + '"]');
+						var runetypeSubune2 = $('img[data-rune-key="' + sub_rune2 + '"]');
+
+						runetypeSubune1[0].style.filter ="none";
+						runetypeSubune2[0].style.filter ="none";
+					}else{
+						rune_img_sub1=''
+						for (var i = 4; i < 7; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+						}
+						$('#sub_rune1').html(rune_img_sub1)
+							
+						rune_img_sub2=''
+						for (var i = 7; i < 10; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+						}
+						$('#sub_rune2').html(rune_img_sub2)
+							
+						rune_img_sub3=''
+						for (var i = 10; i < res.length; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+						}
+						$('#sub_rune3').html(rune_img_sub3)
+							
+							
+							
+						var runetypeSubune1 = $('img[data-rune-key="' + sub_rune1 + '"]');
+						var runetypeSubune2 = $('img[data-rune-key="' + sub_rune2 + '"]');
+
+						runetypeSubune1[0].style.filter ="none";
+						runetypeSubune2[0].style.filter ="none";
+					}
 					
+						
 					
 				}).fail(err=>{
 					
 				})
 				
-			}).fail(err =>{
-			
-			})//2
+				//파편 이미지 목록
+				$.ajax({
+					method:'get',
+					url:'/personlol/champion/rune/shard',
+					
+				}).done(res => {
+					console.log(res)
+					rune_img_shard1=''
+		
+					rune_img_shard1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[3].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[3].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[4].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[4].runeshard_id +'" style="filter: grayscale(1)"></div>';
+					
+					$('#shard1').html(rune_img_shard1);
+					
+					rune_img_shard2=''
+					rune_img_shard2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
+		    		'" data-rune-key2="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
+		    		'" data-rune-ke2y="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
+		    		'" data-rune-key2="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"></div>';
+					$('#shard2').html(rune_img_shard2);
+					
+					rune_img_shard3=''
+					rune_img_shard3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[1].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[1].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"></div>';
+					
+					$('#shard3').html(rune_img_shard3);
+					//shard_defence shard_flex
+					var runetypeShard1 = $('img[data-rune-key1="' + shard_offense + '"]');
+					var runetypeShard2 = $('img[data-rune-key2="' + shard_flex + '"]');
+					var runetypeShard3 = $('img[data-rune-key3="' + shard_defence + '"]');
+
+					runetypeShard1[0].style.filter ="none";
+					runetypeShard2[0].style.filter ="none";
+					runetypeShard3[0].style.filter ="none";
+					
+				}).fail(err =>{
+					
+				})
+				
 			
 				
 		})//1
 		
-		
+		/* rate_info=''
+		$.each(res, function (i,rune) {
+			rate_info += '<div class="col rate_div">'+rune.game_count+','+rune.pick_rate+'%'+rune.win_rate+'%'+'</div>'
+		})
+		$('#all_rate').html(rate_info) */
 		
 		
 		
@@ -335,20 +532,147 @@
 		url:'/personlol/champion/skill-tree'
 	}).done(res => {
 		console.log(res)
+		console.log(res.length)
+		/* $.each(res, function (i,skill) { */
+			const sBuild = res[0].skill_build
+			const result = sBuild.substring(1,44)
+			const arr = result.split(", ")
+						
+			console.log("================")
+			console.log(arr.length)
+			
+			
+			for (i=0; i<6;i++) {				
+				if (arr[i] == 1) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'
+				}else if (arr[i] == 2) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'
+				}else if (arr[i] == 3) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[0].skill_icon+'" alt="이미지"> &nbsp'
+				}else if (arr[i] == 4) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'
+				}    
+				$('#skill_tree1').append(s_img)
+			}
+			
+			for (i=6; i<12;i++) {				
+				if (arr[i] == 1) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'
+					s_name = res[1].skill_name
+				}else if (arr[i] == 2) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'
+				}else if (arr[i] == 3) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[0].skill_icon+'" alt="이미지"> &nbsp'
+				}else if (arr[i] == 4) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'
+				}    
+				$('#skill_tree2').append(s_img)
+			}
+			
+			for (i=12; i<15;i++) {				
+				if (arr[i] == 1) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'
+				}else if (arr[i] == 2) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'
+				}else if (arr[i] == 3) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[0].skill_icon+'" alt="이미지"> &nbsp'
+				}else if (arr[i] == 4) {
+					s_img = '<img class="st_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'
+				}    
+				$('#skill_tree3').append(s_img)
+			}
+			
+			$('#sk_count').html("픽률: "+res[0].pick_rate +' , 게임수: ' +res[0].game_count )
+			$('#sk_win').html("승률: " + res[0].win_rate)
 		
-		
-		$.each(res, function (i,skill) {
-			$('#skill_tree').html(skill.skill_build)
-			$('#sk_count').html("픽률: "+skill.pick_rate +' , 게임수: ' +skill.game_count )
-			$('#sk_win').html("승률: " + skill.win_rate)
-		})
 		
 	}).fail(err => {
 		
 	})//
-	
 
-	
+		
+	   
+		//아이템 트리
+	   $.ajax({
+	      method:'get',
+	      data:{champ_id:champ_id},
+	      url:'/personlol/champion/item_build'
+	   }).done(res => {
+		   console.log(res)
+	      
+	      Pick_List =''
+	      Tot_List =''
+	      Win_List =''
+	      
+	      $.each(res, function (i,item) {
+	         $('#i_Pick').append('<br>'+item.pick_rate);
+	         $('#i_Totgame').append('<br>'+item.game_count);
+	         $('#i_Winrate').append('<br>'+item.win_rate);
+	         
+	         var item_1 = item.item1
+	         var item_2 = item.item2
+	         var item_3 = item.item3
+	         
+	         //아이템 이미지 1
+	         $.ajax({
+	            method:'get',
+	            data:{item:item_1},
+	            url:'/personlol/champion/item1'
+	         }).done(res => {
+	            console.log(res)
+	            let item1_img=''
+	            $.each(res, function (i,i_img) {
+	               item1_img +=
+	                  '<br><img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
+	                  '" alt="이미지">'
+	            })
+	            $('#item1').append(item1_img)
+	         }).fail(err => {
+	            
+	         })//아이템 이미지 1
+	         
+	         //아이템 이미지 2
+	         $.ajax({
+	            method:'get',
+	            data:{item:item_2},
+	            url:'/personlol/champion/item2'
+	         }).done(res => {
+	            console.log(res)
+	            let item2_img=''
+	            $.each(res, function (i,i_img) {
+	               item2_img +=
+	                  '<br><img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
+	                  '" alt="이미지">'
+	            })
+	            $('#item2').append(item2_img)
+	         }).fail(err => {
+	            
+	         })//아이템 이미지 2
+	         
+	         //아이템 이미지 3
+	         $.ajax({
+	            method:'get',
+	            data:{item:item_3},
+	            url:'/personlol/champion/item3'
+	         }).done(res => {
+	            console.log(res)
+	            let item3_img=''
+	            $.each(res, function (i,i_img) {
+	               item3_img +=
+	                  '<br><img class="skill_img" width="40" height="40" src="../resources/'+i_img.item_icon+
+	                  '" alt="이미지">'
+	            })
+	            $('#item3').append(item3_img)
+	         }).fail(err => {
+	            
+	         })//아이템 이미지 3
+	      })
+	      
+	      
+	   }).fail(err => {
+	      
+	   })//아이템 트리 
+
 
  });
 	 

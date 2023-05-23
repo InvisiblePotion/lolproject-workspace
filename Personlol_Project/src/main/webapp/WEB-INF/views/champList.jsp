@@ -85,27 +85,23 @@
 				<input type="text" class="search-champ" placeholder="챔피언 검색" id="search-champ">
 			</div>
 			<div class="btn-group" role="group" aria-label="Basic outlined example">
-				<button type="button" class="btn btn-light" id="all_img">
-					<img src="" alt="all" />
-				</button>
+				
 				<button type="button" class="btn btn-light" id="top_img">
-					<img src="" alt="Top" />
+					<img src="../resources/ranked-positions/Position_Challenger-Top.png"  alt="Top" />
 				</button>
 				<button type="button" class="btn btn-light" id="jug_img">
-					<img src="" alt="Jug" />
+					<img src="../resources/ranked-positions/Position_Challenger-Jungle.png" alt="Jug" />
 				</button>
 				<button type="button" class="btn btn-light" id="mid_img">
-					<img src="" alt="Mid" />
+					<img src="../resources/ranked-positions/Position_Challenger-Mid.png" alt="Mid" />
 				</button>
 				<button type="button" class="btn btn-light" id="bot_img">
-					<img src="" alt="Bot" />
+					<img src="../resources/ranked-positions/Position_Challenger-Bot.png" alt="Bot" />
 				</button>
 				<button type="button" class="btn btn-light" id="util_img">
-					<img src="" alt="Sup" />
+					<img src="../resources/ranked-positions/Position_Challenger-Support.png" alt="Sup" />
 				</button>
-				<button type="button" class="btn btn-light" id="lote_img">
-					<img src="" alt="lote" />
-				</button>
+				
 			</div>
 			<nav class="img-container">
 				<ul class="ul-group">
@@ -145,46 +141,30 @@
 <script>
 	$(document).ready(function () {
 		/*아이콘 부분*/
+		
 		$.ajax({
 			method: 'get',
-			url: '/personlol/champimg',
+			data: {
+				lane: 'TOP'
+			},
+			url: '/personlol/champimg-top',
 		}).done(res => {
 			console.log(res)
-			/*아이콘 띄우기  */
-			let icon_img = ''
+			let top_img = ''
 			$.each(res, function (i, img) {
-				icon_img +=
-					'<a href="/personlol/champion/detail?champ_id=' + img.champ_id + '">' +
-					'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon + '" alt="이미지">'
+				top_img += 
+					'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
+					'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
+					'" alt="이미지">'
 			})
-			$('.ul-group').html(icon_img);
+			$('.ul-group').html(top_img);
+
 		}).fail(err => {
 			console.log(err)
-		}) //
+		})//
 
 
 
-		$('#all_img').click(function () {
-			$.ajax({
-				method: 'get',
-				data: {
-					champ_icon: 'champ_icon'
-				},
-				url: '/personlol/champimg',
-			}).done(res => {
-				console.log(res)
-				/*아이콘 띄우기  */
-				let icon_img = ''
-				$.each(res, function (i, img) {
-					icon_img += 
-						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
-						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon + '" alt="이미지">'
-				})
-				$('.ul-group').html(icon_img);
-			}).fail(err => {
-				console.log(err)
-			})
-		}) //
 
 		$('#top_img').click(function () {
 			$.ajax({
@@ -302,7 +282,7 @@
 
 
 
-			<!--리스트 관련 함수 생성-- >
+			//<!--리스트 관련 함수 생성-- >
 
 			// 테이블 찍어주는 함수
 			function updateTableData(data) {
@@ -509,6 +489,7 @@
 				},
 
 			}).done(res => {
+				console.log(res)
 				let icon_img = ''
 				$.each(res, function (i, img) {
 					icon_img += 
