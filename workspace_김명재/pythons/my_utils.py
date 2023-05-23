@@ -138,6 +138,20 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
                                  AND CONSTRAINT_TYPE = 'P')"""
     pk_col = [val for val in \
               oracle_totalExecute(pk_col_execute, debug_print=False)['COLUMN_NAME']]
+    
+    # 테이블의 UQ 정보를 조회하는 쿼리
+    uq_col_execute = f"""
+        SELECT COLUMN_NAME
+        FROM USER_CONS_COLUMNS
+        WHERE CONSTRAINT_NAME = (SELECT CONSTRAINT_NAME
+                                 FROM ALL_CONSTRAINTS
+                                 WHERE TABLE_NAME = '{table_name}'
+                                 AND CONSTRAINT_TYPE = 'U')"""
+    uq_col = [val for val in \
+              oracle_totalExecute(uq_col_execute, debug_print=False)['COLUMN_NAME']]
+    
+    pk_col += uq_col
+    
     # MERGE의 UPDATE를 위해 SET 컬럼 생성
     all_col = [col.upper() for col in data_frame.columns]
     set_col = [col for col in enumerate(all_col)]
@@ -802,9 +816,9 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                     # 안전 정지
                     # if (int(time.time()) % 3600) <= 120: safeTimeSleeper()
 
-                    # RawData 테이블에 현재 match_id가 이미 존재한다면 리스트에서 제거 후 continue
+                    # RawData 테이블에 현재 match_id가 이미 존재한다면 (# 리스트에서 제거 후) continue
                     if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = '{match_id}'", use_pandas=False, debug_print=False)[0][0]:
-                        match_id_list.remove(match_id)
+                        # match_id_list.remove(match_id)
                         continue
                     
                     # 현재 matchId의 matches와 timeline을 획득
