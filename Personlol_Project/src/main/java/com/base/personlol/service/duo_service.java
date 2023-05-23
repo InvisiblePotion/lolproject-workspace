@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.base.personlol.dao.duo_dao;
@@ -29,21 +30,6 @@ public class duo_service {
 		return dList;
 	}	
 	
-//	public List<Duo_dto> getList() {
-//		
-//		int page = 1;
-//		
-//		// ex (가져온 page (2)*100)-99 = 101
-//		int start_page = (page*18)-17 ;
-//		// ex 2*100 = 200 고로 101 부터 200까지
-//		int end_page =  page * 18;
-//		
-//		System.out.println(start_page+" "+ " "+end_page);
-//		List<Duo_dto> dList = ddao.getList(start_page, end_page);
-//		System.out.println("ser에 받아와? ");
-//		
-//		return dList;
-//	}
 	
 	
 	
@@ -80,16 +66,53 @@ public class duo_service {
 	}
 
 
-	//최종 페이지 계산
-	public Integer totalpage() {
-		System.out.println("ser타?page: ");
-		Integer totalpage = ddao.totalpage();
-		System.out.println("리턴받아와 ser?page: "+ totalpage);
-		return totalpage;
+	public List<Map<String, Object>> Line(String lane, int page, String tier) {
+	    System.out.println("lane: 값은 : " + lane);
+	    System.out.println("라인 서비스 작동하니?");
+	    
+	    
+	    int start_page = 1;
+	    
+	    int end_page = (page*18);
+	    
+	    System.out.println("start_page:"+start_page);
+	    
+	    System.out.println("end_page:"+end_page);
+	    
+	    //티어 값이 null인지 아닌지
+	    if(tier.equals("null")) {
+	    	System.out.println("티어 정렬 아님");
+	    	if ("top".equals(lane)) {
+		        List<Map<String, Object>> Line = ddao.top(start_page, end_page);
+		        return Line;
+		    } else if ("jungle".equals(lane)) {
+		        List<Map<String, Object>> Line = ddao.jungle(start_page, end_page);
+		        return Line;
+		    } else if ("mid".equals(lane)) {
+		        List<Map<String, Object>> Line = ddao.mid(start_page, end_page);
+		        return Line;
+		    } else if ("bottom".equals(lane)) {
+		        List<Map<String, Object>> Line = ddao.bottom(start_page, end_page);
+		        return Line;
+		    } else if ("support".equals(lane)) {
+		        List<Map<String, Object>> Line = ddao.support(start_page, end_page);
+		        return Line;
+		    } else {
+		        List<Map<String, Object>> Line = ddao.all(start_page, end_page);
+		        return Line;
+		    }
+	    	
+	    }else {
+	    	System.out.println("티어별 정렬");
+	    	System.out.println("티어찍히낭?"+tier);
+		        List<Map<String, Object>> tier_Line = ddao.tier_all(start_page, end_page, tier);
+		        System.out.println("티어별 정렬 후 라인 받아와 DB에서?: "+tier_Line);
+		        return tier_Line;
+		    }
+	    }
+	    
 	}
 	
-	
-	
 
-}
+
 
