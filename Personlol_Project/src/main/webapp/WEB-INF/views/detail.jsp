@@ -232,7 +232,7 @@
 				rune_img_part1=''
 				for (var i = 0; i < 3; i++) {
     			var rune = res[i];
-    			rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/dd/img/rune/perk/' + rune.rune_key + '.png "></div>';
+    			rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
 				}
 				$('#core_rune1').html(rune_img_part1)
 				
@@ -240,21 +240,21 @@
 				rune_img_part2=''
 				for (var i = 3; i < 6; i++) {
 	    		var rune = res[i];
-	    		rune_img_part2 += '<div class="col rune_img"><img class="rune_img" width="40"  height="40" src="../resources/dd/img/rune/perk/' + rune.rune_key + '.png "></div>';
+	    		rune_img_part2 += '<div class="col rune_img"><img class="rune_img" width="40"  height="40" src="../resources/' + rune.rune_icon + '"></div>';
 				}
 				$('#core_rune2').html(rune_img_part2)
 				
 				rune_img_part3=''
 				for (var i = 6; i < 9; i++) {
 	    		var rune = res[i];
-	    		rune_img_part3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/dd/img/rune/perk/' + rune.rune_key + '.png "></div>';
+	    		rune_img_part3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
 				}
 				$('#core_rune3').html(rune_img_part3)
 				
 				rune_img_part4=''
 				for (var i = 9; i < 12; i++) {
 	    		var rune = res[i];
-	    		rune_img_part4 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/dd/img/rune/perk/' + rune.rune_key + '.png "></div>';
+	    		rune_img_part4 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
 				}
 				$('#core_rune4').html(rune_img_part4)
 				
@@ -289,21 +289,21 @@
 						rune_img_sub1=''
 						for (var i = 0; i < 3; i++) {
 			    		var rune = res[i];
-			    		rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/dd/img/rune/perk/' + rune.rune_key + '.png "></div>';
+			    		rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
 						}
 						$('#sub_rune1').html(rune_img_sub1)
 						
 						rune_img_sub2=''
 						for (var i = 3; i < 6; i++) {
 			    		var rune = res[i];
-			    		rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/dd/img/rune/perk/' + rune.rune_key + '.png "></div>';
+			    		rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + '"></div>';
 						}
 						$('#sub_rune2').html(rune_img_sub2)
 						
 						rune_img_sub3=''
 						for (var i = 6; i < 9; i++) {
 			    		var rune = res[i];
-			    		rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/dd/img/rune/perk/' + rune.rune_key + '.png "></div>';
+			    		rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + ' "></div>';
 						}
 						$('#sub_rune3').html(rune_img_sub3)
 					
