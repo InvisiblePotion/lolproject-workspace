@@ -9,6 +9,7 @@ import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
 import com.base.personlol.dto.Champskill_dto;
+import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 
@@ -37,7 +38,7 @@ public interface champion_dao {
 	
 	
 	//챔프 디테일 초기정보
-	List<champion_dto> champ_info(Integer champ_id);
+	List<champion_dto> champ_info(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
 	
 	//챔프 스킬 초기정보
 	List<Champskill_dto> champ_skill(Integer champ_id);
@@ -46,7 +47,7 @@ public interface champion_dao {
 	List<Champskill_dto> skill_tree(Integer champ_id);
 	
 	//챔프 룬
-	List<ChampRune_dto> champ_rune(Integer champ_id);
+	List<ChampRune_dto> champ_rune(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
 	
 	//룬 메인 이미지
 	List<ChampRuneType_dto> main_img(Integer main_rune);
@@ -58,11 +59,14 @@ public interface champion_dao {
 	List<ChampRuneCore_dto> core_img(Integer core_rune);
 	
 	//챔프 파편 이미지
-	List<ChampRuneShard_dto> shard_img(Integer shard);
+	List<ChampRuneShard_dto> shard_img();
 	
+	//아이템 승률 정보
+	List<Item_dto> item_build(Integer champ_id);
 	
-	//챔프 테스트
-	List<Test_raw> testraw();
+	//아이템 사진
+	List<Item_dto> item_img(Integer item);
+	
 
 	
 
