@@ -1,5 +1,6 @@
 package com.base.personlol.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -16,6 +17,9 @@ public interface mypage_dao {
 	
 	//lol네임 바꾸기
 	Integer changelolname(Map<String, String> changelolname);
+	
+	//듀오 요청 들어온거
+	List<Map<String, String>> request_id(@Param("user_id") String user_id);
 	
 	
 

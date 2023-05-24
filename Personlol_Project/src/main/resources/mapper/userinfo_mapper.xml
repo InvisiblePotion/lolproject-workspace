@@ -61,5 +61,10 @@
 		UPDATE USERINFO set user_code =#{user_code} where user_id = #{user_id}
 	</update>
 	
+	<!-- 서버에 lolname있는가 -->
+	<select id="checksv_lolname" resultType="Int">
+		SELECT COUNT(*) FROM SUMMONER s WHERE S.SUMMONER_NAME = #{user_lolname}
+	</select>
+	
 
 </mapper>

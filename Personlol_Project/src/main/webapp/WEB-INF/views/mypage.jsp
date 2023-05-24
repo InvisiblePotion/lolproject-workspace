@@ -162,20 +162,10 @@
 
     <div class="offer-container">
         <div class="offer-list-container">
-            <div class="offer-list-write-box">
-                <div class="offer-list-write">
-                    오퍼 승인 요청 들어온 것들
-                </div>
-                <div class="offer-list-write">
-                    오퍼 승인 요청 들어온 것들
-                </div>
-                <div class="offer-list-write">
-                    오퍼 승인 요청 들어온 것들
-                </div>
-                <div class="offer-list-write">
-                    오퍼 승인 요청 들어온 것들
-                </div>
+            <div class="offer-list-write-box request">
+                
             </div>
+            
             <div class="offer-reload-box">
                 <div class="offer-reload">
                     <button class="offer-reload-button">갱신!</button>
@@ -185,7 +175,7 @@
     </div>
 
     <div class="offer-container">
-        <div class="offer-list-container">
+        <div class="offer-list-container accpet">
             <div class="offer-list-write-box">
                 <div class="offer-list-write">
                     오퍼 승인 완료된 글
@@ -253,8 +243,30 @@
         }).fail(err => {
             console.log(err);
         });
-    </script>
 
+        //듀오요청 들어온거 불러오기
+        $.ajax({
+            method: 'get',
+            url: '/personlol/mypage/getrequest'
+        }).done(res => {
+            console.log(res);
+            for(let m in res){
+                let obj = res[m];
+                console.log(obj);
+                for(let k in obj){
+                    let val = obj[k];
+                    console.log(val);
+                	if(val === "null"){
+                		$('.offer-list-write-box.request').append('<div class="offer-list-write">'+'아쉽게도 아직 없네요'+'</div>')
+                	}else{
+                		$('.offer-list-write-box.request').append('<div class="offer-list-write">'+val+'<button type="button" class="btn btn-light accept">수락</button><button type="button" class="btn btn-light refuse">거절</button></div>')
+                	}
+                }
+            }
+        }).fail(err => {
+            console.log(err);
+        })
+    </script>
 
     <script>
         //로그아웃
@@ -359,22 +371,37 @@
         })
     </script>
 
-    <script>
-        $('.gosummonerinfo').click(function () {
-            let summoner_name = $(this).siblings('.summoner_name').filter(function () {
-                return $(this).val() !== "";
-            }).first().val();
-
-            if (!summoner_name) {
-                console.log("검색어가 비어있습니다.");
-                return;
-            }
-
-            console.log(summoner_name);
-            const encoded_name = encodeURIComponent(summoner_name);
-            const url = '/personlol/summoner/?summoner_name=' + encoded_name;
-            location.href = url;
-        });
+<script>
+    $('.gosummonerinfo').click(function() {
+        //siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기
+        let summoner_name = $(this).siblings('.summoner_name').filter(function() {
+          return $(this).val() !== "";
+        }).first().val();
+        
+        if (!summoner_name) {
+          console.log("검색어가 비어있습니다.");
+          return;
+        }
+        
+        console.log(summoner_name);
+        const encoded_name = encodeURIComponent(summoner_name);
+        const go_url = '/personlol/summoner/?summoner_name=' + encoded_name;
+        $.ajax({
+        method:'get',
+        url : '/personlol/user/checkserver',
+        data:{"user_lolname":summoner_name}
+      }).done(res=>{
+        console.log(res);
+        if(res == "1"){
+            location.href = go_url;
+        }else if(res == "-999"){
+            alert("등록되지않은 소환사입니다 다시 입력해주세요")
+        }
+      }).fail(err=>{
+          console.log(err);
+      })
+  
+      });
     </script>
     <script>
         //로그아웃

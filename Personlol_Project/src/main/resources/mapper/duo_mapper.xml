@@ -21,7 +21,7 @@
 	
 	<!-- kang tae min -->
 	<select id="getId" resultType="String">
-		SELECT DUO_OWNERID  FROM Duo WHERE DUO_ID = #{duo_id}
+		SELECT DUO_OWNERID  FROM Duo WHERE DUO_ID = #{duo_id} 
 	</select>
 	
 	<update id="Disable">
@@ -40,6 +40,14 @@
 		UPDATE Duo SET duo_active = 0 WHERE DUO_OWNERID = #{user_id}
 	</update>
 	
+	<insert id="request" parameterType="String">
+		INSERT INTO DUO_REQUEST (USER_ID, REQUEST_ID) VALUES (#{user_id}, #{request_id})
+	</insert>
+	
+	<select id="check_request" resultType="Int">
+		SELECT count(*) FROM DUO_REQUEST WHERE USER_ID =#{user_id} AND REQUEST_ID =#{request_id}
+	</select>
+	
 	
 <!-- 	<select id="all" resultType="Map">
 		SELECT duo_id , duo_ownerid, duo_accepter, duo_content, duo_active, duo_date, duo_title, user_lolname
@@ -48,6 +56,7 @@
 		WHERE duo_active = 1
 		ORDER BY duo_id DESC
 	</select> -->
+	
 	<select id="all" resultType="Map">
 	    SELECT duo_id, duo_ownerid, duo_accepter, duo_content, duo_active, duo_date, duo_title, user_lolname
 	    FROM (
@@ -62,47 +71,77 @@
 
 	
 	<select id="top" resultType="Map">
-		SELECT duo_id, duo_ownerid, duo_accepter, duo_content, duo_active, duo_date, duo_title, user_lolname
-		FROM duo
-		JOIN userinfo ON duo.duo_ownerid = userinfo.user_id
-		WHERE DUO_TITLE LIKE '%탑%'OR duo_content LIKE '%탑%' 
-		ORDER BY duo_id DESC
+			SELECT du.duo_id, du.duo_ownerid, du.duo_accepter, du.duo_content, du.duo_active, du.duo_date, du.duo_title, du.user_lolname
+			FROM (
+			  SELECT d.*,u.*, ROWNUM AS rn
+			  FROM duo d
+			  JOIN USERINFO u ON d.DUO_OWNERID = u.USER_ID
+			  WHERE
+			    (DUO_TITLE LIKE '%탑%'OR duo_content LIKE '%탑%')
+			    AND DUO_ACTIVE = 1
+			  ORDER BY duo_id
+			) du
+			WHERE rn BETWEEN #{start_page} AND #{end_page}
 	</select>
 	
 	<select id="jungle" resultType="Map">
-		SELECT duo_id, duo_ownerid, duo_accepter, duo_content, duo_active, duo_date, duo_title, user_lolname
-		FROM duo
-		JOIN userinfo ON duo.duo_ownerid = userinfo.user_id
-		WHERE DUO_TITLE LIKE '%정글%'OR duo_content LIKE '%정글%'
-		ORDER BY duo_id DESC 
+			SELECT du.duo_id, du.duo_ownerid, du.duo_accepter, du.duo_content, du.duo_active, du.duo_date, du.duo_title, du.user_lolname
+			FROM (
+			  SELECT d.*,u.*, ROWNUM AS rn
+			  FROM duo d
+			  JOIN USERINFO u ON d.DUO_OWNERID = u.USER_ID
+			  WHERE
+			    (DUO_TITLE LIKE '%정글%'OR duo_content LIKE '%정글%')
+			    AND DUO_ACTIVE = 1
+			  ORDER BY duo_id
+			) du
+			WHERE rn BETWEEN #{start_page} AND #{end_page}
 	</select>
 		
 	<select id="mid" resultType="Map">
-		SELECT duo_id, duo_ownerid, duo_accepter, duo_content, duo_active, duo_date, duo_title, user_lolname
-		FROM duo
-		JOIN userinfo ON duo.duo_ownerid = userinfo.user_id
-		WHERE DUO_TITLE LIKE '%미드%'OR duo_content LIKE '%미드%' 
-		ORDER BY duo_id DESC
+			SELECT du.duo_id, du.duo_ownerid, du.duo_accepter, du.duo_content, du.duo_active, du.duo_date, du.duo_title, du.user_lolname
+			FROM (
+			  SELECT d.*,u.*, ROWNUM AS rn
+			  FROM duo d
+			  JOIN USERINFO u ON d.DUO_OWNERID = u.USER_ID
+			  WHERE
+			    (DUO_TITLE LIKE '%미드%'OR duo_content LIKE '%미드%')
+			    AND DUO_ACTIVE = 1
+			  ORDER BY duo_id
+			) du
+			WHERE rn BETWEEN #{start_page} AND #{end_page}
 	</select>
 	
 	<select id="bottom" resultType="Map">
-		SELECT duo_id, duo_ownerid, duo_accepter, duo_content, duo_active, duo_date, duo_title, user_lolname
-		FROM duo
-		JOIN userinfo ON duo.duo_ownerid = userinfo.user_id
-		WHERE DUO_TITLE LIKE '%봇%'OR duo_content LIKE '%봇%' 
-		OR DUO_TITLE LIKE '%바텀%' OR duo_content LIKE '%바텀%'
-		OR DUO_TITLE LIKE '%원딜%' OR duo_content LIKE '%원딜%'
-		ORDER BY duo_id DESC
+			SELECT du.duo_id, du.duo_ownerid, du.duo_accepter, du.duo_content, du.duo_active, du.duo_date, du.duo_title, du.user_lolname
+			FROM (
+			  SELECT d.*,u.*, ROWNUM AS rn
+			  FROM duo d
+			  JOIN USERINFO u ON d.DUO_OWNERID = u.USER_ID
+			  WHERE
+			    (DUO_TITLE LIKE '%봇%'OR duo_content LIKE '%봇%' 
+				OR DUO_TITLE LIKE '%바텀%' OR duo_content LIKE '%바텀%'
+				OR DUO_TITLE LIKE '%원딜%' OR duo_content LIKE '%원딜%')
+			    AND DUO_ACTIVE = 1
+			  ORDER BY duo_id
+			) du
+			WHERE rn BETWEEN #{start_page} AND #{end_page}
 	</select>
 	
 	<select id="support" resultType="Map">
-		SELECT duo_id, duo_ownerid, duo_accepter, duo_content, duo_active, duo_date, duo_title, user_lolname
-		FROM duo
-		JOIN userinfo ON duo.duo_ownerid = userinfo.user_id
-		WHERE DUO_TITLE LIKE '%서폿%'OR duo_content LIKE '%서폿%' 
-		OR DUO_TITLE LIKE '%서포터%' OR duo_content LIKE '%서포터%'
-		OR DUO_TITLE LIKE '%도구%' OR duo_content LIKE '%도구%'
-		ORDER BY duo_id DESC
+			SELECT du.duo_id, du.duo_ownerid, du.duo_accepter, du.duo_content, du.duo_active, du.duo_date, du.duo_title, du.user_lolname
+			FROM (
+			  SELECT d.*,u.*, ROWNUM AS rn
+			  FROM duo d
+			  JOIN USERINFO u ON d.DUO_OWNERID = u.USER_ID
+			  WHERE
+			    (DUO_TITLE LIKE '%서폿%' OR duo_content LIKE '%서폿%' OR
+			    DUO_TITLE LIKE '%서포터%' OR duo_content LIKE '%서포터%' OR
+			    DUO_TITLE LIKE '%도구%' OR duo_content LIKE '%도구%')
+			    AND DUO_ACTIVE = 1
+			  ORDER BY duo_id
+			) du
+			WHERE rn BETWEEN #{start_page} AND #{end_page}
 	</select>
 	
 	
@@ -118,6 +157,13 @@
 		JOIN summoner ON f_join.user_lolname = summoner.summoner_name
 		WHERE f_join.row_num BETWEEN #{start_page} AND #{end_page}
 		AND summoner.summoner_tier = #{tier}
+	</select>
+	
+	<!-- 글쓰기 중복체크 -->
+	<select id="checkboard" resultType="Int">
+	  SELECT CASE WHEN 
+	  EXISTS (SELECT 1 FROM DUO WHERE DUO_OWNERID = #{user_id} AND DUO_ACTIVE = 1) THEN 1 ELSE 0 END AS result
+	  FROM DUAL
 	</select>
 
 </mapper>
