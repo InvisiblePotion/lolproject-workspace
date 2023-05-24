@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -3264.603125000012,
-    "scrollLeft": -3271.206249999998,
+    "scrollTop": -669.4031250000124,
+    "scrollLeft": -2516.806250000008,
     "zoomLevel": 0.8,
     "show": {
       "tableComment": true,
@@ -3614,7 +3614,7 @@
           "active": false,
           "left": 3746.3283,
           "top": 4156.2132,
-          "zIndex": 75,
+          "zIndex": 35,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -4516,9 +4516,10 @@
           "active": false,
           "left": 2664.7782,
           "top": 851.8892,
-          "zIndex": 35,
+          "zIndex": 38,
           "widthName": 60,
-          "widthComment": 96.30078125
+          "widthComment": 96.30078125,
+          "color": "#00BCD4"
         },
         "visible": true,
         "id": "0fa1db98-d049-4f8e-97f9-ca4ede62bdb0"
@@ -4604,7 +4605,7 @@
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
-              "unique": false,
+              "unique": true,
               "notNull": true
             },
             "ui": {
@@ -4831,10 +4832,10 @@
           "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 34,
+          "zIndex": 83,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
-          "color": "#9E9E9E"
+          "color": "#00BCD4"
         },
         "visible": true,
         "id": "0439bf5a-3210-4934-b822-e51384110f45"
@@ -4892,14 +4893,78 @@
         ],
         "ui": {
           "active": false,
-          "left": 3381.3331,
+          "left": 3385.3331,
           "top": 1013.8881,
-          "zIndex": 13,
+          "zIndex": 49,
           "widthName": 60,
-          "widthComment": 77.47998046875
+          "widthComment": 77.47998046875,
+          "color": "#4CAF50"
         },
         "visible": true,
         "id": "86767753-be6a-41c8-88f2-1c6b13a43bbd"
+      },
+      {
+        "name": "summoner_recent_game",
+        "comment": "소환사 20게임 id",
+        "columns": [
+          {
+            "name": "summoner_name",
+            "comment": "소환사 이름",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": true,
+              "widthName": 103.08642578125,
+              "widthComment": 71.5703125,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "8230eb92-f0dd-404b-85bc-54b2e715e12c"
+          },
+          {
+            "name": "game_id",
+            "comment": "게임 id",
+            "dataType": "VARCHAR(15)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "92c3a96f-5497-4f4f-876f-f8969f6c950d"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 2728.6063,
+          "top": 561.2031,
+          "zIndex": 115,
+          "widthName": 145.39990234375,
+          "widthComment": 101.48681640625,
+          "color": "#FF9800"
+        },
+        "visible": true,
+        "id": "a0cd815d-133a-4cc2-9c03-e73d072584af"
       }
     ],
     "indexes": []
@@ -5875,7 +5940,7 @@
           "columnIds": [
             "1648e08a-9cca-4116-8b91-a8f0c7da782d"
           ],
-          "x": 3602.699555078125,
+          "x": 3606.699555078125,
           "y": 1013.8881,
           "direction": "top"
         },
@@ -5901,7 +5966,7 @@
           "columnIds": [
             "1648e08a-9cca-4116-8b91-a8f0c7da782d"
           ],
-          "x": 3381.3331,
+          "x": 3385.3331,
           "y": 1068.8881000000001,
           "direction": "left"
         },
@@ -5995,6 +6060,32 @@
         "constraintName": "fk_item_to_champion_item_build",
         "visible": true,
         "id": "0c1115d5-3b6c-402a-bc57-836f0723174b"
+      },
+      {
+        "identification": true,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "0439bf5a-3210-4934-b822-e51384110f45",
+          "columnIds": [
+            "c56a62c0-ed93-4fe3-b9c3-102ce5fab5c8"
+          ],
+          "x": 3332.4,
+          "y": 697.35,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "a0cd815d-133a-4cc2-9c03-e73d072584af",
+          "columnIds": [
+            "8230eb92-f0dd-404b-85bc-54b2e715e12c"
+          ],
+          "x": 3216.502784375,
+          "y": 616.2031,
+          "direction": "right"
+        },
+        "constraintName": "fk_summoner_to_summoner_recent_game",
+        "visible": true,
+        "id": "939bdfe1-b4ca-4669-a678-f5cc019ec2b5"
       }
     ]
   }
