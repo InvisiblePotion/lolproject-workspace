@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -768.6031250000086,
-    "scrollLeft": -2436.0062499999963,
+    "scrollTop": -3264.603125000012,
+    "scrollLeft": -3271.206249999998,
     "zoomLevel": 0.8,
     "show": {
       "tableComment": true,
@@ -275,7 +275,7 @@
           "active": false,
           "left": 3745.2217,
           "top": 1993.2213,
-          "zIndex": 33,
+          "zIndex": 32,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -706,7 +706,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 17,
+          "zIndex": 16,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -907,7 +907,7 @@
           "active": false,
           "left": 3746.7802,
           "top": 2767.6675,
-          "zIndex": 25,
+          "zIndex": 24,
           "widthName": 87.515625,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1154,7 +1154,7 @@
           "active": false,
           "left": 3747.0892,
           "top": 3019.1997,
-          "zIndex": 18,
+          "zIndex": 17,
           "widthName": 126.76318359375,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -1378,7 +1378,7 @@
           "active": false,
           "left": 3744.8509,
           "top": 3880.7751,
-          "zIndex": 20,
+          "zIndex": 19,
           "widthName": 92.5048828125,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1533,7 +1533,7 @@
           "active": false,
           "left": 4090.5,
           "top": 1083.522,
-          "zIndex": 29,
+          "zIndex": 28,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1595,7 +1595,7 @@
           "active": false,
           "left": 4463.4166,
           "top": 1393.3832,
-          "zIndex": 13,
+          "zIndex": 12,
           "widthName": 74.44580078125,
           "widthComment": 60
         },
@@ -1703,7 +1703,7 @@
           "active": false,
           "left": 4218.75,
           "top": 767.7722,
-          "zIndex": 12,
+          "zIndex": 11,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1989,7 +1989,7 @@
           "active": false,
           "left": 4428.5769,
           "top": 2146.3554,
-          "zIndex": 32,
+          "zIndex": 31,
           "widthName": 60,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2098,7 +2098,7 @@
           "active": false,
           "left": 4433.2447,
           "top": 2623.1335,
-          "zIndex": 28,
+          "zIndex": 27,
           "widthName": 65.49560546875,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2253,7 +2253,7 @@
           "active": false,
           "left": 3093.2224,
           "top": 2262.733,
-          "zIndex": 11,
+          "zIndex": 10,
           "widthName": 71.10693359375,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2477,7 +2477,7 @@
           "active": false,
           "left": 3092.2239,
           "top": 2569.6431,
-          "zIndex": 15,
+          "zIndex": 14,
           "widthName": 67.0126953125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2655,7 +2655,7 @@
           "active": false,
           "left": 3089.332,
           "top": 2898.3334,
-          "zIndex": 16,
+          "zIndex": 15,
           "widthName": 68.1298828125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2833,7 +2833,7 @@
           "active": false,
           "left": 4392.489,
           "top": 3136.1536,
-          "zIndex": 31,
+          "zIndex": 30,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -3097,7 +3097,7 @@
           "active": false,
           "left": 3747.0836,
           "top": 3312.3253,
-          "zIndex": 19,
+          "zIndex": 18,
           "widthName": 130.71142578125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3298,7 +3298,7 @@
           "active": false,
           "left": 3745.3725,
           "top": 3628.2143,
-          "zIndex": 27,
+          "zIndex": 26,
           "widthName": 123.5703125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3357,6 +3357,29 @@
             "id": "ce2f3c43-ce54-42c6-892b-6e1d6b7e4bd0"
           },
           {
+            "name": "lane",
+            "comment": "라인",
+            "dataType": "VARCHAR(7)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 74.97265625,
+              "widthDefault": 60
+            },
+            "id": "3842b164-ebc4-4e4b-af41-30d71ef50ff2"
+          },
+          {
             "name": "champ_id_x",
             "comment": "챔피언 id",
             "dataType": "NUMBER(3)",
@@ -3401,29 +3424,6 @@
               "widthDefault": 60
             },
             "id": "e2164133-8ede-4950-8e65-3dea2610378b"
-          },
-          {
-            "name": "lane",
-            "comment": "라인",
-            "dataType": "VARCHAR(7)",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": true,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 74.97265625,
-              "widthDefault": 60
-            },
-            "id": "3842b164-ebc4-4e4b-af41-30d71ef50ff2"
           },
           {
             "name": "matchup_count",
@@ -3518,7 +3518,7 @@
             "id": "73661c96-d0e6-47ab-bdc6-7162b44b5243"
           },
           {
-            "name": "kill_rate_x",
+            "name": "killparticipation_x",
             "comment": "킬 관여율",
             "dataType": "NUMBER",
             "default": "",
@@ -3533,7 +3533,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 103.53076171875,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -3541,7 +3541,7 @@
             "id": "72e44449-12de-4a49-8420-aecab6aa48de"
           },
           {
-            "name": "kill_rate_y",
+            "name": "killparticipation_y",
             "comment": "상대 킬 관여율",
             "dataType": "NUMBER",
             "default": "",
@@ -3556,7 +3556,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 103.892578125,
               "widthComment": 89.140625,
               "widthDataType": 60,
               "widthDefault": 60
@@ -3564,7 +3564,7 @@
             "id": "04b6b1dc-d62c-4f5a-a30c-829fdcb944e1"
           },
           {
-            "name": "champ_damage_x",
+            "name": "total_champ_damage_x",
             "comment": "챔피언 피해량",
             "dataType": "NUMBER(8)",
             "default": "",
@@ -3579,7 +3579,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 106.35546875,
+              "widthName": 138.49365234375,
               "widthComment": 84.5703125,
               "widthDataType": 70.31982421875,
               "widthDefault": 60
@@ -3587,7 +3587,7 @@
             "id": "01bc6f9d-38e1-4fb5-8d59-979fdd264d62"
           },
           {
-            "name": "champ_damage_y",
+            "name": "total_champ_damage_y",
             "comment": "상대 챔피언 피해량",
             "dataType": "NUMBER(8)",
             "default": "",
@@ -3602,7 +3602,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 106.71728515625,
+              "widthName": 138.85546875,
               "widthComment": 115.140625,
               "widthDataType": 70.31982421875,
               "widthDefault": 60
@@ -3612,9 +3612,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 3744.3283,
-          "top": 4164.2132,
-          "zIndex": 34,
+          "left": 3746.3283,
+          "top": 4156.2132,
+          "zIndex": 75,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -3769,7 +3769,7 @@
           "active": false,
           "left": 2616.1115,
           "top": 2005.2228,
-          "zIndex": 21,
+          "zIndex": 20,
           "widthName": 89.140625,
           "widthComment": 60,
           "color": "#607D8B"
@@ -3901,7 +3901,7 @@
           "active": false,
           "left": 4367.3327,
           "top": 3925.556,
-          "zIndex": 30,
+          "zIndex": 29,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -4513,10 +4513,10 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 2664.7782,
           "top": 851.8892,
-          "zIndex": 45,
+          "zIndex": 35,
           "widthName": 60,
           "widthComment": 96.30078125
         },
@@ -4831,7 +4831,7 @@
           "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 35,
+          "zIndex": 34,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -4894,7 +4894,7 @@
           "active": false,
           "left": 3381.3331,
           "top": 1013.8881,
-          "zIndex": 14,
+          "zIndex": 13,
           "widthName": 60,
           "widthComment": 77.47998046875
         },
@@ -4925,7 +4925,7 @@
           "active": false,
           "left": 3746.844444444461,
           "top": 2693.133333333341,
-          "zIndex": 24,
+          "zIndex": 23,
           "width": 403.8000000000003,
           "height": 100
         },
@@ -4962,7 +4962,7 @@
           "active": false,
           "left": 3742.0000000000155,
           "top": 1673.2666666666992,
-          "zIndex": 22,
+          "zIndex": 21,
           "width": 475.7999999999993,
           "height": 179.1999999999998,
           "color": "#F44336"
@@ -5000,7 +5000,7 @@
           "active": false,
           "left": 3746.155555555586,
           "top": 1912.6888888889214,
-          "zIndex": 23,
+          "zIndex": 22,
           "width": 400.6000000000005,
           "height": 100
         },
@@ -5024,7 +5024,7 @@
           "active": false,
           "left": 3746.6666666666665,
           "top": 3559.4444444444403,
-          "zIndex": 26,
+          "zIndex": 25,
           "width": 428,
           "height": 100
         },
@@ -5754,8 +5754,8 @@
           "columnIds": [
             "54383c5e-7599-4567-a025-2dbfa97a858a"
           ],
-          "x": 4133.430716992188,
-          "y": 4164.2132,
+          "x": 4158.9249796875,
+          "y": 4156.2132,
           "direction": "top"
         },
         "constraintName": "fk_champdata_to_matchup",
@@ -5780,8 +5780,8 @@
           "columnIds": [
             "e2164133-8ede-4950-8e65-3dea2610378b"
           ],
-          "x": 3874.0291056640626,
-          "y": 4164.2132,
+          "x": 3883.8605265625,
+          "y": 4156.2132,
           "direction": "top"
         },
         "constraintName": "fk_champdata_to_matchup",
