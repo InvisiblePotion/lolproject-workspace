@@ -7,6 +7,104 @@
 <title>detail</title>
 
 <style>
+#change_rune1{
+ justify-content: center;
+}
+
+#change_rune2{
+ justify-content: center;
+}
+
+/* 스킬이미지 호버시 툴팁 */
+.skill-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  
+  /* 꾸미기용 */
+  top: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 500px;
+}
+.skill-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 룬이미지 호버시 툴팁 */
+.rune_img {
+  position: relative;
+  display: inline-block;
+  padding: 0px;
+}
+
+.runetype_tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  
+  top: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.rune_tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  text-align:left;
+  
+  top: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 500px;
+  
+}
+
+.rune_img:hover .rune_tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.rune_img:hover .runetype_tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 룬 긴설명 css부분 */
+.rune_longdesc {
+  font-size: 13px;
+  font-weight: normal;
+}
+
 
 
 .rune_img{
@@ -87,12 +185,15 @@
         	<div class="row" id="sub_rune3"></div>
         
         </div>
-        <div class="col" id="shard">
+        <div class="col col-sm-3 id="shard">
        		<div class="row" id="shard1"></div>
        		<div class="row" id="shard2"></div>
        		<div class="row" id="shard3"></div>
-       		<div class="row" id="all_rate"></div>
+       		<div class="row" id="change_rune1">1</div>
+       		<div class="row" id="change_rune2">2</div>
         </div>
+        
+        
       </div>
 
    <div class="row">추천스킬빌드</div>
@@ -129,7 +230,7 @@
       <div class="col" id="i_Totgame"></div>
       <div class="col" id="i_Winrate"></div>
     </div>
-  
+  </div>
    
  <script>
  
@@ -174,9 +275,20 @@
 		console.log(res)
 		let skill_img=''
 		$.each(res, function (i,skill) {
+			// skill설명들이 null인 경우에 대한 조건문 추가
+			let tooltip = skill.skill_tooltip ? skill.skill_tooltip : '';
+			let cooldown = skill.skill_cooldown ? skill.skill_cooldown : '없음';
+			let cost = skill.skill_cost ? skill.skill_cost : '없음';
+			let range = skill.skill_range ? skill.skill_range : '없음';
+			
 			skill_img +=
+				'<div class="skill-container">' +
 				'<img class="skill_img" width="40" height="40" src="../resources/'+skill.skill_icon+
-				'" alt="이미지" >'+'<div class="tooltip">'+skill.skill_tooltip+'</div>'
+				'" alt="이미지" >'+'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+				skill.skill_name+'</span></div>'+
+				'<div>'+'스킬 재사용 대기시간(초): '+cooldown+'</div><div>'+
+				'스킬 마나소모량: '+cost+'</div><div>'+'스킬 범위: '+range+'</div>'+
+				'<div>'+skill.skill_desc+'</div><div>'+tooltip+'</div></div></div>';
 		})
 		$('#skill_img').html(skill_img)
 		
@@ -205,7 +317,6 @@
 	}).done(res => {
 		console.log(res)
 		
-		
 		$.each(res, function (i,rune) {
 			
 			var runetype = rune.runetype_core
@@ -222,22 +333,9 @@
 			var shard_flex = rune.shard_flex
 			var shard_offense = rune.shard_offense
 			
-			console.log(runetype)
-			console.log(core_main)
-			console.log(core_rune1)
-			console.log(core_rune2)
-			console.log(core_rune3)
-			
-			console.log(runesub)
-			console.log(sub_rune1)
-			console.log(sub_rune2)
-			
-			console.log(shard_defence)
-			console.log(shard_flex)
-			console.log(shard_offense)
 			
 			
-
+			//메인룬타입
 			$.ajax({
 				method:'get',
 				url:'/personlol/champion/rune/main-rune',
@@ -246,8 +344,10 @@
 				main_img=''
 				for (var i = 0; i < res.length; i++) {
 	    		var rune = res[i];
-	    		main_img += '<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + 
-	    		'" data-rune-key="'+rune.runetype_id+'"></div>';
+	    		main_img += 
+	    		'<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + 
+	    		'" data-rune-key="'+rune.runetype_id+'"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+	    		rune.runetype_name+'</span></div></div>';
 				}
 				$('#type_rune').html(main_img)
 				
@@ -256,6 +356,7 @@
 				
 			})//r1
 			
+			//메인 룬타입에 해당하는 코어룬들
 			$.ajax({
 				method:'get',
 				url:'/personlol/champion/rune/type-core',
@@ -268,9 +369,11 @@
 					rune_img_part1=''
 					for (var i = 0; i < 3; i++) {
 		    		var rune = res[i];
-		    		rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
-		    			
+		    		rune_img_part1 += 
+		    		'<div class="col rune_img"><img class="rune_img" width="30" height="30" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"> <div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+
 					}
 					$('#core_rune1').html(rune_img_part1)
 						
@@ -279,7 +382,8 @@
 					for (var i = 3; i < 6; i++) {
 			    	var rune = res[i];
 			    	rune_img_part2  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 					}
 					$('#core_rune2').html(rune_img_part2)
 						
@@ -287,7 +391,8 @@
 					for (var i = 6; i < 9; i++) {
 			    	var rune = res[i];
 			    	rune_img_part3  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 					}
 					$('#core_rune3').html(rune_img_part3)
 						
@@ -295,7 +400,8 @@
 					for (var i = 9; i < 12; i++) {
 			    	var rune = res[i];
 			    	rune_img_part4  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 					}
 					$('#core_rune4').html(rune_img_part4)
 						
@@ -313,7 +419,8 @@
 					for (var i = 0; i < 4; i++) {
 		    		var rune = res[i];
 		    		rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 		    		
 					}
 					$('#core_rune1').html(rune_img_part1)
@@ -323,7 +430,8 @@
 					for (var i = 4; i < 7; i++) {
 			    	var rune = res[i];
 			    	rune_img_part2  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 					}
 					$('#core_rune2').html(rune_img_part2)
 						
@@ -331,7 +439,8 @@
 					for (var i = 7; i < 10; i++) {
 			    	var rune = res[i];
 			    	rune_img_part3  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 					}
 					$('#core_rune3').html(rune_img_part3)
 						
@@ -339,7 +448,8 @@
 					for (var i = 10; i < res.length; i++) {
 			    	var rune = res[i];
 			    	rune_img_part4  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 					}
 					$('#core_rune4').html(rune_img_part4)
 						
@@ -372,7 +482,8 @@
 					for (var i = 0; i < res.length; i++) {
 			    	var rune = res[i];
 			    	sub_img += '<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + 
-		    		'" data-rune-key="'+rune.runetype_id+'" ></div>';
+		    		'" data-rune-key="'+rune.runetype_id+'" ><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.runetype_name+'</span></div></div>';
 					}
 					$('#type_sub').html(sub_img)
 					
@@ -394,7 +505,8 @@
 						for (var i = 3; i < 6; i++) {
 				    	var rune = res[i];
 				    	rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 						}
 						$('#sub_rune1').html(rune_img_sub1)
 							
@@ -402,7 +514,8 @@
 						for (var i = 6; i < 9; i++) {
 				    	var rune = res[i];
 				    	rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 						}
 						$('#sub_rune2').html(rune_img_sub2)
 							
@@ -410,7 +523,8 @@
 						for (var i = 9; i < 12; i++) {
 				    	var rune = res[i];
 				    	rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'
+			    		+ rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 						}
 						$('#sub_rune3').html(rune_img_sub3)
 								
@@ -424,7 +538,8 @@
 						for (var i = 4; i < 7; i++) {
 				    	var rune = res[i];
 				    	rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 						}
 						$('#sub_rune1').html(rune_img_sub1)
 							
@@ -432,7 +547,8 @@
 						for (var i = 7; i < 10; i++) {
 				    	var rune = res[i];
 				    	rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name + '</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 						}
 						$('#sub_rune2').html(rune_img_sub2)
 							
@@ -440,7 +556,8 @@
 						for (var i = 10; i < res.length; i++) {
 				    	var rune = res[i];
 				    	rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
-			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"></div>'
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
 						}
 						$('#sub_rune3').html(rune_img_sub3)
 							
@@ -469,30 +586,47 @@
 					rune_img_shard1=''
 		
 					rune_img_shard1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
-		    		'" data-rune-key1="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'" data-rune-key1="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[5].runeshard_stat+'</span><div class="rune_longdesc">'+res[5].runeshard_desc+'</div></div></div>'+
+		    		
 		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[3].runeshard_icon + 
-		    		'" data-rune-key1="'+ res[3].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'" data-rune-key1="'+ res[3].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[3].runeshard_stat+'</span><div class="rune_longdesc">'+res[3].runeshard_desc+'</div></div></div>'+
+		    		
+		    		
 		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[4].runeshard_icon + 
-		    		'" data-rune-key1="'+ res[4].runeshard_id +'" style="filter: grayscale(1)"></div>';
+		    		'" data-rune-key1="'+ res[4].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[4].runeshard_stat+'</span><div class="rune_longdesc">'+res[4].runeshard_desc+'</div></div></div>';
 					
 					$('#shard1').html(rune_img_shard1);
 					
 					rune_img_shard2=''
 					rune_img_shard2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
-		    		'" data-rune-key2="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'" data-rune-key2="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[5].runeshard_stat+'</span><div class="rune_longdesc">'+res[5].runeshard_desc+'</div></div></div>'+
+		    		
 		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
-		    		'" data-rune-ke2y="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'" data-rune-ke2y="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[2].runeshard_stat+'</span><div class="rune_longdesc">'+res[2].runeshard_desc+'</div></div></div>'+
+		    		
 		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
-		    		'" data-rune-key2="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"></div>';
+		    		'" data-rune-key2="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[0].runeshard_stat+'</span><div class="rune_longdesc">'+res[0].runeshard_desc+'</div></div></div>';
+		    		
 					$('#shard2').html(rune_img_shard2);
 					
 					rune_img_shard3=''
 					rune_img_shard3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[1].runeshard_icon + 
-		    		'" data-rune-key3="'+ res[1].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'" data-rune-key3="'+ res[1].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[1].runeshard_stat+'</span><div class="rune_longdesc">'+res[1].runeshard_desc+'</div></div></div>'+
+		    		
 		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
-		    		'" data-rune-key3="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"></div>'+
+		    		'" data-rune-key3="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[2].runeshard_stat+'</span><div class="rune_longdesc">'+res[2].runeshard_desc+'</div></div></div>'+
+		    		
 		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
-		    		'" data-rune-key3="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"></div>';
+		    		'" data-rune-key3="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[0].runeshard_stat+'</span><div class="rune_longdesc">'+res[0].runeshard_desc+'</div></div></div>'
 					
 					$('#shard3').html(rune_img_shard3);
 					//shard_defence shard_flex
@@ -511,6 +645,671 @@
 			
 				
 		})//1
+		
+		
+		let change_rune1 = '';
+		if (res[0].runetype_core !== undefined && res[0].runetype_core !== null && res[0].runetype_core !== '') {
+		  change_rune1 = '<div class="first_rune"><img width="25" height="25" src="../resources/dd/img/rune/style/' + res[0].runetype_core + '.png">'+
+		  '<img width="60" height="60" src="../resources/dd/img/rune/perk/'+res[0].core_mainrune+'.png">'+
+		  '<img width="25" height="25" src="../resources/dd/img/rune/style/'+res[0].runetype_sub+'.png"></div>'
+		  
+		}
+		$('#change_rune1').html(change_rune1)
+		
+		
+		let change_rune2 = '';
+		if (res[1] && res[1].runetype_core != undefined && res[1].runetype_core != null && res[1].runetype_core != '') {
+			change_rune2 = '<div class="second_rune"><img width="25" height="25" src="../resources/dd/img/rune/style/' + res[1].runetype_core + '.png">'+
+			'<img width="60" height="60" src="../resources/dd/img/rune/perk/'+res[1].core_mainrune+'.png">'+
+			'<img width="25" height="25" src="../resources/dd/img/rune/style/'+res[1].runetype_sub+'.png"></div>'
+			
+		}
+		$('#change_rune2').html(change_rune2)
+		
+		$('#change_rune1').click(function() {
+			var f_runetype = res[0].runetype_core
+			var f_core_main = res[0].core_mainrune
+			var f_core_rune1 = res[0].core_rune1
+			var f_core_rune2 = res[0].core_rune2
+			var f_core_rune3 = res[0].core_rune3
+			
+			var f_runesub = res[0].runetype_sub
+			var f_sub_rune1 = res[0].sub_rune1
+			var f_sub_rune2 = res[0].sub_rune2
+			
+			var f_shard_defence = res[0].shard_defence
+			var f_shard_flex = res[0].shard_flex
+			var f_shard_offense = res[0].shard_offense
+			
+			//메인룬타입
+			$.ajax({
+				method:'get',
+				url:'/personlol/champion/rune/main-rune',
+				data:{main_rune:f_runetype}
+			}).done(res => {
+				main_img=''
+				for (var i = 0; i < res.length; i++) {
+	    		var rune = res[i];
+	    		main_img += 
+	    		'<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + 
+	    		'" data-rune-key="'+rune.runetype_id+'"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+	    		rune.runetype_name+'</span></div></div>';
+				}
+				$('#type_rune').html(main_img)
+				
+				
+			}).fail(err=>{
+				
+			})//r1
+			
+			//메인 룬타입에 해당하는 코어룬들
+			$.ajax({
+				method:'get',
+				url:'/personlol/champion/rune/type-core',
+				data:{core_rune:f_runetype}
+			}).done(res =>{
+				
+				if (res.length == 12){
+					
+					rune_img_part1=''
+					for (var i = 0; i < 3; i++) {
+		    		var rune = res[i];
+		    		rune_img_part1 += 
+		    		'<div class="col rune_img"><img class="rune_img" width="30" height="30" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"> <div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+
+					}
+					$('#core_rune1').html(rune_img_part1)
+						
+						
+					rune_img_part2=''
+					for (var i = 3; i < 6; i++) {
+			    	var rune = res[i];
+			    	rune_img_part2  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune2').html(rune_img_part2)
+						
+					rune_img_part3=''
+					for (var i = 6; i < 9; i++) {
+			    	var rune = res[i];
+			    	rune_img_part3  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune3').html(rune_img_part3)
+						
+					rune_img_part4=''
+					for (var i = 9; i < 12; i++) {
+			    	var rune = res[i];
+			    	rune_img_part4  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune4').html(rune_img_part4)
+						
+					var f_runetypeCoremain = $('img[data-rune-key="' + f_core_main + '"]');
+					var f_runetypeCorerune1 = $('img[data-rune-key="' + f_core_rune1 + '"]');
+					var f_runetypeCorerune2 = $('img[data-rune-key="' + f_core_rune2 + '"]');
+					var f_runetypeCorerune3 = $('img[data-rune-key="' + f_core_rune3 + '"]');
+						
+					f_runetypeCoremain[0].style.filter ="none"
+					f_runetypeCorerune1[0].style.filter ="none"
+					f_runetypeCorerune2[0].style.filter ="none"
+					f_runetypeCorerune3[0].style.filter ="none"
+				}else{
+					rune_img_part1=''
+					for (var i = 0; i < 4; i++) {
+		    		var rune = res[i];
+		    		rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+		    		
+					}
+					$('#core_rune1').html(rune_img_part1)
+						
+						
+					rune_img_part2=''
+					for (var i = 4; i < 7; i++) {
+			    	var rune = res[i];
+			    	rune_img_part2  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune2').html(rune_img_part2)
+						
+					rune_img_part3=''
+					for (var i = 7; i < 10; i++) {
+			    	var rune = res[i];
+			    	rune_img_part3  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune3').html(rune_img_part3)
+						
+					rune_img_part4=''
+					for (var i = 10; i < res.length; i++) {
+			    	var rune = res[i];
+			    	rune_img_part4  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune4').html(rune_img_part4)
+						
+					var f_runetypeCoremain = $('img[data-rune-key="' + f_core_main + '"]');
+					var f_runetypeCorerune1 = $('img[data-rune-key="' + f_core_rune1 + '"]');
+					var f_runetypeCorerune2 = $('img[data-rune-key="' + f_core_rune2 + '"]');
+					var f_runetypeCorerune3 = $('img[data-rune-key="' + f_core_rune3 + '"]');
+						
+					f_runetypeCoremain[0].style.filter ="none"
+					f_runetypeCorerune1[0].style.filter ="none"
+					f_runetypeCorerune2[0].style.filter ="none"
+					f_runetypeCorerune3[0].style.filter ="none"
+				}
+				
+					
+				}).fail(err =>{
+				
+				})//r2
+				
+				
+				//서브 룬
+				$.ajax({
+				method:'get',
+				url:'/personlol/champion/rune/sub-rune',
+				data:{sub_rune:f_runesub}
+				
+				}).done(res => {
+					
+					sub_img=''
+					for (var i = 0; i < res.length; i++) {
+			    	var rune = res[i];
+			    	sub_img += '<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + 
+		    		'" data-rune-key="'+rune.runetype_id+'" ><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.runetype_name+'</span></div></div>';
+					}
+					$('#type_sub').html(sub_img)
+					
+				
+				}).fail(err=>{
+				
+				})
+				
+				//서브 룬 이미지 목록
+				$.ajax({
+					method:'get',
+					url:'/personlol/champion/rune/type-core',
+					data:{core_rune:f_runesub}
+				}).done(res=>{
+						
+					if (res.length == 12){
+						
+						rune_img_sub1=''
+						for (var i = 3; i < 6; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune1').html(rune_img_sub1)
+							
+						rune_img_sub2=''
+						for (var i = 6; i < 9; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune2').html(rune_img_sub2)
+							
+						rune_img_sub3=''
+						for (var i = 9; i < 12; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'
+			    		+ rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune3').html(rune_img_sub3)
+								
+						var f_runetypeSubune1 = $('img[data-rune-key="' + f_sub_rune1 + '"]');
+						var f_runetypeSubune2 = $('img[data-rune-key="' + f_sub_rune2 + '"]');
+
+						f_runetypeSubune1[0].style.filter ="none";
+						f_runetypeSubune2[0].style.filter ="none";
+					}else{
+						rune_img_sub1=''
+						for (var i = 4; i < 7; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune1').html(rune_img_sub1)
+							
+						rune_img_sub2=''
+						for (var i = 7; i < 10; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name + '</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune2').html(rune_img_sub2)
+							
+						rune_img_sub3=''
+						for (var i = 10; i < res.length; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune3').html(rune_img_sub3)
+							
+							
+							
+						var f_runetypeSubune1 = $('img[data-rune-key="' + f_sub_rune1 + '"]');
+						var f_runetypeSubune2 = $('img[data-rune-key="' + f_sub_rune2 + '"]');
+
+						runetypeSubune1[0].style.filter ="none";
+						runetypeSubune2[0].style.filter ="none";
+					}
+					
+						
+					
+				}).fail(err=>{
+					
+				})
+				
+				//파편 이미지 목록
+				$.ajax({
+					method:'get',
+					url:'/personlol/champion/rune/shard',
+					
+				}).done(res => {
+					rune_img_shard1=''
+		
+					rune_img_shard1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[5].runeshard_stat+'</span><div class="rune_longdesc">'+res[5].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[3].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[3].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[3].runeshard_stat+'</span><div class="rune_longdesc">'+res[3].runeshard_desc+'</div></div></div>'+
+		    		
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[4].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[4].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[4].runeshard_stat+'</span><div class="rune_longdesc">'+res[4].runeshard_desc+'</div></div></div>';
+					
+					$('#shard1').html(rune_img_shard1);
+					
+					rune_img_shard2=''
+					rune_img_shard2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
+		    		'" data-rune-key2="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[5].runeshard_stat+'</span><div class="rune_longdesc">'+res[5].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
+		    		'" data-rune-ke2y="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[2].runeshard_stat+'</span><div class="rune_longdesc">'+res[2].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
+		    		'" data-rune-key2="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[0].runeshard_stat+'</span><div class="rune_longdesc">'+res[0].runeshard_desc+'</div></div></div>';
+		    		
+					$('#shard2').html(rune_img_shard2);
+					
+					rune_img_shard3=''
+					rune_img_shard3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[1].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[1].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[1].runeshard_stat+'</span><div class="rune_longdesc">'+res[1].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[2].runeshard_stat+'</span><div class="rune_longdesc">'+res[2].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[0].runeshard_stat+'</span><div class="rune_longdesc">'+res[0].runeshard_desc+'</div></div></div>'
+					
+					$('#shard3').html(rune_img_shard3);
+					//shard_defence shard_flex
+					var f_runetypeShard1 = $('img[data-rune-key1="' + f_shard_offense + '"]');
+					var f_runetypeShard2 = $('img[data-rune-key2="' + f_shard_flex + '"]');
+					var f_runetypeShard3 = $('img[data-rune-key3="' + f_shard_defence + '"]');
+
+					f_runetypeShard1[0].style.filter ="none";
+					f_runetypeShard2[0].style.filter ="none";
+					f_runetypeShard3[0].style.filter ="none";
+					
+				}).fail(err =>{
+					
+				})
+			
+			
+		})//클릭 이벤트
+		
+		$('#change_rune2').click(function() {
+			var s_runetype = res[1].runetype_core
+			var s_core_main = res[1].core_mainrune
+			var s_core_rune1 = res[1].core_rune1
+			var s_core_rune2 = res[1].core_rune2
+			var s_core_rune3 = res[1].core_rune3
+			
+			var s_runesub = res[1].runetype_sub
+			var s_sub_rune1 = res[1].sub_rune1
+			var s_sub_rune2 = res[1].sub_rune2
+			
+			var s_shard_defence = res[1].shard_defence
+			var s_shard_flex = res[1].shard_flex
+			var s_shard_offense = res[1].shard_offense
+			
+			//메인룬타입
+			$.ajax({
+				method:'get',
+				url:'/personlol/champion/rune/main-rune',
+				data:{main_rune:s_runetype}
+			}).done(res => {
+				main_img=''
+				for (var i = 0; i < res.length; i++) {
+	    		var rune = res[i];
+	    		main_img += 
+	    		'<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + 
+	    		'" data-rune-key="'+rune.runetype_id+'"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+	    		rune.runetype_name+'</span></div></div>';
+				}
+				$('#type_rune').html(main_img)
+				
+				
+			}).fail(err=>{
+				
+			})//r1
+			
+			//메인 룬타입에 해당하는 코어룬들
+			$.ajax({
+				method:'get',
+				url:'/personlol/champion/rune/type-core',
+				data:{core_rune:s_runetype}
+			}).done(res =>{
+				
+				if (res.length == 12){
+					
+					rune_img_part1=''
+					for (var i = 0; i < 3; i++) {
+		    		var rune = res[i];
+		    		rune_img_part1 += 
+		    		'<div class="col rune_img"><img class="rune_img" width="30" height="30" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"> <div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+
+					}
+					$('#core_rune1').html(rune_img_part1)
+						
+						
+					rune_img_part2=''
+					for (var i = 3; i < 6; i++) {
+			    	var rune = res[i];
+			    	rune_img_part2  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune2').html(rune_img_part2)
+						
+					rune_img_part3=''
+					for (var i = 6; i < 9; i++) {
+			    	var rune = res[i];
+			    	rune_img_part3  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune3').html(rune_img_part3)
+						
+					rune_img_part4=''
+					for (var i = 9; i < 12; i++) {
+			    	var rune = res[i];
+			    	rune_img_part4  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune4').html(rune_img_part4)
+						
+					var s_runetypeCoremain = $('img[data-rune-key="' + s_core_main + '"]');
+					var s_runetypeCorerune1 = $('img[data-rune-key="' + s_core_rune1 + '"]');
+					var s_runetypeCorerune2 = $('img[data-rune-key="' + s_core_rune2 + '"]');
+					var s_runetypeCorerune3 = $('img[data-rune-key="' + s_core_rune3 + '"]');
+						
+					s_runetypeCoremain[0].style.filter ="none"
+					s_runetypeCorerune1[0].style.filter ="none"
+					s_runetypeCorerune2[0].style.filter ="none"
+					s_runetypeCorerune3[0].style.filter ="none"
+				}else{
+					rune_img_part1=''
+					for (var i = 0; i < 4; i++) {
+		    		var rune = res[i];
+		    		rune_img_part1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+		    		
+					}
+					$('#core_rune1').html(rune_img_part1)
+						
+						
+					rune_img_part2=''
+					for (var i = 4; i < 7; i++) {
+			    	var rune = res[i];
+			    	rune_img_part2  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune2').html(rune_img_part2)
+						
+					rune_img_part3=''
+					for (var i = 7; i < 10; i++) {
+			    	var rune = res[i];
+			    	rune_img_part3  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune3').html(rune_img_part3)
+						
+					rune_img_part4=''
+					for (var i = 10; i < res.length; i++) {
+			    	var rune = res[i];
+			    	rune_img_part4  += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+		    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+					}
+					$('#core_rune4').html(rune_img_part4)
+						
+					var s_runetypeCoremain = $('img[data-rune-key="' + s_core_main + '"]');
+					var s_runetypeCorerune1 = $('img[data-rune-key="' + s_core_rune1 + '"]');
+					var s_runetypeCorerune2 = $('img[data-rune-key="' + s_core_rune2 + '"]');
+					var s_runetypeCorerune3 = $('img[data-rune-key="' + s_core_rune3 + '"]');
+						
+					s_runetypeCoremain[0].style.filter ="none"
+					s_runetypeCorerune1[0].style.filter ="none"
+					s_runetypeCorerune2[0].style.filter ="none"
+					s_runetypeCorerune3[0].style.filter ="none"
+				}
+				
+					
+				}).fail(err =>{
+				
+				})//r2
+				
+				
+				//서브 룬
+				$.ajax({
+				method:'get',
+				url:'/personlol/champion/rune/sub-rune',
+				data:{sub_rune:s_runesub}
+				
+				}).done(res => {
+					
+					sub_img=''
+					for (var i = 0; i < res.length; i++) {
+			    	var rune = res[i];
+			    	sub_img += '<div class="col rune_img" ><img class="rune_img" width="40" height="40" src="../resources/' + rune.runetype_icon + 
+		    		'" data-rune-key="'+rune.runetype_id+'" ><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		rune.runetype_name+'</span></div></div>';
+					}
+					$('#type_sub').html(sub_img)
+					
+				
+				}).fail(err=>{
+				
+				})
+				
+				//서브 룬 이미지 목록
+				$.ajax({
+					method:'get',
+					url:'/personlol/champion/rune/type-core',
+					data:{core_rune:s_runesub}
+				}).done(res=>{
+						
+					if (res.length == 12){
+						
+						rune_img_sub1=''
+						for (var i = 3; i < 6; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune1').html(rune_img_sub1)
+							
+						rune_img_sub2=''
+						for (var i = 6; i < 9; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune2').html(rune_img_sub2)
+							
+						rune_img_sub3=''
+						for (var i = 9; i < 12; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'
+			    		+ rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune3').html(rune_img_sub3)
+								
+						var s_runetypeSubune1 = $('img[data-rune-key="' + s_sub_rune1 + '"]');
+						var s_runetypeSubune2 = $('img[data-rune-key="' + s_sub_rune2 + '"]');
+
+						s_runetypeSubune1[0].style.filter ="none";
+						s_runetypeSubune2[0].style.filter ="none";
+					}else{
+						rune_img_sub1=''
+						for (var i = 4; i < 7; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune1').html(rune_img_sub1)
+							
+						rune_img_sub2=''
+						for (var i = 7; i < 10; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name + '</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune2').html(rune_img_sub2)
+							
+						rune_img_sub3=''
+						for (var i = 10; i < res.length; i++) {
+				    	var rune = res[i];
+				    	rune_img_sub3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + rune.rune_icon + 
+			    		'" data-rune-key="'+ rune.rune_id +'" style="filter: grayscale(1)"><div class="rune_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+ 
+			    		rune.rune_name +'</span><div class="rune_longdesc">'+rune.rune_longdesc+'</div></div></div>';
+						}
+						$('#sub_rune3').html(rune_img_sub3)
+							
+							
+							
+						var s_runetypeSubune1 = $('img[data-rune-key="' + s_sub_rune1 + '"]');
+						var s_runetypeSubune2 = $('img[data-rune-key="' + s_sub_rune2 + '"]');
+
+						runetypeSubune1[0].style.filter ="none";
+						runetypeSubune2[0].style.filter ="none";
+					}
+					
+						
+					
+				}).fail(err=>{
+					
+				})
+				
+				//파편 이미지 목록
+				$.ajax({
+					method:'get',
+					url:'/personlol/champion/rune/shard',
+					
+				}).done(res => {
+					rune_img_shard1=''
+		
+					rune_img_shard1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[5].runeshard_stat+'</span><div class="rune_longdesc">'+res[5].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[3].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[3].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[3].runeshard_stat+'</span><div class="rune_longdesc">'+res[3].runeshard_desc+'</div></div></div>'+
+		    		
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[4].runeshard_icon + 
+		    		'" data-rune-key1="'+ res[4].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+		    		res[4].runeshard_stat+'</span><div class="rune_longdesc">'+res[4].runeshard_desc+'</div></div></div>';
+					
+					$('#shard1').html(rune_img_shard1);
+					
+					rune_img_shard2=''
+					rune_img_shard2 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
+		    		'" data-rune-key2="'+ res[5].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[5].runeshard_stat+'</span><div class="rune_longdesc">'+res[5].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
+		    		'" data-rune-ke2y="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[2].runeshard_stat+'</span><div class="rune_longdesc">'+res[2].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
+		    		'" data-rune-key2="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[0].runeshard_stat+'</span><div class="rune_longdesc">'+res[0].runeshard_desc+'</div></div></div>';
+		    		
+					$('#shard2').html(rune_img_shard2);
+					
+					rune_img_shard3=''
+					rune_img_shard3 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[1].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[1].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[1].runeshard_stat+'</span><div class="rune_longdesc">'+res[1].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[2].runeshard_stat+'</span><div class="rune_longdesc">'+res[2].runeshard_desc+'</div></div></div>'+
+		    		
+		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
+		    		'" data-rune-key3="'+ res[0].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		res[0].runeshard_stat+'</span><div class="rune_longdesc">'+res[0].runeshard_desc+'</div></div></div>'
+					
+					$('#shard3').html(rune_img_shard3);
+					//shard_defence shard_flex
+					var s_runetypeShard1 = $('img[data-rune-key1="' + s_shard_offense + '"]');
+					var s_runetypeShard2 = $('img[data-rune-key2="' + s_shard_flex + '"]');
+					var s_runetypeShard3 = $('img[data-rune-key3="' + s_shard_defence + '"]');
+
+					s_runetypeShard1[0].style.filter ="none";
+					s_runetypeShard2[0].style.filter ="none";
+					s_runetypeShard3[0].style.filter ="none";
+					
+				}).fail(err =>{
+					
+				})
+				
+		})//클릭 이벤트
 		
 		/* rate_info=''
 		$.each(res, function (i,rune) {
