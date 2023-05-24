@@ -21,5 +21,12 @@
 	<update id="changelolname" parameterType="java.util.Map">
 		UPDATE USERINFO set USER_LOLNAME = #{changelolname} where user_id = #{user_id}
 	</update>
+	<!-- user_id로 요청자 lolname받아오기 -->
+	
+	<select id="request_id" resultType="java.util.Map">
+		SELECT u.USER_LOLNAME  FROM DUO_REQUEST dr 
+		JOIN USERINFO u ON u.USER_ID = dr.REQUEST_ID 
+		WHERE dr.USER_ID  = #{user_id}
+	</select>
 	
 </mapper>

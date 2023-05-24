@@ -1,6 +1,7 @@
 package com.base.personlol.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -51,7 +52,6 @@ public class R_mypage_Controller {
 	}
 	
 	//lol계정 변경하기
-	
 	@PutMapping(value = "/relolname")
 	public @ResponseBody Integer changelolname(@RequestBody Map<String,String> changelolname, HttpSession session) {
 		String user_id = (String) session.getAttribute("id");
@@ -69,5 +69,22 @@ public class R_mypage_Controller {
 	    }else {
 	    	return 0;
 	    }   
+	}
+	@GetMapping("/getrequest")
+	public @ResponseBody List<Map<String, String>> get_request(HttpSession session) {
+		String user_id = session.getAttribute("id").toString();
+		System.out.println("req_세션에 저장된ID: "+user_id);
+		List<Map<String,String>> getrequest = my_ser.getrequest(user_id);
+		System.out.println("req_jsp가는 요청자네임: "+getrequest);
+		if(getrequest.isEmpty()) {
+			System.out.println("요청자 없음");
+			 Map<String, String> emptyMap = new HashMap<>();
+			 emptyMap.put("user_id", "null");
+			 getrequest.add(emptyMap);
+			 System.out.println("요청자 없을때 null가? " + getrequest);
+			 return getrequest;
+		}
+		return getrequest;
+		
 	}
 }

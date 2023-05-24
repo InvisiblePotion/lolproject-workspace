@@ -1,6 +1,7 @@
 package com.base.personlol.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,13 @@ public class mypage_service {
 		return rename_result;
 	}
 
-
-
+	public List<Map<String, String>> getrequest(String user_id) {
+		System.out.println("req_service userid: "+user_id);
+		
+		//내 userId로 join해서 요청자 user_lolname가져오기
+		List<Map<String, String>> request_lolname = my_dao.request_id(user_id);
+		System.out.println("req_ser의 상대lolname: "+request_lolname);
+		return request_lolname;
+	}
 
 }

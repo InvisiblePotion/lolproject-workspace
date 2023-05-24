@@ -72,10 +72,12 @@
 				$('#id_err').html('중복된 아이디입니다.').css('color', 'red');
 			}else if(res.code == "0"){
 				$('#lol_err').html('중복된 닉네임 정보입니다.').css('color','red')
+			}else if(res.code =="-99"){
+				$('#lol_err').html('서버에 등록되지 않은 소환사입니다 다시 확인해주세요.').css('color','red')
 			}else{
 				alert('서버에러')
 			}
-			 
+			
 		}).fail(err => {
 			console.log(res)
 		})

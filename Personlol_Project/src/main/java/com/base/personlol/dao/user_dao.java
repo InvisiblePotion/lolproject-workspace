@@ -40,6 +40,9 @@ public interface user_dao {
 	
 	//유저코드 업데이트
 	Integer newcode(Map<String, String> id);
+	
+	//서버에 lolname이 실존하는가
+	int checksv_lolname(String user_lolname);
 
 
 
