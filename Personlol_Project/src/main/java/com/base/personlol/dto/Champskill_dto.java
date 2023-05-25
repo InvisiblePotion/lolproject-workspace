@@ -22,7 +22,7 @@ public class Champskill_dto {
 	//챔프스킬 트리 테이블 부분
 	private String lane;
 	private String skill_build;
-	private Integer pick_rate;
+	private double pick_rate;
 	private Integer game_count;
-	private Integer win_rate;
+	private double win_rate;
 }

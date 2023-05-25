@@ -22,9 +22,9 @@ public class Item_dto {
 	private Integer item1;
 	private Integer item2;
 	private Integer item3;
-	private Integer pick_rate;
+	private double pick_rate;
 	private Integer game_count;
-	private Integer win_rate;
+	private double win_rate;
 	
 	
 	

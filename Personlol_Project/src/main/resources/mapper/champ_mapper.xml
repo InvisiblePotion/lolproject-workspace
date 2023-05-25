@@ -67,11 +67,14 @@
 
 	<select id="search_champ"
 		resultType="com.base.personlol.dto.champion_dto">
-		SELECT c.CHAMP_ID,c.CHAMP_NAME, c.CHAMP_ICON, MAX(ci.LANE) as LANE FROM
+		SELECT c.CHAMP_ID,c.CHAMP_NAME, c.CHAMP_ICON, MAX(ci.LANE)
+		as LANE FROM
 		CHAMPDATA c
-		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID =
+		ci.CHAMP_ID
 		WHERE c.CHAMP_NAME LIKE '%' || #{searchVal} || '%'
-		GROUP BY c.CHAMP_ID, c.CHAMP_NAME, c.CHAMP_ICON
+		GROUP BY
+		c.CHAMP_ID, c.CHAMP_NAME, c.CHAMP_ICON
 	</select>
 
 	<select id="champ_info"
@@ -82,7 +85,8 @@
 		FROM CHAMPDATA c
 		LEFT
 		JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-		WHERE c.CHAMP_ID = #{champ_id} AND ci.LANE = #{champ_lane}
+		WHERE c.CHAMP_ID =
+		#{champ_id} AND ci.LANE = #{champ_lane}
 	</select>
 
 	<select id="champ_skill"
@@ -93,14 +97,27 @@
 	<select id="skill_tree"
 		resultType="com.base.personlol.dto.Champskill_dto">
 		SELECT * FROM (SELECT * FROM CHAMPION_SKILL cs WHERE
-		CHAMP_ID = #{champ_id} ORDER BY WIN_RATE DESC FETCH FIRST 1 ROWS ONLY) c
-		INNER JOIN CHAMPSKILL cs ON(c.CHAMP_ID = cs.CHAMP_ID) ORDER BY SKILL_ID
+		CHAMP_ID = #{champ_id} AND lane = #{champ_lane} ORDER BY WIN_RATE DESC
+		FETCH FIRST 1 ROWS ONLY)
+		c
+		INNER JOIN CHAMPSKILL cs ON(c.CHAMP_ID =
+		cs.CHAMP_ID) ORDER BY
+		SKILL_ID
 
 	</select>
 
 	<select id="champ_rune"
 		resultType="com.base.personlol.dto.ChampRune_dto">
-		SELECT * FROM CHAMPION_RUNE cr WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane}
+		<![CDATA[
+		SELECT *
+		FROM (
+		SELECT *
+		FROM CHAMPION_RUNE cr
+		WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane}
+		ORDER BY GAME_COUNT DESC
+		) WHERE ROWNUM <= 2]]>
+
+
 	</select>
 
 	<select id="main_img"
@@ -125,7 +142,7 @@
 
 	<select id="item_build"
 		resultType="com.base.personlol.dto.Item_dto">
-		<![CDATA[SELECT * FROM (SELECT * FROM CHAMPION_ITEM_BUILD WHERE CHAMP_ID = #{champ_id} ORDER BY PICK_RATE DESC) WHERE ROWNUM<=2]]>
+		<![CDATA[SELECT * FROM (SELECT * FROM CHAMPION_ITEM_BUILD WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane} ORDER BY PICK_RATE DESC) WHERE ROWNUM<=2]]>
 	</select>
 
 	<select id="item_img"
@@ -133,6 +150,21 @@
 		SELECT * FROM ITEM WHERE ITEM_ID = #{item}
 	</select>
 
+	<select id="champ_spell" resultType="com.base.personlol.dto.ChampSpell_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		SELECT *
+		FROM CHAMPION_SPELL cs
+		WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane}
+		ORDER BY GAME_COUNT DESC
+		)
+		WHERE ROWNUM <= 2]]>
+	</select>
+	
+	<select id="champ_spell_img" resultType="com.base.personlol.dto.ChampSpell_dto">
+		SELECT * FROM SPELL s WHERE SPELL_ID = #{spell1} OR SPELL_ID = #{spell2}
+	</select>
 
 
 </mapper>
