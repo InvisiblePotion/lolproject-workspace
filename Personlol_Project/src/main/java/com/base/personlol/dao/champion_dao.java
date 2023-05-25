@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.base.personlol.dto.ChampMatch_dto;
 import com.base.personlol.dto.ChampRuneCore_dto;
 import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
@@ -72,7 +73,13 @@ public interface champion_dao {
 	List<ChampSpell_dto> champ_spell(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
 	
 	//챔프 스펠 이미지
-	List<ChampSpell_dto> champ_spell_img(@Param("spell1") Integer spell1,@Param("spell2") Integer spell2);
+	List<ChampSpell_dto> champ_spell_img(@Param("spell_img") Integer spell_img);
+	
+	//챔프 매치업 리스트
+	List<ChampMatch_dto> matchup_lst(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
+	
+	//챔프 매치업 이미지 
+	List<champion_dto> matchup_champ_img(Integer match_champ);
 	
 
 	
