@@ -20,6 +20,10 @@ public class champion_Controller {
 	public String detail() {
 		return "detail";
 	}
+	@GetMapping("/matchup")
+	public String matchup() {
+		return "matchup";
+	}
 	
 	
 	

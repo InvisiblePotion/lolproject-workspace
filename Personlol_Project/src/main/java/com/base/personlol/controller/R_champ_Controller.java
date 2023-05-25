@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.personlol.dto.ChampMatch_dto;
 import com.base.personlol.dto.ChampRuneCore_dto;
 import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
@@ -224,10 +225,11 @@ public class R_champ_Controller {
 		List<ChampSpell_dto> champ_spell_lst = champ_ser.champ_spell(champ_id,champ_lane);
 		return champ_spell_lst;
 	}
+	
 	//챔프 스펠 이미지 부분
 	@GetMapping("/champion/spell-img")
-	public List<ChampSpell_dto> champ_spell_img(Integer spell1,Integer spell2){
-		List<ChampSpell_dto> champ_spell_img_lst = champ_ser.champ_spell_img(spell1,spell2);
+	public List<ChampSpell_dto> champ_spell_img(Integer spell_img){
+		List<ChampSpell_dto> champ_spell_img_lst = champ_ser.champ_spell_img(spell_img);
 		return champ_spell_img_lst;
 	}
 	
@@ -306,5 +308,17 @@ public class R_champ_Controller {
 		List<Item_dto> item_img = champ_ser.item_img(item);
 		return item_img;
 	}
-
+	
+	//챔프 매치업
+	@GetMapping("/matchup/list")
+	public List<ChampMatch_dto> matchup_lst(Integer champ_id,String champ_lane){
+		List<ChampMatch_dto> matchup_lst = champ_ser.matchup_lst(champ_id,champ_lane);
+		return matchup_lst;
+	}
+	//챔프 매치업 이미지
+	@GetMapping("/matchup/champ-img")
+	public List<champion_dto> matchup_champ_img(Integer match_champ){
+		List<champion_dto> matchup_img_lst = champ_ser.matchup_champ_img(match_champ);
+		return matchup_img_lst;
+	}
 }//
