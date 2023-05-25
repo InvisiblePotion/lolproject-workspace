@@ -11,6 +11,12 @@
         WHERE s.SUMMONER_NAME = #{summoner_name}
     </select>
 
+    <select id="isSummonerNameExists" resultType="Integer">
+        SELECT COUNT(*)
+        FROM SUMMONER
+        WHERE summoner_name = #{summoner_name}
+    </select>
+
     <select id="checkRecentGameExist" resultType="String">
         SELECT game_id
         FROM SUMMONER_RECENT_GAME

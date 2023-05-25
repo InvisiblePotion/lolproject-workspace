@@ -13,13 +13,15 @@ public interface summoner_dao {
 	//초기 정보 가져오기
 	summoner_dto getsummonerinfo(Map<String, String> summoner_name);
 
+	Integer isSummonerNameExists(String summoner_name);
+
 	List<String> getGameidsOnRecentGame(String summoner_name);
 
 	List<String> getGameidsOnRawdata(String summoner_name);
 
 	Integer deleteGameidsInRecentGame(String summoner_name);
 
-	Integer putGameidInRecentGame(@Param("summoner_name") String summoner_name,  @Param("game_ids") String game_id);
+	Integer putGameidInRecentGame(@Param("summoner_name") String summoner_name,  @Param("game_id") String game_id);
 
 	summoner_rawdata_dto getGameRecord(String game_id);
 

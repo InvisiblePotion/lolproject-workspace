@@ -25,6 +25,14 @@ public class summoner_service {
 		return firstinfo;
 	}
 
+	public boolean isSummonerNameExists(String summoner_name) {
+		if (0 != sum_dao.isSummonerNameExists(summoner_name)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public List<String> getGameidsOnRecentGame(String summoner_name) {
 		return sum_dao.getGameidsOnRecentGame(summoner_name);
 	}

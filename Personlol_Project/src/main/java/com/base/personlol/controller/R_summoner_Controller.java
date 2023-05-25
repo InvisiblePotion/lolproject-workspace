@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +44,7 @@ public class R_summoner_Controller {
 
 	@GetMapping("/game-ids/{on_where}")
 	public List<String> getGameids(String summoner_name, @PathVariable("on_where") String on_where) {
-		log.info("넘어온 값: summoner_name:{}, on_where:{}", summoner_name, on_where); // ### 로그
+		System.out.println("넘어온 값: summoner_name: "+summoner_name+", on_where: "+on_where); // ### 로그
 		switch (on_where) {
 			case "on-recent-game":
 				return sum_ser.getGameidsOnRecentGame(summoner_name);
@@ -61,9 +62,9 @@ public class R_summoner_Controller {
 		sum_ser.deleteGameidsInRecentGame(summoner_name);
 	}
 
-	@PutMapping("/recent-game")
+	@PostMapping("/recent-game")
 	public void putGameidInRecentGame(summoner_recent_game_dto insert_data) {
-		log.info("넘어온 값: {}", insert_data);  // ### 로그
+		System.out.println("넘어온 값: " + insert_data); // ### 로그
 		sum_ser.putGameidInRecentGame(insert_data.getSummoner_name(), insert_data.getGame_ids());
 	}
 	
