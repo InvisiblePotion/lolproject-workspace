@@ -154,13 +154,17 @@ public class duo_Controller {
 					attr.addFlashAttribute("msg","중복된 요청입니다");
 					return new ModelAndView("redirect:/duo/");
 					
+				}else if(insert_request ==-88) {
+					System.out.println("이미 등록된 듀오 입니다.");
+					attr.addFlashAttribute("msg","이미 등록된 듀오입니다");
+					return new ModelAndView("redirect:/duo/");
 				}else {
 					System.out.println("삽입실패");
 					attr.addFlashAttribute("msg","요청이 실패했습니다.");
 					return new ModelAndView("redirect:/duo/");
 					
 				}
-
+				
 			}else {
 				System.out.println("아이디가 작성자와 일치");
 				attr.addFlashAttribute("msg","본인의 글입니다");

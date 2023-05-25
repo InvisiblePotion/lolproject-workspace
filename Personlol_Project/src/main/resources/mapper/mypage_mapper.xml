@@ -21,12 +21,60 @@
 	<update id="changelolname" parameterType="java.util.Map">
 		UPDATE USERINFO set USER_LOLNAME = #{changelolname} where user_id = #{user_id}
 	</update>
-	<!-- user_id로 요청자 lolname받아오기 -->
 	
+	<!-- user_id로 요청자 lolname받아오기 -->
 	<select id="request_id" resultType="java.util.Map">
 		SELECT u.USER_LOLNAME  FROM DUO_REQUEST dr 
 		JOIN USERINFO u ON u.USER_ID = dr.REQUEST_ID 
 		WHERE dr.USER_ID  = #{user_id}
+	</select>
+	
+	<!-- 내 글 불러오기 -->
+	<select id="getmyboard" resultType = "duo">
+		SELECT d.DUO_OWNERID, d.DUO_TITLE , d.DUO_CONTENT 
+		FROM DUO d
+		WHERE d.DUO_OWNERID =#{user_id} AND d.DUO_ACTIVE = 1
+	</select>
+	
+	<!-- 글삭제 실행 -->
+	<update id="go_deleteboard" parameterType="String">
+	  	UPDATE DUO d SET d.DUO_ACTIVE = 0 WHERE d.DUO_OWNERID = #{user_id} AND DUO_ACTIVE = 1
+	</update>
+	
+	<!-- 듀오 요청 삭제 -->
+	<delete id="delrequest" parameterType="String">
+		DELETE FROM DUO_REQUEST dr WHERE dr.REQUEST_ID = #{request_id} AND dr.USER_ID =#{user_id}
+	</delete>
+	
+	<!-- 닉네임 -> request_id -->
+	<select id="getuser_id" resultType="String">
+		SELECT u.USER_ID  FROM USERINFO u WHERE u.USER_LOLNAME = #{user_lolname} 
+	</select>
+	
+	<!-- user_id에 해당하는 모든 request 삭제 -->
+	<delete id="useralldel" parameterType="String">
+		DELETE FROM DUO_REQUEST dr WHERE dr.USER_ID =#{user_id}
+	</delete>
+	
+	<!-- 요청수락 듀오 테이블 업데이트  -->
+	<update id="go_update_duo" parameterType="String">
+		UPDATE DUO SET DUO_ACCEPTER = #{request_id}, DUO_ACTIVE = 0 WHERE DUO_OWNERID = #{user_id} AND DUO_ACTIVE = 1
+	</update>
+	
+	<!-- 나의 듀오 불러오기 -->
+	<select id="getmyduo" resultType="hashmap">
+			SELECT
+			  u.USER_LOLNAME
+			FROM (
+			  SELECT
+			    CASE
+			      WHEN DUO_OWNERID = #{user_id} THEN DUO_ACCEPTER
+			      ELSE DUO_OWNERID
+			    END AS other_values
+			  FROM DUO
+			  WHERE (DUO_OWNERID = #{user_id} OR DUO_ACCEPTER = #{user_id}) AND DUO_ACCEPTER != 'none'
+			) d
+			JOIN USERINFO u ON d.other_values = u.USER_ID
 	</select>
 	
 </mapper>

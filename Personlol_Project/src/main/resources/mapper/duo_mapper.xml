@@ -165,5 +165,10 @@
 	  EXISTS (SELECT 1 FROM DUO WHERE DUO_OWNERID = #{user_id} AND DUO_ACTIVE = 1) THEN 1 ELSE 0 END AS result
 	  FROM DUAL
 	</select>
+	
+	<!-- 이미 친구인가? -->
+	<select id="check_myduo" resultType="Int">
+		SELECT count(*) FROM DUO d WHERE (DUO_OWNERID = #{user_id} AND DUO_ACCEPTER = #{request_id}) or (DUO_ACCEPTER = #{user_id} AND DUO_OWNERID = #{request_id})
+	</select>
 
 </mapper>
