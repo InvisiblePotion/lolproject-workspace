@@ -28,6 +28,7 @@ public class user_service {
 		int a = checkID(userinfo.getUser_id());
 		int b = checkCode(userinfo.getUser_code());
 		int c = checklolname(userinfo.getUser_lolname());
+		int d = checksvlolname(userinfo.getUser_lolname());
 		
 		System.out.println("프리베이트 찍히나요~? a: "+a+"b: "+b);
 		//a==1 ID중복
@@ -44,13 +45,24 @@ public class user_service {
 		}else if(c == 1){
 			System.out.println("롤네임 중복");
 			return 0;
+			
+		}else if(d == 0) {
+			System.out.println("서버에 롤네임이 없어요");
+			return -99;
 		}else {
 			System.out.println("MM성공 탔어요~");
 			System.out.println("if문안의 코드에용"+userinfo.getUser_code());
 			return u_dao.insertinfo(userinfo);
 		}
+		
 	}
 	
+	//서버에 진짜있는지
+	public int checksvlolname(String user_lolname) {
+		
+		return u_dao.checksv_lolname(user_lolname);
+	}
+
 	private int checklolname(String user_lolname) {
 		//조인에서 쓰는 롤 네임 중복검사기
 		return u_dao.checkuser_lolname(user_lolname);
@@ -171,6 +183,11 @@ public class user_service {
 			Integer newcode = u_dao.newcode(id);
 			return newcode;
 		}
+	}
+
+	public int checkResult(Map<String, String> user_lolname) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

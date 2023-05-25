@@ -2,88 +2,169 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="com.base.personlol.dao.champion_dao">
-  	<select id="key_list" resultType="com.base.personlol.dto.champion_dto">
-  		SELECT * FROM CHAMPDATA 
-  	
-  	</select>
-  
-  	<select id="lane_img" resultType="com.base.personlol.dto.champion_dto">
-  		SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON , ci.LANE  FROM 
-  		CHAMPDATA c LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID WHERE  lane = #{lane}
-  	</select>
-  	
-  	<select id="lane_list" resultType="com.base.personlol.dto.champion_dto">
-  	SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON , ci.LANE as lane ,ci.WIN_RATE ,ci.PICK_RATE ,ci.BAN_RATE  FROM 
-  	CHAMPDATA c LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID WHERE lane = #{lane}
-  	</select>
-  	
-  	<select id="lane_sort_win" resultType="com.base.personlol.dto.champion_dto">
-  	SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON, ci.LANE as lane, ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE
-	FROM CHAMPDATA c
-	LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-	WHERE lane = #{lane}
-	ORDER BY ci.WIN_RATE ${sort}
-  	</select>
-  	
-  	<select id="lane_sort_pick" resultType="com.base.personlol.dto.champion_dto">
-  	SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON, ci.LANE as lane, ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE
-	FROM CHAMPDATA c
-	LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-	WHERE lane = #{lane}
-	ORDER BY ci.PICK_RATE ${sort}
-  	</select>
-  	
-  	<select id="lane_sort_ban" resultType="com.base.personlol.dto.champion_dto">
-  	SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON, ci.LANE as lane, ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE
-	FROM CHAMPDATA c
-	LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-	WHERE lane = #{lane}
-	ORDER BY ci.BAN_RATE ${sort}
-  	</select>
-  	
-  	<select id="search_champ" resultType="com.base.personlol.dto.champion_dto">
-  		SELECT c.CHAMP_ID,c.CHAMP_NAME, c.CHAMP_ICON,ci.LANE FROM CHAMPDATA c
-  		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-  		WHERE c.CHAMP_NAME LIKE '%' || #{searchVal} || '%'
-  	</select>
-  	
-  	<select id="champ_info" resultType="com.base.personlol.dto.champion_dto">
-  	SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON , ci.LANE ,ci.WIN_RATE ,ci.PICK_RATE ,ci.BAN_RATE  
-  	FROM CHAMPDATA c 
-  	LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-  	WHERE c.CHAMP_ID = #{champ_id}
-  	</select>
-  	
-  	<select id="champ_skill" resultType="com.base.personlol.dto.Champskill_dto">
-  		SELECT * FROM CHAMPSKILL c WHERE CHAMP_ID = #{champ_id}
-  	</select>
-  	
-  	<select id="skill_tree" resultType="com.base.personlol.dto.Champskill_dto">
-  		SELECT * FROM CHAMPION_SKILL cs WHERE CHAMP_ID = #{champ_id} 
-  	</select>
-  	
-  	<select id="champ_rune" resultType="com.base.personlol.dto.ChampRune_dto">
-  		SELECT * FROM CHAMPION_RUNE cr WHERE CHAMP_ID = #{champ_id}
-  	</select>
-  	
-  	<select id="main_img" resultType="com.base.personlol.dto.ChampRuneType_dto">
-  		SELECT * FROM RUNETYPE WHERE RUNETYPE_ID = #{main_rune}
-  	</select>
-  	
-  	<select id="sub_img" resultType="com.base.personlol.dto.ChampRuneType_dto">
-  		SELECT * FROM RUNETYPE WHERE RUNETYPE_ID = #{sub_rune}
-  	</select>
-  	
-  	<select id="core_img" resultType="com.base.personlol.dto.ChampRuneCore_dto">
-  		SELECT * FROM RUNE WHERE RUNETYPE_ID = #{core_rune}
-  	</select>
-  	
-  	<select id="shard_img" resultType="com.base.personlol.dto.ChampRuneShard_dto">
-  		SELECT * FROM RUNESHARD WHERE RUNESHARD_ID = #{shard}
-  	</select>
-  	
 
-  	
-  </mapper>
+<mapper namespace="com.base.personlol.dao.champion_dao">
+	<select id="key_list"
+		resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPDATA
+
+	</select>
+
+	<select id="lane_img"
+		resultType="com.base.personlol.dto.champion_dto">
+		SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON
+		, ci.LANE FROM
+		CHAMPDATA c LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID =
+		ci.CHAMP_ID
+		WHERE lane = #{lane}
+	</select>
+
+	<select id="lane_list"
+		resultType="com.base.personlol.dto.champion_dto">
+		SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON
+		, ci.LANE as lane
+		,ci.WIN_RATE ,ci.PICK_RATE ,ci.BAN_RATE FROM
+		CHAMPDATA c LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		WHERE lane =
+		#{lane}
+	</select>
+
+	<select id="lane_sort_win"
+		resultType="com.base.personlol.dto.champion_dto">
+		SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON,
+		ci.LANE as lane,
+		ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE
+		FROM CHAMPDATA c
+		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		WHERE lane =
+		#{lane}
+		ORDER BY ci.WIN_RATE ${sort}
+	</select>
+
+	<select id="lane_sort_pick"
+		resultType="com.base.personlol.dto.champion_dto">
+		SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON,
+		ci.LANE as lane,
+		ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE
+		FROM CHAMPDATA c
+		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		WHERE lane =
+		#{lane}
+		ORDER BY ci.PICK_RATE ${sort}
+	</select>
+
+	<select id="lane_sort_ban"
+		resultType="com.base.personlol.dto.champion_dto">
+		SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON,
+		ci.LANE as lane,
+		ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE
+		FROM CHAMPDATA c
+		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		WHERE lane =
+		#{lane}
+		ORDER BY ci.BAN_RATE ${sort}
+	</select>
+
+	<select id="search_champ"
+		resultType="com.base.personlol.dto.champion_dto">
+		SELECT c.CHAMP_ID,c.CHAMP_NAME, c.CHAMP_ICON, MAX(ci.LANE)
+		as LANE FROM
+		CHAMPDATA c
+		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID =
+		ci.CHAMP_ID
+		WHERE c.CHAMP_NAME LIKE '%' || #{searchVal} || '%'
+		GROUP BY
+		c.CHAMP_ID, c.CHAMP_NAME, c.CHAMP_ICON
+	</select>
+
+	<select id="champ_info"
+		resultType="com.base.personlol.dto.champion_dto">
+		SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON
+		, ci.LANE
+		,ci.WIN_RATE ,ci.PICK_RATE ,ci.BAN_RATE
+		FROM CHAMPDATA c
+		LEFT
+		JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		WHERE c.CHAMP_ID =
+		#{champ_id} AND ci.LANE = #{champ_lane}
+	</select>
+
+	<select id="champ_skill"
+		resultType="com.base.personlol.dto.Champskill_dto">
+		SELECT * FROM CHAMPSKILL c WHERE CHAMP_ID = #{champ_id}
+	</select>
+
+	<select id="skill_tree"
+		resultType="com.base.personlol.dto.Champskill_dto">
+		SELECT * FROM (SELECT * FROM CHAMPION_SKILL cs WHERE
+		CHAMP_ID = #{champ_id} AND lane = #{champ_lane} ORDER BY WIN_RATE DESC
+		FETCH FIRST 1 ROWS ONLY)
+		c
+		INNER JOIN CHAMPSKILL cs ON(c.CHAMP_ID =
+		cs.CHAMP_ID) ORDER BY
+		SKILL_ID
+
+	</select>
+
+	<select id="champ_rune"
+		resultType="com.base.personlol.dto.ChampRune_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		SELECT *
+		FROM CHAMPION_RUNE cr
+		WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane}
+		ORDER BY GAME_COUNT DESC
+		) WHERE ROWNUM <= 2]]>
+
+
+	</select>
+
+	<select id="main_img"
+		resultType="com.base.personlol.dto.ChampRuneType_dto">
+		SELECT * FROM RUNETYPE WHERE RUNETYPE_ID = #{main_rune}
+	</select>
+
+	<select id="sub_img"
+		resultType="com.base.personlol.dto.ChampRuneType_dto">
+		SELECT * FROM RUNETYPE WHERE RUNETYPE_ID = #{sub_rune}
+	</select>
+
+	<select id="core_img"
+		resultType="com.base.personlol.dto.ChampRuneCore_dto">
+		SELECT * FROM RUNE WHERE RUNETYPE_ID = #{core_rune}
+	</select>
+
+	<select id="shard_img"
+		resultType="com.base.personlol.dto.ChampRuneShard_dto">
+		SELECT * FROM RUNESHARD
+	</select>
+
+	<select id="item_build"
+		resultType="com.base.personlol.dto.Item_dto">
+		<![CDATA[SELECT * FROM (SELECT * FROM CHAMPION_ITEM_BUILD WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane} ORDER BY PICK_RATE DESC) WHERE ROWNUM<=2]]>
+	</select>
+
+	<select id="item_img"
+		resultType="com.base.personlol.dto.Item_dto">
+		SELECT * FROM ITEM WHERE ITEM_ID = #{item}
+	</select>
+
+	<select id="champ_spell" resultType="com.base.personlol.dto.ChampSpell_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		SELECT *
+		FROM CHAMPION_SPELL cs
+		WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane}
+		ORDER BY GAME_COUNT DESC
+		)
+		WHERE ROWNUM <= 2]]>
+	</select>
+	
+	<select id="champ_spell_img" resultType="com.base.personlol.dto.ChampSpell_dto">
+		SELECT * FROM SPELL s WHERE SPELL_ID = #{spell1} OR SPELL_ID = #{spell2}
+	</select>
+
+
+</mapper>

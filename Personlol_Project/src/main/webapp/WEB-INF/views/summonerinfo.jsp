@@ -585,21 +585,46 @@
     })
 </script>
 <script>
-	$('.gosummonerinfo').click(function () {
-		const summoner_name = $('.summoner_name').val();
-		console.log(summoner_name);
-		const encoded_name = encodeURIComponent(summoner_name);
-		const url = '/personlol/summoner/?summoner_name=' + encoded_name;
-		location.href = url;
-	});
+    $('.gosummonerinfo').click(function () {
+        //siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기
+        let summoner_name = $(this).siblings('.summoner_name').filter(function () {
+            return $(this).val() !== "";
+        }).first().val();
+
+        if (!summoner_name) {
+            console.log("검색어가 비어있습니다.");
+            return;
+        }
+
+        console.log(summoner_name);
+        const encoded_name = encodeURIComponent(summoner_name);
+        const go_url = '/personlol/summoner/?summoner_name=' + encoded_name;
+        $.ajax({
+            method: 'get',
+            url: '/personlol/user/checkserver',
+            data: {
+                "user_lolname": summoner_name
+            }
+        }).done(res => {
+            console.log(res);
+            if (res == "1") {
+                location.href = go_url;
+            } else if (res == "-999") {
+                alert("등록되지않은 소환사입니다 다시 입력해주세요")
+            }
+        }).fail(err => {
+            console.log(err);
+        })
+
+    });
 </script>
 <script>
-	//로그아웃
-	$('#logout').click(function () {
-		location.href = '/personlol/logout';
-		console.log("로그아웃");
-		alert("로그아웃");
-	})
+    //로그아웃
+    $('#logout').click(function () {
+        location.href = '/personlol/logout';
+        console.log("로그아웃");
+        alert("로그아웃");
+    })
 </script>
 
 <!-- 왼쪽 첫번째 챔피언 박스 -->

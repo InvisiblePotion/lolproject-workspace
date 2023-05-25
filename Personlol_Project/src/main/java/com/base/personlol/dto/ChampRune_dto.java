@@ -19,9 +19,9 @@ public class ChampRune_dto {
 	private Integer shard_offense;
 	private Integer shard_flex;
 	private Integer shard_defence;
-	private Integer pick_rate;
+	private double pick_rate;
 	private Integer game_count;
-	private Integer win_rate;
+	private double win_rate;
 	
 	//rune join 아이콘들 가져오기
 	

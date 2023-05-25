@@ -20,8 +20,8 @@ public interface duo_dao {
 	
 	
 	//kang tae min
-	public String getId(Integer duo_id);
-
+	public String getId(int duo_id);
+	
 	public void Disable(Integer duo_id);
 
 	public userinfo_dto getUser_lolname(String duo_ownerid);
@@ -33,18 +33,35 @@ public interface duo_dao {
 	// 라인선택
 	public List<Map<String, Object>> all(@Param("start_page") int start_page, @Param("end_page") int end_page);
 	
-	public List<Map<String, Object>> top(int start_page , int end_page);
+	public List<Map<String, Object>> top(@Param("start_page") int start_page , @Param("end_page") int end_page);
 	
-	public List<Map<String, Object>> jungle(int start_page , int end_page);
+	public List<Map<String, Object>> jungle(@Param("start_page") int start_page , @Param("end_page") int end_page);
 	
-	public List<Map<String, Object>> mid(int start_page , int end_page);
+	public List<Map<String, Object>> mid(@Param("start_page") int start_page , @Param("end_page") int end_page);
 	
-	public List<Map<String, Object>> bottom(int start_page , int end_page);
+	public List<Map<String, Object>> bottom(@Param("start_page") int start_page , @Param("end_page") int end_page);
 	
-	public List<Map<String, Object>> support(int start_page , int end_page);
+	public List<Map<String, Object>> support(@Param("start_page") int start_page , @Param("end_page") int end_page);
 	
 //티어 x 위 티어 o 아래	
 	public List<Map<String, Object>> tier_all(@Param("start_page") int start_page, @Param("end_page") int end_page, @Param("tier") String tier);
+
+	//듀오 요청 테이블에 삽입
+	public Integer request(@Param("user_id") String user_id, @Param("request_id") String request_id);
+	
+	//active 바꾸기
+	public Integer set_active(@Param("user_id") String user_id);
+	
+	//같은 사람에게 요청했는가
+	public int check_request(@Param("user_id") String user_id, @Param("request_id") String request_id);
+	
+	//글쓰기 중복체크
+	public int checkboard(@Param("user_id") String user_id);
+	
+	//이미 친구인지 아닌지
+	public int check_myduo(@Param("user_id") String user_id, @Param("request_id") String request_id);
+
+
 
 	
 	

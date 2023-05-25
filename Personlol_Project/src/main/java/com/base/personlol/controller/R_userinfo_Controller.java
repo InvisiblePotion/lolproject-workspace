@@ -92,6 +92,15 @@ public class R_userinfo_Controller {
 			result.put("code",code);
 			
 			return result;
+		}else if(insertRst == -99){
+			//서버에 롤네임 없음
+			String msg = "서버에 등록된 닉네임이 아닙니다";
+			String code ="-99";
+			
+			result.put("Msg", msg);
+			result.put("code",code);
+			return result;
+			
 		}else {
 			String msg = "알수없는 이유";
 			String code = "1000";
@@ -100,6 +109,7 @@ public class R_userinfo_Controller {
 			result.put("code",code);
 			return result;
 		}
+		
 	}	//회원가입 끝	
 	
 	//로그인
@@ -158,6 +168,22 @@ public class R_userinfo_Controller {
 		Integer newcode = u_ser.newcode(id);
 		System.out.println("돌아온 업데이트 값은? 0 1 -1?: "+ id);
 		return newcode;
+	}
+	
+	//서버에 롤 네임이 등록이 되어있는가
+	@GetMapping("/checkserver")
+	public int checkserver(@RequestParam  String user_lolname) {
+		System.out.println("검색시 받아오는 롤네임: "+user_lolname);
+		int checkResult = u_ser.checksvlolname(user_lolname);
+		// 1이면 서버에 존재함
+		if(checkResult == 1) {
+			System.out.println("검색 가능");
+			return checkResult;
+		}else {
+			System.out.println("검색 불가능");
+			return -999;	
+		}
+		
 	}
 	
 }

@@ -15,9 +15,9 @@ public class champion_dto {
 	
 //	champion_info와 join 컬럼들
 	private String lane;
-	private String win_rate;
-	private String pick_rate;
-	private String ban_rate;
+	private double win_rate;
+	private double pick_rate;
+	private double ban_rate;
 	
 	//정렬
 	private String sort;
