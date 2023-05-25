@@ -10,5 +10,34 @@
         FROM SUMMONER s
         WHERE s.SUMMONER_NAME = #{summoner_name}
     </select>
+
+    <select id="checkRecentGameExist" resultType="String">
+        SELECT game_id
+        FROM SUMMONER_RECENT_GAME
+        WHERE summoner_name = #{summoner_name}
+    </select>
+
+    <select id="getGameidsOnRawdata" resultType="String">
+        SELECT game_id
+        FROM RAWDATA
+        WHERE participant_name = #{summoner_name}
+    </select>
+
+    <delete id="deleteGameidsInRecentGame">
+        DELETE FROM SUMMONER_RECENT_GAME
+        WHERE summoner_name = #{summoner_name}
+    </delete>
+
+    <insert id="putGameidInRecentGame">
+        INSERT INTO SUMMONER_RECENT_GAME VALUES (
+            #{summoner_name}, #{game_id})
+    </insert>
+
+    <select id="getGameRecord" resultType="com.base.personlol.dto.summoner_rawdata_dto">
+        SELECT game_id, participant_number, participant_name, champion_id, lane,
+            game, champion, spell, skill, skilltree, rune, item, kda, gold, cs, damage, vision
+        FROM RAWDATA
+        WHERE game_id = #{game_id}
+    </select>
     
 </mapper>
