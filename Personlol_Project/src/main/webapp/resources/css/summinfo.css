@@ -265,7 +265,13 @@ body{
 .tier-img{
   width: 72px;
   height: 72px;
-  background-color: blueviolet;
+  background-color: gray;
+  overflow:hidden;
+  margin:0 auto;
+  border-radius:50%;
+}
+.img-tier{
+	object-fit:cover;
 }
 .tier-info{
   flex: 1 1 0%;
@@ -832,7 +838,6 @@ option {
   display: block;
   width: 48px;
   height: 48px;
-  background-color: #0d5a96;
 }
 .sinfo .into .champion .icon a img{
   display: block;
