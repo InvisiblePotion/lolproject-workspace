@@ -1012,3 +1012,98 @@ def rawdataIntegrityKeeper(print_msg: bool=True):
         for match_id in invalid_match_ids:
             oracle_totalExecute(f"DELETE FROM RAWDATA WHERE GAME_ID = '{match_id}'", debug_print=False)
     elif print_msg: print('RawData 테이블 무결성 상태 확인!')
+
+
+def updateSummonerData(summoner_name: str, api_key: str) -> None:
+    """
+    ### 예외 처리 필요!
+    소환사 이름으로 Summoner 테이블의 데이터를 갱신하는 함수
+    """
+
+    # Summoner 테이블 컬럼 정보
+    summoner_cols = [
+        'summoner_id','summoner_puuid','api_key','summoner_name','summoner_level','summoner_profile',
+        'summoner_tier','summoner_wins','summoner_losses','summoner_veteran','summoner_inactive','summoner_freshblood','summoner_hotstreak']
+
+    # API에서 소환사 정보 획득
+    response_summoner = requests.get(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}").json()
+
+    # Summoner 테이블에 필요한 소환사 데이터를 추출
+    summoner_data = [
+        response_summoner['id'],
+        response_summoner['puuid'],
+        api_key,
+        summoner_name,
+        response_summoner['summonerLevel'],
+        response_summoner['profileIconId']]
+
+    # API에서 소환사 랭크 정보 획득
+    response_rank = requests.get(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_data[0]}?api_key={api_key}").json()
+
+    # Summoner 테이블에 필요한 소환사 랭크 데이터를 추출
+    rank_data = None
+    for rank in response_rank:
+        if rank['queueType'] != 'RANKED_SOLO_5x5': continue
+        rank_data = [
+            rank['tier'],
+            rank['wins'],
+            rank['losses'],
+            rank['veteran'].__int__(),
+            rank['inactive'].__int__(),
+            rank['freshBlood'].__int__(),
+            rank['hotStreak'].__int__()]
+    # 해당 소환사가 솔랭 관련 랭크 데이터가 없다면 DEFALUT로 저장
+    if rank_data is None: rank_data = ['DEFAULT' for col in summoner_cols[6:]]
+
+    # Summoner 테이블에 입력
+    summoner_result = summoner_data + rank_data
+
+    insertDataFrameIntoTable(pd.DataFrame([summoner_result], columns=summoner_cols), 'SUMMONER', debug_print=False)
+
+
+def reloadPlayRecord(summoner_name: str, api_key: str) -> None:
+    """
+    ### 예외 처리 필요!
+    전적 갱신 버튼에 대응할 함수.\n
+    해당 소환사의 최근 20게임에 대한 데이터를 불러온다.\n
+    (단, 성능상의 문제로 이 함수로 불러온 게임의 다른 소환사는 Summoner 테이블의 입력되지 않으니 주의)
+    """
+
+    # 소환사 이름으로 Summoner 테이블 갱신
+    updateSummonerData(summoner_name, api_key)
+
+    # API에서 소환사의 최근 20게임의 game_id 획득
+    match_ids = getMatchIdsByPuuid(getPuuidBySummonerName(summoner_name, api_key), api_key, 20)
+
+    # 20게임의 게임 정보를 DB에 입력
+    insert_count = len(match_ids)
+    for mid in tqdm(match_ids, desc=f"'{summoner_name}': 전적 갱신 중"):
+
+        # RawData 테이블에 이미 해당 game_id가 있다면 continue
+        if oracle_totalExecute(f"SELECT * FROM RAWDATA WHERE GAME_ID = '{mid}'", debug_print=False)['VERSION'].tolist() != []:
+            insert_count -= 1
+            continue
+
+        # API로 매치 데이터 불러오기
+        matches, timeline = getMatchDataAndTimelineByMatchId(mid, api_key)
+
+        # RawData 테이블에 맞춰 매치 데이터 필터링
+        filtered_rawdata = RawdataFirstFilter(pd.DataFrame({'matches': [matches], 'timeline': [timeline]}), api_key)
+
+        # RawData 테이블에 입력
+        db_open()
+        for data in filtered_rawdata:
+            val = [a for a in data.values()]
+            sql = f"""
+            INSERT INTO RAWDATA VALUES(
+                '{val[0]}',{val[1]},{val[2]},'{val[3]}',{val[4]},'{val[5]}',{val[6]},'{val[7]}','{val[8]}',
+                '{val[9]}','{val[10]}','{val[11]}','{val[12]}','{val[13]}','{val[14]}','{val[15]}','{val[16]}',
+                '{val[17]}','{val[18]}','{val[19]}','{val[20]}','{val[21]}','{val[22]}','{val[23]}','{val[24]}','{val[25]}')
+            """
+            oracle_execute(sql, debug_print=False)
+        oracle_close()
+
+        # summoner_recent_game 테이블에 입력
+        oracle_totalExecute(f"INSERT INTO SUMMONER_RECENT_GAME VALUES ('{summoner_name}', '{mid}')", debug_print=False)
+        
+    print(f"입력된 게임 수: {insert_count}")
