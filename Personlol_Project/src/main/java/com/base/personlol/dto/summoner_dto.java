@@ -13,4 +13,6 @@ public class summoner_dto {
 	String summoner_tier;
 	int summoner_profile;
 	int summoner_level;
+	int summoner_losses;
+	int summoner_wins;
 }

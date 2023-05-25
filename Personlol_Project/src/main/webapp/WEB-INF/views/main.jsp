@@ -36,7 +36,7 @@
               <a href="/personlol/champion/" class="m-col">챔피언분석</a>
               <a href="/personlol/rank" class="m-col">랭킹</a>
               <a href="/personlol/duo/" class="m-col">듀오찾기</a>
-              <a href=" " class="m-col">사용자분석</a>
+              <a href="/personlol/summoner/" class="m-col">사용자분석</a>
 
               <c:choose>
                 <c:when test="${sessionScope.id ne null}">
