@@ -14,6 +14,7 @@ import com.base.personlol.dto.ChampRuneCore_dto;
 import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
+import com.base.personlol.dto.ChampSpell_dto;
 import com.base.personlol.dto.Champskill_dto;
 import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.Test_raw;
@@ -208,7 +209,6 @@ public class R_champ_Controller {
 	@GetMapping("/champion/search")
 	public List<champion_dto> search_champ(@RequestParam("searchVal") String searchVal) {
 		List<champion_dto> search_champ = champ_ser.search_champ(searchVal);
-		System.out.println("search_champsearch_champsearch_champsearch_champsearch_champ  "+search_champ);
 		return search_champ;
 	}
 
@@ -218,6 +218,19 @@ public class R_champ_Controller {
 		List<champion_dto> champ_info = champ_ser.champ_info(champ_id,champ_lane);
 		return champ_info;
 	}
+	//챔프 스펠 부분
+	@GetMapping("/champion/spell")
+	public List<ChampSpell_dto> champ_spell(Integer champ_id,String champ_lane){
+		List<ChampSpell_dto> champ_spell_lst = champ_ser.champ_spell(champ_id,champ_lane);
+		return champ_spell_lst;
+	}
+	//챔프 스펠 이미지 부분
+	@GetMapping("/champion/spell-img")
+	public List<ChampSpell_dto> champ_spell_img(Integer spell1,Integer spell2){
+		List<ChampSpell_dto> champ_spell_img_lst = champ_ser.champ_spell_img(spell1,spell2);
+		return champ_spell_img_lst;
+	}
+	
 
 	// 챔프 스킬 부분
 	@GetMapping("/champion/skill")
@@ -228,8 +241,8 @@ public class R_champ_Controller {
 
 	// 챔프 스킬 트리 부분
 	@GetMapping("/champion/skill-tree")
-	public List<Champskill_dto> skill_tree(Integer champ_id) {
-		List<Champskill_dto> skill_tree = champ_ser.skill_tree(champ_id);
+	public List<Champskill_dto> skill_tree(Integer champ_id,String champ_lane) {
+		List<Champskill_dto> skill_tree = champ_ser.skill_tree(champ_id,champ_lane);
 		return skill_tree;
 	}
 
@@ -250,9 +263,7 @@ public class R_champ_Controller {
 	// 챔프 룬메인
 	@GetMapping("/champion/rune/sub-rune")
 	public List<ChampRuneType_dto> sub_rune_img(Integer sub_rune) {
-		System.out.println("sub_rune:" + sub_rune);
 		List<ChampRuneType_dto> sub_rune_img = champ_ser.sub_rune(sub_rune);
-		System.out.println("sub_rune_img" + sub_rune_img);
 		return sub_rune_img;
 	}
 
@@ -272,30 +283,26 @@ public class R_champ_Controller {
 
 	// 챔프 아이템 부분
 	@GetMapping("/champion/item_build")
-	public List<Item_dto> item_build(Integer champ_id) {
-		System.out.println("Controller_item_build_champ_id=" + champ_id);
-		List<Item_dto> item_build = champ_ser.item_build(champ_id);
+	public List<Item_dto> item_build(Integer champ_id,String champ_lane) {
+		List<Item_dto> item_build = champ_ser.item_build(champ_id,champ_lane);
 		return item_build;
 	}
 
 	// 챔프 아이템 이미지
 	@GetMapping("/champion/item1")
 	public List<Item_dto> item1_img(Integer item) {
-		System.out.println("Controller_item1_img = " + item);
 		List<Item_dto> item_img = champ_ser.item_img(item);
 		return item_img;
 	}
 
 	@GetMapping("/champion/item2")
 	public List<Item_dto> item2_img(Integer item) {
-		System.out.println("Controller_item2_img = " + item);
 		List<Item_dto> item_img = champ_ser.item_img(item);
 		return item_img;
 	}
 
 	@GetMapping("/champion/item3")
 	public List<Item_dto> item3_img(Integer item) {
-		System.out.println("Controller_item3_img = " + item);
 		List<Item_dto> item_img = champ_ser.item_img(item);
 		return item_img;
 	}

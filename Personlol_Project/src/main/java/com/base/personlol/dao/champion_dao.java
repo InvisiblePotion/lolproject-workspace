@@ -8,6 +8,7 @@ import com.base.personlol.dto.ChampRuneCore_dto;
 import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
+import com.base.personlol.dto.ChampSpell_dto;
 import com.base.personlol.dto.Champskill_dto;
 import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.Test_raw;
@@ -44,7 +45,7 @@ public interface champion_dao {
 	List<Champskill_dto> champ_skill(Integer champ_id);
 	
 	//챔프 스킬트리
-	List<Champskill_dto> skill_tree(Integer champ_id);
+	List<Champskill_dto> skill_tree(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
 	
 	//챔프 룬
 	List<ChampRune_dto> champ_rune(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
@@ -62,10 +63,16 @@ public interface champion_dao {
 	List<ChampRuneShard_dto> shard_img();
 	
 	//아이템 승률 정보
-	List<Item_dto> item_build(Integer champ_id);
+	List<Item_dto> item_build(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
 	
 	//아이템 사진
 	List<Item_dto> item_img(Integer item);
+	
+	//챔프스펠
+	List<ChampSpell_dto> champ_spell(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
+	
+	//챔프 스펠 이미지
+	List<ChampSpell_dto> champ_spell_img(@Param("spell1") Integer spell1,@Param("spell2") Integer spell2);
 	
 
 	

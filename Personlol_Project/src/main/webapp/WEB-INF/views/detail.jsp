@@ -105,12 +105,14 @@
   font-weight: normal;
 }
 
-
-/* 룬이미지 호버시 툴팁 */
-.item_img {
+/* 아이템이미지 호버시 툴팁  */
+.f_item {
   position: relative;
-  display: inline-block;
-  padding: 0px;
+}
+
+.item_img {
+  width: 40px;
+  height: 40px;
 }
 
 .item_tooltip {
@@ -130,20 +132,51 @@
   opacity: 0;
   transition: opacity 0.3s;
   width: 500px;
-  
+
+
 }
 
-.item_img:hover .item_tooltip {
+.f_item:hover .item_tooltip {
   visibility: visible;
   opacity: 1;
 }
+/*아이템 호버*/
+.spell-container {
+  position: relative;
+  display: inline-block;
+}
 
+.spell_tooltip {
+   visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  text-align:left;
+  
+  top: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 
+.spell-container:hover .spell_tooltip {
+  opacity: 1;
+  visibility: visible;
+}
 
 .rune_img{
 	text-align: center;
 }
 
+/* 아이템 설명 css  */
+.item_longdesc ul {
+  white-space: pre-line;
+}
 
 </style>
 
@@ -189,16 +222,12 @@
       </div>     
     </div>
 
-    <div class="row">
-      <div class="col">승률</div>
-      <div class="col">픽률</div>
-      <div class="col">밴율</div>
-    </div>
 
     <div class="row">
       <div class="col" id="win">내용(승률)</div>
       <div class="col" id="pick">내용(픽률)</div>
       <div class="col" id="ban">내용(밴율)</div>
+      <div class="col" id="spell">스펠내용</div>
     </div>
 
     <div class="row">추천 룬 세팅</div>
@@ -288,9 +317,9 @@
 	}).done(res => {
 		$.each(res, function (i, info) {
 			$('#champ_name').html(info.champ_name)
-			$('#win').html(info.win_rate)
-			$('#pick').html(info.pick_rate)
-			$('#ban').html(info.ban_rate)
+			$('#win').html("승률:"+'<br>'+info.win_rate+'%')
+			$('#pick').html("픽률:"+'<br>'+info.pick_rate+'%')
+			$('#ban').html("밴률:"+'<br>'+info.ban_rate+'%')
 			icon_img = '<img class="icon_img" width="70" height="70" src="../resources/'+info.champ_icon +'" alt="이미지">'
 		})
 		$('#champ_img').html(icon_img)
@@ -298,13 +327,83 @@
 		console.log(err)
 	})
 	
+	//스펠정보
+	$.ajax({
+		method:'get',
+		data:{champ_id:champ_id, champ_lane:champ_lane},
+		url:'/personlol/champion/spell',
+	}).done(res => {
+		
+		console.log('**스펠이미지 로직 생각 **')
+		console.log(res)
+		let f_spell1 = res[0].spell1 
+		let f_spell2 = res[0].spell2
+		//첫번째 스펠들 관한 비동기		
+		$.ajax({
+			method:'get',
+			data:{spell1:f_spell1,spell2:f_spell2},
+			url:'/personlol/champion/spell-img'		
+		}).done(res => {
+			console.log("###############")
+			console.log(res)
+			
+			spell_img=''
+			$.each(res, function (i,spell) {
+				spell_img+='<div class="spell-container">'+
+				'<img class="spell_img" width="40" height="40" src="../resources/'+spell.spell_icon+'" alt="이미지">'+
+				'<div class="spell_tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+				spell.spell_name+'</span></div>'+'<div>'+spell.spell_desc+'</div></div>'
+				
+			})
+			$('#spell').append(spell_img)
+		}).fail(err => {
+		
+		})
+	
+		
+		
+		let s_spell1 = res[1].spell1
+		let s_spell2 = res[1].spell2
+		//두번째 스펠들 관한 비동기
+		$.ajax({
+			method:'get',
+			data:{spell1:s_spell1,spell2:s_spell2},
+			url:'/personlol/champion/spell-img'
+		}).done(res => {
+			console.log("**스펠비동기**")
+			console.log(res)
+			
+			spell_img=''
+			$.each(res, function (i,spell) {
+				spell_img+='<div class="spell-container">'+
+				'<img class="spell_img" width="40" height="40" src="../resources/'+spell.spell_icon+'" alt="이미지">'+
+				'<div class="spell_tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+				spell.spell_name+'</span></div>'+'<div>'+spell.spell_desc+'</div></div>'
+				
+			})
+			$('#spell').append(spell_img)
+			
+		}).fail(err => {
+			
+		})
+		
+
+
+		
+		
+	}).fail(err =>{
+		console.log(err)
+	})
+	
+	
+	
 	//스킬 초기정보
 	$.ajax({
 		method:'get',
 		data:{champ_id:champ_id},
 		url:'/personlol/champion/skill'
 	}).done(res => {
-		console.log(res)
+		
 		let skill_img=''
 		$.each(res, function (i,skill) {
 			// skill설명들이 null인 경우에 대한 조건문 추가
@@ -329,16 +428,6 @@
 		
 	})//
 	
-	//rune main 타입들 배열에 저장
-	let domination =[8100,9923,8126,8139,8143,8136,8120,8138,8135,8134,8105,8106,8112,8124,8128]
-	 
-	let inspiration =[8300,8306,8304,8313,8321,8316,8345,8347,8410,8352,8351,8360,8369]
-	 
-	let precision =[8000,9101,9111,8009,9104,9105,9103,8014,8017,8299,8008,8021,8010]
-	
-	let resolve = [8400,8446,8463,8401,8429,8444,8473,8451,8453,8242,8437,8439,8465]
-	
-	let sorcery =[8200,8224,8226,8275,8210,8234,8233,8237,8232,8236,8214,8229,8230]
 	
 	
 	//룬 정보
@@ -943,8 +1032,8 @@
 						var f_runetypeSubune1 = $('img[data-rune-key="' + f_sub_rune1 + '"]');
 						var f_runetypeSubune2 = $('img[data-rune-key="' + f_sub_rune2 + '"]');
 
-						runetypeSubune1[0].style.filter ="none";
-						runetypeSubune2[0].style.filter ="none";
+						f_runetypeSubune1[0].style.filter ="none";
+						f_runetypeSubune2[0].style.filter ="none";
 					}
 					
 						
@@ -959,6 +1048,8 @@
 					url:'/personlol/champion/rune/shard',
 					
 				}).done(res => {
+					console.log("파편이미지 여기 에러남 확인************")
+					console.log(res)
 					rune_img_shard1=''
 		
 					rune_img_shard1 += '<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[5].runeshard_icon + 
@@ -1009,7 +1100,9 @@
 					var f_runetypeShard1 = $('img[data-rune-key1="' + f_shard_offense + '"]');
 					var f_runetypeShard2 = $('img[data-rune-key2="' + f_shard_flex + '"]');
 					var f_runetypeShard3 = $('img[data-rune-key3="' + f_shard_defence + '"]');
-
+					
+					console.log("수정작업 에러남 여기")
+				
 					f_runetypeShard1[0].style.filter ="none";
 					f_runetypeShard2[0].style.filter ="none";
 					f_runetypeShard3[0].style.filter ="none";
@@ -1359,7 +1452,7 @@
 	//스킬 트리
 	$.ajax({
 		method:'get',
-		data:{champ_id:champ_id},
+		data:{champ_id:champ_id,champ_lane:champ_lane},
 		url:'/personlol/champion/skill-tree'
 	}).done(res => {
 		console.log(res)
@@ -1485,7 +1578,7 @@
 		//아이템 트리
 	   $.ajax({
 	      method:'get',
-	      data:{champ_id:champ_id},
+	      data:{champ_id:champ_id,champ_lane:champ_lane},
 	      url:'/personlol/champion/item_build'
 	   }).done(res => {
 		   console.log(res)
@@ -1512,10 +1605,12 @@
 	            console.log(res)
 	            let item1_img=''
 	            $.each(res, function (i,i_img) {
-	               item1_img +='<div class="f_item">'+
+	            	
+	              	item1_img +='<div class="f_item">'+
 	                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
 	                  '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-	                  i_img.item_name+'</span></div>'+'<br>'
+	                  i_img.item_name+'</span><div class="item_longdesc">'+i_img.item_desc+'</div><div>'+i_img.item_plaintext
+	                  '</div></div></div>'
 	            })
 	            $('#item1').append(item1_img)
 	         }).fail(err => {
@@ -1532,8 +1627,11 @@
 	            let item2_img=''
 	            $.each(res, function (i,i_img) {
 	               item2_img +=
-	                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
-	                  '" alt="이미지">'+'<br>'
+	            	   '<div class="f_item">'+
+		                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
+		                  '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		                  i_img.item_name+'</span><div class="item_longdesc">'+i_img.item_desc+'</div><div>'+i_img.item_plaintext
+		                  '</div></div></div>'
 	            })
 	            $('#item2').append(item2_img)
 	         }).fail(err => {
@@ -1550,8 +1648,11 @@
 	            let item3_img=''
 	            $.each(res, function (i,i_img) {
 	               item3_img +=
-	                  '<img class="skill_img" width="40" height="40" src="../resources/'+i_img.item_icon+
-	                  '" alt="이미지">'+'<br>'
+	            	   '<div class="f_item">'+
+		                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
+		                  '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		                  i_img.item_name+'</span><div class="item_longdesc">'+i_img.item_desc+'</div><div>'+i_img.item_plaintext
+		                  '</div></div></div>'
 	            })
 	            $('#item3').append(item3_img)
 	         }).fail(err => {
