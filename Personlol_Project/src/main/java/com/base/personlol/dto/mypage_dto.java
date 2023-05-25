@@ -11,7 +11,13 @@ import lombok.experimental.Accessors;
 
 public class mypage_dto {
 	
-	String user_id;
-	int summoner_profile;
-	String summoner_name;
+	private String user_id;
+	private int summoner_profile;
+	private String summoner_name;
+	
+	private String duo_ownerid;
+	private String duo_title;
+	private String duo_content;
+	
+	private String duolist;
 }

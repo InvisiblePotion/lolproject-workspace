@@ -121,12 +121,20 @@ public class duo_service {
 		System.out.println("요청자 id: " + request_id);
 		// 같은 사람에게 요청 했는지 안했는지 했다면 막아야하니까
 		int check_request = ddao.check_request(user_id, request_id);
+		// 같은 사람이랑 이미 친구인지
+		int check_myduo = ddao.check_myduo(user_id, request_id);
 		System.out.println("check_request 1=중복: " + check_request);
 		if (check_request != 1) {
-			Integer insert_request = ddao.request(user_id, request_id);
-			System.out.println("요청 성공이라면 1: " + insert_request);
-			return insert_request;
+			if(check_myduo != 1) {
+				Integer insert_request = ddao.request(user_id, request_id);
+				System.out.println("요청 성공이라면 1: " + insert_request);
+				return insert_request;
+			}else {
+				System.out.println("이미 듀오 목록에있는 사람입니다.");
+				return -88;
+			}
 		}else {
+			System.out.println("같은 사람에게 요청");
 			return -99;
 		}
 

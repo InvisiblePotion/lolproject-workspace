@@ -57,6 +57,9 @@ public interface duo_dao {
 	
 	//글쓰기 중복체크
 	public int checkboard(@Param("user_id") String user_id);
+	
+	//이미 친구인지 아닌지
+	public int check_myduo(@Param("user_id") String user_id, @Param("request_id") String request_id);
 
 
 
