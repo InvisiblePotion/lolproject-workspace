@@ -1,84 +1,192 @@
 *{
-    box-sizing: border-box;
-    border: 0 solid;
+  box-sizing: border-box;
+  border: 0 solid;
 }
 div{
-    display: block;
+  display: block;
 }
 a {
-    color: inherit;
-    text-decoration: inherit;
+  color: inherit;
+  text-decoration: inherit;
+  text-decoration: none;
 }
+.m-col {
+  text-decoration: none;
+  font-weight: 10;
+  font-style: normal;
+} 
 
 h1, p{
-    margin: 0;
+  margin: 0;
 }
 li{
-    list-style: none;
+  list-style: none;
 }
 
 body{
-    width: 100%;
-    height: 100%;
-    max-width: unset;
-    margin: 0px auto;
-    line-height: 1.193;
-    background-color: rgb(255, 255, 255);
-
+  width: 100%;
+  height: 100%;
+  max-width: unset;
+  margin: 0px auto;
+  line-height: 1.193;
+  
+}
+.summoner_name_search{
+  height: 28px;
+  width: 200px;
+  border-radius: 8px 0 0 0;
+}
+.summoner_name_search::placeholder{
+  text-align: center;
+  color: #252526;
 }
 #generic{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 .area{
-    min-width: 1208px;
+  min-width: 1208px;
 }
 .bener-container{
-    width: 100%;
-    height: 68px;
-    background-color: darkcyan;
+  width: 100%;
+  height: 80px;
+  background-color: #403F3C;
+  
 }
 .bener{
-    display: flex;
-    height: 100%;
-    margin: 0 15% 0 5%;
-    -webkit-box-align: center;
-    align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 15% 0 5%;
+  align-items: flex-end;
+
 }
 .imgfile{
-    margin-right: 34px;
+  margin-right: 34px;
+  padding-bottom: 34px;
 }
 .search-bar{
-    width: 360px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 4px 13px 4px 4px;
-    border-radius: 4px;
+  width: 360px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4px 13px 20px 4px;
+  border-radius: 4px;
 }
 .menu{
-    display: flex;
-    /* margin-left: auto; */
-    align-items: center;
-    height: 50px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  background-color: #ffff;
+  border-radius: 8px 8px 0 0;
 }
 .m-col{
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    font-weight: 600;
-    margin-left: 20px;
-    color: azure;
-    width: 120px;
-    
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #403F3C;
+  justify-content: center;
 }
+
+
+.m-col:hover{
+  color: #ffff;
+  text-decoration-line: none;
+}
+.gosummonerinfo{
+  background-color: #73726F;
+  color: #F2F2EB;
+  height: 28px;
+  width: 40px;
+  font-weight: 500;
+  border-radius: 0 0 8px 0;
+}
+.gosummonerinfo:hover{
+  background-color: #413632;
+  color: #ffff;
+}
+.summoner_name:focus{
+  outline: 1px groove #da9f57;
+}
+.imgfile{
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  border-radius: 50%;
+  align-items: center;
+}
+
 
 #loginout {
   display: flex;
-  flex-direction: row;
+}
+.mypage{
+	display: flex;
+	width: 100px;
+}
+.loggedin{
+	display: flex;
+	
+}
+.loggedin-box{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 220px;
+}
+.loggedin-box:hover{
+	background-color: #73726F;
+}
+.logout-box{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.logout-box:hover{
+	background-color: #73726F;
+	border-radius: 0 8px 0 0;
+}
+.logout{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	width: 140px;
+}
+.menu > :nth-child(n+1):nth-child(-n+5) {
+  
+  width: 140px;
+  height: 100%;
+}
+.menu > :nth-child(6):nth-child(7) {
+  margin-left: 20px;
+  width: 200px;
+  height: 100%;
+}
+.menu > :nth-child(n+1):nth-child(-n+5):hover{
+  background-color: #73726F;
+  border-radius: 8px 8px 0 0;
+}
+.my-menu{
+  display: flex;
+  justify-content: center;
+  margin-left: 5%;
+  background-color: #ffff;
+  height: 50px;
+  border-radius: 8px 8px 0 0;
+}
+.my-menu > :first-child{
+  border-radius: 8px 0 0 0;
+  background-color: #F2F2EB;
+}
+.my-menu > :first-child:hover{
+  background-color: #73726F;
 }
 
+.login{
+	display:flex;
+	width: 100px;
+}
 
 /* 헤더끝 */

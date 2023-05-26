@@ -179,8 +179,23 @@
 	</select>
 	
 	<select id="champ_spell_img" resultType="com.base.personlol.dto.ChampSpell_dto">
-		SELECT * FROM SPELL s WHERE SPELL_ID = #{spell1} OR SPELL_ID = #{spell2}
+		SELECT * FROM SPELL s WHERE SPELL_ID = #{spell_img}
 	</select>
 
-
+	<select id="matchup_lst" resultType="com.base.personlol.dto.ChampMatch_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_MATCHUP
+		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane}
+		  ORDER BY MATCHUP_COUNT DESC
+		) 
+		WHERE ROWNUM <= 3]]>
+	</select>
+	
+	<select id="matchup_champ_img" resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPDATA c WHERE CHAMP_ID = #{match_champ}
+	</select>
+	
 </mapper>
