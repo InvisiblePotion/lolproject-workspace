@@ -22,7 +22,7 @@
 	crossorigin="anonymous">
 	</script>
 
-
+<link rel="stylesheet" type="text/css" href="../resources/css/header.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/duo.css">
 
 
@@ -83,18 +83,22 @@
 			<nav class="bener-container">
 				<div class="bener">
 					<a href="/personlol/main" class="imgfile"><img
-						src="../resources/img/logotesting.png"></a>
+						src="../resources/img/logotesting.png" height="25px"></a>
 					<div class="search-bar">
 
-						<input class="summoner_name" type="text">
+						<input class="summoner_name_search" type="text" placeholder="소환사명 검색....">
 						<button class="gosummonerinfo" type="button">go!</button>
 					</div>
 					<div class="menu">
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
-							href="/personlol/rank" class="m-col">랭킹</a> <a
+							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
 							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-							href="/personlol/summoner/" class="m-col">사용자분석</a>
+							href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
+							href="/personlol/summoner/" class="m-col">소환사분석</a>
 
+
+					</div>
+					<div class="my-menu">
 						<c:choose>
 							<c:when test="${sessionScope.id ne null}">
 								<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
@@ -106,10 +110,10 @@
 
 						<div id="loginout">
 							<c:if test="${sessionScope.id ne null}">
-								<div>
-									<span class="m-col">${sessionScope.id}님 환영합니다!</span>
+								<div class="loggedin-box">
+									<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
 								</div>
-								<div>
+								<div class="logout-box">
 									<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
 								</div>
 							</c:if>
