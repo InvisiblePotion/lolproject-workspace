@@ -1,5 +1,6 @@
 package com.base.personlol.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +11,6 @@ import com.base.personlol.dao.summoner_dao;
 import com.base.personlol.dto.summoner_dto;
 import com.base.personlol.dto.summoner_rawdata_dto;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class summoner_service {
 
@@ -27,13 +25,19 @@ public class summoner_service {
 	}
 
 	/**
-	 * Rawdata 테이블에서 해당 게임 ID의 데이터를 소환사 전적 페이지에 맞춰 가져온다
+	 * Rawdata 테이블에서 해당 게임 ID 리스트에 대한 데이터를 소환사 전적 페이지에 맞춰 가져온다
 	 * @param game_id 게임 ID
 	 * @return 소환사 전적용 Rawdata DTO
 	 * @see controller.R_summoner_Controller.getGameRecord
 	 */
-	public summoner_rawdata_dto getGameRacordList(String game_id) { // 리턴 값 리스트로 수정 후 DAO 반영할것
-		return sum_dao.getGameRecord(game_id);
+	public ArrayList<summoner_rawdata_dto> getGameRacordList(List<String> game_ids) {
+		ArrayList<summoner_rawdata_dto> rawdata_list = new ArrayList<>();
+		for (String gid : game_ids) {
+			for (summoner_rawdata_dto rawdata : sum_dao.getGameRecord(gid)) {
+				rawdata_list.add(rawdata);
+			}
+		}
+		return rawdata_list;
 	}
 
 	/**
@@ -51,49 +55,22 @@ public class summoner_service {
 	}
 
 	/**
-	 * summoner_recent_game 테이블로부터 최근 게임 ID 20개를 가져온다
-	 * @param summoner_name 소환사 이름
-	 * @return 게임 ID의 리스트
-	 * @see controller.R_summoner_Controller.getGameids
-	 */
-	public List<String> getGameidsOnRecentGame(String summoner_name) {
-		return sum_dao.getGameidsOnRecentGame(summoner_name);
-	}
-
-	/**
-	 * Rawdata 테이블로부터 최근 게임 ID 20개를 가져온다
-	 * @param summoner_name 소환사 이름
-	 * @return 게임 ID의 리스트
-	 * @see controller.R_summoner_Controller.getGameids
-	 */
-	public List<String> getGameidsOnRawdata(String summoner_name) {
-		return sum_dao.getGameidsOnRawdata(summoner_name);
-	}
-
-	/**
-	 * summoner_recent_game 테이블에서 해당 소환사 이름이 들어간 레코드를 전부 삭제한다.
-	 * @param summoner_name 소환사 이름
-	 * @return 지워진 레코드 수
-	 * @see controller.R_summoner_Controller.deleteGameidsInRecentGame
-	 * @deprecated <h3>전적 갱신 버튼 활성화 시 사용하지 않을 메소드</h3>
-	 */
-	public Integer deleteGameidsInRecentGame(String summoner_name) {
-		return sum_dao.deleteGameidsInRecentGame(summoner_name);
-	}
-
-	/**
-	 * summoner_recent_game 테이블에 최근 20게임의 game_id를 입력한다.
+	 * summoner_recent_game 테이블에 해당 소환사의 최근 20게임에 대한 game_id를 입력한다.
 	 * @param summoner_name 소환사 이름
 	 * @param game_ids 게임 ID의 리스트
 	 * @see controller.R_summoner_Controller.putGameidInRecentGame
 	 * @deprecated <h3>전적 갱신 버튼 활성화 시 사용하지 않을 메소드</h3>
 	 */
-	public void putGameidInRecentGame(String summoner_name, List<String> game_ids) {
+	public void putGameidListInRecentGame(String summoner_name, List<String> game_ids) {
+		// 먼저 데이터를 삭제
+		sum_dao.deleteGameidsInRecentGame(summoner_name);
+		
+		// 이후 데이터 삽입
 		int total_insert_count = 0;
 		for (String gid : game_ids) {
 			total_insert_count += sum_dao.putGameidInRecentGame(summoner_name, gid);
 		}
-		log.info("데이터 정상 삽입: {}", total_insert_count); // ### 로그
+		System.out.println("summoner_service.putGameidListInRecentGame() >> 데이터 정상 삽입, 삽입 수: " + total_insert_count); // ### 로그
 	}
 
 }

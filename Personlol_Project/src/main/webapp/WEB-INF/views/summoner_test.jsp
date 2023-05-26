@@ -18,5 +18,5 @@
         <input type="text" id="game-id-on-where" placeholder="on_where">
         <button id="game-ids">게임 id 획득</button>
     </body>
-    <script src="../resources/js/summoner_test.js"></script>
+    <!-- <script src="../resources/js/summoner_test.js"></script> -->
 </html>
