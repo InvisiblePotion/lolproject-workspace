@@ -130,4 +130,23 @@ public class mypage_service {
 		return myduo;
 	}
 
+	public int go_duo_del(String user_lolname, String user_id) {
+		System.out.println("듀오 삭제 서비스: "+"user_lolname: "+user_lolname+"user_id: "+user_id);
+		//user_lolname-> request_id
+		String request_id = my_dao.getuser_id(user_lolname);
+		System.out.println("듀오 삭제 서비스 re_id: "+request_id);
+		
+		//1이면 삭제완료 0이면 없음
+		int result_del = my_dao.go_duo_del(user_id,request_id);
+		if(result_del == 1) {
+			System.out.println("성공적으로 듀오를 삭제하였습니다.");
+			return result_del;
+		}else {
+			System.out.println("DB에서 삭제 불가처리");
+			return 0;
+		}
+		
+		
+	}
+
 }

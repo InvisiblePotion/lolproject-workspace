@@ -105,15 +105,26 @@ body{
 #searchdiv{
   display: flex;
   justify-content: center;
-  width: 800px;
+  width: 1080px;
   height: 124px;
   /* border: 1px solid black; */
+  padding: 0 0 0 0 ;
   margin: 0 auto;
+  margin-bottom: 100px;
+}
+.main-search{
+  width: 800px;
+  height: 60px;
+  padding: 0 0 0 0;
+}
+.gosummonerinfo.main-btn{
+  height: 60px;
+  padding: 0 0 0 0;
 }
 
 #lanediv{
   width: 1080px;
-  height: 266px;
+  height: auto;
   display: flex;
   margin-top: 24px;
   justify-content: space-between;
@@ -127,12 +138,33 @@ body{
   justify-content: center;
   /* border: 1px solid black; */
   background-color: white;
+  padding: 0 0 0 0;
+  flex-direction: column;
+}
+
+#table_list{
+  height: 40px;
+}
+
+#table_tier{
+	border-left: 1px solid #dee2e6;
+}
+.tr_champ{
+  height: auto;
 }
 
 #duodiv{
   display: flex;
   margin-top: 24px;
   justify-content: space-between;
+}
+
+.img_c{
+  width: 50px;
+  height: 50px;
+}
+.col{
+  width: 150px;
 }
 
 .duolist{
@@ -142,4 +174,100 @@ body{
   justify-content: center;
   /* border: 1px solid black; */
   background-color: white;
+}
+
+.line-info{
+}
+
+.champ_img{
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  margin: 2px;
+}
+
+.top_val{
+  display: flex;
+  flex-direction: column;
+}
+.top3{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+  margin-top: 10px;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+}
+
+
+.c_name{
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  height: 54px;
+}
+.top3_name{
+  border-right: 1px solid#dee2e6;
+}
+
+.c_tier{
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-db{
+  width: 800px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #81ACFF;
+  height: 100px;
+}
+
+input:focus {outline:none;}
+
+.s_summoner_box{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #81ACFF;
+  width: 800px;
+  height: 100px;
+}
+
+.summoner_icon_img{
+  width: 92px;
+  height: 92px;
+  margin: 8px;
+}
+
+.summoner_icon{
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.s_summoner_name{
+  display: flex;
+  width: 400px;
+  justify-content: center;
+  align-items: center;
+}
+
+.s_summoner_lv_tier{
+  display: flex;
+  width: 300px;
+  justify-content: center;
+  align-items: center;  
 }

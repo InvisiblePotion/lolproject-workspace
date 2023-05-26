@@ -97,6 +97,9 @@ public interface champion_dao {
 	//챔프 매치업 리스트
 	List<ChampMatch_dto> matchup_list(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
 	
+	//메인 리스트
+	List<champion_dto> mlane_list(@Param("lane") String lane);
+	
 
 	
 
