@@ -18,31 +18,5 @@
         <input type="text" id="game-id-on-where" placeholder="on_where">
         <button id="game-ids">게임 id 획득</button>
     </body>
-    <script>
-        function putGameIds(summoner_name, game_ids) {
-            $.ajax({
-                method: 'post',
-                url: '/personlol/summoner/recent-game',
-                data: {
-                    'summoner_name': summoner_name,
-                    'game_ids': game_ids}
-            }).done((res)=>{console.log("done!");}).fail((err)=>{console.log("error...");})
-        }
-
-        function getGameIds() {
-            let summoner_name = $('#game-id-summoner-name').val()
-            $.ajax({
-                method: 'get',
-                url: '/personlol/summoner/game-ids/' + $('#game-id-on-where').val(),
-                data: {'summoner_name': summoner_name}
-            }).done((res)=>{
-                console.log(res);
-                putGameIds(summoner_name, res);
-            }).fail((err)=>{
-                console.log(err);
-            });
-        }
-
-        $('#game-ids').click(getGameIds)
-    </script>
+    <script src="../resources/js/summoner_test.js"></script>
 </html>
