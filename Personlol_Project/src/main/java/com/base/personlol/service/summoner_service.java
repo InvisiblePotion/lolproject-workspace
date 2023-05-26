@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.personlol.dao.summoner_dao;
+import com.base.personlol.dto.Main_summoner_dto;
 import com.base.personlol.dto.summoner_dto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,14 @@ public class summoner_service {
 		List<Map<String, ?>> MainInfo = sum_dao.getMaininfo(summoner_name);
 		System.out.println("서비스 메인"+MainInfo);
 		return MainInfo;
+	}
+
+	//메인 검색 서비스
+	public List<Main_summoner_dto> result_summoner(String summoner_name) {
+		System.out.println("메인 검색 서비스: "+summoner_name);
+		List<Main_summoner_dto> result_summoner = sum_dao.go_search(summoner_name);
+		System.out.println("메인 검색 서비스 리턴");
+		return result_summoner;
 	}
 
 }

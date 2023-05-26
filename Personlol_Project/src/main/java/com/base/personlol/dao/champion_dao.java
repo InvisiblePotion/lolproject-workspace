@@ -74,6 +74,9 @@ public interface champion_dao {
 	//챔프 스펠 이미지
 	List<ChampSpell_dto> champ_spell_img(@Param("spell1") Integer spell1,@Param("spell2") Integer spell2);
 	
+	//메인 리스트
+	List<champion_dto> mlane_list(@Param("lane") String lane);
+	
 
 	
 

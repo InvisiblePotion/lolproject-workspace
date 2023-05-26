@@ -37,5 +37,19 @@
 		WHERE PARTICIPANT_NAME = #{summoner_name}
 		FETCH FIRST 10 ROWS ONLY
 	</select>
+	
 
+	  <select id="go_search" resultType="mainSummoner">
+	    <![CDATA[
+	    SELECT *
+	    FROM (
+	        SELECT s.SUMMONER_NAME, s.SUMMONER_LEVEL, s.SUMMONER_TIER, s.SUMMONER_PROFILE
+	        FROM SUMMONER s
+	        WHERE SUMMONER_NAME LIKE '%' || #{summoner_name} || '%'
+	        ORDER BY ROWNUM
+	    )
+	    WHERE ROWNUM <= 3
+	    ]]>
+	  </select>
+	  
 </mapper>

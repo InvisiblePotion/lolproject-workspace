@@ -28,8 +28,8 @@ public class R_champ_Controller {
 	private champion_service champ_ser;
 
 	@GetMapping("/champimg")
-	public List<champion_dto> champimg() {
-
+	public List<champion_dto> champimg(@RequestParam("main") String main) {
+		
 		List<champion_dto> keyList = champ_ser.key_list();
 
 		return keyList;
@@ -80,6 +80,15 @@ public class R_champ_Controller {
 	public List<champion_dto> first_list(String lane) {
 		List<champion_dto> fList = champ_ser.flist(lane);
 		return fList;
+	}
+	
+	//메인 띄워주는거
+	@GetMapping("/mainchamp")
+	public List<champion_dto> main_list(@RequestParam("lane") String lane){
+		System.out.println("메인 리스트: "+ lane);
+		List<champion_dto> mList = champ_ser.mList(lane);
+		System.out.println("컨트롤러 mList: "+mList);
+		return mList;
 	}
 
 	@GetMapping("/list/TOP")
@@ -306,5 +315,8 @@ public class R_champ_Controller {
 		List<Item_dto> item_img = champ_ser.item_img(item);
 		return item_img;
 	}
+	
+	
+
 
 }//

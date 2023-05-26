@@ -85,7 +85,7 @@ public class duo_service {
 		System.out.println("end_page:" + end_page);
 
 		// 티어 값이 null인지 아닌지
-		if (tier.equals("null")) {
+		if (tier.equals("null")||tier.equals("티어")) {
 			System.out.println("티어 정렬 아님");
 			if ("top".equals(lane)) {
 				List<Map<String, Object>> Line = ddao.top(start_page, end_page);
@@ -110,6 +110,7 @@ public class duo_service {
 		} else {
 			System.out.println("티어별 정렬");
 			System.out.println("티어찍히낭?" + tier);
+
 			List<Map<String, Object>> tier_Line = ddao.tier_all(start_page, end_page, tier);
 			System.out.println("티어별 정렬 후 라인 받아와 DB에서?: " + tier_Line);
 			return tier_Line;

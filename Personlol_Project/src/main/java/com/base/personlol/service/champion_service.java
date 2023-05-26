@@ -72,6 +72,14 @@ public class champion_service {
 		
 		return flist;
 	}
+	
+	// 메인 리스트
+	public List<champion_dto> mList(String lane) {
+		System.out.println("메인 리스트 서비스: "+lane);
+		List<champion_dto> mList = champ_dao.mlane_list(lane);
+		System.out.println("서비스 mList는: " + mList);
+		return mList;
+	}
 
 	public List<champion_dto> top_list(String lane) {
 		
@@ -218,6 +226,8 @@ public class champion_service {
 		champ_spell_img = champ_dao.champ_spell_img(spell1,spell2);
 		return champ_spell_img;
 	}
+
+
 	
 
 	

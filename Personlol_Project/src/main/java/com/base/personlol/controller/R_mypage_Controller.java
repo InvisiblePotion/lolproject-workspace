@@ -148,4 +148,17 @@ public class R_mypage_Controller {
 		return myduo;
 		
 	}
+	
+	@PutMapping("/duodel")
+	public int duo_del(@RequestBody Map<String,String> ajax_user_lolname, HttpSession session) {
+		String user_lolname = ajax_user_lolname.get("user_lolname");
+		System.out.println("듀오 삭제 컨트롤러 롤 네임: "+user_lolname);
+		String user_id = session.getAttribute("id").toString();
+		System.out.println("듀오 삭제 컨트롤라 세션id:"+user_id);
+		
+		//보내기
+		int duodel = my_ser.go_duo_del(user_lolname, user_id);
+		System.out.println("듀오 삭제 컨트롤러 리턴: "+duodel);
+		return duodel;
+	}
 }

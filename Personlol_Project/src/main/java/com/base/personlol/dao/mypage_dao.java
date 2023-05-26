@@ -11,7 +11,7 @@ import com.base.personlol.dto.mypage_dto;
 public interface mypage_dao {
 	
 	//현재 코드 받아오기
-	String getcurcode(String user_id);
+	String getcurcode(@Param("user_id") String user_id);
 	
 	//시작마이페이지 정보 받아오기
 	mypage_dto getnameicon(@Param("user_id")String user_id);
@@ -35,13 +35,15 @@ public interface mypage_dao {
 	String getuser_id(@Param("user_lolname") String user_lolname);
 	
 	//user_id에 해당하는 모든 정보 del
-	int useralldel(String user_id);
+	int useralldel(@Param("user_id") String user_id);
 
 	//업데이트 듀오 수락
 	int go_update_duo(@Param("user_id") String user_id, @Param("request_id") String request_id);
 	
 	//나의 듀오 불러오기
-	List<mypage_dto> getmyduo(String user_id);
+	List<mypage_dto> getmyduo(@Param("user_id") String user_id);
+
+	int go_duo_del(@Param("user_id") String user_id, @Param("request_id") String request_id);
 	
 	
 
