@@ -16,11 +16,12 @@ import com.base.personlol.dto.Test_raw;
 import com.base.personlol.dto.champion_dto;
 
 public interface champion_dao {
-
+	
+	//챔프 아이콘 이미지뿌리기 위한 리스트
 	List<champion_dto> key_list();
-
+	//챔프 라인별 아이콘 이미지
 	List<champion_dto> lane_img(String lane);
-
+	//챔프 라인별 정보 리스트
 	List<champion_dto> lane_list(String lane);
 	
 	//tier 정렬
@@ -80,6 +81,21 @@ public interface champion_dao {
 	
 	//챔프 매치업 이미지 
 	List<champion_dto> matchup_champ_img(Integer match_champ);
+	
+	//챔프 매치업 리스트(어려운)
+	List<ChampMatch_dto> matchup_lst_hard(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
+	
+	//챔프 매치업 디테일(매치업 페이지)
+	List<ChampMatch_dto> matchup_detail(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane,@Param("match_champ") Integer match_champ);
+	
+	//챔프 매치업 디테일 이미지(매치업 페이지)
+	List<champion_dto> matchup_detail_img(@Param("champ_id") Integer champ_id,@Param("match_champ") Integer match_champ);
+	
+	//챔프 매치업 디테일(픽,벤,승)
+	List<champion_dto> matchup_detail_info(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane,@Param("match_champ") Integer match_champ);
+	
+	//챔프 매치업 리스트
+	List<ChampMatch_dto> matchup_list(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
 	
 
 	

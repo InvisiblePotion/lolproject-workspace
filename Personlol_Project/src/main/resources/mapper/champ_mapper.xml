@@ -165,21 +165,65 @@
 	<select id="champ_spell_img" resultType="com.base.personlol.dto.ChampSpell_dto">
 		SELECT * FROM SPELL s WHERE SPELL_ID = #{spell_img}
 	</select>
-
+	
+	<!--매치업 쉬운-->
 	<select id="matchup_lst" resultType="com.base.personlol.dto.ChampMatch_dto">
 		<![CDATA[
 		SELECT *
 		FROM (
 		  SELECT *
 		  FROM CHAMPION_MATCHUP
-		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane}
-		  ORDER BY MATCHUP_COUNT DESC
+		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane} AND MATCHUP_COUNT >= 10
+		  ORDER BY MATCHUP_WIN_RATE DESC
 		) 
 		WHERE ROWNUM <= 3]]>
 	</select>
 	
+	<!--매치업 어려운-->
+	<select id="matchup_lst_hard" resultType="com.base.personlol.dto.ChampMatch_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_MATCHUP
+		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane} AND MATCHUP_COUNT >= 10
+		  ORDER BY MATCHUP_WIN_RATE asc
+		) 
+		WHERE ROWNUM <= 3]]>
+	</select>
+	
+	<!--상대챔프 이미지(디테일 페이지)-->
 	<select id="matchup_champ_img" resultType="com.base.personlol.dto.champion_dto">
 		SELECT * FROM CHAMPDATA c WHERE CHAMP_ID = #{match_champ}
 	</select>
 	
+	<select id="matchup_detail" resultType="com.base.personlol.dto.ChampMatch_dto">
+		SELECT *
+	  	FROM CHAMPION_MATCHUP
+	  	WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane} AND CHAMP_ID_Y = #{match_champ}
+	  	ORDER BY MATCHUP_WIN_RATE DESC
+	</select>
+	
+	<!--매치업페이지 챔프둘 이미지-->
+	<select id="matchup_detail_img" resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPDATA c WHERE CHAMP_ID =#{champ_id} OR CHAMP_ID = #{match_champ}
+	</select>
+	
+	<!--매치업 인포-->
+	<select id="matchup_detail_info" resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPION_INFO ci WHERE (CHAMP_ID = #{champ_id} OR CHAMP_ID = #{match_champ}) AND LANE = #{champ_lane}
+	</select>
+	
+	<!-- 매치업 리스트-->
+	<select id="matchup_list" resultType="com.base.personlol.dto.ChampMatch_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_MATCHUP
+		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane}
+		  ORDER BY MATCHUP_WIN_RATE DESC
+		) 
+		WHERE ROWNUM <= 20]]>
+	</select>
 </mapper>

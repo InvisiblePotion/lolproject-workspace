@@ -141,7 +141,7 @@
   opacity: 1;
 }
 
-/*호버 추가할 예정  */
+/*스펠 호버시 툴팁*/
 .spell-container {
   position: relative;
   display: inline-block;
@@ -279,9 +279,13 @@
       	<div class="row" id="sk_count">1</div>
       	<div class="row" id="sk_win">2</div>
       </div> 
-      <div class="col" id="mat_list">
-      
-      </div>  
+      <div class="col col-sm-2" id="mat_list1">
+      	
+      </div>
+      <div class="col col-sm-2" id="mat_list2">
+      	
+      </div>
+        
     </div>
 
     <div class="row">추천빌드</div>
@@ -318,7 +322,9 @@
 	 const champ_lane = getQueryString('lane')
 	 
 	 console.log(champ_lane)	 
-	 console.log(champ_id)	 
+	 console.log(champ_id)
+	 
+	//상대하기 쉬운챔프
 	$.ajax({
 		method:'get',
 		data:{champ_id:champ_id,champ_lane:champ_lane},
@@ -342,22 +348,63 @@
 					mat_img_lst += 
 						'<div class="col">'+
 						'<div>'+
-						'<a href="/personlol/champion/detail?champ_id=' + champ_id +'&lane='+champ_lane+'&match_champ='+match_champ+'">'+
-						'<img class="icon_img" width="50" height="50" src="../resources/'+mat_img.champ_icon +'" alt="이미지">'+'</a>'+
-						"승률: "+match_win+'%'+' 만난횟수: '+match_count+'</div>'+
+						'<a href="/personlol/champion/matchup?champ_id=' + champ_id +'&lane='+champ_lane+'&match_champ='+match_champ+'">'+
+						'<img class="icon_img" width="40" height="40" src="../resources/'+mat_img.champ_icon +'" alt="이미지">'+'</a>'+
+						match_win+'%, '+match_count+'</div>'+
 						'</div>'
 						
 					
 				})
-				$('#mat_list').append(mat_img_lst);
+				$('#mat_list1').append(mat_img_lst);
 			}).fail(err => {
 				
 			})
-		})
+		})//이치문 끝
 		
 	}).fail(err =>{
 		console.log(err)
-	})
+	})//카운터 쉬운 끝
+	
+	//상대하기 힘든챔프
+	$.ajax({
+		method:'get',
+		data:{champ_id:champ_id,champ_lane:champ_lane},
+		url:'/personlol/matchup/list-hard'
+	}).done(res => {
+		$.each(res, function (i,match) {
+			console.log(res)
+			
+			let match_champ = match.champ_id_y;
+			let match_win = match.matchup_win_rate;
+			let match_count = match.matchup_count;
+			$.ajax({
+				method: 'get',
+				data:{match_champ:match_champ},
+				url:'/personlol/matchup/champ-img'
+			}).done(res => {
+				console.log(res)
+				mat_img_lst=''
+				$.each(res, function (i,mat_img) {
+					mat_img_lst += 
+						'<div class="col">'+
+						'<div>'+
+						'<a href="/personlol/champion/matchup?champ_id=' + champ_id +'&lane='+champ_lane+'&match_champ='+match_champ+'">'+
+						'<img class="icon_img" width="40" height="40" src="../resources/'+mat_img.champ_icon +'" alt="이미지">'+'</a>'+
+						match_win+'%, '+match_count+'</div>'+
+						'</div>'
+						
+					
+				})
+				$('#mat_list2').append(mat_img_lst);
+			}).fail(err => {
+				
+			})
+		})//이치문 끝
+		
+	}).fail(err =>{
+		console.log(err)
+	})//카운터 하드 끝
+	
 	//초기정보
 	$.ajax({
 		method:'get',
@@ -502,7 +549,7 @@
 		
 	}).fail(err =>{
 		console.log(err)
-	})
+	})//스펠정보 끝
 	
 	
 	
@@ -551,21 +598,21 @@
 		console.log(res)
 		console.log("챔피언 가져온 룬")
 		
-		$.each(res, function (i,rune) {
+		//$.each(res, function (i,rune) {
 			
-			let runetype = rune.runetype_core
-			let core_main = rune.core_mainrune
-			let core_rune1 = rune.core_rune1
-			let core_rune2 = rune.core_rune2
-			let core_rune3 = rune.core_rune3
+			let runetype = res[0].runetype_core
+			let core_main = res[0].core_mainrune
+			let core_rune1 = res[0].core_rune1
+			let core_rune2 = res[0].core_rune2
+			let core_rune3 = res[0].core_rune3
 			
-			let runesub = rune.runetype_sub
-			let sub_rune1 = rune.sub_rune1
-			let sub_rune2 = rune.sub_rune2
+			let runesub = res[0].runetype_sub
+			let sub_rune1 = res[0].sub_rune1
+			let sub_rune2 = res[0].sub_rune2
 			
-			let shard_defence = rune.shard_defence
-			let shard_flex = rune.shard_flex
-			let shard_offense = rune.shard_offense
+			let shard_defence = res[0].shard_defence
+			let shard_flex = res[0].shard_flex
+			let shard_offense = res[0].shard_offense
 			
 			
 			
@@ -865,9 +912,9 @@
 					
 					$('#shard3').html(rune_img_shard3);
 		    		
-		    		let shard_defence = rune.shard_defence
-					let shard_flex = rune.shard_flex
-					let shard_offense = rune.shard_offense
+		    		/* let shard_defence = res[0].shard_defence
+					let shard_flex = res[0].shard_flex
+					let shard_offense = res[0].shard_offense */
 					
 		    		
 					//shard_defence shard_flex
@@ -887,7 +934,7 @@
 				
 			
 				
-		})//1
+		//})//1
 		
 		
 		let change_rune1 = '';
@@ -906,7 +953,7 @@
 			change_rune2 = '<div class="second_rune"><img width="25" height="25" src="../resources/dd/img/rune/style/' + res[1].runetype_core + '.png">'+
 			'<img width="60" height="60" src="../resources/dd/img/rune/perk/'+res[1].core_mainrune+'.png">'+
 			'<img width="25" height="25" src="../resources/dd/img/rune/style/'+res[1].runetype_sub+'.png"></div>'+
-			'<div class="rune_rate"><span>'+res[0].game_count+'<br>'+res[0].pick_rate+'<br>'+res[0].win_rate+'</span></div>'
+			'<div class="rune_rate"><span>'+res[1].game_count+'<br>'+res[1].pick_rate+'<br>'+res[1].win_rate+'</span></div>'
 			
 		}
 		$('#change_rune2').html(change_rune2)
@@ -1197,7 +1244,7 @@
 		    		res[5].runeshard_stat+'</span><div class="rune_longdesc">'+res[5].runeshard_desc+'</div></div></div>'+
 		    		
 		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[2].runeshard_icon + 
-		    		'" data-rune-ke2y="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		    		'" data-rune-key2="'+ res[2].runeshard_id +'" style="filter: grayscale(1)"><div class="runetype_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 		    		res[2].runeshard_stat+'</span><div class="rune_longdesc">'+res[2].runeshard_desc+'</div></div></div>'+
 		    		
 		    		'<div class="col rune_img"><img class="rune_img" width="40" height="40" src="../resources/' + res[0].runeshard_icon + 
@@ -1567,11 +1614,7 @@
 				
 		})//클릭 이벤트
 		
-		/* rate_info=''
-		$.each(res, function (i,rune) {
-			rate_info += '<div class="col rate_div">'+rune.game_count+','+rune.pick_rate+'%'+rune.win_rate+'%'+'</div>'
-		})
-		$('#all_rate').html(rate_info) */
+		
 		
 		
 		
@@ -1588,43 +1631,49 @@
 	}).done(res => {
 		/* console.log(res)
 		console.log(res.length) */
-		
+	
 			const sBuild = res[0].skill_build
 			const result = sBuild.substring(1,44)
 			const arr = result.split(", ")
-						
-
+		
+			let champ_id= res[0].champ_id;
 			
-			
-			for (i=0; i<6;i++) {				
+			$.ajax({
+				method:'get',
+				data:{champ_id:champ_id},
+				url:'/personlol/champion/skill'
+				
+			}).done(res => {
+				
+				for (i=0; i<6;i++) {				
 				if (arr[i] == 1) {
 					s_img =	'<div class="skill-container">'+ 
-							'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
+							'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
 							'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-							res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
-							'스킬 마나소모량: '+res[2].skill_cost+'</div><div>'+'스킬 범위: '+res[2].skill_range+'</div>'+'<div>'+res[2].skill_desc+
-							'</div><div>'+res[2].skill_tooltip+'</div></div></div>';
+							res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
+							'스킬 마나소모량: '+res[1].skill_cost+'</div><div>'+'스킬 범위: '+res[1].skill_range+'</div>'+'<div>'+res[1].skill_desc+
+							'</div><div>'+res[1].skill_tooltip+'</div></div></div>';
 				}else if (arr[i] == 2) {
 					s_img = '<div class="skill-container">'+ 
-					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
+					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
-					'스킬 마나소모량: '+res[4].skill_cost+'</div><div>'+'스킬 범위: '+res[4].skill_range+'</div>'+'<div>'+res[4].skill_desc+
-					'</div><div>'+res[4].skill_tooltip+'</div></div></div>';
+					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
+					'스킬 마나소모량: '+res[2].skill_cost+'</div><div>'+'스킬 범위: '+res[2].skill_range+'</div>'+'<div>'+res[2].skill_desc+
+					'</div><div>'+res[2].skill_tooltip+'</div></div></div>';
 				}else if (arr[i] == 3) {
-					s_img = '<div class="skill-container">'+ 
-					'<img class="skill_img" width="40" height="40" src="../resources/'+res[0].skill_icon+'" alt="이미지"> &nbsp'+
-					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-					res[0].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[0].skill_cooldown+'</div><div>'+
-					'스킬 마나소모량: '+res[0].skill_cost+'</div><div>'+'스킬 범위: '+res[0].skill_range+'</div>'+'<div>'+res[0].skill_desc+
-					'</div><div>'+res[0].skill_tooltip+'</div></div></div>';
-				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[3].skill_cost+'</div><div>'+'스킬 범위: '+res[3].skill_range+'</div>'+'<div>'+res[3].skill_desc+
 					'</div><div>'+res[3].skill_tooltip+'</div></div></div>';
+				}else if (arr[i] == 4) {
+					s_img = '<div class="skill-container">'+ 
+					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
+					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
+					'스킬 마나소모량: '+res[4].skill_cost+'</div><div>'+'스킬 범위: '+res[4].skill_range+'</div>'+'<div>'+res[4].skill_desc+
+					'</div><div>'+res[4].skill_tooltip+'</div></div></div>';
 				}    
 				$('#skill_tree1').append(s_img)
 			}
@@ -1632,32 +1681,32 @@
 			for (i=6; i<12;i++) {				
 				if (arr[i] == 1) {
 					s_img = '<div class="skill-container">'+ 
+					'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
+					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+					res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
+					'스킬 마나소모량: '+res[1].skill_cost+'</div><div>'+'스킬 범위: '+res[1].skill_range+'</div>'+'<div>'+res[1].skill_desc+
+					'</div><div>'+res[1].skill_tooltip+'</div></div></div>';
+				}else if (arr[i] == 2) {
+					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[2].skill_cost+'</div><div>'+'스킬 범위: '+res[2].skill_range+'</div>'+'<div>'+res[2].skill_desc+
 					'</div><div>'+res[2].skill_tooltip+'</div></div></div>';
-				}else if (arr[i] == 2) {
-					s_img = '<div class="skill-container">'+ 
-					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
-					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
-					'스킬 마나소모량: '+res[4].skill_cost+'</div><div>'+'스킬 범위: '+res[4].skill_range+'</div>'+'<div>'+res[4].skill_desc+
-					'</div><div>'+res[4].skill_tooltip+'</div></div></div>';
 				}else if (arr[i] == 3) {
-					s_img = '<div class="skill-container">'+ 
-					'<img class="skill_img" width="40" height="40" src="../resources/'+res[0].skill_icon+'" alt="이미지"> &nbsp'+
-					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-					res[0].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[0].skill_cooldown+'</div><div>'+
-					'스킬 마나소모량: '+res[0].skill_cost+'</div><div>'+'스킬 범위: '+res[0].skill_range+'</div>'+'<div>'+res[0].skill_desc+
-					'</div><div>'+res[0].skill_tooltip+'</div></div></div>';
-				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[3].skill_cost+'</div><div>'+'스킬 범위: '+res[3].skill_range+'</div>'+'<div>'+res[3].skill_desc+
 					'</div><div>'+res[3].skill_tooltip+'</div></div></div>';
+				}else if (arr[i] == 4) {
+					s_img = '<div class="skill-container">'+ 
+					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
+					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
+					'스킬 마나소모량: '+res[4].skill_cost+'</div><div>'+'스킬 범위: '+res[4].skill_range+'</div>'+'<div>'+res[4].skill_desc+
+					'</div><div>'+res[4].skill_tooltip+'</div></div></div>';
 				}    
 				$('#skill_tree2').append(s_img)
 			}
@@ -1665,35 +1714,43 @@
 			for (i=12; i<15;i++) {				
 				if (arr[i] == 1) {
 					s_img =  '<div class="skill-container">'+ 
+					'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
+					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+					res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
+					'스킬 마나소모량: '+res[1].skill_cost+'</div><div>'+'스킬 범위: '+res[1].skill_range+'</div>'+'<div>'+res[1].skill_desc+
+					'</div><div>'+res[1].skill_tooltip+'</div></div></div>';
+				}else if (arr[i] == 2) {
+					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[2].skill_cost+'</div><div>'+'스킬 범위: '+res[2].skill_range+'</div>'+'<div>'+res[2].skill_desc+
 					'</div><div>'+res[2].skill_tooltip+'</div></div></div>';
-				}else if (arr[i] == 2) {
+				}else if (arr[i] == 3) {
+					s_img = s_img = '<div class="skill-container">'+ 
+					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
+					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
+					'스킬 마나소모량: '+res[3].skill_cost+'</div><div>'+'스킬 범위: '+res[3].skill_range+'</div>'+'<div>'+res[3].skill_desc+
+					'</div><div>'+res[3].skill_tooltip+'</div></div></div>';
+				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[4].skill_cost+'</div><div>'+'스킬 범위: '+res[4].skill_range+'</div>'+'<div>'+res[4].skill_desc+
 					'</div><div>'+res[4].skill_tooltip+'</div></div></div>';
-				}else if (arr[i] == 3) {
-					s_img = s_img = '<div class="skill-container">'+ 
-					'<img class="skill_img" width="40" height="40" src="../resources/'+res[0].skill_icon+'" alt="이미지"> &nbsp'+
-					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-					res[0].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[0].skill_cooldown+'</div><div>'+
-					'스킬 마나소모량: '+res[0].skill_cost+'</div><div>'+'스킬 범위: '+res[0].skill_range+'</div>'+'<div>'+res[0].skill_desc+
-					'</div><div>'+res[0].skill_tooltip+'</div></div></div>';
-				}else if (arr[i] == 4) {
-					s_img = '<div class="skill-container">'+ 
-					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
-					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
-					'스킬 마나소모량: '+res[3].skill_cost+'</div><div>'+'스킬 범위: '+res[3].skill_range+'</div>'+'<div>'+res[3].skill_desc+
-					'</div><div>'+res[3].skill_tooltip+'</div></div></div>';
 				}    
 				$('#skill_tree3').append(s_img)
 			}
+				
+				
+			}).fail(err => {
+				console.log(err)
+			})
+			
+			
+			
 			
 			$('#sk_count').html("픽률: "+res[0].pick_rate +' , 게임수: ' +res[0].game_count )
 			$('#sk_win').html("승률: " + res[0].win_rate)
@@ -1733,13 +1790,29 @@
 	            url:'/personlol/champion/item1'
 	         }).done(res => {
 	            console.log(res)
+	            
 	            let item1_img=''
 	            $.each(res, function (i,i_img) {
+	            	const text = i_img.item_desc;
+	            	
+	            	const formattedText = text
+	            	  .replace(/<\/?mainText>/g, '')
+	            	  .replace(/<\/?stats>/g, '')
+	            	  .replace(/<\/?attention>/g, '')
+	            	  .replace(/<\/?li>/g, '')
+	            	  .replace(/<\/?passive>/g, '')
+	            	  .replace(/<\/?rarityMythic>/g, '')
+	            	  .replace(/<\/?rarityLegendary>/g, '')
+	            	  .replace(/<br>/g, '<br>');
+				
+	         
+	            	
 	            	
 	              	item1_img +='<div class="f_item">'+
 	                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
-	                  '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-	                  i_img.item_name+'</span><div class="item_longdesc">'+i_img.item_desc+'</div><div>'+i_img.item_plaintext
+	                  '" alt="이미지">'+
+	                  '<div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+	                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
 	                  '</div></div></div>'
 	            })
 	            $('#item1').append(item1_img)
@@ -1756,11 +1829,26 @@
 	            console.log(res)
 	            let item2_img=''
 	            $.each(res, function (i,i_img) {
+	            	
+					const text = i_img.item_desc;
+	            	
+	            	const formattedText = text
+	            	  .replace(/<\/?mainText>/g, '')
+	            	  .replace(/<\/?stats>/g, '')
+	            	  .replace(/<\/?attention>/g, '')
+	            	  .replace(/<\/?li>/g, '')
+	            	  .replace(/<\/?passive>/g, '')
+	            	  .replace(/<\/?rarityMythic>/g, '')
+	            	  .replace(/<\/?rarityLegendary>/g, '')
+	            	  .replace(/<br>/g, '<br>');
+				
+	            	
+	            	
 	               item2_img +=
 	            	   '<div class="f_item">'+
 		                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
 		                  '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-		                  i_img.item_name+'</span><div class="item_longdesc">'+i_img.item_desc+'</div><div>'+i_img.item_plaintext
+		                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
 		                  '</div></div></div>'
 	            })
 	            $('#item2').append(item2_img)
@@ -1777,11 +1865,27 @@
 	            console.log(res)
 	            let item3_img=''
 	            $.each(res, function (i,i_img) {
+	            	
+					const text = i_img.item_desc;
+	            	
+	            	const formattedText = text
+	            	  .replace(/<\/?mainText>/g, '')
+	            	  .replace(/<\/?stats>/g, '')
+	            	  .replace(/<\/?attention>/g, '')
+	            	  .replace(/<\/?li>/g, '')
+	            	  .replace(/<\/?passive>/g, '')
+	            	  .replace(/<\/?rarityMythic>/g, '')
+	            	  .replace(/<\/?rarityLegendary>/g, '')
+	            	  .replace(/<br>/g, '<br>');
+				
+	            	
+	      
+	            	
 	               item3_img +=
 	            	   '<div class="f_item">'+
 		                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
 		                  '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-		                  i_img.item_name+'</span><div class="item_longdesc">'+i_img.item_desc+'</div><div>'+i_img.item_plaintext
+		                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
 		                  '</div></div></div>'
 	            })
 	            $('#item3').append(item3_img)
