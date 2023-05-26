@@ -5,106 +5,134 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous">
 	</script>
 
+<link rel="stylesheet" type="text/css" href="../resources/css/header.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/duo.css">
 
-	<link rel="stylesheet" type="text/css" href="../resources/css/duo.css">
 
+<style>
+/* 모달창 스타일 */
+.modal {
+	display: none;
+	/* 모달창을 처음에는 숨김 */
+	position: fixed;
+	/* 모달창 위치를 고정 */
+	z-index: 1;
+	/* 모달창을 가장 위에 놓음 */
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	/* 모달창이 스크롤 가능하도록 함 */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* 배경색과 투명도 설정 */
+}
 
-	<style>
-		/* 모달창 스타일 */
-		.modal {
-			display: none;
-			/* 모달창을 처음에는 숨김 */
-			position: fixed;
-			/* 모달창 위치를 고정 */
-			z-index: 1;
-			/* 모달창을 가장 위에 놓음 */
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			overflow: auto;
-			/* 모달창이 스크롤 가능하도록 함 */
-			background-color: rgba(0, 0, 0, 0.4);
-			/* 배경색과 투명도 설정 */
-		}
+.modal-content {
+	background-color: #fefefe;
+	/* 모달창 내용의 배경색 설정 */
+	margin: 15% auto;
+	/* 모달창이 화면 중앙에 위치하도록 함 */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	/* 모달창의 너비 설정 */
+}
 
-		.modal-content {
-			background-color: #fefefe;
-			/* 모달창 내용의 배경색 설정 */
-			margin: 15% auto;
-			/* 모달창이 화면 중앙에 위치하도록 함 */
-			padding: 20px;
-			border: 1px solid #888;
-			width: 80%;
-			/* 모달창의 너비 설정 */
-		}
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
 
-		.close {
-			color: #aaa;
-			float: right;
-			font-size: 28px;
-			font-weight: bold;
-		}
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 
-		.close:hover,
-		.close:focus {
-			color: black;
-			text-decoration: none;
-			cursor: pointer;
-		}
-
-		#msg_block {
-			display: block;
-		}
-	</style>
+#msg_block {
+	display: block;
+}
+</style>
 
 </head>
 
 
 <body>
-	<!-- 베너 css입니다 -->
-	<div id="zero">
-		<div class="bener-container">
-			<nav class="bener">
-				<div class="bener2">
-					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png"></a>
+	<div id="generic">
+		<div class="area">
+			<nav class="bener-container">
+				<div class="bener">
+					<a href="/personlol/main" class="imgfile"><img
+						src="../resources/img/logotesting.png" height="25px"></a>
 					<div class="search-bar">
-						<input class="summoner_name" type="text">
+
+						<input class="summoner_name_search" type="text" placeholder="소환사명 검색....">
 						<button class="gosummonerinfo" type="button">go!</button>
 					</div>
 					<div class="menu">
-						<a href=" " class="m-col">playerport</a> <a href=" " class="m-col">듀오찾기</a>
-						<a href=" " class="m-col">협곡차트</a> <a href=" " class="m-col">멀티서치
-							AI</a>
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
+							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
+							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+							href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
+							href="/personlol/summoner/" class="m-col">소환사분석</a>
+
+
+					</div>
+					<div class="my-menu">
+						<c:choose>
+							<c:when test="${sessionScope.id ne null}">
+								<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/personlol/logine" class="m-col login">로그인</a>
+							</c:otherwise>
+						</c:choose>
+
+						<div id="loginout">
+							<c:if test="${sessionScope.id ne null}">
+								<div class="loggedin-box">
+									<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+								</div>
+								<div class="logout-box">
+									<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+								</div>
+							</c:if>
+						</div id="loginout">
 					</div>
 				</div>
 			</nav>
-			<div class="something">
-				<a href="fsdf" class="she"> <span size="12" class="saying">personlol
-						같이 만들 분 찾아요!</span>
-				</a>
-			</div>
 		</div>
-	</div id="zero">
-	<!-- 베너 css입니다 -->
+	</div id="generic">
+	<!-- 여기까지가 배너입니다. -->
 
 	<div id="one">
 		<div class="title">
-			<span size="48" class="main-text">듀오찾기</span> <span size="12" class="sub-text">케미분석으로 나와 가장 잘 맞는 파트너를
-				찾아보세요!</span>
+			<span size="48" class="main-text">듀오찾기</span> <span size="12"
+				class="sub-text">케미분석으로 나와 가장 잘 맞는 파트너를 찾아보세요!</span>
 		</div>
-		<div id="msg_block"> <span id="msg_span">${msg}</span></div>
+		<div id="msg_block">
+			<span id="msg_span">${msg}</span>
+		</div>
 		<div class="lane-bar-container">
 			<div class="lane-bar">
 				<button type="button" class="update">업데이트</button>
@@ -115,7 +143,8 @@
 						</div>
 						<div class="box1 game tier">
 							<!-- <span size="12" class="gametext">모든 티어</span> -->
-							<select class="form-select" aria-label="Default select example" style="width: 100px">
+							<select class="form-select" aria-label="Default select example"
+								style="width: 100px">
 								<option selected>티어</option>
 								<option value="CHELLENGER">챌린저</option>
 								<option value="GRANDMASTER">그랜드마스터</option>
@@ -131,12 +160,18 @@
 					</div>
 
 					<div class="lane-bar-bottom">
-						<button type="button" class="box2 rebox" width="52" height="40" value="all">전체</button>
-						<button type="button" class="box2 rebox" width="52" height="40" id="top" value="top">탑</button>
-						<button type="button" class="box2 rebox" width="52" height="40" id="jungle" value="jungle">정글</button>
-						<button type="button" class="box2 rebox" width="52" height="40" id="mid" value="mid">미드</button>
-						<button type="button" class="box2 rebox" width="52" height="40" id="bottom" value="bottom">바텀</button>
-						<button type="button" class="box2 rebox" width="52" height="40" id="support" value="support">서폿</button>
+						<button type="button" class="box2 rebox" width="52" height="40"
+							value="all">전체</button>
+						<button type="button" class="box2 rebox" width="52" height="40"
+							id="top" value="top">탑</button>
+						<button type="button" class="box2 rebox" width="52" height="40"
+							id="jungle" value="jungle">정글</button>
+						<button type="button" class="box2 rebox" width="52" height="40"
+							id="mid" value="mid">미드</button>
+						<button type="button" class="box2 rebox" width="52" height="40"
+							id="bottom" value="bottom">바텀</button>
+						<button type="button" class="box2 rebox" width="52" height="40"
+							id="support" value="support">서폿</button>
 					</div>
 
 				</div>
@@ -149,8 +184,10 @@
 						<div class="modal-content">
 							<span class="close">&times;</span>
 							<p>글 작성용 모달입니다.</p>
-							<form action="/personlol/duo/insert" method="post" name="insertFrm">
-								<label for="title">제목</label> <input id="duo_title" name="duo_title"> <label for="content">내용</label>
+							<form action="/personlol/duo/insert" method="post"
+								name="insertFrm">
+								<label for="title">제목</label> <input id="duo_title"
+									name="duo_title"> <label for="content">내용</label>
 								<textarea id="duo_content" name="duo_content"></textarea>
 								<button id="commitModal">작성 완료</button>
 							</form>
@@ -174,12 +211,12 @@
 						<div id="result1">안녕하세요</div>
 						<div class="main-bottom">
 							<!-- 유저 초상화 -->
-							<a href="fdaf" class="user-container">
-								<!-- <img src="" alt=""> -->
+							<a href="fdaf" class="user-container"> <!-- <img src="" alt=""> -->
 								<div class="lane-img"></div> <span size="12" class="user-id">
-									<c:set var="userLolName" value="${userInfoMap[duo.duo_ownerid].user_lolname}" />
-									<c:out value="${userLolName}" />
-								</span> <!--  Lory -->
+									<c:set var="userLolName"
+										value="${userInfoMap[duo.duo_ownerid].user_lolname}" /> <c:out
+										value="${userLolName}" />
+							</span> <!--  Lory -->
 							</a>
 							<!-- 주로하는 챔피언 -->
 							<ol class="img-container">
@@ -192,16 +229,16 @@
 						<div class="main-botton">
 
 							<button class="copy-box">
-								<span class="user-id">
-									<c:if test="${duo.duo_ownerid == loginCheck}">
+								<span class="user-id"> <c:if
+										test="${duo.duo_ownerid == loginCheck}">
 										<a href="/personlol/duo/delete?duo_id=${duo.duo_id}" id="wh">삭제하기</a>
 									</c:if>
 								</span>
 							</button>
 
 							<button class="copy-box">
-								<span class="user-id">
-									<c:if test="${duo.duo_ownerid != loginCheck}">
+								<span class="user-id"> <c:if
+										test="${duo.duo_ownerid != loginCheck}">
 										<a href="/personlol/duo/accept/${duo.duo_id}" id="wh">수락하기</a>
 									</c:if>
 								</span>
