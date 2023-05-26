@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -726.2031250000118,
-    "scrollLeft": -3161.6062500000094,
+    "scrollTop": -1812.2031250000118,
+    "scrollLeft": -2997.6062500000094,
     "zoomLevel": 0.8,
     "show": {
       "tableComment": true,
@@ -386,15 +386,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 85.07177734375,
               "widthComment": 60,
               "widthDataType": 70.31982421875,
@@ -432,15 +432,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 66.5810546875,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -455,15 +455,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 66.5810546875,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -478,15 +478,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 66.5810546875,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -524,15 +524,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 62.23291015625,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -547,15 +547,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 62.23291015625,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -570,15 +570,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 82.50732421875,
               "widthComment": 77.10546875,
               "widthDataType": 70.31982421875,
@@ -593,15 +593,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 60,
               "widthComment": 77.10546875,
               "widthDataType": 70.31982421875,
@@ -616,15 +616,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 86.1572265625,
               "widthComment": 77.10546875,
               "widthDataType": 70.31982421875,
@@ -706,7 +706,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 15,
+          "zIndex": 37,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -5256,7 +5256,7 @@
         "id": "3dcc675a-e25d-4b8d-b0d6-141df4032ff6"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5282,7 +5282,7 @@
         "id": "1a22a761-f3d2-452e-a2a3-dbf1e365a350"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5308,7 +5308,7 @@
         "id": "5c29809c-3571-4cda-ada0-4fc3b82f9274"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5334,7 +5334,7 @@
         "id": "df76021c-25e6-4c05-9ad2-56b8e8ed812d"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5360,7 +5360,7 @@
         "id": "d895e546-e2bb-427e-b84c-05cd78758cc8"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5386,7 +5386,7 @@
         "id": "869c327c-8240-4b66-87db-052749df024c"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5412,7 +5412,7 @@
         "id": "be774929-532a-4bca-afa7-5ffd7de9a43c"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5438,7 +5438,7 @@
         "id": "d7a03487-a5c6-4edc-ba38-d3254ff23dcf"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5464,7 +5464,7 @@
         "id": "a8d04895-10b6-4e72-bb81-11f415e0e368"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
