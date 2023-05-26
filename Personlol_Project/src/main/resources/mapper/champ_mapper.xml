@@ -28,6 +28,22 @@
 		WHERE lane =
 		#{lane}
 	</select>
+	
+	<select id="mlane_list" resultType="com.base.personlol.dto.champion_dto">
+	    <![CDATA[
+	        SELECT *
+	        FROM (
+	            SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON, ci.LANE AS lane, ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE
+	            FROM CHAMPDATA c
+	            LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+	            WHERE ci.LANE = #{lane}
+	            ORDER BY ci.PICK_RATE DESC
+	        )
+	        WHERE ROWNUM <= 3
+	    ]]>
+	</select>
+
+	
 
 	<select id="lane_sort_win"
 		resultType="com.base.personlol.dto.champion_dto">

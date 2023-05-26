@@ -73,6 +73,14 @@ public class champion_service {
 		
 		return flist;
 	}
+	
+	// 메인 리스트
+	public List<champion_dto> mList(String lane) {
+		System.out.println("메인 리스트 서비스: "+lane);
+		List<champion_dto> mList = champ_dao.mlane_list(lane);
+		System.out.println("서비스 mList는: " + mList);
+		return mList;
+	}
 
 	public List<champion_dto> top_list(String lane) {
 		
@@ -220,6 +228,7 @@ public class champion_service {
 		return champ_spell_img;
 	}
 
+
 	public List<ChampMatch_dto> matchup_lst(Integer champ_id, String champ_lane) {
 		List<ChampMatch_dto> matchup_lst = null;
 		matchup_lst = champ_dao.matchup_lst(champ_id,champ_lane);
@@ -231,13 +240,8 @@ public class champion_service {
 		matchup_img_lst = champ_dao.matchup_champ_img(match_champ);
 		return matchup_img_lst;
 	}
-	
 
 	
-
-
-
-
 	
 
 }//

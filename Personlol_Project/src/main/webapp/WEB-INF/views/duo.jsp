@@ -434,7 +434,7 @@
 		$('.form-select').change(function () {
 			const selectTier = $(this).val();
 			// 선택된 값의 처리
-			console.log(selectTier)
+			console.log("티어선택: ",selectTier)
 			loadContent("all", page, selectTier)
 		});
 	</script>

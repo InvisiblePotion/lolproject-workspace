@@ -81,6 +81,9 @@ public interface champion_dao {
 	//챔프 매치업 이미지 
 	List<champion_dto> matchup_champ_img(Integer match_champ);
 	
+	//메인 리스트
+	List<champion_dto> mlane_list(@Param("lane") String lane);
+	
 
 	
 

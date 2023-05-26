@@ -284,19 +284,18 @@
                 console.log("듀오 목록: ", res);
                 console.log("length",res.length)
                 $('.offer-list-write-box.result').empty();
+                if(res.length == 0){
+                    $('.offer-list-write-box.result').append('<div class="offer-list-write">' +
+                            '지금 듀오를 찾으러가세요!' + '</div>');
+                }
                 for (let i in res) {
                     let val = res[i];
                     console.log("한번 벗긴거: ", val);
                     for (let j in val) {
                         let d_name = val[j];
                         console.log("두번 벗긴거", d_name);
-                        if (res.length == 0) {
-                            $('.offer-list-write-box.result').append('<div class="offer-list-write">' +
-                                '지금 듀오를 찾으러가세요!' + '</div>');
-                        } else {
-                            $('.offer-list-write-box.result').append('<div class="offer-list-write"><span class="list-write-duo">' + d_name +
-                                '</span></div>');
-                        }
+                        $('.offer-list-write-box.result').append('<div class="offer-list-write"><span class="list-write-duo">' + d_name +
+                           '</span><button type="button" class="btn btn-light" onclick="duo_del(this)" value="' + d_name + '">삭제</button></div>'); 
                     }
                 }
             }).fail(err => {
@@ -325,6 +324,7 @@
             console.log(err);
         })
     </script>
+    
     <script>
     	//듀오 요청 수락
     	function request_accept(info){
@@ -372,6 +372,26 @@
             }).fail(err=>{
                 console.log(err);
             }) 
+    	}
+
+    	//듀오 삭제하는 친구
+    	function duo_del(info){
+    	    let request_id = {'user_lolname':info.value};
+            $.ajax({
+                method:'put',
+                url:'/personlol/mypage/duodel',
+                contentType: 'application/json',
+                data: JSON.stringify(request_id)
+            }).done(res=>{
+                console.log(res);
+                if(res == "1"){
+                	alert("삭제가 완료되었습니다.")
+                }else{
+                    alert("오류발생하였습니다.")
+                }
+            }).fail(err=>{
+                console.log(err);
+            })
     	}
     </script>
 

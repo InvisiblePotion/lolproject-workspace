@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.personlol.dto.Main_summoner_dto;
 import com.base.personlol.dto.summoner_dto;
 import com.base.personlol.service.summoner_service;
 
@@ -49,5 +50,15 @@ public class R_summoner_Controller {
 		System.out.println();
 		List<Map<String, ?>> MainRecord= sum_ser.MainRecord(summoner_name);
 		return MainRecord;
+	}
+	
+	//메인화면 검색
+	@GetMapping("/search-summoner")
+	public List<Main_summoner_dto> search_summoner(@RequestParam String summoner_name){
+		System.out.println("메인 검색 컨트롤러 롤네임 : "+summoner_name);
+		List<Main_summoner_dto> result_summoner = sum_ser.result_summoner(summoner_name);
+		System.out.println("메인 검색 컨트롤러 리턴 : " +result_summoner);
+		return result_summoner;
+		
 	}
 }
