@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.personlol.dto.ChampMatch_dto;
 import com.base.personlol.dto.ChampRuneCore_dto;
 import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
@@ -233,10 +234,11 @@ public class R_champ_Controller {
 		List<ChampSpell_dto> champ_spell_lst = champ_ser.champ_spell(champ_id,champ_lane);
 		return champ_spell_lst;
 	}
+	
 	//챔프 스펠 이미지 부분
 	@GetMapping("/champion/spell-img")
-	public List<ChampSpell_dto> champ_spell_img(Integer spell1,Integer spell2){
-		List<ChampSpell_dto> champ_spell_img_lst = champ_ser.champ_spell_img(spell1,spell2);
+	public List<ChampSpell_dto> champ_spell_img(Integer spell_img){
+		List<ChampSpell_dto> champ_spell_img_lst = champ_ser.champ_spell_img(spell_img);
 		return champ_spell_img_lst;
 	}
 	
@@ -316,7 +318,52 @@ public class R_champ_Controller {
 		return item_img;
 	}
 	
+	//챔프 매치업 쉬운
+	@GetMapping("/matchup/list")
+	public List<ChampMatch_dto> matchup_lst(Integer champ_id,String champ_lane){
+		List<ChampMatch_dto> matchup_lst = champ_ser.matchup_lst(champ_id,champ_lane);
+		return matchup_lst;
+	}
 	
-
-
-}//
+	//챔프 매치업 어려운
+	@GetMapping("/matchup/list-hard")
+	public List<ChampMatch_dto> matchup_lst_hard(Integer champ_id,String champ_lane){
+		List<ChampMatch_dto> matchup_lst_hard = champ_ser.matchup_lst_hard(champ_id,champ_lane);
+		return matchup_lst_hard;
+	}
+	
+	//챔프 매치업 이미지
+	@GetMapping("/matchup/champ-img")
+	public List<champion_dto> matchup_champ_img(Integer match_champ){
+		List<champion_dto> matchup_img_lst = champ_ser.matchup_champ_img(match_champ);
+		return matchup_img_lst;
+	}
+	
+	//챔프 매치업 디테일
+	@GetMapping("/matchup/detail")
+	public List<ChampMatch_dto> matchup_detail(Integer champ_id,String champ_lane,Integer match_champ){
+		List<ChampMatch_dto> matchup_detail_lst = champ_ser.matchup_detail(champ_id,champ_lane,match_champ);
+		return matchup_detail_lst;
+	}
+	//챔프 매치업 디테일 챔프둘이미지
+	@GetMapping("/matchup/detail-img")
+	public List<champion_dto> matchup_detail_img(Integer champ_id,Integer match_champ){
+		List<champion_dto> matchup_detail_img_lst = champ_ser.matchup_detail_img(champ_id,match_champ);
+		return matchup_detail_img_lst;
+	}
+	
+	//챔프 매치업 디테일 인포
+	@GetMapping("/matchup/detail-info")
+	public List<champion_dto> matchup_detail_info(Integer champ_id,String champ_lane,Integer match_champ){
+		List<champion_dto> matchup_detail_info_lst = champ_ser.matchup_detail_info(champ_id,champ_lane,match_champ);
+		return matchup_detail_info_lst;
+	}
+	
+	//챔프 매치업 디테일 리스트
+	@GetMapping("/matchup/champ-list")
+	public List<ChampMatch_dto> matchup_list(Integer champ_id,String champ_lane){
+		List<ChampMatch_dto> matchup_list_lst = champ_ser.matchup_list(champ_id,champ_lane);
+		return matchup_list_lst;
+	}
+	
+}//컨트롤러 끝

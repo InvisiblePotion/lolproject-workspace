@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.personlol.dao.champion_dao;
+import com.base.personlol.dto.ChampMatch_dto;
 import com.base.personlol.dto.ChampRuneCore_dto;
 import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
@@ -221,13 +222,60 @@ public class champion_service {
 		return champ_spell_lst;
 	}
 	//챔프 스펠 이미지
-	public List<ChampSpell_dto> champ_spell_img(Integer spell1, Integer spell2) {
+	public List<ChampSpell_dto> champ_spell_img(Integer spell_img) {
 		List<ChampSpell_dto> champ_spell_img = null;
-		champ_spell_img = champ_dao.champ_spell_img(spell1,spell2);
+		champ_spell_img = champ_dao.champ_spell_img(spell_img);
 		return champ_spell_img;
 	}
 
 
+	
+	//챔프 매치업 상대하기 쉬운
+	public List<ChampMatch_dto> matchup_lst(Integer champ_id, String champ_lane) {
+		List<ChampMatch_dto> matchup_lst = null;
+		matchup_lst = champ_dao.matchup_lst(champ_id,champ_lane);
+		return matchup_lst;
+	}
+	//챔프 매치업 이미지
+	public List<champion_dto> matchup_champ_img(Integer match_champ) {
+		List<champion_dto> matchup_img_lst = null;
+		matchup_img_lst = champ_dao.matchup_champ_img(match_champ);
+		return matchup_img_lst;
+	}
+	
+	//챔프 매치업 상대하기 어려운
+	public List<ChampMatch_dto> matchup_lst_hard(Integer champ_id, String champ_lane) {
+		List<ChampMatch_dto> matchup_lst_hard = null;
+		matchup_lst_hard = champ_dao.matchup_lst_hard(champ_id,champ_lane);
+		return matchup_lst_hard;
+	}
+	
+	//챔프 매치업 디테일(매치업 페이지뿌릴거)
+	public List<ChampMatch_dto> matchup_detail(Integer champ_id, String champ_lane, Integer match_champ) {
+		List<ChampMatch_dto> matchup_detail_lst = null;
+		matchup_detail_lst = champ_dao.matchup_detail(champ_id,champ_lane,match_champ);
+		return matchup_detail_lst;
+	}
+	
+	//챔프 매치업 이미지
+	public List<champion_dto> matchup_detail_img(Integer champ_id, Integer match_champ) {
+		List<champion_dto> matchup_detail_img_lst = null;
+		matchup_detail_img_lst = champ_dao.matchup_detail_img(champ_id,match_champ);
+		return matchup_detail_img_lst;
+	}
+	
+	//챔프 디테일 인포(승,픽,밴률)
+	public List<champion_dto> matchup_detail_info(Integer champ_id, String champ_lane,Integer match_champ) {
+		 List<champion_dto> matchup_detail_info_lst = null;
+		 matchup_detail_info_lst = champ_dao.matchup_detail_info(champ_id,champ_lane,match_champ);
+		return matchup_detail_info_lst;
+	}
+
+	public List<ChampMatch_dto> matchup_list(Integer champ_id, String champ_lane) {
+		List<ChampMatch_dto> matchup_list_lst = null;
+		matchup_list_lst = champ_dao.matchup_list(champ_id,champ_lane);
+		return matchup_list_lst;
+	}
 	
 
 	
