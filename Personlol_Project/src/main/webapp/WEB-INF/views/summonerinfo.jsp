@@ -251,7 +251,7 @@
 					<div class="ch champ-search">
 						<div class="search">
 							<input type="text" placeholder="챔피언 검색"> <img src=""
-								alt="">
+								alt="" class="img2">
 						</div>
 						<div class="content"></div>
 					</div>
