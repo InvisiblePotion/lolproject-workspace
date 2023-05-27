@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,9 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/header.css">
 <!--css 파일명 수정해야함-->
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/champlist.css">
@@ -85,28 +89,53 @@
 </head>
 
 <body>
-	<!--헤더부분-->
 	<div id="generic">
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png"></a>
+					<a href="/personlol/main" class="imgfile"><img
+						src="../resources/img/logotesting.png" height="25px"></a>
 					<div class="search-bar">
-						<input type="text">
-						<button type="button">go!</button>
+
+						<input class="summoner_name_search" type="text"
+							placeholdr="소환사명 검색....">
+						<button class="gosummonerinfo2" type="button">go!</button>
 					</div>
 					<div class="menu">
-						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
-						<a href="/personlol/rank" class="m-col">랭킹</a> 
-						<a href=" " class="m-col">듀오찾기</a>
-						<a href=" " class="m-col">사용자분석</a>
-						<a href="/personlol/logine" class="m-col login">로그인</a>
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
+							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
+							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+							href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
+							href="/personlol/summoner/" class="m-col">소환사분석</a>
+
+
+					</div>
+					<div class="my-menu">
+						<c:choose>
+							<c:when test="${sessionScope.id ne null}">
+								<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/personlol/logine" class="m-col login">로그인</a>
+							</c:otherwise>
+						</c:choose>
+
+						<div id="loginout">
+							<c:if test="${sessionScope.id ne null}">
+								<div class="loggedin-box">
+									<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+								</div>
+								<div class="logout-box">
+									<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+								</div>
+							</c:if>
+						</div id="loginout">
 					</div>
 				</div>
 			</nav>
 		</div>
-	</div>
-	<!--헤더부분 끝-->
+	</div id="generic">
+	<!-- 여기까지가 배너입니다. -->
 	
 <div class="container">
 

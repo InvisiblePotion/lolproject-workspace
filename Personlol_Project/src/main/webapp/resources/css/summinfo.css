@@ -648,7 +648,7 @@ option {
   background-color: #ebeef1;
   background-color: var(--gray200);
 }
-.ch>.search img{
+.ch>.search img2{
   position: absolute;
   top: 2px;
   left: 8px;
@@ -795,7 +795,6 @@ option {
 img{
   border: 0;
   vertical-align: middle;
-  max-width: 100%;
 }
 .champion .runes{
   margin-left: 2px;
@@ -866,7 +865,6 @@ img{
 .intoto{
   display: flex;
   align-items: center;
-  margin-top: 8px;
   width: 377px;
 }
 .intoto .items{
@@ -988,3 +986,9 @@ img{
   text-decoration: none;
   box-sizing: border-box;
 }
+body{
+	margin: 0;
+}
+/* li {
+    text-align: none;
+} */

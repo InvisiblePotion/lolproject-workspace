@@ -10,9 +10,9 @@
 	<!-- DB Config -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="url" value="jdbc:log4jdbc:oracle:thin:@//192.168.0.140/xe" />
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@//112.218.158.250:4100/xe" />
 		<!-- DB ID와 PW 설정하기 -->
-		<property name="username" value="PERSONLOL" />
+		<property name="username" value="personlol" />
 		<property name="password" value="1234" />
 	</bean>
 	

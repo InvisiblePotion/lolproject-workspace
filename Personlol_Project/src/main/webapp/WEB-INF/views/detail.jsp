@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,308 +8,322 @@
 <title>detail</title>
 
 <style>
-#change_rune1{
- justify-content: center;
+#change_rune1 {
+	justify-content: center;
 }
 
-#change_rune2{
- justify-content: center;
+#change_rune2 {
+	justify-content: center;
 }
 
 /* 스킬이미지 호버시 툴팁 */
 .skill-container {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #000;
-  color: #fff;
-  
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  
-  /* 꾸미기용 */
-  top: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  width: 500px;
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	/* 꾸미기용 */
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	width: 500px;
 }
+
 .skill-container:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
 
 /* 룬이미지 호버시 툴팁 */
 .rune_img {
-  position: relative;
-  display: inline-block;
-  padding: 0px;
+	position: relative;
+	display: inline-block;
+	padding: 0px;
 }
 
 .runetype_tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #000;
-  color: #fff;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  
-  top: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
 }
 
 .rune_tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #000;
-  color: #fff;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  text-align:left;
-  
-  top: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  width: 500px;
-  
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	text-align: left;
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	width: 500px;
 }
 
 .rune_img:hover .rune_tooltip {
-  visibility: visible;
-  opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
 
 .rune_img:hover .runetype_tooltip {
-  visibility: visible;
-  opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
 
 /* 룬 긴설명 css부분 */
 .rune_longdesc {
-  font-size: 13px;
-  font-weight: normal;
+	font-size: 13px;
+	font-weight: normal;
 }
 
 /* 아이템이미지 호버시 툴팁  */
 .f_item {
-  position: relative;
+	position: relative;
 }
 
 .item_img {
-  width: 40px;
-  height: 40px;
+	width: 40px;
+	height: 40px;
 }
 
 .item_tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #000;
-  color: #fff;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  text-align:left;
-  
-  top: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  width: 500px;
-
-
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	text-align: left;
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	width: 500px;
 }
 
 .f_item:hover .item_tooltip {
-  visibility: visible;
-  opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
 
 /*스펠 호버시 툴팁*/
 .spell-container {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .spell_tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #000;
-  color: #fff;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  text-align: left;
-  top: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  
-  width: 200px;
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	text-align: left;
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	width: 200px;
 }
 
 .spell-container:hover .spell_tooltip {
-  opacity: 1;
-  visibility: visible;
+	opacity: 1;
+	visibility: visible;
 }
 
 /*룬이미지 센터로*/
-.rune_img{
+.rune_img {
 	text-align: center;
 }
 
 /* 아이템 설명 css  */
 .item_longdesc ul {
-  white-space: pre-line;
+	white-space: pre-line;
 }
-
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/header.css">
 <!--css 파일명 수정해야함-->
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/champlist.css">	
-	
+	href="../resources/css/champlist.css">
+
 </head>
 <body>
 	<div id="generic">
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png"></a>
+					<a href="/personlol/main" class="imgfile"><img
+						src="../resources/img/logotesting.png" height="25px"></a>
 					<div class="search-bar">
-						<input type="text">
-						<button type="button">go!</button>
+
+						<input class="summoner_name_search" type="text"
+							placeholdr="소환사명 검색....">
+						<button class="gosummonerinfo2" type="button">go!</button>
 					</div>
 					<div class="menu">
-						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
-						<a href="/personlol/rank" class="m-col">랭킹</a> 
-						<a href=" " class="m-col">듀오찾기</a>
-						<a href=" " class="m-col">사용자분석</a>
-						<a href="/personlol/logine" class="m-col login">로그인</a>
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
+							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
+							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+							href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
+							href="/personlol/summoner/" class="m-col">소환사분석</a>
+
+
+					</div>
+					<div class="my-menu">
+						<c:choose>
+							<c:when test="${sessionScope.id ne null}">
+								<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/personlol/logine" class="m-col login">로그인</a>
+							</c:otherwise>
+						</c:choose>
+
+						<div id="loginout">
+							<c:if test="${sessionScope.id ne null}">
+								<div class="loggedin-box">
+									<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+								</div>
+								<div class="logout-box">
+									<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+								</div>
+							</c:if>
+						</div id="loginout">
 					</div>
 				</div>
 			</nav>
 		</div>
+	</div id="generic">
+	<!-- 여기까지가 배너입니다. -->
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col" id="champ_img">챔피언 사진</div>
+			<div class="col">
+				<div class="row" id="champ_name"></div>
+				<div class="row skillimg">
+					<div class="col" id="skill_img">스킬사진</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col" id="win">내용(승률)</div>
+			<div class="col" id="pick">내용(픽률)</div>
+			<div class="col" id="ban">내용(밴율)</div>
+			<div class="col" id="spell">
+				<div class="row" id="spell1"></div>
+				<div class="row" id="spell2"></div>
+			</div>
+		</div>
+
+		<div class="row">추천 룬 세팅</div>
+		<div class="row">
+			<div class="col" id="main_rune">
+				<div class="row" id="type_rune"></div>
+				<div class="row" id="core_rune1"></div>
+				<div class="row" id="core_rune2"></div>
+				<div class="row" id="core_rune3"></div>
+				<div class="row" id="core_rune4"></div>
+			</div>
+			<div class="col" id="sub_rune">
+				<div class="row" id="type_sub"></div>
+				<div class="row" id="sub_rune1"></div>
+				<div class="row" id="sub_rune2"></div>
+				<div class="row" id="sub_rune3"></div>
+
+			</div>
+			<div class="col col-sm-3 id="shard">
+				<div class="row" id="shard1"></div>
+				<div class="row" id="shard2"></div>
+				<div class="row" id="shard3"></div>
+				<div class="row" id="change_rune1">1</div>
+				<div class="row" id="change_rune2">2</div>
+			</div>
+
+
+		</div>
+
+		<div class="row">추천스킬빌드</div>
+		<div class="row">
+			<div class="col">
+				<div class="row">스킬사진</div>
+				<div class="row" id="skill_tree1"></div>
+				<div class="row">&nbsp</div>
+				<div class="row" id="skill_tree2"></div>
+				<div class="row">&nbsp</div>
+				<div class="row" id="skill_tree3"></div>
+			</div>
+			<div class="col">
+				<div class="row" id="sk_count">1</div>
+				<div class="row" id="sk_win">2</div>
+			</div>
+			<div class="col col-sm-2" id="mat_list1"></div>
+			<div class="col col-sm-2" id="mat_list2"></div>
+
+		</div>
+
+		<div class="row">추천빌드</div>
+		<div class="row">
+			<div class="col">아이템 1</div>
+			<div class="col">아이템 2</div>
+			<div class="col">아이템 3</div>
+			<div class="col">픽률</div>
+			<div class="col">게임수</div>
+			<div class="col">승률</div>
+		</div>
+
+		<div class="row">
+			<div class="col" id="item1"></div>
+			<div class="col" id="item2"></div>
+			<div class="col" id="item3"></div>
+			<div class="col" id="i_Pick"></div>
+			<div class="col" id="i_Totgame"></div>
+			<div class="col" id="i_Winrate"></div>
+		</div>
 	</div>
-<!--헤더 부분 끝-->
 
-
-  <div class="container">
-    <div class="row">
-      <div class="col" id="champ_img">챔피언 사진</div>
-      <div class="col">
-        <div class = "row" id="champ_name"></div>
-        <div class = "row skillimg">
-          <div class = "col" id="skill_img">스킬사진</div>
-        </div>
-      </div>     
-    </div>
-
-
-    <div class="row">
-      <div class="col" id="win">내용(승률)</div>
-      <div class="col" id="pick">내용(픽률)</div>
-      <div class="col" id="ban">내용(밴율)</div>
-      <div class="col" id="spell">
-      	<div class="row" id="spell1"></div>
-      	<div class="row" id="spell2"></div>
-      </div>
-    </div>
-
-    <div class="row">추천 룬 세팅</div>
-      <div class = "row">
-        <div class="col" id="main_rune">
-        	<div class="row" id="type_rune" ></div>
-        	<div class="row" id="core_rune1"></div>
-        	<div class="row" id="core_rune2"></div>
-        	<div class="row" id="core_rune3"></div>
-        	<div class="row" id="core_rune4"></div>
-        </div>
-        <div class="col" id="sub_rune">
-        	<div class="row" id="type_sub"></div>
-        	<div class="row" id="sub_rune1"></div>
-        	<div class="row" id="sub_rune2"></div>
-        	<div class="row" id="sub_rune3"></div>
-        
-        </div>
-        <div class="col col-sm-3 id="shard">
-       		<div class="row" id="shard1"></div>
-       		<div class="row" id="shard2"></div>
-       		<div class="row" id="shard3"></div>
-       		<div class="row" id="change_rune1">1</div>
-       		<div class="row" id="change_rune2">2</div>
-        </div>
-        
-        
-      </div>
-
-   <div class="row">추천스킬빌드</div>
-    <div class="row">
-      <div class="col">
-        <div class="row">스킬사진</div>
-        <div class="row" id="skill_tree1"></div>
-        <div class="row" >&nbsp</div>
-        <div class="row" id="skill_tree2"></div>
-        <div class="row" >&nbsp</div>
-        <div class="row" id="skill_tree3"></div>
-      </div>
-      <div class="col" > 
-      	<div class="row" id="sk_count">1</div>
-      	<div class="row" id="sk_win">2</div>
-      </div> 
-      <div class="col col-sm-2" id="mat_list1">
-      	
-      </div>
-      <div class="col col-sm-2" id="mat_list2">
-      	
-      </div>
-        
-    </div>
-
-    <div class="row">추천빌드</div>
-    <div class="row">
-        <div class="col">아이템 1</div>
-        <div class="col">아이템 2</div>
-        <div class="col">아이템 3</div>
-        <div class="col">픽률</div>
-        <div class="col">게임수</div>
-        <div class="col">승률</div>
-    </div>
-    
-    <div class="row">
-      <div class="col" id="item1"></div>
-      <div class="col" id="item2"></div>
-      <div class="col" id="item3"></div>
-      <div class="col" id="i_Pick"></div>
-      <div class="col" id="i_Totgame"></div>
-      <div class="col" id="i_Winrate"></div>
-    </div>
-  </div>
-   
- <script>
+	<script>
  
  $(document).ready(function() {
 	 
@@ -1903,8 +1918,8 @@
  });//ready 끝
 	 
  </script>
- 
- </body>
- </html>
- 
-    
+
+</body>
+</html>
+
+
