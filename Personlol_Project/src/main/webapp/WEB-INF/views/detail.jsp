@@ -193,7 +193,6 @@
 					<a href="/personlol/main" class="imgfile"><img
 						src="../resources/img/logotesting.png" height="25px"></a>
 					<div class="search-bar">
-
 						<input class="summoner_name_search" type="text"
 							placeholdr="소환사명 검색....">
 						<button class="gosummonerinfo2" type="button">go!</button>

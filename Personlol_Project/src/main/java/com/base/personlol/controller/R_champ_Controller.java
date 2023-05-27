@@ -366,4 +366,11 @@ public class R_champ_Controller {
 		return matchup_list_lst;
 	}
 	
+	//챔프 매치업 디테일 상대챔프 정보
+	@GetMapping("/matchup/matchamp-info")
+	public List<champion_dto> matchamp_info (Integer matchamp_id,String champ_lane){
+		List<champion_dto> matchamp_info_lst = champ_ser.matchamp_info(matchamp_id,champ_lane);
+		return matchamp_info_lst;
+	}
+	
 }//컨트롤러 끝

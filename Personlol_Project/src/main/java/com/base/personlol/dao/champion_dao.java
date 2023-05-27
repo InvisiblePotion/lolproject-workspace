@@ -100,6 +100,11 @@ public interface champion_dao {
 	//메인 리스트
 	List<champion_dto> mlane_list(@Param("lane") String lane);
 	
+	//챔프 매치업 상대한 챔프들 정보
+	List<champion_dto> matchamp_info(@Param("matchamp_id")Integer matchamp_id,@Param("champ_lane") String champ_lane);
+	
+	
+	
 
 	
 

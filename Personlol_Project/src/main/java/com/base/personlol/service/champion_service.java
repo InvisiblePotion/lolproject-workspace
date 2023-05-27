@@ -264,17 +264,25 @@ public class champion_service {
 		return matchup_detail_img_lst;
 	}
 	
-	//챔프 디테일 인포(승,픽,밴률)
+	//챔프 매치업 인포(승,픽,밴률)
 	public List<champion_dto> matchup_detail_info(Integer champ_id, String champ_lane,Integer match_champ) {
 		 List<champion_dto> matchup_detail_info_lst = null;
 		 matchup_detail_info_lst = champ_dao.matchup_detail_info(champ_id,champ_lane,match_champ);
 		return matchup_detail_info_lst;
 	}
-
+	
+	//챔프 매치업 상대한 챔프 리스트
 	public List<ChampMatch_dto> matchup_list(Integer champ_id, String champ_lane) {
 		List<ChampMatch_dto> matchup_list_lst = null;
 		matchup_list_lst = champ_dao.matchup_list(champ_id,champ_lane);
 		return matchup_list_lst;
+	}
+	
+	//챔프 매치업 상대챔프 정보 
+	public List<champion_dto> matchamp_info(Integer matchamp_id,String champ_lane) {
+		List<champion_dto> matchamp_info_lst = null;
+		matchamp_info_lst = champ_dao.matchamp_info(matchamp_id,champ_lane);
+		return matchamp_info_lst;
 	}
 	
 

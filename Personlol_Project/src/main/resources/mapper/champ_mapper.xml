@@ -242,4 +242,12 @@
 		) 
 		WHERE ROWNUM <= 20]]>
 	</select>
+	
+	<!--챔프 매치업 상대한 챔프 정보-->
+	<select id="matchamp_info" resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPDATA c
+		INNER JOIN CHAMPION_INFO ci 
+		ON c.CHAMP_ID = ci.CHAMP_ID 
+		WHERE c.CHAMP_ID = #{matchamp_id} AND ci.LANE = #{champ_lane}
+	</select>
 </mapper>

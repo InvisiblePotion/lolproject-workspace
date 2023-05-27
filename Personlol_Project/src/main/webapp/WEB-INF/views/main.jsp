@@ -32,9 +32,9 @@
 							src="./resources/img/logotesting.png" height="25px"></a>
 						<div class="search-bar">
 
-							<input class="summoner_name_search" type="text"
+							<input class="summoner_name summoner_name_search" type="text"
 								placeholdr="소환사명 검색....">
-							<button class="gosummonerinfo2" type="button">go!</button>
+							<button class="gosummonerinfo" type="button">go!</button>
 						</div>
 						<div class="menu">
 							<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
@@ -81,13 +81,11 @@
 			</div id="m_logo">
 
 			<div id="searchdiv">
-				<div>
+				<div class="main-search-form">
 					<fieldset>
 						<legend>전적 검색</legend>
-						<form class="main-search-form">
-							<input id="search-input" class="summoner_name main-search">
-							<button class="gosummonerinfo main-btn">전적검색</button>
-						</form>
+						<input id="search-input" class="summoner_name main-search">
+						<button type="button" class="gosummonerinfo main-btn">전적검색</button>
 					</fieldset>
 				</div>
 			</div id="searchdiv">
@@ -351,21 +349,24 @@
 
 
 
-
+    let keyupActive = true;
     $('.gosummonerinfo').click(function () {
-      //siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기
+      keyupActive = false
+      console.log("작동하니?");
       let summoner_name = $(this).siblings('.summoner_name').filter(function () {
         return $(this).val() !== "";
       }).first().val();
 
       if (!summoner_name) {
         console.log("검색어가 비어있습니다.");
+        alert("검색어가 비어있습니다.");
         return;
       }
 
       console.log(summoner_name);
       const encoded_name = encodeURIComponent(summoner_name);
       const go_url = '/personlol/summoner/?summoner_name=' + encoded_name;
+
       $.ajax({
         method: 'get',
         url: '/personlol/user/checkserver',
@@ -376,22 +377,28 @@
         if (res == "1") {
           location.href = go_url;
         } else if (res == "-999") {
-          alert("등록되지않은 소환사입니다 다시 입력해주세요")
+          alert("등록되지 않은 소환사입니다. 다시 입력해주세요.");
         }
       }).fail(err => {
         console.log(err);
-      })
-
+      });
     });
 
+
     $('#search-input').click(function () {
+      $(this).val('')
+
+      if (!keyupActive) {
+        return
+      }
+
       let timer;
-      let dbSearch = $('#db_search');
+      $('#db_search').remove();
+      let dbSearch = $('#db_search')
 
       if (dbSearch.length === 0) {
         let make_div = '<div id="db_search" class="search-db">검색어를 입력하여주세요.</div>';
         $('.main-search-form').append(make_div);
-        dbSearch = $('#db_search');
       }
 
       $('#search-input').keyup(function () {
@@ -407,18 +414,24 @@
               'summoner_name': summoner_lolname
             }
           }).done(res => {
+            if (res.length === 0) {
+              let make_div = '<div id="db_search" class="search-db">검색어를 입력하여주세요.</div>';
+              $('.main-search-form').append(make_div);
+            }
             $('#search-input').empty();
-            $('#searchdiv').css('margin-bottom','300px')
-            $('#db_search').css('height','300px')
+            $('#searchdiv').css('margin-bottom', '300px')
+            $('#db_search').css('height', '300px')
+            $('#db_search').empty();
             for (let i in res) {
               let list = res[i]
-              console.log(list);
+              console.log(list.summoner_name);
               let summoner_info = '';
-              summoner_info +=
+              summoner_info += '<a href="/personlol/summoner/?summoner_name=' + list.summoner_name +
+                '">' +
                 '<div class ="s_summoner_box"><div class = "summoner_icon"><img class="summoner_icon_img" src="./resources/dd/img/profileicon/' +
                 list.summoner_profile + '.png" alt=""></img></div>' +
                 '<div class = "s_summoner_name">' + list.summoner_name + '</div>' +
-                '<div class = "s_summoner_lv_tier">' + list.summoner_tier + '</div></div>'
+                '<div class = "s_summoner_lv_tier">' + list.summoner_tier + '</div></div></a>'
               console.log(summoner_info);
               $('#db_search').append(summoner_info);
             }
@@ -427,10 +440,21 @@
           })
         }, 1000);
       });
-      // $('#search-input').focusout(function () {
-      //   $('#searchdiv').css('margin-bottom','100px')
-      //   dbSearch.remove();
-      // });
+    });
+
+
+    // $('#search-input').focusout(function () {
+    //   $('#searchdiv').css('margin-bottom', '100px')
+    //   $('#db_search').hide();
+    // });
+    $('#search-input').on('focusout', function (event) {
+      let click = $(event.relatedTarget).is('#db_search');
+      let a_click = $(event.relatedTarget).is('a');
+
+      if (!click && !a_click) {
+        $('#searchdiv').css('margin-bottom', '100px');
+        $('#db_search').hide();
+      }
     });
   </script>
 
@@ -444,7 +468,5 @@
   </script>
 
 </body>
-
-
 
 </html>

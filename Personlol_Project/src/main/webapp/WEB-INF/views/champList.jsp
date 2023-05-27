@@ -73,13 +73,6 @@
 
 <div class="container text-center bcolor">
 	<div class="row">
-		<div class='col'>
-			<div class="search-container">
-				<input type="text" class="search-summoner">
-			</div>
-		</div>
-	</div>
-	<div class="row">
 		<div class="col" id="col1">
 			<div id="btn-group1" class="btn-group" role="group"
 				aria-label="Basic outlined example">

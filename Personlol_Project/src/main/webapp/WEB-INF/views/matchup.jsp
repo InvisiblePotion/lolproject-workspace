@@ -238,7 +238,9 @@
     			
     		</div>
     	</div>
-    	<div class="col col-sm-4">2222</div>
+    	<div class="col col-sm-4" id="matchamp_info">
+    	
+    	</div>
     </div>
     
  </div class="container">
@@ -482,7 +484,10 @@ $(document).ready(function() {
 		match_damage='';
 		match_win2='';
 		$.each(res, function (i,match) {
+			
 			let winRate = parseFloat(match.matchup_win_rate);
+			let winRateRounded = (100-winRate).toFixed(2)// 소수점 둘째 자리까지 반올림
+			
 			
 			//계산을 위한 선언
 		    let f_kda = parseFloat(match.kda_x);
@@ -517,7 +522,7 @@ $(document).ready(function() {
 				'<div class="progress" style="height: 50px;">'+
 				'<div class="progress-bar bg-danger" role="progressbar" style="width:'+winRate+'%">'+
 				winRate+'%'+'</div>'+
-				'<div class="progress-bar bg-info" role="progressbar" style="width:'+(100-winRate)+'%">'+(100-winRate)+'%'+'</div>'+
+				'<div class="progress-bar bg-info" role="progressbar" style="width:'+winRateRounded+'%">'+winRateRounded+'%'+'</div>'+
 				'</div>';
 			
 			match_kda +=
@@ -547,7 +552,7 @@ $(document).ready(function() {
 				'<div class="progress" style="height: 25px;">'+
 				'<div class="progress-bar bg-danger" role="progressbar" style="width:'+winRate+'%">'+
 				winRate+'%'+'</div>'+
-				'<div class="progress-bar bg-info" role="progressbar" style="width:'+(100-winRate)+'%">'+(100-winRate)+'%'+'</div>'+
+				'<div class="progress-bar bg-info" role="progressbar" style="width:'+winRateRounded+'%">'+winRateRounded+'%'+'</div>'+
 				'</div>';
 				
 			
@@ -641,6 +646,34 @@ $(document).ready(function() {
 		console.log("확인해보세용")
 		console.log(res)
 		console.log("확인해보세요")
+		
+		$.each(res, function(i,match) {
+			let matchamp_id = match.champ_id_y;
+			
+			$.ajax({
+				method:'get',
+				data:{matchamp_id:matchamp_id,champ_lane:champ_lane},
+				url:'/personlol/matchup/matchamp-info'
+				
+			}).done(res =>{
+				console.log("14개 값 다넘어오는지 보자")
+				console.log(res)
+				console.log("14개 값 다넘어오는지 보자")
+				
+				matchamp_info=''
+				$.each(res, function (i,champ) {
+					matchamp_info += '<div class="row">'+
+					'<div>'+
+					'<img class="icon_img" width="50" height="50" src="../resources/'+ champ.champ_icon +'" alt="이미지">'+
+					'<span>'+champ.champ_name+'</span>'+
+					'</div>'+
+					'</div>'
+				}) 
+				$('#matchamp_info').append(matchamp_info);
+			}).fail(err =>{
+				console.log(err)
+			})
+		})//each문 끝
 		
 	}).fail(err => {
 		
