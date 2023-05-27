@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="javax.servlet.http.HttpSession" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -8,225 +8,227 @@
 
 
 <head>
-<meta charset="UTF-8">
-<title>main</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <title>main</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" type="text/css" href="./resources/css/header.css">
-<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./resources/css/header.css">
+  <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
 
 </head>
 
 <body>
-	<div id="wrapdiv">
+  <div id="wrapdiv">
 
-		<div id="generic">
-			<div class="area">
-				<nav class="bener-container">
-					<div class="bener">
-						<a href="/personlol/main" class="imgfile"><img
-							src="./resources/img/logotesting.png" height="25px"></a>
-						<div class="search-bar">
+    <div id="generic">
+      <div class="area">
+        <nav class="bener-container">
+          <div class="bener">
+            <a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png" height="25px"></a>
+            <div class="search-bar">
 
-							<input class="summoner_name summoner_name_search" type="text"
-								placeholdr="소환사명 검색....">
-							<button class="gosummonerinfo" type="button">go!</button>
-						</div>
-						<div class="menu">
-							<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
-								href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
-								href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-								href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
-								href="/personlol/summoner/" class="m-col">소환사분석</a>
+              <input class="summoner_name summoner_name_search" type="text" placeholdr="소환사명 검색....">
+              <button class="gosummonerinfo" type="button">go!</button>
+            </div>
+            <div class="menu">
+              <a href="/personlol/champion/" class="m-col">챔피언분석</a> <a href="/personlol/rank"
+                class="m-col rank">랭킹보기</a> <a href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+                href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a href="/personlol/summoner/"
+                class="m-col">소환사분석</a>
 
 
-						</div>
-						<div class="my-menu">
-							<c:choose>
-								<c:when test="${sessionScope.id ne null}">
-									<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/personlol/logine" class="m-col login">로그인</a>
-								</c:otherwise>
-							</c:choose>
+            </div>
+            <div class="my-menu">
+              <c:choose>
+                <c:when test="${sessionScope.id ne null}">
+                  <a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+                </c:when>
+                <c:otherwise>
+                  <a href="/personlol/logine" class="m-col login">로그인</a>
+                </c:otherwise>
+              </c:choose>
 
-							<div id="loginout">
-								<c:if test="${sessionScope.id ne null}">
-									<div class="loggedin-box">
-										<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
-									</div>
-									<div class="logout-box">
-										<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
-									</div>
-								</c:if>
-							</div id="loginout">
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div id="generic">
-		<!-- 여기까지가 배너입니다. -->
+              <div id="loginout">
+                <c:if test="${sessionScope.id ne null}">
+                  <div class="loggedin-box">
+                    <span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+                  </div>
+                  <div class="logout-box">
+                    <span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+                  </div>
+                </c:if>
+              </div id="loginout">
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div id="generic">
+    <!-- 여기까지가 배너입니다. -->
 
-		<div id="maindiv">
+    <div id="maindiv">
 
-			<div id="m_logo">
-				<img
-					src="https://opgg-static.akamaized.net/logo/20230414083144.6eb75aa6cdf74acba088a2c108e5a061.png?image=q_auto,f_webp,w_auto&amp;v=1681505802343"
-					alt="OP.GG logo (밀리오)" title="밀리오" id=m_log_img>
-			</div id="m_logo">
+      <div id="m_logo">
+        <img
+          src="https://opgg-static.akamaized.net/logo/20230414083144.6eb75aa6cdf74acba088a2c108e5a061.png?image=q_auto,f_webp,w_auto&amp;v=1681505802343"
+          alt="OP.GG logo (밀리오)" title="밀리오" id=m_log_img>
+      </div id="m_logo">
 
-			<div id="searchdiv">
-				<div class="main-search-form">
-					<fieldset>
-						<legend>전적 검색</legend>
-						<input id="search-input" class="summoner_name main-search">
-						<button type="button" class="gosummonerinfo main-btn">전적검색</button>
-					</fieldset>
-				</div>
-			</div id="searchdiv">
+      <div id="searchdiv">
+        <div class="main-search-form">
+          <fieldset>
+            <legend>전적 검색</legend>
+            <input id="search-input" class="summoner_name main-search">
+            <button type="button" class="gosummonerinfo main-btn">전적검색</button>
+          </fieldset>
+        </div>
+      </div id="searchdiv">
 
-			<div id="lanediv">
-				<div class="m_lane top">
+      <div id="lanediv">
+        <div class="m_lane top">
 
-					<div class="line-info">
-						<h4>TOP</h4>
-					</div>
+          <div class="line-info">
+            <h4>TOP</h4>
+          </div>
 
-					<!-- 설명 -->
-					<div id="table_list">
-						<table class="table " id="head_table">
-							<thead>
-								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-								</tr>
-							</thead>
-						</table>
-						<table id="list_table1" class="table "></table>
-					</div>
+          <!-- 설명 -->
+          <div id="table_list">
+            <table class="table " id="head_table">
+              <thead>
+                <tr class="tr_champ" align="center">
+                  <th width="150px" style="font-size: 12px">챔피언</th>
+                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+                </tr>
+              </thead>
+            </table>
+            <table id="list_table1" class="table "></table>
+          </div>
 
-					<!-- for문으로 넣을 곳 자리잡기용 -->
-					<div class="line-info top_val"></div>
+          <!-- for문으로 넣을 곳 자리잡기용 -->
+          <div class="line-info top_val"></div>
 
-				</div class="m_lane top">
+        </div class="m_lane top">
 
-				<div class="m_lane jug">
-					<div class="line-info">
-						<h2>jug</h2>
-					</div>
-					<!-- 설명 -->
-					<div id="table_list">
-						<table class="table " id="head_table">
-							<thead>
-								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-								</tr>
-							</thead>
-						</table>
-						<table id="list_table1" class="table "></table>
-					</div>
-					<!-- for문으로 넣을 곳 자리잡기용 -->
-					<div class="line-info jug_val"></div>
-				</div class="m_lane jug">
+        <div class="m_lane jug">
+          <div class="line-info">
+            <h2>jug</h2>
+          </div>
+          <!-- 설명 -->
+          <div id="table_list">
+            <table class="table " id="head_table">
+              <thead>
+                <tr class="tr_champ" align="center">
+                  <th width="150px" style="font-size: 12px">챔피언</th>
+                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+                </tr>
+              </thead>
+            </table>
+            <table id="list_table1" class="table "></table>
+          </div>
+          <!-- for문으로 넣을 곳 자리잡기용 -->
+          <div class="line-info jug_val"></div>
+        </div class="m_lane jug">
 
-				<div class="m_lane mid">
-					<div class="line-info">
-						<h2>mid</h2>
-					</div>
+        <div class="m_lane mid">
+          <div class="line-info">
+            <h2>mid</h2>
+          </div>
 
-					<!-- 설명 -->
-					<div id="table_list">
-						<table class="table " id="head_table">
-							<thead>
-								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-								</tr>
-							</thead>
-						</table>
-						<table id="list_table1" class="table "></table>
-					</div>
-					<!-- for문으로 넣을 곳 자리잡기용 -->
-					<div class="line-info mid_val"></div>
+          <!-- 설명 -->
+          <div id="table_list">
+            <table class="table " id="head_table">
+              <thead>
+                <tr class="tr_champ" align="center">
+                  <th width="150px" style="font-size: 12px">챔피언</th>
+                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+                </tr>
+              </thead>
+            </table>
+            <table id="list_table1" class="table "></table>
+          </div>
+          <!-- for문으로 넣을 곳 자리잡기용 -->
+          <div class="line-info mid_val"></div>
 
-				</div class="m_lane mid">
+        </div class="m_lane mid">
 
-				<div class="m_lane ad">
-					<div class="line-info">
-						<h2>ad</h2>
-					</div>
+        <div class="m_lane ad">
+          <div class="line-info">
+            <h2>ad</h2>
+          </div>
 
-					<!-- 설명 -->
-					<div id="table_list">
-						<table class="table " id="head_table">
-							<thead>
-								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-								</tr>
-							</thead>
-						</table>
-						<table id="list_table1" class="table "></table>
-					</div>
-					<!-- for문으로 넣을 곳 자리잡기용 -->
-					<div class="line-info ad_val"></div>
-				</div class="m_lane ad">
+          <!-- 설명 -->
+          <div id="table_list">
+            <table class="table " id="head_table">
+              <thead>
+                <tr class="tr_champ" align="center">
+                  <th width="150px" style="font-size: 12px">챔피언</th>
+                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+                </tr>
+              </thead>
+            </table>
+            <table id="list_table1" class="table "></table>
+          </div>
+          <!-- for문으로 넣을 곳 자리잡기용 -->
+          <div class="line-info ad_val"></div>
+        </div class="m_lane ad">
 
-				<div class="m_lane sup">
-					<div class="line-info">
-						<h2>sup</h2>
-					</div>
+        <div class="m_lane sup">
+          <div class="line-info">
+            <h2>sup</h2>
+          </div>
 
-					<!-- 설명 -->
-					<div id="table_list">
-						<table class="table " id="head_table">
-							<thead>
-								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-								</tr>
-							</thead>
-						</table>
-						<table id="list_table1" class="table "></table>
-					</div>
-					<!-- for문으로 넣을 곳 자리잡기용 -->
-					<div class="line-info sup_val"></div>
+          <!-- 설명 -->
+          <div id="table_list">
+            <table class="table " id="head_table">
+              <thead>
+                <tr class="tr_champ" align="center">
+                  <th width="150px" style="font-size: 12px">챔피언</th>
+                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+                </tr>
+              </thead>
+            </table>
+            <table id="list_table1" class="table "></table>
+          </div>
+          <!-- for문으로 넣을 곳 자리잡기용 -->
+          <div class="line-info sup_val"></div>
 
 
-				</div class="m_lane ">
+        </div class="m_lane ">
 
-			</div id="lanediv">
+      </div id="lanediv">
 
-			<div id="duodiv">
-				<div class="duolist">
-					<h2>듀오1</h2>
-				</div id="duolist">
-				<div class="duolist">
-					<h2>듀오2</h2>
-				</div id="duolist">
-				<div class="duolist">
-					<h2>듀오3</h2>
-				</div id="duolist">
+      <div id="duodiv">
+        <div class="main_paging back_page">
+          <img class="pageing_img" src="./resources/img/backpage.png" alt="">
+        </div>
+        <div class="duolist">
+          <h2>듀오1</h2>
+        </div id="duolist">
+        <div class="duolist">
+          <h2>듀오2</h2>
+        </div id="duolist">
+        <div class="duolist">
+          <h2>듀오3</h2>
+        </div id="duolist">
+        <div class="main_paging next_page">
+          <img class="pageing_img" src="./resources/img/nextpage.png" alt="">
+        </div>
 
-			</div id="duodiv">
+      </div id="duodiv">
 
-		</div id="maindiv">
+    </div id="maindiv">
 
-		<footer>
-			<div>
-				<h2>하단 footer</h2>
-			</div>
-		</footer>
+    <footer>
+      <div>
+        <h2>하단 footer</h2>
+      </div>
+    </footer>
 
-	</div id="wrapdiv">
+  </div id="wrapdiv">
 
-	<script>
+  <script>
     //TOP;
     $.ajax({
       method: 'get',
@@ -348,6 +350,47 @@
     });
 
 
+    //최신 듀오 리스트 가져오기
+    let pageing = 1;
+
+    function paging_duo(pageing) {
+      if(pageing<0){
+        alert("최신페이지 입니다.")
+        location.href='/personlol/'
+
+      }
+
+      $.ajax({
+        method: 'get',
+        url: '/personlol/duo/main_duo',
+        data:{'page_num':pageing}
+      }).done(res => {
+        console.log(res.length);
+        if(res.length===0){
+          alert("더이상 정보가 없습니다.")
+          location.href='/personlol/'
+          return "last_page"
+        }
+      }).fail(err => {
+        console.log(err);
+      });
+    }
+    //초기 값 가져오기
+    paging_duo(pageing)
+    
+    $('.next_page').click(function(){
+      pageing++;
+      console.log("페이징 정보: " + pageing);
+      paging_duo(pageing) 
+      }
+    );
+    
+    $('.back_page').click(function(){
+      pageing--;
+      console.log("페이징 정보: "+pageing);
+      paging_duo(pageing);
+    })
+
 
     let keyupActive = true;
     $('.gosummonerinfo').click(function () {
@@ -458,7 +501,7 @@
     });
   </script>
 
-	<script>
+  <script>
     //로그아웃
     $('#logout').click(function () {
       location.href = '/personlol/logout';

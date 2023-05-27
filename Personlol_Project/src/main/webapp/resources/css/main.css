@@ -71,8 +71,19 @@
 
 #duodiv{
   display: flex;
+  align-items: center;
   margin-top: 24px;
   justify-content: space-between;
+}
+.duolist{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgb(91, 91, 91);
+  border-radius:  4px;
+  width: 315px;
+  min-height: 220px;
+  padding: 24px 20px 15px;
+  margin: 5px;
 }
 
 .img_c{
@@ -186,4 +197,19 @@ input:focus {outline:none;}
   width: 300px;
   justify-content: center;
   align-items: center;  
+}
+
+.main_paging{
+  display: flex;
+  width: 42px;
+  height: 42px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageing_img{
+
+  width: 42px;
+  height: 42px;
+  margin: 8px;
 }

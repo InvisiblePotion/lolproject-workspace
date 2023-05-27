@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.base.personlol.dao.duo_dao;
+import com.base.personlol.dto.Main_duo_dto;
 import com.base.personlol.dto.duo_dto;
 import com.base.personlol.dto.rank_dto;
 import com.base.personlol.dto.userinfo_dto;
@@ -139,6 +140,16 @@ public class duo_service {
 			return -99;
 		}
 
+	}
+
+	public List<Map<String,Object>> getDuoboard(int page_num) {
+		System.out.println("듀오 메인 서비스 실행");
+		int start_page = (page_num*3)-2;
+
+		int end_page = (page_num * 3);
+		List<Map<String,Object>> result_duo = ddao.all(start_page, end_page);
+		System.out.println("듀오 메인 서비스 리턴"+result_duo);
+		return result_duo;
 	}
 
 }
