@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -1812.2031250000118,
-    "scrollLeft": -2997.6062500000094,
+    "scrollTop": -1749.0031250000134,
+    "scrollLeft": -2944.8062500000005,
     "zoomLevel": 0.8,
     "show": {
       "tableComment": true,
@@ -248,6 +248,29 @@
             "id": "f7500afc-9231-490f-8c59-51799b211bd3"
           },
           {
+            "name": "game_count",
+            "comment": "게임 수",
+            "dataType": "NUMBER(6)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 73.96337890625,
+              "widthComment": 60,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "3f1ec0f3-3005-4f0b-83a3-d49db4eb6d36"
+          },
+          {
             "name": "ban_rate",
             "comment": "밴률",
             "dataType": "NUMBER",
@@ -272,10 +295,10 @@
           }
         ],
         "ui": {
-          "active": false,
-          "left": 3745.2217,
-          "top": 1993.2213,
-          "zIndex": 31,
+          "active": true,
+          "left": 3747.2217,
+          "top": 1974.2213,
+          "zIndex": 43,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -706,7 +729,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 37,
+          "zIndex": 36,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -907,7 +930,7 @@
           "active": false,
           "left": 3746.7802,
           "top": 2767.6675,
-          "zIndex": 23,
+          "zIndex": 22,
           "widthName": 87.515625,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1154,7 +1177,7 @@
           "active": false,
           "left": 3747.0892,
           "top": 3019.1997,
-          "zIndex": 16,
+          "zIndex": 15,
           "widthName": 126.76318359375,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -1378,7 +1401,7 @@
           "active": false,
           "left": 3744.8509,
           "top": 3880.7751,
-          "zIndex": 18,
+          "zIndex": 17,
           "widthName": 92.5048828125,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1533,7 +1556,7 @@
           "active": false,
           "left": 4090.5,
           "top": 1083.522,
-          "zIndex": 27,
+          "zIndex": 26,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1989,7 +2012,7 @@
           "active": false,
           "left": 4428.5769,
           "top": 2146.3554,
-          "zIndex": 30,
+          "zIndex": 29,
           "widthName": 60,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2098,7 +2121,7 @@
           "active": false,
           "left": 4433.2447,
           "top": 2623.1335,
-          "zIndex": 26,
+          "zIndex": 25,
           "widthName": 65.49560546875,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2833,7 +2856,7 @@
           "active": false,
           "left": 4392.489,
           "top": 3136.1536,
-          "zIndex": 29,
+          "zIndex": 28,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -3097,7 +3120,7 @@
           "active": false,
           "left": 3747.0836,
           "top": 3312.3253,
-          "zIndex": 17,
+          "zIndex": 16,
           "widthName": 130.71142578125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3298,7 +3321,7 @@
           "active": false,
           "left": 3745.3725,
           "top": 3628.2143,
-          "zIndex": 25,
+          "zIndex": 24,
           "widthName": 123.5703125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3614,7 +3637,7 @@
           "active": false,
           "left": 3746.3283,
           "top": 4156.2132,
-          "zIndex": 32,
+          "zIndex": 31,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -3769,7 +3792,7 @@
           "active": false,
           "left": 2616.1115,
           "top": 2005.2228,
-          "zIndex": 19,
+          "zIndex": 18,
           "widthName": 89.140625,
           "widthComment": 60,
           "color": "#607D8B"
@@ -3901,7 +3924,7 @@
           "active": false,
           "left": 4367.3327,
           "top": 3925.556,
-          "zIndex": 28,
+          "zIndex": 27,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -4516,7 +4539,7 @@
           "active": false,
           "left": 2664.7782,
           "top": 851.8892,
-          "zIndex": 33,
+          "zIndex": 32,
           "widthName": 60,
           "widthComment": 96.30078125,
           "color": "#00BCD4"
@@ -4832,7 +4855,7 @@
           "active": false,
           "left": 3332.4,
           "top": 529.6,
-          "zIndex": 36,
+          "zIndex": 35,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#00BCD4"
@@ -4895,7 +4918,7 @@
           "active": false,
           "left": 3385.3331,
           "top": 1013.8881,
-          "zIndex": 34,
+          "zIndex": 33,
           "widthName": 60,
           "widthComment": 77.47998046875,
           "color": "#4CAF50"
@@ -4958,7 +4981,7 @@
           "active": false,
           "left": 2728.6063,
           "top": 561.2031,
-          "zIndex": 35,
+          "zIndex": 34,
           "widthName": 145.39990234375,
           "widthComment": 101.48681640625,
           "color": "#FF9800"
@@ -4990,7 +5013,7 @@
           "active": false,
           "left": 3746.844444444461,
           "top": 2693.133333333341,
-          "zIndex": 22,
+          "zIndex": 21,
           "width": 403.8000000000003,
           "height": 100
         },
@@ -5024,10 +5047,10 @@
       {
         "value": "빨간 테이블은 전부 인터벌 테이블로 1~2시간 간격의 인터벌로 갱신될 예정...\n이지만 변경될 수 있으며 다른 데이터 테이블과의 참조 여부도 변경될 수 있음.\n\n빨간 테이블의 참조 중 일부는 FK 참조가 성립하지 않을 수도 있음.\n대부분은 실수이므로 이 경우엔 ERD 수정을 위해 팀원에게 알려줄 것!\n\n각종 이미지와 같은 변동성이 없는 정보의 경우엔 서버의 REST 컨트롤러에서\n메소드가 호출될 때 메소드 내부에서 해당 정보들을 직접 쿼리해올 예정이므로\n빨간 인터벌 테이블에는 변동성이 있고 필요한 정보의 추출을 위한 쿼리에\n긴 시간이 소요되는 정보만을 저장함.",
         "ui": {
-          "active": false,
-          "left": 3742.0000000000155,
-          "top": 1673.2666666666992,
-          "zIndex": 20,
+          "active": true,
+          "left": 3744.0000000000155,
+          "top": 1654.2666666666992,
+          "zIndex": 19,
           "width": 475.7999999999993,
           "height": 179.1999999999998,
           "color": "#F44336"
@@ -5062,10 +5085,10 @@
       {
         "value": "OP 티어는 0으로 입력\n(현재 티어 알고리즘 정립 전까지 임시로 0 사용 중)",
         "ui": {
-          "active": false,
-          "left": 3746.155555555586,
-          "top": 1912.6888888889214,
-          "zIndex": 21,
+          "active": true,
+          "left": 3748.155555555586,
+          "top": 1893.6888888889214,
+          "zIndex": 20,
           "width": 400.6000000000005,
           "height": 100
         },
@@ -5089,7 +5112,7 @@
           "active": false,
           "left": 3746.6666666666665,
           "top": 3559.4444444444403,
-          "zIndex": 24,
+          "zIndex": 23,
           "width": 428,
           "height": 100
         },
@@ -5559,8 +5582,8 @@
           "columnIds": [
             "a234594a-b677-4953-b9e0-6c62d419c8f2"
           ],
-          "x": 3745.2217,
-          "y": 2109.7213,
+          "x": 3747.2217,
+          "y": 2100.9713,
           "direction": "left"
         },
         "constraintName": "fk_champdata_to_champion_info",
