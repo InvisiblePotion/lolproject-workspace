@@ -284,6 +284,12 @@ public class champion_service {
 		matchamp_info_lst = champ_dao.matchamp_info(matchamp_id,champ_lane);
 		return matchamp_info_lst;
 	}
+
+	public List<champion_dto> counter_info(Integer champ_id, String champ_lane) {
+		List<champion_dto> counter_info_lst= null;
+		counter_info_lst = champ_dao.counter_info(champ_id,champ_lane);
+		return counter_info_lst;
+	}
 	
 
 	

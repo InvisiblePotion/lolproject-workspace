@@ -103,6 +103,9 @@ public interface champion_dao {
 	//챔프 매치업 상대한 챔프들 정보
 	List<champion_dto> matchamp_info(@Param("matchamp_id")Integer matchamp_id,@Param("champ_lane") String champ_lane);
 	
+	//챔프 리스트 출력에서 카운터정보 추가
+	List<champion_dto> counter_info(@Param("champ_id") Integer champ_id,@Param("champ_lane") String champ_lane);
+	
 	
 	
 
