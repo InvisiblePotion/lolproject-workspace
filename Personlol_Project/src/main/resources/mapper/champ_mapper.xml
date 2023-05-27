@@ -21,12 +21,14 @@
 
 	<select id="lane_list"
 		resultType="com.base.personlol.dto.champion_dto">
-		SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON
-		, ci.LANE as lane
-		,ci.WIN_RATE ,ci.PICK_RATE ,ci.BAN_RATE FROM
-		CHAMPDATA c LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-		WHERE lane =
-		#{lane}
+		<![CDATA[
+		SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON,
+       ci.LANE AS lane, ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE, ci.game_count
+		FROM CHAMPDATA c
+		INNER JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		WHERE ci.LANE = #{lane}
+		ORDER BY ci.game_count DESC
+		FETCH FIRST 30 ROWS ONLY]]>
 	</select>
 	
 	<select id="mlane_list" resultType="com.base.personlol.dto.champion_dto">
@@ -55,6 +57,7 @@
 		WHERE lane =
 		#{lane}
 		ORDER BY ci.WIN_RATE ${sort}
+		FETCH FIRST 30 ROWS ONLY
 	</select>
 
 	<select id="lane_sort_pick"
@@ -67,6 +70,7 @@
 		WHERE lane =
 		#{lane}
 		ORDER BY ci.PICK_RATE ${sort}
+		FETCH FIRST 30 ROWS ONLY
 	</select>
 
 	<select id="lane_sort_ban"
@@ -79,6 +83,7 @@
 		WHERE lane =
 		#{lane}
 		ORDER BY ci.BAN_RATE ${sort}
+		FETCH FIRST 30 ROWS ONLY
 	</select>
 
 	<select id="search_champ"
@@ -189,7 +194,7 @@
 		FROM (
 		  SELECT *
 		  FROM CHAMPION_MATCHUP
-		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane} AND MATCHUP_COUNT >= 10
+		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane} AND MATCHUP_COUNT >= 20
 		  ORDER BY MATCHUP_WIN_RATE DESC
 		) 
 		WHERE ROWNUM <= 3]]>
@@ -249,5 +254,21 @@
 		INNER JOIN CHAMPION_INFO ci 
 		ON c.CHAMP_ID = ci.CHAMP_ID 
 		WHERE c.CHAMP_ID = #{matchamp_id} AND ci.LANE = #{champ_lane}
+	</select>
+	
+	<!--챔프 리스트 출력시 카운터 추가-->
+	<select id="counter_info" resultType="com.base.personlol.dto.champion_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		    SELECT cm.LANE AS LANE, cm.CHAMP_ID_X  ,cm.CHAMP_ID_Y 
+		    FROM CHAMPION_INFO ci
+		    INNER JOIN CHAMPION_MATCHUP cm ON ci.CHAMP_ID = cm.CHAMP_ID_X
+		    WHERE ci.CHAMP_ID = #{champ_id} AND ci.LANE = #{champ_lane} AND cm.MATCHUP_COUNT >= 10
+		    ORDER BY cm.MATCHUP_WIN_RATE ASC
+		) c1
+		INNER JOIN CHAMPDATA c2
+		ON c1.champ_id_y = c2.CHAMP_ID 
+		WHERE ROWNUM <= 3]]>
 	</select>
 </mapper>

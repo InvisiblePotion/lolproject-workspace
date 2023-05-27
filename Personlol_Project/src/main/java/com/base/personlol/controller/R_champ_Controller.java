@@ -83,6 +83,13 @@ public class R_champ_Controller {
 		return fList;
 	}
 	
+	//챔프 리스트 카운터정보 추가
+	@GetMapping("/list/counter-info")
+	public List<champion_dto> counter_info(Integer champ_id,String champ_lane){
+		List<champion_dto> counter_info_lst = champ_ser.counter_info(champ_id,champ_lane);
+		return counter_info_lst;
+	}
+	
 	//메인 띄워주는거
 	@GetMapping("/mainchamp")
 	public List<champion_dto> main_list(@RequestParam("lane") String lane){

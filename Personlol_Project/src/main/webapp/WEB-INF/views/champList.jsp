@@ -89,38 +89,38 @@
 
 	<div class="row">
 
-		<div class="col">
+		<div class="col-4">
 			<div class="search-container">
 				<input type="text" class="search-champ" placeholder="챔피언 검색"
 					id="search-champ">
 			</div>
-			<div class="btn-group" role="group"
+			<div class="btn-group" role="group" id="btn-group2"
 				aria-label="Basic outlined example">
 
 				<button type="button" class="btn btn-light" id="top_img">
 					<img
 						src="../resources/ranked-positions/Position_Challenger-Top.png"
-						alt="Top" />
+						alt="Top" width="40" height="40"/>
 				</button>
 				<button type="button" class="btn btn-light" id="jug_img">
 					<img
 						src="../resources/ranked-positions/Position_Challenger-Jungle.png"
-						alt="Jug" />
+						alt="Jug" width="40" height="40" />
 				</button>
 				<button type="button" class="btn btn-light" id="mid_img">
 					<img
 						src="../resources/ranked-positions/Position_Challenger-Mid.png"
-						alt="Mid" />
+						alt="Mid" width="40" height="40" />
 				</button>
 				<button type="button" class="btn btn-light" id="bot_img">
 					<img
 						src="../resources/ranked-positions/Position_Challenger-Bot.png"
-						alt="Bot" />
+						alt="Bot" width="40" height="40"/>
 				</button>
 				<button type="button" class="btn btn-light" id="util_img">
 					<img
 						src="../resources/ranked-positions/Position_Challenger-Support.png"
-						alt="Sup" />
+						alt="Sup" width="40" height="40"/>
 				</button>
 
 			</div>
@@ -137,7 +137,7 @@
 					<thead>
 						<tr align="center">
 							<th width="100px" style="font-size: 12px">번호</th>
-							<th width="100px" style="font-size: 12px">챔피언</th>
+							<th width="100px" style="font-size: 12px" >챔피언</th>
 							<th width="100px" style="font-size: 12px" id="table_tier">티어</th>
 							<th width="100px" style="font-size: 12px" id="table_win_rate">승률</th>
 							<th width="100px" style="font-size: 12px" id="table_pick_rate">픽률</th>
@@ -307,38 +307,75 @@
 
 			// 테이블 찍어주는 함수
 			function updateTableData(data) {
-				let lane_list_sort = '';
-
+				
+				let lane_list_sort_last = '';
 				$.each(data, function (i, list) {
-					lane_list_sort +=
-						'<tr><td class="number">' +
-						(i + 1) +
-						'</td>' +
-						'<td align="left" width="120px">' +
-						'<a href="/personlol/champion/detail?champ_id=' + list.champ_id +'&lane='+list.lane+'">'+
-						'<img width="30" height="30" src="../resources/'+
-						list.champ_icon +'" alt="이미지">' +
-						'<span style="font-size: 12px; font-weight: bold;">' +
-						list.champ_name +
-						'</span> </td>' +
-						'<td align="left">' +
-						0 +
-						'</td>' +
-						'<td align="left">' +
-						list.win_rate +
-						'</td>' +
-						'<td align="left">' +
-						list.pick_rate +
-						'</td>' +
-						'<td align="left">' +
-						list.ban_rate +
-						'</td>' +
-						'<td align="left">' +
-						0 +
-						'</td> </tr>';
-				});
-
-				$('#list_table1').html(lane_list_sort);
+					
+					//카운터 챔프3개 이미지 갖고오기
+					$.ajax({
+						method:'get',
+						data:{champ_id:list.champ_id,champ_lane:list.lane},
+						url:'/personlol/list/counter-info'
+						
+					}).done(res=>{
+						let lane_list_sort = '';
+						let counter_icons =[];
+						
+						$.each(res, function(i,counter) {
+							let counter_champ = counter.champ_id_y
+							let counter_icon = counter.champ_icon
+							
+							console.log("잘해보자이말이야")
+							console.log(counter_champ)
+							console.log(counter_icon)
+							console.log("잘해보자이말이야")
+							
+							counter_icons.push(
+									'<a href="/personlol/champion/matchup?champ_id='+ list.champ_id +'&lane='+list.lane+'&match_champ='+counter_champ+'">'+
+									'<img width="30" height="30" src="../resources/'+counter_icon +'" alt="이미지">'
+									);
+						})
+						
+						lane_list_sort +=
+							'<tr><td class="number" >' +
+							(i + 1) +
+							'</td>' +
+							'<td align="left" class="list_td">' +
+							
+							'<a href="/personlol/champion/detail?champ_id=' + list.champ_id +'&lane='+list.lane+'">'+
+							'<img width="30" height="30" src="../resources/'+
+							list.champ_icon +'" alt="이미지">' +
+							'<span style="font-size: 12px; font-weight: bold;">' +
+							list.champ_name +
+							'</span> </td>' +
+							'<td align="center">' +
+							0 +
+							'</td>' +
+							'<td align="center">' +
+							list.win_rate +
+							'</td>' +
+							'<td align="center">' +
+							list.pick_rate +
+							'</td>' +
+							'<td align="center">' +
+							list.ban_rate +
+							'</td>' +
+							'<td align="center" class="counter_img" width="120">' +
+							counter_icons.join('') +
+							'</td> </tr>';
+							
+							lane_list_sort_last += lane_list_sort
+							
+							if (i === data.length - 1) {
+				                $('#list_table1').html(lane_list_sort_last);
+				            }
+					}).fail(err => {
+						
+					})//카운터 챔프3개	 이미지 끝
+					
+				});//each list 끝
+				
+				
 			} //찍어주는 함수 끝
 
 		//win 클릭시 함수
@@ -427,6 +464,7 @@
 				}
 			}).done(res => {
 				console.log(res);
+				
 				updateTableData(res);
 
 				isSorting = false; // 정렬 종료 후 플래그 초기화
@@ -451,9 +489,7 @@
 
 		}).done(res => {
 			updateTableData(res);
-
-
-
+		
 		}).fail(err => {
 
 		}) //
@@ -480,6 +516,7 @@
 
 			}).done(res => {
 				updateTableData(res)
+				
 				// 승률 클릭시
 				$('#table_win_rate').click(handleTableWinRateClick);
 

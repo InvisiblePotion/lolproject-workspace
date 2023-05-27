@@ -239,7 +239,20 @@
     		</div>
     	</div>
     	<div class="col col-sm-4" id="matchamp_info">
-    	
+    		<div id="table_list">
+				<table class="table " id="head_table">
+					<thead>
+						<tr align="center">
+							<th width="100px" style="font-size: 12px"></th>
+							<th width="100px" style="font-size: 12px">승률</th>
+							<th width="100px" style="font-size: 12px">게임횟수</th>
+						</tr>
+					</thead>
+
+				</table>
+				<table id="list_table1" class="table"></table>
+
+			</div>
     	</div>
     </div>
     
@@ -662,14 +675,23 @@ $(document).ready(function() {
 				
 				matchamp_info=''
 				$.each(res, function (i,champ) {
-					matchamp_info += '<div class="row">'+
-					'<div>'+
-					'<img class="icon_img" width="50" height="50" src="../resources/'+ champ.champ_icon +'" alt="이미지">'+
-					'<span>'+champ.champ_name+'</span>'+
-					'</div>'+
-					'</div>'
+					matchamp_info += 
+						'<tr>'+
+						
+						'<td align="left" width="120px">'+
+						'<a href="/personlol/champion/matchup?champ_id='+ champ_id +'&lane='+champ_lane+'&match_champ='+matchamp_id+'">'+
+						'<img width="50" height="50" src="../resources/'+champ.champ_icon +'" alt="이미지">' +
+						'<span style="font-size: 12px; font-weight: bold;">' +champ.champ_name +
+						'</span> </td>'+
+			
+						'<td align="center">' +champ.win_rate+
+						'</td>' +
+						
+						'<td align="center">' +champ.game_count+
+						'</td>' +
+						'</tr>'
 				}) 
-				$('#matchamp_info').append(matchamp_info);
+				$('#list_table1').append(matchamp_info);
 			}).fail(err =>{
 				console.log(err)
 			})
