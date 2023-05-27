@@ -1,40 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>champ list</title>
+<meta charset="UTF-8">
+<title>champ list</title>
 
-	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../resources/css/champlist.css">
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-	<style type="text/css">
-		.ul-group {
-			padding: 0px;
-		}
-	</style>
+<link rel="stylesheet" type="text/css" href="../resources/css/header.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/champlist.css">
+
+<style type="text/css">
+.ul-group {
+	padding: 0px;
+}
+</style>
 </head>
-<!-- 여기까지가 헤더!!!!!!!!!! -->
 <div id="generic">
 	<div class="area">
 		<nav class="bener-container">
 			<div class="bener">
-				<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png"></a>
+				<a href="/personlol/main" class="imgfile"><img
+					src="../resources/img/logotesting.png" height="25px"></a>
 				<div class="search-bar">
-					<input class="summoner_name" type="text">
-					<button class="gosummonerinfo" type="button">go!</button>
+
+					<input class="summoner_name_search" type="text"
+						placeholdr="소환사명 검색....">
+					<button class="gosummonerinfo2" type="button">go!</button>
 				</div>
 				<div class="menu">
-					<a href="/personlol/champion/" class="m-col">챔피언분석</a>
-					<a href="/personlol/rank" class="m-col">랭킹</a>
-					<a href="/personlol/duo/" class="m-col">듀오찾기</a>
-					<a href=" " class="m-col">사용자분석</a>
+					<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
+						href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
+						href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+						href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
+						href="/personlol/summoner/" class="m-col">소환사분석</a>
 
+
+				</div>
+				<div class="my-menu">
 					<c:choose>
 						<c:when test="${sessionScope.id ne null}">
 							<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
@@ -46,19 +56,22 @@
 
 					<div id="loginout">
 						<c:if test="${sessionScope.id ne null}">
-							<div><span class="m-col">${sessionScope.id}님 환영합니다!</span></div>
-							<div><span><a href="#" id="logout" class="m-col logout">로그아웃</a></span></div>
+							<div class="loggedin-box">
+								<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+							</div>
+							<div class="logout-box">
+								<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+							</div>
 						</c:if>
 					</div id="loginout">
-
 				</div>
 			</div>
 		</nav>
 	</div>
-</div>
-<!-- 여기까지가 헤더!!!!!!! -->
+</div id="generic">
+<!-- 여기까지가 배너입니다. -->
 
-<div class="container text-center">
+<div class="container text-center bcolor">
 	<div class="row">
 		<div class='col'>
 			<div class="search-container">
@@ -68,12 +81,15 @@
 	</div>
 	<div class="row">
 		<div class="col" id="col1">
-			<div id="btn-group1" class="btn-group" role="group" aria-label="Basic outlined example">
+			<div id="btn-group1" class="btn-group" role="group"
+				aria-label="Basic outlined example">
 				<input type="button" class="btn btn-outline-primary 1" value="TOP">
-				<input type="button" class="btn btn-outline-primary 1" value="JUNGLE">
-				<input type="button" class="btn btn-outline-primary 1" value="MIDDLE">
-				<input type="button" class="btn btn-outline-primary 1" value="BOTTOM">
-				<input type="button" class="btn btn-outline-primary 1" value="UTILITY">
+				<input type="button" class="btn btn-outline-primary 1"
+					value="JUNGLE"> <input type="button"
+					class="btn btn-outline-primary 1" value="MIDDLE"> <input
+					type="button" class="btn btn-outline-primary 1" value="BOTTOM">
+				<input type="button" class="btn btn-outline-primary 1"
+					value="UTILITY">
 			</div>
 		</div>
 	</div class="row">
@@ -82,26 +98,38 @@
 
 		<div class="col">
 			<div class="search-container">
-				<input type="text" class="search-champ" placeholder="챔피언 검색" id="search-champ">
+				<input type="text" class="search-champ" placeholder="챔피언 검색"
+					id="search-champ">
 			</div>
-			<div class="btn-group" role="group" aria-label="Basic outlined example">
-				
+			<div class="btn-group" role="group"
+				aria-label="Basic outlined example">
+
 				<button type="button" class="btn btn-light" id="top_img">
-					<img src="../resources/ranked-positions/Position_Challenger-Top.png"  alt="Top" />
+					<img
+						src="../resources/ranked-positions/Position_Challenger-Top.png"
+						alt="Top" />
 				</button>
 				<button type="button" class="btn btn-light" id="jug_img">
-					<img src="../resources/ranked-positions/Position_Challenger-Jungle.png" alt="Jug" />
+					<img
+						src="../resources/ranked-positions/Position_Challenger-Jungle.png"
+						alt="Jug" />
 				</button>
 				<button type="button" class="btn btn-light" id="mid_img">
-					<img src="../resources/ranked-positions/Position_Challenger-Mid.png" alt="Mid" />
+					<img
+						src="../resources/ranked-positions/Position_Challenger-Mid.png"
+						alt="Mid" />
 				</button>
 				<button type="button" class="btn btn-light" id="bot_img">
-					<img src="../resources/ranked-positions/Position_Challenger-Bot.png" alt="Bot" />
+					<img
+						src="../resources/ranked-positions/Position_Challenger-Bot.png"
+						alt="Bot" />
 				</button>
 				<button type="button" class="btn btn-light" id="util_img">
-					<img src="../resources/ranked-positions/Position_Challenger-Support.png" alt="Sup" />
+					<img
+						src="../resources/ranked-positions/Position_Challenger-Support.png"
+						alt="Sup" />
 				</button>
-				
+
 			</div>
 			<nav class="img-container">
 				<ul class="ul-group">

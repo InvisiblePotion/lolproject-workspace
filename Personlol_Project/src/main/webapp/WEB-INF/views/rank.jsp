@@ -1,38 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>ranking</title>
-	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./resources/css/rank.css">
+<meta charset="UTF-8">
+<title>ranking</title>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="./resources/css/header.css">	
+<link rel="stylesheet" href="./resources/css/rank.css">
 
 </head>
 
 <body>
-	<!-- 여기까지가 헤더!!!!!!!!!! -->
 	<div id="generic">
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png"></a>
+					<a href="/personlol/main" class="imgfile"><img
+						src="./resources/img/logotesting.png" height="25px"></a>
 					<div class="search-bar">
-						<input class="summoner_name" type="text">
-						<button class="gosummonerinfo" type="button">go!</button>
+
+						<input class="summoner_name_search" type="text"
+							placeholdr="소환사명 검색....">
+						<button class="gosummonerinfo2" type="button">go!</button>
 					</div>
 					<div class="menu">
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
+							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
+							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+							href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
+							href="/personlol/summoner/" class="m-col">소환사분석</a>
 
-						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
-						<a href="/personlol/rank" class="m-col">랭킹</a>
-						<a href="/personlol/duo/" class="m-col">듀오찾기</a>
-						<a href=" " class="m-col">사용자분석</a>
 
+					</div>
+					<div class="my-menu">
 						<c:choose>
 							<c:when test="${sessionScope.id ne null}">
 								<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
@@ -44,36 +51,42 @@
 
 						<div id="loginout">
 							<c:if test="${sessionScope.id ne null}">
-								<div><span class="m-col">${sessionScope.id}님 환영합니다!</span></div>
-								<div><span><a href="#" id="logout" class="m-col logout">로그아웃</a></span></div>
+								<div class="loggedin-box">
+									<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+								</div>
+								<div class="logout-box">
+									<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+								</div>
 							</c:if>
 						</div id="loginout">
-
 					</div>
 				</div>
 			</nav>
 		</div>
-	</div>
-	<!-- 여기까지가 헤더!!!!!!! -->
+	</div id="generic">
+	<!-- 여기까지가 배너입니다. -->
 
 
 	<!-- 헤더 다음부분 -->
-	<div class="container text-center">
+	<div class="container text-center bcolor">
 		<div class="row">
 			<div class="col">
-				<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+				<div class="btn-toolbar justify-content-between" role="toolbar"
+					aria-label="Toolbar with button groups">
 					<div class="btn-group" role="group" aria-label="First group">
-						<button type="button" onclick="getranking(this)" id="get_ch" class="btn btn-outline-secondary"
-							value="ch">챌린져</button>
-						<button type="button" onclick="getranking(this)" id="get_gm" class="btn btn-outline-secondary"
-							value="gm">그랜드마스터</button>
-						<button type="button" onclick="getranking(this)" id="get_m" class="btn btn-outline-secondary"
-							value="master">마스터</button>
+						<button type="button" onclick="getranking(this)" id="get_ch"
+							class="btn btn-outline-secondary" value="ch">챌린져</button>
+						<button type="button" onclick="getranking(this)" id="get_gm"
+							class="btn btn-outline-secondary" value="gm">그랜드마스터</button>
+						<button type="button" onclick="getranking(this)" id="get_m"
+							class="btn btn-outline-secondary" value="master">마스터</button>
 
 					</div>
 					<div class="input-group">
 						<div class="input-group-text" id="btnGroupAddon2">@</div>
-						<input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example"
+						<input type="text" class="form-control"
+							placeholder="Input group example"
+							aria-label="Input group example"
 							aria-describedby="btnGroupAddon2">
 					</div>
 				</div>
@@ -105,9 +118,7 @@
 		</div>
 
 	</div class="list-container">
-	<div id="pagenum">
-
-	</div id="pagenum">
+	<div id="pagenum"></div id="pagenum">
 
 	<script>
 		//페이지 불러옴과 동시에 실행되는 함수
@@ -187,7 +198,7 @@
 		}
 	</script>
 
-<script>
+	<script>
   $('.gosummonerinfo').click(function() {
 	  //siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기
 	  let summoner_name = $(this).siblings('.summoner_name').filter(function() {
