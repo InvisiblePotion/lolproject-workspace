@@ -16,6 +16,7 @@
             game, champion, spell, skill, skilltree, rune, item, kda, gold, cs, damage, vision
         FROM RAWDATA
         WHERE game_id = #{game_id}
+        ORDER BY participant_number
     </select>
 
     <select id="isSummonerNameExists" resultType="Integer">

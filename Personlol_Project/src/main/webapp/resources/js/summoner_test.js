@@ -6,7 +6,7 @@ function getGameIds() {
     let summoner_name = $('#game-id-summoner-name').val()
     $.ajax({
         method: 'get',
-        url: '/personlol/summoner/game-ids/' + $('#game-id-on-where').val(),
+        url: '/personlol/summoner/rest/game-ids/' + $('#game-id-on-where').val(),
         data: {'summoner_name': summoner_name}
     }).done((res)=>{
         console.log(res);
@@ -26,7 +26,7 @@ function getGameIds() {
 function putGameIds(summoner_name, game_ids) {
     $.ajax({
         method: 'post',
-        url: '/personlol/summoner/recent-game',
+        url: '/personlol/summoner/rest/recent-game',
         data: {
             'summoner_name': summoner_name,
             'game_ids': game_ids}
@@ -34,10 +34,14 @@ function putGameIds(summoner_name, game_ids) {
     // .done((res)=>{console.log("done!");}).fail((err)=>{console.log("error...");})
 }
 
+/**
+ * RawData 테이블에서 해당 게임 ID 리스트에 매치되는 게임 데이터를 가져온다
+ * @param {string[]} game_id_list
+ */
 function getGameRecords(game_id_list) {
     $.ajax({
-        method: 'get',
-        url: '/personlol/summoner/game-record',
+        method: 'post',
+        url: '/personlol/summoner/rest/game-record',
         data: {'game_ids': game_id_list}
     }).done((res)=>{
         console.log(res);

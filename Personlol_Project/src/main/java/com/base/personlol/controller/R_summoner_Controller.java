@@ -19,7 +19,7 @@ import com.base.personlol.dto.summoner_recent_game_dto;
 import com.base.personlol.service.summoner_service;
 
 @RestController
-@RequestMapping("/summoner")
+@RequestMapping("/summoner/rest")
 public class R_summoner_Controller {
 	
 	@Autowired
@@ -31,14 +31,15 @@ public class R_summoner_Controller {
 	@GetMapping("/info")
 	public summoner_dto getfirstinfo(@RequestParam Map<String,String> summoner_name) {
 		System.out.println("깐트롤라 firstinfo?"+summoner_name);
-		summoner_dto firstinfo = sum_ser.getfirstinfo(summoner_name); 
+		summoner_dto firstinfo = sum_ser.getfirstinfo(summoner_name);
 		System.out.println("돌아온깐트롤라 firstinfo?: "+firstinfo);
 		return firstinfo;
 	}
 
-	@GetMapping("/game-record")
-	public ArrayList<summoner_rawdata_dto> getGameRecord(@RequestParam List<String> game_ids) {
-		return sum_ser.getGameRacordList(game_ids);
+	@PostMapping("/game-record")
+	public ArrayList<summoner_rawdata_dto> getGameRecord(summoner_recent_game_dto game_ids) {
+		System.out.println("R_summoner_Controller.getGameRecord() >> 넘어온 값: game_ids: "+game_ids); // ### 로그
+		return sum_ser.getGameRacordList(game_ids.getGame_ids());
 	}
 
 	@GetMapping("/game-ids/{on_where}")

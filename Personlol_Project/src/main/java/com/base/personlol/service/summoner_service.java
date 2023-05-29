@@ -1,6 +1,8 @@
 package com.base.personlol.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +33,10 @@ public class summoner_service {
 	 * @see controller.R_summoner_Controller.getGameRecord
 	 */
 	public ArrayList<summoner_rawdata_dto> getGameRacordList(List<String> game_ids) {
+		// 게임 ID를 내림차순으로 정렬
+		Collections.reverse(game_ids);
+		
+		// RawData 테이블에서 한 게임씩 데이터를 가져와 리스트에 저장
 		ArrayList<summoner_rawdata_dto> rawdata_list = new ArrayList<>();
 		for (String gid : game_ids) {
 			for (summoner_rawdata_dto rawdata : sum_dao.getGameRecord(gid)) {
