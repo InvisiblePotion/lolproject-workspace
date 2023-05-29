@@ -1,5 +1,6 @@
 package com.base.personlol.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public interface summoner_dao {
 	 * @return 소환사 전적용 Rawdata DTO
 	 * @see controller.R_summoner_Controller.getGameRecord
 	 */
-	List<summoner_rawdata_dto> getGameRecord(String game_id);
+	ArrayList<summoner_rawdata_dto> getGameRecord(String game_id);
 
 	/**
 	 * Summoner 테이블에 해당 소환사 이름이 존재하는지 확인

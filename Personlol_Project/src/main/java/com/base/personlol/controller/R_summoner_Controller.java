@@ -37,30 +37,43 @@ public class R_summoner_Controller {
 	}
 
 	@PostMapping("/game-record")
-	public ArrayList<summoner_rawdata_dto> getGameRecord(summoner_recent_game_dto game_ids) {
-		System.out.println("R_summoner_Controller.getGameRecord() >> 넘어온 값: game_ids: "+game_ids); // ### 로그
-		return sum_ser.getGameRacordList(game_ids.getGame_ids());
+	public ArrayList<ArrayList<summoner_rawdata_dto>> getGameRecord(summoner_recent_game_dto game_id_list) {
+		System.out.println("R_summoner_Controller.getGameRecord() >> 넘어온 값: game_id_list: " + game_id_list); // ### 로그
+		return sum_ser.getGameRacordList(game_id_list.getGame_id_list());
 	}
 
-	@GetMapping("/game-ids/{on_where}")
-	public List<String> getGameids(String summoner_name, @PathVariable("on_where") String on_where) {
-		System.out.println("R_summoner_Controller.getGameids() >> 넘어온 값: summoner_name: "+summoner_name+", on_where: "+on_where); // ### 로그
-		switch (on_where) {
-			case "on-recent-game":
-				return sum_dao.getGameidsOnRecentGame(summoner_name);
-			case "on-rawdata":
-				return sum_dao.getGameidsOnRawdata(summoner_name);
-			default:
-				ArrayList<String> err_result = new ArrayList<String>();
-				err_result.add("입력된 PathVariable이 잘못되었습니다. (\"on-recent-game\", \"on-rawdata\")");
-				return err_result;
+	@GetMapping("/game-id-list")
+	public List<String> getGameids(String summoner_name) {
+		System.out.println("R_summoner_Controller.getGameids() >> 넘어온 값: summoner_name: " + summoner_name); // ### 로그
+
+		List<String> recent_return = sum_dao.getGameidsOnRecentGame(summoner_name);
+		System.out.println("R_summoner_Controller.getGameids() >> getGameidsOnRecentGame() 결과: " + recent_return); // ### 로그
+
+		boolean is_recent_exist = recent_return.isEmpty();
+		System.out.println("R_summoner_Controller.getGameids() >> summoner_recent_game 등록 여부: " + !is_recent_exist); // ### 로그
+		
+		if (!is_recent_exist) {
+			return recent_return;
 		}
+		
+		List<String> rawdata_return = sum_dao.getGameidsOnRawdata(summoner_name);
+		System.out.println("R_summoner_Controller.getGameids() >> getGameidsOnRawdata() 결과: " + rawdata_return); // ### 로그
+
+		boolean is_rawdata_exist = rawdata_return.isEmpty();
+		System.out.println("R_summoner_Controller.getGameids() >> RawData 등록 여부: " + !is_rawdata_exist); // ### 로그
+
+		if (!is_rawdata_exist) {
+			return rawdata_return;
+		}
+
+		// 양쪽 다 값이 없다면 null을 리턴 (프론트에서 null에 대한 페이지 표시 불가 처리 필요!)
+		return null;
 	}
 
 	@PostMapping("/recent-game")
 	public void putGameidInRecentGame(summoner_recent_game_dto insert_data) {
 		System.out.println("R_summoner_Controller.putGameidInRecentGame() >> 넘어온 값: " + insert_data); // ### 로그
-		sum_ser.putGameidListInRecentGame(insert_data.getSummoner_name(), insert_data.getGame_ids());
+		sum_ser.putGameidListInRecentGame(insert_data.getSummoner_name(), insert_data.getGame_id_list());
 	}
 	
 }
