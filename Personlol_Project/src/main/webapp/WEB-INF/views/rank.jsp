@@ -102,11 +102,10 @@
 						<table class="table table-hover" id="head_table">
 							<thead>
 								<tr height="25" align="center">
-									<td width="100">소환사</td>
-									<td width="100">티어</td>
-									<td width="100">LP</td>
-									<td width="100">승리</td>
-									<td width="100">패배</td>
+									<td width="50px">랭킹</td>
+									<td width="480px">소환사</td>
+									<td width="175px">티어</td>
+									<td width="175px">LP</td>
 								</tr>
 							</thead>
 						</table>
@@ -178,19 +177,13 @@
 				let cList = '';
 				$.each(res, function (i, r) {
 				  cList += '<tr height="25" onclick="window.location.href=\'/personlol/summoner/?summoner_name=' + r.summonerName + '\'">' +
-				    '<td width="200px">' + r.ranking + '</td>' +
-				    '<td width="200px">' + r.summonerName + '</td>' +
-				    '<td width="200px">' + r.tier + '</td>' +
-				    '<td width="200px">' + r.leaguePoints + '</td>' +
-				    '<td width="200px">' + r.wins + '</td>' +
-				    '<td width="200px">' + r.losses + '</td>' +
-				    '<td width="200px">' + r.veteran + '</td>' +
-				    '<td width="200px">' + r.inactive + '</td>' +
-				    '<td width="200px">' + r.freshBlood + '</td>' +
-				    '<td width="200px">' + r.hotStreak + '</td>' +
+				    '<td width="50px">' + r.ranking + '</td>' +
+				    '<td width="480px">' + r.summonerName + '</td>' +
+				    '<td width="175px">' + r.tier + '</td>' +
+				    '<td width="175px">' + r.leaguePoints + '</td>' +
 				    '</tr>'; // 여기서 </table>을 삭제하고 </tr>로 변경
 				});
-				$('#info').html('<table class="table table-hover" id="info_table">' + cList + '</table>'); // 여기서 테이블 전체를 감싸는 태그 추가
+				$('#info').html('<table width="100px" class="table table-hover" id="info_table">' + cList + '</table>'); // 여기서 테이블 전체를 감싸는 태그 추가
 
 			}).fail(err => {
 				console.log(res);
@@ -220,6 +213,7 @@
     }).done(res=>{
       console.log(res);
       if(res == "1"){
+    	  
     	  location.href = go_url;
       }else if(res == "-999"){
     	  alert("등록되지않은 소환사입니다 다시 입력해주세요")
@@ -230,6 +224,7 @@
 
 	});
   </script>
+  
 	<script>
 		//로그아웃
 		$('#logout').click(function () {

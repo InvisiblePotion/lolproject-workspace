@@ -146,7 +146,7 @@
 	
 	
 	<select id="tier_all" resultType="Map">
-		SELECT f_join.duo_id, f_join.duo_ownerid, f_join.duo_accepter, f_join.duo_content, f_join.duo_active, f_join.duo_date, f_join.duo_title, f_join.USER_LOLNAME, summoner.summoner_tier
+		SELECT f_join.duo_id, f_join.duo_ownerid, f_join.duo_accepter, f_join.duo_content, f_join.duo_active, f_join.duo_date, f_join.duo_title, f_join.USER_LOLNAME
 		FROM (
 			SELECT duo_id, duo_ownerid, duo_accepter, duo_content, duo_active, duo_date, duo_title, user_lolname,
 		  		   ROW_NUMBER() OVER (ORDER BY duo_id DESC) AS row_num

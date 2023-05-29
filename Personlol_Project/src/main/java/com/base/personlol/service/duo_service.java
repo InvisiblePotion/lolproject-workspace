@@ -24,6 +24,7 @@ public class duo_service {
 	duo_dao ddao;
 
 	public List<duo_dto> getList() {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		List<duo_dto> dList = null;
 		dList = ddao.getList();
 
@@ -142,12 +143,12 @@ public class duo_service {
 
 	}
 
-	public List<Map<String,Object>> getDuoboard(int page_num) {
+	public List<Map<String, Object>> getDuoboard(int page_num) {
 		System.out.println("듀오 메인 서비스 실행");
 		int start_page = (page_num*3)-2;
 
 		int end_page = (page_num * 3);
-		List<Map<String,Object>> result_duo = ddao.all(start_page, end_page);
+		List<Map<String, Object>> result_duo = ddao.all(start_page, end_page);
 		System.out.println("듀오 메인 서비스 리턴"+result_duo);
 		return result_duo;
 	}

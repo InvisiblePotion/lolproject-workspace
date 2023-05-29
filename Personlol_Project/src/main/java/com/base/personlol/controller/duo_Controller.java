@@ -215,9 +215,9 @@ public class duo_Controller {
 	
 	//메인 듀오 가져오기
 	@GetMapping("/main_duo")
-	public @ResponseBody List<Map<String,Object>> getDuoboard(@RequestParam("page_num") int page_num) {
+	public @ResponseBody List<Map<String, Object>> getDuoboard(@RequestParam("page_num") int page_num) {
 		System.out.println("메인 듀오 컨트롤러 페이징"+ page_num);
-		List<Map<String,Object>> result_duo = dse.getDuoboard(page_num);
+		List<Map<String, Object>> result_duo = dse.getDuoboard(page_num);
 		System.out.println("메인 듀오 컨트롤러 리턴"+result_duo);
 		return result_duo;
 	}

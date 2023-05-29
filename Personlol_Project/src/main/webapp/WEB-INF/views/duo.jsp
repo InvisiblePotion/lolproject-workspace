@@ -342,6 +342,7 @@
 
 			}).done((res) => {
 				console.log(selectedId);
+				console.log(res)
 				let div = $('<div></div>');
 
 				$.each(res, function (i, line) {

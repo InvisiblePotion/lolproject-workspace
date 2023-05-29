@@ -365,7 +365,7 @@
         url: '/personlol/duo/main_duo',
         data:{'page_num':pageing}
       }).done(res => {
-        console.log(res.length);
+        console.log(res);
         if(res.length===0){
           alert("더이상 정보가 없습니다.")
           location.href='/personlol/'
