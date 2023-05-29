@@ -13,78 +13,11 @@
 
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/header.css">
+	
 <!--css 파일명 수정해야함-->
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/champlist.css">
-<style>
-/* 스킬이미지 호버시 툴팁 */
-.skill-container {
-  position: relative;
-  display: inline-block;
-}
+	href="../resources/css/matchup.css">
 
-.tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #000;
-  color: #fff;
-  
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  
-  /* 꾸미기용 */
-  top: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  width: 500px;
-}
-.skill-container:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-}
-/*스펠 호버시 툴팁*/
-.spell-container {
-  position: relative;
-  display: inline-block;
-}
-
-.spell_tooltip {
-  visibility: hidden;
-  width: 120px;
-  background-color: #000;
-  color: #fff;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  text-align: left;
-  top: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  
-  width: 200px;
-}
-
-.spell-container:hover .spell_tooltip {
-  opacity: 1;
-  visibility: visible;
-}
-
-/*상대챔프 이미지 왼쪽정렬*/
-.s_img {
-    text-align: right;
-}
-
-.div_info{
-	text-align: center;
-}
-</style>
 
 </head>
 
@@ -154,6 +87,7 @@
       <div class="col" id="pick">내용(픽률)</div>
       <div class="col" id="ban">내용(밴율)</div>
       <div class="col" id="spell">
+      	<span class="spell_span">소환사 주문</span>
       	<div class="row" id="spell1"></div>
       	<div class="row" id="spell2"></div>
       </div>
@@ -180,49 +114,49 @@
     					<div class="col" >
     					
     						<div class="row">
-    							<div class="col div_info">kda</div>
+    							<div class="col div_info"><span class="progress_title">kda</span></div>
     						</div>
     						<div class="row">
     							<div class="col div_info" id="kda_progress">kda그래스바</div>
     						</div>
     						
     						<div class="row">
-    							<div class="col div_info">킬관여율</div>
+    							<div class="col div_info"><span class="progress_title">킬관여율</span></div>
     						</div>
     						<div class="row">
     							<div class="col div_info" id="killpart_progress">킬관여율 그래스바</div>
     						</div>
     						
     						<div class="row">
-    							<div class="col div_info">가한 피해량</div>
+    							<div class="col div_info"><span class="progress_title">가한 피해량</span></div>
     						</div>
     						<div class="row">
     							<div class="col" id="damage_progress">가한 피해량 그래스바</div>
     						</div>
     						
     						<div class="row">
-    							<div class="col div_info">승률</div>
+    							<div class="col div_info"><span class="progress_title">승률</span></div>
     						</div>
     						<div class="row">
     							<div class="col" id="win_progress">승률 그래스바</div>
     						</div>
     						
     						<div class="row">
-    							<div class="col div_info">포지션 승률</div>
+    							<div class="col div_info"><span class="progress_title">포지션 승률</span></div>
     						</div>
     						<div class="row">
     							<div class="col" id="pwin_progress">포지션 승률그래스바</div>
     						</div>
     						
     						<div class="row">
-    							<div class="col div_info">포지션 픽률</div>
+    							<div class="col div_info"><span class="progress_title">포지션 픽률</span></div>
     						</div>
     						<div class="row">
     							<div class="col" id="ppick_progress">포지션 픽률 그래스바</div>
     						</div>
     						
     						<div class="row">
-    							<div class="col div_info">포지션 벤률</div>
+    							<div class="col div_info"><span class="progress_title">포지션 벤률</span></div>
     						</div>
     						
     						<div class="row">
@@ -317,14 +251,18 @@ $(document).ready(function() {
 		let s_win_rate = res[1].win_rate
 		
 		rate_span1='';
-		rate_span1 = '<div class="rate_div"><span>'+f_gamecount+'<br>'+f_pick_rate+'%'+'</span></div>'
+		rate_span1 = '<div class="rate_div"><span class="pick_rate_span">'+f_pick_rate+'%'+'</span>'+
+		'<p><small>'+f_gamecount+'게임'+'</small></p></div>'
+		
 		win_span1='';
-		win_span1 = '<div class="rate_div"><span>'+f_win_rate+'%'+'</span></div>'
+		win_span1 = '<div class="winrate_div"><span class="win_rate_span">'+f_win_rate+'%'+'</span></div>'
 		
 		rate_span2='';
-		rate_span2 = '<div class="rate_div"><span>'+s_gamecount+'<br>'+s_pick_rate+'%'+'</span></div>'
+		rate_span2 = '<div class="rate_div"><span class="pick_rate_span">'+s_pick_rate+'%'+'</span>'+
+		'<p><small>'+s_gamecount+'게임'+'</small></p></div>'
+		
 		win_span2='';
-		win_span2 = '<div class="rate_div"><span>'+s_gamecount+'%'+'</span></div>'
+		win_span2 = '<div class="winrate_div"><span class="win_rate_span">'+s_win_rate+'%'+'</span></div>'
 		
 		
 		
@@ -458,7 +396,8 @@ $(document).ready(function() {
 		console.log(res)
 		console.log("매치업 디테일 이미지")
 		
-		
+		let f_champ_name = res[0].champ_name
+		let s_champ_name = res[1].champ_name
 		champ_img1 =
 			'<div class="f_img">'+
 			'<img class="icon_img" width="100" height="100" src="../resources/'+res[0].champ_icon +'" alt="이미지">'+
@@ -469,8 +408,8 @@ $(document).ready(function() {
 		
 		champ_img2 =
 			'<div class="s_img">'+
-			'<span>'+res[1].champ_name+'</span>'+
 			'<img class="icon_img" width="100" height="100" src="../resources/'+res[1].champ_icon +'" alt="이미지">'+
+			'<span>'+res[1].champ_name+'</span>'+
 			'</div>';
 			
 		$('#champ_img2').html(champ_img2);
@@ -675,19 +614,20 @@ $(document).ready(function() {
 				
 				matchamp_info=''
 				$.each(res, function (i,champ) {
+					let shortenedName = champ.champ_name.length > 3 ? champ.champ_name.slice(0, 3) + '...' : champ.champ_name;
 					matchamp_info += 
 						'<tr>'+
 						
 						'<td align="left" width="120px">'+
 						'<a href="/personlol/champion/matchup?champ_id='+ champ_id +'&lane='+champ_lane+'&match_champ='+matchamp_id+'">'+
 						'<img width="50" height="50" src="../resources/'+champ.champ_icon +'" alt="이미지">' +
-						'<span style="font-size: 12px; font-weight: bold;">' +champ.champ_name +
+						'<span style="font-size: 12px; font-weight: bold;">' +shortenedName +
 						'</span> </td>'+
 			
-						'<td align="center">' +champ.win_rate+
+						'<td align="center" class="win_rate_td">' +champ.win_rate+'%'+
 						'</td>' +
 						
-						'<td align="center">' +champ.game_count+
+						'<td align="center">' +'<small>'+champ.game_count+'</small>'+
 						'</td>' +
 						'</tr>'
 				}) 

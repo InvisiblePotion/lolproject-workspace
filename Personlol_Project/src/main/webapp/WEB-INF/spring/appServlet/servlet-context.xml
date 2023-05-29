@@ -81,7 +81,9 @@
 	        <exclude-mapping path="/rank" />
 	        <!-- 소환사 전적 -->
 	        <exclude-mapping path="/summoner/**" />
+	        
 	        <!-- 사용자 분석 -->
+	        <exclude-mapping path="/summonerstat/**" />
 	        
 	        <!-- 리소스아래 모든 것 -->
 	        <exclude-mapping path="/resources/**"/>

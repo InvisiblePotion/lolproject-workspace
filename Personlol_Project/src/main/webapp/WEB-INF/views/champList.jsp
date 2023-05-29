@@ -136,8 +136,8 @@
 				<table class="table " id="head_table">
 					<thead>
 						<tr align="center">
-							<th width="100px" style="font-size: 12px">번호</th>
-							<th width="100px" style="font-size: 12px" >챔피언</th>
+							
+							<th width="130px" style="font-size: 12px" >챔피언</th>
 							<th width="100px" style="font-size: 12px" id="table_tier">티어</th>
 							<th width="100px" style="font-size: 12px" id="table_win_rate">승률</th>
 							<th width="100px" style="font-size: 12px" id="table_pick_rate">픽률</th>
@@ -173,10 +173,14 @@
 			console.log(res)
 			let top_img = ''
 			$.each(res, function (i, img) {
-				top_img += 
+				top_img +=
+					'<li class="img_list">'+
 					'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
-					'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
-					'" alt="이미지">'
+					'<img class="icon_img" width="60" height="60" src="../resources/' + img.champ_icon +'" alt="이미지">'+
+					'<span class="name">'+img.champ_name+'</span>'+
+					'</a>'+
+					'</li>'
+					
 			})
 			$('.ul-group').html(top_img);
 
@@ -198,11 +202,14 @@
 				console.log(res)
 				let top_img = ''
 				$.each(res, function (i, img) {
+					let shortenedName = img.champ_name.length > 6 ? img.champ_name.slice(0, 6) + '...' : img.champ_name;
 					top_img += 
+						'<li class="img_list">'+
 						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
-						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
-						'" alt="이미지">'
-				})
+						'<img class="icon_img" width="60" height="60" src="../resources/' + img.champ_icon +'" alt="이미지">'+
+						'<span class="name">'+shortenedName+'</span>'+
+						'</a>'+
+						'</li>'				})
 				$('.ul-group').html(top_img);
 
 			}).fail(err => {
@@ -221,10 +228,14 @@
 
 				let jug_img = ''
 				$.each(res, function (i, img) {
+					let shortenedName = img.champ_name.length > 6 ? img.champ_name.slice(0, 6) + '...' : img.champ_name;
 					jug_img +=
+						'<li class="img_list">'+
 						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
-						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
-						'" alt="이미지">'
+						'<img class="icon_img" width="60" height="60" src="../resources/' + img.champ_icon +'" alt="이미지">'+
+						'<span class="name">'+shortenedName+'</span>'+
+						'</a>'+
+						'</li>'
 				})
 				$('.ul-group').html(jug_img);
 
@@ -244,10 +255,14 @@
 
 				let mid_img = ''
 				$.each(res, function (i, img) {
+					let shortenedName = img.champ_name.length > 6 ? img.champ_name.slice(0, 6) + '...' : img.champ_name;
 					mid_img += 
+						'<li class="img_list">'+
 						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
-						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
-						'" alt="이미지">'
+						'<img class="icon_img" width="60" height="60" src="../resources/' + img.champ_icon +'" alt="이미지">'+
+						'<span class="name">'+shortenedName+'</span>'+
+						'</a>'+
+						'</li>'
 				})
 				$('.ul-group').html(mid_img);
 
@@ -257,6 +272,7 @@
 		}) //
 
 		$('#bot_img').click(function () {
+			
 			$.ajax({
 				method: 'get',
 				data: {
@@ -266,10 +282,14 @@
 			}).done(res => {
 				let bot_img = ''
 				$.each(res, function (i, img) {
+					let shortenedName = img.champ_name.length > 6 ? img.champ_name.slice(0, 6) + '...' : img.champ_name;
 					bot_img += 
+						'<li class="img_list">'+
 						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
-						'<img class="icon_img" width="70" height="70" src="../resources/' + img.champ_icon +
-						'" alt="이미지">'
+						'<img class="icon_img" width="60" height="60" src="../resources/' + img.champ_icon +'" alt="이미지">'+
+						'<span class="name">'+shortenedName+'</span>'+
+						'</a>'+
+						'</li>'
 				})
 				$('.ul-group').html(bot_img);
 
@@ -288,10 +308,14 @@
 				}).done(res => {
 					let util_img = ''
 					$.each(res, function (i, img) {
+						let shortenedName = img.champ_name.length > 6 ? img.champ_name.slice(0, 6) + '...' : img.champ_name;
 						util_img += 
+							'<li class="img_list">'+
 							'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
-							'<img class="icon_img" width="70" height="70" src="../resources/' + img
-							.champ_icon + '" alt="이미지">'
+							'<img class="icon_img" width="60" height="60" src="../resources/' + img.champ_icon +'" alt="이미지">'+
+							'<span class="name">'+shortenedName+'</span>'+
+							'</a>'+
+							'</li>'
 					})
 					$('.ul-group').html(util_img);
 
@@ -337,13 +361,10 @@
 						})
 						
 						lane_list_sort +=
-							'<tr><td class="number" >' +
-							(i + 1) +
-							'</td>' +
-							'<td align="left" class="list_td">' +
-							
+							'<tr>'+
+							'<td align="left" class="list_td" >' +
 							'<a href="/personlol/champion/detail?champ_id=' + list.champ_id +'&lane='+list.lane+'">'+
-							'<img width="30" height="30" src="../resources/'+
+							'<img width="	30" height="30" src="../resources/'+
 							list.champ_icon +'" alt="이미지">' +
 							'<span style="font-size: 12px; font-weight: bold;">' +
 							list.champ_name +
@@ -473,12 +494,29 @@
 				console.log(err);
 			});
 		}
+		
+		let isWinRateDescending = true; // 정렬 방식을 내림차순으로 설정
+		
+		//초기정보 정렬
+		function sortTableByWinRate() {
+		    var rows = $('#list_table1 tbody tr').get();
+
+		    rows.sort(function(a, b) {
+		        var rateA = parseFloat($(a).find('td:eq(2)').text());
+		        var rateB = parseFloat($(b).find('td:eq(2)').text());
+
+		        if (isWinRateDescending) {
+		            return rateB - rateA; // 내림차순 정렬
+		        } else {
+		            return rateA - rateB; // 오름차순 정렬
+		        }
+		    });
+
+		    $('#list_table1 tbody').empty().append(rows);
+		}
 
 
-
-
-
-
+		
 		/*챔프 리스트 초기부분 */
 		$.ajax({
 			method: 'get',
@@ -488,11 +526,20 @@
 			},
 
 		}).done(res => {
-			updateTableData(res);
+			
+			 $(document).on('click', '#table_win_rate', function() {
+			        isWinRateDescending = !isWinRateDescending; // 정렬 방식을 토글 (내림차순 <-> 오름차순)
+			        sortTableByWinRate();
+			    });
+			 
+			 let sortedData = res.sort((a, b) => b.win_rate - a.win_rate); //정렬부분
+			 updateTableData(res);
 		
 		}).fail(err => {
 
 		}) //
+		
+		
 
 		//라인별 버튼 눌렀을때 비동기 처리 부분
 		var where;

@@ -19,9 +19,7 @@
   margin-bottom: 5px;
   width: 350px;
 }
-li{
-  display: flex;
-}
+
 
 #col1{
   background-color: white;
@@ -34,9 +32,45 @@ li{
   width: 350px;
   margin-bottom: 10px;
 }
-.ul-group{
-	padding: 0px;
+<!--이미지 아래에 스판설정 -->
+
+.ul-group li {
+  flex: 0 0 20%; /* 한 줄에 5개의 아이템을 나타내기 위해 크기를 조정합니다. */
+  text-align: center;
+  
 }
+
+.img_list{
+  margin-left: 2px;
+  margin-right: 5px;
+}
+
+
+.icon_img {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+.ul-group .name {
+  display: block;
+  font-size: 10px;
+  text-align: left;
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ul-group{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	
+}
+
+<!--이미지 아래에 스판설정 끝-->
+
 .bcolor{
 	background-color: #f5f5f5;
 }
@@ -44,5 +78,5 @@ body{
 	background-color: #f5f5f5;;
 }
 .list_td{
-	width:130px;
+	width:170px;
 }

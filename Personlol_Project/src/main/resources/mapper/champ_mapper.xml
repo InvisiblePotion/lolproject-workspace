@@ -118,7 +118,7 @@
 	<select id="skill_tree"
 		resultType="com.base.personlol.dto.Champskill_dto">
 		SELECT * FROM (SELECT * FROM CHAMPION_SKILL cs WHERE
-		CHAMP_ID = #{champ_id} AND lane = #{champ_lane} ORDER BY WIN_RATE DESC
+		CHAMP_ID = #{champ_id} AND lane = #{champ_lane} ORDER BY GAME_COUNT DESC
 		FETCH FIRST 1 ROWS ONLY)
 		c
 		INNER JOIN CHAMPSKILL cs ON(c.CHAMP_ID =
@@ -270,5 +270,29 @@
 		INNER JOIN CHAMPDATA c2
 		ON c1.champ_id_y = c2.CHAMP_ID 
 		WHERE ROWNUM <= 3]]>
+	</select>
+	
+	<select id="start_item" resultType="com.base.personlol.dto.ChampStartItem_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_ITEM_START
+		  WHERE CHAMP_ID = #{champ_id} AND lane = #{champ_lane}
+		  ORDER BY GAME_COUNT DESC
+		)
+		WHERE ROWNUM <= 3]]>
+	</select>
+	
+	<select id="start_boots" resultType="com.base.personlol.dto.ChampStartBoots_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_ITEM_BOOTS
+		  WHERE CHAMP_ID = #{champ_id} AND lane = #{champ_lane}
+		  ORDER BY GAME_COUNT DESC
+		)
+		WHERE ROWNUM <= 2]]>
 	</select>
 </mapper>

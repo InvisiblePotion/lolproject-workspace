@@ -7,182 +7,19 @@
 <meta charset="UTF-8">
 <title>detail</title>
 
-<style>
-#change_rune1 {
-	justify-content: center;
-}
-
-#change_rune2 {
-	justify-content: center;
-}
-
-/* 스킬이미지 호버시 툴팁 */
-.skill-container {
-	position: relative;
-	display: inline-block;
-}
-
-.tooltip {
-	visibility: hidden;
-	width: 120px;
-	background-color: #000;
-	color: #fff;
-	border-radius: 6px;
-	padding: 5px;
-	position: absolute;
-	z-index: 1;
-	/* 꾸미기용 */
-	top: 125%;
-	left: 50%;
-	margin-left: -60px;
-	opacity: 0;
-	transition: opacity 0.3s;
-	width: 500px;
-}
-
-.skill-container:hover .tooltip {
-	visibility: visible;
-	opacity: 1;
-}
-
-/* 룬이미지 호버시 툴팁 */
-.rune_img {
-	position: relative;
-	display: inline-block;
-	padding: 0px;
-}
-
-.runetype_tooltip {
-	visibility: hidden;
-	width: 120px;
-	background-color: #000;
-	color: #fff;
-	border-radius: 6px;
-	padding: 5px;
-	position: absolute;
-	z-index: 1;
-	top: 125%;
-	left: 50%;
-	margin-left: -60px;
-	opacity: 0;
-	transition: opacity 0.3s;
-}
-
-.rune_tooltip {
-	visibility: hidden;
-	width: 120px;
-	background-color: #000;
-	color: #fff;
-	border-radius: 6px;
-	padding: 5px;
-	position: absolute;
-	z-index: 1;
-	text-align: left;
-	top: 125%;
-	left: 50%;
-	margin-left: -60px;
-	opacity: 0;
-	transition: opacity 0.3s;
-	width: 500px;
-}
-
-.rune_img:hover .rune_tooltip {
-	visibility: visible;
-	opacity: 1;
-}
-
-.rune_img:hover .runetype_tooltip {
-	visibility: visible;
-	opacity: 1;
-}
-
-/* 룬 긴설명 css부분 */
-.rune_longdesc {
-	font-size: 13px;
-	font-weight: normal;
-}
-
-/* 아이템이미지 호버시 툴팁  */
-.f_item {
-	position: relative;
-}
-
-.item_img {
-	width: 40px;
-	height: 40px;
-}
-
-.item_tooltip {
-	visibility: hidden;
-	width: 120px;
-	background-color: #000;
-	color: #fff;
-	border-radius: 6px;
-	padding: 5px;
-	position: absolute;
-	z-index: 1;
-	text-align: left;
-	top: 125%;
-	left: 50%;
-	margin-left: -60px;
-	opacity: 0;
-	transition: opacity 0.3s;
-	width: 500px;
-}
-
-.f_item:hover .item_tooltip {
-	visibility: visible;
-	opacity: 1;
-}
-
-/*스펠 호버시 툴팁*/
-.spell-container {
-	position: relative;
-	display: inline-block;
-}
-
-.spell_tooltip {
-	visibility: hidden;
-	width: 120px;
-	background-color: #000;
-	color: #fff;
-	border-radius: 6px;
-	padding: 5px;
-	position: absolute;
-	z-index: 1;
-	text-align: left;
-	top: 125%;
-	left: 50%;
-	margin-left: -60px;
-	opacity: 0;
-	transition: opacity 0.3s;
-	width: 200px;
-}
-
-.spell-container:hover .spell_tooltip {
-	opacity: 1;
-	visibility: visible;
-}
-
-/*룬이미지 센터로*/
-.rune_img {
-	text-align: center;
-}
-
-/* 아이템 설명 css  */
-.item_longdesc ul {
-	white-space: pre-line;
-}
-</style>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/header.css">
+
 <!--css 파일명 수정해야함-->
+
+
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/champlist.css">
+	href="../resources/css/detail.css">
 
 </head>
 <body>
@@ -237,11 +74,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col" id="champ_img">챔피언 사진</div>
+
 			<div class="col">
 				<div class="row" id="champ_name"></div>
 				<div class="row skillimg">
 					<div class="col" id="skill_img">스킬사진</div>
 				</div>
+
 			</div>
 		</div>
 
@@ -251,12 +90,13 @@
 			<div class="col" id="pick">내용(픽률)</div>
 			<div class="col" id="ban">내용(밴율)</div>
 			<div class="col" id="spell">
+				<span class="spell_span">소환사 주문</span>
 				<div class="row" id="spell1"></div>
 				<div class="row" id="spell2"></div>
 			</div>
 		</div>
 
-		<div class="row">추천 룬 세팅</div>
+		<div class="row">&nbsp <span class="sub_title">추천 룬 세팅</span></div>
 		<div class="row">
 			<div class="col" id="main_rune">
 				<div class="row" id="type_rune"></div>
@@ -283,7 +123,7 @@
 
 		</div>
 
-		<div class="row">추천스킬빌드</div>
+		<div class="row"> &nbsp <span class="sub_title">추천스킬빌드</span></div>
 		<div class="row">
 			<div class="col">
 				<div class="row">스킬사진</div>
@@ -297,19 +137,36 @@
 				<div class="row" id="sk_count">1</div>
 				<div class="row" id="sk_win">2</div>
 			</div>
-			<div class="col col-sm-2" id="mat_list1"></div>
-			<div class="col col-sm-2" id="mat_list2"></div>
+			<div class="col">
+				<div class="row" > <span class="match_span">상대하기 쉬운 챔피언</span> </div>
+				<div class="row" id="mat_list1"></div>
+				<div class="row" ><span class="match_span">상대하기 어려운 챔피언</span></div>
+				<div class="row" id="mat_list2"></div>
+			</div>
+			
 
 		</div>
 
-		<div class="row">추천빌드</div>
+		<div class="row"> &nbsp <span class="sub_title">추천빌드</span></div>
 		<div class="row">
-			<div class="col">아이템 1</div>
-			<div class="col">아이템 2</div>
-			<div class="col">아이템 3</div>
-			<div class="col">픽률</div>
-			<div class="col">게임수</div>
-			<div class="col">승률</div>
+			<div class="col">
+				<div class="row"><span class="item_boots_head">시작 아이템</span></div>
+				<div class="row" id="start_item1"></div>
+				<div class="row" id="start_item2"></div>
+			</div>
+			<div class="col">
+				<div class="row"><span class="item_boots_head">신발</span></div>
+				<div class="row" id="start_boots1"></div>
+				<div class="row" id="start_boots2"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col"><span class="item_boots_head">코어 아이템</span></div>
+			<div class="col"><span class="item_boots_head">코어 아이템</span></div>
+			<div class="col"><span class="item_boots_head">코어 아이템</span></div>
+			<div class="col"><span class="item_boots_head">픽률</span></div>
+			<div class="col"><span class="item_boots_head">게임 수</span></div>
+			<div class="col"><span class="item_boots_head">승률</span></div>
 		</div>
 
 		<div class="row">
@@ -364,7 +221,7 @@
 						'<div>'+
 						'<a href="/personlol/champion/matchup?champ_id=' + champ_id +'&lane='+champ_lane+'&match_champ='+match_champ+'">'+
 						'<img class="icon_img" width="40" height="40" src="../resources/'+mat_img.champ_icon +'" alt="이미지">'+'</a>'+
-						match_win+'%, '+match_count+'</div>'+
+						'<p class="win_rate_span">'+match_win+'%'+'</p>'+'<small>'+match_count+'게임'+'</small></div>'+
 						'</div>'
 						
 					
@@ -404,7 +261,7 @@
 						'<div>'+
 						'<a href="/personlol/champion/matchup?champ_id=' + champ_id +'&lane='+champ_lane+'&match_champ='+match_champ+'">'+
 						'<img class="icon_img" width="40" height="40" src="../resources/'+mat_img.champ_icon +'" alt="이미지">'+'</a>'+
-						match_win+'%, '+match_count+'</div>'+
+						'<p class="hard_rate_span">'+match_win+'%'+'</p>'+'<small>'+match_count+'게임'+'</small></div>'+
 						'</div>'
 						
 					
@@ -459,14 +316,18 @@
 		let s_win_rate = res[1].win_rate
 		
 		rate_span1='';
-		rate_span1 = '<div class="rate_div"><span>'+f_gamecount+'<br>'+f_pick_rate+'%'+'</span></div>'
+		rate_span1 = '<div class="rate_div"><span class="pick_rate_span">'+f_pick_rate+'%'+'</span>'+
+		'<p><small>'+f_gamecount+' 게임'+'</small></p></div>'
+		
 		win_span1='';
-		win_span1 = '<div class="rate_div"><span>'+f_win_rate+'%'+'</span></div>'
+		win_span1 = '<div class="winrate_div"><span class="win_rate_span">'+f_win_rate+'%'+'</span></div>'
 		
 		rate_span2='';
-		rate_span2 = '<div class="rate_div"><span>'+s_gamecount+'<br>'+s_pick_rate+'%'+'</span></div>'
+		rate_span2 = '<div class="rate_div"><span class="pick_rate_span">'+s_pick_rate+'%'+'</span>'+
+		'<p><small>'+s_gamecount+' 게임'+'</small></p></div>'
+		
 		win_span2='';
-		win_span2 = '<div class="rate_div"><span>'+s_gamecount+'%'+'</span></div>'
+		win_span2 = '<div class="winrate_div"><span class="win_rate_span">'+s_win_rate+'%'+'</span></div>'
 		
 		
 		
@@ -479,7 +340,7 @@
 			  console.log(res);
 			  spell_img = '';
 			  spell_img += '<div class="spell-container">' +
-			    '<img class="spell_img" width="40" height="40" src="../resources/' + res[0].spell_icon + '" alt="이미지">' +
+			    '<img class="spell_img" width="45" height="45" src="../resources/' + res[0].spell_icon + '" alt="이미지">' +
 			    '<div class="spell_tooltip">' +
 			    '<div><span style="font-size: 14px; font-weight: bold; color: yellow;">' + res[0].spell_name + '</span></div>' +
 			    '<div>' + res[0].spell_desc + '</div>' +
@@ -495,7 +356,7 @@
 			    console.log(res);
 			    spell_img = '';
 			    spell_img += '<div class="spell-container">' +
-			      '<img class="spell_img" width="40" height="40" src="../resources/' + res[0].spell_icon + '" alt="이미지">' +
+			      '<img class="spell_img" width="45" height="45" src="../resources/' + res[0].spell_icon + '" alt="이미지">' +
 			      '<div class="spell_tooltip">' +
 			      '<div><span style="font-size: 14px; font-weight: bold; color: yellow;">' + res[0].spell_name + '</span></div>' +
 			      '<div>' + res[0].spell_desc + '</div>' +
@@ -511,7 +372,7 @@
 			      console.log(res);
 			      spell_img = '';
 			      spell_img += '<div class="spell-container">' +
-			        '<img class="spell_img" width="40" height="40" src="../resources/' + res[0].spell_icon + '" alt="이미지">' +
+			        '<img class="spell_img" width="45" height="45" src="../resources/' + res[0].spell_icon + '" alt="이미지">' +
 			        '<div class="spell_tooltip">' +
 			        '<div><span style="font-size: 14px; font-weight: bold; color: yellow;">' + res[0].spell_name + '</span></div>' +
 			        '<div>' + res[0].spell_desc + '</div>' +
@@ -528,7 +389,7 @@
 			        console.log(res);
 			        spell_img = '';
 			        spell_img += '<div class="spell-container">' +
-			          '<img class="spell_img" width="40" height="40" src="../resources/' + res[0].spell_icon + '" alt="이미지">' +
+			          '<img class="spell_img" width="45" height="45" src="../resources/' + res[0].spell_icon + '" alt="이미지">' +
 			          '<div class="spell_tooltip">' +
 			          '<div><span style="font-size: 14px; font-weight: bold; color: yellow;">' + res[0].spell_name + '</span></div>' +
 			          '<div>' + res[0].spell_desc + '</div>' +
@@ -583,7 +444,7 @@
 			let range = skill.skill_range ? skill.skill_range : '없음';
 			
 			skill_img +=
-				'<div class="skill-container">' +
+				'<div class="skill-container" id="skill_img">' +
 				'<img class="skill_img" width="40" height="40" src="../resources/'+skill.skill_icon+
 				'" alt="이미지" >'+'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 				skill.skill_name+'</span></div>'+
@@ -956,7 +817,7 @@
 		  change_rune1 = '<div class="first_rune"><img width="25" height="25" src="../resources/dd/img/rune/style/' + res[0].runetype_core + '.png">'+
 		  '<img width="60" height="60" src="../resources/dd/img/rune/perk/'+res[0].core_mainrune+'.png">'+
 		  '<img width="25" height="25" src="../resources/dd/img/rune/style/'+res[0].runetype_sub+'.png"></div>'+
-		  '<div class="rune_rate"><span>'+res[0].game_count+'<br>'+res[0].pick_rate+'<br>'+res[0].win_rate+'</span></div>'
+		  '<div class="rune_rate"><span>'+res[0].pick_rate+'%'+'<p><small>'+res[0].game_count+'게임'+'</small></p></span><p class="win_rate_span">'+res[0].win_rate+'%'+'</p></div>'
 		  
 		}
 		$('#change_rune1').html(change_rune1)
@@ -967,12 +828,17 @@
 			change_rune2 = '<div class="second_rune"><img width="25" height="25" src="../resources/dd/img/rune/style/' + res[1].runetype_core + '.png">'+
 			'<img width="60" height="60" src="../resources/dd/img/rune/perk/'+res[1].core_mainrune+'.png">'+
 			'<img width="25" height="25" src="../resources/dd/img/rune/style/'+res[1].runetype_sub+'.png"></div>'+
-			'<div class="rune_rate"><span>'+res[1].game_count+'<br>'+res[1].pick_rate+'<br>'+res[1].win_rate+'</span></div>'
+			'<div class="rune_rate"><span>'+res[1].pick_rate+'%'+'<p><small>'+res[1].game_count+'게임'+'</small></p></span><p class="win_rate_span">'+res[1].win_rate+'%'+'</p></div>'
 			
 		}
 		$('#change_rune2').html(change_rune2)
 		
+		//체인지룬 1클릭시
 		$('#change_rune1').click(function() {
+			// 배경색 변경
+		    $(this).css('background-color', 'mintcream');
+		    $('#change_rune2').css('background-color', 'initial');
+			
 			let f_runetype = res[0].runetype_core
 			let f_core_main = res[0].core_mainrune
 			let f_core_rune1 = res[0].core_rune1
@@ -1301,6 +1167,9 @@
 		
 		$('#change_rune2').click(function() {
 			
+			// 배경색 변경
+		    $(this).css('background-color', 'mintcream');
+		    $('#change_rune1').css('background-color', 'initial');
 	
 			let s_runetype = res[1].runetype_core
 			let s_core_main = res[1].core_mainrune
@@ -1789,9 +1658,9 @@
 	      Win_List =''
 	      
 	      $.each(res, function (i,item) {
-	         $('#i_Pick').append('<br>'+item.pick_rate);
-	         $('#i_Totgame').append('<br>'+item.game_count);
-	         $('#i_Winrate').append('<br>'+item.win_rate);
+	         $('#i_Pick').append('<div height="40px"><p style="font-size: 25px;">'+item.pick_rate+'%'+'</p></div>');
+	         $('#i_Totgame').append('<div height="40px"><p style="font-size: 25px;">'+item.game_count+' 게임'+'</p></div>');
+	         $('#i_Winrate').append('<div height="40px"><p style="font-size: 25px;" class="win_rate_span" >'+item.win_rate+'%'+'</p></div>');
 	         
 	         var item_1 = item.item1
 	         var item_2 = item.item2
@@ -1912,7 +1781,222 @@
 	   }).fail(err => {
 	      
 	   })//아이템 트리 
+	   
+	   //시작 아이템 갖고오기
+	   $.ajax({
+		   method:'get',
+		   data:{champ_id:champ_id,champ_lane:champ_lane},
+		   url:'/personlol/champion/start-item'
+	   }).done(res => {
+		   
+		   //첫번째 아이템빌드
+		   const sBuild1 = res[0].start_item
+		   const result1 = sBuild1.replace(/\[|\]/g, '');
+		   const arr1 = result1.split(", ")
 			
+	
+		   //다른 아이템빌드
+		   const sBuild2 = res[2].start_item
+		   const result2 = sBuild2.replace(/\[|\]/g, '');
+		   const arr2 = result2.split(", ")
+	
+		   
+		   let f_item1 = arr1[0]
+		   let s_item1 = arr1.length > 1 ? arr1[1] : ""; // 조건문으로 arr의 길이를 확인하여 조건에 따라 s_item 설정
+		   
+		   let f_item2 = arr2[0]
+		   let s_item2 = arr2.length > 1 ? arr2[1] : ""; // 조건문으로 arr의 길이를 확인하여 조건에 따라 s_item 설정
+		   
+		   //첫번째 아이템 픽,승률
+		   let f_win_item = res[0].win_rate
+		   let f_pick_item = res[0].pick_rate
+		   let f_count_item = res[0].game_count
+		   
+		   //두번째 아이템 픽,승률
+		   let s_win_item = res[2].win_rate
+		   let s_pick_item = res[2].pick_rate
+		   let s_count_item = res[2].game_count
+		   
+		   rate_info = '<div class="rate_info">'+
+			  '<strong>'+f_pick_item+'%'+'</strong>'+
+			  '<p><small>'+f_count_item+' 게임'+'</small></p>'+
+			  '</div>';
+			
+		   win_info = '<div class="win_info"><span class="win_rate_span">'+f_win_item+'%'+'</span></div>';
+		   
+		   rate_info2 = '<div class="rate_info">'+
+			  '<strong>'+s_pick_item+'%'+'</strong>'+
+			  '<p><small>'+s_count_item+' 게임'+'</small></p>'+
+			  '</div>';
+			  
+		   win_info2 = '<div class="win_info"><span class="win_rate_span">'+s_win_item+'%'+'</span></div>';
+		   async function fetchItemDetails() {
+			   try {
+			     // 첫 번째 템 빌드
+			     const f_item1_res = await $.ajax({
+			       method: 'get',
+			       url: "/personlol/champion/start-item1",
+			       data: { item: f_item1 }
+			     });
+
+			     const f_iteml_img = '<div class="f_item">' +
+			       '<img class="item_img" width="40" height="40" src="../resources/' + f_item1_res[0].item_icon +
+			       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+			       f_item1_res[0].item_name + '</span><div class="item_longdesc">' + f_item1_res[0].item_desc + '</div><div>' + f_item1_res[0].item_plaintext +
+			       '</div></div></div>';
+
+			     $('#start_item1').append(f_iteml_img);
+
+			     // 두 번째 템 빌드
+			     const s_item1_res = await $.ajax({
+			       method: 'get',
+			       url: "/personlol/champion/start-item2",
+			       data: { item: s_item1 }
+			     });
+
+			     const s_iteml_img = '<div class="f_item">' +
+			       '<img class="item_img" width="40" height="40" src="../resources/' + s_item1_res[0].item_icon +
+			       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+			       s_item1_res[0].item_name + '</span><div class="item_longdesc">' + s_item1_res[0].item_desc + '</div><div>' + s_item1_res[0].item_plaintext +
+			       '</div></div></div>';
+
+			     $('#start_item1').append(s_iteml_img);
+			     $('#start_item1').append(rate_info);
+			     $('#start_item1').append(win_info);
+
+			     // 세 번째 템 빌드
+			     const f_item2_res = await $.ajax({
+			       method: 'get',
+			       url: "/personlol/champion/start-item1",
+			       data: { item: f_item2 }
+			     });
+
+			     const f_item2l_img = '<div class="f_item">' +
+			       '<img class="item_img" width="40" height="40" src="../resources/' + f_item2_res[0].item_icon +
+			       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+			       f_item2_res[0].item_name + '</span><div class="item_longdesc">' + f_item2_res[0].item_desc + '</div><div>' + f_item2_res[0].item_plaintext +
+			       '</div></div></div>';
+
+			     $('#start_item2').append(f_item2l_img);
+
+			     // 네 번째 템 빌드
+			     const s_item2_res = await $.ajax({
+			       method: 'get',
+			       url: "/personlol/champion/start-item2",
+			       data: { item: s_item2 }
+			     });
+
+			     const s_item2l_img = '<div class="f_item">' +
+			       '<img class="item_img" width="40" height="40" src="../resources/' + s_item2_res[0].item_icon +
+			       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+			       s_item2_res[0].item_name + '</span><div class="item_longdesc">' + s_item2_res[0].item_desc + '</div><div>' + s_item2_res[0].item_plaintext +
+			       '</div></div></div>';
+
+			     $('#start_item2').append(s_item2l_img);
+			     $('#start_item2').append(rate_info2);
+			     $('#start_item2').append(win_info2);
+
+			   } catch (err) {
+			     console.log("에러가 발생했습니다.");
+			     console.log(err);
+			   }
+			 }
+
+			 fetchItemDetails();
+				   
+				   
+				  
+		   
+	   }).fail(err => {
+		   
+	   })//item
+	   
+	   //시작 신발 불러오기
+	   $.ajax({
+		   method:'get',
+		   data:{champ_id:champ_id,champ_lane:champ_lane},
+		   url:'/personlol/champion/start-boots'
+	   }).done(res => {
+		   console.log('start-boots check');
+		   console.log(res);
+		   console.log('start-boots check');
+		   
+		   
+		   let f_boots = res[0].boots
+		   let s_boots = res[1].boots
+		   
+		   let f_win_boots = res[0].win_rate
+		   let s_win_boots = res[1].win_rate
+		   
+		   let f_pick_boots = res[0].pick_rate
+		   let s_pick_boots = res[1].pick_rate
+		   
+		   let f_count_boots = res[0].game_count
+		   let s_count_boots = res[1].game_count
+		   
+		   rate_info = '<div class="rate_info">'+
+			  '<strong>'+f_pick_boots+'%'+'</strong>'+
+			  '<p><small>'+f_count_boots+' 게임'+'</small></p>'+
+			  '</div>';
+			
+		   win_info = '<div class="win_info"><span class="win_rate_span">'+f_win_boots+'%'+'</span></div>';
+		   
+		   rate_info2 = '<div class="rate_info">'+
+			  '<strong>'+s_pick_boots+'%'+'</strong>'+
+			  '<p><small>'+s_count_boots+' 게임'+'</small></p>'+
+			  '</div>';
+			
+		   win_info2 = '<div class="win_info"><span class="win_rate_span">'+s_win_boots+'%'+'</span></div>';
+		   
+		   //첫번째 부츠 이미지
+		   $.ajax({
+			   method:'get',
+			   url:"/personlol/champion/start-boots1",
+			   data:{item:f_boots}
+		   }).done(res => {
+			   console.log("신발이미지 가져왓느냐!!!!")
+			   console.log(res)
+			   
+			   f_boots_img = '<div class="f_item">'+
+               '<img class="item_img" width="40" height="40" src="../resources/'+res[0].item_icon+
+               '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+               res[0].item_name+'</span><div class="item_longdesc">'+res[0].item_desc+'</div><div>'+res[0].item_plaintext
+               '</div></div></div>';
+               
+			   $('#start_boots1').append(f_boots_img);
+			   $('#start_boots1').append(rate_info);
+			   $('#start_boots1').append(win_info);
+		   }).fail(err => {
+			   
+		   })
+		   
+		   //두번째 부츠 이미지
+		   $.ajax({
+			   method:'get',
+			   url:"/personlol/champion/start-boots2",
+			   data:{item:s_boots}
+		   }).done(res => {
+			   console.log("신발이미지 가져왓느냐!!!!")
+			   console.log(res)
+			   
+			   s_boots_img = '<div class="f_item">'+
+               '<img class="item_img" width="40" height="40" src="../resources/'+res[0].item_icon+
+               '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+               res[0].item_name+'</span><div class="item_longdesc">'+res[0].item_desc+'</div><div>'+res[0].item_plaintext
+               '</div></div></div>';
+               
+			   $('#start_boots2').append(s_boots_img);
+			   $('#start_boots2').append(rate_info2);
+			   $('#start_boots2').append(win_info2);
+			   
+		   }).fail(err => {
+			   
+		   })
+		   
+	   }).fail(err => {
+		   
+		   
+	   })//신발 끝
 
  });//ready 끝
 	 

@@ -16,9 +16,21 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/header.css">
+	
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/summonerstat.css">
 </head>
+
+<style>
+body{
+	background-color: #f5f5f5;
+}
+.col{
+  background-color: white;
+  margin: 5px;
+}
+
+</style>
 
 <body>
 	<div id="generic">
