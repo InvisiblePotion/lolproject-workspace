@@ -3,9 +3,9 @@
     "version": "2.2.11",
     "width": 5000,
     "height": 5000,
-    "scrollTop": -1749.0031250000134,
-    "scrollLeft": -2944.8062500000005,
-    "zoomLevel": 0.8,
+    "scrollTop": 0,
+    "scrollLeft": 0,
+    "zoomLevel": 0.5,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -295,10 +295,10 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 3747.2217,
           "top": 1974.2213,
-          "zIndex": 43,
+          "zIndex": 36,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -729,7 +729,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 36,
+          "zIndex": 35,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -1554,9 +1554,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 4090.5,
-          "top": 1083.522,
-          "zIndex": 26,
+          "left": 1180.5,
+          "top": 2793.522,
+          "zIndex": 49,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1616,9 +1616,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 4463.4166,
-          "top": 1393.3832,
-          "zIndex": 12,
+          "left": 1953.4166,
+          "top": 2483.3832,
+          "zIndex": 50,
           "widthName": 74.44580078125,
           "widthComment": 60
         },
@@ -1724,9 +1724,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 4218.75,
-          "top": 767.7722,
-          "zIndex": 11,
+          "left": 1218.75,
+          "top": 2462.7722,
+          "zIndex": 51,
           "widthName": 60,
           "widthComment": 60
         },
@@ -3637,7 +3637,7 @@
           "active": false,
           "left": 3746.3283,
           "top": 4156.2132,
-          "zIndex": 31,
+          "zIndex": 30,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -3790,9 +3790,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 2616.1115,
-          "top": 2005.2228,
-          "zIndex": 18,
+          "left": 3096.1115,
+          "top": 3630.2228,
+          "zIndex": 45,
           "widthName": 89.140625,
           "widthComment": 60,
           "color": "#607D8B"
@@ -4537,9 +4537,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 2664.7782,
-          "top": 851.8892,
-          "zIndex": 32,
+          "left": 1159.7782,
+          "top": 3611.8892,
+          "zIndex": 31,
           "widthName": 60,
           "widthComment": 96.30078125,
           "color": "#00BCD4"
@@ -4853,9 +4853,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 3332.4,
-          "top": 529.6,
-          "zIndex": 35,
+          "left": 1827.4,
+          "top": 3289.6,
+          "zIndex": 46,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
           "color": "#00BCD4"
@@ -4916,9 +4916,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 3385.3331,
-          "top": 1013.8881,
-          "zIndex": 33,
+          "left": 1880.3331,
+          "top": 3773.8881,
+          "zIndex": 32,
           "widthName": 60,
           "widthComment": 77.47998046875,
           "color": "#4CAF50"
@@ -4979,9 +4979,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 2728.6063,
-          "top": 561.2031,
-          "zIndex": 34,
+          "left": 1223.6063,
+          "top": 3321.2031,
+          "zIndex": 33,
           "widthName": 145.39990234375,
           "widthComment": 101.48681640625,
           "color": "#FF9800"
@@ -5047,7 +5047,7 @@
       {
         "value": "빨간 테이블은 전부 인터벌 테이블로 1~2시간 간격의 인터벌로 갱신될 예정...\n이지만 변경될 수 있으며 다른 데이터 테이블과의 참조 여부도 변경될 수 있음.\n\n빨간 테이블의 참조 중 일부는 FK 참조가 성립하지 않을 수도 있음.\n대부분은 실수이므로 이 경우엔 ERD 수정을 위해 팀원에게 알려줄 것!\n\n각종 이미지와 같은 변동성이 없는 정보의 경우엔 서버의 REST 컨트롤러에서\n메소드가 호출될 때 메소드 내부에서 해당 정보들을 직접 쿼리해올 예정이므로\n빨간 인터벌 테이블에는 변동성이 있고 필요한 정보의 추출을 위한 쿼리에\n긴 시간이 소요되는 정보만을 저장함.",
         "ui": {
-          "active": true,
+          "active": false,
           "left": 3744.0000000000155,
           "top": 1654.2666666666992,
           "zIndex": 19,
@@ -5061,9 +5061,9 @@
         "value": "여러 테이블에 등장하는 컬럼이지만 다른 테이블에서 참조하는 정보가 아닌 컬럼의 경우 이곳에 기입하기.\n(타입이나 NOT-NULL 등의 컬럼 정보를 통일하기 위함)\n\n혹시 이곳에 기입된 컬럼이 타 테이블에서 타입 등의 정보가\n다르다면 그 테이블의 정보를 오기로 판단하고 수정 바람!",
         "ui": {
           "active": false,
-          "left": 2616.8055555555566,
-          "top": 1857.3111111111243,
-          "zIndex": 8,
+          "left": 3096.8055555555566,
+          "top": 3482.3111111111243,
+          "zIndex": 44,
           "width": 370.2000000000013,
           "height": 146.3999999999999,
           "color": "#2B1919"
@@ -5085,7 +5085,7 @@
       {
         "value": "OP 티어는 0으로 입력\n(현재 티어 알고리즘 정립 전까지 임시로 0 사용 중)",
         "ui": {
-          "active": true,
+          "active": false,
           "left": 3748.155555555586,
           "top": 1893.6888888889214,
           "zIndex": 20,
@@ -5098,8 +5098,8 @@
         "value": "id는 46~47자, puuid는 78자로 확인되었으나 혹시 모르니 넓게 잡음.\n\n랭크 단계는 I~IV 단계가 없는 티어의 경우 0으로 표기",
         "ui": {
           "active": false,
-          "left": 3336.022222222211,
-          "top": 428.39999999999225,
+          "left": 1831.022222222211,
+          "top": 3188.3999999999924,
           "zIndex": 7,
           "width": 422.20000000000033,
           "height": 100
@@ -5131,8 +5131,8 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 4277.7200927734375,
-          "y": 918.7722,
+          "x": 1336.690185546875,
+          "y": 2613.7722,
           "direction": "bottom"
         },
         "end": {
@@ -5140,8 +5140,8 @@
           "columnIds": [
             "9da0b85f-7395-4cf6-b4e9-eaf374608b90"
           ],
-          "x": 4511.9124755859375,
-          "y": 1083.522,
+          "x": 1601.9124755859375,
+          "y": 2793.522,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
@@ -5157,18 +5157,18 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 4513.6004638671875,
-          "y": 918.7722,
-          "direction": "bottom"
+          "x": 1690.5107421875,
+          "y": 2500.5222,
+          "direction": "right"
         },
         "end": {
           "tableId": "e92c01e5-cf04-4511-b71f-a9fffa3961b2",
           "columnIds": [
             "49352f8c-40f2-493e-bcdd-a31222fca518"
           ],
-          "x": 4797.646702539062,
-          "y": 1393.3832,
-          "direction": "top"
+          "x": 1953.4166,
+          "y": 2565.8832,
+          "direction": "left"
         },
         "constraintName": "fk_user_to_agree",
         "visible": true,
@@ -5183,8 +5183,8 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 4395.6602783203125,
-          "y": 918.7722,
+          "x": 1572.570556640625,
+          "y": 2613.7722,
           "direction": "bottom"
         },
         "end": {
@@ -5192,8 +5192,8 @@
           "columnIds": [
             "d27bdd11-1a0e-4b19-a113-06ca1c03010e"
           ],
-          "x": 4230.9708251953125,
-          "y": 1083.522,
+          "x": 1320.9708251953125,
+          "y": 2793.522,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
@@ -5937,18 +5937,18 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 4631.5406494140625,
-          "y": 918.7722,
-          "direction": "bottom"
+          "x": 1690.5107421875,
+          "y": 2576.0222,
+          "direction": "right"
         },
         "end": {
           "tableId": "e92c01e5-cf04-4511-b71f-a9fffa3961b2",
           "columnIds": [
             "190b55e3-fd60-4479-8257-7d875a6ca48a"
           ],
-          "x": 4574.826634179687,
-          "y": 1393.3832,
-          "direction": "top"
+          "x": 1953.4166,
+          "y": 2510.8832,
+          "direction": "left"
         },
         "constraintName": "fk_user_to_duo/request",
         "visible": true,
@@ -5963,8 +5963,8 @@
           "columnIds": [
             "1648e08a-9cca-4116-8b91-a8f0c7da782d"
           ],
-          "x": 3606.699555078125,
-          "y": 1013.8881,
+          "x": 2101.699555078125,
+          "y": 3773.8881,
           "direction": "top"
         },
         "end": {
@@ -5972,8 +5972,8 @@
           "columnIds": [
             "fe033db5-0ce6-48f6-8d03-9c5ddb7976ed"
           ],
-          "x": 3602.636328125,
-          "y": 865.1,
+          "x": 2097.636328125,
+          "y": 3625.1,
           "direction": "bottom"
         },
         "constraintName": "fk_apikey_to_summoner",
@@ -5989,8 +5989,8 @@
           "columnIds": [
             "1648e08a-9cca-4116-8b91-a8f0c7da782d"
           ],
-          "x": 3385.3331,
-          "y": 1068.8881000000001,
+          "x": 1880.3331,
+          "y": 3828.8881,
           "direction": "left"
         },
         "end": {
@@ -5998,8 +5998,8 @@
           "columnIds": [
             "59e02ae7-9b0c-4ff9-b5d3-96f13b7cc11f"
           ],
-          "x": 3196.31482109375,
-          "y": 1152.8892,
+          "x": 1691.31482109375,
+          "y": 3912.8892,
           "direction": "right"
         },
         "constraintName": "fk_apikey_to_rawdata",
@@ -6093,8 +6093,8 @@
           "columnIds": [
             "c56a62c0-ed93-4fe3-b9c3-102ce5fab5c8"
           ],
-          "x": 3332.4,
-          "y": 697.35,
+          "x": 1827.4,
+          "y": 3457.35,
           "direction": "left"
         },
         "end": {
@@ -6102,8 +6102,8 @@
           "columnIds": [
             "8230eb92-f0dd-404b-85bc-54b2e715e12c"
           ],
-          "x": 3216.502784375,
-          "y": 616.2031,
+          "x": 1711.502784375,
+          "y": 3376.2031,
           "direction": "right"
         },
         "constraintName": "fk_summoner_to_summoner_recent_game",
