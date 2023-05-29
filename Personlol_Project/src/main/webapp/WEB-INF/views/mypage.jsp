@@ -239,11 +239,11 @@
                 method: 'get',
                 url: '/personlol/mypage/getrequest'
             }).done(res => {
-                console.log(res);
+                console.log("res",res);
                 $('.offer-list-write-box.request').empty();
                 for (let m in res) {
                 	  let obj = res[m];
-                	  console.log(obj);
+                	  console.log("obj",obj);
                 	  for (let k in obj) {
                 	    let val = obj[k];
                 	    console.log(val);
