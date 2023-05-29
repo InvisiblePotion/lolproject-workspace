@@ -226,6 +226,7 @@ body{
 .offer-list-write-box{
     width: 700px;
     height: 100%;
+    overflow: scroll;
     background-color: steelblue;
 }
 .offer-list-write{
