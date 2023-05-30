@@ -46,7 +46,6 @@ function getGameRecords(game_id_list) {
         console.log(rawdata_list);
         for (const idx in rawdata_list) {
             if (Object.hasOwnProperty.call(rawdata_list, idx)) {
-                if (idx >= 2) {return;} // ### 테스트를 위해 입력할 게임 수를 2개로 제한
                 const game_data = rawdata_list[idx];
                 inputGameDataShort(game_data, parseInt(idx)+1);
             }
@@ -99,11 +98,11 @@ function inputGameDataShort(game_data, game_number) {
         $(prefix+'.raw-game-endtime').html(Math.floor(time_elapsed / 60000)+'분 전');
     }
     game_data[0]['champion']['win'] == 1 ? $(prefix+'.raw-game-win').html('승리') : $(prefix+'.raw-game-win').html('패배') // ## 이거 되나...?
-    $(prefix+'.raw-game-duration').html(duration_min+'분 '+duration_sec+'초'); // ### 
+    $(prefix+'.raw-game-duration').html(duration_min+'분 '+duration_sec+'초');
     $(prefix+'.raw-self-champion-icon')[0].src = '../resources/dd/img/champion/icon/Ahri.png'; // ### 챔피언 아이콘 DB에서 가져와야 함!
     $(prefix+'.raw-self-champion-level').html(game_data[self_number]['champion']['champLevel']);
-    $(prefix+'.raw-self-spell-spell1')[0].src = '../resources/dd/img/spell/'+game_data[self_number]['spell']['summoner1Id']+'.png'; // ### 주소, 확장자 맞춰야 함!
-    $(prefix+'.raw-self-spell-spell2')[0].src = '../resources/dd/img/spell/'+game_data[self_number]['spell']['summoner2Id']+'.png'; // ### 주소, 확장자 맞춰야 함!
+    $(prefix+'.raw-self-spell-spell1')[0].src = '../resources/dd/img/summonerspell/'+game_data[self_number]['spell']['summoner1Id']+'.png';
+    $(prefix+'.raw-self-spell-spell2')[0].src = '../resources/dd/img/summonerspell/'+game_data[self_number]['spell']['summoner2Id']+'.png';
     $(prefix+'.raw-self-rune-core-mainrune')[0].src = '../resources/dd/img/rune/perk/'+game_data[self_number]['rune']['runeCorePerk']+'.png';
     $(prefix+'.raw-self-rune-runetype-sub')[0].src = '../resources/dd/img/rune/style/'+game_data[self_number]['rune']['runeSubStyle']+'.png';
     $(prefix+'.raw-self-kda-kills').html(game_data[self_number]['kda']['kills']);
