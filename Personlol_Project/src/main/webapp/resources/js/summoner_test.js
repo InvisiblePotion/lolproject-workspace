@@ -9,7 +9,7 @@ function getGameIds(summoner_name) {
         url: '/personlol/summoner/rest/game-id-list',
         data: {'summoner_name': summoner_name}
     }).done((game_id_list)=>{
-        console.log(game_id_list);
+        console.log(game_id_list); // ### 로그
         getGameRecords(game_id_list);
         putGameIds(summoner_name, game_id_list); // ### summoner_recent_game 테이블에서 꺼내와도 작동하는 문제 존재(성능 이슈)
     }).fail((err)=>{
@@ -43,11 +43,25 @@ function getGameRecords(game_id_list) {
         url: '/personlol/summoner/rest/game-record',
         data: {'game_id_list': game_id_list}
     }).done((rawdata_list)=>{
-        console.log(rawdata_list);
+        console.log(rawdata_list); // ### 로그
+        const parse_keys = [
+            'game','champion','spell','skill','skilltree',
+            'rune','item','kda','gold','cs','damage','vision'];
         for (const idx in rawdata_list) {
             if (Object.hasOwnProperty.call(rawdata_list, idx)) {
-                const game_data = rawdata_list[idx];
+                let game_data = rawdata_list[idx];
+            
+                // 파싱
+                for (const idx in game_data) {
+                    if (Object.hasOwnProperty.call(game_data, idx)) {
+                        const part = game_data[idx];
+                        for (const key of parse_keys) {
+                            game_data[idx][key] = JSON.parse(part[key]);
+                        }
+                    }
+                }
                 inputGameDataShort(game_data, parseInt(idx)+1);
+                // inputGameDataExpend(game_data, parseInt(idx)+1);
             }
         }
     }).fail((err)=>{
@@ -58,25 +72,12 @@ function getGameRecords(game_id_list) {
 /**
  * RawData 테이블의 데이터를 사용해 접은 상태의 게임 전적 정보를 정해진 클래스가 붙은 각 태그에 삽입한다.
  * 태그에 붙여야 하는 클래스 이름에 대해서는 `소환사 전적 페이지 클래스 리스트.md` 참고
- * @param {object} game_data 한 게임 분량의 RawData
+ * @param {object} game_data 한 게임 분량의 파싱된 RawData
  * @param {int} game_number 삽입할 태그의 위치 (게임의 순번, 1부터 시작)
  */
 function inputGameDataShort(game_data, game_number) {
     const summoner_name = $('#game-id-summoner-name').val() // ### 소환사 이름 가져오는 위치 변경 필요!
     const time_now = Date.now();
-    const parse_keys = [
-        'game','champion','spell','skill','skilltree',
-        'rune','item','kda','gold','cs','damage','vision'];
-
-    // 파싱
-    for (const idx in game_data) {
-        if (Object.hasOwnProperty.call(game_data, idx)) {
-            const part = game_data[idx];
-            for (const key of parse_keys) {
-                game_data[idx][key] = JSON.parse(part[key]);
-            }
-        }
-    }
 
     let self_number = null;
     for (const idx in game_data) {
@@ -97,9 +98,9 @@ function inputGameDataShort(game_data, game_number) {
     } else {
         $(prefix+'.raw-game-endtime').html(Math.floor(time_elapsed / 60000)+'분 전');
     }
-    game_data[0]['champion']['win'] == 1 ? $(prefix+'.raw-game-win').html('승리') : $(prefix+'.raw-game-win').html('패배')
+    game_data[0]['champion']['win'] == 1 ? $(prefix+'.raw-game-win').html('승리') : $(prefix+'.raw-game-win').html('패배');
     $(prefix+'.raw-game-duration').html(duration_min+'분 '+duration_sec+'초');
-    $(prefix+'.raw-self-champion-icon')[0].src = '../resources/dd/img/champion/icon/'+game_data[self_number]['champion']['championId']+'.png';
+    $(prefix+'.raw-self-champion-icon')[0].src = '../resources/dd/img/champion/icon-id/'+game_data[self_number]['champion']['championId']+'.png';
     $(prefix+'.raw-self-champion-level').html(game_data[self_number]['champion']['champLevel']);
     $(prefix+'.raw-self-spell-spell1')[0].src = '../resources/dd/img/summonerspell/'+game_data[self_number]['spell']['summoner1Id']+'.png';
     $(prefix+'.raw-self-spell-spell2')[0].src = '../resources/dd/img/summonerspell/'+game_data[self_number]['spell']['summoner2Id']+'.png';
@@ -108,7 +109,7 @@ function inputGameDataShort(game_data, game_number) {
     $(prefix+'.raw-self-kda-kills').html(game_data[self_number]['kda']['kills']);
     $(prefix+'.raw-self-kda-deaths').html(game_data[self_number]['kda']['deaths']);
     $(prefix+'.raw-self-kda-assists').html(game_data[self_number]['kda']['assists']);
-    $(prefix+'.raw-self-kda-kda').html(game_data[self_number]['kda']['assists']+':1');
+    game_data[self_number]['kda']['deaths'] == 0 ? $(prefix+'.raw-self-kda-kda').html('Perfect') : $(prefix+'.raw-self-kda-kda').html(parseFloat(game_data[self_number]['kda']['kda']).toFixed(2)+':1');
     $(prefix+'.raw-self-kda-killparticipation').html('킬관여 '+(parseFloat(game_data[self_number]['kda']['killParticipation'])*100).toFixed(0)+'%');
     $(prefix+'.raw-self-vision-controlward').html('제어 와드 '+game_data[self_number]['vision']['controlWardsPlaced']);
     $(prefix+'.raw-self-cs').html('CS '+game_data[self_number]['cs']['totalMinionsKilled']+' ('+(parseInt(game_data[self_number]['cs']['totalMinionsKilled'])/duration_min).toFixed(1)+')');
@@ -143,8 +144,71 @@ function inputGameDataShort(game_data, game_number) {
             break;
     }
     for (let idx = 0; idx < 10; idx++) {
-        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-champion-icon')[0].src = '../resources/dd/img/champion/icon/'+game_data[idx]['champion']['championId']+'.png';
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-champion-icon')[0].src = '../resources/dd/img/champion/icon-id/'+game_data[idx]['champion']['championId']+'.png';
         $(prefix+'.raw-part'+(parseInt(idx)+1)+'-summoner-name').html(game_data[idx]['participant_name']);
+    }
+}
+
+/**
+ * RawData 테이블의 데이터를 사용해 펼친 상태의 게임 전적 정보를 정해진 클래스가 붙은 각 태그에 삽입한다.
+ * 태그에 붙여야 하는 클래스 이름에 대해서는 `소환사 전적 페이지 클래스 리스트.md` 참고
+ * @param {object} game_data 한 게임 분량의 파싱된 RawData
+ * @param {int} game_number 삽입할 태그의 위치 (게임의 순번, 1부터 시작)
+ */
+function inputGameDataExpend(game_data, game_number) {
+
+    const duration_min = Math.floor(parseInt(game_data[0]['game']['gameDuration']) / 60);
+    const prefix = '.container #record:nth-child('+game_number+') '; // ### 펼친 뒤의 구조에 맞게 바꿔야 함! (현재는 접힌 상태 기준)
+    
+    let max_dealt_damage = 0; // ### 바를 표시하지 않는다면 필요 없는 코드
+    let max_taken_damage = 0; // ### 바를 표시하지 않는다면 필요 없는 코드
+    
+    for (let idx = 0; idx < 10; idx++) {
+        // >:champion
+        // raw-part0-champion-icon (inputGameDataShort()에서 처리됨)
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-champion-level').html(game_data[idx]['champion']['champLevel'])
+        
+        // >:spell
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-spell-spell1')[0].src = '../resources/dd/img/summonerspell/'+game_data[idx]['spell']['summoner1Id']+'.png';
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-spell-spell2')[0].src = '../resources/dd/img/summonerspell/'+game_data[idx]['spell']['summoner2Id']+'.png';
+        
+        // >:rune
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-rune-core-mainrune')[0].src = '../resources/dd/img/rune/perk/'+game_data[idx]['rune']['runeCorePerk']+'.png';
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-rune-runetype-sub')[0].src = '../resources/dd/img/rune/style/'+game_data[idx]['rune']['runeSubStyle']+'.png';
+        
+        // >:summoner
+        // raw-part0-summoner-name (inputGameDataShort()에서 처리됨)
+        
+        // >:kda
+        let kda_data = game_data[idx]['kda']['kills']+'/'+game_data[idx]['kda']['deaths']+'/'+game_data[idx]['kda']['assists']+' ('+(parseFloat(game_data[idx]['kda']['killParticipation'])*100).toFixed(0)+'%)';
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-kda-data').html(kda_data);
+        game_data[idx]['kda']['deaths'] == 0 ? $(prefix+'.raw-part'+(parseInt(idx)+1)+'-kda-kda').html('Perfect') : $(prefix+'.raw-part'+(parseInt(idx)+1)+'-kda-kda').html(parseFloat(game_data[idx]['kda']['kda']).toFixed(2)+':1');
+        
+        // >:damage
+        const damage_dealt = parseInt(game_data[idx]['damage']['totalDamageDealtToChampions']);
+        if (damage_dealt > max_dealt_damage) {max_dealt_damage = damage_dealt;} // ### 바를 표시하지 않는다면 필요 없는 코드
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-damage-dealt').html(damage_dealt);
+        const taken_damage = parseInt(game_data[idx]['damage']['totalDamageTaken']);
+        if (taken_damage > max_taken_damage) {max_taken_damage = taken_damage;} // ### 바를 표시하지 않는다면 필요 없는 코드
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-damage-taken').html(taken_damage);
+
+        // >:vision
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-vision-controlward').html(game_data[idx]['vision']['controlWardsPlaced']);
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-vision-warddata').html(game_data[idx]['vision']['wardsPlaced']+'/'+game_data[idx]['vision']['wardsKilled']);
+        
+        // >:cs
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-cs-total').html(game_data[idx]['cs']['totalMinionsKilled']);
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-cs-perminute').html((parseInt(game_data[idx]['cs']['totalMinionsKilled'])/duration_min).toFixed(1));
+    
+        // >:item
+        for (let item_idx = 0; item_idx < 6; item_idx++) {
+            if (game_data[self_number]['item']['item'+item_idx] == 0) {
+                $(prefix+'.raw-part'+(parseInt(idx)+1)+'-item-item'+(parseInt(item_idx)+1))[0].src = ''
+            } else {
+                $(prefix+'.raw-part'+(parseInt(idx)+1)+'-item-item'+(parseInt(item_idx)+1))[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item'+item_idx]+'.png';
+            }
+        }
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-item-trinket')[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item6']+'.png';
     }
 }
 
