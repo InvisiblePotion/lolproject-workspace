@@ -1,9 +1,16 @@
 
+.main-search-form{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
 
+}
 #wrapdiv{
   background-color: #828282;
 }
-
+#search-input{
+	border-radius: 45px 0 0 45px;
+}
 #maindiv{
   display: block;
   width: 1080px;
@@ -17,6 +24,12 @@
   margin: 56px 0 46px;
   /* border: 1px solid black; */
 }
+fieldset{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
 
 #searchdiv{
   display: flex;
@@ -27,15 +40,28 @@
   padding: 0 0 0 0 ;
   margin: 0 auto;
   margin-bottom: 100px;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
 }
+/* .db_search{
+	position: absolute;
+} */
 .main-search{
   width: 800px;
   height: 60px;
   padding: 0 0 0 0;
 }
 .gosummonerinfo.main-btn{
+  display:flex;
   height: 60px;
+  width: 80px;
   padding: 0 0 0 0;
+  overflow: hidden;
+  	justify-content: center;
+	align-items: center;
+	align-content: center;
+	border-radius: 0 45px 45px 0;
 }
 
 #lanediv{
@@ -46,6 +72,14 @@
   justify-content: space-between;
   flex-direction: row;
 
+}
+.www{
+	height: 100px;
+	width: 920px;
+	border-radius: 48px ;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 
 .m_lane{
@@ -166,7 +200,8 @@
   justify-content: center;
   align-items: center;
   border-top: 1px solid #81ACFF;
-  height: 100px;
+  height: 80px;
+  position: relative;
 }
 
 input:focus {outline:none;}
