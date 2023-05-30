@@ -76,8 +76,7 @@
 
 			<div id="m_logo">
 				<img
-					src="./resources/img/mainLogo.png"
-					title="메인로고" id=m_log_img width="50%" >
+					src="./resources/img/mainlogo.png" title="메인로고" id=m_log_img width="50%" >
 			</div id="m_logo">
 
 			<div id="searchdiv">
@@ -356,43 +355,19 @@
 
     //최신 듀오 리스트 가져오기
     let pageing = 1;
-
-    function paging_duo(pageing) {
-      if(pageing<0){
-        alert("최신페이지 입니다.")
-        location.href='/personlol/'
-
-      }
-
-      $.ajax({
-        method: 'get',
-        url: '/personlol/duo/main_duo',
-        data:{'page_num':pageing}
-      }).done(res => {
-        console.log(res);
-        if(res.length===0){
-          alert("더이상 정보가 없습니다.")
-          location.href='/personlol/'
-          return "last_page"
-        }
-      }).fail(err => {
-        console.log(err);
-      });
-    }
-    //초기 값 가져오기
-    paging_duo(pageing)
+    
     
     $('.next_page').click(function(){
       pageing++;
       console.log("페이징 정보: " + pageing);
-      paging_duo(pageing) 
+      loadDuo(pageing) 
       }
     );
     
     $('.back_page').click(function(){
       pageing--;
       console.log("페이징 정보: "+pageing);
-      paging_duo(pageing);
+      loadDuo(pageing);
     })
 
 
@@ -425,6 +400,7 @@
           location.href = go_url;
         } else if (res == "-999") {
           alert("등록되지 않은 소환사입니다. 다시 입력해주세요.");
+          location.href = '/personlol/main'
         }
       }).fail(err => {
         console.log(err);
@@ -517,15 +493,13 @@
   <script>
   	let page_num = 1; // 현재 페이지 번호
   	
-	//게시글 시작
 	$(document).ready(function () {
 		loadDuo(page_num);
 
 	});
   	
   	function loadDuo(page_num){
-  		
-	  	
+  		  $('.duolist-container').empty();
 		  //메인듀오가져오기;
 		  $.ajax({
 		    method: 'get',
