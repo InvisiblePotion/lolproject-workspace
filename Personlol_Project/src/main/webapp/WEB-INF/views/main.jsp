@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="javax.servlet.http.HttpSession"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -8,227 +8,231 @@
 
 
 <head>
-  <meta charset="UTF-8">
-  <title>main</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
+<title>main</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="./resources/css/header.css">
-  <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./resources/css/header.css">
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+
 
 </head>
 
 <body>
-  <div id="wrapdiv">
+	<div id="wrapdiv">
 
-    <div id="generic">
-      <div class="area">
-        <nav class="bener-container">
-          <div class="bener">
-            <a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png" height="25px"></a>
-            <div class="search-bar">
+		<div id="generic">
+			<div class="area">
+				<nav class="bener-container">
+					<div class="bener">
+						<a href="/personlol/main" class="imgfile"><img
+							src="./resources/img/navLogo.png" height="28px" width="100px"></a>
+						<div class="search-bar">
 
-              <input class="summoner_name summoner_name_search" type="text" placeholdr="소환사명 검색....">
-              <button class="gosummonerinfo" type="button">go!</button>
-            </div>
-            <div class="menu">
-              <a href="/personlol/champion/" class="m-col">챔피언분석</a> <a href="/personlol/rank"
-                class="m-col rank">랭킹보기</a> <a href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-                href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a href="/personlol/summoner/"
-                class="m-col">소환사분석</a>
-
-
-            </div>
-            <div class="my-menu">
-              <c:choose>
-                <c:when test="${sessionScope.id ne null}">
-                  <a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
-                </c:when>
-                <c:otherwise>
-                  <a href="/personlol/logine" class="m-col login">로그인</a>
-                </c:otherwise>
-              </c:choose>
-
-              <div id="loginout">
-                <c:if test="${sessionScope.id ne null}">
-                  <div class="loggedin-box">
-                    <span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
-                  </div>
-                  <div class="logout-box">
-                    <span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
-                  </div>
-                </c:if>
-              </div id="loginout">
-            </div>
-          </div>
-        </nav>
-      </div>
-    </div id="generic">
-    <!-- 여기까지가 배너입니다. -->
-
-    <div id="maindiv">
-
-      <div id="m_logo">
-        <img
-          src="https://opgg-static.akamaized.net/logo/20230414083144.6eb75aa6cdf74acba088a2c108e5a061.png?image=q_auto,f_webp,w_auto&amp;v=1681505802343"
-          alt="OP.GG logo (밀리오)" title="밀리오" id=m_log_img>
-      </div id="m_logo">
-
-      <div id="searchdiv">
-        <div class="main-search-form">
-          <fieldset>
-            <legend>전적 검색</legend>
-            <input id="search-input" class="summoner_name main-search">
-            <button type="button" class="gosummonerinfo main-btn">전적검색</button>
-          </fieldset>
-        </div>
-      </div id="searchdiv">
-
-      <div id="lanediv">
-        <div class="m_lane top">
-
-          <div class="line-info">
-            <h4>TOP</h4>
-          </div>
-
-          <!-- 설명 -->
-          <div id="table_list">
-            <table class="table " id="head_table">
-              <thead>
-                <tr class="tr_champ" align="center">
-                  <th width="150px" style="font-size: 12px">챔피언</th>
-                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-                </tr>
-              </thead>
-            </table>
-            <table id="list_table1" class="table "></table>
-          </div>
-
-          <!-- for문으로 넣을 곳 자리잡기용 -->
-          <div class="line-info top_val"></div>
-
-        </div class="m_lane top">
-
-        <div class="m_lane jug">
-          <div class="line-info">
-            <h2>jug</h2>
-          </div>
-          <!-- 설명 -->
-          <div id="table_list">
-            <table class="table " id="head_table">
-              <thead>
-                <tr class="tr_champ" align="center">
-                  <th width="150px" style="font-size: 12px">챔피언</th>
-                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-                </tr>
-              </thead>
-            </table>
-            <table id="list_table1" class="table "></table>
-          </div>
-          <!-- for문으로 넣을 곳 자리잡기용 -->
-          <div class="line-info jug_val"></div>
-        </div class="m_lane jug">
-
-        <div class="m_lane mid">
-          <div class="line-info">
-            <h2>mid</h2>
-          </div>
-
-          <!-- 설명 -->
-          <div id="table_list">
-            <table class="table " id="head_table">
-              <thead>
-                <tr class="tr_champ" align="center">
-                  <th width="150px" style="font-size: 12px">챔피언</th>
-                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-                </tr>
-              </thead>
-            </table>
-            <table id="list_table1" class="table "></table>
-          </div>
-          <!-- for문으로 넣을 곳 자리잡기용 -->
-          <div class="line-info mid_val"></div>
-
-        </div class="m_lane mid">
-
-        <div class="m_lane ad">
-          <div class="line-info">
-            <h2>ad</h2>
-          </div>
-
-          <!-- 설명 -->
-          <div id="table_list">
-            <table class="table " id="head_table">
-              <thead>
-                <tr class="tr_champ" align="center">
-                  <th width="150px" style="font-size: 12px">챔피언</th>
-                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-                </tr>
-              </thead>
-            </table>
-            <table id="list_table1" class="table "></table>
-          </div>
-          <!-- for문으로 넣을 곳 자리잡기용 -->
-          <div class="line-info ad_val"></div>
-        </div class="m_lane ad">
-
-        <div class="m_lane sup">
-          <div class="line-info">
-            <h2>sup</h2>
-          </div>
-
-          <!-- 설명 -->
-          <div id="table_list">
-            <table class="table " id="head_table">
-              <thead>
-                <tr class="tr_champ" align="center">
-                  <th width="150px" style="font-size: 12px">챔피언</th>
-                  <th width="50px" style="font-size: 12px" id="table_tier">티어</th>
-                </tr>
-              </thead>
-            </table>
-            <table id="list_table1" class="table "></table>
-          </div>
-          <!-- for문으로 넣을 곳 자리잡기용 -->
-          <div class="line-info sup_val"></div>
+							<input class="summoner_name summoner_name_search" type="text"
+								placeholdr="소환사명 검색....">
+							<button class="gosummonerinfo" type="button" id="ggg">go!</button>
+						</div>
+						<div class="menu">
+							<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
+								href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
+								href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+								href="/personlol/summoner/" class="m-col">소환사분석</a>
 
 
-        </div class="m_lane ">
+						</div>
+						<div class="my-menu">
+							<c:choose>
+								<c:when test="${sessionScope.id ne null}">
+									<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/personlol/logine" class="m-col login">로그인</a>
+								</c:otherwise>
+							</c:choose>
 
-      </div id="lanediv">
+							<div id="loginout">
+								<c:if test="${sessionScope.id ne null}">
+									<div class="loggedin-box">
+										<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+									</div>
+									<div class="logout-box">
+										<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+									</div>
+								</c:if>
+							</div id="loginout">
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div id="generic">
+		<!-- 여기까지가 배너입니다. -->
 
-      <div id="duodiv">
-        <div class="main_paging back_page">
-          <img class="pageing_img" src="./resources/img/backpage.png" alt="">
-        </div>
-        <div class="duolist">
-          <h2>듀오1</h2>
-        </div id="duolist">
-        <div class="duolist">
-          <h2>듀오2</h2>
-        </div id="duolist">
-        <div class="duolist">
-          <h2>듀오3</h2>
-        </div id="duolist">
-        <div class="main_paging next_page">
-          <img class="pageing_img" src="./resources/img/nextpage.png" alt="">
-        </div>
+		<div id="maindiv">
 
-      </div id="duodiv">
+			<div id="m_logo">
+				<img
+					src="./resources/img/mainLogo.png"
+					title="메인로고" id=m_log_img width="50%" >
+			</div id="m_logo">
 
-    </div id="maindiv">
+			<div id="searchdiv">
+				<div class=>
+					<div class="main-search-form">
+						<fieldset>
+							<!-- <legend>전적 검색</legend> -->
+							<input id="search-input" class="summoner_name main-search">
+							<button type="button" class="gosummonerinfo main-btn">전적검색</button>
+						</fieldset>
+					</div>
+				</div>
+			</div id="searchdiv">
 
-    <footer>
-      <div>
-        <h2>하단 footer</h2>
-      </div>
-    </footer>
+			<div id="lanediv">
+				<div class="m_lane top">
 
-  </div id="wrapdiv">
+					<div class="line-info">
+						<h4>TOP</h4>
+					</div>
 
-  <script>
+					<!-- 설명 -->
+					<div id="table_list">
+						<table class="table " id="head_table">
+							<thead>
+								<tr class="tr_champ" align="center">
+									<th width="150px" style="font-size: 12px">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+								</tr>
+							</thead>
+						</table>
+						<table id="list_table1" class="table "></table>
+					</div>
+
+					<!-- for문으로 넣을 곳 자리잡기용 -->
+					<div class="line-info top_val"></div>
+
+				</div class="m_lane top">
+
+				<div class="m_lane jug">
+					<div class="line-info">
+						<h4>Jungle</h4>
+					</div>
+					<!-- 설명 -->
+					<div id="table_list">
+						<table class="table " id="head_table">
+							<thead>
+								<tr class="tr_champ" align="center">
+									<th width="150px" style="font-size: 12px">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+								</tr>
+							</thead>
+						</table>
+						<table id="list_table1" class="table "></table>
+					</div>
+					<!-- for문으로 넣을 곳 자리잡기용 -->
+					<div class="line-info jug_val"></div>
+				</div class="m_lane jug">
+
+				<div class="m_lane mid">
+					<div class="line-info">
+						<h4>Mid</h4>
+					</div>
+
+					<!-- 설명 -->
+					<div id="table_list">
+						<table class="table " id="head_table">
+							<thead>
+								<tr class="tr_champ" align="center">
+									<th width="150px" style="font-size: 12px">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+								</tr>
+							</thead>
+						</table>
+						<table id="list_table1" class="table "></table>
+					</div>
+					<!-- for문으로 넣을 곳 자리잡기용 -->
+					<div class="line-info mid_val"></div>
+
+				</div class="m_lane mid">
+
+				<div class="m_lane ad">
+					<div class="line-info">
+						<h4>AD</h4>
+					</div>
+
+					<!-- 설명 -->
+					<div id="table_list">
+						<table class="table " id="head_table">
+							<thead>
+								<tr class="tr_champ" align="center">
+									<th width="150px" style="font-size: 12px">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+								</tr>
+							</thead>
+						</table>
+						<table id="list_table1" class="table "></table>
+					</div>
+					<!-- for문으로 넣을 곳 자리잡기용 -->
+					<div class="line-info ad_val"></div>
+				</div class="m_lane ad">
+
+				<div class="m_lane sup">
+					<div class="line-info">
+						<h4>Support</h4>
+					</div>
+
+					<!-- 설명 -->
+					<div id="table_list">
+						<table class="table " id="head_table">
+							<thead>
+								<tr class="tr_champ" align="center">
+									<th width="150px" style="font-size: 12px">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+								</tr>
+							</thead>
+						</table>
+						<table id="list_table1" class="table "></table>
+					</div>
+					<!-- for문으로 넣을 곳 자리잡기용 -->
+					<div class="line-info sup_val"></div>
+
+
+				</div class="m_lane ">
+
+			</div id="lanediv">
+
+			<div id="duodiv">
+				<div class="main_paging back_page">
+					<img class="pageing_img" src="./resources/img/backpage.png" alt="">
+				</div>
+				<div class="duolist-container">
+<!-- 					<div class="duolist">
+					
+					</div id="duolist"> -->
+				</div>
+				
+
+				<div class="main_paging next_page">
+					<img class="pageing_img" src="./resources/img/nextpage.png" alt="">
+				</div>
+
+			</div id="duodiv">
+
+		</div id="maindiv">
+
+		<footer>
+			<div>
+				<h2>하단 footer</h2>
+			</div>
+		</footer>
+
+	</div id="wrapdiv">
+
+	<script>
     //TOP;
     $.ajax({
       method: 'get',
@@ -501,13 +505,111 @@
     });
   </script>
 
-  <script>
+	<script>
     //로그아웃
     $('#logout').click(function () {
       location.href = '/personlol/logout';
       console.log("로그아웃");
       alert("로그아웃");
     })
+  </script>
+
+  <script>
+  	let page_num = 1; // 현재 페이지 번호
+  	
+	//게시글 시작
+	$(document).ready(function () {
+		loadDuo(page_num);
+
+	});
+  	
+  	function loadDuo(page_num){
+  		
+	  	
+		  //메인듀오가져오기;
+		  $.ajax({
+		    method: 'get',
+		    url: '/personlol/duo/main_duo',
+		    data: {
+		      'page_num': page_num
+		    }
+		  }).done(res => {
+			$.each(res, function (i, line) {
+				let duolist = $('<div class="duolist"></div>')
+				let mainContents = $('<div class="main-contents"></div>');
+				let date = $('<article class="time-text"><span size="11" class="blue-text">' + new Date(line.DUO_DATE)
+					.toLocaleString('en-US', {
+						timeStyle: 'short'
+					}) + '</span></article>');
+				let title = $('<h1 size="15" color="text" class="title-text">' + line.DUO_TITLE + '</h1>');
+				let content = $('<p size="13" class="p-tag">' + line.DUO_CONTENT + '</p>');
+				let resultDiv = $('<div class="result-div"></div>');
+				let userContainer = $(
+					'<a href="fdaf" class="user-container"><div class="lane-img"></div><span size="12" class="user-id">' +
+					line.USER_LOLNAME + '</span></a>');
+				let mainBotton = $('<div class="main-botton"></div>');
+	
+				isLoggedIn().then((loggedIn) => {
+					if (loggedIn) {
+						// 로그인 상태인 경우에만 동작
+						isLoggedIn().then((loginCheck) => {
+							if (line.DUO_OWNERID == String(loginCheck)) {
+								console.log('성공');
+								let deleteLink = $(
+									'<button class="copy-box"><span class="user-id"><a href="/personlol/duo/delete?duo_id=' +
+									line.DUO_ID + '" id="wh">삭제하기</a></span></button>');
+								mainBotton.append(deleteLink);
+							} else {
+								console.log('실패');
+								let acceptLink = $(
+									'<button class="copy-box"><span class="user-id"><a href="/personlol/duo/request/' +
+									line.DUO_ID + '" id="wh">요청하기</a></span></button>');
+								mainBotton.append(acceptLink);
+							}
+						});
+					}
+	
+					resultDiv.append(userContainer);
+					mainContents.append(date);
+					mainContents.append(title);
+					mainContents.append(content);
+					mainContents.append(resultDiv);
+					mainContents.append(mainBotton);
+					
+					$('.duolist-container').append(mainContents);
+					});
+				});
+	
+				//$('#result1').html(div);
+		   
+			
+		  }).fail(err => {
+		    console.log(err);
+		  });
+  	}
+  	
+  	
+	function isLoggedIn() {
+		// 서버로부터 세션 정보를 전달받아 로그인 상태를 확인하는 함수
+		// 로그인 상태인 경우 Promise를 resolve하고, 로그아웃 상태인 경우 Promise를 reject합니다.
+		return new Promise((resolve, reject) => {
+			$.ajax({
+				method: 'get',
+				url: '/personlol/duo/check-login-status', // 서버에서 세션 상태를 확인하는 API 엔드포인트
+				async: true, // 비동기적으로 요청 처리
+				success: function (response) {
+					var loggedIn = response.loggedIn;
+					var loginCheck = response.loginCheck; // loginCheck 변수를 선언하여 값을 받아옴
+					console.log(loginCheck);
+					resolve(loginCheck);
+				},
+				error: function (error) {
+					console.log(error);
+					reject(error);
+				}
+			});
+		});
+	}
   </script>
 
 </body>

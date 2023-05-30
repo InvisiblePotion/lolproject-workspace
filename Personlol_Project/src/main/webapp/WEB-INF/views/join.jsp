@@ -14,7 +14,7 @@
 <body>
 	<div id="root" class="container">
     <div class="join-layout">
-      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
+      <a href="/personlol/main"><h1><img src="./resources/img/loginLogo.png" alt="logo" class="logo-image" width="70%"></h1></a>
       <form action="">
         <div class="form-group">
           <h2>기본 정보 입력</h2>

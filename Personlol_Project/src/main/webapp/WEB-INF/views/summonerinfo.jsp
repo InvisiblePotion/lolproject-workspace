@@ -33,8 +33,7 @@
 					<div class="menu">
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
 							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
-							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-							href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
+							href="/personlol/duo/" class="m-col">듀오찾기</a>  <a
 							href="/personlol/summoner/" class="m-col">소환사분석</a>
 
 
@@ -483,7 +482,7 @@
         $('.summoner_name').html(summoner_name)
         $('.summoner_level').html(res.summoner_level)
         $('.summoner_icon').html('<img src="../resources/dd/img/profileicon/' + res.summoner_profile +
-            '.png">');
+            '.png" width="100%">');
         $('.tier-name').html(res.summoner_tier)
         $('.win-losses').html(res.summoner_wins + '승 ' +res.summoner_losses+'패 ')
         $('.ratio').html('승률 '+ratio+' %')
@@ -491,31 +490,31 @@
         //티어별 사진 변경됨 가져오는 값은 대문자. 파일 이름은 소문자
         if(res.summoner_tier === "MASTER"){
             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-master'+
-            '.png"  height="100%" width="200%" class="img-tier">');
+            '.png"  height="100%" width="100%" class="img-tier">');
         }else if(res.summoner_tier === "CHELLENGER"){
             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-challenger'+
-            '.png"  height="100%" width="200%" class="img-tier">');
+            '.png"  height="100%" width="100%" class="img-tier">');
         }else if(res.summoner_tier === "GRANDMASTER"){
             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-grandmaster'+
-            '.png"  height="100%" width="200%" class="img-tier">');
+            '.png"  height="100%" width="100%" class="img-tier">');
         }else if(res.summoner_tier === "PLATINUM"){
             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-platinum'+
-            '.png"  height="100%" width="200%" class="img-tier">');
+            '.png"  height="100%" width="100%" class="img-tier">');
         }else if(res.summoner_tier === "DIAMOND"){
              $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-diamond'+
-             '.png"  height="100%" width="200%" class="img-tier">');
+             '.png"  height="100%" width="100%" class="img-tier">');
         }else if(res.summoner_tier === "GOLD"){
             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-gold'+
-            '.png"  height="100%" width="200%" class="img-tier">');
+            '.png"  height="100%" width="100%" class="img-tier">');
         }else if(res.summoner_tier === "SILVER"){
             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-silver'+
-            '.png"  height="100%" width="200%" class="img-tier">');
+            '.png"  height="100%" width="100%" class="img-tier">');
         }else if(res.summoner_tier === "BRONZE"){
             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-bronze'+
-            '.png"  height="100%" width="200%" class="img-tier">');
+            '.png"  height="100%" width="100%" class="img-tier">');
         }else if(res.summoner_tier === "IRON"){
             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-iron'+
-            '.png"  height="100%" width="200%" class="img-tier">');
+            '.png"  height="100%" width="100%" class="img-tier">');
         }
         //티어별 사진 변경됨
         
@@ -590,7 +589,7 @@
 	    	
 	        //게시글 왼쪽
 	    	let champion_box = $('<div class="champion-box"></div>');
-	    	let icon = $('<div class="face"><a href="naver.com" class="face-img"><img src="../resources/'+champ.CHAMP_ICON+'"></a></div>');
+	    	let icon = $('<div class="face"><a href="naver.com" class="face-img"><img src="../resources/'+champ.CHAMP_ICON+'" width="32px"></a></div>');
 	    	let name = $('<div class="box-info"><div class="name">'+champ.CHAMP_NAME+'</div></div>');
 	    	let kda_box = $('<div class="box-kda"></div>')
 	    	let detail = $('<div class="detail">'+kda.kills+' / '+kda.deaths+' / '+kda.assists+'</div>')

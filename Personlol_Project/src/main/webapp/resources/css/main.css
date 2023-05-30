@@ -74,6 +74,10 @@
   align-items: center;
   margin-top: 24px;
   justify-content: space-between;
+  
+}
+.duolist-container{
+	display: flex;
 }
 .duolist{
   display: flex;
@@ -104,6 +108,11 @@
 }
 
 .line-info{
+  text-align: center;
+}
+#ggg{
+	height:28px;
+	border-radius: 0 0 8px 0;
 }
 
 .champ_img{
@@ -212,4 +221,71 @@ input:focus {outline:none;}
   width: 42px;
   height: 42px;
   margin: 8px;
+}
+
+/* 듀오페이지 css */
+
+.main-contents{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(91, 91, 91);
+    border-radius:  4px;
+    width: 330px;
+    height: 200px;
+    padding: 24px 20px 15px;
+    background-color: #413632;
+}
+.time-text{
+    display: flex;
+    margin-bottom: 10px;
+}
+.blue-text{
+    order: 0;
+    margin-right: 6px;
+    color: rgb(49, 142, 239);
+    font-weight: 500;
+    font-size: 11px;
+}
+.gray-text{
+    order: 1;
+    margin-right: 0px;
+    color: rgb(153, 153, 153);
+    font-weight: 500;
+    font-size: 11px;
+}
+.title-text{
+    display: flex;
+    align-items: center;
+    margin-bottom: 13px;
+    color: aliceblue;
+
+    font-weight: 700;
+    font-size: 15px;
+}
+.p-tag{
+    margin-bottom: 20px;
+    max-height: unset;
+    color: rgb(153, 153, 153);
+    line-height: 18px;
+    word-break: break-all;
+    
+    font-weight: 400;
+    font-size: 13px;
+
+    
+}
+.main-bottom{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: auto;
+}
+.user-id{
+	color: aliceblue;
+}
+#wh{
+	color: #413632;
+}
+.copy-box{
+	border-radius: 8px;
 }

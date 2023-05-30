@@ -77,6 +77,8 @@
 	        
 	        <!-- 로그인 -->
 	        <exclude-mapping path="/logine" />
+	        <!-- 비밀번호 변경 -->
+	        <exclude-mapping path="/changepw" />
 	        <!-- 랭킹 o-->
 	        <exclude-mapping path="/rank" />
 	        <!-- 소환사 전적 -->

@@ -21,7 +21,7 @@
 </head>
 <body>
 	<form id="agreementForm" class="checkboxForm">
-    <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
+    <a href="/personlol/main"><h1><img src="./resources/img/loginLogo.png" alt="logo" class="logo-image" width="70%"></h1></a>
     <div class="wrab_div">
       <div id="allchekdiv" class="chekdiv">
         <label for="allAgreeCheckbox">
