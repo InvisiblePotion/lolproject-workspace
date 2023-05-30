@@ -1645,12 +1645,13 @@
 				for (i=0; i<5;i++) {				
 				if (arr[i] == 1) {
 					s_img =	'<div class="skill-container">'+ 
-							'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
-							'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-							res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
-							'스킬 마나소모량: '+res[1].skill_cost+'</div><div>'+'스킬 범위: '+res[1].skill_range+'</div>'+'<div>'+res[1].skill_desc+
-							'</div><div>'+res[1].skill_tooltip+'</div></div></div>'+
-							'<img width="20" height="40" src="../resources/img/arrow.png">'
+					'<div class="skill-key">q</div>' + // Add the skill key text here
+					'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
+					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+					res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
+					'스킬 마나소모량: '+res[1].skill_cost+'</div><div>'+'스킬 범위: '+res[1].skill_range+'</div>'+'<div>'+res[1].skill_desc+
+					'</div><div>'+res[1].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 							
 							
 				}else if (arr[i] == 2) {

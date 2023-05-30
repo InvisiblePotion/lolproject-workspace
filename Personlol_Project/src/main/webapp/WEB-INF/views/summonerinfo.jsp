@@ -64,6 +64,7 @@
 		</div>
 	</div id="generic">
 	<!-- 여기까지가 배너입니다. -->
+	
 	<div class="area2">
 		<div class="summoner-container">
 			<div class="summoner">
@@ -263,189 +264,239 @@
 			</div>
 			<div class="three main">
 				<li class="main list">
-					<div class="madiv list2">
-						<div class="content">
-							<div class="game-content">
-								<div class="game">
-									<div class="type">솔랭</div>
-									<div class="time-stamp">
-										<div style="position: relative;">4일전</div>
+					<div class="madiv_wrap">
+						<div class="madiv list2">
+							<div class="content">
+								<div class="game-content">
+									<div class="game">
+										<div class="type">솔랭</div>
+										<div class="time-stamp">
+											<div style="position: relative;">4일전</div>
+										</div>
+										<div class="bar"></div>
+										<div class="result">승리</div>
+										<div class="length">19분 50초</div>
 									</div>
-									<div class="bar"></div>
-									<div class="result">승리</div>
-									<div class="length">19분 50초</div>
-								</div>
-								<div class="sinfo">
-									<div class="into">
-										<div class="champion">
-											<div class="icon">
-												<a href="fd"> <img src="" alt=""> <span
-													class="champion-level">18</span>
-												</a>
-											</div>
-											<div class="spells">
-												<div class="spell">
-													<div class="sp">
-														<img src="" alt="">
+									<div class="sinfo">
+										<div class="into">
+											<div class="champion">
+												<div class="icon">
+													<a href="fd"> <img src="" alt=""> <span class="champion-level">18</span>
+													</a>
+												</div>
+												<div class="spells">
+													<div class="spell">
+														<div class="sp">
+															<img src="" alt="">
+														</div>
+													</div>
+													<div class="spell">
+														<div class="sp">
+															<img src="" alt="">
+														</div>
 													</div>
 												</div>
-												<div class="spell">
-													<div class="sp">
-														<img src="" alt="">
+												<div class="runes">
+													<div class="rune">
+														<div class="sp">
+															<img src="" alt="">
+														</div>
 													</div>
-												</div>
-											</div>
-											<div class="runes">
-												<div class="rune">
-													<div class="sp">
-														<img src="" alt="">
-													</div>
-												</div>
-												<div class="rune">
-													<div class="sp">
-														<img src="" alt="">
+													<div class="rune">
+														<div class="sp">
+															<img src="" alt="">
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-										<div class="kda">
-											<div class="k-d-a">
-												<span>20</span>/ <span class="d">8</span>/ <span>27</span>
+											<div class="kda">
+												<div class="k-d-a">
+													<span>20</span>/ <span class="d">8</span>/ <span>27</span>
+												</div>
+												<div class="ratio">
+													<span>5.88:1</span> 평점
+												</div>
 											</div>
-											<div class="ratio">
-												<span>5.88:1</span> 평점
+											<div class="status">
+												<div class="p-kill">
+													<div style="position: relative;">킬관여85%</div>
+												</div>
+												<div class="ward">제어 와드 0</div>
+												<div class="cs">
+													<div style="position: relative;">CS 81 (4.1)</div>
+												</div>
+												<div class="average-tier">
+													<div style="position: relative;">Diamond 3</div>
+												</div>
 											</div>
-										</div>
-										<div class="status">
-											<div class="p-kill">
-												<div style="position: relative;">킬관여85%</div>
-											</div>
-											<div class="ward">제어 와드 0</div>
-											<div class="cs">
-												<div style="position: relative;">CS 81 (4.1)</div>
-											</div>
-											<div class="average-tier">
-												<div style="position: relative;">Diamond 3</div>
-											</div>
-										</div>
 
+										</div>
+										<div class="intoto">
+											<div class="items">
+												<ul>
+													<li class="first">
+														<div>
+															<img src="" alt="">
+														</div>
+													</li>
+													<li class="first">
+														<div>
+															<img src="" alt="">
+														</div>
+													</li>
+													<li class="first">
+														<div>
+															<img src="" alt="">
+														</div>
+													</li>
+													<li class="first">
+														<div>
+															<img src="" alt="">
+														</div>
+													</li>
+													<li class="first">
+														<div>
+															<img src="" alt="">
+														</div>
+													</li>
+													<li class="first">
+														<div>
+															<img src="" alt="">
+														</div>
+													</li>
+												</ul>
+												<div class="ward">
+													<div>
+														<img src="" alt="">
+													</div>
+												</div>
+											</div>
+											<div class="multi-kill">쿼드라킬</div>
+										</div>
 									</div>
-									<div class="intoto">
-										<div class="items">
-											<ul>
-												<li class="first">
-													<div>
-														<img src="" alt="">
-													</div>
-												</li>
-												<li class="first">
-													<div>
-														<img src="" alt="">
-													</div>
-												</li>
-												<li class="first">
-													<div>
-														<img src="" alt="">
-													</div>
-												</li>
-												<li class="first">
-													<div>
-														<img src="" alt="">
-													</div>
-												</li>
-												<li class="first">
-													<div>
-														<img src="" alt="">
-													</div>
-												</li>
-												<li class="first">
-													<div>
-														<img src="" alt="">
-													</div>
-												</li>
-											</ul>
-											<div class="ward">
-												<div>
+									<div class="participants">
+										<ul>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
 													<img src="" alt="">
 												</div>
-											</div>
-										</div>
-										<div class="multi-kill">쿼드라킬</div>
+												<div class="name">모짜르트</div>
+											</li>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">모짜르트</div>
+											</li>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">모짜르트</div>
+											</li>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">모짜르트</div>
+											</li>
+											<li class="p-5th">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">자기이름</div>
+											</li>
+										</ul>
+										<ul>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">모짜르트</div>
+											</li>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">모짜르트</div>
+											</li>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">모짜르트</div>
+											</li>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">모짜르트</div>
+											</li>
+											<li class="p-5">
+												<div class="icon" style="position: relative;">
+													<img src="" alt="">
+												</div>
+												<div class="name">모짜르트</div>
+											</li>
+										</ul>
+										<ul></ul>
 									</div>
 								</div>
-								<div class="participants">
-									<ul>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-										<li class="p-5th">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">자기이름</div>
-										</li>
-									</ul>
-									<ul>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-										<li class="p-5">
-											<div class="icon" style="position: relative;">
-												<img src="" alt="">
-											</div>
-											<div class="name">모짜르트</div>
-										</li>
-									</ul>
-									<ul></ul>
-								</div>
+							</div>
+							<div class="action">
+								<button class="detail2">
+									<img src="" alt="">
+								</button>
 							</div>
 						</div>
-						<div class="action">
-							<button class="detail2">
-								<img src="" alt="">
-							</button>
+
+						<div class="list2_detail">
+							<div class="list2_detail2">
+								<div class="detail2 summoner_info">소환사정보</div>
+								<div class="detail2 summoner_kda">KDA</div>
+								<div class="detail2 summoner_damage">딜량</div>
+								<div class="detail2 summoner_ward">와드</div>
+								<div class="detail2 summoner_cs">CS</div>
+								<div class="detail2_summoner_items">아이템 빌드</div>
+							</div>
+							<div class="list2_detail2">
+								<div class="detail2 champ_icon">1</div>
+								<div class="detail2 spells">2</div>
+								<div class="detail2 runes">3</div>
+								<div class="detail2 name">4</div>
+								<div class="detail2 s_kda">
+									<div class="detail2 k-d-a">5.3</div>
+									<div class="detail2 kda">5.6</div>
+								</div>
+								<div class="detail2 damage">
+									<div class="detail2 dealing">
+										<div class="detail2 d_num">d_1</div>
+										<div class="detail2 deal_graph">d_2</div>
+									</div>
+									<div class="detail2 taken">
+										<div class="detail2 t_num">t_1</div>
+										<div class="detail2 taken_graph">t_2</div>
+									</div>
+								</div>
+								<div class="detail2 ward">
+									<div class="detail2 warding">w-1</div>
+									<div class="detail2 del_ward">w-2</div>
+								</div>
+								<div class="detail2 s_cs">
+									<div class="game_cs">8.3</div>
+									<div class="cs_min">8.6</div>
+								</div>
+								<div class="detail2 items">
+									<img src="" alt="">
+									<img src="" alt="">
+									<img src="" alt="">
+									<img src="" alt="">
+									<img src="" alt="">
+									<img src="" alt="">
+									<img src="" alt="">
+									<img src="" alt="">
+								</div>
+							</div>
 						</div>
 					</div>
 				</li>
@@ -459,6 +510,18 @@
 
 </body>
 <script>
+	
+	$(document).ready(function () {
+		
+		$('.list2_detail').hide();
+		
+		//버튼 클릭시 밑에 열리는거
+		$('.detail2').click(function () {
+			$('.list2_detail').toggle();
+		});
+		
+	});
+	
     function getQueryString(key) {
         //url 가져오는거
         const urlParams = new URLSearchParams(window.location.search);
