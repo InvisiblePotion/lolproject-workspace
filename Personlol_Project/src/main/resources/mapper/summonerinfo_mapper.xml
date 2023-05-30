@@ -4,6 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.base.personlol.dao.summoner_dao">
+    
+    <select id="getGameRecord" resultType="com.base.personlol.dto.summoner_rawdata_dto">
+        SELECT game_id, participant_number, participant_name, champion_id, lane,
+            game, champion, spell, skill, skilltree, rune, item, kda, gold, cs, damage, vision
+        FROM RAWDATA
+        WHERE game_id = #{game_id}
+        ORDER BY participant_number
+    </select>
+
+    <select id="isSummonerNameExists" resultType="Integer">
+        SELECT COUNT(*)
+        FROM SUMMONER
+        WHERE summoner_name = #{summoner_name}
+    </select>
+
+    <select id="getGameidsOnRecentGame" resultType="String">
+        SELECT game_id
+        FROM SUMMONER_RECENT_GAME
+        WHERE summoner_name = #{summoner_name}
+        ORDER BY GAME_ID
+    </select>
+
+    <select id="getGameidsOnRawdata" resultType="String">
+        SELECT game_id
+        FROM RAWDATA
+        WHERE participant_name = #{summoner_name} AND ROWNUM &lt;= 20
+        ORDER BY GAME_ID
+    </select>
+
+    <delete id="deleteGameidsInRecentGame">
+        DELETE FROM SUMMONER_RECENT_GAME
+        WHERE summoner_name = #{summoner_name}
+    </delete>
+
+    <insert id="putGameidInRecentGame">
+        INSERT INTO SUMMONER_RECENT_GAME VALUES (
+            #{summoner_name}, #{game_id})
+    </insert>
 
 	<select id="getsummonerinfo" resultType="summonerinfodto">
 		SELECT s.SUMMONER_LEVEL,
