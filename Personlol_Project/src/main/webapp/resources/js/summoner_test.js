@@ -6,7 +6,7 @@
 function getGameIds(summoner_name) {
     $.ajax({
         method: 'get',
-        url: '/personlol/summoner/rest/game-id-list',
+        url: '/personlol/summoner/game-id-list',
         data: {'summoner_name': summoner_name}
     }).done((game_id_list)=>{
         console.log(game_id_list); // ### 로그
@@ -26,7 +26,7 @@ function getGameIds(summoner_name) {
 function putGameIds(summoner_name, game_id_list) {
     $.ajax({
         method: 'post',
-        url: '/personlol/summoner/rest/recent-game',
+        url: '/personlol/summoner/recent-game',
         data: {
             'summoner_name': summoner_name,
             'game_id_list': game_id_list}
@@ -40,7 +40,7 @@ function putGameIds(summoner_name, game_id_list) {
 function getGameRecords(game_id_list) {
     $.ajax({
         method: 'post',
-        url: '/personlol/summoner/rest/game-record',
+        url: '/personlol/summoner/game-record',
         data: {'game_id_list': game_id_list}
     }).done((rawdata_list)=>{
         console.log(rawdata_list); // ### 로그

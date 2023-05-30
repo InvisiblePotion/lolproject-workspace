@@ -21,7 +21,7 @@ import com.base.personlol.dto.summoner_recent_game_dto;
 import com.base.personlol.service.summoner_service;
 
 @RestController
-@RequestMapping("/summoner/rest")
+@RequestMapping("/summoner")
 public class R_summoner_Controller {
 	
 	@Autowired
