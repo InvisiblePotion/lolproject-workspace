@@ -81,24 +81,24 @@ def oracle_totalExecute(query: str, use_pandas: bool=True, debug_print: bool=Tru
 
 
 def getPuuidBySummonerName(summoner_name: str, api_key: str):
-    return requests.get(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{parse.quote(summoner_name)}?api_key={api_key}").json()['puuid']
+    return preventApiRateLimit(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key=", api_key).json()['puuid']
 
 
 def getMatchIdsByPuuid(puuid: str, api_key: str, count: int=10):
-    return requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count={count}&type=ranked&api_key={api_key}").json()
+    return preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count={count}&type=ranked&api_key=", api_key).json()
 
 
 def getMatchDataByMatchIds(match_ids: list, api_key: str, index: int=0):
-    return requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_ids[index]}?api_key={api_key}").json()
+    return preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_ids[index]}?api_key=", api_key).json()
 
 
 def getMatchTimelineDataByMatchIds(match_ids: list, api_key: str, index: int=0):
-    return requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_ids[index]}/timeline?api_key={api_key}").json()
+    return preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_ids[index]}/timeline?api_key=", api_key).json()
 
 
 def getMatchDataAndTimelineByMatchId(match_id: str, api_key: str):
-    match_data = requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={api_key}").json()
-    match_timeline = requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key={api_key}").json()
+    match_data = preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key=", api_key).json()
+    match_timeline = preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key=", api_key).json()
     return match_data, match_timeline
 
 
@@ -282,8 +282,8 @@ def getRawdata(tier: str, riot_api_key: str):
     # riot api를 통해서 summonerName을 가져오기
     print('get SummonerName.....')
     for division in tqdm(division_list):
-        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division}?page={page}&api_key={riot_api_key}'
-        res = requests.get(url).json()
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division}?page={page}&api_key='
+        res = preventApiRateLimit(url, riot_api_key).json()
         if len(res) >= 5: lst += random.sample(res, 5)
         else: lst += [a for a in res]
 
@@ -341,8 +341,8 @@ def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
     # riot api를 통해서 summonerName을 가져오기
     print('get SummonerName.....')
     for v in tqdm(range(get_amount)):
-        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division-1]}?page={page}&api_key={riot_api_key}'
-        res = requests.get(url).json()
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division-1]}?page={page}&api_key='
+        res = preventApiRateLimit(url, riot_api_key).json()
         summonerName_lst.append(random.sample(res, 1)[0]['summonerName'])
 
     print('total player: ', len(summonerName_lst))
@@ -654,7 +654,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
 
     def checkApiResult(url: str):
         """
-        `request.get()`의 결과에 따라서 API Key를 교체하거나 에러 메시지를 출력하고
+        `requests.get()`의 결과에 따라서 API Key를 교체하거나 에러 메시지를 출력하고
         에러인 경우 `False`를 리턴하여 `if`가 걸린 부분의 `continue` 트리거를 작동시키는 `autoInsert()` 전용 내부 함수
         """
         nonlocal api_nonlimit_request_count
@@ -894,6 +894,41 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
             cycle_count += 1
 
 
+def preventApiRateLimit(url: str, api_key: str):
+        """
+        `requests.get(url + api_key)`의 결과의 상태 코드가 429(API RATE EXCEED)인 경우 제한 해제까지 자동 휴식하는 함수
+        """
+        
+        while True:
+            try:
+                result = requests.get(url+api_key)
+
+                # 리퀘스트의 리스폰스가 정상인 경우 리턴
+                if result.status_code == 200:
+                    return result
+                
+                # 리미트 초과인 경우 10초 휴식 후 재시도
+                elif result.status_code == 429:
+                    apiSleep(10, False)
+                    continue
+
+                # 만료 되었거나 불량인 API key 사용시 API key 관련 에러문 출력
+                elif result.status_code == 403:
+                    raise InvaildApiKey(result)
+                
+                # 리턴의 상태 코드가 200, 429, 403이 아닌 경우 예외로 간주하고 API 관련 에러문 출력 출력
+                else:
+                    raise BadApiResult(result)
+                    
+            except requests.exceptions.ConnectionError as e:
+                time.sleep(5)
+
+            # 위에서 발생된 모든 예외를 캐치하여 API 관련 에러 카운트를 1 올리고 False를 리턴(continue 트리거 작동)
+            except Exception as e:
+                print(f"{type(e).__name__}:\n{e}")
+                return False
+
+
 # getRawdata() 함수로 만들어진 데이터프레임 안에서 특정 챔피언의 등장 횟수와 등장 레코드를 리턴하는 함수
 def findChampInRawData(raw_data: pd.DataFrame, champ_name: str='', champ_id: int=0):
 
@@ -1026,7 +1061,7 @@ def updateSummonerData(summoner_name: str, api_key: str) -> None:
         'summoner_tier','summoner_wins','summoner_losses','summoner_veteran','summoner_inactive','summoner_freshblood','summoner_hotstreak']
 
     # API에서 소환사 정보 획득
-    response_summoner = requests.get(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}").json()
+    response_summoner = preventApiRateLimit(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key=", api_key).json()
 
     # Summoner 테이블에 필요한 소환사 데이터를 추출
     summoner_data = [
@@ -1038,7 +1073,7 @@ def updateSummonerData(summoner_name: str, api_key: str) -> None:
         response_summoner['profileIconId']]
 
     # API에서 소환사 랭크 정보 획득
-    response_rank = requests.get(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_data[0]}?api_key={api_key}").json()
+    response_rank = preventApiRateLimit(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_data[0]}?api_key=", api_key).json()
 
     # Summoner 테이블에 필요한 소환사 랭크 데이터를 추출
     rank_data = None
@@ -1061,7 +1096,7 @@ def updateSummonerData(summoner_name: str, api_key: str) -> None:
     insertDataFrameIntoTable(pd.DataFrame([summoner_result], columns=summoner_cols), 'SUMMONER', debug_print=False)
 
 
-def reloadPlayRecord(summoner_name: str, api_key: str) -> None:
+def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> None:
     """
     ### 예외 처리 필요!
     전적 갱신 버튼에 대응할 함수.\n
@@ -1073,7 +1108,7 @@ def reloadPlayRecord(summoner_name: str, api_key: str) -> None:
     updateSummonerData(summoner_name, api_key)
 
     # API에서 소환사의 최근 20게임의 game_id 획득
-    match_ids = getMatchIdsByPuuid(getPuuidBySummonerName(summoner_name, api_key), api_key, 20)
+    match_ids = getMatchIdsByPuuid(getPuuidBySummonerName(summoner_name, api_key), api_key, get_amount)
 
     # 20게임의 게임 정보를 DB에 입력
     insert_count = len(match_ids)
@@ -1105,5 +1140,6 @@ def reloadPlayRecord(summoner_name: str, api_key: str) -> None:
 
         # summoner_recent_game 테이블에 입력
         oracle_totalExecute(f"INSERT INTO SUMMONER_RECENT_GAME VALUES ('{summoner_name}', '{mid}')", debug_print=False)
-        
+    
+    time.sleep(1)
     print(f"입력된 게임 수: {insert_count}")
