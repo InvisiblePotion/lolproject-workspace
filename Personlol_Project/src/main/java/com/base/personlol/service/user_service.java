@@ -58,12 +58,12 @@ public class user_service {
 	}
 	
 	//서버에 진짜있는지
-	private int checksvlolname(String user_lolname) {
+	public int checksvlolname(String user_lolname) {
 		
 		return u_dao.checksv_lolname(user_lolname);
 	}
 
-	public int checklolname(String user_lolname) {
+	private int checklolname(String user_lolname) {
 		//조인에서 쓰는 롤 네임 중복검사기
 		return u_dao.checkuser_lolname(user_lolname);
 	}

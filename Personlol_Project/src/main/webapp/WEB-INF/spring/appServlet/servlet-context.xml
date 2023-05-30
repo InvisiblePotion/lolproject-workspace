@@ -71,13 +71,19 @@
 	        <exclude-mapping path="/champion/" />
 	        <!-- 챔피언 상세 o-->
 	        <exclude-mapping path="/champion/detail" />
+	        
+	        <!-- 챔피언 매치업 o-->
+	        <exclude-mapping path="/champion/matchup" />
+	        
 	        <!-- 로그인 -->
 	        <exclude-mapping path="/logine" />
 	        <!-- 랭킹 o-->
 	        <exclude-mapping path="/rank" />
 	        <!-- 소환사 전적 -->
 	        <exclude-mapping path="/summoner/**" />
+	        
 	        <!-- 사용자 분석 -->
+	        <exclude-mapping path="/summonerstat/**" />
 	        
 	        <!-- 리소스아래 모든 것 -->
 	        <exclude-mapping path="/resources/**"/>

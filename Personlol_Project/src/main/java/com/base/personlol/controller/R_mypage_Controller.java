@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.personlol.dto.duo_dto;
 import com.base.personlol.dto.mypage_dto;
 import com.base.personlol.service.mypage_service;
 import com.base.personlol.service.user_service;
@@ -70,6 +72,7 @@ public class R_mypage_Controller {
 	    	return 0;
 	    }   
 	}
+	//요청 불러오기
 	@GetMapping("/getrequest")
 	public @ResponseBody List<Map<String, String>> get_request(HttpSession session) {
 		String user_id = session.getAttribute("id").toString();
@@ -86,5 +89,76 @@ public class R_mypage_Controller {
 		}
 		return getrequest;
 		
+	}
+	
+	//내 글 가져오기
+	@GetMapping("/myboard")
+	public duo_dto myboard(HttpSession session) {
+		String user_id = session.getAttribute("id").toString();
+		System.out.println("req_세션에 저장된ID: "+user_id);
+		duo_dto getmyboard = my_ser.getmyboard(user_id);
+		System.out.println("컨트롤로 리턴 직전"+getmyboard);
+		System.out.println(getmyboard);
+		return getmyboard;
+	}
+	
+	//게시글 삭제
+	@PutMapping("/deleteboard")
+	public int deleteboard(HttpSession session) {
+		String user_id = session.getAttribute("id").toString();
+		System.out.println("req_세션에 저장된ID: "+user_id);
+		int deleteboard = my_ser.go_deleteboard(user_id);
+		System.out.println("컨트롤러 돌아온 값이 1이면 삭제성공: "+deleteboard);
+		System.out.println(deleteboard);
+		return deleteboard;
+	}
+	
+	//요청 거절
+	@DeleteMapping("/deleterequest")
+	public int deleterequest(@RequestBody Map<String, String> ajax_user_lolname, HttpSession session) {
+	    String user_id = session.getAttribute("id").toString();
+	    String user_lolname = ajax_user_lolname.get("user_lolname");
+	    System.out.println("컨트롤러 거절 세션에 저장된 ID: " + user_id);
+	    System.out.println("컨트롤러 거절 중 요청자 ID: " + user_lolname);
+
+	    int refuse = my_ser.delrequest(user_id, user_lolname);
+	    System.out.println("컨트롤러, refuse 값: " + refuse);
+	    return refuse;
+	}
+	
+	//요청 수락시
+	@PutMapping("/acceptduo")
+	public String acceptduo(@RequestBody Map<String, String> ajax_user_lolname, HttpSession session) {
+		String user_lolname = ajax_user_lolname.get("user_lolname");
+		System.out.println("요청 수락 컨트롤러 유저네임: "+user_lolname);
+		String user_id = session.getAttribute("id").toString();
+		System.out.println("요청 수락 컨트롤러 내 id:"+user_id);
+		String accpeptduo = my_ser.go_accept(user_lolname,user_id);
+		System.out.println("요청수락 리턴 값: "+accpeptduo);
+		return accpeptduo;
+	}
+	
+	//myduo 가져오기!
+	@GetMapping("/myduo")
+	public List<mypage_dto> getmyduo(HttpSession session){
+		String user_id = session.getAttribute("id").toString();
+		System.out.println("듀오 목록 Id: "+ user_id);
+		List<mypage_dto> myduo = my_ser.getmyduo(user_id);
+		System.out.println("듀오 목록 컨트롤러 return: " +myduo);
+		return myduo;
+		
+	}
+	
+	@PutMapping("/duodel")
+	public int duo_del(@RequestBody Map<String,String> ajax_user_lolname, HttpSession session) {
+		String user_lolname = ajax_user_lolname.get("user_lolname");
+		System.out.println("듀오 삭제 컨트롤러 롤 네임: "+user_lolname);
+		String user_id = session.getAttribute("id").toString();
+		System.out.println("듀오 삭제 컨트롤라 세션id:"+user_id);
+		
+		//보내기
+		int duodel = my_ser.go_duo_del(user_lolname, user_id);
+		System.out.println("듀오 삭제 컨트롤러 리턴: "+duodel);
+		return duodel;
 	}
 }

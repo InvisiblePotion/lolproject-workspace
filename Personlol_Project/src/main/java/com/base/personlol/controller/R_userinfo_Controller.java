@@ -174,7 +174,7 @@ public class R_userinfo_Controller {
 	@GetMapping("/checkserver")
 	public int checkserver(@RequestParam  String user_lolname) {
 		System.out.println("검색시 받아오는 롤네임: "+user_lolname);
-		int checkResult = u_ser.checklolname(user_lolname);
+		int checkResult = u_ser.checksvlolname(user_lolname);
 		// 1이면 서버에 존재함
 		if(checkResult == 1) {
 			System.out.println("검색 가능");

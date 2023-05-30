@@ -21,13 +21,31 @@
 
 	<select id="lane_list"
 		resultType="com.base.personlol.dto.champion_dto">
-		SELECT c.CHAMP_ID ,c.CHAMP_KEY ,c.CHAMP_NAME ,c.CHAMP_ICON
-		, ci.LANE as lane
-		,ci.WIN_RATE ,ci.PICK_RATE ,ci.BAN_RATE FROM
-		CHAMPDATA c LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-		WHERE lane =
-		#{lane}
+		<![CDATA[
+		SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON,
+       ci.LANE AS lane, ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE, ci.game_count
+		FROM CHAMPDATA c
+		INNER JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		WHERE ci.LANE = #{lane}
+		ORDER BY ci.game_count DESC
+		FETCH FIRST 30 ROWS ONLY]]>
 	</select>
+	
+	<select id="mlane_list" resultType="com.base.personlol.dto.champion_dto">
+	    <![CDATA[
+	        SELECT *
+	        FROM (
+	            SELECT c.CHAMP_ID, c.CHAMP_KEY, c.CHAMP_NAME, c.CHAMP_ICON, ci.LANE AS lane, ci.WIN_RATE, ci.PICK_RATE, ci.BAN_RATE
+	            FROM CHAMPDATA c
+	            LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+	            WHERE ci.LANE = #{lane}
+	            ORDER BY ci.PICK_RATE DESC
+	        )
+	        WHERE ROWNUM <= 3
+	    ]]>
+	</select>
+
+	
 
 	<select id="lane_sort_win"
 		resultType="com.base.personlol.dto.champion_dto">
@@ -39,6 +57,7 @@
 		WHERE lane =
 		#{lane}
 		ORDER BY ci.WIN_RATE ${sort}
+		FETCH FIRST 30 ROWS ONLY
 	</select>
 
 	<select id="lane_sort_pick"
@@ -51,6 +70,7 @@
 		WHERE lane =
 		#{lane}
 		ORDER BY ci.PICK_RATE ${sort}
+		FETCH FIRST 30 ROWS ONLY
 	</select>
 
 	<select id="lane_sort_ban"
@@ -63,15 +83,19 @@
 		WHERE lane =
 		#{lane}
 		ORDER BY ci.BAN_RATE ${sort}
+		FETCH FIRST 30 ROWS ONLY
 	</select>
 
 	<select id="search_champ"
 		resultType="com.base.personlol.dto.champion_dto">
-		SELECT c.CHAMP_ID,c.CHAMP_NAME, c.CHAMP_ICON, MAX(ci.LANE) as LANE FROM
+		SELECT c.CHAMP_ID,c.CHAMP_NAME, c.CHAMP_ICON, MAX(ci.LANE)
+		as LANE FROM
 		CHAMPDATA c
-		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		LEFT JOIN CHAMPION_INFO ci ON c.CHAMP_ID =
+		ci.CHAMP_ID
 		WHERE c.CHAMP_NAME LIKE '%' || #{searchVal} || '%'
-		GROUP BY c.CHAMP_ID, c.CHAMP_NAME, c.CHAMP_ICON
+		GROUP BY
+		c.CHAMP_ID, c.CHAMP_NAME, c.CHAMP_ICON
 	</select>
 
 	<select id="champ_info"
@@ -82,7 +106,8 @@
 		FROM CHAMPDATA c
 		LEFT
 		JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
-		WHERE c.CHAMP_ID = #{champ_id} AND ci.LANE = #{champ_lane}
+		WHERE c.CHAMP_ID =
+		#{champ_id} AND ci.LANE = #{champ_lane}
 	</select>
 
 	<select id="champ_skill"
@@ -93,14 +118,27 @@
 	<select id="skill_tree"
 		resultType="com.base.personlol.dto.Champskill_dto">
 		SELECT * FROM (SELECT * FROM CHAMPION_SKILL cs WHERE
-		CHAMP_ID = #{champ_id} ORDER BY WIN_RATE DESC FETCH FIRST 1 ROWS ONLY) c
-		INNER JOIN CHAMPSKILL cs ON(c.CHAMP_ID = cs.CHAMP_ID) ORDER BY SKILL_ID
+		CHAMP_ID = #{champ_id} AND lane = #{champ_lane} ORDER BY GAME_COUNT DESC
+		FETCH FIRST 1 ROWS ONLY)
+		c
+		INNER JOIN CHAMPSKILL cs ON(c.CHAMP_ID =
+		cs.CHAMP_ID) ORDER BY
+		SKILL_ID
 
 	</select>
 
 	<select id="champ_rune"
 		resultType="com.base.personlol.dto.ChampRune_dto">
-		SELECT * FROM CHAMPION_RUNE cr WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane}
+		<![CDATA[
+		SELECT *
+		FROM (
+		SELECT *
+		FROM CHAMPION_RUNE cr
+		WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane}
+		ORDER BY GAME_COUNT DESC
+		) WHERE ROWNUM <= 2]]>
+
+
 	</select>
 
 	<select id="main_img"
@@ -125,7 +163,7 @@
 
 	<select id="item_build"
 		resultType="com.base.personlol.dto.Item_dto">
-		<![CDATA[SELECT * FROM (SELECT * FROM CHAMPION_ITEM_BUILD WHERE CHAMP_ID = #{champ_id} ORDER BY PICK_RATE DESC) WHERE ROWNUM<=2]]>
+		<![CDATA[SELECT * FROM (SELECT * FROM CHAMPION_ITEM_BUILD WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane} ORDER BY PICK_RATE DESC) WHERE ROWNUM<=2]]>
 	</select>
 
 	<select id="item_img"
@@ -133,6 +171,128 @@
 		SELECT * FROM ITEM WHERE ITEM_ID = #{item}
 	</select>
 
-
-
+	<select id="champ_spell" resultType="com.base.personlol.dto.ChampSpell_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		SELECT *
+		FROM CHAMPION_SPELL cs
+		WHERE CHAMP_ID = #{champ_id} AND LANE = #{champ_lane}
+		ORDER BY GAME_COUNT DESC
+		)
+		WHERE ROWNUM <= 2]]>
+	</select>
+	
+	<select id="champ_spell_img" resultType="com.base.personlol.dto.ChampSpell_dto">
+		SELECT * FROM SPELL s WHERE SPELL_ID = #{spell_img}
+	</select>
+	
+	<!--매치업 쉬운-->
+	<select id="matchup_lst" resultType="com.base.personlol.dto.ChampMatch_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_MATCHUP
+		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane} AND MATCHUP_COUNT >= 20
+		  ORDER BY MATCHUP_WIN_RATE DESC
+		) 
+		WHERE ROWNUM <= 3]]>
+	</select>
+	
+	<!--매치업 어려운-->
+	<select id="matchup_lst_hard" resultType="com.base.personlol.dto.ChampMatch_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_MATCHUP
+		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane} AND MATCHUP_COUNT >= 10
+		  ORDER BY MATCHUP_WIN_RATE asc
+		) 
+		WHERE ROWNUM <= 3]]>
+	</select>
+	
+	<!--상대챔프 이미지(디테일 페이지)-->
+	<select id="matchup_champ_img" resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPDATA c WHERE CHAMP_ID = #{match_champ}
+	</select>
+	
+	<select id="matchup_detail" resultType="com.base.personlol.dto.ChampMatch_dto">
+		SELECT *
+	  	FROM CHAMPION_MATCHUP
+	  	WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane} AND CHAMP_ID_Y = #{match_champ}
+	  	ORDER BY MATCHUP_WIN_RATE DESC
+	</select>
+	
+	<!--매치업페이지 챔프둘 이미지-->
+	<select id="matchup_detail_img" resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPDATA c WHERE CHAMP_ID =#{champ_id} OR CHAMP_ID = #{match_champ}
+	</select>
+	
+	<!--매치업 인포-->
+	<select id="matchup_detail_info" resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPION_INFO ci WHERE (CHAMP_ID = #{champ_id} OR CHAMP_ID = #{match_champ}) AND LANE = #{champ_lane}
+	</select>
+	
+	<!-- 매치업 리스트-->
+	<select id="matchup_list" resultType="com.base.personlol.dto.ChampMatch_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_MATCHUP
+		  WHERE CHAMP_ID_X = #{champ_id} AND LANE = #{champ_lane}
+		  ORDER BY MATCHUP_WIN_RATE DESC
+		) 
+		WHERE ROWNUM <= 20]]>
+	</select>
+	
+	<!--챔프 매치업 상대한 챔프 정보-->
+	<select id="matchamp_info" resultType="com.base.personlol.dto.champion_dto">
+		SELECT * FROM CHAMPDATA c
+		INNER JOIN CHAMPION_INFO ci 
+		ON c.CHAMP_ID = ci.CHAMP_ID 
+		WHERE c.CHAMP_ID = #{matchamp_id} AND ci.LANE = #{champ_lane}
+	</select>
+	
+	<!--챔프 리스트 출력시 카운터 추가-->
+	<select id="counter_info" resultType="com.base.personlol.dto.champion_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		    SELECT cm.LANE AS LANE, cm.CHAMP_ID_X  ,cm.CHAMP_ID_Y 
+		    FROM CHAMPION_INFO ci
+		    INNER JOIN CHAMPION_MATCHUP cm ON ci.CHAMP_ID = cm.CHAMP_ID_X
+		    WHERE ci.CHAMP_ID = #{champ_id} AND ci.LANE = #{champ_lane} AND cm.MATCHUP_COUNT >= 10
+		    ORDER BY cm.MATCHUP_WIN_RATE ASC
+		) c1
+		INNER JOIN CHAMPDATA c2
+		ON c1.champ_id_y = c2.CHAMP_ID 
+		WHERE ROWNUM <= 3]]>
+	</select>
+	
+	<select id="start_item" resultType="com.base.personlol.dto.ChampStartItem_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_ITEM_START
+		  WHERE CHAMP_ID = #{champ_id} AND lane = #{champ_lane}
+		  ORDER BY GAME_COUNT DESC
+		)
+		WHERE ROWNUM <= 3]]>
+	</select>
+	
+	<select id="start_boots" resultType="com.base.personlol.dto.ChampStartBoots_dto">
+		<![CDATA[
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM CHAMPION_ITEM_BOOTS
+		  WHERE CHAMP_ID = #{champ_id} AND lane = #{champ_lane}
+		  ORDER BY GAME_COUNT DESC
+		)
+		WHERE ROWNUM <= 2]]>
+	</select>
 </mapper>

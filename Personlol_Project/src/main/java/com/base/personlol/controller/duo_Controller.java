@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.base.personlol.dto.Main_duo_dto;
 import com.base.personlol.dto.duo_dto;
 import com.base.personlol.dto.userinfo_dto;
 import com.base.personlol.service.duo_service;
@@ -38,6 +39,7 @@ public class duo_Controller {
 	public String duo() {
 		return "duo";
 	}
+	
 	/* 리스트 가져오기 */
 //	@GetMapping("/")
 //	public ModelAndView duo( HttpSession session) {
@@ -154,13 +156,17 @@ public class duo_Controller {
 					attr.addFlashAttribute("msg","중복된 요청입니다");
 					return new ModelAndView("redirect:/duo/");
 					
+				}else if(insert_request ==-88) {
+					System.out.println("이미 등록된 듀오 입니다.");
+					attr.addFlashAttribute("msg","이미 등록된 듀오입니다");
+					return new ModelAndView("redirect:/duo/");
 				}else {
 					System.out.println("삽입실패");
 					attr.addFlashAttribute("msg","요청이 실패했습니다.");
 					return new ModelAndView("redirect:/duo/");
 					
 				}
-
+				
 			}else {
 				System.out.println("아이디가 작성자와 일치");
 				attr.addFlashAttribute("msg","본인의 글입니다");
@@ -204,6 +210,16 @@ public class duo_Controller {
 		response.put("loginCheck", loginCheck); // 응답에 loginCheck 값을 포함시킴
 
 		return response;
+	}
+	
+	
+	//메인 듀오 가져오기
+	@GetMapping("/main_duo")
+	public @ResponseBody List<Map<String, Object>> getDuoboard(@RequestParam("page_num") int page_num) {
+		System.out.println("메인 듀오 컨트롤러 페이징"+ page_num);
+		List<Map<String, Object>> result_duo = dse.getDuoboard(page_num);
+		System.out.println("메인 듀오 컨트롤러 리턴"+result_duo);
+		return result_duo;
 	}
 
 }

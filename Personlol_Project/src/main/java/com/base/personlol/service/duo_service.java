@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.base.personlol.dao.duo_dao;
+import com.base.personlol.dto.Main_duo_dto;
 import com.base.personlol.dto.duo_dto;
 import com.base.personlol.dto.rank_dto;
 import com.base.personlol.dto.userinfo_dto;
@@ -23,6 +24,7 @@ public class duo_service {
 	duo_dao ddao;
 
 	public List<duo_dto> getList() {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		List<duo_dto> dList = null;
 		dList = ddao.getList();
 
@@ -85,7 +87,7 @@ public class duo_service {
 		System.out.println("end_page:" + end_page);
 
 		// 티어 값이 null인지 아닌지
-		if (tier.equals("null")) {
+		if (tier.equals("null")||tier.equals("티어")) {
 			System.out.println("티어 정렬 아님");
 			if ("top".equals(lane)) {
 				List<Map<String, Object>> Line = ddao.top(start_page, end_page);
@@ -110,6 +112,7 @@ public class duo_service {
 		} else {
 			System.out.println("티어별 정렬");
 			System.out.println("티어찍히낭?" + tier);
+
 			List<Map<String, Object>> tier_Line = ddao.tier_all(start_page, end_page, tier);
 			System.out.println("티어별 정렬 후 라인 받아와 DB에서?: " + tier_Line);
 			return tier_Line;
@@ -121,15 +124,33 @@ public class duo_service {
 		System.out.println("요청자 id: " + request_id);
 		// 같은 사람에게 요청 했는지 안했는지 했다면 막아야하니까
 		int check_request = ddao.check_request(user_id, request_id);
+		// 같은 사람이랑 이미 친구인지
+		int check_myduo = ddao.check_myduo(user_id, request_id);
 		System.out.println("check_request 1=중복: " + check_request);
 		if (check_request != 1) {
-			Integer insert_request = ddao.request(user_id, request_id);
-			System.out.println("요청 성공이라면 1: " + insert_request);
-			return insert_request;
+			if(check_myduo != 1) {
+				Integer insert_request = ddao.request(user_id, request_id);
+				System.out.println("요청 성공이라면 1: " + insert_request);
+				return insert_request;
+			}else {
+				System.out.println("이미 듀오 목록에있는 사람입니다.");
+				return -88;
+			}
 		}else {
+			System.out.println("같은 사람에게 요청");
 			return -99;
 		}
 
+	}
+
+	public List<Map<String, Object>> getDuoboard(int page_num) {
+		System.out.println("듀오 메인 서비스 실행");
+		int start_page = (page_num*3)-2;
+
+		int end_page = (page_num * 3);
+		List<Map<String, Object>> result_duo = ddao.all(start_page, end_page);
+		System.out.println("듀오 메인 서비스 리턴"+result_duo);
+		return result_duo;
 	}
 
 }

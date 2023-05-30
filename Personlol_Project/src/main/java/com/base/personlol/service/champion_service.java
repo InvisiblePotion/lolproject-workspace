@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.personlol.dao.champion_dao;
+import com.base.personlol.dto.ChampMatch_dto;
 import com.base.personlol.dto.ChampRuneCore_dto;
 import com.base.personlol.dto.ChampRuneShard_dto;
 import com.base.personlol.dto.ChampRuneType_dto;
 import com.base.personlol.dto.ChampRune_dto;
+import com.base.personlol.dto.ChampSpell_dto;
+import com.base.personlol.dto.ChampStartBoots_dto;
+import com.base.personlol.dto.ChampStartItem_dto;
 import com.base.personlol.dto.Champskill_dto;
 import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.Test_raw;
@@ -63,13 +67,21 @@ public class champion_service {
 		return utilimg;
 	}
 	
-//	챔프 리스트
+//	梨뷀봽 由ъ뒪�듃
 	public List<champion_dto> flist(String lane) {
 		
 		List<champion_dto> flist = null;
 		flist = champ_dao.lane_list(lane);
 		
 		return flist;
+	}
+	
+	// 硫붿씤 由ъ뒪�듃
+	public List<champion_dto> mList(String lane) {
+		System.out.println("硫붿씤 由ъ뒪�듃 �꽌鍮꾩뒪: "+lane);
+		List<champion_dto> mList = champ_dao.mlane_list(lane);
+		System.out.println("�꽌鍮꾩뒪 mList�뒗: " + mList);
+		return mList;
 	}
 
 	public List<champion_dto> top_list(String lane) {
@@ -108,28 +120,28 @@ public class champion_service {
 		return util_list;
 	}
 	
-	//win rate 리스트 정렬 부분
+	//win rate 由ъ뒪�듃 �젙�젹 遺�遺�
 	public List<champion_dto> list_sort_win(String lane, String sort) {
 		List<champion_dto> list_sort_win = null;
 		list_sort_win = champ_dao.lane_sort_win(lane,sort);
 		return list_sort_win;
 	}
 
-	//pick rate 리스트 정렬
+	//pick rate 由ъ뒪�듃 �젙�젹
 	public List<champion_dto> list_sort_pick(String lane, String sort) {
 		List<champion_dto> list_sort_pick = null;
 		list_sort_pick = champ_dao.lane_sort_pick(lane,sort);
 		return list_sort_pick;
 	}
 	
-	//ban rate 리스트 정렬
+	//ban rate 由ъ뒪�듃 �젙�젹
 	public List<champion_dto> list_sort_ban(String lane, String sort) {
 		List<champion_dto> list_sort_ban = null;
 		list_sort_ban = champ_dao.lane_sort_ban(lane,sort);
 		return list_sort_ban;
 	}
 	
-	//챔피언 검색
+	//梨뷀뵾�뼵 寃��깋
 	public List<champion_dto> search_champ(String searchVal) {
 		List<champion_dto> search_champ =null;
 		search_champ = champ_dao.search_champ(searchVal);
@@ -149,20 +161,20 @@ public class champion_service {
 		return champ_skill;
 	}
 
-	public List<Champskill_dto> skill_tree(Integer champ_id) {
+	public List<Champskill_dto> skill_tree(Integer champ_id,String champ_lane) {
 		List<Champskill_dto> skill_tree = null;
-		skill_tree = champ_dao.skill_tree(champ_id);
+		skill_tree = champ_dao.skill_tree(champ_id,champ_lane);
 		return skill_tree;
 	}
 	
-	//룬트리
+	//猷ы듃由�
 	public List<ChampRune_dto> champ_rune(Integer champ_id,String champ_lane) {
 		List<ChampRune_dto> champ_rune = null;
 		champ_rune = champ_dao.champ_rune(champ_id,champ_lane);
 		return champ_rune;
 	}
 	
-	//룬 메인
+	//猷� 硫붿씤
 	public List<ChampRuneType_dto> main_rune(Integer main_rune) {
 		List<ChampRuneType_dto> main_rune_img = null;
 		main_rune_img = champ_dao.main_img(main_rune);
@@ -176,7 +188,7 @@ public class champion_service {
 	}
 	
 
-	//룬 코어 이미지
+	//猷� 肄붿뼱 �씠誘몄�
 	public List<ChampRuneCore_dto> core_img(Integer core_rune) {
 		List<ChampRuneCore_dto> core_img = null;
 		core_img = champ_dao.core_img(core_rune);
@@ -190,10 +202,10 @@ public class champion_service {
 	}
 
 	
-	public List<Item_dto> item_build(Integer champ_id) {
+	public List<Item_dto> item_build(Integer champ_id,String champ_lane) {
 		System.out.println("Service_item_build_champ_id="+champ_id);
 		List<Item_dto> item_build = null;
-		item_build = champ_dao.item_build(champ_id);
+		item_build = champ_dao.item_build(champ_id,champ_lane);
 		System.out.println("Service_item_build_Return="+item_build);
 		return item_build;		
 	}
@@ -203,6 +215,94 @@ public class champion_service {
 		List<Item_dto> item_img = null;
 		item_img = champ_dao.item_img(item);
 		return item_img;
+	}
+	
+	//梨뷀봽 �뒪�렆 
+	public List<ChampSpell_dto> champ_spell(Integer champ_id, String champ_lane) {
+		List<ChampSpell_dto> champ_spell_lst = null;
+		champ_spell_lst = champ_dao.champ_spell(champ_id,champ_lane);
+		return champ_spell_lst;
+	}
+	//梨뷀봽 �뒪�렆 �씠誘몄�
+	public List<ChampSpell_dto> champ_spell_img(Integer spell_img) {
+		List<ChampSpell_dto> champ_spell_img = null;
+		champ_spell_img = champ_dao.champ_spell_img(spell_img);
+		return champ_spell_img;
+	}
+
+
+	
+	//梨뷀봽 留ㅼ튂�뾽 �긽���븯湲� �돩�슫
+	public List<ChampMatch_dto> matchup_lst(Integer champ_id, String champ_lane) {
+		List<ChampMatch_dto> matchup_lst = null;
+		matchup_lst = champ_dao.matchup_lst(champ_id,champ_lane);
+		return matchup_lst;
+	}
+	//梨뷀봽 留ㅼ튂�뾽 �씠誘몄�
+	public List<champion_dto> matchup_champ_img(Integer match_champ) {
+		List<champion_dto> matchup_img_lst = null;
+		matchup_img_lst = champ_dao.matchup_champ_img(match_champ);
+		return matchup_img_lst;
+	}
+	
+	//梨뷀봽 留ㅼ튂�뾽 �긽���븯湲� �뼱�젮�슫
+	public List<ChampMatch_dto> matchup_lst_hard(Integer champ_id, String champ_lane) {
+		List<ChampMatch_dto> matchup_lst_hard = null;
+		matchup_lst_hard = champ_dao.matchup_lst_hard(champ_id,champ_lane);
+		return matchup_lst_hard;
+	}
+	
+	//梨뷀봽 留ㅼ튂�뾽 �뵒�뀒�씪(留ㅼ튂�뾽 �럹�씠吏�肉뚮┫嫄�)
+	public List<ChampMatch_dto> matchup_detail(Integer champ_id, String champ_lane, Integer match_champ) {
+		List<ChampMatch_dto> matchup_detail_lst = null;
+		matchup_detail_lst = champ_dao.matchup_detail(champ_id,champ_lane,match_champ);
+		return matchup_detail_lst;
+	}
+	
+	//梨뷀봽 留ㅼ튂�뾽 �씠誘몄�
+	public List<champion_dto> matchup_detail_img(Integer champ_id, Integer match_champ) {
+		List<champion_dto> matchup_detail_img_lst = null;
+		matchup_detail_img_lst = champ_dao.matchup_detail_img(champ_id,match_champ);
+		return matchup_detail_img_lst;
+	}
+	
+	//梨뷀봽 留ㅼ튂�뾽 �씤�룷(�듅,�뵿,諛대쪧)
+	public List<champion_dto> matchup_detail_info(Integer champ_id, String champ_lane,Integer match_champ) {
+		 List<champion_dto> matchup_detail_info_lst = null;
+		 matchup_detail_info_lst = champ_dao.matchup_detail_info(champ_id,champ_lane,match_champ);
+		return matchup_detail_info_lst;
+	}
+	
+	//梨뷀봽 留ㅼ튂�뾽 �긽���븳 梨뷀봽 由ъ뒪�듃
+	public List<ChampMatch_dto> matchup_list(Integer champ_id, String champ_lane) {
+		List<ChampMatch_dto> matchup_list_lst = null;
+		matchup_list_lst = champ_dao.matchup_list(champ_id,champ_lane);
+		return matchup_list_lst;
+	}
+	
+	//梨뷀봽 留ㅼ튂�뾽 �긽��梨뷀봽 �젙蹂� 
+	public List<champion_dto> matchamp_info(Integer matchamp_id,String champ_lane) {
+		List<champion_dto> matchamp_info_lst = null;
+		matchamp_info_lst = champ_dao.matchamp_info(matchamp_id,champ_lane);
+		return matchamp_info_lst;
+	}
+
+	public List<champion_dto> counter_info(Integer champ_id, String champ_lane) {
+		List<champion_dto> counter_info_lst= null;
+		counter_info_lst = champ_dao.counter_info(champ_id,champ_lane);
+		return counter_info_lst;
+	}
+
+	public List<ChampStartItem_dto> start_item(Integer champ_id, String champ_lane) {
+		List<ChampStartItem_dto> start_item_lst = null;
+		start_item_lst = champ_dao.start_item(champ_id,champ_lane);
+		return start_item_lst;
+	}
+	
+	public List<ChampStartBoots_dto> start_boots(Integer champ_id, String champ_lane) {
+		List<ChampStartBoots_dto> start_boots_lst = null;
+		start_boots_lst = champ_dao.start_boots(champ_id,champ_lane);
+		return start_boots_lst;
 	}
 	
 

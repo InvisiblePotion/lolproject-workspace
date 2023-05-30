@@ -4,12 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.base.personlol.dao.summoner_dao">
-
-    <select id="getsummonerinfo" resultType="summonerinfodto">
-        SELECT s.SUMMONER_LEVEL, s.SUMMONER_TIER, s.SUMMONER_PROFILE
-        FROM SUMMONER s
-        WHERE s.SUMMONER_NAME = #{summoner_name}
-    </select>
     
     <select id="getGameRecord" resultType="com.base.personlol.dto.summoner_rawdata_dto">
         SELECT game_id, participant_number, participant_name, champion_id, lane,
@@ -48,5 +42,52 @@
         INSERT INTO SUMMONER_RECENT_GAME VALUES (
             #{summoner_name}, #{game_id})
     </insert>
-    
+
+	<select id="getsummonerinfo" resultType="summonerinfodto">
+		SELECT s.SUMMONER_LEVEL,
+		s.SUMMONER_TIER, s.SUMMONER_PROFILE, s.SUMMONER_LOSSES,
+		s.SUMMONER_WINS
+		FROM SUMMONER s
+		WHERE s.SUMMONER_NAME = #{summoner_name}
+	</select>
+
+	<select id="getChampinfo" resultType="java.util.Map">
+		SELECT C.CHAMP_NAME,
+		C.CHAMP_ICON, RD.KDA
+		FROM RAWDATA RD, CHAMPDATA C
+		WHERE RD.GAME_ID IN (
+		SELECT GAME_ID
+		FROM RAWDATA
+		WHERE PARTICIPANT_PUUID = (
+		SELECT
+		SUMMONER_PUUID
+		FROM SUMMONER
+		WHERE SUMMONER_NAME = #{summoner_name}
+		)
+		)
+		AND RD.PARTICIPANT_NAME = #{summoner_name} AND RD.CHAMPION_ID =
+		C.CHAMP_ID
+	</select>
+
+	<select id="getMaininfo" resultType="java.util.Map">
+		SELECT * FROM RAWDATA 
+		JOIN CHAMPDATA c ON CHAMP_ID = C.CHAMP_ID 
+		WHERE PARTICIPANT_NAME = #{summoner_name}
+		FETCH FIRST 10 ROWS ONLY
+	</select>
+	
+
+	  <select id="go_search" resultType="mainSummoner">
+	    <![CDATA[
+	    SELECT *
+	    FROM (
+	        SELECT s.SUMMONER_NAME, s.SUMMONER_LEVEL, s.SUMMONER_TIER, s.SUMMONER_PROFILE
+	        FROM SUMMONER s
+	        WHERE SUMMONER_NAME LIKE '%' || #{summoner_name} || '%'
+	        ORDER BY ROWNUM
+	    )
+	    WHERE ROWNUM <= 3
+	    ]]>
+	  </select>
+	  
 </mapper>

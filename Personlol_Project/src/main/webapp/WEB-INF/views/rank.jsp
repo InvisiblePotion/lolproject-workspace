@@ -1,38 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>ranking</title>
-	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./resources/css/rank.css">
+<meta charset="UTF-8">
+<title>ranking</title>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="./resources/css/header.css">	
+<link rel="stylesheet" href="./resources/css/rank.css">
 
 </head>
 
 <body>
-	<!-- 여기까지가 헤더!!!!!!!!!! -->
 	<div id="generic">
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png"></a>
+					<a href="/personlol/main" class="imgfile"><img
+						src="./resources/img/logotesting.png" height="25px"></a>
 					<div class="search-bar">
-						<input class="summoner_name" type="text">
-						<button class="gosummonerinfo" type="button">go!</button>
+
+						<input class="summoner_name_search" type="text"
+							placeholdr="소환사명 검색....">
+						<button class="gosummonerinfo2" type="button">go!</button>
 					</div>
 					<div class="menu">
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
+							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
+							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+							href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
+							href="/personlol/summoner/" class="m-col">소환사분석</a>
 
-						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
-						<a href="/personlol/rank" class="m-col">랭킹</a>
-						<a href="/personlol/duo/" class="m-col">듀오찾기</a>
-						<a href=" " class="m-col">사용자분석</a>
 
+					</div>
+					<div class="my-menu">
 						<c:choose>
 							<c:when test="${sessionScope.id ne null}">
 								<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
@@ -44,36 +51,42 @@
 
 						<div id="loginout">
 							<c:if test="${sessionScope.id ne null}">
-								<div><span class="m-col">${sessionScope.id}님 환영합니다!</span></div>
-								<div><span><a href="#" id="logout" class="m-col logout">로그아웃</a></span></div>
+								<div class="loggedin-box">
+									<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+								</div>
+								<div class="logout-box">
+									<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+								</div>
 							</c:if>
 						</div id="loginout">
-
 					</div>
 				</div>
 			</nav>
 		</div>
-	</div>
-	<!-- 여기까지가 헤더!!!!!!! -->
+	</div id="generic">
+	<!-- 여기까지가 배너입니다. -->
 
 
 	<!-- 헤더 다음부분 -->
-	<div class="container text-center">
+	<div class="container text-center bcolor">
 		<div class="row">
 			<div class="col">
-				<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+				<div class="btn-toolbar justify-content-between" role="toolbar"
+					aria-label="Toolbar with button groups">
 					<div class="btn-group" role="group" aria-label="First group">
-						<button type="button" onclick="getranking(this)" id="get_ch" class="btn btn-outline-secondary"
-							value="ch">챌린져</button>
-						<button type="button" onclick="getranking(this)" id="get_gm" class="btn btn-outline-secondary"
-							value="gm">그랜드마스터</button>
-						<button type="button" onclick="getranking(this)" id="get_m" class="btn btn-outline-secondary"
-							value="master">마스터</button>
+						<button type="button" onclick="getranking(this)" id="get_ch"
+							class="btn btn-outline-secondary" value="ch">챌린져</button>
+						<button type="button" onclick="getranking(this)" id="get_gm"
+							class="btn btn-outline-secondary" value="gm">그랜드마스터</button>
+						<button type="button" onclick="getranking(this)" id="get_m"
+							class="btn btn-outline-secondary" value="master">마스터</button>
 
 					</div>
 					<div class="input-group">
 						<div class="input-group-text" id="btnGroupAddon2">@</div>
-						<input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example"
+						<input type="text" class="form-control"
+							placeholder="Input group example"
+							aria-label="Input group example"
 							aria-describedby="btnGroupAddon2">
 					</div>
 				</div>
@@ -89,11 +102,10 @@
 						<table class="table table-hover" id="head_table">
 							<thead>
 								<tr height="25" align="center">
-									<td width="100">소환사</td>
-									<td width="100">티어</td>
-									<td width="100">LP</td>
-									<td width="100">승리</td>
-									<td width="100">패배</td>
+									<td width="50px">랭킹</td>
+									<td width="480px">소환사</td>
+									<td width="175px">티어</td>
+									<td width="175px">LP</td>
 								</tr>
 							</thead>
 						</table>
@@ -105,9 +117,7 @@
 		</div>
 
 	</div class="list-container">
-	<div id="pagenum">
-
-	</div id="pagenum">
+	<div id="pagenum"></div id="pagenum">
 
 	<script>
 		//페이지 불러옴과 동시에 실행되는 함수
@@ -167,19 +177,13 @@
 				let cList = '';
 				$.each(res, function (i, r) {
 				  cList += '<tr height="25" onclick="window.location.href=\'/personlol/summoner/?summoner_name=' + r.summonerName + '\'">' +
-				    '<td width="200px">' + r.ranking + '</td>' +
-				    '<td width="200px">' + r.summonerName + '</td>' +
-				    '<td width="200px">' + r.tier + '</td>' +
-				    '<td width="200px">' + r.leaguePoints + '</td>' +
-				    '<td width="200px">' + r.wins + '</td>' +
-				    '<td width="200px">' + r.losses + '</td>' +
-				    '<td width="200px">' + r.veteran + '</td>' +
-				    '<td width="200px">' + r.inactive + '</td>' +
-				    '<td width="200px">' + r.freshBlood + '</td>' +
-				    '<td width="200px">' + r.hotStreak + '</td>' +
+				    '<td width="50px">' + r.ranking + '</td>' +
+				    '<td width="480px">' + r.summonerName + '</td>' +
+				    '<td width="175px">' + r.tier + '</td>' +
+				    '<td width="175px">' + r.leaguePoints + '</td>' +
 				    '</tr>'; // 여기서 </table>을 삭제하고 </tr>로 변경
 				});
-				$('#info').html('<table class="table table-hover" id="info_table">' + cList + '</table>'); // 여기서 테이블 전체를 감싸는 태그 추가
+				$('#info').html('<table width="100px" class="table table-hover" id="info_table">' + cList + '</table>'); // 여기서 테이블 전체를 감싸는 태그 추가
 
 			}).fail(err => {
 				console.log(res);
@@ -187,7 +191,7 @@
 		}
 	</script>
 
-<script>
+	<script>
   $('.gosummonerinfo').click(function() {
 	  //siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기
 	  let summoner_name = $(this).siblings('.summoner_name').filter(function() {
@@ -209,6 +213,7 @@
     }).done(res=>{
       console.log(res);
       if(res == "1"){
+    	  
     	  location.href = go_url;
       }else if(res == "-999"){
     	  alert("등록되지않은 소환사입니다 다시 입력해주세요")
@@ -219,6 +224,7 @@
 
 	});
   </script>
+  
 	<script>
 		//로그아웃
 		$('#logout').click(function () {
