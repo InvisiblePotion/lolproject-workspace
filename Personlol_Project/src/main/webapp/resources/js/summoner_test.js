@@ -109,11 +109,15 @@ function inputGameDataShort(game_data, game_number) {
     $(prefix+'.raw-self-kda-deaths').html(game_data[self_number]['kda']['deaths']);
     $(prefix+'.raw-self-kda-assists').html(game_data[self_number]['kda']['assists']);
     $(prefix+'.raw-self-kda-kda').html(game_data[self_number]['kda']['assists']+':1');
-    $(prefix+'.raw-self-kda-killparticipation').html('킬관여 '+(parseInt(game_data[self_number]['kda']['killParticipation'])*100).toFixed(2)+'%');
+    $(prefix+'.raw-self-kda-killparticipation').html('킬관여 '+(parseFloat(game_data[self_number]['kda']['killParticipation'])*100).toFixed(0)+'%');
     $(prefix+'.raw-self-vision-controlward').html('제어 와드 '+game_data[self_number]['vision']['controlWardsPlaced']);
     $(prefix+'.raw-self-cs').html('CS '+game_data[self_number]['cs']['totalMinionsKilled']+' ('+(parseInt(game_data[self_number]['cs']['totalMinionsKilled'])/duration_min).toFixed(1)+')');
     for (let idx = 0; idx < 6; idx++) {
-        $(prefix+'.raw-self-item-item'+(parseInt(idx)+1))[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item'+idx]+'.png';
+        if (game_data[self_number]['item']['item'+idx] == 0) {
+            $(prefix+'.raw-self-item-item'+(parseInt(idx)+1))[0].src = ''
+        } else {
+            $(prefix+'.raw-self-item-item'+(parseInt(idx)+1))[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item'+idx]+'.png';
+        }
     }
     $(prefix+'.raw-self-item-trinket')[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item6']+'.png';
     switch (parseInt(game_data[self_number]['kda']['largestMultiKill'])) {
