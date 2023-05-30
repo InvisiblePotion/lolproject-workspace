@@ -1,4 +1,14 @@
 /**
+ * 현재 URL의 쿼리 파라미터에서 값을 가져온다
+ * @param {string} key 쿼리 파라미터 키
+ * @returns 쿼리 파라미터 값
+ */
+function getQueryString(key) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(key);
+}
+
+/**
  * 해당 소환사의 최근 20게임에 대한 게임 ID를 가져온다.   
  * `url: /personlol/summoner/game-id-list/`
  * @param {string} summoner_name 소환사 이름
@@ -61,7 +71,7 @@ function getGameRecords(game_id_list) {
                     }
                 }
                 inputGameDataShort(game_data, parseInt(idx)+1);
-                // inputGameDataExpend(game_data, parseInt(idx)+1);
+                inputGameDataExpend(game_data, parseInt(idx)+1);
             }
         }
     }).fail((err)=>{
@@ -76,7 +86,7 @@ function getGameRecords(game_id_list) {
  * @param {int} game_number 삽입할 태그의 위치 (게임의 순번, 1부터 시작)
  */
 function inputGameDataShort(game_data, game_number) {
-    const summoner_name = $('#game-id-summoner-name').val() // ### 소환사 이름 가져오는 위치 변경 필요!
+    const summoner_name = getQueryString('summoner_name');
     const time_now = Date.now();
 
     let self_number = null;
@@ -88,7 +98,7 @@ function inputGameDataShort(game_data, game_number) {
     }
     const duration_min = Math.floor(parseInt(game_data[0]['game']['gameDuration']) / 60);
     const duration_sec = parseInt(game_data[0]['game']['gameDuration']) % 60;
-    const prefix = '.container #record:nth-child('+game_number+') '; // ### 컨테이너와 각 게임 클래스 맞춰야 함!
+    const prefix = '.raw-record-container .raw-record-item:nth-child('+game_number+') '; // ### 컨테이너와 각 게임 클래스 맞춰야 함!
 
     let time_elapsed = time_now - game_data[0]['game']['gameEndTimestamp'];
     if (time_elapsed >= 86400000) {
@@ -158,14 +168,14 @@ function inputGameDataShort(game_data, game_number) {
 function inputGameDataExpend(game_data, game_number) {
 
     const duration_min = Math.floor(parseInt(game_data[0]['game']['gameDuration']) / 60);
-    const prefix = '.container #record:nth-child('+game_number+') '; // ### 펼친 뒤의 구조에 맞게 바꿔야 함! (현재는 접힌 상태 기준)
+    const prefix = '.raw-record-container .raw-record-item:nth-child('+game_number+') '; // ### 펼친 뒤의 구조에 맞게 바꿔야 함! (현재는 접힌 상태 기준)
     
     let max_dealt_damage = 0; // ### 바를 표시하지 않는다면 필요 없는 코드
     let max_taken_damage = 0; // ### 바를 표시하지 않는다면 필요 없는 코드
     
     for (let idx = 0; idx < 10; idx++) {
         // >:champion
-        // raw-part0-champion-icon (inputGameDataShort()에서 처리됨)
+        // raw-part0-champion-icon (일단은 inputGameDataShort()에서 처리됨)
         $(prefix+'.raw-part'+(parseInt(idx)+1)+'-champion-level').html(game_data[idx]['champion']['champLevel'])
         
         // >:spell
@@ -177,7 +187,7 @@ function inputGameDataExpend(game_data, game_number) {
         $(prefix+'.raw-part'+(parseInt(idx)+1)+'-rune-runetype-sub')[0].src = '../resources/dd/img/rune/style/'+game_data[idx]['rune']['runeSubStyle']+'.png';
         
         // >:summoner
-        // raw-part0-summoner-name (inputGameDataShort()에서 처리됨)
+        // raw-part0-summoner-name (일단은 inputGameDataShort()에서 처리됨)
         
         // >:kda
         let kda_data = game_data[idx]['kda']['kills']+'/'+game_data[idx]['kda']['deaths']+'/'+game_data[idx]['kda']['assists']+' ('+(parseFloat(game_data[idx]['kda']['killParticipation'])*100).toFixed(0)+'%)';
@@ -212,6 +222,267 @@ function inputGameDataExpend(game_data, game_number) {
     }
 }
 
-$('#game-ids').click(()=>{ // ### 페이지에 맞게 조건 변경 필요 ($(function (){}))
-    getGameIds($('#game-id-summoner-name').val())  // ### 소환사 이름 가져오는 위치 변경 필요!
+// function recordItemExtender() {
+//     $('.raw-record-container').append(
+//         <li class="main list raw-record-item">
+//         \t<div class="madiv_wrap">
+//         \t\t<div class="madiv list2">
+//         \t\t\t<div class="content">
+//                         <div class="game-content">
+//         \t\t\t\t\t<div class="game">
+//         \t\t\t\t\t\t<div class="type">솔랭</div>
+//         \t\t\t\t\t\t<div class="time-stamp">
+//         \t\t\t\t\t\t\t<div class="raw-game-endtime" style="position: relative;">0일 전</div>
+//         \t\t\t\t\t\t</div>
+//         \t\t\t\t\t\t<div class="bar"></div>
+//         \t\t\t\t\t\t<div class="result raw-game-win">-</div>
+//         \t\t\t\t\t\t<div class="length raw-game-duration">00분 00초</div>
+//         \t\t\t\t\t</div>
+//                             <div class="sinfo">
+//                                 <div class="into">
+//                                     <div class="champion">
+//                                         <div class="icon">
+//                                             <a href="fd"><img class="raw-self-champion-icon" src="" alt=""><span class="champion-level raw-self-champion-level">18</span>
+//                                             </a>
+//                                         </div>
+//                                         <div class="spells">
+//                                             <div class="spell">
+//                                                 <div class="sp">
+//                                                     <img class="raw-self-spell-spell1" src="" alt="">
+//                                                 </div>
+//                                             </div>
+//                                             <div class="spell">
+//                                                 <div class="sp">
+//                                                     <img class="raw-self-spell-spell2" src="" alt="">
+//                                                 </div>
+//                                             </div>
+//                                         </div>
+//                                         <div class="runes">
+//                                             <div class="rune">
+//                                                 <div class="sp">
+//                                                     <img class="raw-self-rune-core-mainrune" src="" alt="">
+//                                                 </div>
+//                                             </div>
+//                                             <div class="rune">
+//                                                 <div class="sp">
+//                                                     <img class="raw-self-rune-runetype-sub" src="" alt="">
+//                                                 </div>
+//                                             </div>
+//                                         </div>
+//                                     </div>
+//                                     <div class="kda">
+//                                         <div class="k-d-a">
+//                                             <span class="raw-self-kda-kills">0</span> / <span class="d raw-self-kda-deaths">0</span> / <span class="raw-self-kda-assists">0</span>
+//                                         </div>
+//                                         <div class="ratio">
+//                                             <span class="raw-self-kda-kda">0:1</span> 평점
+//                                         </div>
+//                                     </div>
+//                                     <div class="status">
+//                                         <div class="p-kill">
+//                                             <div class="raw-self-kda-killparticipation" style="position: relative;">킬관여 0%</div>
+//                                         </div>
+//                                         <div class="ward raw-self-vision-controlward">제어 와드 0</div>
+//                                         <div class="cs">
+//                                             <div class="raw-self-cs" style="position: relative;">CS 0 (0)</div>
+//                                         </div>
+//                                         <div class="average-tier">
+//                                             <div style="position: relative;"><!-- ### 랭크 데이터 삭제됨 --></div>
+//                                         </div>
+//                                     </div>
+    
+//                                 </div>
+//                                 <div class="intoto">
+//                                     <div class="items">
+//                                         <ul>
+//                                             <li class="first">
+//                                                 <div>
+//                                                     <img class="raw-self-item-item1" src="" alt="">
+//                                                 </div>
+//                                             </li>
+//                                             <li class="first">
+//                                                 <div>
+//                                                     <img class="raw-self-item-item2" src="" alt="">
+//                                                 </div>
+//                                             </li>
+//                                             <li class="first">
+//                                                 <div>
+//                                                     <img class="raw-self-item-item3" src="" alt="">
+//                                                 </div>
+//                                             </li>
+//                                             <li class="first">
+//                                                 <div>
+//                                                     <img class="raw-self-item-item4" src="" alt="">
+//                                                 </div>
+//                                             </li>
+//                                             <li class="first">
+//                                                 <div>
+//                                                     <img class="raw-self-item-item5" src="" alt="">
+//                                                 </div>
+//                                             </li>
+//                                             <li class="first">
+//                                                 <div>
+//                                                     <img class="raw-self-item-item6" src="" alt="">
+//                                                 </div>
+//                                             </li>
+//                                         </ul>
+//                                         <div class="ward">
+//                                             <div>
+//                                                 <img class="raw-self-item-trinket" src="" alt="">
+//                                             </div>
+//                                         </div>
+//                                     </div>
+//                                     <div class="multi-kill raw-self-kda-multikill"></div>
+//                                 </div>
+//                             </div>
+//                             <div class="participants">
+//                                 <ul>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part1-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part1-summoner-name">Player1</div>
+//                                     </li>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part2-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part2-summoner-name">Player2</div>
+//                                     </li>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part3-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part3-summoner-name">Player3</div>
+//                                     </li>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part4-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part4-summoner-name">Player4</div>
+//                                     </li>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part5-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part5-summoner-name">Player5</div>
+//                                     </li>
+//                                 </ul>
+//                                 <ul>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part6-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part6-summoner-name">Player6</div>
+//                                     </li>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part7-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part7-summoner-name">Player7</div>
+//                                     </li>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part8-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part8-summoner-name">Player8</div>
+//                                     </li>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part9-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part9-summoner-name">Player9</div>
+//                                     </li>
+//                                     <li class="p-5">
+//                                         <div class="icon" style="position: relative;">
+//                                             <img class="raw-part10-champion-icon" src="" alt="">
+//                                         </div>
+//                                         <div class="name raw-part10-summoner-name">Player10</div>
+//                                     </li>
+//                                 </ul>
+//                                 <ul></ul>
+//                             </div>
+//         \t\t\t\t</div>
+//         \t\t\t</div>
+//         \t\t\t<div class="action">
+//                         <button class="detail2">
+//                             <img src="" alt="">
+//                         </button>
+//         \t\t\t</div>
+//         \t\t</div>
+//         \t\t<div class="list2_detail raw-expend-container">
+//                     <div class="list2_detail2">
+//                         <div class="detail2 summoner_info">소환사정보</div>
+//                         <div class="detail2 summoner_kda">KDA</div>
+//                         <div class="detail2 summoner_damage">딜량</div>
+//                         <div class="detail2 summoner_ward">와드</div>
+//                         <div class="detail2 summoner_cs">CS</div>
+//                         <div class="detail2_summoner_items">아이템 빌드</div>
+//                     </div>
+//         \t\t</div>
+//         \t</div>
+//         </li>
+//     )
+// }
+
+/**
+ * 펼친 상태의 참가자 리스트에 한명을 만든다
+ * @param {int} game_number 삽입할 태그의 위치 (게임의 순번, 1부터 시작)
+ * @param {int} part_number 참가자 번호 (1~10)
+ */
+function expendRecordExtender(game_number, part_number) {
+    $('.raw-record-container .raw-record-item:nth-child('+game_number+') .raw-expend-container').append(
+        $(
+        '<div class="list2_detail2 raw-expend-item">'+
+        '\t<div class="detail2 champ_icon">'+
+        '\t\t<div class="detail2 champ_icon_icon raw-part'+part_number+'-champion-icon">1.1</div>'+
+        '\t\t<div class="detail2 champ_icon_level raw-part'+part_number+'-champion-level">1.2</div>'+
+        '\t</div>'+
+        '\t<div class="detail2 spells">'+
+        '\t\t<div class="detail2 spells_1 raw-part'+part_number+'-spell-spell1">2.1</div>'+
+        '\t\t<div class="detail2 spells_2 raw-part'+part_number+'-spell-spell2">2.2</div>'+
+        '\t</div>'+
+        '\t<div class="detail2 runes">'+
+        '\t\t<div class="detail2 runes_1 raw-part'+part_number+'-rune-core-mainrune">3.1</div>'+
+        '\t\t<div class="detail2 runes_2 raw-part'+part_number+'-rune-runetype-sub">3.2</div>'+
+        '\t</div>'+
+        '\t<div class="detail2 name raw-part'+part_number+'-summoner-name">4</div>'+
+        '\t<div class="detail2 s_kda">'+
+        '\t\t<div class="detail2 k-d-a raw-part'+part_number+'-kda-data">5.3</div>'+
+        '\t\t<div class="detail2 kda raw-part'+part_number+'-kda-kda">5.6</div>'+
+        '\t</div>'+
+        '\t<div class="detail2 damage">'+
+        '\t\t<div class="detail2 dealing">'+
+        '\t\t\t<div class="detail2 d_num raw-part'+part_number+'-damage-dealt">d_1</div>'+
+        '\t\t\t<div class="detail2 deal_graph">d_2</div>'+
+        '\t\t</div>'+
+        '\t\t<div class="detail2 taken">'+
+        '\t\t\t<div class="detail2 t_num raw-part'+part_number+'-damage-taken">t_1</div>'+
+        '\t\t\t<div class="detail2 taken_graph">t_2</div>'+
+        '\t\t</div>'+
+        '\t</div>'+
+        '\t<div class="detail2 ward">'+
+        '\t\t<div class="detail2 warding raw-part'+part_number+'-vision-controlward">w-1</div>'+
+        '\t\t<div class="detail2 del_ward raw-part'+part_number+'-warddata">w-2</div>'+
+        '\t</div>'+
+        '\t<div class="detail2 s_cs">'+
+        '\t\t<div class="game_cs raw-part'+part_number+'-cs-total">8.3</div>'+
+        '\t\t<div class="cs_min raw-part'+part_number+'-cs-perminute">8.6</div>'+
+        '\t</div>'+
+        '\t<div class="detail2 items">'+
+        '\t\t<img raw-part'+part_number+'-item-item1 src="" alt="">'+
+        '\t\t<img raw-part'+part_number+'-item-item2 src="" alt="">'+
+        '\t\t<img raw-part'+part_number+'-item-item3 src="" alt="">'+
+        '\t\t<img raw-part'+part_number+'-item-item4 src="" alt="">'+
+        '\t\t<img raw-part'+part_number+'-item-item5 src="" alt="">'+
+        '\t\t<img raw-part'+part_number+'-item-item6 src="" alt="">'+
+        '\t\t<img raw-part'+part_number+'-item-trinket src="" alt="">'+
+        '\t</div>'+
+        '</div>'
+        )
+    )
+}
+
+$(function () {
+    getGameIds(getQueryString('summoner_name'))
 })
