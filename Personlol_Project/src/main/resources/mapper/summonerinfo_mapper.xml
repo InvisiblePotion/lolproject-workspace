@@ -22,7 +22,7 @@
     <select id="getGameidsOnRecentGame" resultType="String">
         SELECT game_id
         FROM SUMMONER_RECENT_GAME
-        WHERE summoner_name = #{summoner_name}
+        WHERE summoner_name = #{summoner_name} AND ROWNUM &lt;= 20
         ORDER BY GAME_ID
     </select>
 
