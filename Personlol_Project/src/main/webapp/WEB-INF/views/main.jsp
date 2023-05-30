@@ -76,7 +76,7 @@
 
 			<div id="m_logo">
 				<img
-					src="./resources/img/mainLogo.png"
+					src="./resources/img/mainlogo.png"
 					title="메인로고" id=m_log_img width="50%" >
 			</div id="m_logo">
 
@@ -425,6 +425,7 @@
           location.href = go_url;
         } else if (res == "-999") {
           alert("등록되지 않은 소환사입니다. 다시 입력해주세요.");
+          location.href = '/personlol/main';
         }
       }).fail(err => {
         console.log(err);

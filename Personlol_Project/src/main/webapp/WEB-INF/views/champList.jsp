@@ -28,7 +28,7 @@
 		<nav class="bener-container">
 			<div class="bener">
 				<a href="/personlol/main" class="imgfile"><img
-					src="../resources/img/logotesting.png" height="25px"></a>
+					src="../resources/img/navLogo.png" height="28px" width="100px"></a>
 				<div class="search-bar">
 
 					<input class="summoner_name_search" type="text"
@@ -75,13 +75,11 @@
 		<div class="col" id="col1">
 			<div id="btn-group1" class="btn-group" role="group"
 				aria-label="Basic outlined example">
-				<input type="button" class="btn btn-outline-primary 1" value="TOP">
-				<input type="button" class="btn btn-outline-primary 1"
-					value="JUNGLE"> <input type="button"
-					class="btn btn-outline-primary 1" value="MIDDLE"> <input
-					type="button" class="btn btn-outline-primary 1" value="BOTTOM">
-				<input type="button" class="btn btn-outline-primary 1"
-					value="UTILITY">
+				<input type="button" class="btn btn-outline-secondary 1" value="TOP">
+				<input type="button" class="btn btn-outline-secondary 1" value="JUNGLE"> 
+				<input type="button" class="btn btn-outline-secondary 1" value="MIDDLE"> 
+				<input type="button" class="btn btn-outline-secondary 1" value="BOTTOM">
+				<input type="button" class="btn btn-outline-secondary 1" value="UTILITY">
 			</div>
 		</div>
 	</div class="row">
@@ -137,22 +135,19 @@
 						<tr align="center">
 							
 							<td width="170px" style="font-size: 12px" >
-								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">챔피언</span>
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">챔피언</span>
 							</td>
-							<td width="100px" style="font-size: 12px" id="table_tier">
-								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">티어</span>
+							<td width="80px" style="font-size: 12px" id="table_win_rate">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">승률</span>
 							</td>
-							<td width="100px" style="font-size: 12px" id="table_win_rate">
-								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">승률</span>
+							<td width="80px" style="font-size: 12px" id="table_pick_rate">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">픽률</span>
 							</td>
-							<td width="100px" style="font-size: 12px" id="table_pick_rate">
-								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">픽률</span>
+							<td width="80px" style="font-size: 12px" id="table_ban_rate">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">밴률</span>
 							</td>
-							<td width="100px" style="font-size: 12px" id="table_ban_rate">
-								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">밴률</span>
-							</td>
-							<td width="120px" style="font-size: 12px" id="table_counter">
-								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">카운터</span>
+							<td width="150px" style="font-size: 12px" id="table_counter">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">상대하기 힘든 챔피언</span>
 							</td>
 						</tr>
 					</thead>
@@ -373,26 +368,23 @@
 						
 						lane_list_sort +=
 							'<tr>'+
-							'<td align="left" class="list_td" >' +
+							'<td align="left" class="list_td">' +
 							'<a href="/personlol/champion/detail?champ_id=' + list.champ_id +'&lane='+list.lane+'">'+
-							'<img width="	30" height="30" src="../resources/'+
+							'<img class="list_img" width="30" height="30" src="../resources/'+
 							list.champ_icon +'" alt="이미지">' +
 							'<span style="font-size: 12px; font-weight: bold;">' +
 							list.champ_name +
 							'</span> </td>' +
-							'<td align="center" width="100px">' +
-							0 +
-							'</td>' +
-							'<td align="center" width="100px">' +
+							'<td align="center" width="80px">' +
 							'<span style="color: #828282;">'+list.win_rate +'%</span>'+
 							'</td>' +
-							'<td align="center" width="100px">' +
+							'<td align="center" width="80px">' +
 							'<span style="color: #828282;">'+list.pick_rate +'%</span>'+
 							'</td>' +
-							'<td align="center" width="100px">' +
+							'<td align="center" width="80px">' +
 							'<span style="color: #828282;">'+list.ban_rate +'%</span>'+
 							'</td>' +
-							'<td align="center" class="counter_img" width="120">' +
+							'<td align="center" class="counter_img" width="150">' +
 							counter_icons.join('') +
 							'</td> </tr>';
 							
@@ -409,7 +401,7 @@
 				
 				
 			} //찍어주는 함수 끝
-
+		
 		//win 클릭시 함수
 		function handleTableWinRateClick() {
 			if (isSorting) return; // 정렬 중일 때는 추가 클릭 이벤트를 무시
@@ -438,10 +430,26 @@
 			}).fail(err => {
 				console.log(err);
 			});
+			
+			let clicked = $(this).data('clicked');
+		    if (clicked) {
+		        // 이미 클릭한 상태일 때
+		        $(this).css('background-color', 'initial');
+		        $(this).data('clicked', false);
+		    } else {
+		        // 처음 클릭하는 상태일 때
+		        $(this).css('background-color', '#828282');
+		        $('#table_pick_rate').css('background-color','initial');
+		        $('#table_ban_rate').css('background-color','initial');
+		        $(this).data('clicked', true);
+		    }
+		
 		}
 
 		//pick 클릭시 함수
 		function handleTablePickRateClick() {
+			
+			
 			if (isSorting) return; // 정렬 중일 때는 추가 클릭 이벤트를 무시
 
 			isSorting = true; // 정렬 중 플래그 설정
@@ -470,6 +478,20 @@
 			}).fail(err => {
 				console.log(err);
 			});
+			
+			let clicked = $(this).data('clicked');
+		    if (clicked) {
+		        // 이미 클릭한 상태일 때
+		        $(this).css('background-color', 'initial');
+		        $(this).data('clicked', false);
+		    } else {
+		        // 처음 클릭하는 상태일 때
+		        $(this).css('background-color', '#828282');
+		        $('#table_win_rate').css('background-color','initial');
+		        $('#table_ban_rate').css('background-color','initial');
+		        $(this).data('clicked', true);
+		    }
+			 
 		}
 
 		//ban 클릭시 함수
@@ -504,6 +526,20 @@
 			}).fail(err => {
 				console.log(err);
 			});
+			
+			let clicked = $(this).data('clicked');
+		    if (clicked) {
+		        // 이미 클릭한 상태일 때
+		        $(this).css('background-color', 'initial');
+		        $(this).data('clicked', false);
+		    } else {
+		        // 처음 클릭하는 상태일 때
+		        $(this).css('background-color', '#828282');
+		        $('#table_win_rate').css('background-color','initial');
+		        $('#table_pick_rate').css('background-color','initial');
+		        $(this).data('clicked', true);
+		    }
+			
 		}
 		
 		let isWinRateDescending = true; // 정렬 방식을 내림차순으로 설정

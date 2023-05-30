@@ -23,7 +23,7 @@
 			<nav class="bener-container">
 				<div class="bener">
 					<a href="/personlol/main" class="imgfile"><img
-						src="../resources/img/logotesting.png" height="25px"></a>
+						src="../resources/img/navLogo.png" height="28px" width="100px"></a>
 					<div class="search-bar">
 
 						<input class="summoner_name_search" type="text"

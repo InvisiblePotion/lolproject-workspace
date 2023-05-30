@@ -27,8 +27,7 @@
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/main" class="imgfile"><img
-						src="../resources/img/logotesting.png" height="25px"></a>
+					<a href="/personlol/main" class="imgfile"><img src="../resources/img/navLogo.png" height="28px" width="100px"></a>
 					<div class="search-bar">
 						<input class="summoner_name_search" type="text"
 							placeholdr="소환사명 검색....">
@@ -302,20 +301,19 @@
 			var myChart = new Chart(context1, {
 			    type: 'pie', //차트형태
 			    data: {//차트에 들어갈 데이터
-			      labels: ['승률'],
+			      labels: ['승률'+'('+info.win_rate+'%)'],
 			      datasets: [{//데이터
 			        label: 'win_rate',//차트제목
 			        fill: false,//line형태일때, 선 안쪽을 채우는지 
 			        data: [info.win_rate,100 - info.win_rate],//x축 라벨에 대응되는 데이터값
 			        backgroundColor: [ //색상
-			          /* 'rgba(255, 99, 132, 0.2)'
-			          'rgba(54, 162, 235, 0.2)', */
-			          'rgba(255, 206, 86, 0.2)'
+			          'rgba(255, 206, 86, 0.2)',
+			          'rgba(221, 221, 221,0.2)'
+			         
 			        ],
 			        borderColor: [//경계선 색상
-			          /* 'rgba(255, 99, 132, 1)'
-			          'rgba(54, 162, 235, 1)', */
-			          'rgba(255, 206, 86, 1)'
+			          'rgba(255, 206, 86, 1)',
+			          'rgba(221, 221, 221,1)'
 			        ],
 			        borderWidth: 1 //경계선 굵기
 			      }]
@@ -338,20 +336,18 @@
 				var myChart = new Chart(context2, {
 				    type: 'pie', //차트형태
 				    data: {//차트에 들어갈 데이터
-				      labels: ['픽률'],
+				      labels: ['픽률'+'('+info.pick_rate+'%)'],
 				      datasets: [{//데이터
 				        label: 'win_rate',//차트제목
 				        fill: false,//line형태일때, 선 안쪽을 채우는지 
 				        data: [info.pick_rate, (50-info.pick_rate)],//x축 라벨에 대응되는 데이터값
 				        backgroundColor: [ //색상
-				          'rgba(255, 99, 132, 0.2)'
-				          /* 'rgba(54, 162, 235, 0.2)',
-				          'rgba(255, 206, 86, 0.2)' */
+				          'rgba(255, 99, 132, 0.2)',
+				          'rgba(221, 221, 221,0.2)'
 				        ],
 				        borderColor: [//경계선 색상
-				          'rgba(255, 99, 132, 1)'
-				          /* 'rgba(54, 162, 235, 1)',
-				          'rgba(255, 206, 86, 1)' */
+				          'rgba(255, 99, 132, 1)',
+				          'rgba(221, 221, 221,1)'
 				        ],
 				        borderWidth: 1 //경계선 굵기
 				      }]
@@ -374,16 +370,18 @@
 					var myChart = new Chart(context3, {
 					    type: 'pie', //차트형태
 					    data: {//차트에 들어갈 데이터
-					      labels: ['밴률'],
+					      labels: ['밴률'+'('+info.ban_rate+'%)'],
 					      datasets: [{//데이터
 					        label: 'win_rate',//차트제목
 					        fill: false,//line형태일때, 선 안쪽을 채우는지 
 					        data: [info.ban_rate, (100-info.ban_rate)],//x축 라벨에 대응되는 데이터값
 					        backgroundColor: [ //색상
 					        	'rgba(153, 102, 255, 0.2)',
+						        'rgba(221, 221, 221,0.2)'
 					        ],
 					        borderColor: [//경계선 색상
 					        	'rgba(153, 102, 255, 1)',
+						        'rgba(221, 221, 221, 1)'
 					        ],
 					        borderWidth: 1 //경계선 굵기
 					      }]
@@ -1837,7 +1835,7 @@
 	            $.each(res, function (i,i_img) {
 	            	
 	            	const text = i_img.item_desc;
-	            	
+	            	let plaintext = i_img.item_plaintext ? i_img.item_plaintext : ''; //널일경우 ''으로 대체
 	            	
 	            	const formattedText = text
 	            	  .replace(/<\/?mainText>/g, '')
@@ -1857,7 +1855,7 @@
 	                  '" alt="이미지">'+
 	                  '<span class="item_name_span">'+i_img.item_name+'</span>'+
 	                  '<div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-	                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
+	                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+plaintext+
 	                  '</div></div></div>'
 	            })
 	            $('#item1').append(item1_img)
@@ -1878,6 +1876,8 @@
 	            	
 					const text = i_img.item_desc;
 					
+	            	let plaintext = i_img.item_plaintext ? i_img.item_plaintext : ''; //널일경우 ''으로 대체
+					
 					
 	            	const formattedText = text
 	            	  .replace(/<\/?mainText>/g, '')
@@ -1897,7 +1897,7 @@
 		                  '" alt="이미지"> '+
 		                  '<span class="item_name_span">'+i_img.item_name+'</span>'+
 		                  '<div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-		                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
+		                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+plaintext+
 		                  '</div></div></div>'
 	            })
 	            $('#item2').append(item2_img)
@@ -1916,7 +1916,7 @@
 	            $.each(res, function (i,i_img) {
 	            	
 					const text = i_img.item_desc;
-					
+					let plaintext = i_img.item_plaintext ? i_img.item_plaintext : ''; //널일경우 ''으로 대체
 					
 	            	const formattedText = text
 	            	  .replace(/<\/?mainText>/g, '')
@@ -1937,7 +1937,7 @@
 		                  '" alt="이미지">'+
 		                  '<span class="item_name_span">'+i_img.item_name+'</span>'+
 		                  '<div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
-		                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
+		                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+plaintext+
 		                  '</div></div></div>'
 	            })
 	            $('#item3').append(item3_img)
