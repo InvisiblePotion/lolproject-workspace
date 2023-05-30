@@ -97,9 +97,9 @@ function inputGameDataShort(game_data, game_number) {
     } else {
         $(prefix+'.raw-game-endtime').html(Math.floor(time_elapsed / 60000)+'분 전');
     }
-    game_data[0]['champion']['win'] == 1 ? $(prefix+'.raw-game-win').html('승리') : $(prefix+'.raw-game-win').html('패배') // ## 이거 되나...?
+    game_data[0]['champion']['win'] == 1 ? $(prefix+'.raw-game-win').html('승리') : $(prefix+'.raw-game-win').html('패배')
     $(prefix+'.raw-game-duration').html(duration_min+'분 '+duration_sec+'초');
-    $(prefix+'.raw-self-champion-icon')[0].src = '../resources/dd/img/champion/icon/Ahri.png'; // ### 챔피언 아이콘 DB에서 가져와야 함!
+    $(prefix+'.raw-self-champion-icon')[0].src = '../resources/dd/img/champion/icon/'+game_data[self_number]['champion']['championId']+'.png';
     $(prefix+'.raw-self-champion-level').html(game_data[self_number]['champion']['champLevel']);
     $(prefix+'.raw-self-spell-spell1')[0].src = '../resources/dd/img/summonerspell/'+game_data[self_number]['spell']['summoner1Id']+'.png';
     $(prefix+'.raw-self-spell-spell2')[0].src = '../resources/dd/img/summonerspell/'+game_data[self_number]['spell']['summoner2Id']+'.png';
@@ -139,7 +139,7 @@ function inputGameDataShort(game_data, game_number) {
             break;
     }
     for (let idx = 0; idx < 10; idx++) {
-        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-champion-icon')[0].src = '../resources/dd/img/champion/icon/Ahri.png'; // ### 챔피언 아이콘 DB에서 가져와야 함!
+        $(prefix+'.raw-part'+(parseInt(idx)+1)+'-champion-icon')[0].src = '../resources/dd/img/champion/icon/'+game_data[idx]['champion']['championId']+'.png';
         $(prefix+'.raw-part'+(parseInt(idx)+1)+'-summoner-name').html(game_data[idx]['participant_name']);
     }
 }
