@@ -9,14 +9,14 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/header.css">
-
-<!--css 파일명 수정해야함-->
-
 
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/detail.css">
@@ -73,22 +73,34 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col" id="champ_img">챔피언 사진</div>
-
-			<div class="col">
-				<div class="row" id="champ_name"></div>
-				<div class="row skillimg">
-					<div class="col" id="skill_img">스킬사진</div>
+			<div class="col" >
+				<div class="row">
+					<div class="col" id="champ_img"></div>
+					<div class="col" >
+						<div class="row"><span class="skill_info_span">스킬 정보</span></div>
+						<div class="row"id="champ_skill"></div>
+					</div>
 				</div>
-
 			</div>
 		</div>
 
 
 		<div class="row">
-			<div class="col" id="win">내용(승률)</div>
-			<div class="col" id="pick">내용(픽률)</div>
-			<div class="col" id="ban">내용(밴율)</div>
+			<div class="col" id="win">
+				<div >
+					<canvas id="winChart" style="width: 250px; height: 130px;"></canvas>
+				</div>
+			</div>
+			<div class="col" id="pick">
+				<div >
+					<canvas id="pickChart" style="width: 250px; height: 130px;"></canvas>
+				</div>
+			</div>
+			<div class="col" id="ban">
+				<div >
+					<canvas id="banChart" style="width: 250px; height: 130px;"></canvas>
+				</div>
+			</div>
 			<div class="col" id="spell">
 				<span class="spell_span">소환사 주문</span>
 				<div class="row" id="spell1"></div>
@@ -126,16 +138,18 @@
 		<div class="row"> &nbsp <span class="sub_title">추천스킬빌드</span></div>
 		<div class="row">
 			<div class="col">
-				<div class="row">스킬사진</div>
+				<div class="row"><span class="match_span">스킬사진</span></div>
 				<div class="row" id="skill_tree1"></div>
-				<div class="row">&nbsp</div>
+				
 				<div class="row" id="skill_tree2"></div>
-				<div class="row">&nbsp</div>
+				
 				<div class="row" id="skill_tree3"></div>
 			</div>
 			<div class="col">
-				<div class="row" id="sk_count">1</div>
-				<div class="row" id="sk_win">2</div>
+				<div class="row" style="width: 350px; height: 250px;">
+					<canvas id="rateChart" style="width: 350px; height: 250px;"></canvas>
+				</div>
+				
 			</div>
 			<div class="col">
 				<div class="row" > <span class="match_span">상대하기 쉬운 챔피언</span> </div>
@@ -164,9 +178,9 @@
 			<div class="col"><span class="item_boots_head">코어 아이템</span></div>
 			<div class="col"><span class="item_boots_head">코어 아이템</span></div>
 			<div class="col"><span class="item_boots_head">코어 아이템</span></div>
-			<div class="col"><span class="item_boots_head">픽률</span></div>
-			<div class="col"><span class="item_boots_head">게임 수</span></div>
-			<div class="col"><span class="item_boots_head">승률</span></div>
+			<div class="col" style="text-align: center;"><span class="item_boots_head">픽률</span></div>
+			<div class="col" style="text-align: center;"><span class="item_boots_head">게임 수</span></div>
+			<div class="col" style="text-align: center;"><span class="item_boots_head">승률</span></div>
 		</div>
 
 		<div class="row">
@@ -283,13 +297,115 @@
 		url:'/personlol/champion/info',
 	}).done(res => {
 		$.each(res, function (i, info) {
-			$('#champ_name').html(info.champ_name)
-			$('#win').html("승률:"+'<br>'+info.win_rate+'%')
-			$('#pick').html("픽률:"+'<br>'+info.pick_rate+'%')
-			$('#ban').html("밴률:"+'<br>'+info.ban_rate+'%')
+			//승률 파이 그래프
+			let context1 = $('#winChart')[0].getContext('2d');
+			var myChart = new Chart(context1, {
+			    type: 'pie', //차트형태
+			    data: {//차트에 들어갈 데이터
+			      labels: ['승률'],
+			      datasets: [{//데이터
+			        label: 'win_rate',//차트제목
+			        fill: false,//line형태일때, 선 안쪽을 채우는지 
+			        data: [info.win_rate,100 - info.win_rate],//x축 라벨에 대응되는 데이터값
+			        backgroundColor: [ //색상
+			          /* 'rgba(255, 99, 132, 0.2)'
+			          'rgba(54, 162, 235, 0.2)', */
+			          'rgba(255, 206, 86, 0.2)'
+			        ],
+			        borderColor: [//경계선 색상
+			          /* 'rgba(255, 99, 132, 1)'
+			          'rgba(54, 162, 235, 1)', */
+			          'rgba(255, 206, 86, 1)'
+			        ],
+			        borderWidth: 1 //경계선 굵기
+			      }]
+			    },
+			    options: {
+			      scales: {
+			    	  x:{
+			    		  display: false //x축 숨기기
+			    	  },
+			    	  y:{
+			    		  display:false //y축 숨기기
+			    	  }
+			      },
+			   
+			    }
+			  });//승률 파이그래프
+			  
+			  //픽률 파이그래프
+			  let context2 = $('#pickChart')[0].getContext('2d');
+				var myChart = new Chart(context2, {
+				    type: 'pie', //차트형태
+				    data: {//차트에 들어갈 데이터
+				      labels: ['픽률'],
+				      datasets: [{//데이터
+				        label: 'win_rate',//차트제목
+				        fill: false,//line형태일때, 선 안쪽을 채우는지 
+				        data: [info.pick_rate, (50-info.pick_rate)],//x축 라벨에 대응되는 데이터값
+				        backgroundColor: [ //색상
+				          'rgba(255, 99, 132, 0.2)'
+				          /* 'rgba(54, 162, 235, 0.2)',
+				          'rgba(255, 206, 86, 0.2)' */
+				        ],
+				        borderColor: [//경계선 색상
+				          'rgba(255, 99, 132, 1)'
+				          /* 'rgba(54, 162, 235, 1)',
+				          'rgba(255, 206, 86, 1)' */
+				        ],
+				        borderWidth: 1 //경계선 굵기
+				      }]
+				    },
+				    options: {
+				      scales: {
+				    	  x:{
+				    		  display: false //x축 숨기기
+				    	  },
+				    	  y:{
+				    		  display:false //y축 숨기기
+				    	  }
+				      },
+				   
+				    }
+				  });//픽률 파이그래프
+				
+				//밴률 파이그래프
+				  let context3 = $('#banChart')[0].getContext('2d');
+					var myChart = new Chart(context3, {
+					    type: 'pie', //차트형태
+					    data: {//차트에 들어갈 데이터
+					      labels: ['밴률'],
+					      datasets: [{//데이터
+					        label: 'win_rate',//차트제목
+					        fill: false,//line형태일때, 선 안쪽을 채우는지 
+					        data: [info.ban_rate, (100-info.ban_rate)],//x축 라벨에 대응되는 데이터값
+					        backgroundColor: [ //색상
+					        	'rgba(153, 102, 255, 0.2)',
+					        ],
+					        borderColor: [//경계선 색상
+					        	'rgba(153, 102, 255, 1)',
+					        ],
+					        borderWidth: 1 //경계선 굵기
+					      }]
+					    },
+					    options: {
+					      scales: {
+					    	  x:{
+					    		  display: false //x축 숨기기
+					    	  },
+					    	  y:{
+					    		  display:false //y축 숨기기
+					    	  }
+					      },
+					   
+					    }
+					  });//밴률 파이그래프
+			/* $('#champ_img').html(info.champ_name) */
 			icon_img = '<img class="icon_img" width="70" height="70" src="../resources/'+info.champ_icon +'" alt="이미지">'
+			champ_name = '<span class="title_champ_name" style="margin-left: 10px;">'+info.champ_name+'</span>'
 		})
-		$('#champ_img').html(icon_img)
+		$('#champ_img').append(icon_img)
+		$('#champ_img').append(champ_name)
 	}).fail(err => {
 		console.log(err)
 	})
@@ -452,7 +568,7 @@
 				'스킬 마나소모량: '+cost+'</div><div>'+'스킬 범위: '+range+'</div>'+
 				'<div>'+skill.skill_desc+'</div><div>'+tooltip+'</div></div></div>';
 		})
-		$('#skill_img').html(skill_img)
+		$('#champ_skill').append(skill_img)
 		
 		
 	}).fail(err => {
@@ -1528,101 +1644,116 @@
 				
 			}).done(res => {
 				
-				for (i=0; i<6;i++) {				
+				for (i=0; i<5;i++) {				
 				if (arr[i] == 1) {
 					s_img =	'<div class="skill-container">'+ 
 							'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
 							'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 							res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
 							'스킬 마나소모량: '+res[1].skill_cost+'</div><div>'+'스킬 범위: '+res[1].skill_range+'</div>'+'<div>'+res[1].skill_desc+
-							'</div><div>'+res[1].skill_tooltip+'</div></div></div>';
+							'</div><div>'+res[1].skill_tooltip+'</div></div></div>'+
+							'<img width="20" height="40" src="../resources/img/arrow.png">'
+							
+							
 				}else if (arr[i] == 2) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[2].skill_cost+'</div><div>'+'스킬 범위: '+res[2].skill_range+'</div>'+'<div>'+res[2].skill_desc+
-					'</div><div>'+res[2].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[2].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 3) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[3].skill_cost+'</div><div>'+'스킬 범위: '+res[3].skill_range+'</div>'+'<div>'+res[3].skill_desc+
-					'</div><div>'+res[3].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[3].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[4].skill_cost+'</div><div>'+'스킬 범위: '+res[4].skill_range+'</div>'+'<div>'+res[4].skill_desc+
-					'</div><div>'+res[4].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[4].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}    
 				$('#skill_tree1').append(s_img)
 			}
 			
-			for (i=6; i<12;i++) {				
+			for (i=5; i<10;i++) {				
 				if (arr[i] == 1) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[1].skill_cost+'</div><div>'+'스킬 범위: '+res[1].skill_range+'</div>'+'<div>'+res[1].skill_desc+
-					'</div><div>'+res[1].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[1].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
+					
 				}else if (arr[i] == 2) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[2].skill_cost+'</div><div>'+'스킬 범위: '+res[2].skill_range+'</div>'+'<div>'+res[2].skill_desc+
-					'</div><div>'+res[2].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[2].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 3) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[3].skill_cost+'</div><div>'+'스킬 범위: '+res[3].skill_range+'</div>'+'<div>'+res[3].skill_desc+
-					'</div><div>'+res[3].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[3].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[4].skill_cost+'</div><div>'+'스킬 범위: '+res[4].skill_range+'</div>'+'<div>'+res[4].skill_desc+
-					'</div><div>'+res[4].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[4].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}    
 				$('#skill_tree2').append(s_img)
 			}
 			
-			for (i=12; i<15;i++) {				
+			for (i=10; i<15;i++) {				
 				if (arr[i] == 1) {
 					s_img =  '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[1].skill_cost+'</div><div>'+'스킬 범위: '+res[1].skill_range+'</div>'+'<div>'+res[1].skill_desc+
-					'</div><div>'+res[1].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[1].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 2) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[2].skill_cost+'</div><div>'+'스킬 범위: '+res[2].skill_range+'</div>'+'<div>'+res[2].skill_desc+
-					'</div><div>'+res[2].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[2].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 3) {
 					s_img = s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[3].skill_cost+'</div><div>'+'스킬 범위: '+res[3].skill_range+'</div>'+'<div>'+res[3].skill_desc+
-					'</div><div>'+res[3].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[3].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
 					'스킬 마나소모량: '+res[4].skill_cost+'</div><div>'+'스킬 범위: '+res[4].skill_range+'</div>'+'<div>'+res[4].skill_desc+
-					'</div><div>'+res[4].skill_tooltip+'</div></div></div>';
+					'</div><div>'+res[4].skill_tooltip+'</div></div></div>'+
+					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}    
 				$('#skill_tree3').append(s_img)
 			}
@@ -1633,10 +1764,39 @@
 			})
 			
 			
+			let context = $('#rateChart')[0].getContext('2d');
+			var myChart = new Chart(context, {
+			    type: 'bar', //차트형태
+			    data: {//차트에 들어갈 데이터
+			      labels: ['픽률', '게임수', '승률'],
+			      datasets: [{//데이터
+			        label: 'skill_tree',//차트제목
+			        fill: false,//line형태일때, 선 안쪽을 채우는지 
+			        data: [res[0].pick_rate,res[0].game_count,res[0].win_rate],//x축 라벨에 대응되는 데이터값
+			        backgroundColor: [ //색상
+			          'rgba(255, 99, 132, 0.2)',
+			          'rgba(54, 162, 235, 0.2)',
+			          'rgba(255, 206, 86, 0.2)',
+			        ],
+			        borderColor: [//경계선 색상
+			          'rgba(255, 99, 132, 1)',
+			          'rgba(54, 162, 235, 1)',
+			          'rgba(255, 206, 86, 1)',
+			        ],
+			        borderWidth: 1 //경계선 굵기
+			      }]
+			    },
+			    options: {
+			      scales: {
+			        yAxes: [{
+			          ticks: {
+			            beginAtZero: true
+			          }
+			        }]
+			      }
+			    }
+			  });
 			
-			
-			$('#sk_count').html("픽률: "+res[0].pick_rate +' , 게임수: ' +res[0].game_count )
-			$('#sk_win').html("승률: " + res[0].win_rate)
 		
 		
 	}).fail(err => {
@@ -1651,16 +1811,14 @@
 	      data:{champ_id:champ_id,champ_lane:champ_lane},
 	      url:'/personlol/champion/item_build'
 	   }).done(res => {
-		   console.log(res)
-	      
 	      Pick_List =''
 	      Tot_List =''
 	      Win_List =''
 	      
 	      $.each(res, function (i,item) {
-	         $('#i_Pick').append('<div height="40px"><p style="font-size: 25px;">'+item.pick_rate+'%'+'</p></div>');
-	         $('#i_Totgame').append('<div height="40px"><p style="font-size: 25px;">'+item.game_count+' 게임'+'</p></div>');
-	         $('#i_Winrate').append('<div height="40px"><p style="font-size: 25px;" class="win_rate_span" >'+item.win_rate+'%'+'</p></div>');
+	         $('#i_Pick').append('<div height="40px" style="margin-top: 5px;"><p style="text-align: center; font-size: 25px;">'+item.pick_rate+'%'+'</p></div>');
+	         $('#i_Totgame').append('<div height="40px" style="margin-top: 5px;"><p style="text-align: center; font-size: 25px;">'+item.game_count+' 게임'+'</p></div>');
+	         $('#i_Winrate').append('<div height="40px" style="margin-top: 5px;"><p style="text-align: center; font-size: 25px;" class="win_rate_span" >'+item.win_rate+'%'+'</p></div>');
 	         
 	         var item_1 = item.item1
 	         var item_2 = item.item2
@@ -1675,8 +1833,11 @@
 	            console.log(res)
 	            
 	            let item1_img=''
+	            short_item_name=''
 	            $.each(res, function (i,i_img) {
+	            	
 	            	const text = i_img.item_desc;
+	            	
 	            	
 	            	const formattedText = text
 	            	  .replace(/<\/?mainText>/g, '')
@@ -1694,6 +1855,7 @@
 	              	item1_img +='<div class="f_item">'+
 	                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
 	                  '" alt="이미지">'+
+	                  '<span class="item_name_span">'+i_img.item_name+'</span>'+
 	                  '<div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 	                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
 	                  '</div></div></div>'
@@ -1711,10 +1873,12 @@
 	         }).done(res => {
 	            console.log(res)
 	            let item2_img=''
+	            let short_item_name=''
 	            $.each(res, function (i,i_img) {
 	            	
 					const text = i_img.item_desc;
-	            	
+					
+					
 	            	const formattedText = text
 	            	  .replace(/<\/?mainText>/g, '')
 	            	  .replace(/<\/?stats>/g, '')
@@ -1730,7 +1894,9 @@
 	               item2_img +=
 	            	   '<div class="f_item">'+
 		                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
-		                  '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		                  '" alt="이미지"> '+
+		                  '<span class="item_name_span">'+i_img.item_name+'</span>'+
+		                  '<div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 		                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
 		                  '</div></div></div>'
 	            })
@@ -1750,7 +1916,8 @@
 	            $.each(res, function (i,i_img) {
 	            	
 					const text = i_img.item_desc;
-	            	
+					
+					
 	            	const formattedText = text
 	            	  .replace(/<\/?mainText>/g, '')
 	            	  .replace(/<\/?stats>/g, '')
@@ -1761,13 +1928,15 @@
 	            	  .replace(/<\/?rarityLegendary>/g, '')
 	            	  .replace(/<br>/g, '<br>');
 				
-	            	
+	        
 	      
 	            	
 	               item3_img +=
 	            	   '<div class="f_item">'+
 		                  '<img class="item_img" width="40" height="40" src="../resources/'+i_img.item_icon+
-		                  '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+		                  '" alt="이미지">'+
+		                  '<span class="item_name_span">'+i_img.item_name+'</span>'+
+		                  '<div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 		                  i_img.item_name+'</span><div class="item_longdesc">'+formattedText+'</div><div>'+i_img.item_plaintext
 		                  '</div></div></div>'
 	            })
@@ -1790,9 +1959,9 @@
 	   }).done(res => {
 		   
 		   //첫번째 아이템빌드
-		   const sBuild1 = res[0].start_item
-		   const result1 = sBuild1.replace(/\[|\]/g, '');
-		   const arr1 = result1.split(", ")
+			const sBuild1 = res[0].start_item
+			const result1 = sBuild1.replace(/\[|\]/g, '');
+			const arr1 = result1.split(", ")
 			
 	
 		   //다른 아이템빌드
@@ -1806,6 +1975,24 @@
 		   
 		   let f_item2 = arr2[0]
 		   let s_item2 = arr2.length > 1 ? arr2[1] : ""; // 조건문으로 arr의 길이를 확인하여 조건에 따라 s_item 설정
+		   
+		   console.log("####################")
+		   console.log(f_item2)
+		   console.log(s_item2)
+		   console.log("####################")
+		   if (champ_lane === 'UTILITY') {
+			 
+			   //다른 아이템빌드
+			   const sBuild3 = res[1].start_item
+			   const result3 = sBuild3.replace(/\[|\]/g, '');
+			   const arr3 = result3.split(", ")
+			   
+			    f_item1 = arr1[3] // 서폿에 해당하는 아이템 설정
+			    s_item1 = arr1.length > 1 ? arr1[1] : "";
+			    
+			    f_item2 = arr3[2]
+			    s_item2 = arr3.length > 1 ? arr1[1] : "";
+			  }
 		   
 		   //첫번째 아이템 픽,승률
 		   let f_win_item = res[0].win_rate
@@ -1832,75 +2019,100 @@
 		   win_info2 = '<div class="win_info"><span class="win_rate_span">'+s_win_item+'%'+'</span></div>';
 		   async function fetchItemDetails() {
 			   try {
-			     // 첫 번째 템 빌드
-			     const f_item1_res = await $.ajax({
-			       method: 'get',
-			       url: "/personlol/champion/start-item1",
-			       data: { item: f_item1 }
-			     });
+				   // 첫 번째 템 빌드
+				   const f_item1_res = await $.ajax({
+				     method: 'get',
+				     url: "/personlol/champion/start-item1",
+				     data: { item: f_item1 }
+				   });
 
-			     const f_iteml_img = '<div class="f_item">' +
-			       '<img class="item_img" width="40" height="40" src="../resources/' + f_item1_res[0].item_icon +
-			       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
-			       f_item1_res[0].item_name + '</span><div class="item_longdesc">' + f_item1_res[0].item_desc + '</div><div>' + f_item1_res[0].item_plaintext +
-			       '</div></div></div>';
+				   const f_iteml_img = '<div class="f_item">' +
+				     '<img class="item_img" width="40" height="40" src="../resources/' + f_item1_res[0].item_icon +
+				     '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+				     f_item1_res[0].item_name + '</span><div class="item_longdesc">' + f_item1_res[0].item_desc + '</div><div>' + f_item1_res[0].item_plaintext +
+				     '</div></div></div>';
 
-			     $('#start_item1').append(f_iteml_img);
+				   $('#start_item1').append(f_iteml_img);
+			
+				 } catch (err) {
+				   console.log("첫 번째 템 빌드 에러가 발생했습니다.");
+				   console.log(err);
+				 }
 
-			     // 두 번째 템 빌드
-			     const s_item1_res = await $.ajax({
-			       method: 'get',
-			       url: "/personlol/champion/start-item2",
-			       data: { item: s_item1 }
-			     });
+				 try {
+				   // 두 번째 템 빌드
+				   const s_item1_res = await $.ajax({
+				     method: 'get',
+				     url: "/personlol/champion/start-item2",
+				     data: { item: s_item1 }
+				   });
 
-			     const s_iteml_img = '<div class="f_item">' +
-			       '<img class="item_img" width="40" height="40" src="../resources/' + s_item1_res[0].item_icon +
-			       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
-			       s_item1_res[0].item_name + '</span><div class="item_longdesc">' + s_item1_res[0].item_desc + '</div><div>' + s_item1_res[0].item_plaintext +
-			       '</div></div></div>';
+				   if (s_item1_res.length > 0) {
+				     const s_iteml_img = '<div class="f_item">' +
+				       '<img class="item_img" width="40" height="40" src="../resources/' + s_item1_res[0].item_icon +
+				       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+				       s_item1_res[0].item_name + '</span><div class="item_longdesc">' + s_item1_res[0].item_desc + '</div><div>' + s_item1_res[0].item_plaintext +
+				       '</div></div></div>';
 
-			     $('#start_item1').append(s_iteml_img);
-			     $('#start_item1').append(rate_info);
-			     $('#start_item1').append(win_info);
+				     $('#start_item1').append(s_iteml_img);
+				     $('#start_item1').append(rate_info);
+					 $('#start_item1').append(win_info);
+				   }
+				 } catch (err) {
+				   console.log("두 번째 템 빌드 에러가 발생했습니다.");
+				   console.log(err);
+				   $('#start_item1').append('<div style="width: 45px; height: 48px;"><img width="40" heigh="40" style="display: none;" src="../resources/dd/img/item/7050.png"></div>')
+				   $('#start_item1').append(rate_info);
+				   $('#start_item1').append(win_info);
+				 }
 
-			     // 세 번째 템 빌드
-			     const f_item2_res = await $.ajax({
-			       method: 'get',
-			       url: "/personlol/champion/start-item1",
-			       data: { item: f_item2 }
-			     });
+				 try {
+				   // 세 번째 템 빌드
+				   const f_item2_res = await $.ajax({
+				     method: 'get',
+				     url: "/personlol/champion/start-item1",
+				     data: { item: f_item2 }
+				   });
 
-			     const f_item2l_img = '<div class="f_item">' +
-			       '<img class="item_img" width="40" height="40" src="../resources/' + f_item2_res[0].item_icon +
-			       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
-			       f_item2_res[0].item_name + '</span><div class="item_longdesc">' + f_item2_res[0].item_desc + '</div><div>' + f_item2_res[0].item_plaintext +
-			       '</div></div></div>';
+				   const f_item2l_img = '<div class="f_item">' +
+				     '<img class="item_img" width="40" height="40" src="../resources/' + f_item2_res[0].item_icon +
+				     '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+				     f_item2_res[0].item_name + '</span><div class="item_longdesc">' + f_item2_res[0].item_desc + '</div><div>' + f_item2_res[0].item_plaintext +
+				     '</div></div></div>';
 
-			     $('#start_item2').append(f_item2l_img);
+				   $('#start_item2').append(f_item2l_img);
+				   
+				 } catch (err) {
+				   console.log("세 번째 템 빌드 에러가 발생했습니다.");
+				   console.log(err);
+				 }
 
-			     // 네 번째 템 빌드
-			     const s_item2_res = await $.ajax({
-			       method: 'get',
-			       url: "/personlol/champion/start-item2",
-			       data: { item: s_item2 }
-			     });
+				 try {
+				   // 네 번째 템 빌드
+				   const s_item2_res = await $.ajax({
+				     method: 'get',
+				     url: "/personlol/champion/start-item2",
+				     data: { item: s_item2 }
+				   });
 
-			     const s_item2l_img = '<div class="f_item">' +
-			       '<img class="item_img" width="40" height="40" src="../resources/' + s_item2_res[0].item_icon +
-			       '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
-			       s_item2_res[0].item_name + '</span><div class="item_longdesc">' + s_item2_res[0].item_desc + '</div><div>' + s_item2_res[0].item_plaintext +
-			       '</div></div></div>';
+				   const s_item2l_img = '<div class="f_item">' +
+				     '<img class="item_img" width="40" height="40" src="../resources/' + s_item2_res[0].item_icon +
+				     '" alt="이미지"> <div class="item_tooltip"><span style="font-size: 14px; font-weight: bold; color: yellow;">' +
+				     s_item2_res[0].item_name + '</span><div class="item_longdesc">' + s_item2_res[0].item_desc + '</div><div>' + s_item2_res[0].item_plaintext +
+				     '</div></div></div>';
 
-			     $('#start_item2').append(s_item2l_img);
-			     $('#start_item2').append(rate_info2);
-			     $('#start_item2').append(win_info2);
-
-			   } catch (err) {
-			     console.log("에러가 발생했습니다.");
-			     console.log(err);
-			   }
-			 }
+				   $('#start_item2').append(s_item2l_img);
+				   $('#start_item2').append(rate_info2);
+				   $('#start_item2').append(win_info2);
+				 } catch (err) {
+				   console.log("네 번째 템 빌드 에러가 발생했습니다.");
+				   console.log(err);
+				   $('#start_item2').append('<div style="width: 45px; height: 48px;"><img width="40" heigh="40" style="display: none;" src="../resources/dd/img/item/7050.png"></div>')
+				   
+				   $('#start_item2').append(rate_info2);
+				   $('#start_item2').append(win_info2);
+				 }
+		   }
 
 			 fetchItemDetails();
 				   

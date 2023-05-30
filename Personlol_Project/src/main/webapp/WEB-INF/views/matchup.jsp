@@ -8,6 +8,9 @@
 <title>matchup</title>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
@@ -83,9 +86,21 @@
     </div>
     
    <div class="row">
-      <div class="col" id="win">내용(승률)</div>
-      <div class="col" id="pick">내용(픽률)</div>
-      <div class="col" id="ban">내용(밴율)</div>
+      <div class="col" id="win">
+      	<div >
+			<canvas id="winChart" style="width: 250px; height: 130px;"></canvas>
+		</div>
+      </div>
+      <div class="col" id="pick">
+      	<div >
+			<canvas id="pickChart" style="width: 250px; height: 130px;"></canvas>
+		</div>
+      </div>
+      <div class="col" id="ban">
+      	<div >
+			<canvas id="banChart" style="width: 250px; height: 130px;"></canvas>
+		</div>
+      </div>
       <div class="col" id="spell">
       	<span class="spell_span">소환사 주문</span>
       	<div class="row" id="spell1"></div>
@@ -218,10 +233,111 @@ $(document).ready(function() {
 		url:'/personlol/champion/info',
 	}).done(res => {
 		$.each(res, function (i, info) {
+			//승률 파이 그래프
+			let context1 = $('#winChart')[0].getContext('2d');
+			var myChart = new Chart(context1, {
+			    type: 'pie', //차트형태
+			    data: {//차트에 들어갈 데이터
+			      labels: ['승률'],
+			      datasets: [{//데이터
+			        label: 'win_rate',//차트제목
+			        fill: false,//line형태일때, 선 안쪽을 채우는지 
+			        data: [info.win_rate,100 - info.win_rate],//x축 라벨에 대응되는 데이터값
+			        backgroundColor: [ //색상
+			          /* 'rgba(255, 99, 132, 0.2)'
+			          'rgba(54, 162, 235, 0.2)', */
+			          'rgba(255, 206, 86, 0.2)'
+			        ],
+			        borderColor: [//경계선 색상
+			          /* 'rgba(255, 99, 132, 1)'
+			          'rgba(54, 162, 235, 1)', */
+			          'rgba(255, 206, 86, 1)'
+			        ],
+			        borderWidth: 1 //경계선 굵기
+			      }]
+			    },
+			    options: {
+			      scales: {
+			    	  x:{
+			    		  display: false //x축 숨기기
+			    	  },
+			    	  y:{
+			    		  display:false //y축 숨기기
+			    	  }
+			      },
+			   
+			    }
+			  });//승률 파이그래프
+			  
+			  //픽률 파이그래프
+			  let context2 = $('#pickChart')[0].getContext('2d');
+				var myChart = new Chart(context2, {
+				    type: 'pie', //차트형태
+				    data: {//차트에 들어갈 데이터
+				      labels: ['픽률'],
+				      datasets: [{//데이터
+				        label: 'win_rate',//차트제목
+				        fill: false,//line형태일때, 선 안쪽을 채우는지 
+				        data: [info.pick_rate, (50-info.pick_rate)],//x축 라벨에 대응되는 데이터값
+				        backgroundColor: [ //색상
+				          'rgba(255, 99, 132, 0.2)'
+				          /* 'rgba(54, 162, 235, 0.2)',
+				          'rgba(255, 206, 86, 0.2)' */
+				        ],
+				        borderColor: [//경계선 색상
+				          'rgba(255, 99, 132, 1)'
+				          /* 'rgba(54, 162, 235, 1)',
+				          'rgba(255, 206, 86, 1)' */
+				        ],
+				        borderWidth: 1 //경계선 굵기
+				      }]
+				    },
+				    options: {
+				      scales: {
+				    	  x:{
+				    		  display: false //x축 숨기기
+				    	  },
+				    	  y:{
+				    		  display:false //y축 숨기기
+				    	  }
+				      },
+				   
+				    }
+				  });//픽률 파이그래프
+				
+				//밴률 파이그래프
+				  let context3 = $('#banChart')[0].getContext('2d');
+					var myChart = new Chart(context3, {
+					    type: 'pie', //차트형태
+					    data: {//차트에 들어갈 데이터
+					      labels: ['밴률'],
+					      datasets: [{//데이터
+					        label: 'win_rate',//차트제목
+					        fill: false,//line형태일때, 선 안쪽을 채우는지 
+					        data: [info.ban_rate, (100-info.ban_rate)],//x축 라벨에 대응되는 데이터값
+					        backgroundColor: [ //색상
+					        	'rgba(153, 102, 255, 0.2)'
+					        ],
+					        borderColor: [//경계선 색상
+					        	'rgba(153, 102, 255, 1)'
+					        ],
+					        borderWidth: 1 //경계선 굵기
+					      }]
+					    },
+					    options: {
+					      scales: {
+					    	  x:{
+					    		  display: false //x축 숨기기
+					    	  },
+					    	  y:{
+					    		  display:false //y축 숨기기
+					    	  }
+					      },
+					   
+					    }
+					  });//밴률 파이그래프
 			$('#champ_name').html(info.champ_name)
-			$('#win').html("승률:"+'<br>'+info.win_rate+'%')
-			$('#pick').html("픽률:"+'<br>'+info.pick_rate+'%')
-			$('#ban').html("밴률:"+'<br>'+info.ban_rate+'%')
+			
 			icon_img = '<img class="icon_img" width="70" height="70" src="../resources/'+info.champ_icon +'" alt="이미지">'
 		})
 		$('#champ_img').html(icon_img)

@@ -34,11 +34,12 @@ body{
 	cursor: pointer;
 }
 
-/* ½ºÅ³ÀÌ¹ÌÁö È£¹ö½Ã ÅøÆÁ */
+
 .skill-container {
+	width:45px;
 	position: relative;
 	display: inline-block;
-	margin-right: 10px;
+	margin-left: 5px;
 }
 
 .tooltip {
@@ -50,7 +51,7 @@ body{
 	padding: 5px;
 	position: absolute;
 	z-index: 1;
-	/* ²Ù¹Ì±â¿ë */
+	/* ï¿½Ù¹Ì±ï¿½ï¿½ */
 	top: 125%;
 	left: 50%;
 	margin-left: -60px;
@@ -64,11 +65,12 @@ body{
 	opacity: 1;
 }
 
-/* ·éÀÌ¹ÌÁö È£¹ö½Ã ÅøÆÁ */
+/* ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .rune_img {
 	position: relative;
 	display: inline-block;
 	padding: 0px;
+	margin-bottom: 10px;
 }
 
 .runetype_tooltip {
@@ -115,13 +117,13 @@ body{
 	opacity: 1;
 }
 
-/* ·é ±ä¼³¸í cssºÎºÐ */
+/* ï¿½ï¿½ ï¿½ä¼³ï¿½ï¿½ cssï¿½Îºï¿½ */
 .rune_longdesc {
 	font-size: 13px;
 	font-weight: normal;
 }
 
-/* ¾ÆÀÌÅÛÀÌ¹ÌÁö È£¹ö½Ã ÅøÆÁ  */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  */
 .f_item {
 	position: relative;
 	margin-left: 5px;
@@ -157,7 +159,7 @@ body{
 	opacity: 1;
 }
 
-/*½ºÆç È£¹ö½Ã ÅøÆÁ*/
+/*ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 .spell-container {
 	position: relative;
 	display: inline-block;
@@ -186,30 +188,30 @@ body{
 	visibility: visible;
 }
 
-/*·éÀÌ¹ÌÁö ¼¾ÅÍ·Î*/
+/*ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í·ï¿½*/
 .rune_img {
 	text-align: center;
 }
 
-/* ¾ÆÀÌÅÛ ¼³¸í css  */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ css  */
 .item_longdesc ul {
 	white-space: pre-line;
 }
-/* ·écss */
+/* ï¿½ï¿½css */
 .rune_rate{
 	margin-left: 10px;
 }
-/*½ºÆç css  */
+/*ï¿½ï¿½ï¿½ï¿½ css  */
 
 #spell1{
 	margin-top: 5px;
-	border-top: 1px solid #E2E2E2; /* À§ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
- 	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+	border-top: 1px solid #E2E2E2; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ */
+ 	border-bottom: 1px solid #E2E2E2; /* ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ */
 	
 }
 #spell2{
 	margin-top: 5px;
-  	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+  	border-bottom: 1px solid #E2E2E2; /* ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ */
 }
 
 .spell-container{
@@ -240,7 +242,7 @@ body{
 }
 
 .rate_info{
-	width: 55px;
+	width: 70px;
 	margin-left: 150px;
 	
 }
@@ -250,34 +252,34 @@ body{
 }
 #start_item1{
 	margin-top: 5px;
-	border-top: 1px solid #E2E2E2; /* À§ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
- 	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+	border-top: 1px solid #E2E2E2; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ */
+ 	border-bottom: 1px solid #E2E2E2; /* ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ */
 	
 }
 #start_item2{
 	margin-top: 5px;
-  	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+  	border-bottom: 1px solid #E2E2E2; 
 }
 #start_boots1{
 	margin-top: 5px;
-	border-top: 1px solid #E2E2E2; /* À§ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
- 	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+	border-top: 1px solid #E2E2E2; 
+ 	border-bottom: 1px solid #E2E2E2; 
 	
 }
 #start_boots2{
 	margin-top: 5px;
-  	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+  	border-bottom: 1px solid #E2E2E2; 
 }
 
 #mat_list1{
 	margin-top: 5px;
-	border-top: 1px solid #E2E2E2; /* À§ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
- 	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+	border-top: 1px solid #E2E2E2; 
+ 	border-bottom: 1px solid #E2E2E2; 
 	
 }
 #mat_list2{
 	margin-top: 5px;
-	border-top: 1px solid #E2E2E2; /* À§ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+	border-top: 1px solid #E2E2E2; 
 }
 .match_span{
 	font-size: 15px;
@@ -289,5 +291,33 @@ body{
 }
 .item_boots_head{
 	font-size: 15px;
+	font-weight: bold;
+}
+
+.item_name_span{
+	margin-left: 5px;
+	font-size: 12px;
+	font-weight: bold;
+}
+.title_champ_name{
+	
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#skill_tree1{
+	border-top: 1px solid #E2E2E2; 
+	margin-top: 10px;
+}
+#skill_tree2{
+	border-top: 1px solid #E2E2E2; 
+	margin-top: 10px;
+}
+#skill_tree3{
+	border-top: 1px solid #E2E2E2; 
+	margin-top: 10px;
+}
+.skill_info_span{
+	font-size: 20px;
 	font-weight: bold;
 }

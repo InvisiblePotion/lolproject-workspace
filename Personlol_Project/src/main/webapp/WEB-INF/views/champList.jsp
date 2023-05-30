@@ -137,12 +137,24 @@
 					<thead>
 						<tr align="center">
 							
-							<th width="130px" style="font-size: 12px" >챔피언</th>
-							<th width="100px" style="font-size: 12px" id="table_tier">티어</th>
-							<th width="100px" style="font-size: 12px" id="table_win_rate">승률</th>
-							<th width="100px" style="font-size: 12px" id="table_pick_rate">픽률</th>
-							<th width="100px" style="font-size: 12px" id="table_ban_rate">밴률</th>
-							<th width="100px" style="font-size: 12px" id="table_counter">카운터</th>
+							<td width="170px" style="font-size: 12px" >
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">챔피언</span>
+							</td>
+							<td width="100px" style="font-size: 12px" id="table_tier">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">티어</span>
+							</td>
+							<td width="100px" style="font-size: 12px" id="table_win_rate">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">승률</span>
+							</td>
+							<td width="100px" style="font-size: 12px" id="table_pick_rate">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">픽률</span>
+							</td>
+							<td width="100px" style="font-size: 12px" id="table_ban_rate">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">밴률</span>
+							</td>
+							<td width="120px" style="font-size: 12px" id="table_counter">
+								<span style="font-weight: bold; color: #c8c8c8; font-size: 20px;">카운터</span>
+							</td>
 						</tr>
 					</thead>
 
@@ -369,17 +381,17 @@
 							'<span style="font-size: 12px; font-weight: bold;">' +
 							list.champ_name +
 							'</span> </td>' +
-							'<td align="center">' +
+							'<td align="center" width="100px">' +
 							0 +
 							'</td>' +
-							'<td align="center">' +
-							list.win_rate +
+							'<td align="center" width="100px">' +
+							'<span style="color: #828282;">'+list.win_rate +'%</span>'+
 							'</td>' +
-							'<td align="center">' +
-							list.pick_rate +
+							'<td align="center" width="100px">' +
+							'<span style="color: #828282;">'+list.pick_rate +'%</span>'+
 							'</td>' +
-							'<td align="center">' +
-							list.ban_rate +
+							'<td align="center" width="100px">' +
+							'<span style="color: #828282;">'+list.ban_rate +'%</span>'+
 							'</td>' +
 							'<td align="center" class="counter_img" width="120">' +
 							counter_icons.join('') +
