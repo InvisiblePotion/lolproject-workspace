@@ -35,13 +35,12 @@
 
 							<input class="summoner_name summoner_name_search" type="text"
 								placeholdr="소환사명 검색....">
-							<button class="gosummonerinfo" type="button">go!</button>
+							<button class="gosummonerinfo" type="button" id="ggg">go!</button>
 						</div>
 						<div class="menu">
 							<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
 								href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
 								href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-								href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
 								href="/personlol/summoner/" class="m-col">소환사분석</a>
 
 
@@ -120,7 +119,7 @@
 
 				<div class="m_lane jug">
 					<div class="line-info">
-						<h2>jug</h2>
+						<h4>Jungle</h4>
 					</div>
 					<!-- 설명 -->
 					<div id="table_list">
@@ -140,7 +139,7 @@
 
 				<div class="m_lane mid">
 					<div class="line-info">
-						<h2>mid</h2>
+						<h4>Mid</h4>
 					</div>
 
 					<!-- 설명 -->
@@ -162,7 +161,7 @@
 
 				<div class="m_lane ad">
 					<div class="line-info">
-						<h2>ad</h2>
+						<h4>AD</h4>
 					</div>
 
 					<!-- 설명 -->
@@ -183,7 +182,7 @@
 
 				<div class="m_lane sup">
 					<div class="line-info">
-						<h2>sup</h2>
+						<h4>Support</h4>
 					</div>
 
 					<!-- 설명 -->

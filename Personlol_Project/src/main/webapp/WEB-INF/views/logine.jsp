@@ -24,7 +24,7 @@
   <div id="root" class="container mt-5">
     <div class="logine-layout">
 
-      <a href="/personlol/main"><h1><img src="./resources/img/loginLogo.png" alt="logo" class="logo-image" width="80%"></h1></a>
+      <a href="/personlol/main"><h1><img src="./resources/img/loginLogo.png" alt="logo" class="logo-image" width="70%"></h1></a>
 
       <div class="form-group">
         <label for="userid">아이디</label>

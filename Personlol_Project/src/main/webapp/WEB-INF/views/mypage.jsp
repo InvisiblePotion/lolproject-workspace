@@ -1,207 +1,219 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- 마이페이지 css -->
-    <link rel="stylesheet" type="text/css" href="./resources/css/mypage.css">
+<!-- 마이페이지 css -->
+<link rel="stylesheet" type="text/css" href="./resources/css/header.css">
+<link rel="stylesheet" type="text/css" href="./resources/css/mypage.css">
 </head>
 
 <body>
-    <!-- 여기까지가 헤더!!!!!!!!!! -->
-    <div id="generic">
-        <div class="area">
-            <nav class="bener-container">
-                <div class="bener">
-                    <a href="/personlol/main" class="imgfile"><img src="./resources/img/logotesting.png"></a>
-                    <div class="search-bar">
-                        <input class="summoner_name" type="text">
-                        <button class="gosummonerinfo" type="button">go!</button>
-                    </div>
-                    <div class="menu">
-                        <a href="/personlol/champion/" class="m-col">챔피언분석</a>
-                        <a href="/personlol/rank" class="m-col">랭킹</a>
-                        <a href="/personlol/duo/" class="m-col">듀오찾기</a>
-                        <a href=" " class="m-col">사용자분석</a>
+	<div id="generic">
+		<div class="area">
+			<nav class="bener-container">
+				<div class="bener">
+					<a href="/personlol/main" class="imgfile"><img
+						src="./resources/img/navLogo.png" height="28px" width="100px"></a>
+					<div class="search-bar">
 
-                        <c:choose>
-                            <c:when test="${sessionScope.id ne null}">
-                                <a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="/personlol/logine" class="m-col login">로그인</a>
-                            </c:otherwise>
-                        </c:choose>
+						<input class="summoner_name summoner_name_search" type="text"
+							placeholdr="소환사명 검색....">
+						<button class="gosummonerinfo" type="button" id="ggg">go!</button>
+					</div>
+					<div class="menu">
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
+							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
+							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+							href="/personlol/summoner/" class="m-col">소환사분석</a>
 
-                        <div id="loginout">
-                            <c:if test="${sessionScope.id ne null}">
-                                <div><span class="m-col">${sessionScope.id}님 환영합니다!</span></div>
-                                <div><span><a href="#" id="logout" class="m-col logout">로그아웃</a></span></div>
-                            </c:if>
-                        </div id="loginout">
 
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- 여기까지가 헤더!!!!!!! -->
-    <div class="information container">
-        <div class="information box">
-            <div class="contents box">
-                <div class="user_icon_box">
-                    <div id="SUMMONER_PROFILE" class="">
-                    </div>
-                    <button class="button tier_AI" type="button">티어/AI</button>
-                    <button class="button duo_find" type="button">듀오 찾는 여부</button>
-                </div>
-                <div class="user_info">
-                    <ul>
-                        <li>
-                            <div class="user_name">
-                                <span id="cur_lolname">광포한까마귀</span>
-                            </div>
-                        </li>
-                        <li class="mt">
-                            <div class="lol_acount_change">
-                                <!-- 모달을 띄우는 버튼 -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">
-                                    LOL계정변경하기
-                                </button>
-                                <!-- 모달 -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">롤 계정 변경</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- 여기에 원하는 내용을 추가하세요 -->
-                                                <div class="form-group">
-                                                    <label for="lolname">변경할 계정</label>
-                                                    <input type="text" class="form-control" id="newlolname"
-                                                        placeholder="변경할 LOL계정을 입력하세요">
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">닫기</button>
-                                                <button type="button" class="btn btn-primary"
-                                                    id="re_lolname">확인</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+					</div>
+					<div class="my-menu">
+						<c:choose>
+							<c:when test="${sessionScope.id ne null}">
+								<a href="/personlol/mypage" class="m-col mypage">마이페이지</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/personlol/logine" class="m-col login">로그인</a>
+							</c:otherwise>
+						</c:choose>
 
-                        </li>
-                        <li class="mt">
-                            <div class="win-lose">
-                                <div class="wl button">
-                                    <button id="gosummonerinfo">전적</button>
-                                </div>
-                                <div class="wl button">
-                                    <button>분석</button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mt">
-                            <div class="verification-code">
-                                <button id="selectcode">인증 코드 확인</button>
-                            </div>
-                        </li>
-                        <li class="mt">
-                            <div class="verification-code">
-                                <button id="changecode">인증 코드 변경</button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="duo-container">
-        <div class="duo-write-container">
-            <div class="duo-write">
-                <div class="duo-write-title">
-                    <div class="duo-title-font">듀오 찾는 내 글</div>
-                </div>
-                <div class="duo-write-main">
-                    <div class="duo-write-boardbox">
-                        <span class="duo-write-boardspan">안녕하세요 듀오를 찾습니다. 주로 6~9시에 플레이합니다.</span>
-                    </div>
-                </div>
-                <div class="duo-write-delete">
-                    <div class="duo-write-delete-button">
-                        <button type="button" class="boardDelete">글 삭제</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						<div id="loginout">
+							<c:if test="${sessionScope.id ne null}">
+								<div class="loggedin-box">
+									<span class="m-col loggedin">${sessionScope.id}님 환영합니다!</span>
+								</div>
+								<div class="logout-box">
+									<span><a href="#" id="logout" class="m-col logout">로그아웃</a></span>
+								</div>
+							</c:if>
+						</div id="loginout">
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div id="generic">
+	<!-- 여기까지가 배너입니다. -->
+	<div class="information container">
+		<div class="information box">
+			<div class="contents box">
+				<div class="user_icon_box">
+					<div id="SUMMONER_PROFILE" class=""></div>
+					<button class="button tier_AI" type="button">티어/AI</button>
+					<button class="button duo_find" type="button">듀오 찾는 여부</button>
+				</div>
+				<div class="user_info">
+					<ul>
+						<li>
+							<div class="user_name">
+								<span id="cur_lolname">광포한까마귀</span>
+							</div>
+						</li>
+						<li class="mt">
+							<div class="lol_acount_change">
+								<!-- 모달을 띄우는 버튼 -->
+								<button type="button" class="btn btn-primary"
+									data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+									LOL계정변경하기</button>
+								<!-- 모달 -->
+								<div class="modal fade" id="staticBackdrop"
+									data-bs-backdrop="static" data-bs-keyboard="false"
+									tabindex="-1" aria-labelledby="staticBackdropLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="staticBackdropLabel">롤
+													계정 변경</h1>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<!-- 여기에 원하는 내용을 추가하세요 -->
+												<div class="form-group">
+													<label for="lolname">변경할 계정</label> <input type="text"
+														class="form-control" id="newlolname"
+														placeholder="변경할 LOL계정을 입력하세요">
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">닫기</button>
+												<button type="button" class="btn btn-primary"
+													id="re_lolname">확인</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 
-    <div class="offer-container">
-        <div class="offer-list-container">
-            <div class="offer-list-write-box request">
+						</li>
+						<li class="mt">
+							<div class="win-lose">
+								<div class="wl button">
+									<button id="gosummonerinfo">전적</button>
+								</div>
+								<div class="wl button">
+									<button>분석</button>
+								</div>
+							</div>
+						</li>
+						<li class="mt">
+							<div class="verification-code">
+								<button id="selectcode">인증 코드 확인</button>
+							</div>
+						</li>
+						<li class="mt">
+							<div class="verification-code">
+								<button id="changecode">인증 코드 변경</button>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="duo-container">
+		<div class="duo-write-container">
+			<div class="duo-write">
+				<div class="duo-write-title">
+					<div class="duo-title-font">듀오 찾는 내 글</div>
+				</div>
+				<div class="duo-write-main">
+					<div class="duo-write-boardbox">
+						<span class="duo-write-boardspan">안녕하세요 듀오를 찾습니다. 주로 6~9시에
+							플레이합니다.</span>
+					</div>
+				</div>
+				<div class="duo-write-delete">
+					<div class="duo-write-delete-button">
+						<button type="button" class="boardDelete">글 삭제</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-            </div>
+	<div class="offer-container">
+		<div class="offer-list-container">
+			<div class="offer-list-write-box request"></div>
 
-            <div class="offer-reload-box">
-                <div class="offer-reload">
-                    <button class="offer-reload-button">갱신!</button>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="offer-reload-box">
+				<div class="offer-reload">
+					<button class="offer-reload-button">갱신!</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="offer-container">
-        <div class="offer-list-container accpet">
-            <div class="offer-list-write-box result">
+	<div class="offer-container">
+		<div class="offer-list-container accpet">
+			<div class="offer-list-write-box result"></div>
+			<div class="offer-reload-box">
+				<div class="offer-reload">
+					<button class="offer-reload-button">갱신!</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="acount-container">
+		<div class="change-password-container">
+			<div class="change-password-box">
+				<div class="change-password">
+					<button id="changpw">비밀번호 변경</button>
+				</div>
+			</div>
 
-            </div>
-            <div class="offer-reload-box">
-                <div class="offer-reload">
-                    <button class="offer-reload-button">갱신!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="acount-container">
-        <div class="change-password-container">
-            <div class="change-password-box">
-                <div class="change-password"><button id="changpw">비밀번호 변경</button></div>
-            </div>
+			<!-- 회원탈퇴 -->
+			<div class="change-password-box">
+				<div class="change-password">
+					<button id="deletemember">회원탈퇴</button>
+				</div>
+			</div>
 
-            <!-- 회원탈퇴 -->
-            <div class="change-password-box">
-                <div class="change-password"><button id="deletemember">회원탈퇴</button></div>
-            </div>
+		</div>
+	</div>
+	<footer></footer>
 
-        </div>
-    </div>
-    <footer></footer>
-
-    <script>
+	<script>
         //summoner_name 가지고 포워딩 하기위한 함수
         function gosummoner(summoner_name) {
             console.log(summoner_name)
@@ -211,7 +223,7 @@
         }
     </script>
 
-    <script>
+	<script>
         // 시작시 롤 네임 뿌려주기 위한 코드
         $.ajax({
             method: 'get',
@@ -315,8 +327,8 @@
             console.log(err);
         })
     </script>
-    
-    <script>
+
+	<script>
     	//듀오 요청 수락
     	function request_accept(info){
     		let request_id ={'user_lolname':info.value}
@@ -386,7 +398,7 @@
     	}
     </script>
 
-    <script>
+	<script>
         //로그아웃
         $('#logout').click(function () {
             location.href = '/personlol/logout';
@@ -395,7 +407,7 @@
         })
     </script>
 
-    <script>
+	<script>
         //갱신버튼 클릭시 갱신하는 메소드
         $('.offer-reload-button').click(function () {
             alert("요청이 완료되었습니다.");
@@ -404,7 +416,7 @@
         })
     </script>
 
-    <script>
+	<script>
         // 롤 네임 바꾸기
         $('#re_lolname').click(function () {
             changelolname = {
@@ -425,7 +437,7 @@
             });
         });
     </script>
-    <script>
+	<script>
     	//게시글 삭제
         $('.boardDelete').click(function () {
             $.ajax({
@@ -446,7 +458,7 @@
         })
     </script>
 
-    <script>
+	<script>
         //코드 확인
         $('#selectcode').click(function () {
             user_id = $('#userid').val()
@@ -466,9 +478,9 @@
 
         //코드 변경
         $('#changecode').click(function () {
-            console.log('<%= session.getAttribute("id") %>');
+            console.log('<%=session.getAttribute("id")%>');
             id = {
-                'user_id': '<%= session.getAttribute("id") %>',
+                'user_id': '<%=session.getAttribute("id")%>',
                 'user_code': '0'
             };
 
@@ -489,12 +501,12 @@
         })
     </script>
 
-    <script>
+	<script>
         //회원 탈퇴
         $('#deletemember').click(function () {
             console.log("삭제눌렀어용");
             id = {
-                'user_id': '<%= session.getAttribute("id") %>'
+                'user_id': '<%=session.getAttribute("id")%>'
             };
             $.ajax({
                 method: 'delete',
@@ -512,14 +524,14 @@
         })
     </script>
 
-    <script>
+	<script>
         //비밀번호 변경
         $('#changpw').click(function () {
             location.href = "/personlol/changepw";
         })
     </script>
 
-    <script>
+	<script>
         $('.gosummonerinfo').click(function () {
             //siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기
             let summoner_name = $(this).siblings('.summoner_name').filter(function () {

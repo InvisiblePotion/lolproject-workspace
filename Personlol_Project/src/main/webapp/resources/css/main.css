@@ -108,6 +108,11 @@
 }
 
 .line-info{
+  text-align: center;
+}
+#ggg{
+	height:28px;
+	border-radius: 0 0 8px 0;
 }
 
 .champ_img{
