@@ -30,7 +30,7 @@
 				<nav class="bener-container">
 					<div class="bener">
 						<a href="/personlol/main" class="imgfile"><img
-							src="./resources/img/logotesting.png" height="25px"></a>
+							src="./resources/img/navLogo.png" height="28px" width="100px"></a>
 						<div class="search-bar">
 
 							<input class="summoner_name summoner_name_search" type="text"
@@ -77,7 +77,7 @@
 
 			<div id="m_logo">
 				<img
-					src="./resources/img/logoBig.png"
+					src="./resources/img/mainLogo.png"
 					title="메인로고" id=m_log_img width="50%" >
 			</div id="m_logo">
 
