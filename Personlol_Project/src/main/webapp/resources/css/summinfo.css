@@ -704,12 +704,18 @@ option {
 }
 .madiv{
   display: flex;
+  flex-direction: row;
   height: 96px;
   border-radius: 4px;
   border-left-width: 6px;
   border-left-style: solid;
   border-color: var(--main500);
   background-color: var(--main100);
+}
+
+.madiv_wrap{
+  display: flex;
+  flex-direction: column;
 }
 .madiv .content{
   display: flex;
@@ -992,3 +998,94 @@ body{
 /* li {
     text-align: none;
 } */
+
+
+.list2_detail{
+  width: 738px;
+  height: 96px;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail2.champ_icon{
+  width: 45px;
+
+}
+.detail2.spells{
+  width: 18px;
+
+}
+.detail2.runes{
+  width: 18px;
+
+}
+
+.detail2_box{
+  width: 100px;
+}
+
+.detail2.name{
+  width: 163px;
+  display: flex;
+  flex-direction: column;
+}
+.detail2.s_kda{
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+}
+.detail2.damage{
+  width: 120px;
+  display: flex;
+  flex-direction: row;
+}
+.detail2.dealing{
+  display: flex;
+  flex-direction: column;
+}
+.detail2.taken{
+  display: flex;
+  flex-direction: column;
+}
+.detail2.ward{
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+}
+.detail2.s_cs{
+  width: 56px;
+  display: flex;
+  flex-direction: column;
+}
+.list2_detail2{
+  width: 738px;
+  height: 96px;
+  display: flex;
+  flex-direction: row;
+}
+.detail2.items{
+  width: 175px;
+  display: flex;
+  flex-direction: row;
+}
+
+.detail2.summoner_info{
+  width: 243px;
+}
+.detail2.summoner_kda{
+  width: 100px;
+}
+
+.detail2.summoner_damage{
+  width: 120px;
+}
+
+.detail2.summoner_ward{
+  width: 48px;
+}
+.detail2.summoner_cs{
+  width: 56px;
+}
+.detail2.summoner_items{
+  width: 175px;
+}
