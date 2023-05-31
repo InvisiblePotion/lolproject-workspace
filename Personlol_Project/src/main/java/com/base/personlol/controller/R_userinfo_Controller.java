@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -192,5 +193,25 @@ public class R_userinfo_Controller {
 		System.out.println("컨트롤러 롤네임??"+user_lolname);
 		return user_lolname;
 	}
+	
+	//소환사 분석헤더
+	@GetMapping("/main-gosummoner-info")
+	public String goSummoner_m(HttpServletRequest session) {
+		System.out.println("@@@@@@@@@@@@@@@@@@############"+session.getAttribute("id"));
+		if(session.getAttribute("id") != null) {
+			String user_id = session.getAttribute("id").toString();
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@"+user_id);
+			
+			
+			String result_summonerinfo = u_ser.goSummoner_m(user_id);
+			System.out.println("result_summonerinfo"+result_summonerinfo);
+			return result_summonerinfo;
+		}else {
+			String msg = "없는 소환사입니다";
+			return msg;
+		}//
+		
+		
+	}//
 	
 }

@@ -194,6 +194,11 @@ public class user_service {
 		String user_lolname = u_dao.getUserLolname(user_id);
 		return user_lolname;
 	}
+
+	public String goSummoner_m(String user_id) {
+		String result_summonerinfo =  u_dao.goSummoner_m(user_id);
+		return result_summonerinfo;
+	}
 	
 
 	

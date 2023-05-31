@@ -70,6 +70,8 @@
 		SELECT USER_LOLNAME FROM USERINFO WHERE USER_ID = #{user_id}
 	</select>
 	
-
+	<select id="goSummoner_m" resultType="String">
+		SELECT USER_LOLNAME FROM USERINFO WHERE USER_ID = #{user_id}
+	</select>
 
 </mapper>

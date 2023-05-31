@@ -306,6 +306,7 @@
 				data:{name:summoner_name},
 				url:'/personlol/mypage/score_data',				
 			}).done(res => {
+				console.log(res);
 				$('#score').html(res[0]);
 				const resArray = res.slice(0,7);
 				const resultArray=[];
@@ -333,20 +334,47 @@
 					    resultArray.push(9);
 					  }
 					}
-
+				// 색상에 대한 함수 정의
+				function getColorByTier(tier) {
+				  switch (tier) {
+				    case 1: // IRON
+				      return 'rgba(051, 051, 051, 0.2)';
+				    case 2: // BRONZE
+				      return 'rgba(102,051, 000, 0.2)';
+				    case 3: // SILVER
+				      return 'rgba(204, 204, 204, 0.2)';
+				    case 4: // GOLD
+					  return 'rgba(255, 255, 051, 0.2)';
+				    case 5: // PLA
+						  return 'rgba(051, 255, 051, 0.2)';
+				    case 6: // DIA
+						  return 'rgba(051, 000, 255, 0.2)';
+				    case 7: // MAS
+						  return 'rgba(153, 102, 255, 0.2)';
+				    case 8: // GRAND
+						  return 'rgba(153, 000, 051, 0.2)';
+				    case 9: // CH
+						  return 'rgba(255, 051, 153, 0.2)';
+				  }
+				}
+				// resultArray를 순회하며 색상을 매핑하여 backgroundColor 배열에 추가
+				let backgroundColors = resultArray.map((tier) => getColorByTier(tier));
+				
+				
 				var ctx = document.getElementById('myChart').getContext('2d');
 		        var chart = new Chart(ctx, {
 		          // 챠트 종류를 선택
-		          type: 'line',
+		          type: 'pie',
 
 		          // 챠트를 그릴 데이타
 		          data: {
 		            labels: resArray,
 		            datasets: [{
 		              label: '최근 경기에서의 활약도',
-		              backgroundColor: 'transparent',
-		              borderColor: 'red',        	 
 		              data: resultArray,
+		              backgroundColor: backgroundColors,
+		              borderColor: backgroundColors,        	 
+
 		            }]
 		          },
 		          

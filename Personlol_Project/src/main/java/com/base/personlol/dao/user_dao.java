@@ -46,6 +46,8 @@ public interface user_dao {
 	
 	//서버에서 user_lolname가져오기
 	String getUserLolname(@Param("user_id")String user_id);
+
+	String goSummoner_m(@Param("user_id") String user_id);
 	
 
 

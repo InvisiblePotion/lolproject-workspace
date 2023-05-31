@@ -38,11 +38,10 @@
 						<button class="gosummonerinfo2" type="button">go!</button>
 					</div>
 					<div class="menu">
-						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
-							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
-							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-							href="/personlol/summonerstat/" class="m-col">사용자분석</a> <a
-							href="/personlol/summoner/" class="m-col">소환사분석</a>
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
+						 <a href="/personlol/rank" class="m-col rank">랭킹보기</a>
+						 <a href="/personlol/duo/" class="m-col">듀오찾기</a>  
+						<a href="/personlol/summoner/" class="m-col">소환사분석</a>
 
 
 					</div>
