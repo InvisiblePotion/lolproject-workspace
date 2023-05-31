@@ -52,15 +52,20 @@
 	/* 모달창이 화면 중앙에 위치하도록 함 */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 80%;
+	width: 70%;
 	/* 모달창의 너비 설정 */
+	display: flex;
+	flex-direction: column;
 }
 
 .close {
+	position: absolute;
 	color: #aaa;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
+	width: 50px;
+	right: 0;
 }
 
 .close:hover, .close:focus {
@@ -71,6 +76,43 @@
 
 #msg_block {
 	display: block;
+}
+.modalw{
+	width: 300px;
+	height: 50px;
+	text-align: center;
+	margin-left: 30%;
+	font-size: 22px;
+}
+.duo-modal-form{
+	display: flex;
+	flex-direction: column;
+	
+
+}
+.modal-title{
+	width: 500px;
+	height: 40px;
+	margin-left: 15px;
+	ali
+}
+#duo_title{
+	width: 500px;
+	height: 30px;
+	margin-left: 15px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+#duo_content{
+	width: 900px;
+	margin: 15px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+#commitModal{
+	width: 300px;
+	margin-left: 65%;
+	margin-top: 15px;
 }
 </style>
 
@@ -183,11 +225,11 @@
 						<!-- 모달창 내용 -->
 						<div class="modal-content">
 							<span class="close">&times;</span>
-							<p>글 작성용 모달입니다.</p>
-							<form action="/personlol/duo/insert" method="post"
+							<p class="modalw">듀오를 찾아봐요!</p>
+							<form action="/personlol/duo/insert" method="post" class="duo-modal-form"
 								name="insertFrm">
-								<label for="title">제목</label> <input id="duo_title"
-									name="duo_title"> <label for="content">내용</label>
+								<label for="title" class="modal-title">제목을 입력해주세요</label> <input id="duo_title"
+									name="duo_title"> <label for="content" class="modal-title">내용을 입력해주세요</label>
 								<textarea id="duo_content" name="duo_content"></textarea>
 								<button id="commitModal">작성 완료</button>
 							</form>
@@ -323,11 +365,11 @@
 
 
 
-
+		let currentPage = 6;
 
 
 		function loadContent(selectedId, page, tier) {
-			$('.main-container').empty();
+			//$('.main-container').empty();
 
 			$.ajax({
 				method: 'get',
@@ -363,13 +405,13 @@
 							// 로그인 상태인 경우에만 동작
 							isLoggedIn().then((loginCheck) => {
 								if (line.DUO_OWNERID == String(loginCheck)) {
-									console.log('성공');
+									//console.log('성공');
 									let deleteLink = $(
 										'<button class="copy-box"><span class="user-id"><a href="/personlol/duo/delete?duo_id=' +
 										line.DUO_ID + '" id="wh">삭제하기</a></span></button>');
 									mainBotton.append(deleteLink);
 								} else {
-									console.log('실패');
+									//console.log('실패');
 									let acceptLink = $(
 										'<button class="copy-box"><span class="user-id"><a href="/personlol/duo/request/' +
 										line.DUO_ID + '" id="wh">요청하기</a></span></button>');
@@ -401,7 +443,7 @@
 
 		// 더보기(페이징) 버튼 클릭 이벤트 처리
 		$('#load-more-button').on('click', function () {
-			page++; // 페이지 번호 증가
+			page+=6; // 페이지 번호 증가
 
 			console.log(page)
 
