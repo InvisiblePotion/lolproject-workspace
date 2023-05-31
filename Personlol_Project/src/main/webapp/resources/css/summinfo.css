@@ -1003,20 +1003,23 @@ body{
 
 .list2_detail{
   width: 738px;
-  height: 96px;
+
+
   display: flex;
   flex-direction: column;
 }
 
-.detail2.champ_icon{
+
+.expend.champ_icon{
   width: 45px;
 
 }
-.detail2.spells{
+.expend.spells{
   width: 18px;
 
 }
-.detail2.runes{
+.expend.runes{
+
   width: 18px;
 
 }
@@ -1025,68 +1028,81 @@ body{
   width: 100px;
 }
 
-.detail2.name{
+
+.expend.name{
+
   width: 163px;
   display: flex;
   flex-direction: column;
 }
-.detail2.s_kda{
+
+.expend.s_kda{
+
   width: 100px;
   display: flex;
   flex-direction: column;
 }
-.detail2.damage{
+
+.expend.damage{
+
   width: 120px;
   display: flex;
   flex-direction: row;
 }
-.detail2.dealing{
+
+.expend.dealing{
   display: flex;
   flex-direction: column;
 }
-.detail2.taken{
+.expend.taken{
   display: flex;
   flex-direction: column;
 }
-.detail2.ward{
+.expend.ward{
+
   width: 48px;
   display: flex;
   flex-direction: column;
 }
-.detail2.s_cs{
+
+.expend.s_cs{
+
   width: 56px;
   display: flex;
   flex-direction: column;
 }
-.list2_detail2{
+
+.list2_expend{
   width: 738px;
-  height: 96px;
   display: flex;
   flex-direction: row;
 }
-.detail2.items{
+.expend.items{
+
   width: 175px;
   display: flex;
   flex-direction: row;
 }
 
-.detail2.summoner_info{
+
+.expend.summoner_info{
   width: 243px;
 }
-.detail2.summoner_kda{
+.expend.summoner_kda{
   width: 100px;
 }
 
-.detail2.summoner_damage{
+.expend.summoner_damage{
   width: 120px;
 }
 
-.detail2.summoner_ward{
+.expend.summoner_ward{
   width: 48px;
 }
-.detail2.summoner_cs{
+.expend.summoner_cs{
   width: 56px;
 }
-.detail2.summoner_items{
+.expend.summoner_items{
+
   width: 175px;
 }

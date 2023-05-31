@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.base.personlol.dto.Item_dto;
 import com.base.personlol.dto.duo_dto;
 import com.base.personlol.dto.mypage_dto;
 import com.base.personlol.service.mypage_service;
@@ -160,5 +161,11 @@ public class R_mypage_Controller {
 		int duodel = my_ser.go_duo_del(user_lolname, user_id);
 		System.out.println("듀오 삭제 컨트롤러 리턴: "+duodel);
 		return duodel;
+	}
+	
+	@GetMapping("/score_data")
+	public List<mypage_dto> score(String name) {
+		List<mypage_dto> score = my_ser.score(name);
+		return score;
 	}
 }

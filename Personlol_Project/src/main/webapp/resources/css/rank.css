@@ -17,6 +17,7 @@
 .bcolor{
   background-color: #f5f5f5;
 }
+
 #pagenum{
 	display: flex;
 	justify-content: center;
@@ -31,4 +32,5 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 }

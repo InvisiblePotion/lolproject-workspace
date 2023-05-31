@@ -484,6 +484,7 @@ $(document).ready(function() {
 	}).done(res => {
 		
 		let skill_img=''
+		let skillKeys = ['P', 'Q', 'W', 'E', 'R']; // 텍스트로 사용할 스킬 키들
 		$.each(res, function (i,skill) {
 			// skill설명들이 null인 경우에 대한 조건문 추가
 			let tooltip = skill.skill_tooltip ? skill.skill_tooltip : '';
@@ -493,6 +494,7 @@ $(document).ready(function() {
 			
 			skill_img +=
 				'<div class="skill-container">' +
+				'<div class="skill-key-info">' + skillKeys[i] + '</div>' + 
 				'<img class="skill_img" width="40" height="40" src="../resources/'+skill.skill_icon+
 				'" alt="이미지" >'+'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 				skill.skill_name+'</span></div>'+
@@ -522,15 +524,15 @@ $(document).ready(function() {
 		champ_img1 =
 			'<div class="f_img">'+
 			'<img class="icon_img" width="100" height="100" src="../resources/'+res[0].champ_icon +'" alt="이미지">'+
-			'<span>'+res[0].champ_name+'</span>'+
+			'<span class="sub_r_champ_name">'+res[0].champ_name+'</span>'+
 			'</div>';
 			
 		$('#champ_img1').html(champ_img1);
 		
 		champ_img2 =
 			'<div class="s_img">'+
+			'<span class="sub_l_champ_name">'+res[1].champ_name+'</span>'+
 			'<img class="icon_img" width="100" height="100" src="../resources/'+res[1].champ_icon +'" alt="이미지">'+
-			'<span>'+res[1].champ_name+'</span>'+
 			'</div>';
 			
 		$('#champ_img2').html(champ_img2);
@@ -740,7 +742,7 @@ $(document).ready(function() {
 						'<tr>'+
 						
 						'<td align="left" width="120px">'+
-						'<a href="/personlol/champion/matchup?champ_id='+ champ_id +'&lane='+champ_lane+'&match_champ='+matchamp_id+'">'+
+						'<a class="match_champ" href="/personlol/champion/matchup?champ_id='+ champ_id +'&lane='+champ_lane+'&match_champ='+matchamp_id+'">'+
 						'<img width="50" height="50" src="../resources/'+champ.champ_icon +'" alt="이미지">' +
 						'<span style="font-size: 12px; font-weight: bold;">' +shortenedName +
 						'</span> </td>'+

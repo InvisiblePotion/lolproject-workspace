@@ -549,7 +549,13 @@
 		url:'/personlol/champion/skill'
 	}).done(res => {
 		
+		console.log("초기스킬정보")
+		console.log(res)
+		console.log("초기스킬정보")
+		
 		let skill_img=''
+		let skillKeys = ['P', 'Q', 'W', 'E', 'R']; // 텍스트로 사용할 스킬 키들
+		
 		$.each(res, function (i,skill) {
 			// skill설명들이 null인 경우에 대한 조건문 추가
 			let tooltip = skill.skill_tooltip ? skill.skill_tooltip : '';
@@ -559,8 +565,10 @@
 			
 			skill_img +=
 				'<div class="skill-container" id="skill_img">' +
+				'<div class="skill-key-info">' + skillKeys[i] + '</div>' + 
 				'<img class="skill_img" width="40" height="40" src="../resources/'+skill.skill_icon+
-				'" alt="이미지" >'+'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
+				'" alt="이미지" >'+
+				'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 				skill.skill_name+'</span></div>'+
 				'<div>'+'스킬 재사용 대기시간(초): '+cooldown+'</div><div>'+
 				'스킬 마나소모량: '+cost+'</div><div>'+'스킬 범위: '+range+'</div>'+
@@ -1645,7 +1653,7 @@
 				for (i=0; i<5;i++) {				
 				if (arr[i] == 1) {
 					s_img =	'<div class="skill-container">'+ 
-					'<div class="skill-key">q</div>' + // Add the skill key text here
+					'<div class="skill-key">Q</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
@@ -1656,6 +1664,7 @@
 							
 				}else if (arr[i] == 2) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">W</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
@@ -1664,6 +1673,7 @@
 					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 3) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">E</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
@@ -1672,6 +1682,7 @@
 					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">R</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
@@ -1685,6 +1696,7 @@
 			for (i=5; i<10;i++) {				
 				if (arr[i] == 1) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">Q</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
@@ -1694,6 +1706,7 @@
 					
 				}else if (arr[i] == 2) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">W</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
@@ -1702,6 +1715,7 @@
 					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 3) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">E</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
@@ -1710,6 +1724,7 @@
 					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">R</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+
@@ -1723,6 +1738,7 @@
 			for (i=10; i<15;i++) {				
 				if (arr[i] == 1) {
 					s_img =  '<div class="skill-container">'+ 
+					'<div class="skill-key">Q</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[1].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[1].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[1].skill_cooldown+'</div><div>'+
@@ -1731,6 +1747,7 @@
 					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 2) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">W</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[2].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[2].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[2].skill_cooldown+'</div><div>'+
@@ -1739,6 +1756,7 @@
 					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 3) {
 					s_img = s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">E</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[3].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[3].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[3].skill_cooldown+'</div><div>'+
@@ -1747,6 +1765,7 @@
 					'<img width="20" height="40" src="../resources/img/arrow.png">'
 				}else if (arr[i] == 4) {
 					s_img = '<div class="skill-container">'+ 
+					'<div class="skill-key">R</div>' + // Add the skill key text here
 					'<img class="skill_img" width="40" height="40" src="../resources/'+res[4].skill_icon+'" alt="이미지"> &nbsp'+
 					'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 					res[4].skill_name+'</span></div>'+'<div>'+'스킬 재사용 대기시간(초): '+res[4].skill_cooldown+'</div><div>'+

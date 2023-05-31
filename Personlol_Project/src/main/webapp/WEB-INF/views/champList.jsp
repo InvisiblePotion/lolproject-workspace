@@ -369,8 +369,8 @@
 						lane_list_sort +=
 							'<tr>'+
 							'<td align="left" class="list_td">' +
-							'<a href="/personlol/champion/detail?champ_id=' + list.champ_id +'&lane='+list.lane+'">'+
-							'<img class="list_img" width="30" height="30" src="../resources/'+
+							'<a class="champ_list_a" href="/personlol/champion/detail?champ_id=' + list.champ_id +'&lane='+list.lane+'">'+
+							'<img class="list_img" width="40" height="40" src="../resources/'+
 							list.champ_icon +'" alt="이미지">' +
 							'<span style="font-size: 12px; font-weight: bold;">' +
 							list.champ_name +

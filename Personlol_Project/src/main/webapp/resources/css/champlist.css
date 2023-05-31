@@ -99,3 +99,7 @@ body{
 #table_ban_rate{
 	cursor: pointer;
 }
+a.champ_list_a{
+	
+	text-decoration: none;
+}

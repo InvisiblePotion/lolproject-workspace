@@ -45,6 +45,9 @@ public interface mypage_dao {
 
 	int go_duo_del(@Param("user_id") String user_id, @Param("request_id") String request_id);
 	
+	//머신런닝 티어 불러오기
+	List<mypage_dto> get_score(String name);
+	
 	
 
 }
