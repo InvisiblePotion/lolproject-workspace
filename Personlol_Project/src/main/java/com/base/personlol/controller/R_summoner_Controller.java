@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import com.base.personlol.dto.summoner_rawdata_dto;
 import com.base.personlol.dto.summoner_recent_game_dto;
 import com.base.personlol.service.summoner_service;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/summoner")
 public class R_summoner_Controller {
