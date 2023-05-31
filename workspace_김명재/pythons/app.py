@@ -13,6 +13,6 @@ CORS(app)
 def recordReload():
 	summoner_name = request.args.get('summoner_name')
 	print(f"recordReload() >> 전적 갱신 작동. 대상 소환사 이름: {summoner_name}")
-	return mu.reloadPlayRecord(summoner_name, 'RGAPI-baa753a4-a532-4640-9886-d8f05d8f2b39').__str__()
+	return mu.reloadPlayRecord(summoner_name, '문정환1').__str__()
 
 app.run()
