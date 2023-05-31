@@ -233,10 +233,10 @@ function inputGameDataExpend(game_data, game_number) {
         // >:damage
         const damage_dealt = parseInt(game_data[idx]['damage']['totalDamageDealtToChampions']);
         if (damage_dealt > max_dealt_damage) {max_dealt_damage = damage_dealt;} // ### 바를 표시하지 않는다면 필요 없는 코드
-        $(prefix+'.raw-part-damage-dealt').html(damage_dealt);
+        $(prefix+'.raw-part-damage-dealt').html('가한 피해 '+damage_dealt);
         const taken_damage = parseInt(game_data[idx]['damage']['totalDamageTaken']);
         if (taken_damage > max_taken_damage) {max_taken_damage = taken_damage;} // ### 바를 표시하지 않는다면 필요 없는 코드
-        $(prefix+'.raw-part-damage-taken').html(taken_damage);
+        $(prefix+'.raw-part-damage-taken').html('받은 피해 '+taken_damage);
 
         // >:vision
         $(prefix+'.raw-part-vision-controlward').html(game_data[idx]['vision']['controlWardsPlaced']);
@@ -485,28 +485,24 @@ function extendExpendParticipant(game_number, part_number) {
         '\t\t<img class="raw-part-rune-core-mainrune" src="" alt="">'+
         '\t\t<img class="raw-part-rune-runetype-sub" src="" alt="">'+
         '\t</div>'+
-        '\t<div class="expend name raw-part-summoner-name">4</div>'+
+        '\t<div class="expend name raw-part-summoner-name"></div>'+
         '\t<div class="expend s_kda">'+
-        '\t\t<div class="expend k-d-a raw-part-kda-data">5.3</div>'+
-        '\t\t<div class="expend kda raw-part-kda-kda">5.6</div>'+
+        '\t\t<div class="expend k-d-a raw-part-kda-data"></div>'+
+        '\t\t<div class="expend kda raw-part-kda-kda"></div>'+
         '\t</div>'+
         '\t<div class="expend damage">'+
         '\t\t<div class="expend dealing">'+
-        '\t\t\t<div class="expend d_num raw-part-damage-dealt">d_1</div>'+
-        '\t\t\t<div class="expend deal_graph"></div>'+
-        '\t\t</div>'+
-        '\t\t<div class="expend taken">'+
-        '\t\t\t<div class="expend t_num raw-part-damage-taken">t_1</div>'+
-        '\t\t\t<div class="expend taken_graph"></div>'+
+        '\t\t\t<div class="expend d_num raw-part-damage-dealt"></div>'+
+        '\t\t\t<div class="expend t_num raw-part-damage-taken"></div>'+
         '\t\t</div>'+
         '\t</div>'+
         '\t<div class="expend ward">'+
-        '\t\t<div class="expend warding raw-part-vision-controlward">w-1</div>'+
-        '\t\t<div class="expend del_ward raw-part-vision-warddata">w-2</div>'+
+        '\t\t<div class="expend warding raw-part-vision-controlward"></div>'+
+        '\t\t<div class="expend del_ward raw-part-vision-warddata"></div>'+
         '\t</div>'+
         '\t<div class="expend s_cs">'+
-        '\t\t<div class="game_cs raw-part-cs-total">8.3</div>'+
-        '\t\t<div class="cs_min raw-part-cs-perminute">8.6</div>'+
+        '\t\t<div class="game_cs raw-part-cs-total"></div>'+
+        '\t\t<div class="cs_min raw-part-cs-perminute"></div>'+
         '\t</div>'+
         '\t<div class="expend items">'+
         '\t\t<img class="raw-part-item-item1" src="" alt="">'+
