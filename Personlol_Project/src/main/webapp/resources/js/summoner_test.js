@@ -450,14 +450,6 @@ function extendRecordItem(record_number) {
         '\t\t\t</div>'+
         '\t\t</div>'+
         '\t\t<div class="list2_detail raw-expend-container" style="display: none">'+
-        '\t\t\t<div class="list2_expend">'+
-        '\t\t\t\t<div class="summoner_info">소환사정보</div>'+
-        '\t\t\t\t<div class="summoner_kda">KDA</div>'+
-        '\t\t\t\t<div class="summoner_damage">딜량</div>'+
-        '\t\t\t\t<div class="summoner_ward">와드</div>'+
-        '\t\t\t\t<div class="summoner_cs">CS</div>'+
-        '\t\t\t\t<div class="summoner_items">아이템 빌드</div>'+
-        '\t\t\t</div>'+
         '\t\t</div>'+
         '\t</div>'+
         '</li>'
