@@ -101,10 +101,21 @@
 						<table class="table table-hover" id="head_table">
 							<thead>
 								<tr height="25" align="center">
-									<td width="50px">랭킹</td>
-									<td width="480px">소환사</td>
-									<td width="175px">티어</td>
-									<td width="175px">LP</td>
+									<td width="70px">
+										<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">랭킹</span>
+									</td>
+									<td width="450px">
+										<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">소환사</span>
+									</td>
+									<td width="175px">
+										<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">티어</span>
+									</td>
+									<td width="175px">
+										<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">LP</span>
+									</td>
+									<td width="175px">
+										<span style="font-weight: bold; color: #c8c8c8; font-size: 18px;">승률</span>
+									</td>
 								</tr>
 							</thead>
 						</table>
@@ -152,7 +163,7 @@
 				console.log(res)
 				let pList = ''
 				for (let i = 0; i < res; i++) {
-					pList += '<a href ="#" onclick = "pageclick(' + (i + 1) + ')">' + (i + 1) + '</a>'
+					pList += '<a  href ="#" onclick = "pageclick(' + (i + 1) + ')">' + (i + 1) + '</a>'
 				}
 				$('#pagenum').html(pList);
 
@@ -174,12 +185,15 @@
 				console.log(res);
 
 				let cList = '';
+				
 				$.each(res, function (i, r) {
-				  cList += '<tr height="25" onclick="window.location.href=\'/personlol/summoner/?summoner_name=' + r.summonerName + '\'">' +
-				    '<td width="50px">' + r.ranking + '</td>' +
-				    '<td width="480px">' + r.summonerName + '</td>' +
-				    '<td width="175px">' + r.tier + '</td>' +
-				    '<td width="175px">' + r.leaguePoints + '</td>' +
+					
+				  cList += '<tr height="25" class="rank_a" onclick="window.location.href=\'/personlol/summoner/?summoner_name=' + r.summonerName + '\'">' +
+				    '<td width="70px">' +r.ranking +'</td>' +
+				    '<td width="450px">' + '<span style="font-weight: bold;">'+r.summonerName + '</span>'+'</td>' +
+				    '<td width="175px">' + '<span style="color: #828282">' +r.tier + '</span>' + '</td>' +
+				    '<td width="175px">' +'<span style="color: #828282">' +r.leaguePoints + '</span>' + '</td>' +
+				    '<td width="175px">' + '<span style="color: #828282">'+Math.floor(r.wins/(r.losses+r.wins)*100) +'%' +'</span></td>' +
 				    '</tr>'; // 여기서 </table>을 삭제하고 </tr>로 변경
 				});
 				$('#info').html('<table width="100px" class="table table-hover" id="info_table">' + cList + '</table>'); // 여기서 테이블 전체를 감싸는 태그 추가

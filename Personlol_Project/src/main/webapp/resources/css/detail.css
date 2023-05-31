@@ -40,6 +40,7 @@ body{
 	position: relative;
 	display: inline-block;
 	margin-left: 5px;
+	margin-top: 10px;
 }
 
 .tooltip {
@@ -73,8 +74,27 @@ body{
   height:20px;
   
   background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  color: yellow;
   font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transform: none; /* transform 속성 제거 */
+}
+
+/* 스킬이미지에 텍스트 추가 */
+.skill-key-info {
+  position: absolute;
+  bottom: 0px; /* 하단 여백 조정 */
+  right: 5px; /* 우측 여백 조정 */
+  
+  width:20px;
+  height:20px;
+  
+  background-color: rgba(0, 0, 0, 0.5);
+  color: yellow;
+  font-size: 10px;
+  font-weight: bold;
   padding: 4px 8px;
   border-radius: 4px;
   transform: none; /* transform 속성 제거 */
