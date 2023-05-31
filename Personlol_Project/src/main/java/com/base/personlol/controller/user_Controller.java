@@ -92,7 +92,7 @@ public class user_Controller {
 		if(findid != null) {
 			return new ModelAndView("idfound").addObject("findid",findid);
 		}else {
-			return new ModelAndView("idfound").addObject("msg","일치하는 아이디가 없습니다.");
+			return new ModelAndView("idfind").addObject("msg","일치하는 아이디가 없습니다.");
 		}
 	}
 	

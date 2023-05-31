@@ -226,7 +226,7 @@
 				
 				<div class="col float-right">
 					<div class="offer-reload-box">
-						<button type="button" class="btn btn-light" style="float:right" id="offer-reload-button">갱신</button>
+						<button type="button" class="btn btn-light" style="float:right" id="offer-reload-button1">갱신</button>
 					</div>
 				</div>
 				
@@ -243,7 +243,7 @@
 				
 				<div class="col float-right">
 					<div class="offer-reload-box">
-						<button type="button" class="btn btn-light" style="float:right" id="offer-reload-button">갱신</button>
+						<button type="button" class="btn btn-light" style="float:right" id="offer-reload-button2">갱신</button>
 					</div>
 				</div>
 
@@ -485,6 +485,7 @@
                 if(res == "1"){
                 	console.log("듀오 요청 거절 성공")
                 	alert("요청을 성공적으로 거절하였습니다.")
+                	location.href = '/personlol/mypage'
                 }else{
                     console.log(res);
                     alert("요청 거부에 실패했습니다.")
@@ -506,6 +507,7 @@
                 console.log(res);
                 if(res == "1"){
                 	alert("삭제가 완료되었습니다.")
+                	location.href = '/personlol/mypage'
                 }else{
                     alert("오류발생하였습니다.")
                 }
@@ -526,7 +528,12 @@
 
 	<script>
         //갱신버튼 클릭시 갱신하는 메소드
-        $('#offer-reload-button').click(function () {
+        $('#offer-reload-button1').click(function () {
+            alert("요청이 완료되었습니다.");
+            getrequestfunc();
+            getduofunc();
+        })
+        $('#offer-reload-button2').click(function () {
             alert("요청이 완료되었습니다.");
             getrequestfunc();
             getduofunc();

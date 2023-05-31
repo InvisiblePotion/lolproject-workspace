@@ -79,14 +79,6 @@
 							class="btn btn-outline-secondary" value="gm">그랜드마스터</button>
 						<button type="button" onclick="getranking(this)" id="get_m"
 							class="btn btn-outline-secondary" value="master">마스터</button>
-
-					</div>
-					<div class="input-group">
-						<div class="input-group-text" id="btnGroupAddon2">Search</div>
-						<input type="text" class="form-control"
-							placeholder="소환사명 검색..."
-							aria-label="Input group example"
-							aria-describedby="btnGroupAddon2">
 					</div>
 				</div>
 			</div>

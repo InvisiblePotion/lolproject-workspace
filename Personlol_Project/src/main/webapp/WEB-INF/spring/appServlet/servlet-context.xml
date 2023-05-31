@@ -54,7 +54,12 @@
 	    	<!-- 예외 설정 -->   
 	        <mapping path="/**" />
 	        <!-- 아이디 찾기 o-->
-	        <exclude-mapping path="/idfind" />     
+	        <exclude-mapping path="/idfind" />   
+	        <!-- 아이디 found -->
+	        <exclude-mapping path="/idfound" /> 
+	        <!-- form태그 -->
+	        <exclude-mapping path="/goidfind" />  
+	        
 			<!-- 메인 o-->
 	        <exclude-mapping path="/main" />
 			<!-- 메인2 o-->

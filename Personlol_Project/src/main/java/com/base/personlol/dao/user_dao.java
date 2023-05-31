@@ -36,7 +36,7 @@ public interface user_dao {
 	String login(Map<String, String> logindata);
 
 	//회원탈퇴
-	Integer deletemember(Map<String, String> userid);
+	Integer deletemember( Map<String, String> userid);
 	
 	//유저코드 업데이트
 	Integer newcode(Map<String, String> id);
@@ -46,6 +46,8 @@ public interface user_dao {
 	
 	//서버에서 user_lolname가져오기
 	String getUserLolname(@Param("user_id")String user_id);
+	
+
 
 
 

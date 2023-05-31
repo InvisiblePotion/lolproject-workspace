@@ -219,7 +219,7 @@ input:focus {outline:none;}
   justify-content: center;
   align-items: center;
   border-top: 1px solid #81ACFF;
-  width: 800px;
+  width: 776px;
   height: 100px;
 }
 
@@ -238,7 +238,7 @@ input:focus {outline:none;}
 
 .s_summoner_name{
   display: flex;
-  width: 400px;
+  width: 476px;
   justify-content: center;
   align-items: center;
 }

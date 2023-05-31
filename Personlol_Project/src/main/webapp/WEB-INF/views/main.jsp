@@ -522,56 +522,64 @@
 		      'page_num': page_num
 		    }
 		  }).done(res => {
-			$.each(res, function (i, line) {
-				let duolist = $('<div class="duolist"></div>')
-				let mainContents = $('<div class="main-contents"></div>');
-				let date = $('<article class="time-text"><span size="11" class="blue-text">' + new Date(line.DUO_DATE)
-					.toLocaleString('en-US', {
-						timeStyle: 'short'
-					}) + '</span></article>');
-				let title = $('<h1 size="15" color="text" class="title-text">' + line.DUO_TITLE + '</h1>');
-				let content = $('<p size="13" class="p-tag">' + line.DUO_CONTENT + '</p>');
-				let resultDiv = $('<div class="result-div"></div>');
-				let userContainer = $(
-					'<a href="fdaf" class="user-container"><div class="lane-img"></div><span size="12" class="user-id">' +
-					line.USER_LOLNAME + '</span></a>');
-				let mainBotton = $('<div class="main-botton"></div>');
-	
-				isLoggedIn().then((loggedIn) => {
-					if (loggedIn) {
-						// 로그인 상태인 경우에만 동작
-						isLoggedIn().then((loginCheck) => {
-							if (line.DUO_OWNERID == String(loginCheck)) {
-								console.log('성공');
-								let deleteLink = $(
-									'<button class="copy-box"><span class="user-id"><a href="/personlol/duo/delete?duo_id=' +
-									line.DUO_ID + '" id="wh">삭제하기</a></span></button>');
-								mainBotton.append(deleteLink);
-							} else {
-								console.log('실패');
-								let acceptLink = $(
-									'<button class="copy-box"><span class="user-id"><a href="/personlol/duo/request/' +
-									line.DUO_ID + '" id="wh">요청하기</a></span></button>');
-								mainBotton.append(acceptLink);
-							}
+			if(res.length != 0){
+				$.each(res, function (i, line) {
+					let duolist = $('<div class="duolist"></div>')
+					let mainContents = $('<div class="main-contents"></div>');
+					let date = $('<article class="time-text"><span size="11" class="blue-text">' + new Date(line.DUO_DATE)
+						.toLocaleString('en-US', {
+							timeStyle: 'short'
+						}) + '</span></article>');
+					let title = $('<h1 size="15" color="text" class="title-text">' + line.DUO_TITLE + '</h1>');
+					let content = $('<p size="13" class="p-tag">' + line.DUO_CONTENT + '</p>');
+					let resultDiv = $('<div class="result-div"></div>');
+					let userContainer = $('<a href="/personlol/summoner/?summoner_name=' + line.USER_LOLNAME + '">' +
+						    '<div class="user-container"><div class="lane-img"></div>' +
+						    '<span size="12" class="user-id">' + line.USER_LOLNAME + '</span></div></a>');
+					let mainBotton = $('<div class="main-botton"></div>');
+		
+					isLoggedIn().then((loggedIn) => {
+						if (loggedIn) {
+							// 로그인 상태인 경우에만 동작
+							isLoggedIn().then((loginCheck) => {
+								if (line.DUO_OWNERID == String(loginCheck)) {
+									console.log('성공');
+									let deleteLink = $(
+										'<button class="copy-box"><span class="user-id"><a href="/personlol/duo/delete?duo_id=' +
+										line.DUO_ID + '" id="wh">삭제하기</a></span></button>');
+									mainBotton.append(deleteLink);
+								} else {
+									console.log('실패');
+									let acceptLink = $(
+										'<button class="copy-box"><span class="user-id"><a href="/personlol/duo/request/' +
+										line.DUO_ID + '" id="wh">요청하기</a></span></button>');
+									mainBotton.append(acceptLink);
+								}
+							});
+						}
+		
+						resultDiv.append(userContainer);
+						mainContents.append(date);
+						mainContents.append(title);
+						mainContents.append(content);
+						mainContents.append(resultDiv);
+						mainContents.append(mainBotton);
+						
+						$('.duolist-container').append(mainContents);
 						});
-					}
-	
-					resultDiv.append(userContainer);
-					mainContents.append(date);
-					mainContents.append(title);
-					mainContents.append(content);
-					mainContents.append(resultDiv);
-					mainContents.append(mainBotton);
-					
-					$('.duolist-container').append(mainContents);
 					});
-				});
-	
-				//$('#result1').html(div);
+		
+					//$('#result1').html(div);
+					
+			}else{
+				alert("더이상 정보가 없습니다!")
+				location.href='/personlol/main'
+			}
+			
 		   
 			
 		  }).fail(err => {
+			  
 		    console.log(err);
 		  });
   	}
