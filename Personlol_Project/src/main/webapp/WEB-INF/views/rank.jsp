@@ -82,9 +82,9 @@
 
 					</div>
 					<div class="input-group">
-						<div class="input-group-text" id="btnGroupAddon2">@</div>
+						<div class="input-group-text" id="btnGroupAddon2">Search</div>
 						<input type="text" class="form-control"
-							placeholder="Input group example"
+							placeholder="소환사명 검색..."
 							aria-label="Input group example"
 							aria-describedby="btnGroupAddon2">
 					</div>
@@ -152,7 +152,7 @@
 				console.log(res)
 				let pList = ''
 				for (let i = 0; i < res; i++) {
-					pList += '<a href ="#" onclick = "pageclick(' + (i + 1) + ')">' + (i + 1) + '</a>'
+					pList += '<div class="page-box"><a href ="#" onclick = "pageclick(' + (i + 1) + ')">' + (i + 1) + '</a></div>'
 				}
 				$('#pagenum').html(pList);
 

@@ -87,11 +87,16 @@ fieldset{
   width: 200px;
   justify-content: center;
   /* border: 1px solid black; */
-  background-color: white;
+  background-color: #413632;
   padding: 0 0 0 0;
   flex-direction: column;
 }
-
+.whc{
+	color: white;
+}
+.brn:hover{
+	color: brown;
+}
 #table_list{
   height: 40px;
 }
@@ -193,7 +198,7 @@ fieldset{
 }
 
 .search-db{
-  width: 800px;
+  width: 776px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -202,6 +207,8 @@ fieldset{
   border-top: 1px solid #81ACFF;
   height: 80px;
   position: relative;
+  margin-left: 24px;
+  border-radius: 7px;
 }
 
 input:focus {outline:none;}
@@ -323,4 +330,24 @@ input:focus {outline:none;}
 }
 .copy-box{
 	border-radius: 8px;
+}
+a:hover {
+  text-decoration: none;
+}
+footer{
+	margin-top: 5%;
+	background-color: #403F3C;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.foot-box{
+	padding: 5px;
+	margin: 20px;
+	color: #ffff;
+	font-size: 15px;
+}
+.bar{
+	border-bottom: 1px solid #ffff;
 }

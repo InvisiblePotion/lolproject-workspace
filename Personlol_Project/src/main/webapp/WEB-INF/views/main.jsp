@@ -106,8 +106,8 @@
 						<table class="table " id="head_table">
 							<thead>
 								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
+									<th width="150px" style="font-size: 12px" class="whc">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier" class="whc">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -128,8 +128,8 @@
 						<table class="table " id="head_table">
 							<thead>
 								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
+									<th width="150px" style="font-size: 12px" class="whc">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier" class="whc">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -149,8 +149,8 @@
 						<table class="table " id="head_table">
 							<thead>
 								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
+									<th width="150px" style="font-size: 12px" class="whc">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier" class="whc">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -171,8 +171,8 @@
 						<table class="table " id="head_table">
 							<thead>
 								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
+									<th width="150px" style="font-size: 12px" class="whc">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier" class="whc">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -192,8 +192,8 @@
 						<table class="table " id="head_table">
 							<thead>
 								<tr class="tr_champ" align="center">
-									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
+									<th width="150px" style="font-size: 12px" class="whc">챔피언</th>
+									<th width="50px" style="font-size: 12px" id="table_tier" class="whc">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -227,8 +227,14 @@
 		</div id="maindiv">
 
 		<footer>
-			<div>
-				<h2>하단 footer</h2>
+			<div class="foot-box bar">
+				<span>1.이 프로젝트는 riot-api를 활용한 데이터 분석 사이트를 구현 한 것 입니다.</span>
+			</div>
+			<div class="foot-box bar">
+				<span>1.이 프로젝트는 riot-api를 활용한 데이터 분석 사이트를 구현 한 것 입니다.</span>
+			</div>
+			<div class="foot-box">
+				<span>프로젝트 기간 2023/04/00~ 2023/05/31     프로젝트 팀원 이름: 이세인, 이주찬, 문정환, 강태민, 김명재</span>
 			</div>
 		</footer>
 
@@ -250,7 +256,7 @@
         top_img = '<a href="/personlol/champion/detail?champ_id=' + val.champ_id + '&lane=' + val.lane + '">' +
           '<div class="top3"><div class="c_img">' +
           '<img class="champ_img" src="./resources/dd/img/champion/icon/' + val.champ_key + '.png" alt="챔피언 사진">' +
-          '</div><div class="c_name top3_name">' + val.champ_name + '</div><div class="c_tier">' + val.pick_rate +
+          '</div><div class="c_name top3_name whc brn">' + val.champ_name + '</div><div class="c_tier whc">' + val.pick_rate +
           '</div>' +
           '</div></a>';
         $('.top_val').append(top_img);
@@ -274,7 +280,7 @@
         top_img = '<a href="/personlol/champion/detail?champ_id=' + val.champ_id + '&lane=' + val.lane + '">' +
           '<div class="top3"><div class="c_img">' +
           '<img class="champ_img" src="./resources/dd/img/champion/icon/' + val.champ_key + '.png" alt="챔피언 사진">' +
-          '</div><div class="c_name top3_name">' + val.champ_name + '</div><div class="c_tier">' + val.pick_rate +
+          '</div><div class="c_name top3_name whc brn">' + val.champ_name + '</div><div class="c_tier whc">' + val.pick_rate +
           '</div>' +
           '</div></a>';
         $('.jug_val').append(top_img);
@@ -298,7 +304,7 @@
         top_img = '<a href="/personlol/champion/detail?champ_id=' + val.champ_id + '&lane=' + val.lane + '">' +
           '<div class="top3"><div class="c_img">' +
           '<img class="champ_img" src="./resources/dd/img/champion/icon/' + val.champ_key + '.png" alt="챔피언 사진">' +
-          '</div><div class="c_name top3_name">' + val.champ_name + '</div><div class="c_tier">' + val.pick_rate +
+          '</div><div class="c_name top3_name whc brn">' + val.champ_name + '</div><div class="c_tier whc">' + val.pick_rate +
           '</div>' +
           '</div></a>';
         $('.mid_val').append(top_img);
@@ -322,7 +328,7 @@
         top_img = '<a href="/personlol/champion/detail?champ_id=' + val.champ_id + '&lane=' + val.lane + '">' +
           '<div class="top3"><div class="c_img">' +
           '<img class="champ_img" src="./resources/dd/img/champion/icon/' + val.champ_key + '.png" alt="챔피언 사진">' +
-          '</div><div class="c_name top3_name">' + val.champ_name + '</div><div class="c_tier">' + val.pick_rate +
+          '</div><div class="c_name top3_name whc brn">' + val.champ_name + '</div><div class="c_tier whc">' + val.pick_rate +
           '</div>' +
           '</div></a>';
         $('.ad_val').append(top_img);
@@ -346,7 +352,7 @@
         top_img = '<a href="/personlol/champion/detail?champ_id=' + val.champ_id + '&lane=' + val.lane + '">' +
           '<div class="top3"><div class="c_img">' +
           '<img class="champ_img" src="./resources/dd/img/champion/icon/' + val.champ_key + '.png" alt="챔피언 사진">' +
-          '</div><div class="c_name top3_name">' + val.champ_name + '</div><div class="c_tier">' + val.pick_rate +
+          '</div><div class="c_name top3_name whc brn">' + val.champ_name + '</div><div class="c_tier whc">' + val.pick_rate +
           '</div>' +
           '</div></a>';
         $('.sup_val').append(top_img);
