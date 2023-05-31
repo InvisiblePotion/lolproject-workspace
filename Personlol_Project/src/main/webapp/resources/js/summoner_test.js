@@ -1,7 +1,7 @@
 function reloadPlayRecord() {
     const summoner_name = getQueryString('summoner_name')
     $('.btn-reload-playrecord').css('background-color', '#729769');
-    $('.btn-reload-playrecord').html('전적 갱신 중<br>(약 30초 소요)');
+    $('.btn-reload-playrecord').html('전적 갱신 중<br>(약 40초 소요)');
     $.ajax({
         method: 'get',
         url: 'http://localhost:8095/personlol/summoner/reload-playrecord',
@@ -10,7 +10,7 @@ function reloadPlayRecord() {
     }).done((res)=>{
         console.log(res);
         $('.btn-reload-playrecord').css('background-color', '#699097');
-        $('.btn-reload-playrecord').html('가져오는 중<br>(약 10초 소요)');
+        $('.btn-reload-playrecord').html('가져오는 중<br>(약 5초 소요)');
         getGameIds(summoner_name, true);
     }).fail((err)=>{
         console.log(err);
@@ -100,9 +100,13 @@ function getGameRecords(game_id_list, is_reload_record) {
                 inputGameDataExpend(game_data, parseInt(idx)+1);
             }
         }
+        // 전적 갱신으로 타고 들어온 경우엔 갱신 완료
         if (is_reload_record) {
             $('.btn-reload-playrecord').css('background-color', '#f7ea79');
             $('.btn-reload-playrecord').html('갱신 완료!');
+        } else { // 페이지 초기에 온 경우 전적 갱신
+            $('.btn-reload-playrecord').css('background-color', '#fff');
+            $('.btn-reload-playrecord').html('전적 갱신');
         }
     }).fail((err)=>{
         console.log(err);
@@ -524,5 +528,5 @@ function toggleRecordExpend(tag) {
 }
 
 $(function () {
-    getGameIds(getQueryString('summoner_name'));
+    getGameIds(getQueryString('summoner_name'), false);
 });
