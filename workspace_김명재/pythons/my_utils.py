@@ -1139,6 +1139,7 @@ def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> in
         oracle_close()
 
         # summoner_recent_game 테이블에 입력
+        oracle_totalExecute(f"DELETE FROM SUMMONER_RECENT_GAME WHERE summoner_name = '{summoner_name}'", debug_print=False)
         oracle_totalExecute(f"INSERT INTO SUMMONER_RECENT_GAME VALUES ('{summoner_name}', '{mid}')", debug_print=False)
     
     time.sleep(1)
