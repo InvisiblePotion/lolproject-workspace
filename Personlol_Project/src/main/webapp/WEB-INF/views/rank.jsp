@@ -82,9 +82,9 @@
 
 					</div>
 					<div class="input-group">
-						<div class="input-group-text" id="btnGroupAddon2">@</div>
+						<div class="input-group-text" id="btnGroupAddon2">Search</div>
 						<input type="text" class="form-control"
-							placeholder="Input group example"
+							placeholder="소환사명 검색..."
 							aria-label="Input group example"
 							aria-describedby="btnGroupAddon2">
 					</div>
@@ -150,27 +150,85 @@
 			getajax('lol_' + cur_rank, info)
 		}
 
+		
 
+		
+		
+		
+		
+		
 		//페이지 전체 가져오기(몇 페이지 나와야하는지 받아오는 함수)
 		function highpage(rank) {
-			$.ajax({
-				method: 'get',
-				url: '/personlol/rank/highpage',
-				data: {
-					'rank': rank
-				}
-			}).done(res => {
-				console.log(res)
-				let pList = ''
-				for (let i = 0; i < res; i++) {
-					pList += '<a  href ="#" onclick = "pageclick(' + (i + 1) + ')">' + (i + 1) + '</a>'
-				}
-				$('#pagenum').html(pList);
 
-			}).fail(err => {
-				console.log(err)
-			})
+		  $.ajax({
+		    method: 'get',
+		    url: '/personlol/rank/highpage',
+		    data: {
+		      'rank': rank
+		    }
+		  }).done(res => {
+		    console.log(res);
+		    let pList = '';
+		    let startIndex = 0; // 현재 페이지의 시작 인덱스
+		    //Math.ceil 소숫점 이하를 반올림하여 가장 가까운 정수로 변환
+		    let totalPages = Math.ceil(res / 5); // 전체 페이지 수 (한 페이지에 5개의 번호)
+		
+		    // 이전 버튼을 클릭했을 때 호출되는 함수
+		    function showPreviousNumbers() {
+		      if (startIndex >= 5) {
+		        startIndex -= 5;
+		        fetchPageNumbers();
+		      }
+		    }
+		
+		    // 다음 버튼을 클릭했을 때 호출되는 함수
+		    function showNextNumbers() {
+		      if (startIndex + 5 < res) {
+		        startIndex += 5;
+		        fetchPageNumbers();
+		      }
+		    }
+		
+		    // 페이지 번호를 가져와서 표시하는 함수
+		    function fetchPageNumbers() {
+		      let endIdx = startIndex + 5; // 현재 페이지의 끝 인덱스
+		      if (endIdx > res) {
+		        endIdx = res;
+		      }
+		
+		      pList = '';
+		      for (let i = startIndex; i < endIdx; i++) {
+		        pList += '<div class="page-box"><a href="#" onclick="pageclick(' + (i + 1) + ')">' + (i + 1) + '</a></div>';
+		      }
+		
+		      $('.page-box').remove(); // 기존 페이지 번호 요소 제거
+		      $('.prev-button').remove(); // 이전 버튼 요소 제거
+		      $('.next-button').remove(); // 다음 버튼 요소 제거
+		
+		      $('#pagenum').append(pList);
+		
+		      // 이전 버튼 추가
+		      if (startIndex >= 5) {
+		        let prevButton = $('<div class="prev-button"><button>이전</button></div>');
+		        prevButton.click(showPreviousNumbers);
+		        $('#pagenum').prepend(prevButton);
+		      }
+		
+		      // 다음 버튼 추가
+		      if (endIdx < res) {
+		        let nextButton = $('<div class="next-button"><button>다음</button></div>');
+		        nextButton.click(showNextNumbers);
+		        $('#pagenum').append(nextButton);
+		      }
+		    }
+		
+		    fetchPageNumbers();
+		  }).fail(err => {
+		    console.log(err);
+		  });
+
 		}
+
 
 		//비동기실행(랭킹정보 가져오는 함수)
 		function getajax(rank, page) {

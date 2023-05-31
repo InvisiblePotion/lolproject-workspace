@@ -43,6 +43,9 @@ public interface user_dao {
 	
 	//서버에 lolname이 실존하는가
 	int checksv_lolname(String user_lolname);
+	
+	//서버에서 user_lolname가져오기
+	String getUserLolname(@Param("user_id")String user_id);
 
 
 

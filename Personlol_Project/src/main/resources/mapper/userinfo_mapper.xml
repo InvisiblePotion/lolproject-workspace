@@ -66,5 +66,8 @@
 		SELECT COUNT(*) FROM SUMMONER s WHERE S.SUMMONER_NAME = #{user_lolname}
 	</select>
 	
+	<select id="getUserLolname" resultType="String"> 
+		SELECT USER_LOLNAME FROM USERINFO WHERE USER_ID = #{user_id}
+	</select>
 
 </mapper>

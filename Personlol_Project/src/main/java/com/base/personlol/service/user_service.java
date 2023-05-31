@@ -189,6 +189,11 @@ public class user_service {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public String getUserLolname(String user_id) {
+		String user_lolname = u_dao.getUserLolname(user_id);
+		return user_lolname;
+	}
 	
 
 	
