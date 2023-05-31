@@ -12,7 +12,7 @@
 	
 	<!-- 마이페이지 시작 시 롤 네임 -->
 	<select id="getnameicon" resultType = "mypage">
-		SELECT u.USER_ID, s.SUMMONER_PROFILE ,s.SUMMONER_NAME
+		SELECT u.USER_ID, s.SUMMONER_PROFILE ,s.SUMMONER_NAME, s.SUMMONER_TIER
 		FROM USERINFO u
 		JOIN SUMMONER s ON u.USER_LOLNAME = s.SUMMONER_NAME
 		WHERE u.USER_ID = #{user_id}
@@ -82,4 +82,8 @@
 	<update id="go_duo_del" parameterType="String">
 		UPDATE DUO SET DUO_ACCEPTER = 'none' WHERE (DUO_OWNERID = #{request_id} AND DUO_ACCEPTER = #{user_id}) OR (DUO_ACCEPTER = #{request_id} AND DUO_OWNERID = #{user_id})
 	</update>
+	
+	<select id="get_score" resultType ="String">
+		SELECT SCORE FROM RANK_TARGET_DATA WHERE PARTICIPANT_NAME = #{name}
+	</select>
 </mapper>
