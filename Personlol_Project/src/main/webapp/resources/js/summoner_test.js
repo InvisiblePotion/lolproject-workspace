@@ -14,6 +14,8 @@ function reloadPlayRecord() {
         getGameIds(summoner_name, true);
     }).fail((err)=>{
         console.log(err);
+        $('.btn-reload-playrecord').css('background-color', '#ff4343');
+        $('.btn-reload-playrecord').html('갱신 실패');
     });
 }
 
@@ -78,6 +80,8 @@ function getGameRecords(game_id_list, is_reload_record) {
         const parse_keys = [
             'game','champion','spell','skill','skilltree',
             'rune','item','kda','gold','cs','damage','vision'];
+
+        $('.raw-record-container').empty();
         for (const idx in rawdata_list) {
             if (Object.hasOwnProperty.call(rawdata_list, idx)) {
                 let game_data = rawdata_list[idx];
@@ -91,7 +95,6 @@ function getGameRecords(game_id_list, is_reload_record) {
                         }
                     }
                 }
-
                 extendRecordItem(parseInt(idx)+1);
                 for (let p = 0; p < 10; p++) {
                     extendExpendParticipant(parseInt(idx)+1, parseInt(p)+1);
