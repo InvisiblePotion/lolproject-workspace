@@ -255,205 +255,8 @@
 				<div class="positions">포지션들</div>
 			</div>
 			<div class="three main raw-record-container">
-				<li class="main list raw-record-item">
-					<div class="madiv_wrap">
-						<div class="madiv list2">
-							<div class="content">
-								<div class="game-content">
-									<div class="game">
-										<div class="type">솔랭</div>
-										<div class="time-stamp">
-											<div class="raw-game-endtime" style="position: relative;">0일 전</div>
-										</div>
-										<div class="bar"></div>
-										<div class="result raw-game-win">-</div>
-										<div class="length raw-game-duration">00분 00초</div>
-									</div>
-									<div class="sinfo">
-										<div class="into">
-											<div class="champion">
-												<div class="icon">
-													<a href="fd"> <img class="raw-self-champion-icon" src="" alt=""> <span class="champion-level raw-self-champion-level">18</span>
-													</a>
-												</div>
-												<div class="spells">
-													<div class="spell">
-														<div class="sp">
-															<img class="raw-self-spell-spell1" src="" alt="">
-														</div>
-													</div>
-													<div class="spell">
-														<div class="sp">
-															<img class="raw-self-spell-spell2" src="" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="runes">
-													<div class="rune">
-														<div class="sp">
-															<img class="raw-self-rune-core-mainrune" src="" alt="">
-														</div>
-													</div>
-													<div class="rune">
-														<div class="sp">
-															<img class="raw-self-rune-runetype-sub" src="" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="kda">
-												<div class="k-d-a">
-													<span class="raw-self-kda-kills">0</span> / <span class="d raw-self-kda-deaths">0</span> / <span class="raw-self-kda-assists">0</span>
-												</div>
-												<div class="ratio">
-													<span class="raw-self-kda-kda">0:1</span> 평점
-												</div>
-											</div>
-											<div class="status">
-												<div class="p-kill">
-													<div class="raw-self-kda-killparticipation" style="position: relative;">킬관여 0%</div>
-												</div>
-												<div class="ward raw-self-vision-controlward">제어 와드 0</div>
-												<div class="cs">
-													<div class="raw-self-cs" style="position: relative;">CS 0 (0)</div>
-												</div>
-												<div class="average-tier">
-													<div style="position: relative;"><!-- ### 랭크 데이터 삭제됨 --></div>
-												</div>
-											</div>
-
-										</div>
-										<div class="intoto">
-											<div class="items">
-												<ul>
-													<li class="first">
-														<div>
-															<img class="raw-self-item-item1" src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img class="raw-self-item-item2" src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img class="raw-self-item-item3" src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img class="raw-self-item-item4" src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img class="raw-self-item-item5" src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img class="raw-self-item-item6" src="" alt="">
-														</div>
-													</li>
-												</ul>
-												<div class="ward">
-													<div>
-														<img class="raw-self-item-trinket" src="" alt="">
-													</div>
-												</div>
-											</div>
-											<div class="multi-kill raw-self-kda-multikill"></div>
-										</div>
-									</div>
-									<div class="participants">
-										<ul>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part1-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part1-summoner-name">Player1</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part2-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part2-summoner-name">Player2</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part3-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part3-summoner-name">Player3</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part4-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part4-summoner-name">Player4</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part5-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part5-summoner-name">Player5</div>
-											</li>
-										</ul>
-										<ul>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part6-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part6-summoner-name">Player6</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part7-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part7-summoner-name">Player7</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part8-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part8-summoner-name">Player8</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part9-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part9-summoner-name">Player9</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img class="raw-part10-champion-icon" src="" alt="">
-												</div>
-												<div class="name raw-part10-summoner-name">Player10</div>
-											</li>
-										</ul>
-										<ul></ul>
-									</div>
-								</div>
-							</div>
-							<div class="action">
-								<button class="detail2">
-									<img src="" alt="">
-								</button>
-							</div>
-						</div>
-						<div class="list2_detail raw-expend-container">
-							<div class="list2_detail2">
-								<div class="detail2 summoner_info">소환사정보</div>
-								<div class="detail2 summoner_kda">KDA</div>
-								<div class="detail2 summoner_damage">딜량</div>
-								<div class="detail2 summoner_ward">와드</div>
-								<div class="detail2 summoner_cs">CS</div>
-								<div class="detail2_summoner_items">아이템 빌드</div>
-							</div>
-						</div>
-					</div>
-				</li>
-		</div>
+				<!-- 게임 전적 들어갈 위치 -->
+			</div>
 		<div class="more2">더보기</div>
 	</div>
 
@@ -532,13 +335,13 @@
 		console.log(err);
 	})
 </script>
-
-<script>
+<!-- ### 230531-10:33: 기능상 문제로 주석 처리 -->
+<!-- <script>
 	//버튼 클릭시 밑에 열리는거
 	$('.detail2').click(function () {
 		$('.list2_detail').toggle();
 	});
-</script>
+</script> -->
 <script>
 	$('.gosummonerinfo').click(function () {
 		//siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기

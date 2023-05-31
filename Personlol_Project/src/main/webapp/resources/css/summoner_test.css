@@ -1,30 +1,29 @@
-.raw-self-champion-icon {
+.raw-self-champion-icon, .raw-part-champion-icon {
     width: 48px;
 }
-.raw-self-item-item1 {
+.raw-self-item-item1, .raw-self-item-item2,
+.raw-self-item-item3, .raw-self-item-item4,
+.raw-self-item-item5, .raw-self-item-item6,
+.raw-self-item-trinket,
+.raw-part-item-item1, .raw-part-item-item2,
+.raw-part-item-item3, .raw-part-item-item4,
+.raw-part-item-item5, .raw-part-item-item6,
+.raw-part-item-trinket {
     width: 22px;
+    height: 22px;
+    background-color: #5383E8;
+    border-radius: 4px;
 }
-.raw-self-item-item2 {
+.raw-self-spell-spell1, .raw-self-spell-spell2,
+.raw-part-spell-spell1, .raw-part-spell-spell2 {
     width: 22px;
+    height: 22px;
+    background-color: #E84057;
 }
-.raw-self-item-item3 {
+.raw-self-rune-core-mainrune, .raw-self-rune-runetype-sub,
+.raw-part-rune-core-mainrune, .raw-part-rune-runetype-sub {
+    background-color: rgb(51, 118, 53);
     width: 22px;
-}
-.raw-self-item-item4 {
-    width: 22px;
-}
-.raw-self-item-item5 {
-    width: 22px;
-}
-.raw-self-item-item6 {
-    width: 22px;
-}
-.raw-self-item-trinket {
-    width: 22px;
-}
-.raw-self-spell-spell1 {
-    width: 22px;
-}
-.raw-self-spell-spell2 {
-    width: 22px;
+    height: 22px;
+    border-radius: 50%;
 }
