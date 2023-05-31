@@ -41,7 +41,7 @@
 							<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
 								href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
 								href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-								href="/personlol/summoner/" class="m-col">소환사분석</a>
+								href="/personlol/summoner/" class="m-col summoner-info">소환사분석</a>
 
 
 						</div>
@@ -594,7 +594,60 @@
 		});
 	}
   </script>
-
+	<script type="text/javascript">
+		$('.summoner-info').click(function () {
+			console.log("summoner-info")
+			event.preventDefault();
+			// 로그인 상태 확인 요청 보내기
+			$.ajax({
+				url: '/personlol/duo/isLoggedIn',
+				type: 'GET',
+				success: function (response) {
+					console.log("체크로그인:",res)
+					// 로그인이 되어있다면
+					if (response) {
+						//세션아이디 받아오는 ajax
+						$.ajax({
+							method: 'get',
+							url: '/personlol/duo/check-login-status', // 서버에서 세션 상태를 확인하는 API 엔드포인트
+							async: true, // 비동기적으로 요청 처리
+							success: function (response) {
+								var loggedIn = response.loggedIn;
+								var loginCheck = response.loginCheck; // loginCheck 변수를 선언하여 값을 받아옴
+								console.log(loginCheck);
+								//세션아이디로 lolName검색 후 포워딩
+								$.ajax({
+									method: 'get',
+									url: '/personlol/user/get_user_lolname',
+									data: { 'user_id' : loginCheck}
+									async: true,
+									success: function (response){
+									      const encoded_name = encodeURIComponent(response);
+									      const go_url = '/personlol/summoner/?summoner_name=' + encoded_name;
+									},
+									error: function (error){
+										console.log(error);
+									}
+								});
+								
+							},
+							error: function (error) {
+								console.log(error);
+								reject(error);
+							}
+						});
+				      
+					} else {
+						alert('로그인 후 사용해주세요.');
+						
+					}
+				},
+				error: function () {
+					alert('로그인 중이 아닙니다.');
+				}
+			});
+		});
+	</script>
 </body>
 
 </html>

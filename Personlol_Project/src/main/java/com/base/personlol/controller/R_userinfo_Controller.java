@@ -185,5 +185,12 @@ public class R_userinfo_Controller {
 		}
 		
 	}
+	//서버에서 롤 이름 가져오기
+	@GetMapping("/get_user_lolname")
+	public String getUserLolname(@RequestParam String user_id ) {
+		String user_lolname = u_ser.getUserLolname(user_id);
+		System.out.println("컨트롤러 롤네임??"+user_lolname);
+		return user_lolname;
+	}
 	
 }
