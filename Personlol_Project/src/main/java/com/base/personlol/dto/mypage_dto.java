@@ -14,10 +14,13 @@ public class mypage_dto {
 	private String user_id;
 	private int summoner_profile;
 	private String summoner_name;
+	private String summoner_tier;
 	
 	private String duo_ownerid;
 	private String duo_title;
 	private String duo_content;
 	
 	private String duolist;
+	
+	private String score;
 }

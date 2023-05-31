@@ -83,7 +83,7 @@
 			<nav class="bener-container">
 				<div class="bener">
 					<a href="/personlol/main" class="imgfile"><img
-						src="../resources/img/logotesting.png" height="25px"></a>
+						src="../resources/img/navLogo.png" height="28px" width="100px"></a>
 					<div class="search-bar">
 
 						<input class="summoner_name_search" type="text"
@@ -138,9 +138,9 @@
 				<button type="button" class="update">업데이트</button>
 				<div class="lane-bar-mid">
 					<div class="categori">
-						<div class="box1 game">
+<!-- 						<div class="box1 game">
 							<span size="12" class="gametext">모든 큐</span>
-						</div>
+						</div> -->
 						<div class="box1 game tier">
 							<!-- <span size="12" class="gametext">모든 티어</span> -->
 							<select class="form-select" aria-label="Default select example"

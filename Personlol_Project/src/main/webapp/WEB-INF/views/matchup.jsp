@@ -30,7 +30,7 @@
 			<nav class="bener-container">
 				<div class="bener">
 					<a href="/personlol/main" class="imgfile"><img
-						src="../resources/img/logotesting.png" height="25px"></a>
+						src="../resources/img/navLogo.png" height="28px" width="100px"></a>
 					<div class="search-bar">
 
 						<input class="summoner_name_search" type="text"
@@ -76,14 +76,16 @@
 <div class="container">
 
     <div class="row">
-      <div class="col" id="champ_img">챔피언 사진</div>
-      <div class="col">
-        <div class = "row" id="champ_name"></div>
-        <div class = "row skillimg">
-          <div class = "col" id="skill_img">스킬사진</div>
-        </div>
-      </div>     
-    </div>
+			<div class="col" >
+				<div class="row">
+					<div class="col" id="main_champ_img"></div>
+					<div class="col" >
+						<div class="row"><span class="skill_info_span">스킬 정보</span></div>
+						<div class="row"id="champ_skill"></div>
+					</div>
+				</div>
+			</div>
+		</div>
     
    <div class="row">
       <div class="col" id="win">
@@ -238,20 +240,18 @@ $(document).ready(function() {
 			var myChart = new Chart(context1, {
 			    type: 'pie', //차트형태
 			    data: {//차트에 들어갈 데이터
-			      labels: ['승률'],
+			      labels: ['승률'+'('+info.win_rate+'%)'],
 			      datasets: [{//데이터
 			        label: 'win_rate',//차트제목
 			        fill: false,//line형태일때, 선 안쪽을 채우는지 
 			        data: [info.win_rate,100 - info.win_rate],//x축 라벨에 대응되는 데이터값
 			        backgroundColor: [ //색상
-			          /* 'rgba(255, 99, 132, 0.2)'
-			          'rgba(54, 162, 235, 0.2)', */
-			          'rgba(255, 206, 86, 0.2)'
+			          'rgba(255, 206, 86, 0.2)',
+			          'rgba(221, 221, 221,0.2)'
 			        ],
 			        borderColor: [//경계선 색상
-			          /* 'rgba(255, 99, 132, 1)'
-			          'rgba(54, 162, 235, 1)', */
-			          'rgba(255, 206, 86, 1)'
+			          'rgba(255, 206, 86, 1)',
+			          'rgba(221, 221, 221,1)'
 			        ],
 			        borderWidth: 1 //경계선 굵기
 			      }]
@@ -274,20 +274,21 @@ $(document).ready(function() {
 				var myChart = new Chart(context2, {
 				    type: 'pie', //차트형태
 				    data: {//차트에 들어갈 데이터
-				      labels: ['픽률'],
+				      labels: ['픽률'+'('+info.pick_rate+'%)'],
 				      datasets: [{//데이터
 				        label: 'win_rate',//차트제목
 				        fill: false,//line형태일때, 선 안쪽을 채우는지 
 				        data: [info.pick_rate, (50-info.pick_rate)],//x축 라벨에 대응되는 데이터값
 				        backgroundColor: [ //색상
-				          'rgba(255, 99, 132, 0.2)'
-				          /* 'rgba(54, 162, 235, 0.2)',
-				          'rgba(255, 206, 86, 0.2)' */
+				          'rgba(255, 99, 132, 0.2)',
+				          'rgba(221, 221, 221,0.2)'
+				          
+				         
 				        ],
 				        borderColor: [//경계선 색상
-				          'rgba(255, 99, 132, 1)'
-				          /* 'rgba(54, 162, 235, 1)',
-				          'rgba(255, 206, 86, 1)' */
+				          'rgba(255, 99, 132, 1)',
+				          'rgba(221, 221, 221,1)'
+				          
 				        ],
 				        borderWidth: 1 //경계선 굵기
 				      }]
@@ -310,16 +311,18 @@ $(document).ready(function() {
 					var myChart = new Chart(context3, {
 					    type: 'pie', //차트형태
 					    data: {//차트에 들어갈 데이터
-					      labels: ['밴률'],
+					      labels: ['밴률'+'('+info.ban_rate+'%)'],
 					      datasets: [{//데이터
 					        label: 'win_rate',//차트제목
 					        fill: false,//line형태일때, 선 안쪽을 채우는지 
 					        data: [info.ban_rate, (100-info.ban_rate)],//x축 라벨에 대응되는 데이터값
 					        backgroundColor: [ //색상
-					        	'rgba(153, 102, 255, 0.2)'
+					        	'rgba(153, 102, 255, 0.2)',
+						         'rgba(221, 221, 221,0.2)'
 					        ],
 					        borderColor: [//경계선 색상
-					        	'rgba(153, 102, 255, 1)'
+					        	'rgba(153, 102, 255, 1)',
+						         'rgba(221, 221, 221,1)'
 					        ],
 					        borderWidth: 1 //경계선 굵기
 					      }]
@@ -339,8 +342,10 @@ $(document).ready(function() {
 			$('#champ_name').html(info.champ_name)
 			
 			icon_img = '<img class="icon_img" width="70" height="70" src="../resources/'+info.champ_icon +'" alt="이미지">'
+			champ_name = '<span class="title_champ_name" style="margin-left: 10px;">'+info.champ_name+'</span>'
 		})
-		$('#champ_img').html(icon_img)
+		$('#main_champ_img').append(icon_img)
+		$('#main_champ_img').append(champ_name)
 	}).fail(err => {
 		console.log(err)
 	})//초기정보 끝
@@ -479,6 +484,7 @@ $(document).ready(function() {
 	}).done(res => {
 		
 		let skill_img=''
+		let skillKeys = ['P', 'Q', 'W', 'E', 'R']; // 텍스트로 사용할 스킬 키들
 		$.each(res, function (i,skill) {
 			// skill설명들이 null인 경우에 대한 조건문 추가
 			let tooltip = skill.skill_tooltip ? skill.skill_tooltip : '';
@@ -488,6 +494,7 @@ $(document).ready(function() {
 			
 			skill_img +=
 				'<div class="skill-container">' +
+				'<div class="skill-key-info">' + skillKeys[i] + '</div>' + 
 				'<img class="skill_img" width="40" height="40" src="../resources/'+skill.skill_icon+
 				'" alt="이미지" >'+'<div class="tooltip">'+'<div><span style="font-size: 14px; font-weight: bold; color: yellow;">'+
 				skill.skill_name+'</span></div>'+
@@ -495,7 +502,7 @@ $(document).ready(function() {
 				'스킬 마나소모량: '+cost+'</div><div>'+'스킬 범위: '+range+'</div>'+
 				'<div>'+skill.skill_desc+'</div><div>'+tooltip+'</div></div></div>';
 		})
-		$('#skill_img').html(skill_img)
+		$('#champ_skill').append(skill_img)
 		
 		
 	}).fail(err => {
@@ -517,15 +524,15 @@ $(document).ready(function() {
 		champ_img1 =
 			'<div class="f_img">'+
 			'<img class="icon_img" width="100" height="100" src="../resources/'+res[0].champ_icon +'" alt="이미지">'+
-			'<span>'+res[0].champ_name+'</span>'+
+			'<span class="sub_r_champ_name">'+res[0].champ_name+'</span>'+
 			'</div>';
 			
 		$('#champ_img1').html(champ_img1);
 		
 		champ_img2 =
 			'<div class="s_img">'+
+			'<span class="sub_l_champ_name">'+res[1].champ_name+'</span>'+
 			'<img class="icon_img" width="100" height="100" src="../resources/'+res[1].champ_icon +'" alt="이미지">'+
-			'<span>'+res[1].champ_name+'</span>'+
 			'</div>';
 			
 		$('#champ_img2').html(champ_img2);
@@ -724,9 +731,9 @@ $(document).ready(function() {
 				url:'/personlol/matchup/matchamp-info'
 				
 			}).done(res =>{
-				console.log("14개 값 다넘어오는지 보자")
+				
 				console.log(res)
-				console.log("14개 값 다넘어오는지 보자")
+				
 				
 				matchamp_info=''
 				$.each(res, function (i,champ) {
@@ -735,7 +742,7 @@ $(document).ready(function() {
 						'<tr>'+
 						
 						'<td align="left" width="120px">'+
-						'<a href="/personlol/champion/matchup?champ_id='+ champ_id +'&lane='+champ_lane+'&match_champ='+matchamp_id+'">'+
+						'<a class="match_champ" href="/personlol/champion/matchup?champ_id='+ champ_id +'&lane='+champ_lane+'&match_champ='+matchamp_id+'">'+
 						'<img width="50" height="50" src="../resources/'+champ.champ_icon +'" alt="이미지">' +
 						'<span style="font-size: 12px; font-weight: bold;">' +shortenedName +
 						'</span> </td>'+

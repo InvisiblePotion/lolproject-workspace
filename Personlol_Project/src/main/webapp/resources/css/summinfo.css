@@ -961,6 +961,7 @@ img{
   width: 40px;
   height: 96px;
   background-color: #81bdf9;
+  cursor: pointer;
 }
 .action .detail2 img{
   /* position: absolute; */
@@ -1002,9 +1003,12 @@ body{
 
 .list2_detail{
   width: 738px;
+
+
   display: flex;
   flex-direction: column;
 }
+
 
 .expend.champ_icon{
   width: 45px;
@@ -1015,6 +1019,7 @@ body{
 
 }
 .expend.runes{
+
   width: 18px;
 
 }
@@ -1023,21 +1028,28 @@ body{
   width: 100px;
 }
 
+
 .expend.name{
+
   width: 163px;
   display: flex;
   flex-direction: column;
 }
+
 .expend.s_kda{
+
   width: 100px;
   display: flex;
   flex-direction: column;
 }
+
 .expend.damage{
+
   width: 120px;
   display: flex;
   flex-direction: row;
 }
+
 .expend.dealing{
   display: flex;
   flex-direction: column;
@@ -1047,25 +1059,31 @@ body{
   flex-direction: column;
 }
 .expend.ward{
+
   width: 48px;
   display: flex;
   flex-direction: column;
 }
+
 .expend.s_cs{
+
   width: 56px;
   display: flex;
   flex-direction: column;
 }
+
 .list2_expend{
   width: 738px;
   display: flex;
   flex-direction: row;
 }
 .expend.items{
+
   width: 175px;
   display: flex;
   flex-direction: row;
 }
+
 
 .expend.summoner_info{
   width: 243px;
@@ -1085,5 +1103,6 @@ body{
   width: 56px;
 }
 .expend.summoner_items{
+
   width: 175px;
 }

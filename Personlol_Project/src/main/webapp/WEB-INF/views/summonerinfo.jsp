@@ -22,7 +22,9 @@
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
+
 					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png" height="25px"></a>
+
 					<div class="search-bar">
 
 						<input class="summoner_name_search" type="text" placeholdr="소환사명 검색....">
@@ -60,6 +62,7 @@
 		</div>
 	</div id="generic">
 	<!-- 여기까지가 배너입니다. -->
+	
 	<div class="area2">
 		<div class="summoner-container">
 			<div class="summoner">
@@ -254,8 +257,10 @@
 				<div class="champions">챔피언들</div>
 				<div class="positions">포지션들</div>
 			</div>
+
 			<div class="three main raw-record-container">
 				<!-- 게임 전적 들어갈 위치 -->
+
 			</div>
 		<div class="more2">더보기</div>
 	</div>
@@ -267,6 +272,7 @@
 <!-- ### 230525-invisible-server로부터 추가된 스크립트 -->
 <script src="../resources/js/summoner_test.js"></script>
 <script>
+
 	$(document).ready(function () {
 		$('.list2_detail').hide();
 	});
@@ -334,6 +340,7 @@
 	}).fail(err => {
 		console.log(err);
 	})
+
 </script>
 <!-- ### 230531-10:33: 기능상 문제로 주석 처리 -->
 <!-- <script>

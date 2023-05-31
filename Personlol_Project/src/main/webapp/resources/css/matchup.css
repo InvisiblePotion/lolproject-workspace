@@ -6,9 +6,6 @@
 }
 
 
-
-
-
 .bcolor{
 	background-color: #f5f5f5;
 }
@@ -16,7 +13,7 @@ body{
 	background-color: #f5f5f5;;
 }
 
-/* ½ºÅ³ÀÌ¹ÌÁö È£¹ö½Ã ÅøÆÁ */
+/* ìŠ¤í‚¬ í˜¸ë²„ì‹œ íˆ´íŒ */
 .skill-container {
   position: relative;
   display: inline-block;
@@ -34,7 +31,7 @@ body{
   position: absolute;
   z-index: 1;
   
-  /* ²Ù¹Ì±â¿ë */
+
   top: 125%;
   left: 50%;
   margin-left: -60px;
@@ -46,7 +43,24 @@ body{
   visibility: visible;
   opacity: 1;
 }
-/*½ºÆç È£¹ö½Ã ÅøÆÁ*/
+/* ìŠ¤í‚¬ ì´ë¯¸ì§€ìœ„ì— í…ìŠ¤íŠ¸ */
+.skill-key-info {
+  position: absolute;
+  bottom: 0px; /* í•˜ë‹¨ ì—¬ë°± ì¡°ì • */
+  right: 0px; /* ìš°ì¸¡ ì—¬ë°± ì¡°ì • */
+  
+  width:20px;
+  height:20px;
+  
+  background-color: rgba(0, 0, 0, 0.5);
+  color: yellow;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transform: none; /* transform ì†ì„± ì œê±° */
+}
+/*ìŠ¤í  í˜¸ë²„ì‹œ íˆ´íŒ*/
 .spell-container {
   position: relative;
   display: inline-block;
@@ -76,27 +90,27 @@ body{
   visibility: visible;
 }
 
-/*»ó´ëÃ¨ÇÁ ÀÌ¹ÌÁö ¿ŞÂÊÁ¤·Ä*/
+
 .s_img {
-    text-align: left;
+    text-align: right;
 }
 
 .div_info{
 	text-align: center;
 }
-/*½ºÆç css  */
+
 
 
 
 #spell1{
 	margin-top: 5px;
-	border-top: 1px solid #E2E2E2; /* À§ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
- 	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+	border-top: 1px solid #E2E2E2; 
+ 	border-bottom: 1px solid #E2E2E2; 
 	
 }
 #spell2{
 	margin-top: 5px;
-  	border-bottom: 1px solid #E2E2E2; /* ¾Æ·¡ÂÊ ¼±ÀÇ ½ºÅ¸ÀÏ°ú »ö»óÀ» ¼³Á¤ÇÏ¼¼¿ä */
+  	border-bottom: 1px solid #E2E2E2; /* ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ */
 }
 
 .spell-container{
@@ -128,4 +142,26 @@ body{
 .progress_title{
 	font-weight: bold;
 	color: darkgray;
+}
+.skill_info_span{
+	font-size: 20px;
+	font-weight: bold;
+}
+.title_champ_name{
+	font-size: 25px;
+	font-weight: bold;
+}
+.sub_r_champ_name{
+	margin-left:10px;
+	font-size: 25px;
+	font-weight: bold;
+}
+.sub_l_champ_name{
+	margin-right:10px;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+a.match_champ {
+  text-decoration: none;
 }

@@ -149,4 +149,9 @@ public class mypage_service {
 		
 	}
 
+	public List<mypage_dto> score(String name) {
+		List<mypage_dto> score = my_dao.get_score(name);
+		return score;
+	}
+
 }

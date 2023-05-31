@@ -80,8 +80,26 @@ body{
 }
 .list_td{
 	width:170px;
+	padding-left: 30px;
 }
 #head_table{
 	margin-bottom: 0px;
 	background-color: #f7f7f9;
+}
+
+.list_img{
+	margin-left: 50px;
+}
+#table_win_rate{
+	cursor: pointer;
+}
+#table_pick_rate{
+	cursor: pointer;
+}
+#table_ban_rate{
+	cursor: pointer;
+}
+a.champ_list_a{
+	
+	text-decoration: none;
 }

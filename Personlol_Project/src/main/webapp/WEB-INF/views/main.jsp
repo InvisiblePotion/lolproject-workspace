@@ -76,16 +76,20 @@
 
 			<div id="m_logo">
 				<img
+
 					src="./resources/img/mainlogo.png" title="메인로고" id=m_log_img width="50%" >
+
 			</div id="m_logo">
 
 			<div id="searchdiv">
-				<div class=>
+				<div class="www">
 					<div class="main-search-form">
 						<fieldset>
 							<!-- <legend>전적 검색</legend> -->
 							<input id="search-input" class="summoner_name main-search">
-							<button type="button" class="gosummonerinfo main-btn">전적검색</button>
+							<button type="button" class="gosummonerinfo main-btn">
+								<img src="./resources/img/search.png" width="95%">
+							</button>
 						</fieldset>
 					</div>
 				</div>
@@ -95,7 +99,7 @@
 				<div class="m_lane top">
 
 					<div class="line-info">
-						<h4>TOP</h4>
+						<img  src="./resources/ranked-positions/Position_Bronze-Top.png" width="25%">
 					</div>
 
 					<!-- 설명 -->
@@ -104,7 +108,7 @@
 							<thead>
 								<tr class="tr_champ" align="center">
 									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -118,7 +122,7 @@
 
 				<div class="m_lane jug">
 					<div class="line-info">
-						<h4>Jungle</h4>
+						<img  src="./resources/ranked-positions/Position_Bronze-Jungle.png" width="25%">
 					</div>
 					<!-- 설명 -->
 					<div id="table_list">
@@ -126,7 +130,7 @@
 							<thead>
 								<tr class="tr_champ" align="center">
 									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -138,7 +142,7 @@
 
 				<div class="m_lane mid">
 					<div class="line-info">
-						<h4>Mid</h4>
+						<img  src="./resources/ranked-positions/Position_Bronze-Mid.png" width="25%">
 					</div>
 
 					<!-- 설명 -->
@@ -147,7 +151,7 @@
 							<thead>
 								<tr class="tr_champ" align="center">
 									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -160,7 +164,7 @@
 
 				<div class="m_lane ad">
 					<div class="line-info">
-						<h4>AD</h4>
+						<img  src="./resources/ranked-positions/Position_Bronze-Bot.png" width="25%">
 					</div>
 
 					<!-- 설명 -->
@@ -169,7 +173,7 @@
 							<thead>
 								<tr class="tr_champ" align="center">
 									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -181,7 +185,7 @@
 
 				<div class="m_lane sup">
 					<div class="line-info">
-						<h4>Support</h4>
+						<img  src="./resources/ranked-positions/Position_Bronze-Support.png" width="25%">
 					</div>
 
 					<!-- 설명 -->
@@ -190,7 +194,7 @@
 							<thead>
 								<tr class="tr_champ" align="center">
 									<th width="150px" style="font-size: 12px">챔피언</th>
-									<th width="50px" style="font-size: 12px" id="table_tier">티어</th>
+									<th width="50px" style="font-size: 12px" id="table_tier">픽률</th>
 								</tr>
 							</thead>
 						</table>
@@ -355,7 +359,7 @@
 
     //최신 듀오 리스트 가져오기
     let pageing = 1;
-    
+
     
     $('.next_page').click(function(){
       pageing++;
@@ -400,7 +404,9 @@
           location.href = go_url;
         } else if (res == "-999") {
           alert("등록되지 않은 소환사입니다. 다시 입력해주세요.");
+
           location.href = '/personlol/main'
+
         }
       }).fail(err => {
         console.log(err);
@@ -456,7 +462,7 @@
                 '<div class = "s_summoner_name">' + list.summoner_name + '</div>' +
                 '<div class = "s_summoner_lv_tier">' + list.summoner_tier + '</div></div></a>'
               console.log(summoner_info);
-              $('#db_search').append(summoner_info);
+              $('.search-db').append(summoner_info);
             }
           }).fail(err => {
             console.log(err);
@@ -499,7 +505,9 @@
 	});
   	
   	function loadDuo(page_num){
+
   		  $('.duolist-container').empty();
+
 		  //메인듀오가져오기;
 		  $.ajax({
 		    method: 'get',
