@@ -75,7 +75,7 @@
 					<div></div>
 					<div></div>
 					<div class="buttons">
-						<button class="button">전적 갱신</button>
+						<button onclick="reloadPlayRecord()" class="button btn-reload-playrecord">전적 갱신</button>
 						<button class="button">티어 그래프</button>
 					</div>
 					<div class="last-update">

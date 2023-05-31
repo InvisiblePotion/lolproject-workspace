@@ -1,3 +1,22 @@
+function reloadPlayRecord() {
+    const summoner_name = getQueryString('summoner_name')
+    $('.btn-reload-playrecord').css('background-color', '#729769');
+    $('.btn-reload-playrecord').html('전적 갱신 중<br>(약 30초 소요)');
+    $.ajax({
+        method: 'get',
+        url: 'http://localhost:8095/personlol/summoner/reload-playrecord',
+        data: {'summoner_name': summoner_name},
+
+    }).done((res)=>{
+        console.log(res);
+        $('.btn-reload-playrecord').css('background-color', '#699097');
+        $('.btn-reload-playrecord').html('가져오는 중<br>(약 10초 소요)');
+        getGameIds(summoner_name, true);
+    }).fail((err)=>{
+        console.log(err);
+    });
+}
+
 /**
  * 현재 URL의 쿼리 파라미터에서 값을 가져온다
  * @param {string} key 쿼리 파라미터 키
@@ -12,15 +31,16 @@ function getQueryString(key) {
  * 해당 소환사의 최근 20게임에 대한 게임 ID를 가져온다.   
  * `url: /personlol/summoner/game-id-list/`
  * @param {string} summoner_name 소환사 이름
+ * @param {boolean} is_reload_record 전적 갱신으로 실행 여부
  */
-function getGameIds(summoner_name) {
+function getGameIds(summoner_name, is_reload_record) {
     $.ajax({
         method: 'get',
         url: '/personlol/summoner/game-id-list',
         data: {'summoner_name': summoner_name}
     }).done((game_id_list)=>{
         console.log(game_id_list); // ### 로그
-        getGameRecords(game_id_list);
+        getGameRecords(game_id_list, is_reload_record);
         putGameIds(summoner_name, game_id_list); // ### summoner_recent_game 테이블에서 꺼내와도 작동하는 문제 존재(성능 이슈)
     }).fail((err)=>{
         console.log(err);
@@ -46,8 +66,9 @@ function putGameIds(summoner_name, game_id_list) {
 /**
  * RawData 테이블에서 해당 게임 ID 리스트에 매치되는 게임 데이터를 가져온다
  * @param {string[]} game_id_list 게임 ID 리스트
+ * @param {boolean} is_reload_record 전적 갱신으로 실행 여부
  */
-function getGameRecords(game_id_list) {
+function getGameRecords(game_id_list, is_reload_record) {
     $.ajax({
         method: 'post',
         url: '/personlol/summoner/game-record',
@@ -78,6 +99,10 @@ function getGameRecords(game_id_list) {
                 inputGameDataShort(game_data, parseInt(idx)+1);
                 inputGameDataExpend(game_data, parseInt(idx)+1);
             }
+        }
+        if (is_reload_record) {
+            $('.btn-reload-playrecord').css('background-color', '#f7ea79');
+            $('.btn-reload-playrecord').html('갱신 완료!');
         }
     }).fail((err)=>{
         console.log(err);
@@ -130,7 +155,7 @@ function inputGameDataShort(game_data, game_number) {
     $(prefix+'.raw-self-cs').html('CS '+game_data[self_number]['cs']['totalMinionsKilled']+' ('+(parseInt(game_data[self_number]['cs']['totalMinionsKilled'])/duration_min).toFixed(1)+')');
     for (let idx = 0; idx < 6; idx++) {
         if (game_data[self_number]['item']['item'+idx] == 0) {
-            $(prefix+'.raw-self-item-item'+(parseInt(idx)+1))[0].src = ''
+            $(prefix+'.raw-self-item-item'+(parseInt(idx)+1)).hide();
         } else {
             $(prefix+'.raw-self-item-item'+(parseInt(idx)+1))[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item'+idx]+'.png';
         }
@@ -220,7 +245,7 @@ function inputGameDataExpend(game_data, game_number) {
         // >:item
         for (let item_idx = 0; item_idx < 6; item_idx++) {
             if (game_data[idx]['item']['item'+item_idx] == 0) {
-                $(prefix+'.raw-part-item-item'+(parseInt(item_idx)+1))[0].src = ''
+                $(prefix+'.raw-part-item-item'+(parseInt(item_idx)+1)).hide();
             } else {
                 $(prefix+'.raw-part-item-item'+(parseInt(item_idx)+1))[0].src = '../resources/dd/img/item/'+game_data[idx]['item']['item'+item_idx]+'.png';
             }
@@ -499,5 +524,5 @@ function toggleRecordExpend(tag) {
 }
 
 $(function () {
-    getGameIds(getQueryString('summoner_name'))
-})
+    getGameIds(getQueryString('summoner_name'));
+});
