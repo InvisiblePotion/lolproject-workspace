@@ -81,24 +81,24 @@ def oracle_totalExecute(query: str, use_pandas: bool=True, debug_print: bool=Tru
 
 
 def getPuuidBySummonerName(summoner_name: str, api_key: str):
-    return requests.get(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{parse.quote(summoner_name)}?api_key={api_key}").json()['puuid']
+    return preventApiRateLimit(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key=", api_key).json()['puuid']
 
 
 def getMatchIdsByPuuid(puuid: str, api_key: str, count: int=10):
-    return requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count={count}&type=ranked&api_key={api_key}").json()
+    return preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count={count}&type=ranked&api_key=", api_key).json()
 
 
 def getMatchDataByMatchIds(match_ids: list, api_key: str, index: int=0):
-    return requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_ids[index]}?api_key={api_key}").json()
+    return preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_ids[index]}?api_key=", api_key).json()
 
 
 def getMatchTimelineDataByMatchIds(match_ids: list, api_key: str, index: int=0):
-    return requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_ids[index]}/timeline?api_key={api_key}").json()
+    return preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_ids[index]}/timeline?api_key=", api_key).json()
 
 
 def getMatchDataAndTimelineByMatchId(match_id: str, api_key: str):
-    match_data = requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={api_key}").json()
-    match_timeline = requests.get(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key={api_key}").json()
+    match_data = preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key=", api_key).json()
+    match_timeline = preventApiRateLimit(f"https://asia.api.riotgames.com/lol/match/v5/matches/{match_id}/timeline?api_key=", api_key).json()
     return match_data, match_timeline
 
 
@@ -138,6 +138,20 @@ def insertDataFrameIntoTable(data_frame: pd.DataFrame, table_name: str, debug_pr
                                  AND CONSTRAINT_TYPE = 'P')"""
     pk_col = [val for val in \
               oracle_totalExecute(pk_col_execute, debug_print=False)['COLUMN_NAME']]
+    
+    # 테이블의 UQ 정보를 조회하는 쿼리
+    uq_col_execute = f"""
+        SELECT COLUMN_NAME
+        FROM USER_CONS_COLUMNS
+        WHERE CONSTRAINT_NAME = (SELECT CONSTRAINT_NAME
+                                 FROM ALL_CONSTRAINTS
+                                 WHERE TABLE_NAME = '{table_name}'
+                                 AND CONSTRAINT_TYPE = 'U')"""
+    uq_col = [val for val in \
+              oracle_totalExecute(uq_col_execute, debug_print=False)['COLUMN_NAME']]
+    
+    pk_col += uq_col
+    
     # MERGE의 UPDATE를 위해 SET 컬럼 생성
     all_col = [col.upper() for col in data_frame.columns]
     set_col = [col for col in enumerate(all_col)]
@@ -268,8 +282,8 @@ def getRawdata(tier: str, riot_api_key: str):
     # riot api를 통해서 summonerName을 가져오기
     print('get SummonerName.....')
     for division in tqdm(division_list):
-        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division}?page={page}&api_key={riot_api_key}'
-        res = requests.get(url).json()
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division}?page={page}&api_key='
+        res = preventApiRateLimit(url, riot_api_key).json()
         if len(res) >= 5: lst += random.sample(res, 5)
         else: lst += [a for a in res]
 
@@ -327,8 +341,8 @@ def getSampleData(tier: str, division: int, get_amount: int, riot_api_key: str):
     # riot api를 통해서 summonerName을 가져오기
     print('get SummonerName.....')
     for v in tqdm(range(get_amount)):
-        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division+1]}?page={page}&api_key={riot_api_key}'
-        res = requests.get(url).json()
+        url = f'https://kr.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{tier}/{division_list[division-1]}?page={page}&api_key='
+        res = preventApiRateLimit(url, riot_api_key).json()
         summonerName_lst.append(random.sample(res, 1)[0]['summonerName'])
 
     print('total player: ', len(summonerName_lst))
@@ -437,20 +451,22 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
     RawData를 1차 정제 형태로 변환해주는 함수
     """
 
-    # 전설, 신화 아이템 리스트: 13.9 (버전별 갱신 필요)
+    # 전설, 신화 아이템 리스트: 13.10.1 (버전별 갱신 필요)
     legend_items = [
-        3003,3004,3011,3026,3031,3033,3036,3040,3041,3042,
-        3046,3050,3053,3065,3068,3071,3072,3074,3075,3083,
-        3085,3089,3091,3094,3095,3100,3102,3107,3109,3110,
-        3115,3116,3119,3121,3124,3135,3139,3142,3143,3153,
-        3156,3157,3161,3165,3179,3181,3193,3222,3504,3508,
-        3742,3748,3814,4401,4628,4629,4637,4645,6035,6333,
-        6609,6616,6664,6675,6676,6694,6695,6696,8001,8020]
-
+        3003,3004,3011,3026,3033,3036,3040,3041,3042,3046,
+        3050,3053,3065,3068,3071,3072,3074,3075,3083,3085,
+        3087,3089,3091,3094,3095,3100,3102,3107,3109,3110,
+        3115,3116,3119,3121,3135,3139,3143,3153,3156,3157,
+        3161,3165,3179,3181,3193,3222,3504,3508,3742,3748,
+        3814,4005,4401,4628,4629,4637,4643,4645,6035,6333,
+        6609,6616,6664,6672,6673,6676,6693,6694,6695,6696,
+        8001,8020]
+    
     mythic_items = [
-        2065,3001,3078,3084,3152,3190,4005,4633,4636,4644,
-        6617,6630,6631,6632,6653,6655,6656,6657,6662,6665,
-        6667,6671,6672,6673,6691,6692,6693]
+        2065,3001,3031,3078,3084,3124,3142,3152,3190,4633,
+        4636,4644,6617,6620,6630,6631,6632,6653,6655,6656,
+        6657,6662,6665,6667,6671,6675,6691,6692]
+    
 
     result = []
     try:
@@ -459,6 +475,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                 matches = game['matches']['info']
                 part = matches['participants'][part_num]
                 challenge = part['challenges']
+
 
                 # 예외 처리부
 
@@ -479,6 +496,9 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                 if (individual_position := part['individualPosition']) not in position_list: individual_position = 'NONE'
                 if (team_position := part['teamPosition']) not in position_list: team_position = 'NONE'
 
+                win = 1 if part['win'] else 0
+                first_blood_kill = 1 if part['firstBloodKill'] else 0
+
 
                 each_part = {
                     'version': matches['gameVersion'],
@@ -486,11 +506,12 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                     'game_duration': matches['gameDuration'],
                     'game_id': game['matches']['metadata']['matchId'],
                     'participant_number': part['participantId'],
+                    'participant_name': part['summonerName'],
                     'champion_id': part['championId'],
                     'lane': part['teamPosition'],
                     'participant_puuid': part['puuid'],
                     'api_key': api_key,
-                    'game': {
+                    'game': str({
                         'gameCreation': matches['gameCreation'],
                         'gameStartTimestamp': matches['gameStartTimestamp'],
                         'gameEndTimestamp': matches['gameEndTimestamp'],
@@ -498,14 +519,14 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'gameVersion': matches['gameVersion'],
                         'queueId': matches['queueId'],
                         'bans': matches['teams'][0]['bans'] + matches['teams'][1]['bans']
-                    },
-                    'summoner': {
+                    }).replace("'",'"'),
+                    'summoner': str({
                         'summonerName': part['summonerName'],
                         'summonerLevel': part['summonerLevel'],
                         'summonerId': part['summonerId'],
                         'puuid': part['puuid']
-                    },
-                    'champion': {
+                    }).replace("'",'"'),
+                    'champion': str({
                         'championId': part['championId'],
                         'championName': part['championName'],
                         'champLevel': part['champLevel'],
@@ -513,20 +534,20 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'individualPosition': individual_position, # 예외처리
                         'teamPosition': team_position, # 예외처리
                         'teamId': part['teamId'],
-                        'win': str(part['win']) # bool
-                    },
-                    'spell': {
+                        'win': win # bool
+                    }).replace("'",'"'),
+                    'spell': str({
                         'summoner1Id': part['summoner1Id'],
                         'summoner2Id': part['summoner2Id']
-                    },
-                    'skill': {
+                    }).replace("'",'"'),
+                    'skill': str({
                         'spell1Casts': part['spell1Casts'],
                         'spell2Casts': part['spell2Casts'],
                         'spell3Casts': part['spell3Casts'],
                         'spell4Casts': part['spell4Casts']
-                    },
+                    }).replace("'",'"'),
                     'skillTree': [sk['skillSlot'] for sk in eventExtractor(game, 'SKILL_LEVEL_UP', part_num+1)],
-                    'rune': {
+                    'rune': str({
                         'runePrimaryStyle': part['perks']['styles'][0]['style'],
                         'runeCorePerk': part['perks']['styles'][0]['selections'][0]['perk'],
                         'runePrimaryPerk1': part['perks']['styles'][0]['selections'][1]['perk'],
@@ -538,8 +559,8 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'runeShardOffense': part['perks']['statPerks']['offense'],
                         'runeShardFlex': part['perks']['statPerks']['flex'],
                         'runeShardDefense': part['perks']['statPerks']['defense']
-                    },
-                    'item': {
+                    }).replace("'",'"'),
+                    'item': str({
                         'item0': part['item0'],
                         'item1': part['item1'],
                         'item2': part['item2'],
@@ -547,35 +568,35 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'item4': part['item4'],
                         'item5': part['item5'],
                         'item6': part['item6']
-                    },
+                    }).replace("'",'"'),
                     'startItem': getHoldingItems(game, part_num+1, 60000),
                     'itemTree': list(filter(lambda x: x in legend_items + mythic_items,
                         [a['itemId'] for a in eventExtractor(game, 'ITEM_PURCHASED', part_num+1)]))[:3],
-                    'kda': {
+                    'kda': str({
                         'kills': part['kills'],
                         'deaths': part['deaths'],
                         'assists': part['assists'],
                         'kda': challenge['kda'],
                         'killParticipation': kill_participation, # 예외처리
-                        'firstBloodKill': str(part['firstBloodKill']), # bool
+                        'firstBloodKill': first_blood_kill, # bool
                         'largestKillingSpree': part['largestKillingSpree'],
                         'largestMultiKill': part['largestMultiKill']
-                    },
-                    'gold': {
+                    }).replace("'",'"'),
+                    'gold': str({
                         'bountyLevel': part['bountyLevel'],
                         'bountyGold': challenge['bountyGold'],
                         'goldEarned': part['goldEarned'],
                         'goldPerMinute': challenge['goldPerMinute']
-                    },
-                    'cs': {
+                    }).replace("'",'"'),
+                    'cs': str({
                         'totalMinionsKilled': part['totalMinionsKilled'],
                         'laneMinionsFirst10Minutes': challenge['laneMinionsFirst10Minutes']
-                    },
-                    'turret': {
+                    }).replace("'",'"'),
+                    'turret': str({
                         'turretTakedowns': challenge['turretTakedowns'],
                         'turretPlatesTaken': challenge['turretPlatesTaken']
-                    },
-                    'damage': {
+                    }).replace("'",'"'),
+                    'damage': str({
                         'teamDamagePercentage': team_damage_percentage, # 예외처리
                         'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
                         'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
@@ -589,13 +610,13 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'trueDamageTaken': part['trueDamageTaken'],
                         'totalHeal': part['totalHeal'],
                         'totalHealsOnTeammates': part['totalHealsOnTeammates']
-                    },
-                    'vision': {
+                    }).replace("'",'"'),
+                    'vision': str({
                         'visionScore': part['visionScore'],
                         'wardsPlaced': part['wardsPlaced'],
                         'controlWardsPlaced': challenge['controlWardsPlaced'],
                         'wardsKilled': part['wardsKilled']
-                    }
+                    }).replace("'",'"')
                 }
                 result.append(each_part)
     except Exception as e:
@@ -633,7 +654,7 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
 
     def checkApiResult(url: str):
         """
-        `request.get()`의 결과에 따라서 API Key를 교체하거나 에러 메시지를 출력하고
+        `requests.get()`의 결과에 따라서 API Key를 교체하거나 에러 메시지를 출력하고
         에러인 경우 `False`를 리턴하여 `if`가 걸린 부분의 `continue` 트리거를 작동시키는 `autoInsert()` 전용 내부 함수
         """
         nonlocal api_nonlimit_request_count
@@ -796,9 +817,9 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
                     # 안전 정지
                     # if (int(time.time()) % 3600) <= 120: safeTimeSleeper()
 
-                    # RawData 테이블에 현재 match_id가 이미 존재한다면 리스트에서 제거 후 continue
+                    # RawData 테이블에 현재 match_id가 이미 존재한다면 (# 리스트에서 제거 후) continue
                     if 0 != oracle_totalExecute(f"SELECT COUNT(game_id) FROM RAWDATA WHERE game_id = '{match_id}'", use_pandas=False, debug_print=False)[0][0]:
-                        match_id_list.remove(match_id)
+                        # match_id_list.remove(match_id)
                         continue
                     
                     # 현재 matchId의 matches와 timeline을 획득
@@ -871,6 +892,41 @@ def autoInsert(riot_api_key: str, logging_path: str, start_page: int=1, debug: b
             # 매 사이클 종료시 변수 후처리
             rank_tier_list[this_rank_idx]['page'] += 1
             cycle_count += 1
+
+
+def preventApiRateLimit(url: str, api_key: str):
+        """
+        `requests.get(url + api_key)`의 결과의 상태 코드가 429(API RATE EXCEED)인 경우 제한 해제까지 자동 휴식하는 함수
+        """
+        
+        while True:
+            try:
+                result = requests.get(url+api_key)
+
+                # 리퀘스트의 리스폰스가 정상인 경우 리턴
+                if result.status_code == 200:
+                    return result
+                
+                # 리미트 초과인 경우 10초 휴식 후 재시도
+                elif result.status_code == 429:
+                    apiSleep(10, False)
+                    continue
+
+                # 만료 되었거나 불량인 API key 사용시 API key 관련 에러문 출력
+                elif result.status_code == 403:
+                    raise InvaildApiKey(result)
+                
+                # 리턴의 상태 코드가 200, 429, 403이 아닌 경우 예외로 간주하고 API 관련 에러문 출력 출력
+                else:
+                    raise BadApiResult(result)
+                    
+            except requests.exceptions.ConnectionError as e:
+                time.sleep(5)
+
+            # 위에서 발생된 모든 예외를 캐치하여 API 관련 에러 카운트를 1 올리고 False를 리턴(continue 트리거 작동)
+            except Exception as e:
+                print(f"{type(e).__name__}:\n{e}")
+                return False
 
 
 # getRawdata() 함수로 만들어진 데이터프레임 안에서 특정 챔피언의 등장 횟수와 등장 레코드를 리턴하는 함수
@@ -991,3 +1047,106 @@ def rawdataIntegrityKeeper(print_msg: bool=True):
         for match_id in invalid_match_ids:
             oracle_totalExecute(f"DELETE FROM RAWDATA WHERE GAME_ID = '{match_id}'", debug_print=False)
     elif print_msg: print('RawData 테이블 무결성 상태 확인!')
+
+
+def updateSummonerData(summoner_name: str, api_key: str) -> None:
+    """
+    ### 예외 처리 필요!
+    소환사 이름으로 Summoner 테이블의 데이터를 갱신하는 함수
+    """
+
+    # Summoner 테이블 컬럼 정보
+    summoner_cols = [
+        'summoner_id','summoner_puuid','api_key','summoner_name','summoner_level','summoner_profile',
+        'summoner_tier','summoner_wins','summoner_losses','summoner_veteran','summoner_inactive','summoner_freshblood','summoner_hotstreak']
+
+    # API에서 소환사 정보 획득
+    response_summoner = preventApiRateLimit(f"https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key=", api_key).json()
+
+    # Summoner 테이블에 필요한 소환사 데이터를 추출
+    summoner_data = [
+        response_summoner['id'],
+        response_summoner['puuid'],
+        api_key,
+        summoner_name,
+        response_summoner['summonerLevel'],
+        response_summoner['profileIconId']]
+
+    # API에서 소환사 랭크 정보 획득
+    response_rank = preventApiRateLimit(f"https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_data[0]}?api_key=", api_key).json()
+
+    # Summoner 테이블에 필요한 소환사 랭크 데이터를 추출
+    rank_data = None
+    for rank in response_rank:
+        if rank['queueType'] != 'RANKED_SOLO_5x5': continue
+        rank_data = [
+            rank['tier'],
+            rank['wins'],
+            rank['losses'],
+            rank['veteran'].__int__(),
+            rank['inactive'].__int__(),
+            rank['freshBlood'].__int__(),
+            rank['hotStreak'].__int__()]
+    # 해당 소환사가 솔랭 관련 랭크 데이터가 없다면 DEFALUT로 저장
+    if rank_data is None: rank_data = ['DEFAULT' for col in summoner_cols[6:]]
+
+    # Summoner 테이블에 입력
+    summoner_result = summoner_data + rank_data
+
+    insertDataFrameIntoTable(pd.DataFrame([summoner_result], columns=summoner_cols), 'SUMMONER', debug_print=False)
+
+
+def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> int:
+    """
+    ### 예외 처리 필요!
+    전적 갱신 버튼에 대응할 함수.\n
+    해당 소환사의 최근 20게임에 대한 데이터를 불러온다.\n
+    (단, 성능상의 문제로 이 함수로 불러온 게임의 다른 소환사는 Summoner 테이블의 입력되지 않으니 주의)
+    """
+
+    # 소환사 이름으로 Summoner 테이블 갱신
+    updateSummonerData(summoner_name, api_key)
+
+    # API에서 소환사의 최근 20게임의 game_id 획득
+    match_ids = getMatchIdsByPuuid(getPuuidBySummonerName(summoner_name, api_key), api_key, get_amount)
+
+    # summoner_recent_game 테이블에서 현재 정보를 삭제
+    oracle_totalExecute(f"DELETE FROM SUMMONER_RECENT_GAME WHERE summoner_name = '{summoner_name}'", debug_print=False)
+    
+    # 20게임의 게임 정보를 DB에 입력
+    insert_count = len(match_ids)
+    for mid in tqdm(match_ids, desc=f"'{summoner_name}': 전적 갱신 중"):
+
+
+        # RawData 테이블에 이미 해당 game_id가 있다면 continue
+        if oracle_totalExecute(f"SELECT * FROM RAWDATA WHERE GAME_ID = '{mid}'", debug_print=False)['VERSION'].tolist() != []:
+            # 이미 존재하는 game_id를 summoner_recent_game 테이블에 입력
+            oracle_totalExecute(f"INSERT INTO SUMMONER_RECENT_GAME VALUES ('{summoner_name}', '{mid}')", debug_print=False)
+            insert_count -= 1
+            continue
+
+        # API로 매치 데이터 불러오기
+        matches, timeline = getMatchDataAndTimelineByMatchId(mid, api_key)
+
+        # RawData 테이블에 맞춰 매치 데이터 필터링
+        filtered_rawdata = RawdataFirstFilter(pd.DataFrame({'matches': [matches], 'timeline': [timeline]}), api_key)
+
+        # RawData 테이블에 입력
+        db_open()
+        for data in filtered_rawdata:
+            val = [a for a in data.values()]
+            sql = f"""
+            INSERT INTO RAWDATA VALUES(
+                '{val[0]}',{val[1]},{val[2]},'{val[3]}',{val[4]},'{val[5]}',{val[6]},'{val[7]}','{val[8]}',
+                '{val[9]}','{val[10]}','{val[11]}','{val[12]}','{val[13]}','{val[14]}','{val[15]}','{val[16]}',
+                '{val[17]}','{val[18]}','{val[19]}','{val[20]}','{val[21]}','{val[22]}','{val[23]}','{val[24]}','{val[25]}')
+            """
+            oracle_execute(sql, debug_print=False)
+        oracle_close()
+
+        # 입력된 데이터의 game_id를 summoner_recent_game 테이블에 입력
+        oracle_totalExecute(f"INSERT INTO SUMMONER_RECENT_GAME VALUES ('{summoner_name}', '{mid}')", debug_print=False)
+    
+    time.sleep(1)
+    print(f"입력된 게임 수: {insert_count}")
+    return insert_count

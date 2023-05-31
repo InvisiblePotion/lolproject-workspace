@@ -934,8 +934,9 @@ img{
 }
 .p-5 .name{
   display: inline-block;
-  max-width: 60px;
+  max-width: 70px;
   vertical-align: middle;
+  overflow: hidden;
   color: var(--gray500);
 }
 .p-5th{

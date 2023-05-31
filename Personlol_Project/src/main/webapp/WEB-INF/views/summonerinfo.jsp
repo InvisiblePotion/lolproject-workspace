@@ -67,19 +67,20 @@
 		<div class="summoner-container">
 			<div class="summoner">
 				<div class="summoner_icon">
-					<div class="summoner_level">286</div>
+					<div class="summoner_level"></div>
 				</div>
 				<div class="info">
-					<div class="summoner_tier">GOLD</div>
-					<div class="summoner_name">감귤해적</div>
+					<div class="summoner_tier"></div>
+					<div class="summoner_name"></div>
 					<div></div>
 					<div></div>
 					<div class="buttons">
-						<button class="button">전적 갱신</button>
-						<button class="button">티어 그래프</button>
+						<button onclick="reloadPlayRecord()" class="button btn-reload-playrecord">가져오는 중<br>(약 10초 소요)</button>
+						<!-- ### 없으니 주석 -->
+						<!-- <button class="button">티어 그래프</button> -->
 					</div>
 					<div class="last-update">
-						<div>최근 업데이트: 3시간 전</div>
+						<div></div>
 					</div>
 				</div>
 			</div>
@@ -87,8 +88,9 @@
 		</div>
 
 	</div>
-	<div class="nav-bar">
-		<!-- <h2>종합</h2> -->
+	<!-- 없으니 주석 -->
+	<!-- <div class="nav-bar">
+		<h2>종합</h2>
 		<ul class="nav-item">
 			<li><a href="fdaf" class="nav-button">종합</a></li>
 			<li><a href="fdafda" class="nav-button">챔피언</a></li>
@@ -100,7 +102,7 @@
 				</div>
 			</div>
 		</ul>
-	</div>
+	</div> -->
 	</div>
 	<div class="contents-container">
 		<div class="solo-rank">
@@ -110,27 +112,27 @@
 					<div class="tier-img"></div>
 					<div class="tier-info">
 						<div class="tier-name">challenger</div>
-						<div class="tier-lp">1,789 LP</div>
+						<!-- 없으니 주석 -->
+						<!-- <div class="tier-lp">1,789 LP</div> -->
 					</div>
-					<div class="win-losses-container">
+					<!-- 없으니 주석 -->
+					<!-- <div class="win-losses-container">
 						<div class="win-losses">190승 180패</div>
 						<div class="ratio">승률 62%</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
-			<div class="free-rank-container">
+			<!-- 없으니 주석 -->
+			<!-- <div class="free-rank-container">
 				<div class="free-rank">
 					자유랭크 <span>Unranked</span>
 				</div>
-			</div>
-			<div class="mini-rank-container">
+			</div> -->
+			<!-- <div class="mini-rank-container">
 				<ul class="mini-rank-ul">
 					<li class="total-season"><button class="season-button">전체</button></li>
 				</ul>
-				<!-- 챔피언 박스 칸 -->
 				<div class="champion-container">
-
-					<!-- 챔피언 박스 칸입니다. -->
 					<div class="champion-box">
 						<div class="face">
 							<a href=" " class="face-img"></a>
@@ -150,14 +152,9 @@
 							<div class="count">41 게임</div>
 						</div>
 					</div>
-					<!-- 챔피언 박스 칸입니다x8 -->
-
-					<!-- <a href="fafd" class="more">더 보기+다른 시즌 보기</a> -->
 				</div>
-			</div>
-			<!-- 챔피언 박스 칸 -->
-			<!-- 최근 승률 칸 입니다. -->
-			<div class="recent-container">
+			</div> -->
+			<!-- <div class="recent-container">
 				<div class="recent-title-container">
 					<div class="recent-title">최근 7일간의 랭크 승률</div>
 				</div>
@@ -166,7 +163,6 @@
 					<div class="pick2">승률</div>
 				</div>
 				<ul>
-					<!-- 최근 7일간의 랭크 승률 -->
 					<li class="header3-li">
 						<div class="face">
 							<a href=" " class="face-img2"></a>
@@ -184,11 +180,10 @@
 						</div>
 						<div class="winratio">71%</div>
 					</li>
-					<!-- 최근 7일간의 랭크 승률 -->
 				</ul>
-			</div class="recent-container">
+			</div class="recent-container"> -->
 			<!-- 최근 승률 칸 입니다. -->
-			<div class="recent athor-summoner-container">
+			<!-- <div class="recent athor-summoner-container">
 				<div class="athor-title">같은 팀으로 게임한 소환사들(최근 20게임)</div>
 				<table>
 					<colgroup>
@@ -205,9 +200,7 @@
 							<th class="th-winratio" scope="col">승률</th>
 						</tr>
 					</thead>
-					<!-- tr태그 곱하기 10번입니다. -->
 					<tbody class="tdo">
-						<!-- 최근 함께한 사람들 -->
 						<tr>
 							<td class="tp name" scope="col"><a href="  " class="a-tag"><img src="" alt="" class="mini-img">닉네임니다</a>
 								</th>
@@ -218,45 +211,47 @@
 							<td class="th-winratio" scope="col">75%
 								</th>
 						</tr>
-						<!-- 최근 함께한 사람들 -->
 					</tbody>
-					<!-- tr태그 곱하기 10번입니다. -->
 				</table>
-			</div>
+			</div> -->
 		</div>
 		<!--오른쪽 문단 -->
 		<div class="real main-container">
 			<div class="one main">
 				<ul>
-					<li class="li-first">
+					<!-- 없으니 주석 -->
+					<!-- <li class="li-first">
 						<button class="TOTAL">전체</button>
+					</li> -->
+					<li class="li-first">
+						<button class="TOTAL">솔로랭크</button>
 					</li>
-					<li class="li-other">
-						<button>솔로랭크</button>
-					</li>
-					<li class="li-other">
+					<!-- 없으니 주석 -->
+					<!-- <li class="li-other">
 						<button>자유랭크</button>
-					</li>
-					<li class="li-other"><span> <label class="hidden" for="queueType">큐 타입</label> <select id="queueType">
+					</li> -->
+					<!-- <li class="li-other"><span> <label class="hidden" for="queueType">큐 타입</label> <select id="queueType">
 								<option value="TOTAL">큐 타입</option>
 								<option value="NORMAL">일반 (비공개 선택)</option>
 							</select>
-						</span></li>
+						</span>
+					</li> -->
 				</ul>
-				<div>
+				<!-- 없으니 주석 -->
+				<!-- <div>
 					<div class="ch champ-search">
 						<div class="search">
 							<input type="text" placeholder="챔피언 검색"> <img src="" alt="" class="img2">
 						</div>
 						<div class="content"></div>
 					</div>
-				</div>
+				</div> -->
 			</div>
-			<div class="two main">
+			<!-- <div class="two main">
 				<div class="status">그래프</div>
 				<div class="champions">챔피언들</div>
 				<div class="positions">포지션들</div>
-			</div>
+			</div> -->
 
 			<div class="three main raw-record-container">
 				<!-- 게임 전적 들어갈 위치 -->
