@@ -7,14 +7,14 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>summoner info</title>
-<!-- jQuery 3.6.4 min CDN -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"
-	integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../resources/css/header.css">
-<link rel="stylesheet" href="../resources/css/summinfo.css">
+	<meta charset="UTF-8">
+	<title>summoner info</title>
+	<!-- jQuery 3.6.4 min CDN -->
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="../resources/css/header.css">
+	<link rel="stylesheet" href="../resources/css/summinfo.css">
+	<link rel="stylesheet" href="../resources/css/summoner_test.css">
 </head>
 
 <body>
@@ -22,19 +22,17 @@
 		<div class="area">
 			<nav class="bener-container">
 				<div class="bener">
-					<a href="/personlol/main" class="imgfile"><img
-						src="../resources/img/navLogo.png" height="28px" width="100px"></a>
+
+					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png" height="25px"></a>
+
 					<div class="search-bar">
 
-						<input class="summoner_name_search" type="text"
-							placeholdr="소환사명 검색....">
+						<input class="summoner_name_search" type="text" placeholdr="소환사명 검색....">
 						<button class="gosummonerinfo2" type="button">go!</button>
 					</div>
 					<div class="menu">
-						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
-							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
-							href="/personlol/duo/" class="m-col">듀오찾기</a>  <a
-							href="/personlol/summoner/" class="m-col">소환사분석</a>
+						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a href="/personlol/rank" class="m-col rank">랭킹보기</a>
+						<a href="/personlol/duo/" class="m-col">듀오찾기</a> <a href="/personlol/summoner/" class="m-col">소환사분석</a>
 
 
 					</div>
@@ -211,15 +209,14 @@
 					<tbody class="tdo">
 						<!-- 최근 함께한 사람들 -->
 						<tr>
-							<td class="tp name" scope="col"><a href="  " class="a-tag"><img
-									src="" alt="" class="mini-img">닉네임니다</a>
-							</th>
+							<td class="tp name" scope="col"><a href="  " class="a-tag"><img src="" alt="" class="mini-img">닉네임니다</a>
+								</th>
 							<td class="tp played" scope="col">4
-							</th>
+								</th>
 							<td class="tp win-lose" scope="col">3-1
-							</th>
+								</th>
 							<td class="th-winratio" scope="col">75%
-							</th>
+								</th>
 						</tr>
 						<!-- 최근 함께한 사람들 -->
 					</tbody>
@@ -240,18 +237,16 @@
 					<li class="li-other">
 						<button>자유랭크</button>
 					</li>
-					<li class="li-other"><span> <label class="hidden"
-							for="queueType">큐 타입</label> <select id="queueType">
+					<li class="li-other"><span> <label class="hidden" for="queueType">큐 타입</label> <select id="queueType">
 								<option value="TOTAL">큐 타입</option>
 								<option value="NORMAL">일반 (비공개 선택)</option>
-						</select>
-					</span></li>
+							</select>
+						</span></li>
 				</ul>
 				<div>
 					<div class="ch champ-search">
 						<div class="search">
-							<input type="text" placeholder="챔피언 검색"> <img src=""
-								alt="" class="img2">
+							<input type="text" placeholder="챔피언 검색"> <img src="" alt="" class="img2">
 						</div>
 						<div class="content"></div>
 					</div>
@@ -262,503 +257,273 @@
 				<div class="champions">챔피언들</div>
 				<div class="positions">포지션들</div>
 			</div>
-			<div class="three main">
-				<li class="main list">
-					<div class="madiv_wrap">
-						<div class="madiv list2">
-							<div class="content">
-								<div class="game-content">
-									<div class="game">
-										<div class="type">솔랭</div>
-										<div class="time-stamp">
-											<div style="position: relative;">4일전</div>
-										</div>
-										<div class="bar"></div>
-										<div class="result">승리</div>
-										<div class="length">19분 50초</div>
-									</div>
-									<div class="sinfo">
-										<div class="into">
-											<div class="champion">
-												<div class="icon">
-													<a href="fd"> <img src="" alt=""> <span class="champion-level">18</span>
-													</a>
-												</div>
-												<div class="spells">
-													<div class="spell">
-														<div class="sp">
-															<img src="" alt="">
-														</div>
-													</div>
-													<div class="spell">
-														<div class="sp">
-															<img src="" alt="">
-														</div>
-													</div>
-												</div>
-												<div class="runes">
-													<div class="rune">
-														<div class="sp">
-															<img src="" alt="">
-														</div>
-													</div>
-													<div class="rune">
-														<div class="sp">
-															<img src="" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="kda">
-												<div class="k-d-a">
-													<span>20</span>/ <span class="d">8</span>/ <span>27</span>
-												</div>
-												<div class="ratio">
-													<span>5.88:1</span> 평점
-												</div>
-											</div>
-											<div class="status">
-												<div class="p-kill">
-													<div style="position: relative;">킬관여85%</div>
-												</div>
-												<div class="ward">제어 와드 0</div>
-												<div class="cs">
-													<div style="position: relative;">CS 81 (4.1)</div>
-												</div>
-												<div class="average-tier">
-													<div style="position: relative;">Diamond 3</div>
-												</div>
-											</div>
 
-										</div>
-										<div class="intoto">
-											<div class="items">
-												<ul>
-													<li class="first">
-														<div>
-															<img src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img src="" alt="">
-														</div>
-													</li>
-													<li class="first">
-														<div>
-															<img src="" alt="">
-														</div>
-													</li>
-												</ul>
-												<div class="ward">
-													<div>
-														<img src="" alt="">
-													</div>
-												</div>
-											</div>
-											<div class="multi-kill">쿼드라킬</div>
-										</div>
-									</div>
-									<div class="participants">
-										<ul>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-											<li class="p-5th">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">자기이름</div>
-											</li>
-										</ul>
-										<ul>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-											<li class="p-5">
-												<div class="icon" style="position: relative;">
-													<img src="" alt="">
-												</div>
-												<div class="name">모짜르트</div>
-											</li>
-										</ul>
-										<ul></ul>
-									</div>
-								</div>
-							</div>
-							<div class="action">
-								<button class="detail2">
-									<img src="" alt="">
-								</button>
-							</div>
-						</div>
-
-						<div class="list2_detail">
-							<div class="list2_detail2">
-								<div class="detail2 summoner_info">소환사정보</div>
-								<div class="detail2 summoner_kda">KDA</div>
-								<div class="detail2 summoner_damage">딜량</div>
-								<div class="detail2 summoner_ward">와드</div>
-								<div class="detail2 summoner_cs">CS</div>
-								<div class="detail2_summoner_items">아이템 빌드</div>
-							</div>
-							<div class="list2_detail2">
-								<div class="detail2 champ_icon">1</div>
-								<div class="detail2 spells">2</div>
-								<div class="detail2 runes">3</div>
-								<div class="detail2 name">4</div>
-								<div class="detail2 s_kda">
-									<div class="detail2 k-d-a">5.3</div>
-									<div class="detail2 kda">5.6</div>
-								</div>
-								<div class="detail2 damage">
-									<div class="detail2 dealing">
-										<div class="detail2 d_num">d_1</div>
-										<div class="detail2 deal_graph">d_2</div>
-									</div>
-									<div class="detail2 taken">
-										<div class="detail2 t_num">t_1</div>
-										<div class="detail2 taken_graph">t_2</div>
-									</div>
-								</div>
-								<div class="detail2 ward">
-									<div class="detail2 warding">w-1</div>
-									<div class="detail2 del_ward">w-2</div>
-								</div>
-								<div class="detail2 s_cs">
-									<div class="game_cs">8.3</div>
-									<div class="cs_min">8.6</div>
-								</div>
-								<div class="detail2 items">
-									<img src="" alt="">
-									<img src="" alt="">
-									<img src="" alt="">
-									<img src="" alt="">
-									<img src="" alt="">
-									<img src="" alt="">
-									<img src="" alt="">
-									<img src="" alt="">
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
+			<div class="three main raw-record-container">
+				<!-- 게임 전적 들어갈 위치 -->
 
 			</div>
-			<div class="more2">더보기</div>
-		</div>
+		<div class="more2">더보기</div>
+	</div>
 
-		<!-- 오른쪽 문단 -->
+	<!-- 오른쪽 문단 -->
 	</div class="contents-container">
 
 </body>
+<!-- ### 230525-invisible-server로부터 추가된 스크립트 -->
+<script src="../resources/js/summoner_test.js"></script>
 <script>
-	
+
 	$(document).ready(function () {
-		
 		$('.list2_detail').hide();
-		
-		//버튼 클릭시 밑에 열리는거
-		$('.detail2').click(function () {
-			$('.list2_detail').toggle();
-		});
-		
 	});
-	
-    function getQueryString(key) {
-        //url 가져오는거
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(key);
-    }
-    const summoner_name = getQueryString('summoner_name')
 
-    //summoner_name 값 가져오기
-    console.log(summoner_name)
-    $.ajax({
-        method: 'get',
-        url: '/personlol/summoner/info',
-        data: {
-            'summoner_name': summoner_name
-        },
-        contentType: 'application/json; charset=utf-8'
-    }).done(res => {
-        let ratio = Math.floor((res.summoner_wins/(res.summoner_wins+res.summoner_losses))*100);
-        console.log(res);
-    	$('.summoner_tier').html(res.summoner_tier)
-        $('.summoner_name').html(summoner_name)
-        $('.summoner_level').html(res.summoner_level)
-        $('.summoner_icon').html('<img src="../resources/dd/img/profileicon/' + res.summoner_profile +
-            '.png" width="100%">');
-        $('.tier-name').html(res.summoner_tier)
-        $('.win-losses').html(res.summoner_wins + '승 ' +res.summoner_losses+'패 ')
-        $('.ratio').html('승률 '+ratio+' %')
-        
-        //티어별 사진 변경됨 가져오는 값은 대문자. 파일 이름은 소문자
-        if(res.summoner_tier === "MASTER"){
-            $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-master'+
-            '.png"  height="100%" width="100%" class="img-tier">');
-        }else if(res.summoner_tier === "CHELLENGER"){
-            $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-challenger'+
-            '.png"  height="100%" width="100%" class="img-tier">');
-        }else if(res.summoner_tier === "GRANDMASTER"){
-            $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-grandmaster'+
-            '.png"  height="100%" width="100%" class="img-tier">');
-        }else if(res.summoner_tier === "PLATINUM"){
-            $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-platinum'+
-            '.png"  height="100%" width="100%" class="img-tier">');
-        }else if(res.summoner_tier === "DIAMOND"){
-             $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-diamond'+
-             '.png"  height="100%" width="100%" class="img-tier">');
-        }else if(res.summoner_tier === "GOLD"){
-            $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-gold'+
-            '.png"  height="100%" width="100%" class="img-tier">');
-        }else if(res.summoner_tier === "SILVER"){
-            $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-silver'+
-            '.png"  height="100%" width="100%" class="img-tier">');
-        }else if(res.summoner_tier === "BRONZE"){
-            $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-bronze'+
-            '.png"  height="100%" width="100%" class="img-tier">');
-        }else if(res.summoner_tier === "IRON"){
-            $('.tier-img').html('<img src="../resources/ranked-emblem/emblem-iron'+
-            '.png"  height="100%" width="100%" class="img-tier">');
-        }
-        //티어별 사진 변경됨
-        
-        
-    }).fail(err => {
-        console.log(err);
-    })
+	function getQueryString(key) {
+		//url 가져오는거
+		const urlParams = new URLSearchParams(window.location.search);
+		return urlParams.get(key);
+	}
+	const summoner_name = getQueryString('summoner_name')
+
+	//summoner_name 값 가져오기
+	console.log(summoner_name)
+	$.ajax({
+		method: 'get',
+		url: '/personlol/summoner/info',
+		data: {
+			'summoner_name': summoner_name
+		},
+		contentType: 'application/json; charset=utf-8'
+	}).done(res => {
+		let ratio = Math.floor((res.summoner_wins / (res.summoner_wins + res.summoner_losses)) * 100);
+		console.log(res);
+		$('.summoner_tier').html(res.summoner_tier)
+		$('.summoner_name').html(summoner_name)
+		$('.summoner_level').html(res.summoner_level)
+		$('.summoner_icon').html('<img src="../resources/dd/img/profileicon/' + res.summoner_profile +
+			'.png" width="100%">');
+		$('.tier-name').html(res.summoner_tier)
+		$('.win-losses').html(res.summoner_wins + '승 ' + res.summoner_losses + '패 ')
+		$('.ratio').html('승률 ' + ratio + ' %')
+
+		//티어별 사진 변경됨 가져오는 값은 대문자. 파일 이름은 소문자
+		if (res.summoner_tier === "MASTER") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-master' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		} else if (res.summoner_tier === "CHELLENGER") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-challenger' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		} else if (res.summoner_tier === "GRANDMASTER") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-grandmaster' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		} else if (res.summoner_tier === "PLATINUM") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-platinum' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		} else if (res.summoner_tier === "DIAMOND") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-diamond' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		} else if (res.summoner_tier === "GOLD") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-gold' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		} else if (res.summoner_tier === "SILVER") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-silver' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		} else if (res.summoner_tier === "BRONZE") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-bronze' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		} else if (res.summoner_tier === "IRON") {
+			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-iron' +
+				'.png"  height="100%" width="100%" class="img-tier">');
+		}
+		//티어별 사진 변경됨
+
+
+	}).fail(err => {
+		console.log(err);
+	})
+
+</script>
+<!-- ### 230531-10:33: 기능상 문제로 주석 처리 -->
+<!-- <script>
+	//버튼 클릭시 밑에 열리는거
+	$('.detail2').click(function () {
+		$('.list2_detail').toggle();
+	});
+</script> -->
+<script>
+	$('.gosummonerinfo').click(function () {
+		//siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기
+		let summoner_name = $(this).siblings('.summoner_name').filter(function () {
+			return $(this).val() !== "";
+		}).first().val();
+
+		if (!summoner_name) {
+			console.log("검색어가 비어있습니다.");
+			return;
+		}
+
+		console.log(summoner_name);
+		const encoded_name = encodeURIComponent(summoner_name);
+		const go_url = '/personlol/summoner/?summoner_name=' + encoded_name;
+		$.ajax({
+			method: 'get',
+			url: '/personlol/user/checkserver',
+			data: {
+				"user_lolname": summoner_name
+			}
+		}).done(res => {
+			console.log(res);
+			if (res == "1") {
+				location.href = go_url;
+			} else if (res == "-999") {
+				alert("등록되지않은 소환사입니다 다시 입력해주세요")
+			}
+		}).fail(err => {
+			console.log(err);
+		})
+
+	});
 </script>
 <script>
-    $('.gosummonerinfo').click(function () {
-        //siblings = this의 형제중 클래스 묶인거 가져오고 필터로 둘 중 있는거 찾아오기
-        let summoner_name = $(this).siblings('.summoner_name').filter(function () {
-            return $(this).val() !== "";
-        }).first().val();
-
-        if (!summoner_name) {
-            console.log("검색어가 비어있습니다.");
-            return;
-        }
-
-        console.log(summoner_name);
-        const encoded_name = encodeURIComponent(summoner_name);
-        const go_url = '/personlol/summoner/?summoner_name=' + encoded_name;
-        $.ajax({
-            method: 'get',
-            url: '/personlol/user/checkserver',
-            data: {
-                "user_lolname": summoner_name
-            }
-        }).done(res => {
-            console.log(res);
-            if (res == "1") {
-                location.href = go_url;
-            } else if (res == "-999") {
-                alert("등록되지않은 소환사입니다 다시 입력해주세요")
-            }
-        }).fail(err => {
-            console.log(err);
-        })
-
-    });
-</script>
-<script>
-    //로그아웃
-    $('#logout').click(function () {
-        location.href = '/personlol/logout';
-        console.log("로그아웃");
-        alert("로그아웃");
-    })
+	//로그아웃
+	$('#logout').click(function () {
+		location.href = '/personlol/logout';
+		console.log("로그아웃");
+		alert("로그아웃");
+	})
 </script>
 
 <!-- 왼쪽 첫번째 챔피언 박스 -->
 <script>
 	$.ajax({
-	    method: 'get',
-	    url: '/personlol/summoner/champion',
-	    data: {
-	        	'summoner_name': summoner_name 
-	    },
-	    contentType: 'application/json; charset=utf-8'
+		method: 'get',
+		url: '/personlol/summoner/champion',
+		data: {
+			'summoner_name': summoner_name
+		},
+		contentType: 'application/json; charset=utf-8'
 	}).done(res => {
 		console.log(res)
-		
-	    $.each(res, function (i, champ) {
-	        // KDA 값 가져오기
-	        let kda = JSON.parse(champ.KDA);
-	        
-	        // KDA 값 활용 예시
-	        let kills = kda.kills;
-	        let deaths = kda.deaths;
-	        let assists = kda.assists;
-	    	
-	        //게시글 왼쪽
-	    	let champion_box = $('<div class="champion-box"></div>');
-	    	let icon = $('<div class="face"><a href="naver.com" class="face-img"><img src="../resources/'+champ.CHAMP_ICON+'" width="32px"></a></div>');
-	    	let name = $('<div class="box-info"><div class="name">'+champ.CHAMP_NAME+'</div></div>');
-	    	let kda_box = $('<div class="box-kda"></div>')
-	    	let detail = $('<div class="detail">'+kda.kills+' / '+kda.deaths+' / '+kda.assists+'</div>')
-	    	kda_box.append(detail);
-	    	champion_box.append(icon);
-	    	champion_box.append(name);
-	    	champion_box.append(kda_box);
-	    	$('.champion-container').append(champion_box);
-	    });
-		
+
+		$.each(res, function (i, champ) {
+			// KDA 값 가져오기
+			let kda = JSON.parse(champ.KDA);
+
+			// KDA 값 활용 예시
+			let kills = kda.kills;
+			let deaths = kda.deaths;
+			let assists = kda.assists;
+
+			//게시글 왼쪽
+			let champion_box = $('<div class="champion-box"></div>');
+			let icon = $('<div class="face"><a href="naver.com" class="face-img"><img src="../resources/' + champ
+				.CHAMP_ICON + '" width="32px"></a></div>');
+			let name = $('<div class="box-info"><div class="name">' + champ.CHAMP_NAME + '</div></div>');
+			let kda_box = $('<div class="box-kda"></div>')
+			let detail = $('<div class="detail">' + kda.kills + ' / ' + kda.deaths + ' / ' + kda.assists + '</div>')
+			kda_box.append(detail);
+			champion_box.append(icon);
+			champion_box.append(name);
+			champion_box.append(kda_box);
+			$('.champion-container').append(champion_box);
+		});
+
 
 	}).fail(err => {
-	    console.log(err);
+		console.log(err);
 	})
-
 </script>
 
-<script>
+<!-- ### 왜 있는지 잘 모르겠는 코드라 주석처리 -->
+<!-- <script>
 	//게시글 본문
- 	$.ajax({
-	    method: 'get',
-	    url: '/personlol/summoner/main',
-	    data: {
-	        	'summoner_name': summoner_name 
-	    },
-	    contentType: 'application/json; charset=utf-8'
+	$.ajax({
+		method: 'get',
+		url: '/personlol/summoner/main',
+		data: {
+			'summoner_name': summoner_name
+		},
+		contentType: 'application/json; charset=utf-8'
 	}).done(res => {
 		console.log(res)
 		console.log('@@@@@@@@@@@@@@')
-		
-		$.each(res, function (k, champ2){
-	        // 컬럼 배열 값 가져오기
-	        let champion_data = JSON.parse(champ2.CHAMPION);
-	        // 배열속 컬럼 값 활용 예시
- 	        let win = champion_data.win;
-	        let level = champion_data.champLevel;
-			
-		   
- 	       var totalSeconds = champ2.GAME_DURATION; 
- 	       var minutes = Math.floor(totalSeconds / 60);
- 	       var seconds = totalSeconds % 60;
 
- 	       var timestamp = champ2.GAME_CREATE_TIME; // 주어진 타임스탬프
- 	       var targetDate = new Date(timestamp); // 주어진 타임스탬프를 날짜 객체로 변환
+		$.each(res, function (k, champ2) {
+			// 컬럼 배열 값 가져오기
+			let champion_data = JSON.parse(champ2.CHAMPION);
+			// 배열속 컬럼 값 활용 예시
+			let win = champion_data.win;
+			let level = champion_data.champLevel;
 
- 	       var currentDate = new Date(); // 현재 날짜와 시간을 담은 객체
- 	       var timeDiff = currentDate.getTime() - targetDate.getTime(); // 현재 날짜와 주어진 날짜의 차이를 밀리초로 계산
 
- 	       var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // 밀리초를 일(day)로 변환
+			var totalSeconds = champ2.GAME_DURATION;
+			var minutes = Math.floor(totalSeconds / 60);
+			var seconds = totalSeconds % 60;
 
- 	       console.log(daysDiff + "일 전");
-	          
-	        
-	        
-		   let result = (win === 1) ? "승리" : "패배";
-			
-		   let main_list = $('<li class="main list"><div class="madiv list2">'+
-				   '<div class="content"><div class="game-content">'+
-				   
-				   '</div></div>'+
-				   '</div></li>')
- 		   let game = $('<div class="game">'+
-				   		'<div class="type">솔랭</div>'+
-				   		'<div class="time-stamp"></div>'+
-				   		'<div class="bar"></div>'+
-				   		'<div class="result">'+result+'</div>'+
-				   '</div>')  
+			var timestamp = champ2.GAME_CREATE_TIME; // 주어진 타임스탬프
+			var targetDate = new Date(timestamp); // 주어진 타임스탬프를 날짜 객체로 변환
 
- 		   main_list.find('.game-content').append('<div class="game">'+
-											   		'<div class="type">솔랭</div>'+
-								 '<div class="time-stamp"><div style="position: relative">'+daysDiff+'일 전'+'</div></div>'+
-											   		'<div class="time-stamp"></div>'+
-											   		'<div class="bar"></div>'+
-											   		'<div class="result">'+result+'</div>'+
-											   		'<div class="length">'+minutes+'분'+seconds+'초'+'</div>'+
-			  									   '</div>');
-		   
-		   main_list.find('.game-content').append('<div class="sinfo"><div class="into"></div></div>');
-		   
- 		   let champion = $('<div class="champion">'+
-	   							'<div class="icon">'+
-				'<a href="http://localhost:8088/personlol/champion/detail?champ_id='+champ2.CHAMP_ID+'">'+
-				'<img src="../resources/'+champ2.CHAMP_ICON+'" width="48" height="48">'+
-				'<span class="champion-level">'+level+'</span>'+
-	   			'</a></div>'+
-	   					'<div class="spells">'+
-	   						'<div class="spell"><div class="sp">'+'<img src'+
-	   						'</div></div>'+
-	   					'</div>'+
-	   					 '<div class="runes"></div>'+
-	   					'</div>'); 
-		   
-		   
-		   
-		   
-		   main_list.find('.into').append(champion)
+			var currentDate = new Date(); // 현재 날짜와 시간을 담은 객체
+			var timeDiff = currentDate.getTime() - targetDate.getTime(); // 현재 날짜와 주어진 날짜의 차이를 밀리초로 계산
 
-		   
-		   let item_div = $('<div></div>')
-		   
-		   $('.three').append(main_list);
-		   //game_content까지는 넣어야함
-	    });
-		
+			var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // 밀리초를 일(day)로 변환
+
+			console.log(daysDiff + "일 전");
+
+
+
+			let result = (win === 1) ? "승리" : "패배";
+
+			let main_list = $('<li class="main list"><div class="madiv list2">' +
+				'<div class="content"><div class="game-content">' +
+
+				'</div></div>' +
+				'</div></li>')
+			let game = $('<div class="game">' +
+				'<div class="type">솔랭</div>' +
+				'<div class="time-stamp"></div>' +
+				'<div class="bar"></div>' +
+				'<div class="result">' + result + '</div>' +
+				'</div>')
+
+			main_list.find('.game-content').append('<div class="game">' +
+				'<div class="type">솔랭</div>' +
+				'<div class="time-stamp"><div style="position: relative">' + daysDiff + '일 전' + '</div></div>' +
+				'<div class="time-stamp"></div>' +
+				'<div class="bar"></div>' +
+				'<div class="result">' + result + '</div>' +
+				'<div class="length">' + minutes + '분' + seconds + '초' + '</div>' +
+				'</div>');
+
+			main_list.find('.game-content').append('<div class="sinfo"><div class="into"></div></div>');
+
+			let champion = $('<div class="champion">' +
+				'<div class="icon">' +
+				'<a href="http://localhost:8088/personlol/champion/detail?champ_id=' + champ2.CHAMP_ID + '">' +
+				'<img src="../resources/' + champ2.CHAMP_ICON + '" width="48" height="48">' +
+				'<span class="champion-level">' + level + '</span>' +
+				'</a></div>' +
+				'<div class="spells">' +
+				'<div class="spell"><div class="sp">' + '<img src' +
+				'</div></div>' +
+				'</div>' +
+				'<div class="runes"></div>' +
+				'</div>');
+
+
+
+
+			main_list.find('.into').append(champion)
+
+
+			let item_div = $('<div></div>')
+
+			$('.three').append(main_list);
+			//game_content까지는 넣어야함
+		});
+
 	}).fail(err => {
-	    console.log(err);
-	}) 
-</script>
+		console.log(err);
+	})
+</script> -->
+
 </html>

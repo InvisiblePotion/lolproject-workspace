@@ -76,8 +76,9 @@
 
 			<div id="m_logo">
 				<img
-					src="./resources/img/mainlogo.png"
-					title="메인로고" id=m_log_img width="50%" >
+
+					src="./resources/img/mainlogo.png" title="메인로고" id=m_log_img width="50%" >
+
 			</div id="m_logo">
 
 			<div id="searchdiv">
@@ -358,6 +359,7 @@
 
     //최신 듀오 리스트 가져오기
     let pageing = 1;
+
     
     $('.next_page').click(function(){
       pageing++;
@@ -402,7 +404,9 @@
           location.href = go_url;
         } else if (res == "-999") {
           alert("등록되지 않은 소환사입니다. 다시 입력해주세요.");
-          location.href = '/personlol/main';
+
+          location.href = '/personlol/main'
+
         }
       }).fail(err => {
         console.log(err);
@@ -495,14 +499,15 @@
   <script>
   	let page_num = 1; // 현재 페이지 번호
   	
-	//게시글 시작
 	$(document).ready(function () {
 		loadDuo(page_num);
 
 	});
   	
   	function loadDuo(page_num){
-  		$('.duolist-container').empty();
+
+  		  $('.duolist-container').empty();
+
 		  //메인듀오가져오기;
 		  $.ajax({
 		    method: 'get',
