@@ -33,8 +33,8 @@
 					<div class="menu">
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
 							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
-							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-							href="/personlol/summoner/" class="m-col">소환사분석</a>
+							href="/personlol/duo/" class="m-col">듀오찾기</a>
+							<a href="#" class="m-col summoner-info">소환사분석</a>
 
 
 					</div>
@@ -295,6 +295,26 @@
 			console.log("로그아웃");
 			alert("로그아웃");
 		})
+	</script>
+	<script>
+		$('.summoner-info').click(function () {
+			$.ajax({
+				method:'get',
+				url:'/personlol/user/main-gosummoner-info',
+				
+			}).done(res => {
+				if(res.length != 0){
+					location.href ='/personlol/summoner/?summoner_name='+res
+				}else{
+					alert("로그인을 해주세요!")
+					location.href ='/personlol/logine'
+				}
+				
+			}).fail(err => {
+				console.log(err)
+				
+			})
+		});//클릭 이벤트 끝
 	</script>
 </body>
 

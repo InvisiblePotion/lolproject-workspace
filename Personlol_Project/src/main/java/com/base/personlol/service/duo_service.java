@@ -78,7 +78,7 @@ public class duo_service {
 		System.out.println("lane: 값은 : " + lane);
 		System.out.println("라인 서비스 작동하니?");
 
-		int start_page = page;
+		int start_page = 1;
 		
 		int end_page = (page * 6);
 

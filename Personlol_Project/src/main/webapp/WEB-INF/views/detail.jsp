@@ -40,8 +40,7 @@
 							<a
 							href="/personlol/duo/" class="m-col">듀오찾기</a> 
 							
-							<a
-							href="/personlol/summoner/" class="m-col">소환사분석</a>
+							<a href="#" class="m-col summoner-info">소환사분석</a>
 
 
 					</div>
@@ -198,6 +197,8 @@
 	<script>
  
  $(document).ready(function() {
+	 
+
 	 
 	 //쿼리스트링 가져오는 함수
 	 function getQueryString(key) {
@@ -2232,10 +2233,40 @@
 		   
 		   
 	   })//신발 끝
-
+		
+	   
  });//ready 끝
 	 
  </script>
+
+
+<script>
+$('.summoner-info').click(function () {
+	$.ajax({
+		method:'get',
+		url:'/personlol/user/main-gosummoner-info',
+		
+	}).done(res => {
+		if(res.length != 0){
+			location.href ='/personlol/summoner/?summoner_name='+res
+		}else{
+			alert("로그인을 해주세요!")
+			location.href ='/personlol/logine'
+		}
+		
+	}).fail(err => {
+		console.log(err)
+		
+	})
+});//클릭 이벤트 끝
+
+    //로그아웃
+    $('#logout').click(function () {
+      location.href = '/personlol/logout';
+      console.log("로그아웃");
+      alert("로그아웃");
+    })
+  </script>
 
 </body>
 </html>

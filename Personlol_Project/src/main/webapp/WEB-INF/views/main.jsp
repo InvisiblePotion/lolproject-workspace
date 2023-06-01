@@ -229,13 +229,16 @@
 
 		<footer>
 			<div class="foot-box bar">
-				<span>1.이 프로젝트는 riot-api를 활용한 데이터 분석 사이트를 구현 한 것 입니다.</span>
+				<span>thanks to! <br>
+					  인천일보 아카데미 - 차지헌 선생님 <br>
+					  (주)게임아이 - 김기찬 연구원님, 성중곤 연구원님
+				</span>
 			</div>
 			<div class="foot-box bar">
-				<span>1.이 프로젝트는 riot-api를 활용한 데이터 분석 사이트를 구현 한 것 입니다.</span>
+				<span>프로젝트 기간 프로젝트 기간 2023/04/17~ 2023/05/31</span>
 			</div>
 			<div class="foot-box">
-				<span>프로젝트 기간 2023/04/00~ 2023/05/31     프로젝트 팀원 이름: 이세인, 이주찬, 문정환, 강태민, 김명재</span>
+				<span>프로젝트 팀원 이름: 이세인, 이주찬, 문정환, 강태민, 김명재</span>
 			</div>
 		</footer>
 
@@ -607,17 +610,23 @@
 		});
 	}
   </script>
-	<script type="text/javascript">
+	<script>
 		$('.summoner-info').click(function () {
 			$.ajax({
 				method:'get',
-				url:'/personlol/user/main-gosummoner-info'
+				url:'/personlol/user/main-gosummoner-info',
 				
 			}).done(res => {
-				console.log(res)
-				console.log("아니왜안돼")
+				if(res.length != 0){
+					location.href ='/personlol/summoner/?summoner_name='+res
+				}else{
+					alert("로그인을 해주세요!")
+					location.href ='/personlol/logine'
+				}
+				
 			}).fail(err => {
 				console.log(err)
+				
 			})
 		});//클릭 이벤트 끝
 	</script>

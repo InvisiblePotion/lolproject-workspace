@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>mypage</title>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -44,9 +44,8 @@
 					<div class="menu">
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
 							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
-							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
-							href="/personlol/summoner/" class="m-col">소환사분석</a>
-
+							href="/personlol/duo/" class="m-col">듀오찾기</a> 
+							<a href="#" class="m-col summoner-info">소환사분석</a>
 
 					</div>
 					<div class="my-menu">
@@ -308,7 +307,7 @@
 			}).done(res => {
 				console.log(res);
 				$('#score').html(res[0]);
-				const resArray = res.slice(0,7);
+				const resArray = res.slice(0,20);
 				const resultArray=[];
 				
 				for (let i = 0; i < resArray.length; i++) {
@@ -378,7 +377,20 @@
 		            }]
 		          },
 		          
-		          options: {}
+		          options: {
+		        	  plugins:{
+		        		  legend:{
+		        			  position: 'top',//라벨 위치 설정
+		        		  },
+		        		  tooltip:{
+		        			  callback:{
+		        				  label:(context) => {
+		        					  return resArray[context.dataIndex]; // 라벨에 표시할 이름 설정
+		        				  }
+		        			  }
+		        		  }
+		        	  }
+		          }
 		        });
 
 				
@@ -720,7 +732,26 @@
         
         
     </script>
-    
+    <script>
+		$('.summoner-info').click(function () {
+			$.ajax({
+				method:'get',
+				url:'/personlol/user/main-gosummoner-info',
+				
+			}).done(res => {
+				if(res.length != 0){
+					location.href ='/personlol/summoner/?summoner_name='+res
+				}else{
+					alert("로그인을 해주세요!")
+					location.href ='/personlol/logine'
+				}
+				
+			}).fail(err => {
+				console.log(err)
+				
+			})
+		});//클릭 이벤트 끝
+	</script>
 
 
 </body>

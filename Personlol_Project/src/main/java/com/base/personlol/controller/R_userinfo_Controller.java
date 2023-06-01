@@ -195,20 +195,18 @@ public class R_userinfo_Controller {
 	}
 	
 	//소환사 분석헤더
-	@GetMapping("/main-gosummoner-info")
-	public String goSummoner_m(HttpServletRequest session) {
-		System.out.println("@@@@@@@@@@@@@@@@@@############"+session.getAttribute("id"));
+	@GetMapping(value = "/main-gosummoner-info", produces = MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
+	public String goSummoner_m(HttpSession session) {
 		if(session.getAttribute("id") != null) {
 			String user_id = session.getAttribute("id").toString();
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@"+user_id);
-			
+			System.out.println("로그인한 유저 아이디: "+user_id);
 			
 			String result_summonerinfo = u_ser.goSummoner_m(user_id);
 			System.out.println("result_summonerinfo"+result_summonerinfo);
 			return result_summonerinfo;
 		}else {
-			String msg = "없는 소환사입니다";
-			return msg;
+			
+			return "";
 		}//
 		
 		
