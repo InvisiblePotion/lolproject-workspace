@@ -13,7 +13,7 @@ function reloadPlayRecord() {
         $('.btn-reload-playrecord').html('가져오는 중<br>(약 5초 소요)');
         getGameIds(summoner_name, true);
     }).fail((err)=>{
-        console.log(err);
+        console.log(err); // ### 로그
         $('.btn-reload-playrecord').css('background-color', '#ff4343');
         $('.btn-reload-playrecord').html('갱신 실패');
     });
@@ -42,10 +42,17 @@ function getGameIds(summoner_name, is_reload_record) {
         data: {'summoner_name': summoner_name}
     }).done((game_id_list)=>{
         console.log(game_id_list); // ### 로그
+        if (game_id_list == '') {
+            $('.btn-reload-playrecord').css('background-color', '#d68e3b');
+            $('.btn-reload-playrecord').html('소환사 등록');
+            return
+        }
         getGameRecords(game_id_list, is_reload_record);
         putGameIds(summoner_name, game_id_list); // ### summoner_recent_game 테이블에서 꺼내와도 작동하는 문제 존재(성능 이슈)
     }).fail((err)=>{
-        console.log(err);
+        console.log(err); // ### 로그
+        $('.btn-reload-playrecord').css('background-color', '#d68e3b');
+        $('.btn-reload-playrecord').html('소환사 등록');
     });
 }
 
@@ -285,7 +292,7 @@ function extendRecordItem(record_number) {
         '\t\t\t\t\t\t<div class="into">'+
         '\t\t\t\t\t\t\t<div class="champion">'+
         '\t\t\t\t\t\t\t\t<div class="icon">'+
-        '\t\t\t\t\t\t\t\t\t<a href="fd"><img class="raw-self-champion-icon" src="" alt=""><span class="champion-level raw-self-champion-level">18</span>'+
+        '\t\t\t\t\t\t\t\t\t<a href="fd"><img class="raw-self-champion-icon champ-icon" src="" alt=""><span class="champion-level raw-self-champion-level">18</span>'+
         '\t\t\t\t\t\t\t\t\t</a>'+
         '\t\t\t\t\t\t\t\t</div>'+
         '\t\t\t\t\t\t\t\t<div class="spells">'+

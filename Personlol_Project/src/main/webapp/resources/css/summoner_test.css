@@ -28,6 +28,17 @@
     border-radius: 50%;
 }
 
+.raw-part-number-1, .raw-part-number-2,
+.raw-part-number-3, .raw-part-number-4,
+.raw-part-number-5 {
+    background-color: #f3aca3;
+}
+.raw-part-number-6, .raw-part-number-7,
+.raw-part-number-8, .raw-part-number-9,
+.raw-part-number-10 {
+    background-color: #a8b1fc;
+}
+
 .btn-reload-playrecord {
     background-color: #699097;
 }

@@ -24,6 +24,7 @@
 
 <link rel="stylesheet" type="text/css" href="../resources/css/header.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/duo.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/footer.css">
 
 
 <style>
@@ -300,7 +301,20 @@
 		</span>
 		<p id="result"></p>
 	</div>
-	<footer class="footer-container"> </footer>
+	<footer>
+		<div class="foot-box bar">
+			<span>thanks to! <br>
+				  인천일보 아카데미 - 차지헌 선생님 <br>
+				  (주)게임아이 - 김기찬 연구원님, 성중곤 연구원님
+			</span>
+		</div>
+		<div class="foot-box bar">
+			<span>프로젝트 기간 프로젝트 기간 2023/04/17~ 2023/05/31</span>
+		</div>
+		<div class="foot-box">
+			<span>프로젝트 팀원 이름: 이세인, 이주찬, 문정환, 강태민, 김명재</span>
+		</div>
+	</footer>
 	</div>
 
 	<script type="text/javascript">

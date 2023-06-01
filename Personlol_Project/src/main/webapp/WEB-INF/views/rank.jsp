@@ -14,6 +14,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/css/header.css">	
 <link rel="stylesheet" href="./resources/css/rank.css">
+<link rel="stylesheet" href="./resources/css/footer.css">
 
 </head>
 
@@ -120,6 +121,20 @@
 
 	</div class="list-container">
 	<div id="pagenum"></div id="pagenum">
+	<footer>
+		<div class="foot-box bar">
+			<span>thanks to! <br>
+				  인천일보 아카데미 - 차지헌 선생님 <br>
+				  (주)게임아이 - 김기찬 연구원님, 성중곤 연구원님
+			</span>
+		</div>
+		<div class="foot-box bar">
+			<span>프로젝트 기간 프로젝트 기간 2023/04/17~ 2023/05/31</span>
+		</div>
+		<div class="foot-box">
+			<span>프로젝트 팀원 이름: 이세인, 이주찬, 문정환, 강태민, 김명재</span>
+		</div>
+	</footer>
 
 	<script>
 		//페이지 불러옴과 동시에 실행되는 함수
