@@ -1,3 +1,9 @@
+#chart_title {
+	justify-content: center;
+	font-weight: bold;
+	font-size: 20px
+}
+
 #SUMMONER_PROFILE {
 	text-align: center;
 }

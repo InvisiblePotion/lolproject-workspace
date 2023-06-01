@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>mypage</title>
+<title>Insert title here</title>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -44,8 +44,9 @@
 					<div class="menu">
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a
 							href="/personlol/rank" class="m-col rank">랭킹보기</a> <a
-							href="/personlol/duo/" class="m-col">듀오찾기</a> 
-							<a href="#" class="m-col summoner-info">소환사분석</a>
+							href="/personlol/duo/" class="m-col">듀오찾기</a> <a
+							href="/personlol/summoner/" class="m-col">소환사분석</a>
+
 
 					</div>
 					<div class="my-menu">
@@ -176,7 +177,11 @@
 		
 		<div class="row">&nbsp;</div>
 		
-		<div class="row">
+		<div class="row"> <!-- 머신런칭 차트분석 -->
+			<div class="title_chart">
+				<div class="row" id="chart_title"></div>
+			</div>
+			<div class="row">&nbsp;</div>
 			<div class="container">
 				<canvas id="myChart"></canvas>
 			</div>
@@ -307,57 +312,46 @@
 			}).done(res => {
 				console.log(res);
 				$('#score').html(res[0]);
-				const resArray = res.slice(0,20);
-				const resultArray=[];
+				$('#chart_title').html('최근 '+ res.length +'경기 머신런닝 경기 결과 분석');
+				const resArray = res;
+				const resultArray=[];				
 				
-				for (let i = 0; i < resArray.length; i++) {
-					  const resElement = resArray[i];
-
-					  if (resElement === 'IRON') {
-					    resultArray.push(1);
-					  } else if (resElement === 'BRONZE') {
-					    resultArray.push(2);
-					  } else if (resElement === 'SILVER') {
-					    resultArray.push(3);
-					  } else if (resElement === 'GOLD') {
-					    resultArray.push(4);
-					  } else if (resElement === 'PLATINUM') {
-					    resultArray.push(5);
-					  } else if (resElement === 'DIAMOND') {
-					    resultArray.push(6);
-					  } else if (resElement === 'MASTER') {
-					    resultArray.push(7);
-					  } else if (resElement === 'GRANDMASTER') {
-					    resultArray.push(8);
-					  } else if (resElement === 'CHALLENGER') {
-					    resultArray.push(9);
-					  }
-					}
+				var counts = {};
+				
+				for (var i = 0; i < resArray.length; i++) {
+				  var item = resArray[i];
+				  counts[item] = counts[item] ? counts[item] + 1 : 1;				   
+				}
+				
+				var keys = Object.keys(counts); // 객체의 모든 키(key)를 추출하여 배열로 반환
+				var values = Object.values(counts);
+				console.log(keys)	
+				
 				// 색상에 대한 함수 정의
 				function getColorByTier(tier) {
 				  switch (tier) {
-				    case 1: // IRON
+				    case 'IRON': // IRON
 				      return 'rgba(051, 051, 051, 0.2)';
-				    case 2: // BRONZE
+				    case 'BRONZE': // BRONZE
 				      return 'rgba(102,051, 000, 0.2)';
-				    case 3: // SILVER
+				    case 'SILVER': // SILVER
 				      return 'rgba(204, 204, 204, 0.2)';
-				    case 4: // GOLD
+				    case 'GOLD': // GOLD
 					  return 'rgba(255, 255, 051, 0.2)';
-				    case 5: // PLA
+				    case 'PLATINUM': // PLA
 						  return 'rgba(051, 255, 051, 0.2)';
-				    case 6: // DIA
+				    case 'DIAMOND': // DIA
 						  return 'rgba(051, 000, 255, 0.2)';
-				    case 7: // MAS
+				    case 'MASTER': // MAS
 						  return 'rgba(153, 102, 255, 0.2)';
-				    case 8: // GRAND
+				    case 'GRANDMASTER': // GRAND
 						  return 'rgba(153, 000, 051, 0.2)';
-				    case 9: // CH
+				    case 'CHALLENGER': // CH
 						  return 'rgba(255, 051, 153, 0.2)';
 				  }
 				}
 				// resultArray를 순회하며 색상을 매핑하여 backgroundColor 배열에 추가
-				let backgroundColors = resultArray.map((tier) => getColorByTier(tier));
+				let backgroundColors = keys.map((tier) => getColorByTier(tier));
 				
 				
 				var ctx = document.getElementById('myChart').getContext('2d');
@@ -367,30 +361,17 @@
 
 		          // 챠트를 그릴 데이타
 		          data: {
-		            labels: resArray,
+		            labels: keys,
 		            datasets: [{
 		              label: '최근 경기에서의 활약도',
-		              data: resultArray,
+		              data: values,
 		              backgroundColor: backgroundColors,
 		              borderColor: backgroundColors,        	 
 
 		            }]
 		          },
 		          
-		          options: {
-		        	  plugins:{
-		        		  legend:{
-		        			  position: 'top',//라벨 위치 설정
-		        		  },
-		        		  tooltip:{
-		        			  callback:{
-		        				  label:(context) => {
-		        					  return resArray[context.dataIndex]; // 라벨에 표시할 이름 설정
-		        				  }
-		        			  }
-		        		  }
-		        	  }
-		          }
+		          options: {}
 		        });
 
 				
@@ -732,26 +713,7 @@
         
         
     </script>
-    <script>
-		$('.summoner-info').click(function () {
-			$.ajax({
-				method:'get',
-				url:'/personlol/user/main-gosummoner-info',
-				
-			}).done(res => {
-				if(res.length != 0){
-					location.href ='/personlol/summoner/?summoner_name='+res
-				}else{
-					alert("로그인을 해주세요!")
-					location.href ='/personlol/logine'
-				}
-				
-			}).fail(err => {
-				console.log(err)
-				
-			})
-		});//클릭 이벤트 끝
-	</script>
+    
 
 
 </body>
