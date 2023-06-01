@@ -167,15 +167,11 @@ function inputGameDataShort(game_data, game_number) {
             $(prefix+'.raw-self-item-item'+(parseInt(idx)+1))[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item'+idx]+'.png';
         }
     }
-    if (game_data[self_number]['item']['item'+6] == 0) {
-    	$(prefix+'.raw-self-item-trinket').hide();
-    } else {
-    	$(prefix+'.raw-self-item-trinket')[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item6']+'.png';    
-    }
+    $(prefix+'.raw-self-item-trinket')[0].src = '../resources/dd/img/item/'+game_data[self_number]['item']['item6']+'.png';
     switch (parseInt(game_data[self_number]['kda']['largestMultiKill'])) {
         case 0:
             $(prefix+'.multi-kill').css('display', 'none'); // ### 디자인 상태에 따라 변경 필요
-            $(prefix+'.raw-self-kda-multikill').html(''	);
+            $(prefix+'.raw-self-kda-multikill').html('');
             break;
         case 1:
         $(prefix+'.multi-kill').css('display', 'none'); // ### 디자인 상태에 따라 변경 필요
@@ -289,7 +285,7 @@ function extendRecordItem(record_number) {
         '\t\t\t\t\t\t<div class="into">'+
         '\t\t\t\t\t\t\t<div class="champion">'+
         '\t\t\t\t\t\t\t\t<div class="icon">'+
-        '\t\t\t\t\t\t\t\t\t<a href="/personlol/champion/"><img class="raw-self-champion-icon" src="" alt=""><span class="champion-level raw-self-champion-level">18</span>'+
+        '\t\t\t\t\t\t\t\t\t<a href="fd"><img class="raw-self-champion-icon" src="" alt=""><span class="champion-level raw-self-champion-level">18</span>'+
         '\t\t\t\t\t\t\t\t\t</a>'+
         '\t\t\t\t\t\t\t\t</div>'+
         '\t\t\t\t\t\t\t\t<div class="spells">'+
@@ -452,7 +448,7 @@ function extendRecordItem(record_number) {
         '\t\t\t</div>'+
         '\t\t\t<div class="action">'+
         '\t\t\t\t<button onclick="toggleRecordExpend(this)" class="raw-record-number-'+record_number+' detail2 btn-expend-toggle">'+ // ### 위치기억
-        '\t\t\t\t\t<img src="../resources/img/nextpage2.png" alt="" class="nextpage2">'+
+        '\t\t\t\t\t<img src="" alt="">'+
         '\t\t\t\t</button>'+
         '\t\t\t</div>'+
         '\t\t</div>'+

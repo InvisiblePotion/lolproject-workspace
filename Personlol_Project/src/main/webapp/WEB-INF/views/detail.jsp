@@ -194,10 +194,12 @@
 		</div>
 	</div>
 
-<script>
+	<script>
  
  $(document).ready(function() {
-	
+	 
+
+	 
 	 //쿼리스트링 가져오는 함수
 	 function getQueryString(key) {
 	     //url 가져오는거

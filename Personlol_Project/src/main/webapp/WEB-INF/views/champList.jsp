@@ -644,14 +644,10 @@
 				console.log(res)
 				let icon_img = ''
 				$.each(res, function (i, img) {
-					let shortenedName = img.champ_name.length > 6 ? img.champ_name.slice(0, 6) + '...' : img.champ_name;
 					icon_img += 
-						'<li class="img_list">'+
 						'<a href="/personlol/champion/detail?champ_id=' + img.champ_id +'&lane='+img.lane+'">'+
-						'<img class="icon_img" width="60" height="60" src="../resources/' + img.champ_icon +'" alt="이미지">'+
-						'<span class="name">'+shortenedName+'</span>'+
-						'</a>'+
-						'</li>'
+						'<img class="icon_img" width="70" height="70" src="../resources/' + img
+						.champ_icon + '" alt="이미지">'
 				})
 				$('.ul-group').html(icon_img);
 
