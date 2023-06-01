@@ -14,7 +14,8 @@
 <body>
 	<div id="root" class="container mt-5">
     <div class="idfind-layout">
-      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
+      <a href="/personlol/main"><h1><img src="./resources/img/loginLogo.png" alt="logo" class="logo-image" width="70%"></h1></a>
+      <div class = "d_msg"> <span class="msg">${msg}</span> </div>
       <form action = "/personlol/goidfind" method="get">
         <div class="form-group">
           <h2>아이디를 잊어버리셨나요?</h2>
@@ -31,11 +32,16 @@
         <div class="msg2-div">
           <span>PersonLoL이 처음이세요?</span> &nbsp; &nbsp;
           <a href="/personlol/agree"><span>회원가입하기</span></a>
-          <span>${msg}</span>
+          
         </div>
       </form>
     </div>
   </div>
-  
+  <script>
+  if($('.msg').text() != ""){
+	  $('.msg').hide();
+	  alert($('.msg').text());
+  }
+  </script>
 </body>
 </html>

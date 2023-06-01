@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -92,6 +93,15 @@ public class R_userinfo_Controller {
 			result.put("code",code);
 			
 			return result;
+		}else if(insertRst == -99){
+			//서버에 롤네임 없음
+			String msg = "서버에 등록된 닉네임이 아닙니다";
+			String code ="-99";
+			
+			result.put("Msg", msg);
+			result.put("code",code);
+			return result;
+			
 		}else {
 			String msg = "알수없는 이유";
 			String code = "1000";
@@ -100,6 +110,7 @@ public class R_userinfo_Controller {
 			result.put("code",code);
 			return result;
 		}
+		
 	}	//회원가입 끝	
 	
 	//로그인
@@ -159,5 +170,46 @@ public class R_userinfo_Controller {
 		System.out.println("돌아온 업데이트 값은? 0 1 -1?: "+ id);
 		return newcode;
 	}
+	
+	//서버에 롤 네임이 등록이 되어있는가
+	@GetMapping("/checkserver")
+	public int checkserver(@RequestParam  String user_lolname) {
+		System.out.println("검색시 받아오는 롤네임: "+user_lolname);
+		int checkResult = u_ser.checksvlolname(user_lolname);
+		// 1이면 서버에 존재함
+		if(checkResult == 1) {
+			System.out.println("검색 가능");
+			return checkResult;
+		}else {
+			System.out.println("검색 불가능");
+			return -999;	
+		}
+		
+	}
+	//서버에서 롤 이름 가져오기
+	@GetMapping("/get_user_lolname")
+	public String getUserLolname(@RequestParam String user_id ) {
+		String user_lolname = u_ser.getUserLolname(user_id);
+		System.out.println("컨트롤러 롤네임??"+user_lolname);
+		return user_lolname;
+	}
+	
+	//소환사 분석헤더
+	@GetMapping(value = "/main-gosummoner-info", produces = MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
+	public String goSummoner_m(HttpSession session) {
+		if(session.getAttribute("id") != null) {
+			String user_id = session.getAttribute("id").toString();
+			System.out.println("로그인한 유저 아이디: "+user_id);
+			
+			String result_summonerinfo = u_ser.goSummoner_m(user_id);
+			System.out.println("result_summonerinfo"+result_summonerinfo);
+			return result_summonerinfo;
+		}else {
+			
+			return "";
+		}//
+		
+		
+	}//
 	
 }

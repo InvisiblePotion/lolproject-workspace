@@ -1,285 +1,70 @@
-*{
-    box-sizing: border-box;
-    border: 0 solid;
-}
-div{
-    display: block;
-}
-a {
-    color: inherit;
-    text-decoration: inherit;
+#chart_title {
+	justify-content: center;
+	font-weight: bold;
+	font-size: 20px
 }
 
-h1, p{
-    margin: 0;
-}
-li, ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
+#SUMMONER_PROFILE {
+	text-align: center;
 }
 
-body{
-    width: 100%;
-    height: 100%;
-    max-width: unset;
-    margin: 0px auto;
-    line-height: 1.193;
-    background-color: rgb(255, 255, 255);
+#info-t {
+	border-top: 1px solid #E2E2E2;
+	border-bottom: 1px solid #E2E2E2;
+	border-right: 1px solid #E2E2E2;
+	font-size: 18px;
+	
+}
 
+#info-b {
+	border-top: 1px solid #E2E2E2;
+	border-bottom: 1px solid #E2E2E2;
+	font-size: 20px;
+	text-align: center;
 }
-#generic{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-}
-.area{
-    min-width: 1208px;
-}
-.bener-container{
-    width: 100%;
-    height: 68px;
-    background-color: darkcyan;
-}
-.bener{
-    display: flex;
-    height: 100%;
-    margin: 0 15% 0 5%;
-    -webkit-box-align: center;
-    align-items: center;
-}
-.imgfile{
-    margin-right: 34px;
-}
-.search-bar{
-    width: 360px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 4px 13px 4px 4px;
-    border-radius: 4px;
-}
-.menu{
-    display: flex;
-    /* margin-left: auto; */
-    align-items: center;
-    height: 50px;
-}
-.m-col{
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    font-weight: 600;
-    margin-left: 20px;
-    color: azure;
-    width: 120px;
+
+.offer-list-write-box{
+    overflow: scroll;
     
+    padding: 0 17px;
+    border-radius: 12px;
+    box-shadow: 1px 1px 10px 0 rgba(72,75,108,.08);
+    border: solid 1px #e3e9ed;
+    background-color: #fff;
+    box-sizing: border-box;
 }
-#loginout {
-  display: flex;
-  flex-direction: row;
-}
-/* 여기까지가 헤더 입니다!. */
-.information{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-content: center;
-}
-.box{
-    display: flex;
-    position: relative;
-    height: 350px;
-    width: 1080px;
-    background-color: rgb(99, 143, 112);
-}
-.contents{
 
-} 
-.user_icon_box{
-    display: inline-block;
-    position: relative;
-    margin: 9px 0 9px 12px;
+#box{
+    padding: 12px 0 12px 30px;
+    border-radius: 12px;
+    box-shadow: 1px 1px 10px 0 rgba(72,75,108,.08);
+    border: solid 1px #e3e9ed;
+    background-color: #fff;
+    box-sizing: border-box;
+    
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -.8px;
+    color: #303038;
+    word-break: break-all;
+}
 
+#titles {
+    display: inline;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -.2px;
+    color: #303038;
 }
-.user_icon_box img{
-    width: 180px;
-    height: 180px;
-    background-color: coral;
+#duo-t2 {
+	boder-bottom: 1px solid #E2E2E2;
 }
-.tier_AI{
-    margin-top: 9px;
-}
-.duo_find{
-    margin-top: 25px;
-   
-}
-.user_info{
-    /* width: 100%; */
-    width: 500px;
-    display: inline-block;
-    position: relative;
-    margin: 9px 12px 9px 10%;
-}
-.user_info li{
-    width: 250px;
-    height: 40px;
-    background-color: blanchedalmond;
-}
+
 .mt{
     margin-top: 20px;
 }
-.button{
-    width: 100%;
-    height: 44px;
-}
-.user_name{
-
-}
-.user_name span{
-    font-size: 20px;
-    font-weight: 600;
-}
-.lol_acount_change{
-
-}
-.win-lose{
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-
-}
-.wl.button{
-    width: 120px;
-    height: 40px;
-    background-color: aliceblue;
-    justify-content: center;
-    align-content: center;
-    display: flex;
-}
-.verification-code{
-    background-color: aliceblue;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-content: center;
-    display: flex;
-}
-/* 듀오 컨테이너 */
-.duo-container{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-.duo-write-container{
-    background-color: rgb(92, 92, 210);
-    height: 100%;
-    width: 1080px;
-    margin-top: 10px;
-}
-.duo-write-title{
-    width: 100%;
-    height: 100%;
-    background-color: lightskyblue;
-}
-.duo-title-font{
-    font-size: 20px;
-    font-weight: 600;
-}
-.duo-write-main{
-    background-color: aliceblue;
-    height: 200px;
-}
-.duo-write-delete{
-    background-color: cornflowerblue;
-    height: 50px;
-    display: flex;
-    position: relative;
-}
-.duo-write-delete-button{
-    background-color: darkslategray;
-    width: 100px;
-    margin-left: auto;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    margin-right: 0px;
-}
-
-.offer-container{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-.offer-list-container{
-    width: 1080px;
-    margin-top: 10px;
-    height: 140px;
-    background-color: lightgrey;
-    display: flex;
-    justify-content: space-between;
-}
-.offer-list-write-box{
-    width: 700px;
-    height: 100%;
-    background-color: steelblue;
-}
-.offer-list-write{
-    margin: 9px;
-    background-color: linen;
-    border: 1px solid dimgray;
-}
-.offer-reload-box{
-    background-color: cadetblue;
-    width: 200px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.offer-reload{
-    height: 50px;
-    background-color: beige;
-    width: 100px;
-    position: relative;
-    display: flex;
-}
-.offer-reload-button{
-    width: 100%;
-
-}
-.acount-container{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-.change-password-container{
-    width: 1080px;
-    margin-top: 10px;
-    height: 140px;
-    background-color: lightgrey;
-    display: inline-block;
-}
-.change-password-box{
-    margin-top: 20px;
-    width: 150px;
-    height: 50px;
-    background-color: brown;
-    
-}
-.change-password{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    color: #fff;
-}
-
 
 label {
     display: inline-block;

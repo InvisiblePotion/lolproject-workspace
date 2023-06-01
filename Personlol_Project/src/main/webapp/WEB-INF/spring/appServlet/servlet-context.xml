@@ -48,34 +48,49 @@
 	<!-- <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/> -->
 	
 	<interceptors>
+	
+	    
 	    <interceptor>
 	    	<!-- 예외 설정 -->   
 	        <mapping path="/**" />
-	        <!-- 아이디 찾기 -->
-	        <exclude-mapping path="/idfind" />     
-			<!-- 메인 -->
+	        <!-- 아이디 찾기 o-->
+	        <exclude-mapping path="/idfind" />   
+	        <!-- 아이디 found -->
+	        <exclude-mapping path="/idfound" /> 
+	        <!-- form태그 -->
+	        <exclude-mapping path="/goidfind" />  
+	        
+			<!-- 메인 o-->
 	        <exclude-mapping path="/main" />
-			<!-- 메인2 -->
+			<!-- 메인2 o-->
 	        <exclude-mapping path="//" />
-			<!-- 비밀번호 찾기 -->
+			<!-- 비밀번호 o찾기 -->
 	        <exclude-mapping path="/pwfind" />
-	        <!-- 회원가입 -->
+	        <!-- 회원가입 o-->
 	        <exclude-mapping path="/join" />
-	        <!-- 동의 -->	
+	        <!-- 동의 o-->	
 	        <exclude-mapping path="/agree" />
 	        <!-- 듀오 -->
-	        <exclude-mapping path="/duo" />
-	        <!-- 챔피언 리스트 -->
+	        <exclude-mapping path="/duo/" />
+	        <!-- 챔피언 리스트 o-->
 	        <exclude-mapping path="/champion/" />
-	        <!-- 챔피언 상세 -->
+	        <!-- 챔피언 상세 o-->
 	        <exclude-mapping path="/champion/detail" />
+	        
+	        <!-- 챔피언 매치업 o-->
+	        <exclude-mapping path="/champion/matchup" />
+	        
 	        <!-- 로그인 -->
 	        <exclude-mapping path="/logine" />
-	        <!-- 랭킹 -->
+	        <!-- 비밀번호 변경 -->
+	        <exclude-mapping path="/changepw" />
+	        <!-- 랭킹 o-->
 	        <exclude-mapping path="/rank" />
 	        <!-- 소환사 전적 -->
-	        <exclude-mapping path="/summonerinfo" />
+	        <exclude-mapping path="/summoner/**" />
+	        
 	        <!-- 사용자 분석 -->
+	        <exclude-mapping path="/summonerstat/**" />
 	        
 	        <!-- 리소스아래 모든 것 -->
 	        <exclude-mapping path="/resources/**"/>
@@ -83,6 +98,8 @@
 	        
 	        <beans:bean class="com.base.personlol.intercepter.SessionInterceptor"/>
 	    </interceptor>
+	    
+	    
 	</interceptors>
 
 

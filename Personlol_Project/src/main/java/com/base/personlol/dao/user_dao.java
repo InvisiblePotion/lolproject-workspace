@@ -36,10 +36,20 @@ public interface user_dao {
 	String login(Map<String, String> logindata);
 
 	//회원탈퇴
-	Integer deletemember(Map<String, String> userid);
+	Integer deletemember( Map<String, String> userid);
 	
 	//유저코드 업데이트
 	Integer newcode(Map<String, String> id);
+	
+	//서버에 lolname이 실존하는가
+	int checksv_lolname(String user_lolname);
+	
+	//서버에서 user_lolname가져오기
+	String getUserLolname(@Param("user_id")String user_id);
+
+	String goSummoner_m(@Param("user_id") String user_id);
+	
+
 
 
 

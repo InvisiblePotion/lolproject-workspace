@@ -53,7 +53,7 @@
 	
 	<!-- 회원탈퇴 -->
 	<delete id="deletemember" parameterType="java.util.Map">
-  		DELETE FROM USERINFO WHERE user_id = #{user_id}
+  		DELETE FROM USERINFO WHERE user_id = #{userid} CASCADE
 	</delete>
 
 	<!-- 업데이트 유저코드 -->
@@ -61,5 +61,17 @@
 		UPDATE USERINFO set user_code =#{user_code} where user_id = #{user_id}
 	</update>
 	
+	<!-- 서버에 lolname있는가 -->
+	<select id="checksv_lolname" resultType="Int">
+		SELECT COUNT(*) FROM SUMMONER s WHERE S.SUMMONER_NAME = #{user_lolname}
+	</select>
+	
+	<select id="getUserLolname" resultType="String"> 
+		SELECT USER_LOLNAME FROM USERINFO WHERE USER_ID = #{user_id}
+	</select>
+	
+	<select id="goSummoner_m" resultType="String">
+		SELECT USER_LOLNAME FROM USERINFO WHERE USER_ID = #{user_id}
+	</select>
 
 </mapper>

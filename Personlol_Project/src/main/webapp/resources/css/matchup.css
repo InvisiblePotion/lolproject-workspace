@@ -1,0 +1,167 @@
+
+
+.col{
+  background-color: white;
+  margin: 5px;
+}
+
+
+.bcolor{
+	background-color: #f5f5f5;
+}
+body{
+	background-color: #f5f5f5;;
+}
+
+/* 스킬 호버시 툴팁 */
+.skill-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  
+
+  top: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 500px;
+}
+.skill-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+/* 스킬 이미지위에 텍스트 */
+.skill-key-info {
+  position: absolute;
+  bottom: 0px; /* 하단 여백 조정 */
+  right: 0px; /* 우측 여백 조정 */
+  
+  width:20px;
+  height:20px;
+  
+  background-color: rgba(0, 0, 0, 0.5);
+  color: yellow;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transform: none; /* transform 속성 제거 */
+}
+/*스펠 호버시 툴팁*/
+.spell-container {
+  position: relative;
+  display: inline-block;
+}
+
+.spell_tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  text-align: left;
+  top: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  
+  width: 200px;
+}
+
+.spell-container:hover .spell_tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.s_img {
+    text-align: right;
+}
+
+.div_info{
+	text-align: center;
+}
+
+
+
+
+#spell1{
+	margin-top: 5px;
+	border-top: 1px solid #E2E2E2; 
+ 	border-bottom: 1px solid #E2E2E2; 
+	
+}
+#spell2{
+	margin-top: 5px;
+  	border-bottom: 1px solid #E2E2E2; /* �Ʒ��� ���� ��Ÿ�ϰ� ������ �����ϼ��� */
+}
+
+.spell-container{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 7px;
+	
+}
+.spell_span{
+	font-size: 15px;
+	font-weight: bold;
+}
+.rate_div{
+	margin-left: 15px;
+	margin-right: 10px;
+}
+.winrate_div{
+	margin-left: 10px;
+}
+.pick_rata_span{
+	font-weight: bold;
+}
+.win_rate_span{
+	color: #4171D6;
+}
+.win_rate_td{
+	color: #4171D6;
+}
+.progress_title{
+	font-weight: bold;
+	color: darkgray;
+}
+.skill_info_span{
+	font-size: 20px;
+	font-weight: bold;
+}
+.title_champ_name{
+	font-size: 25px;
+	font-weight: bold;
+}
+.sub_r_champ_name{
+	margin-left:10px;
+	font-size: 25px;
+	font-weight: bold;
+}
+.sub_l_champ_name{
+	margin-right:10px;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+a.match_champ {
+  text-decoration: none;
+}

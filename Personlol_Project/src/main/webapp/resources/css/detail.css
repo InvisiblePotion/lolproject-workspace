@@ -1,0 +1,357 @@
+
+
+.col{
+  background-color: white;
+  margin: 5px;
+}
+.col-4{
+  background-color: white;
+  margin: 5px;
+}
+
+
+.bcolor{
+	background-color: #f5f5f5;
+}
+body{
+	background-color: #f5f5f5;;
+}
+.list_td{
+	width:170px;
+}
+
+
+#change_rune1 {
+	border-top: 1px solid #E2E2E2;
+	border-bottom: 1px solid #E2E2E2;
+	justify-content: center;
+	cursor: pointer;
+}
+
+#change_rune2 {
+	border-bottom: 1px solid #E2E2E2;
+	justify-content: center;
+	cursor: pointer;
+}
+
+
+.skill-container {
+	width:45px;
+	position: relative;
+	display: inline-block;
+	margin-left: 5px;
+	margin-top: 10px;
+}
+
+.tooltip {
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	/* �ٹ̱�� */
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	width: 500px;
+}
+
+.skill-container:hover .tooltip {
+	visibility: visible;
+	opacity: 1;
+}
+/* 스킬이미지에 텍스트 추가 */
+.skill-key {
+  position: absolute;
+  bottom: 25px; /* 하단 여백 조정 */
+  right: 5px; /* 우측 여백 조정 */
+  width:20px;
+  height:20px;
+  
+  background-color: rgba(0, 0, 0, 0.5);
+  color: yellow;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transform: none; /* transform 속성 제거 */
+}
+
+/* 스킬이미지에 텍스트 추가 */
+.skill-key-info {
+  position: absolute;
+  bottom: 0px; /* 하단 여백 조정 */
+  right: 5px; /* 우측 여백 조정 */
+  
+  width:20px;
+  height:20px;
+  
+  background-color: rgba(0, 0, 0, 0.5);
+  color: yellow;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transform: none; /* transform 속성 제거 */
+}
+
+/*룬타입 이미지 호버 */
+.rune_img {
+	position: relative;
+	display: inline-block;
+	padding: 0px;
+	margin-bottom: 10px;
+}
+
+.runetype_tooltip {
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.rune_tooltip {
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	text-align: left;
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	width: 500px;
+}
+
+.rune_img:hover .rune_tooltip {
+	visibility: visible;
+	opacity: 1;
+}
+
+.rune_img:hover .runetype_tooltip {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* �� �伳�� css�κ� */
+.rune_longdesc {
+	font-size: 13px;
+	font-weight: normal;
+}
+
+/* �������̹��� ȣ���� ����  */
+.f_item {
+	position: relative;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.item_img {
+	width: 40px;
+	height: 40px;
+	
+}
+
+.item_tooltip {
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	text-align: left;
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	width: 500px;
+}
+
+.f_item:hover .item_tooltip {
+	visibility: visible;
+	opacity: 1;
+}
+
+/*���� ȣ���� ����*/
+.spell-container {
+	position: relative;
+	display: inline-block;
+}
+
+.spell_tooltip {
+	visibility: hidden;
+	width: 120px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	text-align: left;
+	top: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	width: 200px;
+}
+
+.spell-container:hover .spell_tooltip {
+	opacity: 1;
+	visibility: visible;
+}
+
+/*���̹��� ���ͷ�*/
+.rune_img {
+	text-align: center;
+}
+
+/* ������ ���� css  */
+.item_longdesc ul {
+	white-space: pre-line;
+}
+/* ��css */
+.rune_rate{
+	margin-left: 10px;
+}
+/*���� css  */
+
+#spell1{
+	margin-top: 5px;
+	border-top: 1px solid #E2E2E2; /* ���� ���� ��Ÿ�ϰ� ������ �����ϼ��� */
+ 	border-bottom: 1px solid #E2E2E2; /* �Ʒ��� ���� ��Ÿ�ϰ� ������ �����ϼ��� */
+	
+}
+#spell2{
+	margin-top: 5px;
+  	border-bottom: 1px solid #E2E2E2; /* �Ʒ��� ���� ��Ÿ�ϰ� ������ �����ϼ��� */
+}
+
+.spell-container{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 7px;
+	
+}
+.spell_span{
+	font-size: 15px;
+	font-weight: bold;
+}
+.rate_div{
+	margin-left: 15px;
+	margin-right: 10px;
+}
+.winrate_div{
+	margin-left: 10px;
+}
+.pick_rata_span{
+	font-weight: bold;
+}
+.win_rate_span{
+	color: #4171D6;
+}
+.hard_rate_span{
+	color: #D31A45;
+}
+
+.rate_info{
+	width: 70px;
+	margin-left: 150px;
+	
+}
+.win_info{
+	margin-left: 150px;
+	
+}
+#start_item1{
+	margin-top: 5px;
+	border-top: 1px solid #E2E2E2; /* ���� ���� ��Ÿ�ϰ� ������ �����ϼ��� */
+ 	border-bottom: 1px solid #E2E2E2; /* �Ʒ��� ���� ��Ÿ�ϰ� ������ �����ϼ��� */
+	
+}
+#start_item2{
+	margin-top: 5px;
+  	border-bottom: 1px solid #E2E2E2; 
+}
+#start_boots1{
+	margin-top: 5px;
+	border-top: 1px solid #E2E2E2; 
+ 	border-bottom: 1px solid #E2E2E2; 
+	
+}
+#start_boots2{
+	margin-top: 5px;
+  	border-bottom: 1px solid #E2E2E2; 
+}
+
+#mat_list1{
+	margin-top: 5px;
+	border-top: 1px solid #E2E2E2; 
+ 	border-bottom: 1px solid #E2E2E2; 
+	
+}
+#mat_list2{
+	margin-top: 5px;
+	border-top: 1px solid #E2E2E2; 
+}
+.match_span{
+	font-size: 15px;
+	font-weight: bold;
+}
+.sub_title{
+	font-size: 20px;
+	font-weight: bold;
+}
+.item_boots_head{
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.item_name_span{
+	margin-left: 5px;
+	font-size: 12px;
+	font-weight: bold;
+}
+.title_champ_name{
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#skill_tree1{
+	border-top: 1px solid #E2E2E2; 
+	margin-top: 10px;
+}
+#skill_tree2{
+	border-top: 1px solid #E2E2E2; 
+	margin-top: 10px;
+}
+#skill_tree3{
+	border-top: 1px solid #E2E2E2; 
+	margin-top: 10px;
+}
+.skill_info_span{
+	font-size: 20px;
+	font-weight: bold;
+}

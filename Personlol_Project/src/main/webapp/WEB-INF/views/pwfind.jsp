@@ -15,7 +15,7 @@
 
 <div id="root" class="container mt-5">
     <div class="idfind-layout">
-      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
+      <a href="/personlol/main"><h1><img src="./resources/img/loginLogo.png" alt="logo" class="logo-image" width="70%"></h1></a>
       <form>
         <div class="form-group">
           <h2>비밀번호를 잊어버리셨나요?</h2>

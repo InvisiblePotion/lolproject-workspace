@@ -14,7 +14,7 @@
 <body>
 	<div id="root" class="container">
     <div class="join-layout">
-      <a href="/personlol/main"><h1><img src="./resources/img/logo.png" alt="logo" class="logo-image"></h1></a>
+      <a href="/personlol/main"><h1><img src="./resources/img/loginLogo.png" alt="logo" class="logo-image" width="70%"></h1></a>
       <form action="">
         <div class="form-group">
           <h2>기본 정보 입력</h2>
@@ -72,10 +72,12 @@
 				$('#id_err').html('중복된 아이디입니다.').css('color', 'red');
 			}else if(res.code == "0"){
 				$('#lol_err').html('중복된 닉네임 정보입니다.').css('color','red')
+			}else if(res.code =="-99"){
+				$('#lol_err').html('서버에 등록되지 않은 소환사입니다 다시 확인해주세요.').css('color','red')
 			}else{
 				alert('서버에러')
 			}
-			 
+			
 		}).fail(err => {
 			console.log(res)
 		})
