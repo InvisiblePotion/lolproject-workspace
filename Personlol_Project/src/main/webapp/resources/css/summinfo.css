@@ -60,7 +60,6 @@ ul{
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  height: 32px;
   font-size: 24px;
   font-weight: bold;
   color: var(--gray900);

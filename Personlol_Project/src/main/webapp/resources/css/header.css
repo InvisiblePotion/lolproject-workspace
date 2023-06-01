@@ -189,5 +189,8 @@ li{
 	display:flex;
 	width: 100px;
 }
-
+#ggg{
+	height:28px;
+	border-radius: 0 0 8px 0;
+}
 /* 헤더끝 */
