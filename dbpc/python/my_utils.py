@@ -433,20 +433,22 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
     RawData를 1차 정제 형태로 변환해주는 함수
     """
 
-    # 전설, 신화 아이템 리스트: 13.9 (버전별 갱신 필요)
+    # 전설, 신화 아이템 리스트: 13.10.1 (버전별 갱신 필요)
     legend_items = [
-        3003,3004,3011,3026,3031,3033,3036,3040,3041,3042,
-        3046,3050,3053,3065,3068,3071,3072,3074,3075,3083,
-        3085,3089,3091,3094,3095,3100,3102,3107,3109,3110,
-        3115,3116,3119,3121,3124,3135,3139,3142,3143,3153,
-        3156,3157,3161,3165,3179,3181,3193,3222,3504,3508,
-        3742,3748,3814,4401,4628,4629,4637,4645,6035,6333,
-        6609,6616,6664,6675,6676,6694,6695,6696,8001,8020]
-
+        3003,3004,3011,3026,3033,3036,3040,3041,3042,3046,
+        3050,3053,3065,3068,3071,3072,3074,3075,3083,3085,
+        3087,3089,3091,3094,3095,3100,3102,3107,3109,3110,
+        3115,3116,3119,3121,3135,3139,3143,3153,3156,3157,
+        3161,3165,3179,3181,3193,3222,3504,3508,3742,3748,
+        3814,4005,4401,4628,4629,4637,4643,4645,6035,6333,
+        6609,6616,6664,6672,6673,6676,6693,6694,6695,6696,
+        8001,8020]
+    
     mythic_items = [
-        2065,3001,3078,3084,3152,3190,4005,4633,4636,4644,
-        6617,6630,6631,6632,6653,6655,6656,6657,6662,6665,
-        6667,6671,6672,6673,6691,6692,6693]
+        2065,3001,3031,3078,3084,3124,3142,3152,3190,4633,
+        4636,4644,6617,6620,6630,6631,6632,6653,6655,6656,
+        6657,6662,6665,6667,6671,6675,6691,6692]
+    
 
     result = []
     try:
@@ -456,13 +458,33 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                 part = matches['participants'][part_num]
                 challenge = part['challenges']
 
-                # timeline에서 어떤 데이터를 뽑을지 아직 미정
-                timeline = game['timeline']['info']
-                # frames = timeline['frames']
+                # 예외 처리부
+
+                # 팀에서 킬이 나지 않은 경우 killParticipation키가 없는 경우가 발생해 해당 경우엔 대신 0으로 넣는다.
+                try: kill_participation = challenge['killParticipation']
+                except KeyError:kill_participation = 0
+
+                # 팀이 가한 피해량이 없는 경우 teamDamagePercentage 키가 없는 경우가 발생해 해당 경우엔 대신 0으로 넣는다.
+                try: team_damage_percentage = challenge['teamDamagePercentage']
+                except KeyError: team_damage_percentage = 0
+
+                # 게임이 유저의 라인을 추측하지 못할 정도로 비정상적으로 빠르게 끝났다면 (ex. 다시하기)
+                #:라인 관련 데이터가 없거나 비정상적인 정보가 들어간 경우 대신 'NONE'을 넣는다.
+                lane_list = ['TOP','JUNGLE','MIDDLE','BOTTOM']
+                position_list = ['TOP','JUNGLE','MIDDLE','BOTTOM','UTILITY']
+
+                if (lane := part['lane']) not in lane_list: lane = 'NONE'
+                if (individual_position := part['individualPosition']) not in position_list: individual_position = 'NONE'
+                if (team_position := part['teamPosition']) not in position_list: team_position = 'NONE'
+
+                win = 1 if part['win'] else 0
+                first_blood_kill = 1 if part['firstBloodKill'] else 0
+
 
                 each_part = {
                     'version': matches['gameVersion'],
                     'game_create_time': matches['gameCreation'],
+                    'game_duration': matches['gameDuration'],
                     'game_id': game['matches']['metadata']['matchId'],
                     'participant_number': part['participantId'],
                     'champion_id': part['championId'],
@@ -488,11 +510,11 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'championId': part['championId'],
                         'championName': part['championName'],
                         'champLevel': part['champLevel'],
-                        'lane': part['lane'],
-                        'individualPosition': part['individualPosition'],
-                        'teamPosition': part['teamPosition'],
+                        'lane': lane, # 예외처리
+                        'individualPosition': individual_position, # 예외처리
+                        'teamPosition': team_position, # 예외처리
                         'teamId': part['teamId'],
-                        'win': str(part['win']) # bool
+                        'win': win # bool
                     },
                     'spell': {
                         'summoner1Id': part['summoner1Id'],
@@ -535,8 +557,8 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'deaths': part['deaths'],
                         'assists': part['assists'],
                         'kda': challenge['kda'],
-                        'killParticipation': challenge['killParticipation'],
-                        'firstBloodKill': str(part['firstBloodKill']), # bool
+                        'killParticipation': kill_participation, # 예외처리
+                        'firstBloodKill': first_blood_kill, # bool
                         'largestKillingSpree': part['largestKillingSpree'],
                         'largestMultiKill': part['largestMultiKill']
                     },
@@ -555,7 +577,7 @@ def RawdataFirstFilter(rawdata: pd.DataFrame, api_key: str):
                         'turretPlatesTaken': challenge['turretPlatesTaken']
                     },
                     'damage': {
-                        'teamDamagePercentage': challenge['teamDamagePercentage'],
+                        'teamDamagePercentage': team_damage_percentage, # 예외처리
                         'totalDamageDealtToChampions': part['totalDamageDealtToChampions'],
                         'physicalDamageDealtToChampions': part['physicalDamageDealtToChampions'],
                         'magicDamageDealtToChampions': part['magicDamageDealtToChampions'],

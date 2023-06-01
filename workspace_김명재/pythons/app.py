@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.config.update(
 	SERVER_NAME='localhost:8095'
 )
+
 CORS(app)
 
 @app.route('/personlol/summoner/reload-playrecord', methods=['GET'])

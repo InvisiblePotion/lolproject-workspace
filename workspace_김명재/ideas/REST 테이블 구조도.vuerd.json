@@ -4,8 +4,8 @@
     "width": 5000,
     "height": 5000,
     "scrollTop": 0,
-    "scrollLeft": -1.6,
-    "zoomLevel": 1,
+    "scrollLeft": 0,
+    "zoomLevel": 0.5,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -248,6 +248,29 @@
             "id": "f7500afc-9231-490f-8c59-51799b211bd3"
           },
           {
+            "name": "game_count",
+            "comment": "게임 수",
+            "dataType": "NUMBER(6)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 73.96337890625,
+              "widthComment": 60,
+              "widthDataType": 70.31982421875,
+              "widthDefault": 60
+            },
+            "id": "3f1ec0f3-3005-4f0b-83a3-d49db4eb6d36"
+          },
+          {
             "name": "ban_rate",
             "comment": "밴률",
             "dataType": "NUMBER",
@@ -273,9 +296,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 3745.2217,
-          "top": 1993.2213,
-          "zIndex": 202,
+          "left": 3747.2217,
+          "top": 1974.2213,
+          "zIndex": 36,
           "widthName": 88.328125,
           "widthComment": 102.71826171875,
           "color": "#F44336"
@@ -386,15 +409,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 85.07177734375,
               "widthComment": 60,
               "widthDataType": 70.31982421875,
@@ -432,15 +455,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 66.5810546875,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -455,15 +478,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 66.5810546875,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -478,15 +501,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 66.5810546875,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -524,15 +547,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 62.23291015625,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -547,15 +570,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 62.23291015625,
               "widthComment": 79.6953125,
               "widthDataType": 70.31982421875,
@@ -570,15 +593,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 82.50732421875,
               "widthComment": 77.10546875,
               "widthDataType": 70.31982421875,
@@ -593,15 +616,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 60,
               "widthComment": 77.10546875,
               "widthDataType": 70.31982421875,
@@ -616,15 +639,15 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 86.1572265625,
               "widthComment": 77.10546875,
               "widthDataType": 70.31982421875,
@@ -706,7 +729,7 @@
           "active": false,
           "left": 3746.8891,
           "top": 2242.2434,
-          "zIndex": 21,
+          "zIndex": 35,
           "widthName": 92.29541015625,
           "widthComment": 60,
           "color": "#F44336"
@@ -907,7 +930,7 @@
           "active": false,
           "left": 3746.7802,
           "top": 2767.6675,
-          "zIndex": 31,
+          "zIndex": 22,
           "widthName": 87.515625,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1154,7 +1177,7 @@
           "active": false,
           "left": 3747.0892,
           "top": 3019.1997,
-          "zIndex": 22,
+          "zIndex": 15,
           "widthName": 126.76318359375,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -1378,7 +1401,7 @@
           "active": false,
           "left": 3744.8509,
           "top": 3880.7751,
-          "zIndex": 24,
+          "zIndex": 17,
           "widthName": 92.5048828125,
           "widthComment": 72.14794921875,
           "color": "#F44336"
@@ -1531,9 +1554,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 4090.5,
-          "top": 1083.522,
-          "zIndex": 35,
+          "left": 1180.5,
+          "top": 2793.522,
+          "zIndex": 49,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1593,9 +1616,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 4463.4166,
-          "top": 1393.3832,
-          "zIndex": 17,
+          "left": 1953.4166,
+          "top": 2483.3832,
+          "zIndex": 50,
           "widthName": 74.44580078125,
           "widthComment": 60
         },
@@ -1701,9 +1724,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 4218.75,
-          "top": 767.7722,
-          "zIndex": 16,
+          "left": 1218.75,
+          "top": 2462.7722,
+          "zIndex": 51,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1989,7 +2012,7 @@
           "active": false,
           "left": 4428.5769,
           "top": 2146.3554,
-          "zIndex": 200,
+          "zIndex": 29,
           "widthName": 60,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2098,7 +2121,7 @@
           "active": false,
           "left": 4433.2447,
           "top": 2623.1335,
-          "zIndex": 34,
+          "zIndex": 25,
           "widthName": 65.49560546875,
           "widthComment": 76.140625,
           "color": "#9E9E9E"
@@ -2253,7 +2276,7 @@
           "active": false,
           "left": 3093.2224,
           "top": 2262.733,
-          "zIndex": 15,
+          "zIndex": 10,
           "widthName": 71.10693359375,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2477,7 +2500,7 @@
           "active": false,
           "left": 3092.2239,
           "top": 2569.6431,
-          "zIndex": 19,
+          "zIndex": 13,
           "widthName": 67.0126953125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2655,7 +2678,7 @@
           "active": false,
           "left": 3089.332,
           "top": 2898.3334,
-          "zIndex": 20,
+          "zIndex": 14,
           "widthName": 68.1298828125,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2833,7 +2856,7 @@
           "active": false,
           "left": 4392.489,
           "top": 3136.1536,
-          "zIndex": 199,
+          "zIndex": 28,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#9E9E9E"
@@ -2896,7 +2919,7 @@
           "active": false,
           "left": 4435.1111,
           "top": 3448.8873,
-          "zIndex": 11,
+          "zIndex": 9,
           "widthName": 79.1875,
           "widthComment": 115.140625,
           "color": "#9E9E9E"
@@ -3097,7 +3120,7 @@
           "active": false,
           "left": 3747.0836,
           "top": 3312.3253,
-          "zIndex": 23,
+          "zIndex": 16,
           "widthName": 130.71142578125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3298,7 +3321,7 @@
           "active": false,
           "left": 3745.3725,
           "top": 3628.2143,
-          "zIndex": 33,
+          "zIndex": 24,
           "widthName": 123.5703125,
           "widthComment": 116.2958984375,
           "color": "#F44336"
@@ -3357,6 +3380,29 @@
             "id": "ce2f3c43-ce54-42c6-892b-6e1d6b7e4bd0"
           },
           {
+            "name": "lane",
+            "comment": "라인",
+            "dataType": "VARCHAR(7)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 74.97265625,
+              "widthDefault": 60
+            },
+            "id": "3842b164-ebc4-4e4b-af41-30d71ef50ff2"
+          },
+          {
             "name": "champ_id_x",
             "comment": "챔피언 id",
             "dataType": "NUMBER(3)",
@@ -3401,29 +3447,6 @@
               "widthDefault": 60
             },
             "id": "e2164133-8ede-4950-8e65-3dea2610378b"
-          },
-          {
-            "name": "lane",
-            "comment": "라인",
-            "dataType": "VARCHAR(7)",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": true,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 74.97265625,
-              "widthDefault": 60
-            },
-            "id": "3842b164-ebc4-4e4b-af41-30d71ef50ff2"
           },
           {
             "name": "matchup_count",
@@ -3518,7 +3541,7 @@
             "id": "73661c96-d0e6-47ab-bdc6-7162b44b5243"
           },
           {
-            "name": "kill_rate_x",
+            "name": "killparticipation_x",
             "comment": "킬 관여율",
             "dataType": "NUMBER",
             "default": "",
@@ -3533,7 +3556,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 103.53076171875,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -3541,7 +3564,7 @@
             "id": "72e44449-12de-4a49-8420-aecab6aa48de"
           },
           {
-            "name": "kill_rate_y",
+            "name": "killparticipation_y",
             "comment": "상대 킬 관여율",
             "dataType": "NUMBER",
             "default": "",
@@ -3556,7 +3579,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 103.892578125,
               "widthComment": 89.140625,
               "widthDataType": 60,
               "widthDefault": 60
@@ -3564,7 +3587,7 @@
             "id": "04b6b1dc-d62c-4f5a-a30c-829fdcb944e1"
           },
           {
-            "name": "champ_damage_x",
+            "name": "total_champ_damage_x",
             "comment": "챔피언 피해량",
             "dataType": "NUMBER(8)",
             "default": "",
@@ -3579,7 +3602,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 106.35546875,
+              "widthName": 138.49365234375,
               "widthComment": 84.5703125,
               "widthDataType": 70.31982421875,
               "widthDefault": 60
@@ -3587,7 +3610,7 @@
             "id": "01bc6f9d-38e1-4fb5-8d59-979fdd264d62"
           },
           {
-            "name": "champ_damage_y",
+            "name": "total_champ_damage_y",
             "comment": "상대 챔피언 피해량",
             "dataType": "NUMBER(8)",
             "default": "",
@@ -3602,7 +3625,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 106.71728515625,
+              "widthName": 138.85546875,
               "widthComment": 115.140625,
               "widthDataType": 70.31982421875,
               "widthDefault": 60
@@ -3612,9 +3635,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 3744.3283,
-          "top": 4164.2132,
-          "zIndex": 366,
+          "left": 3746.3283,
+          "top": 4156.2132,
+          "zIndex": 30,
           "widthName": 117.197265625,
           "widthComment": 85.14794921875,
           "color": "#F44336"
@@ -3767,9 +3790,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 2616.1115,
-          "top": 2005.2228,
-          "zIndex": 26,
+          "left": 3096.1115,
+          "top": 3630.2228,
+          "zIndex": 45,
           "widthName": 89.140625,
           "widthComment": 60,
           "color": "#607D8B"
@@ -3901,7 +3924,7 @@
           "active": false,
           "left": 4367.3327,
           "top": 3925.556,
-          "zIndex": 198,
+          "zIndex": 27,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9E9E9E"
@@ -4027,6 +4050,29 @@
               "widthDefault": 60
             },
             "id": "09ba139b-6fac-4aa0-b8a1-98d0044ac0d7"
+          },
+          {
+            "name": "participant_name",
+            "comment": "참여자 소환사 명",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 102.99755859375,
+              "widthComment": 102.140625,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "1735594d-dbee-479f-b279-c22a38ffe4b1"
           },
           {
             "name": "champion_id",
@@ -4491,11 +4537,12 @@
         ],
         "ui": {
           "active": false,
-          "left": 2664.7782,
-          "top": 851.8892,
-          "zIndex": 14,
+          "left": 1159.7782,
+          "top": 3611.8892,
+          "zIndex": 31,
           "widthName": 60,
-          "widthComment": 96.30078125
+          "widthComment": 96.30078125,
+          "color": "#00BCD4"
         },
         "visible": true,
         "id": "0fa1db98-d049-4f8e-97f9-ca4ede62bdb0"
@@ -4806,12 +4853,12 @@
         ],
         "ui": {
           "active": false,
-          "left": 3332.4,
-          "top": 529.6,
-          "zIndex": 8,
+          "left": 1827.4,
+          "top": 3289.6,
+          "zIndex": 46,
           "widthName": 66.30810546875,
           "widthComment": 71.5703125,
-          "color": "#9E9E9E"
+          "color": "#00BCD4"
         },
         "visible": true,
         "id": "0439bf5a-3210-4934-b822-e51384110f45"
@@ -4869,14 +4916,78 @@
         ],
         "ui": {
           "active": false,
-          "left": 3381.3331,
-          "top": 1013.8881,
-          "zIndex": 18,
+          "left": 1880.3331,
+          "top": 3773.8881,
+          "zIndex": 32,
           "widthName": 60,
-          "widthComment": 77.47998046875
+          "widthComment": 77.47998046875,
+          "color": "#4CAF50"
         },
         "visible": true,
         "id": "86767753-be6a-41c8-88f2-1c6b13a43bbd"
+      },
+      {
+        "name": "summoner_recent_game",
+        "comment": "소환사 20게임 id",
+        "columns": [
+          {
+            "name": "summoner_name",
+            "comment": "소환사 이름",
+            "dataType": "NVARCHAR2(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": true,
+              "widthName": 103.08642578125,
+              "widthComment": 71.5703125,
+              "widthDataType": 99.23974609375,
+              "widthDefault": 60
+            },
+            "id": "8230eb92-f0dd-404b-85bc-54b2e715e12c"
+          },
+          {
+            "name": "game_id",
+            "comment": "게임 id",
+            "dataType": "VARCHAR(15)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 82.1328125,
+              "widthDefault": 60
+            },
+            "id": "92c3a96f-5497-4f4f-876f-f8969f6c950d"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1223.6063,
+          "top": 3321.2031,
+          "zIndex": 33,
+          "widthName": 145.39990234375,
+          "widthComment": 101.48681640625,
+          "color": "#FF9800"
+        },
+        "visible": true,
+        "id": "a0cd815d-133a-4cc2-9c03-e73d072584af"
       }
     ],
     "indexes": []
@@ -4902,7 +5013,7 @@
           "active": false,
           "left": 3746.844444444461,
           "top": 2693.133333333341,
-          "zIndex": 30,
+          "zIndex": 21,
           "width": 403.8000000000003,
           "height": 100
         },
@@ -4937,9 +5048,9 @@
         "value": "빨간 테이블은 전부 인터벌 테이블로 1~2시간 간격의 인터벌로 갱신될 예정...\n이지만 변경될 수 있으며 다른 데이터 테이블과의 참조 여부도 변경될 수 있음.\n\n빨간 테이블의 참조 중 일부는 FK 참조가 성립하지 않을 수도 있음.\n대부분은 실수이므로 이 경우엔 ERD 수정을 위해 팀원에게 알려줄 것!\n\n각종 이미지와 같은 변동성이 없는 정보의 경우엔 서버의 REST 컨트롤러에서\n메소드가 호출될 때 메소드 내부에서 해당 정보들을 직접 쿼리해올 예정이므로\n빨간 인터벌 테이블에는 변동성이 있고 필요한 정보의 추출을 위한 쿼리에\n긴 시간이 소요되는 정보만을 저장함.",
         "ui": {
           "active": false,
-          "left": 3742.0000000000155,
-          "top": 1673.2666666666992,
-          "zIndex": 27,
+          "left": 3744.0000000000155,
+          "top": 1654.2666666666992,
+          "zIndex": 19,
           "width": 475.7999999999993,
           "height": 179.1999999999998,
           "color": "#F44336"
@@ -4950,9 +5061,9 @@
         "value": "여러 테이블에 등장하는 컬럼이지만 다른 테이블에서 참조하는 정보가 아닌 컬럼의 경우 이곳에 기입하기.\n(타입이나 NOT-NULL 등의 컬럼 정보를 통일하기 위함)\n\n혹시 이곳에 기입된 컬럼이 타 테이블에서 타입 등의 정보가\n다르다면 그 테이블의 정보를 오기로 판단하고 수정 바람!",
         "ui": {
           "active": false,
-          "left": 2616.8055555555566,
-          "top": 1857.3111111111243,
-          "zIndex": 9,
+          "left": 3096.8055555555566,
+          "top": 3482.3111111111243,
+          "zIndex": 44,
           "width": 370.2000000000013,
           "height": 146.3999999999999,
           "color": "#2B1919"
@@ -4975,9 +5086,9 @@
         "value": "OP 티어는 0으로 입력\n(현재 티어 알고리즘 정립 전까지 임시로 0 사용 중)",
         "ui": {
           "active": false,
-          "left": 3746.155555555586,
-          "top": 1912.6888888889214,
-          "zIndex": 28,
+          "left": 3748.155555555586,
+          "top": 1893.6888888889214,
+          "zIndex": 20,
           "width": 400.6000000000005,
           "height": 100
         },
@@ -4987,8 +5098,8 @@
         "value": "id는 46~47자, puuid는 78자로 확인되었으나 혹시 모르니 넓게 잡음.\n\n랭크 단계는 I~IV 단계가 없는 티어의 경우 0으로 표기",
         "ui": {
           "active": false,
-          "left": 3336.022222222211,
-          "top": 428.39999999999225,
+          "left": 1831.022222222211,
+          "top": 3188.3999999999924,
           "zIndex": 7,
           "width": 422.20000000000033,
           "height": 100
@@ -5001,7 +5112,7 @@
           "active": false,
           "left": 3746.6666666666665,
           "top": 3559.4444444444403,
-          "zIndex": 32,
+          "zIndex": 23,
           "width": 428,
           "height": 100
         },
@@ -5020,8 +5131,8 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 4277.7200927734375,
-          "y": 918.7722,
+          "x": 1336.690185546875,
+          "y": 2613.7722,
           "direction": "bottom"
         },
         "end": {
@@ -5029,8 +5140,8 @@
           "columnIds": [
             "9da0b85f-7395-4cf6-b4e9-eaf374608b90"
           ],
-          "x": 4511.9124755859375,
-          "y": 1083.522,
+          "x": 1601.9124755859375,
+          "y": 2793.522,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
@@ -5046,18 +5157,18 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 4513.6004638671875,
-          "y": 918.7722,
-          "direction": "bottom"
+          "x": 1690.5107421875,
+          "y": 2500.5222,
+          "direction": "right"
         },
         "end": {
           "tableId": "e92c01e5-cf04-4511-b71f-a9fffa3961b2",
           "columnIds": [
             "49352f8c-40f2-493e-bcdd-a31222fca518"
           ],
-          "x": 4797.646702539062,
-          "y": 1393.3832,
-          "direction": "top"
+          "x": 1953.4166,
+          "y": 2565.8832,
+          "direction": "left"
         },
         "constraintName": "fk_user_to_agree",
         "visible": true,
@@ -5072,8 +5183,8 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 4395.6602783203125,
-          "y": 918.7722,
+          "x": 1572.570556640625,
+          "y": 2613.7722,
           "direction": "bottom"
         },
         "end": {
@@ -5081,8 +5192,8 @@
           "columnIds": [
             "d27bdd11-1a0e-4b19-a113-06ca1c03010e"
           ],
-          "x": 4230.9708251953125,
-          "y": 1083.522,
+          "x": 1320.9708251953125,
+          "y": 2793.522,
           "direction": "top"
         },
         "constraintName": "fk_user_to_duo",
@@ -5168,7 +5279,7 @@
         "id": "3dcc675a-e25d-4b8d-b0d6-141df4032ff6"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5194,7 +5305,7 @@
         "id": "1a22a761-f3d2-452e-a2a3-dbf1e365a350"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5220,7 +5331,7 @@
         "id": "5c29809c-3571-4cda-ada0-4fc3b82f9274"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5246,7 +5357,7 @@
         "id": "df76021c-25e6-4c05-9ad2-56b8e8ed812d"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5272,7 +5383,7 @@
         "id": "d895e546-e2bb-427e-b84c-05cd78758cc8"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5298,7 +5409,7 @@
         "id": "869c327c-8240-4b66-87db-052749df024c"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5324,7 +5435,7 @@
         "id": "be774929-532a-4bca-afa7-5ffd7de9a43c"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5350,7 +5461,7 @@
         "id": "d7a03487-a5c6-4edc-ba38-d3254ff23dcf"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5376,7 +5487,7 @@
         "id": "a8d04895-10b6-4e72-bb81-11f415e0e368"
       },
       {
-        "identification": false,
+        "identification": true,
         "relationshipType": "ZeroN",
         "startRelationshipType": "Dash",
         "start": {
@@ -5471,8 +5582,8 @@
           "columnIds": [
             "a234594a-b677-4953-b9e0-6c62d419c8f2"
           ],
-          "x": 3745.2217,
-          "y": 2109.7213,
+          "x": 3747.2217,
+          "y": 2100.9713,
           "direction": "left"
         },
         "constraintName": "fk_champdata_to_champion_info",
@@ -5731,8 +5842,8 @@
           "columnIds": [
             "54383c5e-7599-4567-a025-2dbfa97a858a"
           ],
-          "x": 4133.430716992188,
-          "y": 4164.2132,
+          "x": 4158.9249796875,
+          "y": 4156.2132,
           "direction": "top"
         },
         "constraintName": "fk_champdata_to_matchup",
@@ -5757,8 +5868,8 @@
           "columnIds": [
             "e2164133-8ede-4950-8e65-3dea2610378b"
           ],
-          "x": 3874.0291056640626,
-          "y": 4164.2132,
+          "x": 3883.8605265625,
+          "y": 4156.2132,
           "direction": "top"
         },
         "constraintName": "fk_champdata_to_matchup",
@@ -5826,18 +5937,18 @@
           "columnIds": [
             "e8decb38-79ff-451d-b588-4fbdbde1d983"
           ],
-          "x": 4631.5406494140625,
-          "y": 918.7722,
-          "direction": "bottom"
+          "x": 1690.5107421875,
+          "y": 2576.0222,
+          "direction": "right"
         },
         "end": {
           "tableId": "e92c01e5-cf04-4511-b71f-a9fffa3961b2",
           "columnIds": [
             "190b55e3-fd60-4479-8257-7d875a6ca48a"
           ],
-          "x": 4574.826634179687,
-          "y": 1393.3832,
-          "direction": "top"
+          "x": 1953.4166,
+          "y": 2510.8832,
+          "direction": "left"
         },
         "constraintName": "fk_user_to_duo/request",
         "visible": true,
@@ -5852,8 +5963,8 @@
           "columnIds": [
             "1648e08a-9cca-4116-8b91-a8f0c7da782d"
           ],
-          "x": 3602.699555078125,
-          "y": 1013.8881,
+          "x": 2101.699555078125,
+          "y": 3773.8881,
           "direction": "top"
         },
         "end": {
@@ -5861,8 +5972,8 @@
           "columnIds": [
             "fe033db5-0ce6-48f6-8d03-9c5ddb7976ed"
           ],
-          "x": 3602.636328125,
-          "y": 865.1,
+          "x": 2097.636328125,
+          "y": 3625.1,
           "direction": "bottom"
         },
         "constraintName": "fk_apikey_to_summoner",
@@ -5878,8 +5989,8 @@
           "columnIds": [
             "1648e08a-9cca-4116-8b91-a8f0c7da782d"
           ],
-          "x": 3381.3331,
-          "y": 1068.8881000000001,
+          "x": 1880.3331,
+          "y": 3828.8881,
           "direction": "left"
         },
         "end": {
@@ -5887,8 +5998,8 @@
           "columnIds": [
             "59e02ae7-9b0c-4ff9-b5d3-96f13b7cc11f"
           ],
-          "x": 3173.36804375,
-          "y": 1142.6392,
+          "x": 1691.31482109375,
+          "y": 3912.8892,
           "direction": "right"
         },
         "constraintName": "fk_apikey_to_rawdata",
@@ -5972,6 +6083,32 @@
         "constraintName": "fk_item_to_champion_item_build",
         "visible": true,
         "id": "0c1115d5-3b6c-402a-bc57-836f0723174b"
+      },
+      {
+        "identification": true,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "0439bf5a-3210-4934-b822-e51384110f45",
+          "columnIds": [
+            "c56a62c0-ed93-4fe3-b9c3-102ce5fab5c8"
+          ],
+          "x": 1827.4,
+          "y": 3457.35,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "a0cd815d-133a-4cc2-9c03-e73d072584af",
+          "columnIds": [
+            "8230eb92-f0dd-404b-85bc-54b2e715e12c"
+          ],
+          "x": 1711.502784375,
+          "y": 3376.2031,
+          "direction": "right"
+        },
+        "constraintName": "fk_summoner_to_summoner_recent_game",
+        "visible": true,
+        "id": "939bdfe1-b4ca-4669-a678-f5cc019ec2b5"
       }
     ]
   }

@@ -1096,7 +1096,7 @@ def updateSummonerData(summoner_name: str, api_key: str) -> None:
     insertDataFrameIntoTable(pd.DataFrame([summoner_result], columns=summoner_cols), 'SUMMONER', debug_print=False)
 
 
-def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> int:
+def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> None:
     """
     ### 예외 처리 필요!
     전적 갱신 버튼에 대응할 함수.\n
@@ -1116,7 +1116,6 @@ def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> in
     # 20게임의 게임 정보를 DB에 입력
     insert_count = len(match_ids)
     for mid in tqdm(match_ids, desc=f"'{summoner_name}': 전적 갱신 중"):
-
 
         # RawData 테이블에 이미 해당 game_id가 있다면 continue
         if oracle_totalExecute(f"SELECT * FROM RAWDATA WHERE GAME_ID = '{mid}'", debug_print=False)['VERSION'].tolist() != []:
@@ -1143,10 +1142,9 @@ def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> in
             """
             oracle_execute(sql, debug_print=False)
         oracle_close()
-
+        
         # 입력된 데이터의 game_id를 summoner_recent_game 테이블에 입력
         oracle_totalExecute(f"INSERT INTO SUMMONER_RECENT_GAME VALUES ('{summoner_name}', '{mid}')", debug_print=False)
     
     time.sleep(1)
     print(f"입력된 게임 수: {insert_count}")
-    return insert_count
