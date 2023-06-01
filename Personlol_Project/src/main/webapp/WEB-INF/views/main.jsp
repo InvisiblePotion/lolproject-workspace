@@ -18,6 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="./resources/css/header.css">
 <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="./resources/css/footer.css">
 
 
 </head>

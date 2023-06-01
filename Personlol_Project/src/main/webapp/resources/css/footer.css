@@ -1,0 +1,17 @@
+footer{
+	margin-top: 5%;
+	background-color: #403F3C;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.foot-box{
+	padding: 5px;
+	margin: 20px;
+	color: #ffff;
+	font-size: 15px;
+}
+.bar{
+	border-bottom: 1px solid #ffff;
+}
