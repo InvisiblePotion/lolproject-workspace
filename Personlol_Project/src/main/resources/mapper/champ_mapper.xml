@@ -105,7 +105,7 @@
 		,ci.WIN_RATE ,ci.PICK_RATE ,ci.BAN_RATE
 		FROM CHAMPDATA c
 		LEFT
-		JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID
+		JOIN CHAMPION_INFO ci ON c.CHAMP_ID = ci.CHAMP_ID 
 		WHERE c.CHAMP_ID =
 		#{champ_id} AND ci.LANE = #{champ_lane}
 	</select>
@@ -263,7 +263,7 @@
 		FROM (
 		    SELECT cm.LANE AS LANE, cm.CHAMP_ID_X  ,cm.CHAMP_ID_Y 
 		    FROM CHAMPION_INFO ci
-		    INNER JOIN CHAMPION_MATCHUP cm ON ci.CHAMP_ID = cm.CHAMP_ID_X
+		    INNER JOIN CHAMPION_MATCHUP cm ON ci.CHAMP_ID = cm.CHAMP_ID_X AND  ci.LANE = cm.LANE
 		    WHERE ci.CHAMP_ID = #{champ_id} AND ci.LANE = #{champ_lane} AND cm.MATCHUP_COUNT >= 20
 		    ORDER BY cm.MATCHUP_WIN_RATE ASC
 		) c1
