@@ -32,9 +32,8 @@
 					src="../resources/img/navLogo.png" height="28px" width="100px"></a>
 				<div class="search-bar">
 
-					<input class="summoner_name_search" type="text"
-						placeholdr="소환사명 검색....">
-					<button class="gosummonerinfo2" type="button">go!</button>
+					<input class="summoner_name summoner_name_search" type="text" placeholdr="소환사명 검색....">
+					<button class="gosummonerinfo" type="button" id="ggg">go!</button>
 				</div>
 				<div class="menu">
 					<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a

@@ -455,7 +455,7 @@ function extendRecordItem(record_number) {
         '\t\t\t</div>'+
         '\t\t\t<div class="action">'+
         '\t\t\t\t<button onclick="toggleRecordExpend(this)" class="raw-record-number-'+record_number+' detail2 btn-expend-toggle">'+ // ### 위치기억
-        '\t\t\t\t\t<img src="" alt="">'+
+        '\t\t\t\t\t<img src="../resources/img/nextpage2.png" alt="" class="nextpage2">'+
         '\t\t\t\t</button>'+
         '\t\t\t</div>'+
         '\t\t</div>'+

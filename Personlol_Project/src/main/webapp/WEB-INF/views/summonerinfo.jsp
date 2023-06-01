@@ -24,12 +24,12 @@
 			<nav class="bener-container">
 				<div class="bener">
 
-					<a href="/personlol/main" class="imgfile"><img src="../resources/img/logotesting.png" height="25px"></a>
+					<a href="/personlol/main" class="imgfile"><img src="../resources/img/navLogo.png" height="28px" width="100px"></a>
 
 					<div class="search-bar">
 
-						<input class="summoner_name_search" type="text" placeholdr="소환사명 검색....">
-						<button class="gosummonerinfo2" type="button">go!</button>
+						<input class="summoner_name summoner_name_search" type="text" placeholdr="소환사명 검색....">
+						<button class="gosummonerinfo" type="button" id="ggg">go!</button>
 					</div>
 					<div class="menu">
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a> <a href="/personlol/rank" class="m-col rank">랭킹보기</a>
@@ -110,7 +110,9 @@
 			<div class="solo-rank-box">
 				<div class="header2">솔로랭크</div>
 				<div class="tier-img-container">
-					<div class="tier-img"></div>
+					<div class="tier-img">
+						<img alt="" src="">
+					</div>
 					<div class="tier-info">
 						<div class="tier-name">challenger</div>
 						<!-- 없으니 주석 -->
@@ -319,7 +321,7 @@
 		if (res.summoner_tier === "MASTER") {
 			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-master' +
 				'.png"  height="100%" width="100%" class="img-tier">');
-		} else if (res.summoner_tier === "CHELLENGER") {
+		} else if (res.summoner_tier === "CHALLENGER") {
 			$('.tier-img').html('<img src="../resources/ranked-emblem/emblem-challenger' +
 				'.png"  height="100%" width="100%" class="img-tier">');
 		} else if (res.summoner_tier === "GRANDMASTER") {

@@ -35,10 +35,8 @@ href="../resources/css/footer.css">
 					<a href="/personlol/main" class="imgfile"><img
 						src="../resources/img/navLogo.png" height="28px" width="100px"></a>
 					<div class="search-bar">
-
-						<input class="summoner_name_search" type="text"
-							placeholdr="소환사명 검색....">
-						<button class="gosummonerinfo2" type="button">go!</button>
+						<input class="summoner_name summoner_name_search" type="text" placeholdr="소환사명 검색....">
+						<button class="gosummonerinfo" type="button" id="ggg">go!</button>
 					</div>
 					<div class="menu">
 						<a href="/personlol/champion/" class="m-col">챔피언분석</a>
@@ -802,6 +800,44 @@ $(document).ready(function() {
 				
 			})
 		});//클릭 이벤트 끝
+		
+		let keyupActive = true;
+	    $('.gosummonerinfo').click(function () {
+	      keyupActive = false
+	      console.log("작동하니?");
+	      let summoner_name = $(this).siblings('.summoner_name').filter(function () {
+	        return $(this).val() !== "";
+	      }).first().val();
+
+	      if (!summoner_name) {
+	        console.log("검색어가 비어있습니다.");
+	        alert("검색어가 비어있습니다.");
+	        return;
+	      }
+
+	      console.log(summoner_name);
+	      const encoded_name = encodeURIComponent(summoner_name);
+	      const go_url = '/personlol/summoner/?summoner_name=' + encoded_name;
+
+	      $.ajax({
+	        method: 'get',
+	        url: '/personlol/user/checkserver',
+	        data: {
+	          "user_lolname": summoner_name
+	        }
+	      }).done(res => {
+	        if (res == "1") {
+	          location.href = go_url;
+	        } else if (res == "-999") {
+	          alert("등록되지 않은 소환사입니다. 다시 입력해주세요.");
+
+	          location.href = '/personlol/main'
+
+	        }
+	      }).fail(err => {
+	        console.log(err);
+	      });
+	    });
 	</script>
 
 </html>
