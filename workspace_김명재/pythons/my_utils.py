@@ -1110,17 +1110,12 @@ def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> No
     # API에서 소환사의 최근 20게임의 game_id 획득
     match_ids = getMatchIdsByPuuid(getPuuidBySummonerName(summoner_name, api_key), api_key, get_amount)
 
-    # summoner_recent_game 테이블에서 현재 정보를 삭제
-    oracle_totalExecute(f"DELETE FROM SUMMONER_RECENT_GAME WHERE summoner_name = '{summoner_name}'", debug_print=False)
-    
     # 20게임의 게임 정보를 DB에 입력
     insert_count = len(match_ids)
     for mid in tqdm(match_ids, desc=f"'{summoner_name}': 전적 갱신 중"):
 
         # RawData 테이블에 이미 해당 game_id가 있다면 continue
         if oracle_totalExecute(f"SELECT * FROM RAWDATA WHERE GAME_ID = '{mid}'", debug_print=False)['VERSION'].tolist() != []:
-            # 이미 존재하는 game_id를 summoner_recent_game 테이블에 입력
-            oracle_totalExecute(f"INSERT INTO SUMMONER_RECENT_GAME VALUES ('{summoner_name}', '{mid}')", debug_print=False)
             insert_count -= 1
             continue
 
@@ -1142,8 +1137,8 @@ def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> No
             """
             oracle_execute(sql, debug_print=False)
         oracle_close()
-        
-        # 입력된 데이터의 game_id를 summoner_recent_game 테이블에 입력
+
+        # summoner_recent_game 테이블에 입력
         oracle_totalExecute(f"INSERT INTO SUMMONER_RECENT_GAME VALUES ('{summoner_name}', '{mid}')", debug_print=False)
     
     time.sleep(1)
