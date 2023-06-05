@@ -1143,3 +1143,4 @@ def reloadPlayRecord(summoner_name: str, api_key: str, get_amount: int=20) -> No
     
     time.sleep(1)
     print(f"입력된 게임 수: {insert_count}")
+    return insert_count
